@@ -481,7 +481,7 @@ public:
     bool getSpentIndex(CSpentIndexKey &key, CSpentIndexValue &value);
     bool removeSpentIndex(const uint256 txhash);
 
-    void remove(const CTransaction &tx, std::list<CTransaction>& removed, bool fRecursive = false);
+    void removeRecursive(const CTransaction &tx, std::list<CTransaction>& removed);
     void removeForReorg(const CCoinsViewCache *pcoins, unsigned int nMemPoolHeight, int flags);
     void removeConflicts(const CTransaction &tx, std::list<CTransaction>& removed);
     void removeForBlock(const std::vector<CTransaction>& vtx, unsigned int nBlockHeight,
