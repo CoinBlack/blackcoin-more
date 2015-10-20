@@ -104,5 +104,19 @@ class HTTPBasicsTest (BitcoinTestFramework):
         assert_equal(out1.status, http.client.BAD_REQUEST)
 
 
+        # Check excessive request size
+        conn = httplib.HTTPConnection(urlNode2.hostname, urlNode2.port)
+        conn.connect()
+        conn.request('GET', '/' + ('x'*1000), '', headers)
+        out1 = conn.getresponse()
+        assert_equal(out1.status, httplib.NOT_FOUND)
+
+        conn = httplib.HTTPConnection(urlNode2.hostname, urlNode2.port)
+        conn.connect()
+        conn.request('GET', '/' + ('x'*10000), '', headers)
+        out1 = conn.getresponse()
+        assert_equal(out1.status, httplib.BAD_REQUEST)
+
+
 if __name__ == '__main__':
     HTTPBasicsTest ().main ()
