@@ -130,13 +130,6 @@ public:
     // Update the LockPoints after a reorg
     void UpdateLockPoints(const LockPoints& lp);
 
-    /** We can set the entry to be dirty if doing the full calculation of in-
-     *  mempool descendants will be too expensive, which can potentially happen
-     *  when re-adding transactions from a block back to the mempool.
-     */
-    void SetDirty();
-    bool IsDirty() const { return nCountWithDescendants == 0; }
-
     uint64_t GetCountWithDescendants() const { return nCountWithDescendants; }
     uint64_t GetSizeWithDescendants() const { return nSizeWithDescendants; }
     CAmount GetModFeesWithDescendants() const { return nModFeesWithDescendants; }
@@ -158,12 +151,6 @@ struct update_descendant_state
         int64_t modifySize;
         CAmount modifyFee;
         int64_t modifyCount;
-};
-
-struct set_dirty
-{
-    void operator() (CTxMemPoolEntry &e)
-        { e.SetDirty(); }
 };
 
 struct update_fee_delta
@@ -608,15 +595,11 @@ private:
      *  updated and hence their state is already reflected in the parent
      *  state).
      *
-     *  If updating an entry requires looking at more than maxDescendantsToVisit
-     *  transactions, outside of the ones in setExclude, then give up.
-     *
      *  cachedDescendants will be updated with the descendants of the transaction
      *  being updated, so that future invocations don't need to walk the
      *  same transaction again, if encountered in another transaction chain.
      */
-    bool UpdateForDescendants(txiter updateIt,
-            int maxDescendantsToVisit,
+    void UpdateForDescendants(txiter updateIt,
             cacheMap &cachedDescendants,
             const std::set<uint256> &setExclude);
     /** Update ancestors of hash to add/remove it as a descendant transaction. */
