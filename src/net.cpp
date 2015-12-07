@@ -69,14 +69,6 @@ namespace {
     };
 }
 
-//immutable thread safe array of allowed commands for logging inbound traffic
-const static std::string logAllowIncomingMsgCmds[] = {
-    "version", "addr", "inv", "getdata", "merkleblock",
-    "getblocks", "getheaders", "tx", "headers", "block",
-    "getaddr", "mempool", "ping", "pong", "alert", "notfound",
-    "filterload", "filteradd", "filterclear", "reject",
-    "sendheaders", "verack"};
-
 const static std::string NET_MESSAGE_COMMAND_OTHER = "*other*";
 
 //
@@ -2382,8 +2374,8 @@ CNode::CNode(SOCKET hSocketIn, const CAddress& addrIn, const std::string& addrNa
     lastSentFeeFilter = 0;
     nextSendTimeFeeFilter = 0;
 
-    for (unsigned int i = 0; i < sizeof(logAllowIncomingMsgCmds)/sizeof(logAllowIncomingMsgCmds[0]); i++)
-        mapRecvBytesPerMsgCmd[logAllowIncomingMsgCmds[i]] = 0;
+    BOOST_FOREACH(const std::string &msg, getAllNetMessageTypes())
+        mapRecvBytesPerMsgCmd[msg] = 0;
     mapRecvBytesPerMsgCmd[NET_MESSAGE_COMMAND_OTHER] = 0;
 
     {
