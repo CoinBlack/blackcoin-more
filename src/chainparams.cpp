@@ -134,7 +134,6 @@ public:
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x05;
         nDefaultPort = 15714;
-        nMaxTipAge = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1393221600, 164482, 0x1e0fffff, 1, 0);
@@ -219,7 +218,6 @@ public:
         pchMessageStart[2] = 0xc0;
         pchMessageStart[3] = 0xef;
         nDefaultPort = 25714;
-        nMaxTipAge = 0x7fffffff;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -318,7 +316,6 @@ public:
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x06;
         nDefaultPort = 25714;
-        nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
