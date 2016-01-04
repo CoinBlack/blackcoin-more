@@ -104,6 +104,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "setban", 2 },
     { "setban", 3 },
     { "getmempoolancestors", 1 },
+    { "getmempooldescendants", 1 },
     { "reservebalance", 0},
     { "reservebalance", 1},
 };
