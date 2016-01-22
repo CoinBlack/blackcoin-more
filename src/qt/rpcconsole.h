@@ -79,6 +79,9 @@ private Q_SLOTS:
 
 public Q_SLOTS:
     void clear();
+    void fontBigger();
+    void fontSmaller();
+    void setFontSize(int newSize);
     /** Append the message to the message widget */
     void message(int category, const QString &message, bool html = false);
     /** Set number of connections shown in the UI */
@@ -135,7 +138,7 @@ private:
     RPCTimerInterface *rpcTimerInterface;
     QMenu *peersTableContextMenu;
     QMenu *banTableContextMenu;
-
+    int consoleFontSize;
     QCompleter *autoCompleter;
 };
 

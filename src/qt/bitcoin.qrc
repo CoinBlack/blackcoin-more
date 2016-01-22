@@ -46,10 +46,12 @@
         <file alias="about_qt">res/icons/about_qt.png</file>
         <file alias="verify">res/icons/verify.png</file>
         <file alias="warning">res/icons/warning.png</file>
-        <file alias="staking_on">res/icons/staking_on.png</file>
-        <file alias="staking_off">res/icons/staking_off.png</file>
+        <file alias="fontbigger">res/icons/fontbigger.png</file>
+        <file alias="fontsmaller">res/icons/fontsmaller.png</file>
         <file alias="hd_enabled">res/icons/hd_enabled.png</file>
         <file alias="hd_disabled">res/icons/hd_disabled.png</file>
+        <file alias="staking_on">res/icons/staking_on.png</file>
+        <file alias="staking_off">res/icons/staking_off.png</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>
