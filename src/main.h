@@ -173,6 +173,7 @@ extern CFeeRate minRelayTxFee;
 extern CAmount maxTxFee;
 extern bool fEnableReplacement;
 extern int64_t nLastCoinStakeSearchInterval;
+/** If the tip is older than this (in seconds), the node is considered to be in initial block download. */
 extern int64_t nMaxTipAge;
 
 /** Best header we've seen so far (used for getheaders queries' starting points). */
