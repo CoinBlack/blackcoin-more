@@ -17,6 +17,7 @@
 #include "util.h"
 #include "httpserver.h"
 #include "httprpc.h"
+#include "utilstrencodings.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
@@ -84,7 +85,7 @@ bool AppInit(int argc, char* argv[])
 
         if (mapArgs.count("-version"))
         {
-            strUsage += LicenseInfo();
+            strUsage += FormatParagraph(LicenseInfo());
         }
         else
         {
