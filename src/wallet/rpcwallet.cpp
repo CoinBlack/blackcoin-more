@@ -2530,6 +2530,7 @@ extern UniValue importaddress(const UniValue& params, bool fHelp);
 extern UniValue importpubkey(const UniValue& params, bool fHelp);
 extern UniValue dumpwallet(const UniValue& params, bool fHelp);
 extern UniValue importwallet(const UniValue& params, bool fHelp);
+extern UniValue importprunedfunds(const UniValue& params, bool fHelp);
 
 static const CRPCCommand commands[] =
 { //  category              name                        actor (function)           okSafeMode
@@ -2556,6 +2557,7 @@ static const CRPCCommand commands[] =
     { "wallet",             "importprivkey",            &importprivkey,            true  },
     { "wallet",             "importwallet",             &importwallet,             true  },
     { "wallet",             "importaddress",            &importaddress,            true  },
+    { "wallet",             "importprunedfunds",        &importprunedfunds,        true  },
     { "wallet",             "importpubkey",             &importpubkey,             true  },
     { "wallet",             "keypoolrefill",            &keypoolrefill,            true  },
     { "wallet",             "listaccounts",             &listaccounts,             false },

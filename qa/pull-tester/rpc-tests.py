@@ -112,7 +112,8 @@ testScripts = [
     'invalidtxrequest.py',
     'abandonconflict.py',
     'p2p-versionbits-warning.py',
-    'signmessages.py'
+    'importprunedfunds.py',
+    'signmessages.py',
 ]
 testScriptsExt = [
     'bip9-softforks.py',
