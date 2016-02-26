@@ -1,47 +1,51 @@
-Bitcoin Core version 0.12.2 is now available from:
+Bitcoin Core version 0.13.x is now available from:
 
-  <https://bitcoin.org/bin/bitcoin-core-0.12.2/>
+  <https://bitcoin.org/bin/bitcoin-core-0.13.x/>
 
-This is a new minor version release, including ........,
-various bugfixes and updated translations.
+This is a new minor version release, including various bugfixes and
+performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
   <https://github.com/bitcoin/bitcoin/issues>
 
-Upgrading and downgrading
-=========================
+To receive security and update notifications, please subscribe to:
 
-How to Upgrade
---------------
+  <https://bitcoincore.org/en/list/announcements/join/>
 
-If you are running an older version, shut it down. Wait until it has completely
-shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
-bitcoind/bitcoin-qt (on Linux).
+Compatibility
+==============
 
-Downgrade warning
------------------
+Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
+an OS initially released in 2001. This means that not even critical security
+updates will be released anymore. Without security updates, using a bitcoin
+wallet on a XP machine is irresponsible at least.
 
-### Downgrade to a version < 0.12.0
+In addition to that, with 0.12.x there have been varied reports of Bitcoin Core
+randomly crashing on Windows XP. It is [not clear](https://github.com/bitcoin/bitcoin/issues/7681#issuecomment-217439891)
+what the source of these crashes is, but it is likely that upstream
+libraries such as Qt are no longer being tested on XP.
 
-Because release 0.12.0 and later will obfuscate the chainstate on every
-fresh sync or reindex, the chainstate is not backwards-compatible with
-pre-0.12 versions of Bitcoin Core or other software.
+We do not have time nor resources to provide support for an OS that is
+end-of-life. From 0.13.0 on, Windows XP is no longer supported. Users are
+suggested to upgrade to a newer version of Windows, or install an alternative OS
+that is supported.
 
-If you want to downgrade after you have done a reindex with 0.12.0 or later,
-you will need to reindex when you first start Bitcoin Core version 0.11 or
-earlier.
+No attempt is made to prevent installing or running the software on Windows XP,
+you can still do so at your own risk, but do not expect it to work: do not
+report issues about Windows XP to the issue tracker.
+
+From 0.13.1 onwards OS X 10.7 is no longer supported. 0.13.0 was intended to work on 10.7+, 
+but severe issues with the libc++ version on 10.7.x keep it from running reliably. 
+0.13.1 now requires 10.8+, and will communicate that to 10.7 users, rather than crashing unexpectedly.
 
 Notable changes
 ===============
 
 Example item
----------------------------------------
+-----------------------------------------------
 
-Example text.
-
-0.12.1 Change log
+0.13.x Change log
 =================
 
 Detailed release notes follow. This overview includes changes that affect
@@ -49,60 +53,13 @@ behavior, not code moves, refactors and string updates. For convenience in locat
 the code changes and accompanying discussion, both the pull request and
 git merge commit are mentioned.
 
-### RPC and REST
-
-Asm script outputs replacements for OP_NOP2 and OP_NOP3
--------------------------------------------------------
-
-OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP 
-65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki)
-
-OP_NOP3 has been renamed to OP_CHECKSEQUENCEVERIFY by [BIP 
-112](https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki)
-
-The following outputs are affected by this change:
-- RPC `getrawtransaction` (in verbose mode)
-- RPC `decoderawtransaction`
-- RPC `decodescript`
-- REST `/rest/tx/` (JSON format)
-- REST `/rest/block/` (JSON format when including extended tx details)
-- `bitcoin-tx -json`
-
-### Configuration and command-line options
-
-### Block and transaction handling
-
-### P2P protocol and network code
-
-The p2p alert system has been removed in #7692 and the 'alert' message is no longer supported.
-
-
-Fee filtering of invs (BIP 133)
-------------------------------------
-
-The optional new p2p message "feefilter" is implemented and the protocol
-version is bumped to 70013. Upon receiving a feefilter message from a peer,
-a node will not send invs for any transactions which do not meet the filter
-feerate. [BIP 133](https://github.com/bitcoin/bips/blob/master/bip-0133.mediawiki)
-
-### Validation
-
-### Build system
-
-### Wallet
-
-### GUI
-
-### Tests and QA
-
-### Miscellaneous
+[to be filled in at release]
 
 Credits
 =======
 
 Thanks to everyone who directly contributed to this release:
 
+[to be filled in at release]
 
 As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).
-
-
