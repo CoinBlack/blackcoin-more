@@ -158,6 +158,8 @@ git merge commit are mentioned.
 - #7804 `90f1d24` Track block download times per individual block (sipa)
 - #7832 `4c3a00d` Reduce block timeout to 10 minutes (laanwj)
 
+The p2p alert system has been removed in #7692 and the 'alert' message is no longer supported.
+
 ### Validation
 - #7821 `4226aac` init: allow shutdown during 'Activating best chain...' (laanwj)
 - #7835 `46898e7` Version 2 transactions remain non-standard until CSV activates (sdaftuar)
