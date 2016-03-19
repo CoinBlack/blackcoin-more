@@ -285,7 +285,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         matchingOuts = 0
         for i, out in enumerate(dec_tx['vout']):
             totalOut += out['value']
-            if outputs.has_key(out['scriptPubKey']['addresses'][0]):
+            if out['scriptPubKey']['addresses'][0] in outputs:
                 matchingOuts+=1
             else:
                 assert_equal(i, rawtxfund['changepos'])
@@ -325,7 +325,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         matchingOuts = 0
         for out in dec_tx['vout']:
             totalOut += out['value']
-            if outputs.has_key(out['scriptPubKey']['addresses'][0]):
+            if out['scriptPubKey']['addresses'][0] in outputs:
                 matchingOuts+=1
 
         assert_equal(matchingOuts, 1)
@@ -367,7 +367,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         matchingOuts = 0
         for out in dec_tx['vout']:
             totalOut += out['value']
-            if outputs.has_key(out['scriptPubKey']['addresses'][0]):
+            if out['scriptPubKey']['addresses'][0] in outputs:
                 matchingOuts+=1
 
         assert_equal(matchingOuts, 2)
@@ -385,11 +385,9 @@ class RawTransactionsTest(BitcoinTestFramework):
         errorString = ""
         try:
             rawtxfund = self.nodes[2].fundrawtransaction(rawtx)
-        except JSONRPCException,e:
-            errorString = e.error['message']
-
-        assert("Insufficient" in errorString)
-
+            raise AssertionError("Spent more than available")
+        except JSONRPCException as e:
+            assert("Insufficient" in e.error['message'])
 
 
         ############################################################

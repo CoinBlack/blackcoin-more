@@ -238,7 +238,7 @@ class WalletTest (BitcoinTestFramework):
         errorString = ""
         try:
             txId  = self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), "1f-4")
-        except JSONRPCException,e:
+        except JSONRPCException as e:
             errorString = e.error['message']
 
         assert_equal("Invalid amount" in errorString, True)
@@ -246,7 +246,7 @@ class WalletTest (BitcoinTestFramework):
         errorString = ""
         try:
             self.nodes[0].generate("2") #use a string to as block amount parameter must fail because it's not interpreted as amount
-        except JSONRPCException,e:
+        except JSONRPCException as e:
             errorString = e.error['message']
 
         assert_equal("not an integer" in errorString, True)
@@ -260,7 +260,7 @@ class WalletTest (BitcoinTestFramework):
         # Check that the txid and balance is found by node1
         try:
             self.nodes[1].gettransaction(cbTxId)
-        except JSONRPCException,e:
+        except JSONRPCException as e:
             assert("Invalid or non-wallet transaction id" not in e.error['message'])
 
         #check if wallet or blochchain maintenance changes the balance
