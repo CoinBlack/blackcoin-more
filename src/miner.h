@@ -28,7 +28,6 @@ struct CBlockTemplate
 };
 
 /** Run the miner threads */
-void GenerateBitcoins(bool fGenerate, int nThreads, const CChainParams& chainparams);
 void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams);
 /** Sign a block */
 bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees);
