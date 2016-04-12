@@ -866,10 +866,9 @@ static UniValue SoftForkDesc(const std::string &name, int version, CBlockIndex* 
     return rv;
 }
 
-static UniValue BIP9SoftForkDesc(const std::string& name, const Consensus::Params& consensusParams, Consensus::DeploymentPos id)
+static UniValue BIP9SoftForkDesc(const Consensus::Params& consensusParams, Consensus::DeploymentPos id)
 {
     UniValue rv(UniValue::VOBJ);
-    rv.push_back(Pair("id", name));
     const ThresholdState thresholdState = VersionBitsTipState(consensusParams, id);
     switch (thresholdState) {
     case THRESHOLD_DEFINED: rv.push_back(Pair("status", "defined")); break;
@@ -921,15 +920,14 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
             "        \"reject\": { ... }      (object) progress toward rejecting pre-softfork blocks (same fields as \"enforce\")\n"
             "     }, ...\n"
             "  ],\n"
-            "  \"bip9_softforks\": [       (array) status of BIP9 softforks in progress\n"
-            "     {\n"
-            "        \"id\": \"xxxx\",        (string) name of the softfork\n"
+            "  \"bip9_softforks\": {          (object) status of BIP9 softforks in progress\n"
+            "     \"xxxx\" : {                (string) name of the softfork\n"
             "        \"status\": \"xxxx\",    (string) one of \"defined\", \"started\", \"lockedin\", \"active\", \"failed\"\n"
             "        \"bit\": xx,             (numeric) the bit, 0-28, in the block version field used to signal this soft fork\n"
             "        \"startTime\": xx,       (numeric) the minimum median time past of a block at which the bit gains its meaning\n"
             "        \"timeout\": xx          (numeric) the median time past of a block at which the deployment is considered failed if not yet locked in\n"
             "     }\n"
-            "  ]\n"
+            "  }\n"
             "}\n"
             "\nExamples:\n"
             + HelpExampleCli("getblockchaininfo", "")
@@ -956,8 +954,8 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
     const Consensus::Params& consensusParams = Params().GetConsensus();
     CBlockIndex* tip = chainActive.Tip();
     UniValue softforks(UniValue::VARR);
-    UniValue bip9_softforks(UniValue::VARR);
-    bip9_softforks.push_back(BIP9SoftForkDesc("csv", consensusParams, Consensus::DEPLOYMENT_CSV));
+    UniValue bip9_softforks(UniValue::VOBJ);
+    bip9_softforks.push_back(Pair("csv", BIP9SoftForkDesc(consensusParams, Consensus::DEPLOYMENT_CSV)));
     obj.push_back(Pair("softforks",             softforks));
     obj.push_back(Pair("bip9_softforks", bip9_softforks));
 
