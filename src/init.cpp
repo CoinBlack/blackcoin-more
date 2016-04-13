@@ -1171,10 +1171,11 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
     if (mapArgs.count("-externalip")) {
         BOOST_FOREACH(const std::string& strAddr, mapMultiArgs["-externalip"]) {
-            CService addrLocal(strAddr, GetListenPort(), fNameLookup);
-            if (!addrLocal.IsValid())
+            CService addrLocal;
+            if (Lookup(strAddr.c_str(), addrLocal, GetListenPort(), fNameLookup) && addrLocal.IsValid())
+                AddLocal(addrLocal, LOCAL_MANUAL);
+            else
                 return InitError(ResolveErrMsg("externalip", strAddr));
-            AddLocal(CService(strAddr, GetListenPort(), fNameLookup), LOCAL_MANUAL);
         }
     }
 
