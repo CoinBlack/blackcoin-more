@@ -75,6 +75,7 @@ endif
 .PHONY: FORCE check-symbols check-security
 # bitcoin core #
 BITCOIN_CORE_H = \
+  addrdb.h \
   addrman.h \
   amount.h \
   arith_uint256.h \
@@ -190,6 +191,7 @@ libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CP
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
+  addrdb.cpp \
   bloom.cpp \
   blockencodings.cpp \
   chain.cpp \
