@@ -2466,7 +2466,7 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
                             "     \"lockUnspents\"      (boolean, optional, default false) Lock selected unspent outputs\n"
                             "     \"feeRate\"           (numeric, optional, default not set: makes wallet determine the fee) Set a specific feerate (" + CURRENCY_UNIT + " per KB)\n"
                             "   }\n"
-                            "                         for backward compatibility: passing in a true instzead of an object will result in {\"includeWatching\":true}\n"
+                            "                         for backward compatibility: passing in a true instead of an object will result in {\"includeWatching\":true}\n"
                             "\nResult:\n"
                             "{\n"
                             "  \"hex\":       \"value\", (string)  The resulting raw transaction (hex-encoded string)\n"
