@@ -2044,7 +2044,7 @@ public:
 instance_of_cnetcleanup;
 
 
-void RelayTransaction(const CTransaction& tx, CFeeRate feerate)
+void RelayTransaction(const CTransaction& tx)
 {
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss.reserve(10000);
