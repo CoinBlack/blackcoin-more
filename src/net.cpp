@@ -2604,17 +2604,22 @@ bool CBanDB::Read(banmap_t& banSet)
 
 void DumpBanlist()
 {
-    int64_t nStart = GetTimeMillis();
+    CNode::SweepBanned(); // clean unused entries (if bantime has expired)
 
-    CNode::SweepBanned(); //clean unused entries (if bantime has expired)
+    if (!CNode::BannedSetIsDirty())
+        return;
+
+    int64_t nStart = GetTimeMillis();
 
     CBanDB bandb;
     banmap_t banmap;
+    CNode::SetBannedSetDirty(false);
     CNode::GetBanned(banmap);
-    bandb.Write(banmap);
+    if (!bandb.Write(banmap))
+        CNode::SetBannedSetDirty(true);
 
     LogPrint("net", "Flushed %d banned node ips/subnets to banlist.dat  %dms\n",
-             banmap.size(), GetTimeMillis() - nStart);
+        banmap.size(), GetTimeMillis() - nStart);
 }
 
 int64_t PoissonNextSend(int64_t nNow, int average_interval_seconds) {
