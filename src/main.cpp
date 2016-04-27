@@ -1805,7 +1805,7 @@ bool fLargeWorkForkFound = false;
 bool fLargeWorkInvalidChainFound = false;
 CBlockIndex *pindexBestForkTip = NULL, *pindexBestForkBase = NULL;
 
-static void AlertNotify(const std::string& strMessage, bool fThread)
+static void AlertNotify(const std::string& strMessage)
 {
     uiInterface.NotifyAlertChanged();
     std::string strCmd = GetArg("-alertnotify", "");
@@ -1819,10 +1819,7 @@ static void AlertNotify(const std::string& strMessage, bool fThread)
     safeStatus = singleQuote+safeStatus+singleQuote;
     boost::replace_all(strCmd, "%s", safeStatus);
 
-    if (fThread)
-        boost::thread t(runCommand, strCmd); // thread runs free
-    else
-        runCommand(strCmd);
+    boost::thread t(runCommand, strCmd); // thread runs free
 }
 
 void CheckForkWarningConditions()
@@ -1844,7 +1841,7 @@ void CheckForkWarningConditions()
         {
             std::string warning = std::string("'Warning: Large-work fork detected, forking after block ") +
                 pindexBestForkBase->phashBlock->ToString() + std::string("'");
-            AlertNotify(warning, true);
+            AlertNotify(warning);
         }
         if (pindexBestForkTip && pindexBestForkBase)
         {
@@ -2798,7 +2795,7 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
                 if (state == THRESHOLD_ACTIVE) {
                     strMiscWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
                     if (!fWarned) {
-                        AlertNotify(strMiscWarning, true);
+                        AlertNotify(strMiscWarning);
                         fWarned = true;
                     }
                 } else {
@@ -2821,7 +2818,7 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
             // strMiscWarning is read by GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
             strMiscWarning = _("Warning: Unknown block versions being mined! It's possible unknown rules are in effect");
             if (!fWarned) {
-                AlertNotify(strMiscWarning, true);
+                AlertNotify(strMiscWarning);
                 fWarned = true;
             }
         }
