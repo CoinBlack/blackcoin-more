@@ -103,6 +103,7 @@ BITCOIN_CORE_H = \
   dstencode.h \
   httprpc.h \
   httpserver.h \
+  indirectmap.h \
   init.h \
   key.h \
   keystore.h \
