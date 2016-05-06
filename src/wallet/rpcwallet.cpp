@@ -2530,6 +2530,7 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
     bool includeWatching = false;
     bool lockUnspents = false;
     CFeeRate feeRate = CFeeRate(0);
+    bool overrideEstimatedFeerate = false;
 
     if (params.size() > 1) {
       if (params[1].type() == UniValue::VBOOL) {
@@ -2562,7 +2563,10 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
             lockUnspents = options["lockUnspents"].get_bool();
 
         if (options.exists("feeRate"))
+        {
             feeRate = CFeeRate(options["feeRate"].get_real());
+            overrideEstimatedFeerate = true;
+        }
       }
     }
 
@@ -2581,7 +2585,7 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
     CAmount nFeeOut;
     string strFailReason;
 
-    if(!pwalletMain->FundTransaction(tx, nFeeOut, feeRate, changePosition, strFailReason, includeWatching, lockUnspents, changeAddress))
+    if(!pwalletMain->FundTransaction(tx, nFeeOut, overrideEstimatedFeerate, feeRate, changePosition, strFailReason, includeWatching, lockUnspents, changeAddress))
         throw JSONRPCError(RPC_INTERNAL_ERROR, strFailReason);
 
     UniValue result(UniValue::VOBJ);
