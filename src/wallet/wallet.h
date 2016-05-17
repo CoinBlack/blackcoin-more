@@ -835,6 +835,8 @@ public:
     /* Wallets parameter interaction */
     static bool ParameterInteraction();
 
+    bool BackupWallet(const std::string& strDest);
+    
     /* Set the HD chain model (chain child index counters) */
     bool SetHDChain(const CHDChain& chain, bool memonly);
     const CHDChain& GetHDChain() { return hdChain; }
