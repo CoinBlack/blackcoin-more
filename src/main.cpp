@@ -4899,11 +4899,11 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                 }
                 if (!pushed && inv.type == MSG_TX) {
                     CTransaction tx;
-                    if (mempool.lookup(inv.hash, tx)) {
-                        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-                        ss.reserve(1000);
-                        ss << tx;
-                        pfrom->PushMessage(NetMsgType::TX, ss);
+                    int64_t txtime;
+                    // To protect privacy, do not answer getdata using the mempool when
+                    // that TX couldn't have been INVed in reply to a MEMPOOL request.
+                    if (mempool.lookup(inv.hash, tx, txtime) && txtime <= pfrom->timeLastMempoolReq) {
+                        pfrom->PushMessage(NetMsgType::TX, tx);
                         pushed = true;
                     }
                 }
@@ -6581,6 +6581,7 @@ bool SendMessages(CNode* pto)
                         vInv.clear();
                     }
                 }
+                pto->timeLastMempoolReq = GetTime();
             }
 
             // Determine transactions to relay
