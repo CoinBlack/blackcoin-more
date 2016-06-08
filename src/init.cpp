@@ -961,8 +961,8 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     // Option to startup with mocktime set (used for regression testing):
     SetMockTime(GetArg("-mocktime", 0)); // SetMockTime(0) is a no-op
 
-    if (GetBoolArg("-peerbloomfilters", true))
-        nLocalServices |= NODE_BLOOM;
+    if (GetBoolArg("-peerbloomfilters", DEFAULT_PEERBLOOMFILTERS))
+        nLocalServices = ServiceFlags(nLocalServices | NODE_BLOOM);
 
     fEnableReplacement = GetBoolArg("-mempoolreplacement", DEFAULT_ENABLE_REPLACEMENT);
     if ((!fEnableReplacement) && mapArgs.count("-mempoolreplacement")) {
@@ -1389,7 +1389,7 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     // after any wallet rescanning has taken place.
     if (fPruneMode) {
         LogPrintf("Unsetting NODE_NETWORK on prune mode\n");
-        nLocalServices &= ~NODE_NETWORK;
+        nLocalServices = ServiceFlags(nLocalServices & ~NODE_NETWORK);
         if (!fReindex) {
             uiInterface.InitMessage(_("Pruning blockstore..."));
             PruneAndFlush();
