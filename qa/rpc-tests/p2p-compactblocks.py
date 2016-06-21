@@ -526,7 +526,7 @@ class CompactBlocksTest(BitcoinTestFramework):
 
         # bitcoind won't respond for blocks whose height is more than 15 blocks
         # deep.
-        MAX_GETBLOCKTXN_DEPTH = 15
+        MAX_GETBLOCKTXN_DEPTH = 10
         chain_height = self.nodes[0].getblockcount()
         current_height = chain_height
         while (current_height >= chain_height - MAX_GETBLOCKTXN_DEPTH):
@@ -563,7 +563,7 @@ class CompactBlocksTest(BitcoinTestFramework):
         print("Testing compactblock requests/announcements not at chain tip...")
 
         # Test that requesting old compactblocks doesn't work.
-        MAX_CMPCTBLOCK_DEPTH = 5
+        MAX_CMPCTBLOCK_DEPTH = 6
         new_blocks = []
         for i in range(MAX_CMPCTBLOCK_DEPTH + 1):
             self.test_node.clear_block_announcement()
