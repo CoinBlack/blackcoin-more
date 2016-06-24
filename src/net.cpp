@@ -637,6 +637,7 @@ void CNode::SweepBanned()
         {
             setBanned.erase(it++);
             setBannedIsDirty = true;
+            LogPrint("net", "%s: Removed banned node ip/subnet from banlist.dat: %s\n", __func__, subNet.ToString());
         }
         else
             ++it;
@@ -1567,12 +1568,7 @@ void DumpAddresses()
 void DumpData()
 {
     DumpAddresses();
-
-    if (CNode::BannedSetIsDirty())
-    {
-        DumpBanlist();
-        CNode::SetBannedSetDirty(false);
-    }
+    DumpBanlist();
 }
 
 void static ProcessOneShot()
