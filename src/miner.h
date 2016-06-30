@@ -140,7 +140,7 @@ private:
     CBlock* pblock;
 
     // Configuration parameters for the block size
-    unsigned int nBlockMaxSize, nBlockMinSize;
+    unsigned int nBlockMaxSize;
 
     // Information on the current status of the block
     uint64_t nBlockSize;
