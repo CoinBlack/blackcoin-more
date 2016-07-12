@@ -124,6 +124,7 @@ testScripts = [
     'invalidblockrequest.py',
     'invalidtxrequest.py',
     'abandonconflict.py',
+    'p2p-compactblocks.py',
     'p2p-versionbits-warning.py',
     'importprunedfunds.py',
     'signmessages.py',
