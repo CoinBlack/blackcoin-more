@@ -2043,6 +2043,9 @@ void StartNode(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     LogPrintf("Loaded %i addresses from peers.dat  %dms\n",
            addrman.size(), GetTimeMillis() - nStart);
+
+    uiInterface.InitMessage(_("Starting network threads..."));
+
     fAddressesInitialized = true;
 
     if (semOutbound == NULL) {
