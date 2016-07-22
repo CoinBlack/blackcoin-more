@@ -1470,6 +1470,9 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
     // ********************************************************* Step 10: import blocks
 
+    if (!CheckDiskSpace())
+        return false;
+
     // Either install a handler to notify us when genesis activates, or set fHaveGenesis directly.
     // No locking, as this happens before any background thread is started.
     if (chainActive.Tip() == NULL) {
@@ -1500,9 +1503,6 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     }
 
     // ********************************************************* Step 11: start node
-
-    if (!CheckDiskSpace())
-        return false;
 
     if (!strErrors.str().empty())
         return InitError(strErrors.str());
