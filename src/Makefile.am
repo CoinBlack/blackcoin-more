@@ -119,8 +119,8 @@ BITCOIN_CORE_H = \
   merkleblock.h \
   miner.h \
   net.h \
-  netbase.h \
   netaddress.h \
+  netbase.h \
   noui.h \
   policy/fees.h \
   policy/policy.h \
