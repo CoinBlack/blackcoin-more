@@ -101,48 +101,48 @@ CPubKey CWallet::GenerateNewKey()
     CKey secret;
 
     // Create new metadata
-       int64_t nCreationTime = GetTime();
-       CKeyMetadata metadata(nCreationTime);
+    int64_t nCreationTime = GetTime();
+    CKeyMetadata metadata(nCreationTime);
 
-       // use HD key derivation if HD was enabled during wallet creation
-       if (!hdChain.masterKeyID.IsNull()) {
-           // for now we use a fixed keypath scheme of m/0'/0'/k
-           CKey key;                      //master key seed (256bit)
-           CExtKey masterKey;             //hd master key
-           CExtKey accountKey;            //key at m/0'
-           CExtKey externalChainChildKey; //key at m/0'/0'
-           CExtKey childKey;              //key at m/0'/0'/<n>'
+    // use HD key derivation if HD was enabled during wallet creation
+    if (IsHDEnabled()) {
+        // for now we use a fixed keypath scheme of m/0'/0'/k
+        CKey key;                      //master key seed (256bit)
+        CExtKey masterKey;             //hd master key
+        CExtKey accountKey;            //key at m/0'
+        CExtKey externalChainChildKey; //key at m/0'/0'
+        CExtKey childKey;              //key at m/0'/0'/<n>'
 
-           // try to get the master key
-           if (!GetKey(hdChain.masterKeyID, key))
-               throw std::runtime_error("CWallet::GenerateNewKey(): Master key not found");
+        // try to get the master key
+        if (!GetKey(hdChain.masterKeyID, key))
+            throw std::runtime_error("CWallet::GenerateNewKey(): Master key not found");
 
-           masterKey.SetMaster(key.begin(), key.size());
+        masterKey.SetMaster(key.begin(), key.size());
 
-           // derive m/0'
-           // use hardened derivation (child keys >= 0x80000000 are hardened after bip32)
-           masterKey.Derive(accountKey, BIP32_HARDENED_KEY_LIMIT);
+        // derive m/0'
+        // use hardened derivation (child keys >= 0x80000000 are hardened after bip32)
+        masterKey.Derive(accountKey, BIP32_HARDENED_KEY_LIMIT);
 
-           // derive m/0'/0'
-           accountKey.Derive(externalChainChildKey, BIP32_HARDENED_KEY_LIMIT);
+        // derive m/0'/0'
+        accountKey.Derive(externalChainChildKey, BIP32_HARDENED_KEY_LIMIT);
 
-           // derive child key at next index, skip keys already known to the wallet
-           do
-           {
-               // always derive hardened keys
-               // childIndex | BIP32_HARDENED_KEY_LIMIT = derive childIndex in hardened child-index-range
-               // example: 1 | BIP32_HARDENED_KEY_LIMIT == 0x80000001 == 2147483649
-               externalChainChildKey.Derive(childKey, hdChain.nExternalChainCounter | BIP32_HARDENED_KEY_LIMIT);
-               metadata.hdKeypath     = "m/0'/0'/"+std::to_string(hdChain.nExternalChainCounter)+"'";
-               metadata.hdMasterKeyID = hdChain.masterKeyID;
-               // increment childkey index
-               hdChain.nExternalChainCounter++;
-           } while(HaveKey(childKey.key.GetPubKey().GetID()));
-           secret = childKey.key;
+        // derive child key at next index, skip keys already known to the wallet
+        do
+        {
+            // always derive hardened keys
+            // childIndex | BIP32_HARDENED_KEY_LIMIT = derive childIndex in hardened child-index-range
+            // example: 1 | BIP32_HARDENED_KEY_LIMIT == 0x80000001 == 2147483649
+            externalChainChildKey.Derive(childKey, hdChain.nExternalChainCounter | BIP32_HARDENED_KEY_LIMIT);
+            metadata.hdKeypath     = "m/0'/0'/"+std::to_string(hdChain.nExternalChainCounter)+"'";
+            metadata.hdMasterKeyID = hdChain.masterKeyID;
+            // increment childkey index
+            hdChain.nExternalChainCounter++;
+        } while(HaveKey(childKey.key.GetPubKey().GetID()));
+        secret = childKey.key;
 
-           // update the chain model in the database
-           if (!CWalletDB(strWalletFile).WriteHDChain(hdChain))
-               throw std::runtime_error("CWallet::GenerateNewKey(): Writing HD chain model failed");
+        // update the chain model in the database
+        if (!CWalletDB(strWalletFile).WriteHDChain(hdChain))
+            throw std::runtime_error("CWallet::GenerateNewKey(): Writing HD chain model failed");
     } else {
             secret.MakeNewKey(fCompressed);
     }
@@ -962,7 +962,7 @@ bool CWallet::EncryptWallet(const SecureString& strWalletPassphrase)
         Unlock(strWalletPassphrase);
 
         // if we are using HD, replace the HD master key (seed) with a new one
-        if (!hdChain.masterKeyID.IsNull()) {
+        if (IsHDEnabled()) {
             CKey key;
             CPubKey masterPubKey = GenerateNewHDMasterKey();
             if (!SetHDMasterKey(masterPubKey))
@@ -1505,6 +1505,11 @@ CAmount CWallet::GetChange(const CTransaction& tx) const
             throw std::runtime_error("CWallet::GetChange(): value out of range");
     }
     return nChange;
+}
+
+bool CWallet::IsHDEnabled()
+{
+    return !hdChain.masterKeyID.IsNull();
 }
 
 int64_t CWalletTx::GetTxTime() const
@@ -3608,7 +3613,7 @@ bool CWallet::InitLoadWallet()
         RandAddSeedPerfmon();
 
         // Create new keyUser and set as default key
-        if (GetBoolArg("-usehd", DEFAULT_USE_HD_WALLET) && walletInstance->hdChain.masterKeyID.IsNull()) {
+        if (GetBoolArg("-usehd", DEFAULT_USE_HD_WALLET) && !walletInstance->IsHDEnabled()) {
             // generate a new master key
             CPubKey masterPubKey = walletInstance->GenerateNewHDMasterKey();
             if (!walletInstance->SetHDMasterKey(masterPubKey))
@@ -3625,9 +3630,9 @@ bool CWallet::InitLoadWallet()
     }
     else if (mapArgs.count("-usehd")) {
         bool useHD = GetBoolArg("-usehd", DEFAULT_USE_HD_WALLET);
-        if (!walletInstance->hdChain.masterKeyID.IsNull() && !useHD)
+        if (walletInstance->IsHDEnabled() && !useHD)
             return InitError(strprintf(_("Error loading %s: You can't disable HD on a already existing HD wallet"), walletFile));
-        if (walletInstance->hdChain.masterKeyID.IsNull() && useHD)
+        if (!walletInstance->IsHDEnabled() && useHD)
             return InitError(strprintf(_("Error loading %s: You can't enable HD on a already existing non-HD wallet"), walletFile));
     }
 
