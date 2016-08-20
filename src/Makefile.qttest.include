@@ -9,6 +9,7 @@ TEST_QT_MOC_CPP = \
   qt/test/moc_bitcoinaddressvalidatortests.cpp \
   qt/test/moc_compattests.cpp \
   qt/test/moc_guiutiltests.cpp \
+  qt/test/moc_rpcnestedtests.cpp \
   qt/test/moc_uritests.cpp
 
 if ENABLE_WALLET
@@ -19,6 +20,7 @@ TEST_QT_H = \
   qt/test/bitcoinaddressvalidatortests.h \
   qt/test/compattests.h \
   qt/test/guiutiltests.h \
+  qt/test/rpcnestedtests.h \
   qt/test/uritests.h \
   qt/test/paymentrequestdata.h \
   qt/test/paymentservertests.h
@@ -30,6 +32,7 @@ qt_test_test_bitcoin_qt_SOURCES = \
   qt/test/bitcoinaddressvalidatortests.cpp \
   qt/test/compattests.cpp \
   qt/test/guiutiltests.cpp \
+  qt/test/rpcnestedtests.cpp \
   qt/test/test_main.cpp \
   qt/test/uritests.cpp \
   $(TEST_QT_H)
