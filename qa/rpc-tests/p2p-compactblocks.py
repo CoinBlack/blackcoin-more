@@ -563,9 +563,9 @@ class CompactBlocksTest(BitcoinTestFramework):
         print("Testing compactblock requests/announcements not at chain tip...")
 
         # Test that requesting old compactblocks doesn't work.
-        MAX_CMPCTBLOCK_DEPTH = 11
+        MAX_CMPCTBLOCK_DEPTH = 5
         new_blocks = []
-        for i in range(MAX_CMPCTBLOCK_DEPTH):
+        for i in range(MAX_CMPCTBLOCK_DEPTH + 1):
             self.test_node.clear_block_announcement()
             new_blocks.append(self.nodes[0].generate(1)[0])
             wait_until(self.test_node.received_block_announcement, timeout=30)
