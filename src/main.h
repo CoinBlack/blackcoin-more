@@ -37,11 +37,10 @@ class CScriptCheck;
 class CTxMemPool;
 class CValidationInterface;
 class CValidationState;
-class PrecomputedTransactionData;
-
-struct CDiskTxPos;
 class CWallet;
 
+struct CDiskTxPos;
+struct PrecomputedTransactionData;
 struct CNodeStateStats;
 struct LockPoints;
 
