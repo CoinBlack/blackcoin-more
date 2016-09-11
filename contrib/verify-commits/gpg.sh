@@ -1,8 +1,13 @@
 #!/bin/sh
-INPUT=$(</dev/stdin)
+# Copyright (c) 2014-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+INPUT=$(cat /dev/stdin)
 VALID=false
 REVSIG=false
-IFS=$'\n'
+IFS='
+'
 for LINE in $(echo "$INPUT" | gpg --trust-model always "$@" 2>/dev/null); do
 	case "$LINE" in
 	"[GNUPG:] VALIDSIG "*)

@@ -1,18 +1,16 @@
 #!/bin/sh
+# Copyright (c) 2014-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+# Not technically POSIX-compliant due to use of "local", but almost every
+# shell anyone uses today supports it, so its probably fine
 
 DIR=$(dirname "$0")
-
-echo "Please verify all commits in the following list are not evil:"
-git log "$DIR"
+[ "/${DIR#/}" != "$DIR" ] && DIR=$(dirname "$(pwd)/$0")
 
 VERIFIED_ROOT=$(cat "${DIR}/trusted-git-root")
-
-IS_REVSIG_ALLOWED () {
-	while read LINE; do
-		[ "$LINE" = "$1" ] && return 0
-	done < "${DIR}/allow-revsig-commits"
-	return 1
-}
+REVSIG_ALLOWED=$(cat "${DIR}/allow-revsig-commits")
 
 HAVE_FAILED=false
 IS_SIGNED () {
