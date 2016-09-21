@@ -210,5 +210,5 @@ WalletView *WalletFrame::currentWalletView()
 
 void WalletFrame::outOfSyncWarningClicked()
 {
-    Q_EMIT requestedOfSyncWarningInfo();
+    Q_EMIT requestedSyncWarningInfo();
 }
