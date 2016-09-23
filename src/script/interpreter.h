@@ -82,14 +82,18 @@ enum
     // See BIP65 for details.
     SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY = (1U << 9),
 
-	// Evaluating a pubkey that is not (0x04 + 64 bytes) or (0x02 or 0x03 + 32 bytes) by checksig causes script failure.
-	// (softfork safe)
-	SCRIPT_VERIFY_DERKEY = (1U << 10),
+    // Evaluating a pubkey that is not (0x04 + 64 bytes) or (0x02 or 0x03 + 32 bytes) by checksig causes script failure.
+    // (softfork safe)
+    SCRIPT_VERIFY_DERKEY = (1U << 10),
 
     // support CHECKSEQUENCEVERIFY opcode
     //
     // See BIP112 for details
     SCRIPT_VERIFY_CHECKSEQUENCEVERIFY = (1U << 10),
+
+    // Require the argument of OP_IF/NOTIF to be exactly 0x01 or empty vector
+    //
+    SCRIPT_VERIFY_MINIMALIF = (1U << 13),
 
     // Signature(s) must be empty vector if an CHECK(MULTI)SIG operation failed
     //
