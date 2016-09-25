@@ -34,7 +34,7 @@ def run_bind_test(tmpdir, allow_ips, connect_to, addresses, expected):
 
 def run_allowip_test(tmpdir, allow_ips, rpchost, rpcport):
     '''
-    Start a node with rpcwallow IP, and request getnetworkinfo
+    Start a node with rpcallow IP, and request getnetworkinfo
     at a non-localhost IP.
     '''
     base_args = ['-disablewallet', '-nolisten'] + ['-rpcallowip='+x for x in allow_ips]
