@@ -213,6 +213,7 @@ public:
     double dPingWait;
     double dPingMin;
     std::string addrLocal;
+    CAddress addr;
 };
 
 
