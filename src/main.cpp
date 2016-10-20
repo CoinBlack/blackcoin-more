@@ -3052,9 +3052,8 @@ static void NotifyHeaderTip() {
     CBlockIndex* pindexHeader = NULL;
     {
         LOCK(cs_main);
-        if (!setBlockIndexCandidates.empty()) {
-            pindexHeader = *setBlockIndexCandidates.rbegin();
-        }
+        pindexHeader = pindexBestHeader;
+
         if (pindexHeader != pindexHeaderOld) {
             fNotify = true;
             fInitialBlockDownload = IsInitialBlockDownload();
