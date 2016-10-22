@@ -119,6 +119,9 @@ public:
         consensus.nStakeMinConfirmations = 500;
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
+        // The best chain should have at least this much work.
+        consensus.nMinimumChainWork = uint256S("0x00");
+
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
@@ -215,6 +218,10 @@ public:
         pchMessageStart[3] = 0xef;
         nDefaultPort = 25714;
         nMaxTipAge = 0x7fffffff;
+
+        // The best chain should have at least this much work.
+        consensus.nMinimumChainWork = uint256S("0x00");
+
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
@@ -279,6 +286,9 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
+
+        // The best chain should have at least this much work.
+        consensus.nMinimumChainWork = uint256S("0x00");
 
 //      Deployment of BIP68, BIP112, and BIP113.
 //      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
