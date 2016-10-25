@@ -1,8 +1,8 @@
 package=bdb
-$(package)_version=5.3.28
+$(package)_version=6.2.23
 $(package)_download_path=http://download.oracle.com/berkeley-db
-$(package)_file_name=db-$($(package)_version).NC.tar.gz
-$(package)_sha256_hash=76a25560d9e52a198d37a31440fd07632b5f1f8f9f2b6d5438f4bc3e7c9013ef
+$(package)_file_name=db-$($(package)_version).tar.gz
+$(package)_sha256_hash=47612c8991aa9ac2f6be721267c8d3cdccf5ac83105df8e50809daea24e95dc7
 $(package)_build_subdir=build_unix
 
 define $(package)_set_vars
@@ -11,17 +11,12 @@ $(package)_config_opts_mingw32=--enable-mingw
 $(package)_config_opts_linux=--with-pic
 endef
 
-define $(package)_preprocess_cmds
-  sed -i -e "s/WinIoCtl.h/winioctl.h/g" src/dbinc/win_db.h && \
-  sed -i.old 's/__atomic_compare_exchange/__atomic_compare_exchange_db/' src/dbinc/atomic.h
-endef
-
 define $(package)_config_cmds
   ../dist/$($(package)_autoconf)
 endef
 
 define $(package)_build_cmds
-   $(MAKE) libdb_cxx-5.3.a libdb-5.3.a
+  $(MAKE) libdb_cxx-6.2.a libdb-6.2.a
 endef
 
 define $(package)_stage_cmds
