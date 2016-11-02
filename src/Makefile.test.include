@@ -48,7 +48,6 @@ BITCOIN_TESTS =\
   test/blockencodings_tests.cpp \
   test/bloom_tests.cpp \
   test/checkblock_tests.cpp \
-  test/Checkpoints_tests.cpp \
   test/cashaddr_tests.cpp \
   test/cashaddrenc_tests.cpp \
   test/coins_tests.cpp \
