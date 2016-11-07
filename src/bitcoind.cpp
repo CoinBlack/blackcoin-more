@@ -128,8 +128,8 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in blackmored anymore. Use the blackmore-cli utility instead.\n");
-            exit(1);
+            fprintf(stderr, "Error: There is no RPC client functionality in blackmored anymore. Use the blackmored-cli utility instead.\n");
+            exit(EXIT_FAILURE);
         }
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
@@ -189,5 +189,5 @@ int main(int argc, char* argv[])
     // Connect bitcoind signal handlers
     noui_connect();
 
-    return (AppInit(argc, argv) ? 0 : 1);
+    return (AppInit(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);
 }
