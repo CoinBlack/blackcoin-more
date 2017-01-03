@@ -66,7 +66,7 @@ public:
 
     //! Return true if core is doing initial block download
     bool inInitialBlockDownload() const;
-    //! Return true if core is importing blocks
+    //! Returns enum BlockSource of the current importing/syncing state
     enum BlockSource getBlockSource() const;
     //! Return warnings to be displayed in status bar
     QString getStatusBarWarnings() const;
