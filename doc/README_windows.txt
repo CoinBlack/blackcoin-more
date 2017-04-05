@@ -1,5 +1,5 @@
-Blackcoin More 2.13.2.1
-=====================
+Blackcoin More
+=============
 
 Intro
 -----
