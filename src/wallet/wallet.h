@@ -79,8 +79,8 @@ enum WalletFeature
     FEATURE_WALLETCRYPT = 40000, // wallet encryption
     FEATURE_COMPRPUBKEY = 60000, // compressed public keys
 
-	FEATURE_HD = 330000, // Hierarchical key derivation after BIP32 (HD Wallet)
-	FEATURE_LATEST = FEATURE_COMPRPUBKEY // HD is optional, use FEATURE_COMPRPUBKEY as latest version
+    FEATURE_HD = 330000, // Hierarchical key derivation after BIP32 (HD Wallet)
+    FEATURE_LATEST = FEATURE_COMPRPUBKEY // HD is optional, use FEATURE_COMPRPUBKEY as latest version
 };
 
 /** A key pool entry */
@@ -550,6 +550,9 @@ private:
 class CWallet : public CCryptoKeyStore, public CValidationInterface
 {
 private:
+    std::atomic<bool> fAbortRescan;
+    std::atomic<bool> fScanningWallet;
+
     /**
      * Select a set of coins such that nValueRet >= nTargetValue and at least
      * all coins from coinControl are selected; Never select unconfirmed coins
@@ -645,6 +648,9 @@ public:
         nTimeFirstKey = 0;
         fBroadcastTransactions = false;
         nConflictsReceived = 0;
+
+        fAbortRescan = false;
+        fScanningWallet = false;
     }
 
     std::map<uint256, CWalletTx> mapWallet;
@@ -690,6 +696,13 @@ public:
     void UnlockCoin(const COutPoint& output);
     void UnlockAllCoins();
     void ListLockedCoins(std::vector<COutPoint>& vOutpts);
+
+    /*
+     * Rescan abort properties
+     */
+    void AbortRescan() { fAbortRescan = true; }
+    bool IsAbortingRescan() { return fAbortRescan; }
+    bool IsScanning() { return fScanningWallet; }
 
     /**
      * keystore implementation
