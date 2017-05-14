@@ -116,6 +116,7 @@ testScripts = [
     'p2p-versionbits-warning.py',
     'importprunedfunds.py',
     'signmessages.py',
+    'uptime.py',
 ]
 testScriptsExt = [
     'bip9-softforks.py',

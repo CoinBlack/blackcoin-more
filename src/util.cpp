@@ -97,6 +97,9 @@ namespace boost {
 
 } // namespace boost
 
+// Application startup time (used for uptime calculation)
+const int64_t nStartupTime = GetTime();
+
 using namespace std;
 
 const char * const BITCOIN_CONF_FILENAME = "blackmore.conf";
@@ -834,5 +837,11 @@ int GetNumCores()
 #else // Must fall back to hardware_concurrency, which unfortunately counts virtual cores
     return boost::thread::hardware_concurrency();
 #endif
+}
+
+// Obtain the application startup time (used for uptime calculation)
+int64_t GetStartupTime()
+{
+    return nStartupTime;
 }
 
