@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>黑币智慧版钱包客户端</translation>
+        <translation>黑币新知识版钱包客户端</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>显示有关黑币智慧版钱包信息</translation>
+        <translation>显示有关黑币新知识版钱包信息</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -399,7 +399,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>黑币智慧版</translation>
+        <translation>黑币新知识版</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and Bitcoin: URIs)</source>
@@ -407,11 +407,11 @@
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>关于黑币智慧版(&amp;A)</translation>
+        <translation>关于黑币新知识版(&amp;A)</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation>修改黑币智慧版的配置选项</translation>
+        <translation>修改黑币新知识版的配置选项</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -431,7 +431,7 @@
     </message>
     <message>
         <source>Show the Bitcoin Core help message to get a list with possible Bitcoin command-line options</source>
-        <translation>显示黑币智慧版程序帮助信息，获取可用的命令行选项 </translation>
+        <translation>显示黑币新知识版程序帮助信息，获取可用的命令行选项 </translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
@@ -856,7 +856,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>黑币智慧版</translation>
+        <translation>黑币新知识版</translation>
     </message>
     <message>
         <source>version</source>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>关于黑币智慧版</translation>
+        <translation>关于黑币新知识版</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -923,11 +923,11 @@
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where Bitcoin Core will store its data.</source>
-        <translation>由于这是第一次运行 黑币智慧版 程序，您可以选择数据存储目录。</translation>
+        <translation>由于这是第一次运行 黑币新知识版 程序，您可以选择数据存储目录。</translation>
     </message>
     <message>
         <source>Bitcoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>黑币智慧版 程序会下载储存一份数据块链(blockchain)。至少需要 %1 GB的存储空间，随着时间推移会需要更多的存储空间。钱包文件也储存在该目录。</translation>
+        <translation>黑币新知识版 程序会下载储存一份数据块链(blockchain)。至少需要 %1 GB的存储空间，随着时间推移会需要更多的存储空间。钱包文件也储存在该目录。</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -939,7 +939,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>黑币智慧版</translation>
+        <translation>黑币新知识版</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1021,7 +1021,7 @@
     </message>
     <message>
         <source>The user interface language can be set here. This setting will take effect after restarting Bitcoin Core.</source>
-        <translation>可以在这里设置用户界面语言。此设置将在重新启动黑币智慧版钱包后生效。</translation>
+        <translation>可以在这里设置用户界面语言。此设置将在重新启动黑币新知识版钱包后生效。</translation>
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
@@ -1049,11 +1049,11 @@
     </message>
     <message>
         <source>Automatically start Bitcoin Core after logging in to the system.</source>
-        <translation>登录到系统后自动启动黑币智慧版钱包。</translation>
+        <translation>登录到系统后自动启动黑币新知识版钱包。</translation>
     </message>
     <message>
         <source>&amp;Start Bitcoin Core on system login</source>
-        <translation>系统登录时启动黑币智慧版钱包(&amp;S)</translation>
+        <translation>系统登录时启动黑币新知识版钱包(&amp;S)</translation>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1519,7 +1519,7 @@
     </message>
     <message>
         <source>Open the Bitcoin Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>从当前的数据目录打开黑币智慧版调试日志文件。对于较大的日志文件，这可能需要几秒钟。</translation>
+        <translation>从当前的数据目录打开黑币新知识版调试日志文件。对于较大的日志文件，这可能需要几秒钟。</translation>
     </message>
     <message>
         <source>Received</source>
@@ -1675,7 +1675,7 @@
     </message>
     <message>
         <source>Welcome to the Bitcoin Core RPC console.</source>
-        <translation>欢迎使用 黑币智慧版 RPC 控制台。</translation>
+        <translation>欢迎使用 黑币新知识版 RPC 控制台。</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -2261,7 +2261,7 @@
     <name>ShutdownWindow</name>
     <message>
         <source>Bitcoin Core is shutting down...</source>
-        <translation>黑币智慧版正在关机...</translation>
+        <translation>黑币新知识版正在关机...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2411,11 +2411,11 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>黑币智慧版</translation>
+        <translation>黑币新知识版</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
-        <translation>黑币智慧版钱包的开发者</translation>
+        <translation>黑币新知识版钱包的开发者</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -3002,7 +3002,7 @@
     </message>
     <message>
         <source>Unable to bind to %s on this computer. Bitcoin Core is probably already running.</source>
-        <translation>无法 %s的绑定到电脑上，黑币智慧版钱包可能已经在运行。</translation>
+        <translation>无法 %s的绑定到电脑上，黑币新知识版钱包可能已经在运行。</translation>
     </message>
     <message>
         <source>Use UPnP to map the listening port (default: 1 when listening and no -proxy)</source>
@@ -3206,7 +3206,7 @@
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running.</source>
-        <translation>无法获取数据目录的 %s. 黑币智慧版钱包可能已经在运行.</translation>
+        <translation>无法获取数据目录的 %s. 黑币新知识版钱包可能已经在运行.</translation>
     </message>
     <message>
         <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
@@ -3294,7 +3294,7 @@
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>
-        <translation>加载wallet.dat错误：需要新版的黑币智慧版钱包</translation>
+        <translation>加载wallet.dat错误：需要新版的黑币新知识版钱包</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>
@@ -3414,7 +3414,7 @@
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart Bitcoin Core to complete</source>
-        <translation>钱包需要被改写：重新启动黑币智慧版钱包来完成</translation>
+        <translation>钱包需要被改写：重新启动黑币新知识版钱包来完成</translation>
     </message>
     <message>
         <source>Warning</source>
