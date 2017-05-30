@@ -18,7 +18,7 @@
  */
 bool TransactionRecord::showTransaction(const CWalletTx &wtx)
 {
-    if (wtx.IsCoinBase())
+    if (wtx.IsCoinBase() || wtx.IsCoinStake())
     {
         // Ensures we show generated coins / mined transactions at depth 1
         if (!wtx.IsInMainChain())
@@ -39,10 +39,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     CAmount nCredit = wtx.GetCredit(ISMINE_ALL);
     CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
     CAmount nNet = nCredit - nDebit;
-    uint256 hash = wtx.GetHash();
+    uint256 hash = wtx.GetHash(), hashPrev;
     std::map<std::string, std::string> mapValue = wtx.mapValue;
 
-    if (nNet > 0 || wtx.IsCoinBase())
+    if (nNet > 0 || wtx.IsCoinBase() || wtx.IsCoinStake())
     {
         //
         // Credit
@@ -69,12 +69,19 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                     sub.type = TransactionRecord::RecvFromOther;
                     sub.address = mapValue["from"];
                 }
-                if (wtx.IsCoinBase())
+                if (wtx.IsCoinBase() || wtx.IsCoinStake())
                 {
                     // Generated
                     sub.type = TransactionRecord::Generated;
                 }
+                if (wtx.IsCoinStake())
+                {
+                	if (hashPrev == hash)
+                		continue; // last coinstake output
+                	sub.credit = nNet > 0 ? nNet : wtx.GetValueOut() - nDebit;
+                	hashPrev = hash;
 
+                }
                 parts.append(sub);
             }
         }
@@ -181,7 +188,7 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
     // Sort order, unrecorded transactions sort to the top
     status.sortKey = strprintf("%010d-%01d-%010u-%03d",
         (pindex ? pindex->nHeight : std::numeric_limits<int>::max()),
-        (wtx.IsCoinBase() ? 1 : 0),
+        (wtx.IsCoinBase() || wtx.IsCoinStake() ? 1 : 0),
         wtx.nTimeReceived,
         idx);
     status.countsForBalance = wtx.IsTrusted() && !(wtx.GetBlocksToMaturity() > 0);

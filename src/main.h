@@ -29,7 +29,6 @@
 #include <vector>
 
 #include <boost/unordered_map.hpp>
-
 class CBlockIndex;
 class CBlockTreeDB;
 class CBloomFilter;
@@ -39,6 +38,9 @@ class CScriptCheck;
 class CTxMemPool;
 class CValidationInterface;
 class CValidationState;
+
+class CDiskTxPos;
+class CWallet;
 
 struct CNodeStateStats;
 struct LockPoints;
@@ -50,7 +52,7 @@ static const bool DEFAULT_WHITELISTRELAY = true;
 /** Default for DEFAULT_WHITELISTFORCERELAY. */
 static const bool DEFAULT_WHITELISTFORCERELAY = true;
 /** Default for -minrelaytxfee, minimum relay fee for transactions */
-static const unsigned int DEFAULT_MIN_RELAY_TX_FEE = 1000;
+static const unsigned int DEFAULT_MIN_RELAY_TX_FEE = 10000;
 /** Default for -maxorphantx, maximum number of orphan transactions kept in memory */
 static const unsigned int DEFAULT_MAX_ORPHAN_TRANSACTIONS = 100;
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
@@ -111,7 +113,7 @@ static const bool DEFAULT_RELAYPRIORITY = true;
 static const bool DEFAULT_PERMIT_BAREMULTISIG = true;
 static const unsigned int DEFAULT_BYTES_PER_SIGOP = 20;
 static const bool DEFAULT_CHECKPOINTS_ENABLED = true;
-static const bool DEFAULT_TXINDEX = false;
+static const bool DEFAULT_TXINDEX = true;
 static const bool DEFAULT_ADDRESSINDEX = false;
 static const bool DEFAULT_TIMESTAMPINDEX = false;
 static const bool DEFAULT_SPENTINDEX = false;
@@ -146,6 +148,7 @@ extern bool fReindex;
 extern int nScriptCheckThreads;
 extern bool fTxIndex;
 extern bool fIsBareMultisigStd;
+extern bool fBIP37;
 extern bool fRequireStandard;
 extern unsigned int nBytesPerSigOp;
 extern bool fCheckBlockIndex;
@@ -154,6 +157,7 @@ extern size_t nCoinCacheUsage;
 extern CFeeRate minRelayTxFee;
 extern bool fAlerts;
 extern bool fEnableReplacement;
+extern int64_t nLastCoinStakeSearchInterval;
 
 /** Best header we've seen so far (used for getheaders queries' starting points). */
 extern CBlockIndex *pindexBestHeader;
@@ -169,7 +173,7 @@ extern bool fPruneMode;
 /** Number of MiB of block files that we're trying to stay below. */
 extern uint64_t nPruneTarget;
 /** Block files containing a block-height within MIN_BLOCKS_TO_KEEP of chainActive.Tip() will not be pruned. */
-static const unsigned int MIN_BLOCKS_TO_KEEP = 288;
+static const unsigned int MIN_BLOCKS_TO_KEEP = 500;
 
 static const signed int DEFAULT_CHECKBLOCKS = MIN_BLOCKS_TO_KEEP;
 static const unsigned int DEFAULT_CHECKLEVEL = 3;
@@ -201,7 +205,7 @@ void UnregisterNodeSignals(CNodeSignals& nodeSignals);
  * @param[out]  dbp     If pblock is stored to disk (or already there), this will be set to its location.
  * @return True if state.IsValid()
  */
-bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, const CNode* pfrom, const CBlock* pblock, bool fForceProcessing, CDiskBlockPos* dbp);
+bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, const CNode* pfrom, const CBlock* pblock, bool fForceProcessing, CDiskBlockPos* dbp, const uint256& hash);
 /** Check whether enough disk space is available for an incoming block */
 bool CheckDiskSpace(uint64_t nAdditionalBytes = 0);
 /** Open a block file (blk?????.dat) */
@@ -229,7 +233,7 @@ bool SendMessages(CNode* pto);
 /** Run an instance of the script checking thread */
 void ThreadScriptCheck();
 /** Try to detect Partition (network isolation) attacks against us */
-void PartitionCheck(bool (*initialDownloadCheck)(), CCriticalSection& cs, const CBlockIndex *const &bestHeader, int64_t nPowTargetSpacing);
+void PartitionCheck(bool (*initialDownloadCheck)(), CCriticalSection& cs, const CBlockIndex *const &bestHeader, int64_t nTargetSpacing);
 /** Check whether we are doing an initial block download (synchronizing from disk or network) */
 bool IsInitialBlockDownload();
 /** Format a string that describes several potential problems detected by the core.
@@ -243,8 +247,9 @@ std::string GetWarnings(const std::string& strFor);
 /** Retrieve a transaction (from memory pool, or from disk, if possible) */
 bool GetTransaction(const uint256 &hash, CTransaction &tx, const Consensus::Params& params, uint256 &hashBlock, bool fAllowSlow = false);
 /** Find the best known block, and make it the tip of the block chain */
-bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL);
-CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams);
+bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL, const uint256 *phash = NULL);
+CAmount GetProofOfWorkSubsidy();
+CAmount GetProofOfStakeSubsidy();
 
 /**
  * Prune block and undo files (blk???.dat and undo???.dat) so that the disk space used is less than a user-defined target.
@@ -422,6 +427,7 @@ struct CAddressUnspentKey {
     uint256 txhash;
     size_t index;
 
+
     size_t GetSerializeSize(int nType, int nVersion) const {
         return 57;
     }
@@ -463,6 +469,7 @@ struct CAddressUnspentValue {
     CAmount satoshis;
     CScript script;
     int blockHeight;
+    uint64_t nTime;
 
     ADD_SERIALIZE_METHODS;
 
@@ -471,12 +478,14 @@ struct CAddressUnspentValue {
         READWRITE(satoshis);
         READWRITE(*(CScriptBase*)(&script));
         READWRITE(blockHeight);
+        READWRITE(nTime);
     }
 
-    CAddressUnspentValue(CAmount sats, CScript scriptPubKey, int height) {
+    CAddressUnspentValue(CAmount sats, CScript scriptPubKey, int height, uint64_t nTimeVal) {
         satoshis = sats;
         script = scriptPubKey;
         blockHeight = height;
+        nTime = nTimeVal;
     }
 
     CAddressUnspentValue() {
@@ -487,6 +496,7 @@ struct CAddressUnspentValue {
         satoshis = -1;
         script.clear();
         blockHeight = 0;
+        nTime = 0;
     }
 
     bool IsNull() const {
@@ -770,6 +780,8 @@ bool GetAddressUnspent(uint160 addressHash, int type,
 bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHeader::MessageStartChars& messageStart);
 bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus::Params& consensusParams);
 bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus::Params& consensusParams);
+bool ReadFromDisk(CTransaction& tx, CDiskTxPos& txindex, CBlockTreeDB& txdb, COutPoint prevout);
+bool ReadFromDisk(CTransaction& tx, CDiskTxPos& txindex);
 
 /** Functions for validating blocks and updating the block tree */
 
@@ -783,15 +795,15 @@ bool DisconnectBlock(const CBlock& block, CValidationState& state, const CBlockI
 bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pindex, CCoinsViewCache& coins, bool fJustCheck = false);
 
 /** Context-independent validity checks */
-bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool fCheckPOW = true);
-bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW = true, bool fCheckMerkleRoot = true);
+bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool fCheckPOW = false);
+bool CheckBlock(const CBlock& block, CValidationState& state, const uint256& hash, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
 
 /** Context-dependent validity checks */
-bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex *pindexPrev);
+bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex *pindexPrev, const uint256& hash);
 bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex *pindexPrev);
 
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
-bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true);
+bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
 
 
 class CBlockFileInfo
@@ -885,6 +897,8 @@ int GetSpendHeight(const CCoinsViewCache& inputs);
  * Determine what nVersion a new block should use.
  */
 int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Params& params);
+
+bool GetCoinAge(const CTransaction& tx, CBlockTreeDB& txdb, const CBlockIndex* pindexPrev, uint64_t& nCoinAge);
 
 /** Reject codes greater or equal to this can be returned by AcceptToMemPool
  * for transactions, to signal internal conditions. They cannot and should not

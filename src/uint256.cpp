@@ -144,3 +144,10 @@ uint64_t uint256::GetHash(const uint256& salt) const
 
     return ((((uint64_t)b) << 32) | c);
 }
+
+uint64_t uint256::GetLow64() const
+{
+   assert(sizeof(data) >= 2);
+   const uint32_t *pn = (const uint32_t*)data;
+   return pn[0] | (uint64_t)pn[1] << 32;
+}

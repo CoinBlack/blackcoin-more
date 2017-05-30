@@ -36,7 +36,7 @@ struct BIP9Deployment {
  */
 struct Params {
     uint256 hashGenesisBlock;
-    int nSubsidyHalvingInterval;
+    int nMaxReorganizationDepth;
     /** Used to check majorities for block version upgrade */
     int nMajorityEnforceBlockUpgrade;
     int nMajorityRejectBlockOutdated;
@@ -46,7 +46,7 @@ struct Params {
     uint256 BIP34Hash;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargetting period,
-     * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
+     * (nTargetTimespan / nTargetSpacing) which is also used for BIP9 deployments.
      * Examples: 1916 for 95%, 1512 for testchains.
      */
     uint32_t nRuleChangeActivationThreshold;
@@ -54,11 +54,22 @@ struct Params {
     BIP9Deployment vDeployments[MAX_VERSION_BITS_DEPLOYMENTS];
     /** Proof of work parameters */
     uint256 powLimit;
+    uint256 posLimit;
+    uint256 posLimitV2;
     bool fPowAllowMinDifficultyBlocks;
+    int64_t nTargetSpacingV1;
     bool fPowNoRetargeting;
-    int64_t nPowTargetSpacing;
-    int64_t nPowTargetTimespan;
-    int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
+    int64_t nTargetSpacing;
+    int64_t nTargetTimespan;
+    int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
+    int64_t nProtocolV1RetargetingFixedTime;
+    int64_t nProtocolV2Time;
+    int64_t nProtocolV3Time;
+    bool IsProtocolV2(int64_t nTime) const { return nTime > nProtocolV2Time && nTime != 1407053678; }
+    bool IsProtocolV3(int64_t nTime) const { return nTime > nProtocolV3Time && nTime != 1444028400; }
+    unsigned int GetTargetSpacing(int nHeight) { return IsProtocolV2(nHeight) ? 64 : 60; }
+    int nLastPOWBlock;
+    int nStakeTimestampMask;
 };
 } // namespace Consensus
 

@@ -38,7 +38,7 @@ QString TransactionDesc::FormatTxStatus(const CWalletTx& wtx)
             return tr("conflicted");
         else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
             return tr("%1/offline").arg(nDepth);
-        else if (nDepth < 6)
+        else if (nDepth < 10)
             return tr("%1/unconfirmed").arg(nDepth);
         else
             return tr("%1 confirmations").arg(nDepth);

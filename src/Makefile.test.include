@@ -42,7 +42,6 @@ BITCOIN_TESTS =\
   test/alert_tests.cpp \
   test/allocator_tests.cpp \
   test/base32_tests.cpp \
-  test/base58_tests.cpp \
   test/base64_tests.cpp \
   test/bip32_tests.cpp \
   test/bloom_tests.cpp \
@@ -73,17 +72,14 @@ BITCOIN_TESTS =\
   test/scheduler_tests.cpp \
   test/script_P2SH_tests.cpp \
   test/script_P2PKH_tests.cpp \
-  test/script_tests.cpp \
   test/scriptnum_tests.cpp \
   test/serialize_tests.cpp \
-  test/sighash_tests.cpp \
   test/sigopcount_tests.cpp \
   test/skiplist_tests.cpp \
   test/streams_tests.cpp \
   test/test_bitcoin.cpp \
   test/test_bitcoin.h \
   test/timedata_tests.cpp \
-  test/transaction_tests.cpp \
   test/txvalidationcache_tests.cpp \
   test/versionbits_tests.cpp \
   test/uint256_tests.cpp \

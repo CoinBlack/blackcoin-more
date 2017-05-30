@@ -42,7 +42,7 @@ double GetDifficulty(const CBlockIndex* blockindex)
         if (chainActive.Tip() == NULL)
             return 1.0;
         else
-            blockindex = chainActive.Tip();
+        	blockindex = GetLastBlockIndex(chainActive.Tip(), false);
     }
 
     int nShift = (blockindex->nBits >> 24) & 0xff;
@@ -77,17 +77,20 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
     result.push_back(Pair("version", blockindex->nVersion));
     result.push_back(Pair("merkleroot", blockindex->hashMerkleRoot.GetHex()));
     result.push_back(Pair("time", (int64_t)blockindex->nTime));
-    result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
+    result.push_back(Pair("mediantime", (int64_t)blockindex->GetPastTimeLimit()));
     result.push_back(Pair("nonce", (uint64_t)blockindex->nNonce));
     result.push_back(Pair("bits", strprintf("%08x", blockindex->nBits)));
     result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
     result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
+    result.push_back(Pair("modifier", blockindex->nStakeModifier.GetHex()));
 
     if (blockindex->pprev)
         result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
     CBlockIndex *pnext = chainActive.Next(blockindex);
     if (pnext)
         result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
+
+
     return result;
 }
 
@@ -183,7 +186,7 @@ UniValue blockToDeltasJSON(const CBlock& block, const CBlockIndex* blockindex)
     }
     result.push_back(Pair("deltas", deltas));
     result.push_back(Pair("time", block.GetBlockTime()));
-    result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
+    result.push_back(Pair("mediantime", (int64_t)blockindex->GetPastTimeLimit()));
     result.push_back(Pair("nonce", (uint64_t)block.nNonce));
     result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
     result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
@@ -197,10 +200,45 @@ UniValue blockToDeltasJSON(const CBlock& block, const CBlockIndex* blockindex)
     return result;
 }
 
+double GetPoSKernelPS()
+{
+    int nPoSInterval = 72;
+    double dStakeKernelsTriedAvg = 0;
+    int nStakesHandled = 0, nStakesTime = 0;
+
+    CBlockIndex* pindex = chainActive.Tip();;
+    CBlockIndex* pindexPrevStake = NULL;
+
+    while (pindex && nStakesHandled < nPoSInterval)
+    {
+        if (pindex->IsProofOfStake())
+        {
+            if (pindexPrevStake)
+            {
+                dStakeKernelsTriedAvg += GetDifficulty(pindexPrevStake) * 4294967296.0;
+                nStakesTime += pindexPrevStake->nTime - pindex->nTime;
+                nStakesHandled++;
+            }
+            pindexPrevStake = pindex;
+        }
+
+        pindex = pindex->pprev;
+    }
+
+    double result = 0;
+
+    if (nStakesTime)
+        result = dStakeKernelsTriedAvg / nStakesTime;
+
+    result *= 16;
+
+    return result;
+}
+
 UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDetails = false)
 {
     UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("hash", block.GetHash().GetHex()));
+    result.push_back(Pair("hash", blockindex->GetBlockHash().GetHex()));
     int confirmations = -1;
     // Only report confirmations if the block is on the main chain
     if (chainActive.Contains(blockindex))
@@ -224,7 +262,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     }
     result.push_back(Pair("tx", txs));
     result.push_back(Pair("time", block.GetBlockTime()));
-    result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
+    result.push_back(Pair("mediantime", (int64_t)blockindex->GetPastTimeLimit()));
     result.push_back(Pair("nonce", (uint64_t)block.nNonce));
     result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
     result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
@@ -235,6 +273,10 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     CBlockIndex *pnext = chainActive.Next(blockindex);
     if (pnext)
         result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
+    result.push_back(Pair("flags", blockindex->IsProofOfStake()? "proof-of-stake" : "proof-of-work"));
+    result.push_back(Pair("modifier", blockindex->nStakeModifier.GetHex()));
+    if (block.IsProofOfStake())
+    	result.push_back(Pair("signature", HexStr(block.vchBlockSig.begin(), block.vchBlockSig.end())));
     return result;
 }
 
@@ -274,19 +316,26 @@ UniValue getbestblockhash(const UniValue& params, bool fHelp)
 
 UniValue getdifficulty(const UniValue& params, bool fHelp)
 {
-    if (fHelp || params.size() != 0)
-        throw runtime_error(
-            "getdifficulty\n"
-            "\nReturns the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
-            "\nResult:\n"
-            "n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
-            "\nExamples:\n"
-            + HelpExampleCli("getdifficulty", "")
-            + HelpExampleRpc("getdifficulty", "")
-        );
+	if (fHelp || params.size() != 0)
+	        throw runtime_error(
+	            "getdifficulty\n"
+	            "\nReturns the difficulty as a multiple of the minimum difficulty.\n"
+	            "\nResult:\n"
+	            "{                            (json object)\n"
+	            "  \"proof-of-work\" : n.nnn, (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
+	            "  \"proof-of-stake\" : n.nnn (numeric) the proof-of-stake difficulty as a multiple of the minimum difficulty.\n"
+	            "}\n"
+	            "\nExamples:\n"
+	            + HelpExampleCli("getdifficulty", "")
+	            + HelpExampleRpc("getdifficulty", "")
+	);
 
     LOCK(cs_main);
-    return GetDifficulty();
+
+    UniValue obj(UniValue::VOBJ);
+    obj.push_back(Pair("proof-of-work",  GetDifficulty()));
+    obj.push_back(Pair("proof-of-stake", GetDifficulty(GetLastBlockIndex(chainActive.Tip(), true))));
+    return obj;
 }
 
 UniValue mempoolToJSON(bool fVerbose = false)
@@ -700,6 +749,7 @@ UniValue gettxout(const UniValue& params, bool fHelp)
             "  },\n"
             "  \"version\" : n,            (numeric) The version\n"
             "  \"coinbase\" : true|false   (boolean) Coinbase or not\n"
+			"  \"coinstake\" : true|false  (boolean) Coinstake or not\n"
             "}\n"
 
             "\nExamples:\n"
@@ -749,6 +799,7 @@ UniValue gettxout(const UniValue& params, bool fHelp)
     ret.push_back(Pair("scriptPubKey", o));
     ret.push_back(Pair("version", coins.nVersion));
     ret.push_back(Pair("coinbase", coins.fCoinBase));
+    ret.push_back(Pair("coinstake", coins.fCoinStake));
 
     return ret;
 }
@@ -837,7 +888,10 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
             "  \"blocks\": xxxxxx,         (numeric) the current number of blocks processed in the server\n"
             "  \"headers\": xxxxxx,        (numeric) the current number of headers we have validated\n"
             "  \"bestblockhash\": \"...\", (string) the hash of the currently best block\n"
-            "  \"difficulty\": xxxxxx,     (numeric) the current difficulty\n"
+        	"  \"difficulty\": {            (json object)\n"
+        	           "    \"proof-of-work\": xxxxxx, (numeric) the current proof-of-work difficulty\n"
+        	           "    \"proof-of-stake\": xxxxxx (numeric) the current proof-of-stake difficulty\n"
+        	"  },\n"
             "  \"mediantime\": xxxxxx,     (numeric) median time for the current best block\n"
             "  \"verificationprogress\": xxxx, (numeric) estimate of verification progress [0..1]\n"
             "  \"chainwork\": \"xxxx\"     (string) total amount of work in active chain, in hexadecimal\n"
@@ -870,13 +924,17 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
 
     LOCK(cs_main);
 
+    UniValue diff(UniValue::VOBJ);
+    diff.push_back(Pair("proof-of-work",  (double)GetDifficulty()));
+    diff.push_back(Pair("proof-of-stake", (double)GetDifficulty(GetLastBlockIndex(chainActive.Tip(), true))));
+
     UniValue obj(UniValue::VOBJ);
     obj.push_back(Pair("chain",                 Params().NetworkIDString()));
     obj.push_back(Pair("blocks",                (int)chainActive.Height()));
     obj.push_back(Pair("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1));
     obj.push_back(Pair("bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex()));
-    obj.push_back(Pair("difficulty",            (double)GetDifficulty()));
-    obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast()));
+    obj.push_back(Pair("difficulty",            diff));
+    obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetPastTimeLimit()));
     obj.push_back(Pair("verificationprogress",  Checkpoints::GuessVerificationProgress(Params().Checkpoints(), chainActive.Tip())));
     obj.push_back(Pair("chainwork",             chainActive.Tip()->nChainWork.GetHex()));
     obj.push_back(Pair("pruned",                fPruneMode));
@@ -885,9 +943,6 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
     CBlockIndex* tip = chainActive.Tip();
     UniValue softforks(UniValue::VARR);
     UniValue bip9_softforks(UniValue::VARR);
-    softforks.push_back(SoftForkDesc("bip34", 2, tip, consensusParams));
-    softforks.push_back(SoftForkDesc("bip66", 3, tip, consensusParams));
-    softforks.push_back(SoftForkDesc("bip65", 4, tip, consensusParams));
     bip9_softforks.push_back(BIP9SoftForkDesc("csv", consensusParams, Consensus::DEPLOYMENT_CSV));
     obj.push_back(Pair("softforks",             softforks));
     obj.push_back(Pair("bip9_softforks", bip9_softforks));

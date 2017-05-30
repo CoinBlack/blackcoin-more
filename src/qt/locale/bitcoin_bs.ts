@@ -15,11 +15,11 @@
     <name>BitcoinGUI</name>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <translation>Blackcoin</translation>
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Jezrga</translation>
+        <translation>Blackcoin Jezrga</translation>
     </message>
     </context>
 <context>
@@ -38,14 +38,14 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Jezrga</translation>
+        <translation>Blackcoin Jezrga</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Jezrga</translation>
+        <translation>Blackcoin Jezrga</translation>
     </message>
     </context>
 <context>
@@ -113,7 +113,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Jezrga</translation>
+        <translation>Blackcoin Jezrga</translation>
     </message>
     </context>
 <context>

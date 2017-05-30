@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Vælg adresse at sende bitcoins til</translation>
+        <translation>Vælg adresse at sende blackcoins til</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Vælg adresse at modtage bitcoins med</translation>
+        <translation>Vælg adresse at modtage blackcoins med</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -67,11 +67,11 @@
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Disse er dine Bitcoin-adresser for at sende betalinger. Tjek altid beløb og modtageradresse, inden du sender bitcoins.</translation>
+        <translation>Disse er dine Blackcoin-adresser for at sende betalinger. Tjek altid beløb og modtageradresse, inden du sender blackcoins.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dette er dine Bitcoin-adresser til at modtage betalinger med. Det anbefales are bruge en ny modtagelsesadresse for hver transaktion.</translation>
+        <translation>Dette er dine Blackcoin-adresser til at modtage betalinger med. Det anbefales are bruge en ny modtagelsesadresse for hver transaktion.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>Bitcoin Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Bitcoin Core vil nu lukke for at færdiggøre krypteringsprocessen. Husk at kryptering af din tegnebog kan ikke beskytte dine bitcoin fuldt ud mod at blive stjålet af eventuel malware, der måtte have inficeret din computer.</translation>
+        <translation>Blackcoin Core vil nu lukke for at færdiggøre krypteringsprocessen. Husk at kryptering af din tegnebog kan ikke beskytte dine blackcoin fuldt ud mod at blive stjålet af eventuel malware, der måtte have inficeret din computer.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Bitcoin Core-klient</translation>
+        <translation>Blackcoin Core-klient</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -319,7 +319,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Send bitcoins til en Bitcoin-adresse</translation>
+        <translation>Send blackcoins til en Blackcoin-adresse</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -343,7 +343,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <translation>Blackcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Vis oplysninger om Bitcoin Core</translation>
+        <translation>Vis oplysninger om Blackcoin Core</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -375,11 +375,11 @@
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Underskriv beskeder med dine Bitcoin-adresser for at bevise, at de tilhører dig</translation>
+        <translation>Underskriv beskeder med dine Blackcoin-adresser for at bevise, at de tilhører dig</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verificér beskeder for at sikre, at de er underskrevet med de angivne Bitcoin-adresser</translation>
+        <translation>Verificér beskeder for at sikre, at de er underskrevet med de angivne Blackcoin-adresser</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -399,19 +399,19 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Core</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Anmod om betalinger (genererer QR-koder og "bitcoin:"-URI'er)</translation>
+        <translation>Anmod om betalinger (genererer QR-koder og "blackcoin:"-URI'er)</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;Om Bitcoin Core</translation>
+        <translation>&amp;Om Blackcoin Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation>Ændr opsætning af Bitcoin Core</translation>
+        <translation>Ændr opsætning af Blackcoin Core</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -423,7 +423,7 @@
     </message>
     <message>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation>Åbn en "bitcoin:"-URI eller betalingsanmodning</translation>
+        <translation>Åbn en "blackcoin:"-URI eller betalingsanmodning</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -431,11 +431,11 @@
     </message>
     <message>
         <source>Show the Bitcoin Core help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Vis Bitcoin Core hjælpebesked for at få en liste over mulige tilvalg for Bitcoin kommandolinje</translation>
+        <translation>Vis Blackcoin Core hjælpebesked for at få en liste over mulige tilvalg for Blackcoin kommandolinje</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktiv forbindelse til Bitcoin-netværket</numerusform><numerusform>%n aktive forbindelser til Bitcoin-netværket</numerusform></translation>
+        <translation><numerusform>%n aktiv forbindelse til Blackcoin-netværket</numerusform><numerusform>%n aktive forbindelser til Bitcoin-netværket</numerusform></translation>
     </message>
     <message>
         <source>No block source available...</source>
@@ -818,7 +818,7 @@
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Den indtastede adresse "%1" er ikke en gyldig Bitcoin-adresse.</translation>
+        <translation>Den indtastede adresse "%1" er ikke en gyldig Blackcoin-adresse.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -856,7 +856,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Core</translation>
     </message>
     <message>
         <source>version</source>
@@ -868,7 +868,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>Om Bitcoin Core</translation>
+        <translation>Om Blackcoin Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -919,15 +919,15 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Velkommen til Bitcoin Core.</translation>
+        <translation>Velkommen til Blackcoin Core.</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where Bitcoin Core will store its data.</source>
-        <translation>Siden dette er første gang, programmet startes, kan du vælge, hvor Bitcoin Core skal gemme sin data.</translation>
+        <translation>Siden dette er første gang, programmet startes, kan du vælge, hvor Blackcoin Core skal gemme sin data.</translation>
     </message>
     <message>
         <source>Bitcoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Bitcoin Core vil downloade og gemme et kopi af Bitcoin-blokkæden. Mindst %1 GB data vil blive gemt i denne mappe, og den vil vokse over tid. Tegnebogen vil også blive gemt i denne mappe.</translation>
+        <translation>Blackcoin Core vil downloade og gemme et kopi af Blackcoin-blokkæden. Mindst %1 GB data vil blive gemt i denne mappe, og den vil vokse over tid. Tegnebogen vil også blive gemt i denne mappe.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -939,7 +939,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1021,7 +1021,7 @@
     </message>
     <message>
         <source>The user interface language can be set here. This setting will take effect after restarting Bitcoin Core.</source>
-        <translation>Sproget for brugerfladen kan vælges her. Denne indstilling vil træde i kraft efter genstart af Bitcoin Core.</translation>
+        <translation>Sproget for brugerfladen kan vælges her. Denne indstilling vil træde i kraft efter genstart af Blackcoin Core.</translation>
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
@@ -1049,11 +1049,11 @@
     </message>
     <message>
         <source>Automatically start Bitcoin Core after logging in to the system.</source>
-        <translation>Start Bitcoin Core automatisk efter der logges ind på systemet.</translation>
+        <translation>Start Blackcoin Core automatisk efter der logges ind på systemet.</translation>
     </message>
     <message>
         <source>&amp;Start Bitcoin Core on system login</source>
-        <translation>&amp;Start Bitcoin Core ved system-login</translation>
+        <translation>&amp;Start Blackcoin Core ved system-login</translation>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1081,7 +1081,7 @@
     </message>
     <message>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Åbn automatisk Bitcoin-klientens port på routeren. Dette virker kun, når din router understøtter UPnP, og UPnP er aktiveret.</translation>
+        <translation>Åbn automatisk Blackcoin-klientens port på routeren. Dette virker kun, når din router understøtter UPnP, og UPnP er aktiveret.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1089,7 +1089,7 @@
     </message>
     <message>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Forbind til Bitcoin-netværket gennem en SOCKS5-proxy.</translation>
+        <translation>Forbind til Blackcoin-netværket gennem en SOCKS5-proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1129,7 +1129,7 @@
     </message>
     <message>
         <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Forbind til Bitcoin-netværket gennem en separat SOCKS5-proxy for skjulte Tor-tjenester.</translation>
+        <translation>Forbind til Blackcoin-netværket gennem en separat SOCKS5-proxy for skjulte Tor-tjenester.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
@@ -1165,7 +1165,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Vælg standard for underopdeling af enhed, som skal vises i brugergrænsefladen og ved afsendelse af bitcoins.</translation>
+        <translation>Vælg standard for underopdeling af enhed, som skal vises i brugergrænsefladen og ved afsendelse af blackcoins.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1216,7 +1216,7 @@
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Den viste information kan være forældet. Din tegnebog synkroniserer automatisk med Bitcoin-netværket, når en forbindelse etableres, men denne proces er ikke gennemført endnu.</translation>
+        <translation>Den viste information kan være forældet. Din tegnebog synkroniserer automatisk med Blackcoin-netværket, når en forbindelse etableres, men denne proces er ikke gennemført endnu.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1315,7 +1315,7 @@
     </message>
     <message>
         <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>Kan ikke starte bitcoin: click-to-pay-håndtering</translation>
+        <translation>Kan ikke starte blackcoin: click-to-pay-håndtering</translation>
     </message>
     <message>
         <source>Payment request fetch URL is invalid: %1</source>
@@ -1323,7 +1323,7 @@
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig Bitcoin-adresse eller forkert udformede URL-parametre.</translation>
+        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig Blackcoin-adresse eller forkert udformede URL-parametre.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1397,7 +1397,7 @@
     </message>
     <message>
         <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Indtast en Bitcoin-adresse (fx %1)</translation>
+        <translation>Indtast en Blackcoin-adresse (fx %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1519,7 +1519,7 @@
     </message>
     <message>
         <source>Open the Bitcoin Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Åbn Bitcoin Cores fejlsøgningslogfil fra den aktuelle datamappe. Dette kan tage nogle få sekunder for store logfiler.</translation>
+        <translation>Åbn Blackcoin Cores fejlsøgningslogfil fra den aktuelle datamappe. Dette kan tage nogle få sekunder for store logfiler.</translation>
     </message>
     <message>
         <source>Received</source>
@@ -1679,7 +1679,7 @@
     </message>
     <message>
         <source>Welcome to the Bitcoin Core RPC console.</source>
-        <translation>Velkommen til Bitcoin Cores RPC-konsol.</translation>
+        <translation>Velkommen til Blackcoin Cores RPC-konsol.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -1762,7 +1762,7 @@
     </message>
     <message>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>En valgfri besked, der føjes til betalingsanmodningen, og som vil vises, når anmodningen åbnes. Bemærk: Beskeden vil ikke sendes sammen med betalingen over Bitcoin-netværket.</translation>
+        <translation>En valgfri besked, der føjes til betalingsanmodningen, og som vil vises, når anmodningen åbnes. Bemærk: Beskeden vil ikke sendes sammen med betalingen over Blackcoin-netværket.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1911,7 +1911,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Send bitcoins</translation>
+        <translation>Send blackcoins</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -1995,7 +1995,7 @@
     </message>
     <message>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>Det er helt fint kun at betale det minimale gebyr, så længe den totale transaktionsvolumen er mindre end den plads, der er tilgængelig i blokkene. Men vær opmærksom på, at dette kan ende ud i transaktioner, der aldrig bliver bekræftet, når der bliver større forespørgsel efter bitcoin-transaktioner, end hvad netværket kan bearbejde.</translation>
+        <translation>Det er helt fint kun at betale det minimale gebyr, så længe den totale transaktionsvolumen er mindre end den plads, der er tilgængelig i blokkene. Men vær opmærksom på, at dette kan ende ud i transaktioner, der aldrig bliver bekræftet, når der bliver større forespørgsel efter blackcoin-transaktioner, end hvad netværket kan bearbejde.</translation>
     </message>
     <message>
         <source>(read the tooltip)</source>
@@ -2067,7 +2067,7 @@
     </message>
     <message>
         <source>Confirm send coins</source>
-        <translation>Bekræft afsendelse af bitcoins</translation>
+        <translation>Bekræft afsendelse af blackcoins</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2127,7 +2127,7 @@
     </message>
     <message>
         <source>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
-        <translation>Transaktionen blev afvist! Dette kan ske, hvis nogle af dine bitcoins i din tegnebog allerede er brugt, som hvis du brugte en kopi af wallet.dat og dine bitcoins er blevet brugt i kopien, men ikke er markeret som brugt her.</translation>
+        <translation>Transaktionen blev afvist! Dette kan ske, hvis nogle af dine blackcoins i din tegnebog allerede er brugt, som hvis du brugte en kopi af wallet.dat og dine blackcoins er blevet brugt i kopien, men ikke er markeret som brugt her.</translation>
     </message>
     <message>
         <source>A fee higher than %1 is considered an absurdly high fee.</source>
@@ -2155,7 +2155,7 @@
     </message>
     <message>
         <source>Warning: Invalid Bitcoin address</source>
-        <translation>Advarsel: Ugyldig Bitcoin-adresse</translation>
+        <translation>Advarsel: Ugyldig Blackcoin-adresse</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2206,7 +2206,7 @@
     </message>
     <message>
         <source>The Bitcoin address to send the payment to</source>
-        <translation>Bitcoin-adresse, som betalingen skal sendes til</translation>
+        <translation>Blackcoin-adresse, som betalingen skal sendes til</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2226,7 +2226,7 @@
     </message>
     <message>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Gebyret vil blive trukket fra det sendte beløb. Modtageren vil modtage færre bitcoin, end du indtaster i beløbfeltet. Hvis flere modtagere vælges, vil gebyret deles ligeligt.</translation>
+        <translation>Gebyret vil blive trukket fra det sendte beløb. Modtageren vil modtage færre blackcoin, end du indtaster i beløbfeltet. Hvis flere modtagere vælges, vil gebyret deles ligeligt.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2250,7 +2250,7 @@
     </message>
     <message>
         <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>En besked, som blev føjet til "bitcon:"-URI'en, som vil gemmes med transaktionen til din reference. Bemærk: Denne besked vil ikke blive sendt over Bitcoin-netværket.</translation>
+        <translation>En besked, som blev føjet til "bitcon:"-URI'en, som vil gemmes med transaktionen til din reference. Bemærk: Denne besked vil ikke blive sendt over Blackcoin-netværket.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2265,7 +2265,7 @@
     <name>ShutdownWindow</name>
     <message>
         <source>Bitcoin Core is shutting down...</source>
-        <translation>Bitcoin Core lukker ned…</translation>
+        <translation>Blackcoin Core lukker ned…</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2284,11 +2284,11 @@
     </message>
     <message>
         <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>Du kan signere beskeder/aftaler med dine adresser for at bevise, at du kan modtage bitcoin, der bliver sendt til adresserne. Vær forsigtig med ikke at signere noget vagt eller tilfældigt, da eventuelle phishing-angreb kan snyde dig til at overlade din identitet til dem. Signér kun fuldt ud detaljerede udsagn, som du er enig i.</translation>
+        <translation>Du kan signere beskeder/aftaler med dine adresser for at bevise, at du kan modtage blackcoin, der bliver sendt til adresserne. Vær forsigtig med ikke at signere noget vagt eller tilfældigt, da eventuelle phishing-angreb kan snyde dig til at overlade din identitet til dem. Signér kun fuldt ud detaljerede udsagn, som du er enig i.</translation>
     </message>
     <message>
         <source>The Bitcoin address to sign the message with</source>
-        <translation>Bitcoin-adresse, som beskeden skal signeres med</translation>
+        <translation>Blackcoin-adresse, som beskeden skal signeres med</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2320,7 +2320,7 @@
     </message>
     <message>
         <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Underskriv denne besked for at bevise, at Bitcoin-adressen tilhører dig</translation>
+        <translation>Underskriv denne besked for at bevise, at Blackcoin-adressen tilhører dig</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2344,11 +2344,11 @@
     </message>
     <message>
         <source>The Bitcoin address the message was signed with</source>
-        <translation>Bitcoin-adressen, som beskeden blev signeret med</translation>
+        <translation>Blackcoin-adressen, som beskeden blev signeret med</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verificér beskeden for at sikre, at den er underskrevet med den angivne Bitcoin-adresse</translation>
+        <translation>Verificér beskeden for at sikre, at den er underskrevet med den angivne Blackcoin-adresse</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2415,11 +2415,11 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Core</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
-        <translation>Udviklerne af Bitcoin Core</translation>
+        <translation>Udviklerne af Blackcoin Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2545,7 +2545,7 @@
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>Minede bitcoins skal modne %1 blokke, før de kan bruges. Da du genererede denne blok, blev den transmitteret til netværket for at blive føjet til blokkæden. Hvis det ikke lykkes at få den i kæden, vil dens tilstand ændres til "ikke accepteret", og den vil ikke kunne bruges. Dette kan ske nu og da, hvis en anden knude udvinder en blok inden for nogle få sekunder fra din.</translation>
+        <translation>Minede blackcoins skal modne %1 blokke, før de kan bruges. Da du genererede denne blok, blev den transmitteret til netværket for at blive føjet til blokkæden. Hvis det ikke lykkes at få den i kæden, vil dens tilstand ændres til "ikke accepteret", og den vil ikke kunne bruges. Dette kan ske nu og da, hvis en anden knude udvinder en blok inden for nogle få sekunder fra din.</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -2867,7 +2867,7 @@
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation>Send bitcoins</translation>
+        <translation>Send blackcoins</translation>
     </message>
 </context>
 <context>
@@ -2937,7 +2937,7 @@
     </message>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong Bitcoin Core will not work properly.</source>
-        <translation>Kontrollér venligst, at din computers dato og tid er korrekt! Hvis uret ikke passer, vil Bitcoin Core ikke fungere korrekt.</translation>
+        <translation>Kontrollér venligst, at din computers dato og tid er korrekt! Hvis uret ikke passer, vil Blackcoin Core ikke fungere korrekt.</translation>
     </message>
     <message>
         <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
@@ -3009,7 +3009,7 @@
     </message>
     <message>
         <source>Unable to bind to %s on this computer. Bitcoin Core is probably already running.</source>
-        <translation>Ikke i stand til at tildele til %s på denne computer. Bitcoin Core kører sansynligvis allerede.</translation>
+        <translation>Ikke i stand til at tildele til %s på denne computer. Blackcoin Core kører sansynligvis allerede.</translation>
     </message>
     <message>
         <source>Use UPnP to map the listening port (default: 1 when listening and no -proxy)</source>
@@ -3217,7 +3217,7 @@
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running.</source>
-        <translation>Kan ikke opnå en lås på datamappe %s. Bitcoin Core kører sansynligvis allerede.</translation>
+        <translation>Kan ikke opnå en lås på datamappe %s. Blackcoin Core kører sansynligvis allerede.</translation>
     </message>
     <message>
         <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
@@ -3317,11 +3317,11 @@
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Ophavsret © 2009-%i Udviklerne af Bitcoin Core</translation>
+        <translation>Ophavsret © 2009-%i Udviklerne af Blackcoin Core</translation>
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>
-        <translation>Fejl ved indlæsning af wallet.dat: Tegnebog kræver en nyere version af Bitcoin Core</translation>
+        <translation>Fejl ved indlæsning af wallet.dat: Tegnebog kræver en nyere version af Blackcoin Core</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>
@@ -3337,7 +3337,7 @@
     </message>
     <message>
         <source>Initialization sanity check failed. Bitcoin Core is shutting down.</source>
-        <translation>Sundhedstjek under klargøring mislykkedes. Bitcoin Core lukker ned.</translation>
+        <translation>Sundhedstjek under klargøring mislykkedes. Blackcoin Core lukker ned.</translation>
     </message>
     <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s'</source>
@@ -3457,7 +3457,7 @@
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart Bitcoin Core to complete</source>
-        <translation>Det var nødvendigt at genskrive tegnebogen: genstart Bitcoin Core for at gennemføre</translation>
+        <translation>Det var nødvendigt at genskrive tegnebogen: genstart Blackcoin Core for at gennemføre</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -3581,7 +3581,7 @@
     </message>
     <message>
         <source>Generate coins (default: %u)</source>
-        <translation>Generér bitcoins (standard: %u)</translation>
+        <translation>Generér blackcoins (standard: %u)</translation>
     </message>
     <message>
         <source>How many blocks to check at startup (default: %u, 0 = all)</source>

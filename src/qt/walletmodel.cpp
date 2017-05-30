@@ -520,6 +520,14 @@ void WalletModel::unsubscribeFromCoreSignals()
 WalletModel::UnlockContext WalletModel::requestUnlock()
 {
     bool was_locked = getEncryptionStatus() == Locked;
+
+    if ((!was_locked) && fWalletUnlockStakingOnly)
+    {
+    	setWalletLocked(true);
+        was_locked = getEncryptionStatus() == Locked;
+
+    }
+
     if(was_locked)
     {
         // Request UI to unlock wallet
@@ -528,7 +536,7 @@ WalletModel::UnlockContext WalletModel::requestUnlock()
     // If wallet is still locked, unlock was failed or cancelled, mark context as invalid
     bool valid = getEncryptionStatus() != Locked;
 
-    return UnlockContext(this, valid, was_locked);
+    return UnlockContext(this, valid, was_locked && !fWalletUnlockStakingOnly);
 }
 
 WalletModel::UnlockContext::UnlockContext(WalletModel *wallet, bool valid, bool relock):
@@ -667,4 +675,20 @@ bool WalletModel::saveReceiveRequest(const std::string &sAddress, const int64_t 
         return wallet->EraseDestData(dest, key);
     else
         return wallet->AddDestData(dest, key, sRequest);
+}
+
+unsigned long long WalletModel::updateWeight()
+{
+    if (!wallet)
+        return 0;
+
+    TRY_LOCK(cs_main, lockMain);
+    if (!lockMain)
+    	return 0;
+
+    TRY_LOCK(wallet->cs_wallet, lockWallet);
+    if (!lockWallet)
+    	return 0;
+
+    return wallet->GetStakeWeight();
 }

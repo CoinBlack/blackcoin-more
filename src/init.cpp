@@ -191,10 +191,7 @@ void Shutdown()
     StopREST();
     StopRPC();
     StopHTTPServer();
-#ifdef ENABLE_WALLET
-    if (pwalletMain)
-        pwalletMain->Flush(false);
-#endif
+
     GenerateBitcoins(false, 0, Params());
     StopNode();
     StopTorControl();
@@ -393,6 +390,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-whitebind=<addr>", _("Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6"));
     strUsage += HelpMessageOpt("-whitelist=<netmask>", _("Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.") +
         " " + _("Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway"));
+    strUsage += HelpMessageOpt("-synctime", strprintf(_("Sync time with other nodes (default: %u)"), 0));
     strUsage += HelpMessageOpt("-whitelistrelay", strprintf(_("Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)"), DEFAULT_WHITELISTRELAY));
     strUsage += HelpMessageOpt("-whitelistforcerelay", strprintf(_("Force relay of transactions from whitelisted peers even they violate local relay policy (default: %d)"), DEFAULT_WHITELISTFORCERELAY));
     strUsage += HelpMessageOpt("-maxuploadtarget=<n>", strprintf(_("Tries to keep outbound traffic under the given target (in MiB per 24h), 0 = no limit (default: %d)"), DEFAULT_MAX_UPLOAD_TARGET));
@@ -436,7 +434,6 @@ std::string HelpMessage(HelpMessageMode mode)
     {
         strUsage += HelpMessageOpt("-checkblockindex", strprintf("Do a full consistency check for mapBlockIndex, setBlockIndexCandidates, chainActive and mapBlocksUnlinked occasionally. Also sets -checkmempool (default: %u)", Params(CBaseChainParams::MAIN).DefaultConsistencyChecks()));
         strUsage += HelpMessageOpt("-checkmempool=<n>", strprintf("Run checks every <n> transactions (default: %u)", Params(CBaseChainParams::MAIN).DefaultConsistencyChecks()));
-        strUsage += HelpMessageOpt("-checkpoints", strprintf("Disable expensive verification for known chain history (default: %u)", DEFAULT_CHECKPOINTS_ENABLED));
 #ifdef ENABLE_WALLET
         strUsage += HelpMessageOpt("-dblogsize=<n>", strprintf("Flush wallet database activity from memory to disk log every <n> megabytes (default: %u)", DEFAULT_WALLET_DBLOGSIZE));
 #endif
@@ -744,6 +741,19 @@ void InitParameterInteraction()
             LogPrintf("%s: parameter interaction: -externalip set -> setting -discover=0\n", __func__);
     }
 
+#ifdef ENABLE_WALLET
+    if (mapArgs.count("-reservebalance")) // ppcoin: reserve balance amount
+    {
+
+        if (SoftSetBoolArg("-reservebalance", false))
+        {
+            LogPrintf("Invalid amount for -reservebalance=<amount>");
+
+        }
+        ParseMoney(mapArgs["-reservebalance"], nReserveBalance);
+    }
+#endif
+
     if (GetBoolArg("-salvagewallet", false)) {
         // Rewrite just private keys: rescan to find transactions
         if (SoftSetBoolArg("-rescan", true))
@@ -906,7 +916,9 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         mempool.setSanityCheck(1.0 / ratio);
     }
     fCheckBlockIndex = GetBoolArg("-checkblockindex", chainparams.DefaultConsistencyChecks());
-    fCheckpointsEnabled = GetBoolArg("-checkpoints", DEFAULT_CHECKPOINTS_ENABLED);
+    if (GetBoolArg("-checkpoints", false))
+            return InitError(_("Error: Unsupported argument -checkpoints found. We rely on it to verify pre protocol v3 era."));
+    fCheckpointsEnabled = true;
 
     // mempool limits
     int64_t nMempoolSizeMax = GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;
@@ -1025,6 +1037,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     nMaxDatacarrierBytes = GetArg("-datacarriersize", nMaxDatacarrierBytes);
 
     fAlerts = GetBoolArg("-alerts", DEFAULT_ALERTS);
+    fBIP37 = GetArg("-bip37", false);
 
     // Option to startup with mocktime set (used for regression testing):
     SetMockTime(GetArg("-mocktime", 0)); // SetMockTime(0) is a no-op
@@ -1113,6 +1126,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     }
 
     int64_t nStart;
+
+#if defined(USE_SSE2)
+    scrypt_detect_sse2();
+#endif
 
     // ********************************************************* Step 5: verify wallet database integrity
 #ifdef ENABLE_WALLET
@@ -1670,17 +1687,22 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     // this was discussed in the IRC meeting on 2016-03-31.
     //
     // --- disabled ---
-    //int64_t nPowTargetSpacing = Params().GetConsensus().nPowTargetSpacing;
+    //int64_t nTargetSpacing = Params().GetConsensus().nTargetSpacing;
     //CScheduler::Function f = boost::bind(&PartitionCheck, &IsInitialBlockDownload,
-    //                                     boost::ref(cs_main), boost::cref(pindexBestHeader), nPowTargetSpacing);
-    //scheduler.scheduleEvery(f, nPowTargetSpacing);
+    //                                     boost::ref(cs_main), boost::cref(pindexBestHeader), nTargetSpacing);
+    //scheduler.scheduleEvery(f, nTargetSpacing);
     // --- end disabled ---
 
     // Generate coins in the background
     GenerateBitcoins(GetBoolArg("-gen", DEFAULT_GENERATE), GetArg("-genproclimit", DEFAULT_GENERATE_THREADS), chainparams);
+#ifdef ENABLE_WALLET
+    // Mine proof-of-stake blocks in the background
+    if (!GetBoolArg("-staking", true))
+        LogPrintf("Staking disabled\n");
+    else if (pwalletMain)
+    	threadGroup.create_thread(boost::bind(&ThreadStakeMiner, pwalletMain, chainparams));
 
-    // ********************************************************* Step 12: finished
-
+#endif
     SetRPCWarmupFinished();
     uiInterface.InitMessage(_("Done loading"));
 

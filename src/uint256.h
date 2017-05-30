@@ -130,6 +130,7 @@ public:
      * @note This hash is not stable between little and big endian.
      */
     uint64_t GetHash(const uint256& salt) const;
+    uint64_t GetLow64() const;
 };
 
 /* uint256 from const char *.

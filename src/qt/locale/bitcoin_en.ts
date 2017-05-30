@@ -86,12 +86,12 @@
     <message>
         <location line="+7"/>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
+        <translation>These are your Blackcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your Blackcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -212,7 +212,7 @@
     <message>
         <location line="+11"/>
         <source>Bitcoin Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackcoin Lore will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your blackcoins from being stolen by malware infecting your computer.</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -391,7 +391,7 @@
     <message>
         <location line="+183"/>
         <source>Bitcoin Core client</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackcoin Lore client</translation>
     </message>
     <message>
         <location line="+169"/>
@@ -406,7 +406,7 @@
     <message>
         <location line="-436"/>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Send coins to a Bitcoin address</translation>
+        <translation>Send coins to a Blackcoin address</translation>
     </message>
     <message>
         <location line="+65"/>
@@ -436,7 +436,7 @@
     <message>
         <location line="+459"/>
         <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <translation>Blackcoin</translation>
     </message>
     <message>
         <location line="-669"/>
@@ -456,7 +456,7 @@
     <message>
         <location line="+40"/>
         <source>Show information about Bitcoin Core</source>
-        <translation type="unfinished"></translation>
+        <translation>Show information about Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -476,12 +476,12 @@
     <message>
         <location line="+7"/>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Sign messages with your Bitcoin addresses to prove you own them</translation>
+        <translation>Sign messages with your Blackcoin addresses to prove you own them</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verify messages to ensure they were signed with specified Bitcoin addresses</translation>
+        <translation>Verify messages to ensure they were signed with specified Blackcoin addresses</translation>
     </message>
     <message>
         <location line="+56"/>
@@ -506,22 +506,22 @@
     <message>
         <location line="-314"/>
         <source>Bitcoin Core</source>
-        <translation type="unfinished">Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+160"/>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished"></translation>
+        <translation>Request payments (generates QR codes and blackcoin: URIs)</translation>
     </message>
     <message>
         <location line="+38"/>
         <source>&amp;About Bitcoin Core</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;About Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation type="unfinished"></translation>
+        <translation>Modify configuration options for Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+21"/>
@@ -536,7 +536,7 @@
     <message>
         <location line="+3"/>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Open a blackcoin: URI or payment request</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -546,14 +546,14 @@
     <message>
         <location line="+2"/>
         <source>Show the Bitcoin Core help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished"></translation>
+        <translation>Show the Blackcoin Lore help message to get a list with possible Blackcoin command-line options</translation>
     </message>
     <message numerus="yes">
         <location line="+329"/>
         <source>%n active connection(s) to Bitcoin network</source>
         <translation>
-            <numerusform>%n active connection to Bitcoin network</numerusform>
-            <numerusform>%n active connections to Bitcoin network</numerusform>
+            <numerusform>%n active connection to Blackcoin network</numerusform>
+            <numerusform>%n active connections to Blackcoin network</numerusform>
         </translation>
     </message>
     <message>
@@ -1042,7 +1042,7 @@
     <message>
         <location line="-5"/>
         <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
-        <translation>The entered address &quot;%1&quot; is not a valid Bitcoin address.</translation>
+        <translation>The entered address &quot;%1&quot; is not a valid Blackcoin address.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1088,7 +1088,7 @@
     <message>
         <location filename="../utilitydialog.cpp" line="+36"/>
         <source>Bitcoin Core</source>
-        <translation type="unfinished">Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1104,7 +1104,7 @@
     <message>
         <location line="+5"/>
         <source>About Bitcoin Core</source>
-        <translation type="unfinished"></translation>
+        <translation>About Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -1167,17 +1167,17 @@
     <message>
         <location line="+9"/>
         <source>Welcome to Bitcoin Core.</source>
-        <translation type="unfinished"></translation>
+        <translation>Welcome to Bitcoin Lore.</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>As this is the first time the program is launched, you can choose where Bitcoin Core will store its data.</source>
-        <translation type="unfinished"></translation>
+        <translation>As this is the first time the program is launched, you can choose where Blackcoin Lore will store its data.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Bitcoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackcoin Lore will download and store a copy of the Blackcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1192,7 +1192,7 @@
     <message>
         <location filename="../intro.cpp" line="+86"/>
         <source>Bitcoin Core</source>
-        <translation type="unfinished">Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1300,7 +1300,7 @@
     <message>
         <location line="+45"/>
         <source>The user interface language can be set here. This setting will take effect after restarting Bitcoin Core.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">The user interface language can be set here. This setting will take effect after restarting Blackcoin Lore.</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -1336,12 +1336,12 @@
     <message>
         <location line="-153"/>
         <source>Automatically start Bitcoin Core after logging in to the system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatically start Blackcoin Lore after logging in to the system.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>&amp;Start Bitcoin Core on system login</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Start Blackcoin Lore on system login</translation>
     </message>
     <message>
         <location line="+65"/>
@@ -1376,7 +1376,7 @@
     <message>
         <location line="+30"/>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
+        <translation>Automatically open the Blackcoin client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1386,7 +1386,7 @@
     <message>
         <location line="+17"/>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connect to the Blackcoin network through a SOCKS5 proxy.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1441,7 +1441,7 @@
     <message>
         <location line="+25"/>
         <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Connect to the Blackcoin network through a separate SOCKS5 proxy for Tor hidden services.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1551,7 +1551,7 @@
         <location line="+59"/>
         <location line="+386"/>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</translation>
+        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Blackcoin network after a connection is established, but this process has not completed yet.</translation>
     </message>
     <message>
         <location line="-139"/>
@@ -1686,7 +1686,7 @@
     <message>
         <location line="-402"/>
         <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cannot start blackcoin: click-to-pay handler</translation>
     </message>
     <message>
         <location line="+104"/>
@@ -1696,7 +1696,7 @@
     <message>
         <location line="+21"/>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">URI cannot be parsed! This can be caused by an invalid Blackcoin address or malformed URI parameters.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1788,7 +1788,7 @@
     <message>
         <location filename="../guiutil.cpp" line="+118"/>
         <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter a Blackcoin address (e.g. %1)</translation>
     </message>
     <message>
         <location line="+763"/>
@@ -1963,7 +1963,7 @@
     <message>
         <location line="+48"/>
         <source>Open the Bitcoin Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Open the Blackcoin Lore debug log file from the current data directory. This can take a few seconds for large log files.</translation>
     </message>
     <message>
         <location line="+233"/>
@@ -2171,7 +2171,7 @@
     <message>
         <location line="+74"/>
         <source>Welcome to the Bitcoin Core RPC console.</source>
-        <translation type="unfinished"></translation>
+        <translation>Welcome to the Blackcoin Lore RPC console.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2277,7 +2277,7 @@
         <location line="+14"/>
         <location line="+23"/>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation type="unfinished"></translation>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Blackcoin network.</translation>
     </message>
     <message>
         <location line="-7"/>
@@ -2571,7 +2571,7 @@
         <location line="+30"/>
         <location line="+13"/>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for blackcoin transactions than the network can process.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2777,7 +2777,7 @@
     <message>
         <location line="+236"/>
         <source>Warning: Invalid Bitcoin address</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning: Invalid Blackcoin address</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -2842,7 +2842,7 @@
     <message>
         <location line="+39"/>
         <source>The Bitcoin address to send the payment to</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin address to send the payment to</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -2869,7 +2869,7 @@
     <message>
         <location line="-1021"/>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">The fee will be deducted from the amount being sent. The recipient will receive less blackcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2899,7 +2899,7 @@
     <message>
         <location line="+47"/>
         <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A message that was attached to the blackcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Blackcoin network.</translation>
     </message>
     <message>
         <location line="+448"/>
@@ -2919,7 +2919,7 @@
     <message>
         <location filename="../utilitydialog.cpp" line="+78"/>
         <source>Bitcoin Core is shutting down...</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackcoin Lore is shutting down...</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2942,12 +2942,12 @@
     <message>
         <location line="+6"/>
         <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">You can sign messages/agreements with your addresses to prove you can receive blackcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>The Bitcoin address to sign the message with</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin address to sign the message with</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -2989,7 +2989,7 @@
     <message>
         <location line="+21"/>
         <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Sign the message to prove you own this Bitcoin address</translation>
+        <translation>Sign the message to prove you own this Blackcoin address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3020,12 +3020,12 @@
     <message>
         <location line="+21"/>
         <source>The Bitcoin address the message was signed with</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin address the message was signed with</translation>
     </message>
     <message>
         <location line="+37"/>
         <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verify the message to ensure it was signed with the specified Bitcoin address</translation>
+        <translation>Verify the message to ensure it was signed with the specified Blackcoin address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3114,12 +3114,12 @@
     <message>
         <location filename="../splashscreen.cpp" line="+41"/>
         <source>Bitcoin Core</source>
-        <translation type="unfinished">Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>The Bitcoin Core developers</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin Lore developers</translation>
     </message>
     <message>
         <location filename="../networkstyle.cpp" line="+19"/>
@@ -3786,7 +3786,7 @@
     <message>
         <location line="+7"/>
         <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong Bitcoin Core will not work properly.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Please check that your computer&apos;s date and time are correct! If your clock is wrong Blackcoin Lore will not work properly.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3896,7 +3896,7 @@
     <message>
         <location line="+13"/>
         <source>Unable to bind to %s on this computer. Bitcoin Core is probably already running.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Unable to bind to %s on this computer. Blackcoin Lore is probably already running.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -4191,7 +4191,7 @@
     <message>
         <location line="+4"/>
         <source>Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cannot obtain a lock on data directory %s. Blackcoin Lore is probably already running.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4311,12 +4311,12 @@
     <message>
         <location line="+3"/>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (C) 2014-%i The Blackcoin Lore Developers</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>
-        <translation type="unfinished"></translation>
+        <translation>Error loading wallet.dat: Wallet requires newer version of Blackcoin Lore</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4336,7 +4336,7 @@
     <message>
         <location line="+1"/>
         <source>Initialization sanity check failed. Bitcoin Core is shutting down.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Initialization sanity check failed. Blackcoin Lore is shutting down.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -4486,7 +4486,7 @@
     <message>
         <location line="+4"/>
         <source>Wallet needed to be rewritten: restart Bitcoin Core to complete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wallet needed to be rewritten: restart Blackcoin Lore to complete</translation>
     </message>
     <message>
         <location line="+2"/>

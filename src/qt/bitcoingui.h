@@ -85,6 +85,7 @@ private:
     QLabel *labelConnectionsIcon;
     QLabel *labelBlocksIcon;
     QLabel *progressBarLabel;
+    QLabel *labelStakingIcon;
     QProgressBar *progressBar;
     QProgressDialog *progressDialog;
 
@@ -106,6 +107,8 @@ private:
     QAction *encryptWalletAction;
     QAction *backupWalletAction;
     QAction *changePassphraseAction;
+    QAction *unlockWalletAction;
+    QAction *lockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
     QAction *openAction;
@@ -120,6 +123,8 @@ private:
     /** Keep track of previous number of blocks, to detect progress */
     int prevBlocks;
     int spinnerFrame;
+
+    uint64_t nWeight;
 
     const PlatformStyle *platformStyle;
 
@@ -212,6 +217,8 @@ private Q_SLOTS:
     void showNormalIfMinimized(bool fToggleHidden = false);
     /** Simply calls showNormalIfMinimized(true) for use in SLOT() macro */
     void toggleHidden();
+
+    void updateStakingIcon();
 
     /** called by a timer to check if fRequestShutdown has been set **/
     void detectShutdown();

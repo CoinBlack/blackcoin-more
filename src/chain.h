@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
+ // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -7,6 +7,7 @@
 #define BITCOIN_CHAIN_H
 
 #include "arith_uint256.h"
+#include "chainparams.h"
 #include "primitives/block.h"
 #include "pow.h"
 #include "tinyformat.h"
@@ -90,6 +91,10 @@ enum BlockStatus {
     BLOCK_FAILED_VALID       =   32, //! stage after last reached validness failed
     BLOCK_FAILED_CHILD       =   64, //! descends from failed block
     BLOCK_FAILED_MASK        =   BLOCK_FAILED_VALID | BLOCK_FAILED_CHILD,
+	BLOCK_PROOF_OF_STAKE     =   128, //! is proof-of-stake block
+	BLOCK_STAKE_ENTROPY		 =	 256,
+	BLOCK_STAKE_MODIFIER	 =	 512,
+
 };
 
 /** The block chain is a tree shaped structure starting with the
@@ -136,6 +141,9 @@ public:
     //! Verification status of this block. See enum BlockStatus
     unsigned int nStatus;
 
+    //! hash modifier of proof-of-stake
+    uint256 nStakeModifier;
+
     //! block header
     int nVersion;
     uint256 hashMerkleRoot;
@@ -159,6 +167,7 @@ public:
         nTx = 0;
         nChainTx = 0;
         nStatus = 0;
+        nStakeModifier = uint256();
         nSequenceId = 0;
 
         nVersion       = 0;
@@ -220,11 +229,17 @@ public:
         return *phashBlock;
     }
 
+    uint256 GetBlockPoWHash() const
+    {
+        return GetBlockHeader().GetPoWHash();
+    }
+
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
     }
 
+private:
     enum { nMedianTimeSpan=11 };
 
     int64_t GetMedianTimePast() const
@@ -239,6 +254,30 @@ public:
 
         std::sort(pbegin, pend);
         return pbegin[(pend - pbegin)/2];
+    }
+
+public:
+    int64_t GetPastTimeLimit() const
+    {
+        if (Params().GetConsensus().IsProtocolV2(GetBlockTime()))
+            return GetBlockTime();
+        else
+            return GetMedianTimePast();
+    }
+
+    bool IsProofOfWork() const
+    {
+          return !IsProofOfStake();
+    }
+
+    bool IsProofOfStake() const
+    {
+         return (nStatus & BLOCK_PROOF_OF_STAKE);
+    }
+
+    void SetProofOfStake()
+    {
+         nStatus |= BLOCK_PROOF_OF_STAKE;
     }
 
     std::string ToString() const
@@ -285,13 +324,15 @@ class CDiskBlockIndex : public CBlockIndex
 {
 public:
     uint256 hashPrev;
-
+    uint256 nHashBlock;
     CDiskBlockIndex() {
         hashPrev = uint256();
+        nHashBlock = uint256();
     }
 
     explicit CDiskBlockIndex(const CBlockIndex* pindex) : CBlockIndex(*pindex) {
         hashPrev = (pprev ? pprev->GetBlockHash() : uint256());
+        nHashBlock = *pindex->phashBlock;
     }
 
     ADD_SERIALIZE_METHODS;
@@ -303,6 +344,8 @@ public:
 
         READWRITE(VARINT(nHeight));
         READWRITE(VARINT(nStatus));
+        READWRITE(nStakeModifier);
+        READWRITE(nHashBlock);
         READWRITE(VARINT(nTx));
         if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
             READWRITE(VARINT(nFile));
@@ -322,14 +365,7 @@ public:
 
     uint256 GetBlockHash() const
     {
-        CBlockHeader block;
-        block.nVersion        = nVersion;
-        block.hashPrevBlock   = hashPrev;
-        block.hashMerkleRoot  = hashMerkleRoot;
-        block.nTime           = nTime;
-        block.nBits           = nBits;
-        block.nNonce          = nNonce;
-        return block.GetHash();
+    	return nHashBlock;
     }
 
 
@@ -400,5 +436,7 @@ public:
     /** Find the last common block between this chain and a block index entry. */
     const CBlockIndex *FindFork(const CBlockIndex *pindex) const;
 };
+
+const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake);
 
 #endif // BITCOIN_CHAIN_H

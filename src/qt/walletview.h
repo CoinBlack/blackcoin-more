@@ -99,6 +99,8 @@ public Q_SLOTS:
     /** Ask for passphrase to unlock wallet temporarily */
     void unlockWallet();
 
+    void lockWallet();
+
     /** Show used sending addresses */
     void usedSendingAddresses();
     /** Show used receiving addresses */
@@ -109,6 +111,8 @@ public Q_SLOTS:
 
     /** Show progress dialog e.g. for rescan */
     void showProgress(const QString &title, int nProgress);
+
+    unsigned long long updateWeight();
 
 Q_SIGNALS:
     /** Signal that we want to show the main window */

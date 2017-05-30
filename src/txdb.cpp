@@ -185,7 +185,7 @@ bool CBlockTreeDB::UpdateSpentIndex(const std::vector<std::pair<CSpentIndexKey, 
 }
 
 bool CBlockTreeDB::UpdateAddressUnspentIndex(const std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue > >&vect) {
-    CDBBatch batch(&GetObfuscateKey());
+	CDBBatch batch(&GetObfuscateKey());
     for (std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue> >::const_iterator it=vect.begin(); it!=vect.end(); it++) {
         if (it->second.IsNull()) {
             batch.Erase(make_pair(DB_ADDRESSUNSPENTINDEX, it->first));
@@ -198,7 +198,6 @@ bool CBlockTreeDB::UpdateAddressUnspentIndex(const std::vector<std::pair<CAddres
 
 bool CBlockTreeDB::ReadAddressUnspentIndex(uint160 addressHash, int type,
                                            std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue> > &unspentOutputs) {
-
     boost::scoped_ptr<CDBIterator> pcursor(NewIterator());
 
     pcursor->Seek(make_pair(DB_ADDRESSUNSPENTINDEX, CAddressIndexIteratorKey(type, addressHash)));
@@ -367,10 +366,17 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->nBits          = diskindex.nBits;
                 pindexNew->nNonce         = diskindex.nNonce;
                 pindexNew->nStatus        = diskindex.nStatus;
+                pindexNew->nStakeModifier = diskindex.nStakeModifier;
                 pindexNew->nTx            = diskindex.nTx;
 
-                if (!CheckProofOfWork(pindexNew->GetBlockHash(), pindexNew->nBits, Params().GetConsensus()))
-                    return error("LoadBlockIndex(): CheckProofOfWork failed: %s", pindexNew->ToString());
+                // Litecoin: Disable PoW Sanity check while loading block index from disk.
+                                // We use the sha256 hash for the block index for performance reasons, which is recorded for later use.
+                                // CheckProofOfWork() uses the scrypt hash which is discarded after a block is accepted.
+                                // While it is technically feasible to verify the PoW, doing so takes several minutes as it
+                                // requires recomputing every PoW hash during every Litecoin startup.
+                                // We opt instead to simply trust the data that is on your local disk.
+                                //if (!CheckProofOfWork(pindexNew->GetBlockPoWHash(), pindexNew->nBits, Params().GetConsensus()))
+                //    return error("LoadBlockIndex(): CheckProofOfWork failed: %s", pindexNew->ToString());
 
                 pcursor->Next();
             } else {

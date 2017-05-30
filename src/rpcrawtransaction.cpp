@@ -20,6 +20,7 @@
 #include "script/script_error.h"
 #include "script/sign.h"
 #include "script/standard.h"
+#include "timedata.h"
 #include "txmempool.h"
 #include "uint256.h"
 #include "utilstrencodings.h"
@@ -477,6 +478,8 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, locktime out of range");
         rawTx.nLockTime = nLockTime;
     }
+    
+    rawTx.nTime = GetAdjustedTime();
 
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& input = inputs[idx];

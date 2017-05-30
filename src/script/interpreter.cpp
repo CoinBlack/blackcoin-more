@@ -63,7 +63,7 @@ static inline void popstack(vector<valtype>& stack)
     stack.pop_back();
 }
 
-bool static IsCompressedOrUncompressedPubKey(const valtype &vchPubKey) {
+bool IsCompressedOrUncompressedPubKey(const vector<unsigned char> &vchPubKey) {
     if (vchPubKey.size() < 33) {
         //  Non-canonical public key: too short
         return false;
@@ -95,7 +95,7 @@ bool static IsCompressedOrUncompressedPubKey(const valtype &vchPubKey) {
  *
  * This function is consensus-critical since BIP66.
  */
-bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig) {
+bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig, bool haveHashType = true) {
     // Format: 0x30 [total-length] 0x02 [R-length] [R] 0x02 [S-length] [S] [sighash]
     // * total-length: 1-byte length descriptor of everything that follows,
     //   excluding the sighash byte.
@@ -116,7 +116,7 @@ bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig) {
     if (sig[0] != 0x30) return false;
 
     // Make sure the length covers the entire signature.
-    if (sig[1] != sig.size() - 3) return false;
+    if (sig[1] != sig.size() - (haveHashType ? 3 : 2)) return false;
 
     // Extract the length of the R element.
     unsigned int lenR = sig[3];
@@ -129,7 +129,7 @@ bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig) {
 
     // Verify that the length of the signature matches the sum of the length
     // of the elements.
-    if ((size_t)(lenR + lenS + 7) != sig.size()) return false;
+    if ((size_t)(lenR + lenS + (haveHashType ? 7 : 6)) != sig.size()) return false;
  
     // Check whether the R element is an integer.
     if (sig[2] != 0x02) return false;
@@ -160,16 +160,32 @@ bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig) {
     return true;
 }
 
-bool static IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
-    if (!IsValidSignatureEncoding(vchSig)) {
+bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHashType) {
+    if (!IsValidSignatureEncoding(vchSig, haveHashType)) {
         return set_error(serror, SCRIPT_ERR_SIG_DER);
     }
-    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
-    if (!CPubKey::CheckLowS(vchSigCopy)) {
+    unsigned int nLenR = vchSig[3];
+    unsigned int nLenS = vchSig[5+nLenR];
+    const unsigned char *S = &vchSig[6+nLenR];
+    // If the S value is above the order of the curve divided by two, its
+    // complement modulo the order could have been used instead, which is
+    // one byte shorter when encoded correctly.
+    if (!CPubKey::CheckSignatureElement(S, nLenS, true))
         return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
-    }
+
     return true;
 }
+
+//bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
+//    if (!IsValidSignatureEncoding(vchSig)) {
+//        return set_error(serror, SCRIPT_ERR_SIG_DER);
+//    }
+//    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
+//    if (!CPubKey::CheckLowS(vchSigCopy)) {
+//        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
+//    }
+//    return true;
+//}
 
 bool static IsDefinedHashtypeSignature(const valtype &vchSig) {
     if (vchSig.size() == 0) {
@@ -200,7 +216,7 @@ bool CheckSignatureEncoding(const vector<unsigned char> &vchSig, unsigned int fl
 }
 
 bool static CheckPubKeyEncoding(const valtype &vchSig, unsigned int flags, ScriptError* serror) {
-    if ((flags & SCRIPT_VERIFY_STRICTENC) != 0 && !IsCompressedOrUncompressedPubKey(vchSig)) {
+    if ((flags & (SCRIPT_VERIFY_DERKEY | SCRIPT_VERIFY_STRICTENC)) != 0 && !IsCompressedOrUncompressedPubKey(vchSig)) {
         return set_error(serror, SCRIPT_ERR_PUBKEYTYPE);
     }
     return true;
@@ -1089,6 +1105,8 @@ public:
     void Serialize(S &s, int nType, int nVersion) const {
         // Serialize nVersion
         ::Serialize(s, txTo.nVersion, nType, nVersion);
+        // Serialize nTime
+        ::Serialize(s, txTo.nTime, nType, nVersion);
         // Serialize vin
         unsigned int nInputs = fAnyoneCanPay ? 1 : txTo.vin.size();
         ::WriteCompactSize(s, nInputs);

@@ -67,11 +67,11 @@
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ezekről a címekről küldhetsz bitcoint. Mindig ellenőrizd a fogadó címet és a fizetendő összeget, mielőtt elküldöd.</translation>
+        <translation>Ezekről a címekről küldhetsz blackcoint. Mindig ellenőrizd a fogadó címet és a fizetendő összeget, mielőtt elküldöd.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Ezekkel a címekkel fogadhatsz bitcoint. Ajánlott minden tranzakcióhoz egy új fogadó címet használni.</translation>
+        <translation>Ezekkel a címekkel fogadhatsz blackcoint. Ajánlott minden tranzakcióhoz egy új fogadó címet használni.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Bitcoin Core kliens</translation>
+        <translation>Blackcoin Lore kliens</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Bitcoin küldése megadott címre</translation>
+        <translation>Blackcoin küldése megadott címre</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <translation>Blackcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -347,7 +347,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Bitcoin Core információ megjelenítése</translation>
+        <translation>Blackcoin Lore információ megjelenítése</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -363,11 +363,11 @@
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Üzenetek aláírása a Bitcoin-címmeiddel, amivel bizonyítod, hogy a cím a sajátod</translation>
+        <translation>Üzenetek aláírása a Blackcoin-címmeiddel, amivel bizonyítod, hogy a cím a sajátod</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Üzenetek ellenőrzése, hogy valóban a megjelölt Bitcoin-címekkel vannak-e aláírva</translation>
+        <translation>Üzenetek ellenőrzése, hogy valóban a megjelölt Blackcoin-címekkel vannak-e aláírva</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -387,19 +387,19 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Fizetési kérelem (QR-kódot és "bitcoin:" URI azonosítót hoz létre)</translation>
+        <translation>Fizetési kérelem (QR-kódot és "blackcoin:" URI azonosítót hoz létre)</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;A Bitcoin Core-ról</translation>
+        <translation>&amp;A Blackcoin Lore-ról</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation>Konfigurációs opciók módosítása a Bitcoin Core-hoz</translation>
+        <translation>Konfigurációs opciók módosítása a Blackcoin Lore-hoz</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -411,7 +411,7 @@
     </message>
     <message>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation>"bitcoin:" URI azonosító vagy fizetési kérelem megnyitása</translation>
+        <translation>"blackcoin:" URI azonosító vagy fizetési kérelem megnyitása</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -419,11 +419,11 @@
     </message>
     <message>
         <source>Show the Bitcoin Core help message to get a list with possible Bitcoin command-line options</source>
-        <translation>A Bitcoin Core súgóüzenet megjelenítése a Bitcoin lehetséges parancssori kapcsolóival.</translation>
+        <translation>A Blackcoin Lore súgóüzenet megjelenítése a Blackcoin lehetséges parancssori kapcsolóival.</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktív kapcsolat a Bitcoin hálózathoz</numerusform><numerusform>%n aktív kapcsolat a Bitcoin hálózathoz</numerusform></translation>
+        <translation><numerusform>%n aktív kapcsolat a Blackcoin hálózathoz</numerusform><numerusform>%n aktív kapcsolat a Blackcoin hálózathoz</numerusform></translation>
     </message>
     <message>
         <source>No block source available...</source>
@@ -806,7 +806,7 @@
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>A megadott "%1" cím nem egy érvényes Bitcoin-cím.</translation>
+        <translation>A megadott "%1" cím nem egy érvényes Blackcoin-cím.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -840,7 +840,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <source>version</source>
@@ -852,7 +852,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>A Bitcoin Core-ról</translation>
+        <translation>A Blackcoin Lore-ról</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -875,11 +875,11 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Üdvözlünk a Bitcoin Core-ban.</translation>
+        <translation>Üdvözlünk a Blackcoin Lore-ban.</translation>
     </message>
     <message>
         <source>Bitcoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>A Bitcoin Core le fogja tölteni és tárolni fogja a Bitcoin blokklánc egy másolatát. Legalább %1GB adat lesz tárolva ebben a mappában, és ez folyamatosan nőni fog. A tárca szintén itt lesz tárolva.</translation>
+        <translation>A Blackcoin Lore le fogja tölteni és tárolni fogja a Blackcoin blokklánc egy másolatát. Legalább %1GB adat lesz tárolva ebben a mappában, és ez folyamatosan nőni fog. A tárca szintén itt lesz tárolva.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -891,7 +891,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -961,7 +961,7 @@
     </message>
     <message>
         <source>The user interface language can be set here. This setting will take effect after restarting Bitcoin Core.</source>
-        <translation>Itt beállíthatod a kezelőfelület nyelvét. A beállítás a Bitcoin újraindítása után lép érvénybe.</translation>
+        <translation>Itt beállíthatod a kezelőfelület nyelvét. A beállítás a Blackcoin újraindítása után lép érvénybe.</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
@@ -981,7 +981,7 @@
     </message>
     <message>
         <source>&amp;Start Bitcoin Core on system login</source>
-        <translation>A Bitcoin elindítása bejelentkezéskor</translation>
+        <translation>A Blackcoin elindítása bejelentkezéskor</translation>
     </message>
     <message>
         <source>W&amp;allet</source>
@@ -993,7 +993,7 @@
     </message>
     <message>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>A Bitcoin-kliens portjának automatikus megnyitása a routeren. Ez csak akkor működik, ha a routered támogatja az UPnP-t és az engedélyezve is van rajta.</translation>
+        <translation>A Blackcoin-kliens portjának automatikus megnyitása a routeren. Ez csak akkor működik, ha a routered támogatja az UPnP-t és az engedélyezve is van rajta.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1001,7 +1001,7 @@
     </message>
     <message>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Csatlakozás a Bitcoin hálózatához SOCKS5 proxyn keresztül</translation>
+        <translation>Csatlakozás a Blackcoin hálózatához SOCKS5 proxyn keresztül</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1096,7 +1096,7 @@
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>A kijelzett információ lehet, hogy elavult. A pénztárcája automatikusan szinkronizálja magát a Bitcoin hálózattal miután a kapcsolat létrejön, de ez e folyamat még nem fejeződött be.</translation>
+        <translation>A kijelzett információ lehet, hogy elavult. A pénztárcája automatikusan szinkronizálja magát a Blackcoin hálózattal miután a kapcsolat létrejön, de ez e folyamat még nem fejeződött be.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1155,7 +1155,7 @@
     </message>
     <message>
         <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>A bitcoint nem lehet elindítani: click-to-pay handler</translation>
+        <translation>A blackcoint nem lehet elindítani: click-to-pay handler</translation>
     </message>
     <message>
         <source>Payment request expired.</source>
@@ -1185,7 +1185,7 @@
     </message>
     <message>
         <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Ad meg egy Bitcoin címet (pl: %1)</translation>
+        <translation>Ad meg egy Blackcoin címet (pl: %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1759,7 +1759,7 @@
     </message>
     <message>
         <source>Warning: Invalid Bitcoin address</source>
-        <translation>Figyelmeztetés: Érvénytelen Bitcoin cím</translation>
+        <translation>Figyelmeztetés: Érvénytelen Blackcoin cím</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1830,7 +1830,7 @@
     <name>ShutdownWindow</name>
     <message>
         <source>Bitcoin Core is shutting down...</source>
-        <translation>A Bitcoin Core leáll...</translation>
+        <translation>A Blackcoin Lore leáll...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -1936,11 +1936,11 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin Lore</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
-        <translation>A Bitcoin Core fejlesztői</translation>
+        <translation>A Blackcoin Lore fejlesztői</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2434,7 +2434,7 @@
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Copyright (C) 2009-%i A Bitcoin Core Fejlesztői</translation>
+        <translation>Copyright (C) 2014-%i A Blackcoin Lore Fejlesztői</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>
@@ -2541,7 +2541,7 @@
     </message>
     <message>
         <source>Insufficient funds</source>
-        <translation>Nincs elég bitcoinod.</translation>
+        <translation>Nincs elég blackcoinod.</translation>
     </message>
     <message>
         <source>Loading block index...</source>

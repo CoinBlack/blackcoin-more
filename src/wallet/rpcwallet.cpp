@@ -30,6 +30,18 @@ using namespace std;
 int64_t nWalletUnlockTime;
 static CCriticalSection cs_nWalletUnlockTime;
 
+static void accountingDeprecationCheck()
+{
+    if (!GetBoolArg("-enableaccounts", false))
+        throw runtime_error(
+            "Accounting API is deprecated and will be removed in future.\n"
+            "It can easily result in negative or odd balances if misused or misunderstood, which has happened in the field.\n"
+            "If you still want to enable it, add to your config file iknowaccountsarebroken=1\n");
+
+    if (GetBoolArg("-staking", true))
+        throw runtime_error("If you want to use accounting API, staking must be disabled, add to your config file staking=0\n");
+}
+
 std::string HelpRequiringPassphrase()
 {
     return pwalletMain && pwalletMain->IsCrypted()
@@ -49,10 +61,17 @@ bool EnsureWalletIsAvailable(bool avoidException)
     return true;
 }
 
+// optional setting to unlock wallet for staking only
+// serves to disable the trivial sendmoney when OS account compromised
+// provides no real security
+bool fWalletUnlockStakingOnly = false;
+
 void EnsureWalletIsUnlocked()
 {
     if (pwalletMain->IsLocked())
         throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
+    if (fWalletUnlockStakingOnly)
+        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Wallet is unlocked for staking only.");
 }
 
 void WalletTxToJSON(const CWalletTx& wtx, UniValue& entry)
@@ -367,6 +386,8 @@ UniValue getaddressesbyaccount(const UniValue& params, bool fHelp)
     return ret;
 }
 
+
+
 static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew)
 {
     CAmount curBalance = pwalletMain->GetBalance();
@@ -646,6 +667,8 @@ UniValue getreceivedbyaccount(const UniValue& params, bool fHelp)
             + HelpExampleRpc("getreceivedbyaccount", "\"tabby\", 6")
         );
 
+    accountingDeprecationCheck();
+
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     // Minimum confirmations
@@ -778,6 +801,8 @@ UniValue getbalance(const UniValue& params, bool fHelp)
         return  ValueFromAmount(nBalance);
     }
 
+    accountingDeprecationCheck();
+
     string strAccount = AccountFromValue(params[0]);
 
     CAmount nBalance = GetAccountBalance(strAccount, nMinDepth, filter);
@@ -826,6 +851,8 @@ UniValue movecmd(const UniValue& params, bool fHelp)
             "\nAs a json rpc call\n"
             + HelpExampleRpc("move", "\"timotei\", \"akiko\", 0.01, 6, \"happy birthday!\"")
         );
+
+    accountingDeprecationCheck();
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -1305,6 +1332,8 @@ UniValue listreceivedbyaccount(const UniValue& params, bool fHelp)
             + HelpExampleRpc("listreceivedbyaccount", "6, true, true")
         );
 
+    accountingDeprecationCheck();
+
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     return ListReceived(params, true);
@@ -1562,6 +1591,8 @@ UniValue listaccounts(const UniValue& params, bool fHelp)
             "\nAs json rpc call\n"
             + HelpExampleRpc("listaccounts", "6")
         );
+
+    accountingDeprecationCheck();
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -1946,6 +1977,12 @@ UniValue walletpassphrase(const UniValue& params, bool fHelp)
     LOCK(cs_nWalletUnlockTime);
     nWalletUnlockTime = GetTime() + nSleepTime;
     RPCRunLater("lockwallet", boost::bind(LockWallet, pwalletMain), nSleepTime);
+
+    // ppcoin: if user OS account compromised prevent trivial sendmoney commands
+    if (params.size() > 2)
+    	fWalletUnlockStakingOnly = params[2].get_bool();
+    else
+    	fWalletUnlockStakingOnly = false;
 
     return NullUniValue;
 }

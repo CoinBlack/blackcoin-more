@@ -110,3 +110,10 @@ void CBlockIndex::BuildSkip()
     if (pprev)
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
+
+const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
+{
+    while (pindex && pindex->pprev && (pindex->IsProofOfStake() != fProofOfStake))
+        pindex = pindex->pprev;
+    return pindex;
+}

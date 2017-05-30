@@ -32,21 +32,24 @@
  */
 extern CFeeRate payTxFee;
 extern CAmount maxTxFee;
+extern CAmount nReserveBalance;
+extern CAmount nMinimumInputValue;
 extern unsigned int nTxConfirmTarget;
 extern bool bSpendZeroConfChange;
 extern bool fSendFreeTransactions;
+extern bool fWalletUnlockStakingOnly;
 
 static const unsigned int DEFAULT_KEYPOOL_SIZE = 100;
 //! -paytxfee default
-static const CAmount DEFAULT_TRANSACTION_FEE = 0;
+static const CAmount DEFAULT_TRANSACTION_FEE = 10000;
 //! -paytxfee will warn if called with a higher fee than this amount (in satoshis) per KB
-static const CAmount nHighTransactionFeeWarning = 0.01 * COIN;
+static const CAmount nHighTransactionFeeWarning = 0.1 * COIN;
 //! -fallbackfee default
-static const CAmount DEFAULT_FALLBACK_FEE = 20000;
+static const CAmount DEFAULT_FALLBACK_FEE = 10000;
 //! -mintxfee default
-static const CAmount DEFAULT_TRANSACTION_MINFEE = 1000;
+static const CAmount DEFAULT_TRANSACTION_MINFEE = 10000;
 //! -maxtxfee default
-static const CAmount DEFAULT_TRANSACTION_MAXFEE = 0.1 * COIN;
+static const CAmount DEFAULT_TRANSACTION_MAXFEE = 1 * COIN;
 //! minimum change amount
 static const CAmount MIN_CHANGE = CENT;
 //! Default for -spendzeroconfchange
@@ -240,6 +243,7 @@ public:
     mutable bool fDebitCached;
     mutable bool fCreditCached;
     mutable bool fImmatureCreditCached;
+    mutable bool fImmatureStakeCreditCached;
     mutable bool fAvailableCreditCached;
     mutable bool fWatchDebitCached;
     mutable bool fWatchCreditCached;
@@ -249,6 +253,7 @@ public:
     mutable CAmount nDebitCached;
     mutable CAmount nCreditCached;
     mutable CAmount nImmatureCreditCached;
+    mutable CAmount nImmatureStakeCreditCached;
     mutable CAmount nAvailableCreditCached;
     mutable CAmount nWatchDebitCached;
     mutable CAmount nWatchCreditCached;
@@ -289,7 +294,9 @@ public:
         fDebitCached = false;
         fCreditCached = false;
         fImmatureCreditCached = false;
+        fImmatureStakeCreditCached = false;
         fAvailableCreditCached = false;
+        fImmatureCreditCached = false;
         fWatchDebitCached = false;
         fWatchCreditCached = false;
         fImmatureWatchCreditCached = false;
@@ -298,6 +305,7 @@ public:
         nDebitCached = 0;
         nCreditCached = 0;
         nImmatureCreditCached = 0;
+        nImmatureStakeCreditCached = 0;
         nAvailableCreditCached = 0;
         nWatchDebitCached = 0;
         nWatchCreditCached = 0;
@@ -374,6 +382,7 @@ public:
     CAmount GetDebit(const isminefilter& filter) const;
     CAmount GetCredit(const isminefilter& filter) const;
     CAmount GetImmatureCredit(bool fUseCache=true) const;
+    CAmount GetImmatureStakeCredit(bool fUseCache=true) const;
     CAmount GetAvailableCredit(bool fUseCache=true) const;
     CAmount GetImmatureWatchOnlyCredit(const bool& fUseCache=true) const;
     CAmount GetAvailableWatchOnlyCredit(const bool& fUseCache=true) const;
@@ -653,6 +662,7 @@ public:
     CAmount GetBalance() const;
     CAmount GetUnconfirmedBalance() const;
     CAmount GetImmatureBalance() const;
+    CAmount GetStakeBalance() const;
     CAmount GetWatchOnlyBalance() const;
     CAmount GetUnconfirmedWatchOnlyBalance() const;
     CAmount GetImmatureWatchOnlyBalance() const;
@@ -795,6 +805,10 @@ public:
 
     /* Mark a transaction (and it in-wallet descendants) as abandoned so its inputs may be respent. */
     bool AbandonTransaction(const uint256& hashTx);
+    bool CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CAmount& nFees, CMutableTransaction& tx, CKey& key);
+    bool SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
+    void AvailableCoinsForStaking(std::vector<COutput>& vCoins) const;
+    uint64_t GetStakeWeight() const;
 };
 
 /** A key allocated from the key pool. */
@@ -934,5 +948,5 @@ public:
 private:
     std::vector<char> _ssExtra;
 };
-
+bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, int64_t nTime, const COutPoint& prevout, int64_t* pBlockTime = NULL);
 #endif // BITCOIN_WALLET_WALLET_H

@@ -215,7 +215,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <translation>Blackcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -231,7 +231,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Dangos gwybodaeth am Graidd Bitcoin</translation>
+        <translation>Dangos gwybodaeth am Graidd Blackcoin</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -255,11 +255,11 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Craidd Bitcoin</translation>
+        <translation>Craidd Blackcoin</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;Ynghylch Craidd Bitcoin</translation>
+        <translation>&amp;Ynghylch Craidd Blackcoin</translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
@@ -426,11 +426,11 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Craidd Bitcoin</translation>
+        <translation>Craidd Blackcoin</translation>
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>Ynghylch Craidd Bitcoin</translation>
+        <translation>Ynghylch Craidd Blackcoin</translation>
     </message>
     <message>
         <source>Usage:</source>
@@ -445,11 +445,11 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Croeso i Graidd Bitcoin</translation>
+        <translation>Croeso i Graidd Blackcoin</translation>
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Craidd Bitcoin</translation>
+        <translation>Craidd Blackcoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -665,11 +665,11 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Craidd Bitcoin</translation>
+        <translation>Craidd Blackcoin</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
-        <translation>Datblygwyr Graidd Bitcoin</translation>
+        <translation>Datblygwyr Graidd Blackcoin</translation>
     </message>
     <message>
         <source>[testnet]</source>

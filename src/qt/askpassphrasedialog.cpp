@@ -14,6 +14,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 
+extern bool fWalletUnlockStakingOnly;
 AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AskPassphraseDialog),
@@ -36,6 +37,8 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
     ui->passEdit2->installEventFilter(this);
     ui->passEdit3->installEventFilter(this);
 
+    ui->stakingCheckBox->setChecked(fWalletUnlockStakingOnly);
+
     switch(mode)
     {
         case Encrypt: // Ask passphrase x2
@@ -45,6 +48,8 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
             setWindowTitle(tr("Encrypt wallet"));
             break;
         case Unlock: // Ask passphrase
+        	ui->stakingCheckBox->setChecked(false);
+        	ui->stakingCheckBox->show();
             ui->warningLabel->setText(tr("This operation needs your wallet passphrase to unlock the wallet."));
             ui->passLabel2->hide();
             ui->passEdit2->hide();
@@ -74,9 +79,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
 AskPassphraseDialog::~AskPassphraseDialog()
 {
     // Attempt to overwrite text so that they do not linger around in memory
-    ui->passEdit1->setText(QString(" ").repeated(ui->passEdit1->text().size()));
-    ui->passEdit2->setText(QString(" ").repeated(ui->passEdit2->text().size()));
-    ui->passEdit3->setText(QString(" ").repeated(ui->passEdit3->text().size()));
+	secureClearPassFields();
     delete ui;
 }
 
@@ -98,6 +101,8 @@ void AskPassphraseDialog::accept()
     oldpass.assign(ui->passEdit1->text().toStdString().c_str());
     newpass1.assign(ui->passEdit2->text().toStdString().c_str());
     newpass2.assign(ui->passEdit3->text().toStdString().c_str());
+
+    secureClearPassFields();
 
     switch(mode)
     {
@@ -156,6 +161,7 @@ void AskPassphraseDialog::accept()
         }
         else
         {
+        	fWalletUnlockStakingOnly = ui->stakingCheckBox->isChecked();
             QDialog::accept(); // Success
         }
         break;
@@ -255,4 +261,18 @@ bool AskPassphraseDialog::eventFilter(QObject *object, QEvent *event)
         }
     }
     return QDialog::eventFilter(object, event);
+}
+
+static void SecureClearQLineEdit(QLineEdit* edit)
+{
+    // Attempt to overwrite text so that they do not linger around in memory
+    edit->setText(QString(" ").repeated(edit->text().size()));
+    edit->clear();
+}
+
+void AskPassphraseDialog::secureClearPassFields()
+{
+    SecureClearQLineEdit(ui->passEdit1);
+    SecureClearQLineEdit(ui->passEdit2);
+    SecureClearQLineEdit(ui->passEdit3);
 }

@@ -3021,7 +3021,7 @@
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Copyright (C) 2009-%i The Bitcoin Core Developers</translation>
+        <translation>Copyright (C) 2014-%i The Bitcoin Lore Developers</translation>
     </message>
     <message>
         <source>Information</source>
