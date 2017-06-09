@@ -39,7 +39,7 @@ class CTxMemPool;
 class CValidationInterface;
 class CValidationState;
 
-class CDiskTxPos;
+struct CDiskTxPos;
 class CWallet;
 
 struct CNodeStateStats;
