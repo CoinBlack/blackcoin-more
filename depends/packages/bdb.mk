@@ -11,6 +11,10 @@ $(package)_config_opts_mingw32=--enable-mingw
 $(package)_config_opts_linux=--with-pic
 endef
 
+define $(package)_preprocess_cmds
+  sed -i -e "s/WinIoCtl.h/winioctl.h/g" src/dbinc/win_db.h
+endef
+
 define $(package)_config_cmds
   ../dist/$($(package)_autoconf)
 endef
