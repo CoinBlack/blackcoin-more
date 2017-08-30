@@ -85,6 +85,35 @@ enum WalletFeature
 };
 
 
+/* simple hd chain data model */
+class CHDChain
+{
+public:
+    uint32_t nExternalChainCounter;
+    CKeyID masterKeyID; //!< master key hash160
+
+    static const int CURRENT_VERSION = 1;
+    int nVersion;
+
+    CHDChain() { SetNull(); }
+    ADD_SERIALIZE_METHODS;
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+        READWRITE(this->nVersion);
+        nVersion = this->nVersion;
+        READWRITE(nExternalChainCounter);
+        READWRITE(masterKeyID);
+    }
+
+    void SetNull()
+    {
+        nVersion = CHDChain::CURRENT_VERSION;
+        nExternalChainCounter = 0;
+        masterKeyID.SetNull();
+    }
+};
+
 /** A key pool entry */
 class CKeyPool
 {
@@ -509,6 +538,9 @@ private:
 
     void SyncMetaData(std::pair<TxSpends::iterator, TxSpends::iterator>);
 
+    /* the hd chain data model (external chain counters) */
+    CHDChain hdChain;
+
 public:
     /*
      * Main wallet lock.
@@ -814,6 +846,11 @@ public:
     bool SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
     void AvailableCoinsForStaking(std::vector<COutput>& vCoins) const;
     uint64_t GetStakeWeight() const;
+    /* Set the hd chain model (chain child index counters) */
+    bool SetHDChain(const CHDChain& chain, bool memonly);
+
+    /* Set the current hd master key (will reset the chain child index counters) */
+    bool SetHDMasterKey(const CKey& key);
 };
 
 /** A key allocated from the key pool. */

@@ -46,6 +46,8 @@ public:
     static const int CURRENT_VERSION=1;
     int nVersion;
     int64_t nCreateTime; // 0 means unknown
+    std::string hdKeypath; //optional HD/bip32 keypath
+    CKeyID hdMasterKeyID; //id of the HD masterkey used to derive this key
 
     CKeyMetadata()
     {
@@ -70,6 +72,32 @@ public:
     {
         nVersion = CKeyMetadata::CURRENT_VERSION;
         nCreateTime = 0;
+    }
+};
+
+/* simple hd chain data model */
+class CHDChain
+{
+public:
+    uint32_t nExternalChainCounter;
+    CKeyID masterKeyID; //!< master key hash160
+    static const int CURRENT_VERSION = 1;
+    int nVersion;
+    CHDChain() { SetNull(); }
+    ADD_SERIALIZE_METHODS;
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+        READWRITE(this->nVersion);
+        nVersion = this->nVersion;
+        READWRITE(nExternalChainCounter);
+        READWRITE(masterKeyID);
+    }
+    void SetNull()
+    {
+        nVersion = CHDChain::CURRENT_VERSION;
+        nExternalChainCounter = 0;
+        masterKeyID.SetNull();
     }
 };
 
@@ -120,9 +148,9 @@ public:
 
     /// Write destination data key,value tuple to database
     bool WriteDestData(const std::string &address, const std::string &key, const std::string &value);
+    bool WriteHDChain(const CHDChain& chain);
     /// Erase destination data tuple from wallet database
     bool EraseDestData(const std::string &address, const std::string &key);
-
     CAmount GetAccountCreditDebit(const std::string& strAccount);
     void ListAccountCreditDebit(const std::string& strAccount, std::list<CAccountingEntry>& acentries);
 
