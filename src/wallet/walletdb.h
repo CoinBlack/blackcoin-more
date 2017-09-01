@@ -55,7 +55,7 @@ public:
     }
     CKeyMetadata(int64_t nCreateTime_)
     {
-        nVersion = CKeyMetadata::CURRENT_VERSION;
+    	SetNull();
         nCreateTime = nCreateTime_;
     }
 
@@ -72,6 +72,7 @@ public:
     {
         nVersion = CKeyMetadata::CURRENT_VERSION;
         nCreateTime = 0;
+        hdMasterKeyID.SetNull();
     }
 };
 
