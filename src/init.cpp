@@ -1541,11 +1541,13 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
 
             // Create new keyUser and set as default key
             if (GetBoolArg("-usehd", true)) {
-                        // generate a new master key
-                        CKey key;
-                        key.MakeNewKey(true);
-                        if (!pwalletMain->SetHDMasterKey(key))
-                            throw std::runtime_error("CWallet::GenerateNewKey(): Storing master key failed");
+            // generate a new master key
+            CKey key;
+            key.MakeNewKey(true);
+            if (!pwalletMain->SetHDMasterKey(key))
+            	throw std::runtime_error("CWallet::GenerateNewKey(): Storing master key failed");
+            // ensure this wallet.dat can only be opened by clients supporting HD
+            pwalletMain->SetMinVersion(FEATURE_HD);
             }
             CPubKey newDefaultKey;
             if (pwalletMain->GetKeyFromPool(newDefaultKey)) {
