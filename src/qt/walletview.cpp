@@ -284,9 +284,8 @@ void WalletView::lockWallet()
 
 unsigned long long WalletView::updateWeight()
 {
-    if(!walletModel)
-        return 0;
-    return walletModel->updateWeight();
+    if(walletModel)
+		return walletModel->updateWeight();
 }
 
 void WalletView::usedSendingAddresses()

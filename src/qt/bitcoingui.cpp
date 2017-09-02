@@ -82,7 +82,6 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     labelEncryptionIcon(0),
     labelConnectionsIcon(0),
     labelBlocksIcon(0),
-	labelStakingIcon(0),
     progressBarLabel(0),
     progressBar(0),
     progressDialog(0),
@@ -200,13 +199,6 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     labelConnectionsIcon = new QLabel();
     labelBlocksIcon = new QLabel();
     labelStakingIcon = new QLabel();
-//    if (GetBoolArg("-staking", true))
-//    {
-    	QTimer *timerStakingIcon = new QTimer(labelStakingIcon);
-        connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(updateStakingIcon()));
-        timerStakingIcon->start(30 * 1000);
-        updateStakingIcon();
-//    }
 
     if(enableWallet)
     {
@@ -222,6 +214,15 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     frameBlocksLayout->addStretch();
     frameBlocksLayout->addWidget(labelBlocksIcon);
     frameBlocksLayout->addStretch();
+	
+	if (GetBoolArg("-staking", true))
+    {
+        QTimer *timerStakingIcon = new QTimer(labelStakingIcon);
+        connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(updateStakingIcon()));
+        timerStakingIcon->start(30 * 1000);
+
+        updateStakingIcon();
+    }
 
 
     // Progress bar and label for blocks download
