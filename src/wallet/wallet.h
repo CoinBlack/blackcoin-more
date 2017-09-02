@@ -81,40 +81,8 @@ enum WalletFeature
     FEATURE_WALLETCRYPT = 40000, // wallet encryption
     FEATURE_COMPRPUBKEY = 60000, // compressed public keys
 
-    FEATURE_LATEST = 60000,
-
 	FEATURE_HD = 330000, // Hierarchical key derivation after BIP32 (HD Wallet)
 	FEATURE_LATEST = FEATURE_COMPRPUBKEY // HD is optional, use FEATURE_COMPRPUBKEY as latest version
-};
-
-
-/* simple hd chain data model */
-class CHDChain
-{
-public:
-    uint32_t nExternalChainCounter;
-    CKeyID masterKeyID; //!< master key hash160
-
-    static const int CURRENT_VERSION = 1;
-    int nVersion;
-
-    CHDChain() { SetNull(); }
-    ADD_SERIALIZE_METHODS;
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
-        READWRITE(this->nVersion);
-        nVersion = this->nVersion;
-        READWRITE(nExternalChainCounter);
-        READWRITE(masterKeyID);
-    }
-
-    void SetNull()
-    {
-        nVersion = CHDChain::CURRENT_VERSION;
-        nExternalChainCounter = 0;
-        masterKeyID.SetNull();
-    }
 };
 
 /** A key pool entry */
