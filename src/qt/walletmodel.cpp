@@ -680,15 +680,15 @@ bool WalletModel::saveReceiveRequest(const std::string &sAddress, const int64_t 
 unsigned long long WalletModel::updateWeight()
 {
     if (!wallet)
-        return;
+        return 0;
 
     TRY_LOCK(cs_main, lockMain);
     if (!lockMain)
-    	return;
+    	return 0;
 
     TRY_LOCK(wallet->cs_wallet, lockWallet);
     if (!lockWallet)
-    	return;
+    	return 0;
 
     return wallet->GetStakeWeight();
 }

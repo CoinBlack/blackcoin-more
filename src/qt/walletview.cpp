@@ -286,6 +286,7 @@ unsigned long long WalletView::updateWeight()
 {
     if(walletModel)
 		return walletModel->updateWeight();
+	return 0;
 }
 
 void WalletView::usedSendingAddresses()
