@@ -4,6 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "amount.h"
+#include "math.h"
 
 #include "tinyformat.h"
 
@@ -19,7 +20,7 @@ CFeeRate::CFeeRate(const CAmount& nFeePaid, size_t nSize)
 
 CAmount CFeeRate::GetFee(size_t nSize) const
 {
-    CAmount nFee = nSatoshisPerK*(1 + nSize / 1000);
+    CAmount nFee = nSatoshisPerK * ceil(1 + nSize / 1000);
 
     if (nFee == 0 && nSatoshisPerK > 0)
         nFee = nSatoshisPerK;
