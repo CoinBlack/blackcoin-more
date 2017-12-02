@@ -99,8 +99,8 @@ namespace boost {
 
 using namespace std;
 
-const char * const BITCOIN_CONF_FILENAME = "blackcoin.conf";
-const char * const BITCOIN_PID_FILENAME = "blackcoind.pid";
+const char * const BITCOIN_CONF_FILENAME = "lore.conf";
+const char * const BITCOIN_PID_FILENAME = "lored.pid";
 
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
