@@ -3437,7 +3437,7 @@ bool GetCoinAge(const CTransaction& tx, CBlockTreeDB& txdb, const CBlockIndex* p
 	        if (Params().GetConsensus().IsProtocolV3(tx.nTime))
 	        {
 	            int nSpendDepth;
-	            if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, nStakeMinConfirmations - 1, nSpendDepth))
+	            if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, Params().GetConsensus().nStakeMinConfirmations - 1, nSpendDepth))
 	            {
 	                LogPrint("coinage", "coin age skip nSpendDepth=%d\n", nSpendDepth + 1);
 	                continue; // only count coins meeting min confirmations requirement
@@ -3450,7 +3450,7 @@ bool GetCoinAge(const CTransaction& tx, CBlockTreeDB& txdb, const CBlockIndex* p
 	        	const CDiskBlockPos& pos = CDiskBlockPos(txindex.nFile, txindex.nPos);
 	        	if (!ReadBlockFromDisk(block, pos, Params().GetConsensus()))
 	                return false; // unable to read block of previous transaction
-	            if (block.GetBlockTime() + nStakeMinAge > tx.nTime)
+	            if (block.GetBlockTime() + Params().GetConsensus().nStakeMinAge > tx.nTime)
 	                continue; // only count coins meeting min age requirement
 	        }
 

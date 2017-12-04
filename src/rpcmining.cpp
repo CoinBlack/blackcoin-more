@@ -769,7 +769,7 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
 	    CBlockHeader blockHeader = pindexPrev->GetBlockHeader();
 	    unsigned int nBits = GetNextTargetRequired(pindexPrev, &blockHeader, true, Params().GetConsensus());
 	    int64_t nTime = GetAdjustedTime();
-	    nTime &= ~STAKE_TIMESTAMP_MASK;
+	    nTime &= ~Params().GetConsensus().nStakeTimestampMask;
 
 	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
 	    	const UniValue& input = inputs[idx];
