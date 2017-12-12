@@ -111,6 +111,14 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason)
 
         if (whichType == TX_NULL_DATA)
             nDataOut++;
+        else if (txout.nValue == 0) {
+        	reason = "dust";
+            return false;
+        }
+        if (!txout.scriptPubKey.HasCanonicalPushes()) {
+            reason = "scriptpubkey-non-canonical-push";
+            return false;
+        }
         else if ((whichType == TX_MULTISIG) && (!fIsBareMultisigStd)) {
             reason = "bare-multisig";
             return false;
