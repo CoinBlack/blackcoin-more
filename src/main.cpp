@@ -2476,7 +2476,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                 REJECT_INVALID, "bad-cs-kernel");
 
             // Check proof-of-stake min confirmations
-         if (pindex->nHeight - coins->nHeight < STAKE_MIN_CONFIRMATIONS)
+         if (pindex->nHeight - coins->nHeight < Params().GetConsensus().nStakeMinConfirmations)
               return state.DoS(100,
                   error("%s: tried to stake at depth %d", __func__, pindex->nHeight - coins->nHeight),
                     REJECT_INVALID, "bad-cs-premature");
