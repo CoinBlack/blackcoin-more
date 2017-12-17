@@ -70,6 +70,7 @@ struct Params {
     unsigned int GetTargetSpacing(int nHeight) { return IsProtocolV2(nHeight) ? 64 : 60; }
     int nLastPOWBlock;
     int nStakeTimestampMask;
+    int nCoinbaseMaturity;
     int nStakeMinConfirmations;
     unsigned int nStakeMinAge;
 };

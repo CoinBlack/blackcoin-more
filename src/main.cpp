@@ -1915,7 +1915,7 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
             // If prev is coinbase or coinstake, check that it's matured
             if (coins->IsCoinBase() || coins->IsCoinStake()) {
-                     if (nSpendHeight - coins->nHeight < COINBASE_MATURITY)
+                     if (nSpendHeight - coins->nHeight < Params().nCoinbaseMaturity)
                              return state.Invalid(
                                     error("CheckInputs(): tried to spend %s at depth %d", coins->IsCoinBase() ? "coinbase" : "coinstake", nSpendHeight - coins->nHeight),
                                     REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
@@ -2476,7 +2476,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                 REJECT_INVALID, "bad-cs-kernel");
 
             // Check proof-of-stake min confirmations
-         if (pindex->nHeight - coins->nHeight < Params().GetConsensus().nStakeMinConfirmations)
+         if (pindex->nHeight - coins->nHeight < chainparams.GetConsensus().nStakeMinConfirmations)
               return state.DoS(100,
                   error("%s: tried to stake at depth %d", __func__, pindex->nHeight - coins->nHeight),
                     REJECT_INVALID, "bad-cs-premature");

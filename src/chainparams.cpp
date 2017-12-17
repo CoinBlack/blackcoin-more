@@ -102,6 +102,7 @@ public:
         consensus.nProtocolV3Time = 1444028400;
         consensus.nLastPOWBlock = 10000;
         consensus.nStakeTimestampMask = 0xf; // 15
+        consensus.nCoinbaseMaturity = 500;
         consensus.nStakeMinConfirmations = 500;
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
