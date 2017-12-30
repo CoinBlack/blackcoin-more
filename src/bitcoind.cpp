@@ -83,7 +83,7 @@ bool AppInit(int argc, char* argv[])
         else
         {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  blackcoind [options]                     " + _("Start Blackcoin Lore Daemon") + "\n";
+                  "  lored [options]                     " + _("Start Blackcoin Lore Daemon") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
@@ -122,7 +122,7 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in blackcoind anymore. Use the blackcoin-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in lored anymore. Use the lore-cli utility instead.\n");
             exit(1);
         }
 #ifndef WIN32
