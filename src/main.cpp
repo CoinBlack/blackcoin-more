@@ -1915,7 +1915,7 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
             // If prev is coinbase or coinstake, check that it's matured
             if (coins->IsCoinBase() || coins->IsCoinStake()) {
-                     if (nSpendHeight - coins->nHeight < COINBASE_MATURITY)
+                     if (nSpendHeight - coins->nHeight < Params().nCoinbaseMaturity)
                              return state.Invalid(
                                     error("CheckInputs(): tried to spend %s at depth %d", coins->IsCoinBase() ? "coinbase" : "coinstake", nSpendHeight - coins->nHeight),
                                     REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
@@ -2476,7 +2476,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                 REJECT_INVALID, "bad-cs-kernel");
 
             // Check proof-of-stake min confirmations
-         if (pindex->nHeight - coins->nHeight < STAKE_MIN_CONFIRMATIONS)
+         if (pindex->nHeight - coins->nHeight < chainparams.GetConsensus().nStakeMinConfirmations)
               return state.DoS(100,
                   error("%s: tried to stake at depth %d", __func__, pindex->nHeight - coins->nHeight),
                     REJECT_INVALID, "bad-cs-premature");
@@ -3437,7 +3437,7 @@ bool GetCoinAge(const CTransaction& tx, CBlockTreeDB& txdb, const CBlockIndex* p
 	        if (Params().GetConsensus().IsProtocolV3(tx.nTime))
 	        {
 	            int nSpendDepth;
-	            if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, nStakeMinConfirmations - 1, nSpendDepth))
+	            if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, Params().GetConsensus().nStakeMinConfirmations - 1, nSpendDepth))
 	            {
 	                LogPrint("coinage", "coin age skip nSpendDepth=%d\n", nSpendDepth + 1);
 	                continue; // only count coins meeting min confirmations requirement
@@ -3450,7 +3450,7 @@ bool GetCoinAge(const CTransaction& tx, CBlockTreeDB& txdb, const CBlockIndex* p
 	        	const CDiskBlockPos& pos = CDiskBlockPos(txindex.nFile, txindex.nPos);
 	        	if (!ReadBlockFromDisk(block, pos, Params().GetConsensus()))
 	                return false; // unable to read block of previous transaction
-	            if (block.GetBlockTime() + nStakeMinAge > tx.nTime)
+	            if (block.GetBlockTime() + Params().GetConsensus().nStakeMinAge > tx.nTime)
 	                continue; // only count coins meeting min age requirement
 	        }
 
