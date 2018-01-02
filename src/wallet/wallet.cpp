@@ -1382,6 +1382,9 @@ bool CWallet::SetHDMasterKey(const CKey& key)
 {
     LOCK(cs_wallet);
 
+    // ensure this wallet.dat can only be opened by clients supporting HD
+    SetMinVersion(FEATURE_HD);
+    
     // store the key as normal "key"/"ckey" object
     // in the database
     // key metadata is not required
