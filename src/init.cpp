@@ -1540,7 +1540,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
             RandAddSeedPerfmon();
 
             // Create new keyUser and set as default key
-            if (GetBoolArg("-usehd", true)) {
+            if (GetBoolArg("-usehd", true) && pwalletMain->hdChain.masterKeyID.IsNull() ) {
             // generate a new master key
             CKey key;
             key.MakeNewKey(true);
