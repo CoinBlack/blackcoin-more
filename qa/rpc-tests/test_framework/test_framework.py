@@ -21,6 +21,7 @@ from .util import (
     sync_blocks,
     sync_mempools,
     stop_nodes,
+    stop_node,
     wait_bitcoinds,
     enable_coverage,
     check_json_precision,
@@ -44,6 +45,9 @@ class BitcoinTestFramework(object):
         print("Initializing test directory "+self.options.tmpdir)
         initialize_chain(self.options.tmpdir)
 
+    def stop_node(self, num_node):
+        stop_node(self.nodes[num_node], num_node)
+    
     def setup_nodes(self):
         return start_nodes(4, self.options.tmpdir)
 
