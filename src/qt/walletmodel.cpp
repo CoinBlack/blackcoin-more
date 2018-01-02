@@ -692,3 +692,8 @@ unsigned long long WalletModel::updateWeight()
 
     return wallet->GetStakeWeight();
 }
+
+bool WalletModel::hdEnabled() const
+{
+    return wallet->IsHDEnabled();
+}

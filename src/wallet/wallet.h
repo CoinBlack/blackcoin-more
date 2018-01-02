@@ -27,6 +27,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+extern CWallet* pwalletMain;
+
 /**
  * Settings
  */
@@ -63,6 +65,11 @@ static const CAmount nHighTransactionMaxFeeWarning = 100 * nHighTransactionFeeWa
 //! Largest (in bytes) free transaction we're willing to create
 static const unsigned int MAX_FREE_TRANSACTION_CREATE_SIZE = 1000;
 static const bool DEFAULT_WALLETBROADCAST = true;
+
+//! if set, all keys will be derived by using BIP32
+static const bool DEFAULT_USE_HD_WALLET = true;
+
+extern const char * DEFAULT_WALLET_DAT;
 
 class CAccountingEntry;
 class CBlockIndex;
@@ -405,8 +412,6 @@ public:
     bool InMempool() const;
     bool IsTrusted() const;
 
-    bool WriteToDisk(CWalletDB *pwalletdb);
-
     int64_t GetTxTime() const;
     int GetRequestCount() const;
 
@@ -509,7 +514,7 @@ private:
 
     void SyncMetaData(std::pair<TxSpends::iterator, TxSpends::iterator>);
 
-    /* the hd chain data model (external chain counters) */
+    /* the HD chain data model (external chain counters) */
     CHDChain hdChain;
 
 public:
@@ -782,7 +787,7 @@ public:
     void Flush(bool shutdown=false);
 
     //! Verify the wallet database and perform salvage if required
-    static bool Verify(const std::string& walletFile, std::string& warningString, std::string& errorString);
+    static bool Verify();
     
     /** 
      * Address book entry changed.
@@ -817,12 +822,25 @@ public:
     bool SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
     void AvailableCoinsForStaking(std::vector<COutput>& vCoins) const;
     uint64_t GetStakeWeight() const;
-    /* Set the hd chain model (chain child index counters) */
-    bool SetHDChain(const CHDChain& chain, bool memonly);
 
-    /* Set the current hd master key (will reset the chain child index counters) */
-    bool SetHDMasterKey(const CKey& key);
+    /* Returns the wallets help message */
+    static std::string GetWalletHelpString(bool showDebug);
+
+    /* Initializes the wallet, returns a new CWallet instance or a null pointer in case of an error */
+    static bool InitLoadWallet();
+
+    /* Set the HD chain model (chain child index counters) */
+    bool SetHDChain(const CHDChain& chain, bool memonly);
     const CHDChain& GetHDChain() { return hdChain; }
+
+    /* Returns true if HD is enabled */
+    bool IsHDEnabled();
+
+    /* Generates a new HD master key (will not be activated) */
+    CPubKey GenerateNewHDMasterKey();
+
+    /* Set the current HD master key (will reset the chain child index counters) */
+    bool SetHDMasterKey(const CPubKey& key);
 };
 
 /** A key allocated from the key pool. */
