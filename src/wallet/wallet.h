@@ -819,10 +819,13 @@ public:
     uint64_t GetStakeWeight() const;
     /* Set the hd chain model (chain child index counters) */
     bool SetHDChain(const CHDChain& chain, bool memonly);
+    const CHDChain& GetHDChain() { return hdChain; }
+
+    /* Generates a new HD master key (will not be activated) */
+    CPubKey GenerateNewHDMasterKey();
 
     /* Set the current hd master key (will reset the chain child index counters) */
-    bool SetHDMasterKey(const CKey& key);
-    const CHDChain& GetHDChain() { return hdChain; }
+    bool SetHDMasterKey(const CPubKey& key);
 };
 
 /** A key allocated from the key pool. */

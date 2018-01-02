@@ -1543,8 +1543,8 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
             if (GetBoolArg("-usehd", true) && pwalletMain->hdChain.masterKeyID.IsNull() ) {
             // generate a new master key
             CKey key;
-            key.MakeNewKey(true);
-            if (!pwalletMain->SetHDMasterKey(key))
+            CPubKey masterPubKey = pwalletMain->GenerateNewHDMasterKey();
+            if (!pwalletMain->SetHDMasterKey(masterPubKey))
             	throw std::runtime_error("CWallet::GenerateNewKey(): Storing master key failed");
             }
             CPubKey newDefaultKey;
