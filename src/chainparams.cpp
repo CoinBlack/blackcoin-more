@@ -101,7 +101,10 @@ public:
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
         consensus.nLastPOWBlock = 10000;
-        consensus.nStakeTimestampMask = 0xf;
+        consensus.nStakeTimestampMask = 0xf; // 15
+        consensus.nCoinbaseMaturity = 500;
+        consensus.nStakeMinConfirmations = 500;
+        consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.

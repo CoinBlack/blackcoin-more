@@ -417,7 +417,7 @@ void static BitcoinMiner(const CChainParams& chainparams)
             }
 
             //check the block height
-            if (chainActive.Tip()->nHeight > Params().LastPOWBlock() + nStakeMinConfirmations)
+            if (chainActive.Tip()->nHeight > Params().LastPOWBlock() + Params().GetConsensus().nStakeMinConfirmations)
             {
                  // The stake is confirmed, stop the PoW miner
                  throw boost::thread_interrupted();
@@ -568,7 +568,7 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     CMutableTransaction txCoinBase(block.vtx[0]);
     CMutableTransaction txCoinStake;
     txCoinStake.nTime = GetAdjustedTime();
-    txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
+    txCoinStake.nTime &= ~Params().GetConsensus().nStakeTimestampMask;
 
     int64_t nSearchTime = txCoinStake.nTime; // search to current time
 
