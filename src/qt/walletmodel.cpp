@@ -677,6 +677,26 @@ bool WalletModel::saveReceiveRequest(const std::string &sAddress, const int64_t 
         return wallet->AddDestData(dest, key, sRequest);
 }
 
+bool WalletModel::transactionCanBeAbandoned(uint256 hash) const
+{
+    LOCK2(cs_main, wallet->cs_wallet);
+    const CWalletTx *wtx = wallet->GetWalletTx(hash);
+    if (!wtx || wtx->isAbandoned() || wtx->GetDepthInMainChain() > 0 || wtx->InMempool())
+        return false;
+    return true;
+}
+
+bool WalletModel::abandonTransaction(uint256 hash) const
+{
+    LOCK2(cs_main, wallet->cs_wallet);
+    return wallet->AbandonTransaction(hash);
+}
+
+bool WalletModel::hdEnabled() const
+{
+    return wallet->IsHDEnabled();
+}
+
 unsigned long long WalletModel::updateWeight()
 {
     if (!wallet)
@@ -691,9 +711,4 @@ unsigned long long WalletModel::updateWeight()
     	return 0;
 
     return wallet->GetStakeWeight();
-}
-
-bool WalletModel::hdEnabled() const
-{
-    return wallet->IsHDEnabled();
 }
