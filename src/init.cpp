@@ -479,6 +479,7 @@ std::string LicenseInfo()
     const std::string URL_WEBSITE = "<http://blackcoin.co/>";
     // todo: remove urls from translations on next change
     return FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
+           "\n" +
            FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Blackcoin Lore Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" +
            FormatParagraph(strprintf(_("Please contribute if you find Blackcoin Lore useful. "
