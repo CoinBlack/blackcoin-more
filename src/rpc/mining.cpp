@@ -14,11 +14,16 @@
 #include "miner.h"
 #include "net.h"
 #include "pow.h"
+#include "pos.h"
 #include "rpc/server.h"
 #include "txmempool.h"
+#include "timedata.h"
 #include "util.h"
 #include "utilstrencodings.h"
 #include "validationinterface.h"
+#ifdef ENABLE_WALLET
+#include "wallet/wallet.h"
+#endif
 
 #include <stdint.h>
 
@@ -68,7 +73,7 @@ UniValue GetNetworkHashPS(int lookup, int height) {
     arith_uint256 workDiff = pb->nChainWork - pb0->nChainWork;
     int64_t timeDiff = maxTime - minTime;
 
-    return (int64_t)(workDiff.getdouble() / timeDiff);
+    return workDiff.getdouble() / timeDiff;
 }
 
 UniValue getnetworkhashps(const UniValue& params, bool fHelp)
@@ -157,7 +162,7 @@ UniValue generate(const UniValue& params, bool fHelp)
     UniValue blockHashes(UniValue::VARR);
     while (nHeight < nHeightEnd)
     {
-        auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), coinbaseScript->reserveScript));
+        auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), coinbaseScript->reserveScript, 0, false));
         if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
         CBlock *pblock = &pblocktemplate->block;
@@ -165,16 +170,17 @@ UniValue generate(const UniValue& params, bool fHelp)
             LOCK(cs_main);
             IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
         }
-        while (!CheckProofOfWork(pblock->GetHash(), pblock->nBits, Params().GetConsensus())) {
+        while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
             // Yes, there is a chance every nonce could fail to satisfy the -regtest
             // target -- 1 in 2^(2^32). That ain't gonna happen.
             ++pblock->nNonce;
         }
         CValidationState state;
-        if (!ProcessNewBlock(state, Params(), NULL, pblock, true, NULL))
+        uint256 hash = pblock->GetHash();
+        if (!ProcessNewBlock(state, Params(), NULL, pblock, true, NULL, hash))
             throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
         ++nHeight;
-        blockHashes.push_back(pblock->GetHash().GetHex());
+        blockHashes.push_back(hash.GetHex());
 
         //mark script as important because it was used at least for one coinbase output
         coinbaseScript->KeepScript();
@@ -265,6 +271,42 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
     obj.push_back(Pair("testnet",          Params().TestnetToBeDeprecatedFieldRPC()));
     obj.push_back(Pair("chain",            Params().NetworkIDString()));
     obj.push_back(Pair("generate",         getgenerate(params, false)));
+    return obj;
+}
+
+UniValue getstakinginfo(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "getstakinginfo\n"
+            "Returns an object containing staking-related information.");
+
+    uint64_t nWeight = 0;
+    if (pwalletMain)
+        nWeight = pwalletMain->GetStakeWeight();
+
+    uint64_t nNetworkWeight = GetPoSKernelPS();
+    bool staking = nLastCoinStakeSearchInterval && nWeight;
+    uint64_t nExpectedTime = staking ? 1.0455 * 64 * nNetworkWeight / nWeight : 0;
+
+    UniValue obj(UniValue::VOBJ);
+
+    obj.push_back(Pair("enabled", GetBoolArg("-staking", true)));
+    obj.push_back(Pair("staking", staking));
+    obj.push_back(Pair("errors", GetWarnings("statusbar")));
+
+    obj.push_back(Pair("currentblocksize", (uint64_t)nLastBlockSize));
+    obj.push_back(Pair("currentblocktx", (uint64_t)nLastBlockTx));
+    obj.push_back(Pair("pooledtx", (uint64_t)mempool.size()));
+
+    obj.push_back(Pair("difficulty", GetDifficulty(GetLastBlockIndex(chainActive.Tip(), true))));
+    obj.push_back(Pair("search-interval", (int)nLastCoinStakeSearchInterval));
+
+    obj.push_back(Pair("weight", (uint64_t)nWeight));
+    obj.push_back(Pair("netstakeweight", (uint64_t)nNetworkWeight));
+
+    obj.push_back(Pair("expectedtime", nExpectedTime));
+
     return obj;
 }
 
@@ -426,7 +468,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             if (block.hashPrevBlock != pindexPrev->GetBlockHash())
                 return "inconclusive-not-best-prevblk";
             CValidationState state;
-            TestBlockValidity(state, Params(), block, pindexPrev, false, true);
+            TestBlockValidity(state, Params(), block, pindexPrev, false, true, true);
             return BIP22ValidationResult(state);
         }
     }
@@ -439,6 +481,9 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
 
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Bitcoin is downloading blocks...");
+
+    if (chainActive.Tip()->nHeight > Params().GetConsensus().nLastPOWBlock)
+    	throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
 
     static unsigned int nTransactionsUpdatedLast;
 
@@ -510,7 +555,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             pblocktemplate = NULL;
         }
         CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = CreateNewBlock(Params(), scriptDummy);
+        pblocktemplate = CreateNewBlock(Params(), scriptDummy, 0, false);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
 
@@ -578,7 +623,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0].vout[0].nValue));
     result.push_back(Pair("longpollid", chainActive.Tip()->GetBlockHash().GetHex() + i64tostr(nTransactionsUpdatedLast)));
     result.push_back(Pair("target", hashTarget.GetHex()));
-    result.push_back(Pair("mintime", (int64_t)pindexPrev->GetMedianTimePast()+1));
+    result.push_back(Pair("mintime", (int64_t)pindexPrev->GetPastTimeLimit()+1));
     result.push_back(Pair("mutable", aMutable));
     result.push_back(Pair("noncerange", "00000000ffffffff"));
     result.push_back(Pair("sigoplimit", (int64_t)MAX_BLOCK_SIGOPS));
@@ -650,9 +695,9 @@ UniValue submitblock(const UniValue& params, bool fHelp)
     }
 
     CValidationState state;
-    submitblock_StateCatcher sc(block.GetHash());
+    submitblock_StateCatcher sc(hash);
     RegisterValidationInterface(&sc);
-    bool fAccepted = ProcessNewBlock(state, Params(), NULL, &block, true, NULL);
+    bool fAccepted = ProcessNewBlock(state, Params(), NULL, &block, true, NULL, hash);
     UnregisterValidationInterface(&sc);
     if (fBlockPresent)
     {
@@ -671,6 +716,128 @@ UniValue submitblock(const UniValue& params, bool fHelp)
 
 UniValue estimatefee(const UniValue& params, bool fHelp)
 {
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+            "estimatefee nblocks\n"
+            "\nEstimates the approximate fee per kilobyte needed for a transaction to begin\n"
+            "confirmation within nblocks blocks.\n"
+            "\nArguments:\n"
+            "1. nblocks     (numeric)\n"
+            "\nResult:\n"
+            "n              (numeric) estimated fee-per-kilobyte\n"
+            "\n"
+            "A negative value is returned if not enough transactions and blocks\n"
+            "have been observed to make an estimate.\n"
+            "\nExample:\n"
+            + HelpExampleCli("estimatefee", "6")
+            );
+
+    RPCTypeCheck(params, boost::assign::list_of(UniValue::VNUM));
+
+    int nBlocks = params[0].get_int();
+    if (nBlocks < 1)
+        nBlocks = 1;
+
+    CFeeRate feeRate = mempool.estimateFee(nBlocks);
+    if (feeRate == CFeeRate(0))
+        return -1.0;
+
+    return ValueFromAmount(feeRate.GetFeePerK());
+}
+
+UniValue checkkernel(const UniValue& params, bool fHelp)
+{
+	if (fHelp || params.size() < 1 || params.size() > 2)
+	        throw runtime_error(
+	            "checkkernel [{\"txid\":txid,\"vout\":n},...] [createblocktemplate=false]\n"
+	            "Check if one of given inputs is a kernel input at the moment.\n"
+	        );
+
+	    RPCTypeCheck(params, boost::assign::list_of(UniValue::VARR)(UniValue::VBOOL));
+
+	    UniValue inputs = params[0].get_array();
+	    bool fCreateBlockTemplate = params.size() > 1 ? params[1].get_bool() : false;
+
+	    if (vNodes.empty())
+	        throw JSONRPCError(-9, "BlackCoin is not connected!");
+
+	    if (IsInitialBlockDownload())
+	        throw JSONRPCError(-10, "BlackCoin is downloading blocks...");
+
+	    COutPoint kernel;
+	    CBlockIndex* pindexPrev = chainActive.Tip();
+	    CBlockHeader blockHeader = pindexPrev->GetBlockHeader();
+	    unsigned int nBits = GetNextTargetRequired(pindexPrev, &blockHeader, true, Params().GetConsensus());
+	    int64_t nTime = GetAdjustedTime();
+	    nTime &= ~Params().GetConsensus().nStakeTimestampMask;
+
+	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+	    	const UniValue& input = inputs[idx];
+	    	const UniValue& o = input.get_obj();
+
+	        const UniValue& txid_v = find_value(o, "txid");
+	        if (!txid_v.isStr())
+	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing txid key");
+	        string txid = txid_v.get_str();
+	        if (!IsHex(txid))
+	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected hex txid");
+
+	        const UniValue& vout_v = find_value(o, "vout");
+	        if (!vout_v.isNum())
+	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing vout key");
+	        int nOutput = vout_v.get_int();
+	        if (nOutput < 0)
+	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout must be positive");
+
+	        COutPoint cInput(uint256S(txid), nOutput);
+	        if (CheckKernel(pindexPrev, nBits, nTime, cInput))
+	        {
+	            kernel = cInput;
+	            break;
+	        }
+	    }
+
+
+	    UniValue result(UniValue::VOBJ);
+	    result.push_back(Pair("found", !kernel.IsNull()));
+
+	    if (kernel.IsNull())
+	        return result;
+
+	    UniValue oKernel(UniValue::VOBJ);
+	    oKernel.push_back(Pair("txid", kernel.hash.GetHex()));
+	    oKernel.push_back(Pair("vout", (int64_t)kernel.n));
+	    oKernel.push_back(Pair("time", nTime));
+	    result.push_back(Pair("kernel", oKernel));
+
+	    if (!fCreateBlockTemplate)
+	        return result;
+
+	    int64_t nFees;
+	    if (!pwalletMain->IsLocked())
+	    	pwalletMain->TopUpKeyPool();
+
+	    CReserveKey pMiningKey(pwalletMain);
+	    auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
+	    if (!pblocktemplate.get())
+	    	throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
+
+	    CBlock *pblock = &pblocktemplate->block;
+	    pblock->nTime = pblock->vtx[0].nTime = nTime;
+
+	    CDataStream ss(SER_DISK, PROTOCOL_VERSION);
+	    ss << *pblock;
+
+	    result.push_back(Pair("blocktemplate", HexStr(ss.begin(), ss.end())));
+	    result.push_back(Pair("blocktemplatefees", nFees));
+
+	    CPubKey pubkey;
+	    if (!pMiningKey.GetReservedKey(pubkey))
+	        throw JSONRPCError(RPC_MISC_ERROR, "GetReservedKey failed");
+
+	    result.push_back(Pair("blocktemplatesignkey", HexStr(pubkey)));
+
+	    return result;
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "estimatefee nblocks\n"
