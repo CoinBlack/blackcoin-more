@@ -51,6 +51,9 @@ typedef enum ScriptError_t
 
     /* softfork safeness */
     SCRIPT_ERR_DISCOURAGE_UPGRADABLE_NOPS,
+	
+	/* count acks */
+	SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM,
 
     SCRIPT_ERR_ERROR_COUNT
 } ScriptError;

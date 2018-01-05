@@ -1920,11 +1920,11 @@ public:
 
     virtual bool CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positive, int& negative) const;
 
-    CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, const CAmount& amount, bool storeIn, int height);           
+    CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, bool storeIn, int height);           
 };
 
-CachingTransactionSignatureCheckerWithBlockReader::CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, const CAmount& amount, bool storeIn, int height)
-    : CachingTransactionSignatureChecker(txToIn, nInIn, amount, storeIn), nHeight(height), hash(txToIn->GetHash())
+CachingTransactionSignatureCheckerWithBlockReader::CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, bool storeIn, int height)
+    : CachingTransactionSignatureChecker(txToIn, nInIn, storeIn), nHeight(height), hash(txToIn->GetHash())
 {
 }
 
