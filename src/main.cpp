@@ -48,6 +48,10 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/math/distributions/poisson.hpp>
+#include <boost/multi_index_container.hpp>
+#include <boost/multi_index/member.hpp>
+#include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index/sequenced_index.hpp>
 #include <boost/thread.hpp>
 
 using namespace std;
@@ -1883,9 +1887,32 @@ void UpdateCoins(const CTransaction& tx, CValidationState &state, CCoinsViewCach
     UpdateCoins(tx, state, inputs, txundo, nHeight);
 }
 
-class CachingTransactionSignatureCheckerWithBlockReader : public CachingTransactionSignatureChecker, public BaseBlockReader {
+class CachingTransactionSignatureCheckerWithBlockReader : public CachingTransactionSignatureChecker, public BaseBlockReader 
+{
+	typedef std::pair<uint256, CTransaction> CoinbaseCacheItem;
+    typedef boost::multi_index_container<
+        CoinbaseCacheItem,
+        boost::multi_index::indexed_by<
+            boost::multi_index::sequenced<>,
+            boost::multi_index::ordered_unique<
+                boost::multi_index::member<CoinbaseCacheItem, uint256, &CoinbaseCacheItem::first>
+            >
+        >
+	> CoinbaseCacheContainer;
+	
     int nHeight;
     uint256 hash;
+	
+	mutable boost::mutex mutexCache;
+    mutable CoinbaseCacheContainer cacheCoinbase; // block hash -> block coinbase
+
+    void UpdateCache(const CoinbaseCacheItem& coinbase) const;
+
+    CTransaction ReadBlockCoinbase(CBlockIndex* pblockindex) const;
+
+public:
+const unsigned int MAX_COUNT_ACKS_CACHE = 1000;
+
 public:
     virtual int GetBlockNumber() const;
 
@@ -1893,11 +1920,13 @@ public:
 
     virtual bool CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positive, int& negative) const;
 
-    CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, const CAmount& amount, bool storeIn, int height)
-            :CachingTransactionSignatureChecker(txToIn, nInIn, storeIn), nHeight(height), hash(txToIn->GetHash())
-    {
-    }
+    CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, const CAmount& amount, bool storeIn, int height);           
 };
+
+CachingTransactionSignatureCheckerWithBlockReader::CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, const CAmount& amount, bool storeIn, int height)
+    : CachingTransactionSignatureChecker(txToIn, nInIn, amount, storeIn), nHeight(height), hash(txToIn->GetHash())
+{
+}
 
 int CachingTransactionSignatureCheckerWithBlockReader::GetBlockNumber() const
 {
@@ -1913,13 +1942,30 @@ CTransaction CachingTransactionSignatureCheckerWithBlockReader::GetBlockCoinbase
         return CTransaction();
 
     CBlockIndex* pblockindex = chainActive[nHeight];
+	
+	{
+        boost::lock_guard<boost::mutex> lock(mutexCache);
+        CoinbaseCacheContainer::nth_index<1>::type::iterator it = cacheCoinbase.get<1>().find(*pblockindex->phashBlock);
+        if (it != cacheCoinbase.get<1>().end())
+            return it->second;
+    }
 
+    CTransaction coinbase = ReadBlockCoinbase(pblockindex);
+    if (!coinbase.IsNull())
+        UpdateCache(std::make_pair(*pblockindex->phashBlock, coinbase));
+
+    return coinbase;
+}
+
+CTransaction CachingTransactionSignatureCheckerWithBlockReader::ReadBlockCoinbase(CBlockIndex* pblockindex) const
+{
+	
     CBlock block;
 
     if (fHavePruned && !(pblockindex->nStatus & BLOCK_HAVE_DATA) && pblockindex->nTx > 0)
         return CTransaction();
 
-    if(!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus()))
+    if (!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus()))
         return CTransaction();
 
     if (block.vtx.empty())
@@ -1929,6 +1975,17 @@ CTransaction CachingTransactionSignatureCheckerWithBlockReader::GetBlockCoinbase
         return CTransaction();
 
     return block.vtx[0];
+}
+
+void CachingTransactionSignatureCheckerWithBlockReader::UpdateCache(const CachingTransactionSignatureCheckerWithBlockReader::CoinbaseCacheItem& coinbase) const
+{
+    boost::lock_guard<boost::mutex> lock(mutexCache);
+    std::pair<CoinbaseCacheContainer::iterator, bool> result = cacheCoinbase.push_front(coinbase);
+    if (!result.second) {
+        cacheCoinbase.relocate(cacheCoinbase.begin(), result.first);
+    } else if (cacheCoinbase.size() > MAX_COUNT_ACKS_CACHE) {
+        cacheCoinbase.pop_back();
+    }
 }
 
 bool CachingTransactionSignatureCheckerWithBlockReader::CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positiveAcks, int& negativeAcks) const
