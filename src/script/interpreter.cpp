@@ -426,7 +426,40 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     break;
                 }
 
-                case OP_NOP1: case OP_NOP4: case OP_NOP5:
+				case OP_COUNT_ACKS:
+				{
+
+					// (secondary_chain_id ack_period liveness_period -- )
+					if (stack.size() < 3)
+						return set_error(serror, SCRIPT_ERR_INVALID_STACK_OPERATION);
+
+					valtype& secondaryChainId = stacktop(-3);
+					if (secondaryChainId.size() < 1 || secondaryChainId.size() > MAX_CHAIN_ID_LENGTH)
+						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
+
+					CScriptNum periodAck(stacktop(-2), fRequireMinimal);
+					if (periodAck < 1 || periodAck > MAX_ACK_PERIOD)
+						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
+
+					CScriptNum periodLiveness(stacktop(-1), fRequireMinimal);
+					if (periodLiveness < MIN_LIVENESS_PERIOD || periodLiveness > MAX_LIVENESS_PERIOD)
+						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
+
+					int positiveAcks, negativeAcks;
+					if (checker.CountAcks(secondaryChainId, periodAck.getint(), periodLiveness.getint(), positiveAcks, negativeAcks)) {
+						popstack(stack);
+						popstack(stack);
+						popstack(stack);
+						stack.push_back(CScriptNum(positiveAcks).getvch());
+						stack.push_back(CScriptNum(negativeAcks).getvch());
+					} else {
+						return set_error(serror, SCRIPT_ERR_COUNT_ACKS_INVALID_PARAM);
+					}
+
+					break;
+				}
+
+                case OP_NOP1: case OP_NOP5:
                 case OP_NOP6: case OP_NOP7: case OP_NOP8: case OP_NOP9: case OP_NOP10:
                 {
                     if (flags & SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS)

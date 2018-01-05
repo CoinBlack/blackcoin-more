@@ -219,6 +219,8 @@ libbitcoin_server_a_SOURCES = \
   rpcrawtransaction.cpp \
   rpcserver.cpp \
   script/sigcache.cpp \
+  script/drivechain.cpp \
+  script/drivechain.h \
   timedata.cpp \
   torcontrol.cpp \
   txdb.cpp \

@@ -25,6 +25,7 @@
 #include "pubkey.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
+#include "script/drivechain.h"
 #include "script/script.h"
 #include "script/sigcache.h"
 #include "script/standard.h"
@@ -1882,9 +1883,63 @@ void UpdateCoins(const CTransaction& tx, CValidationState &state, CCoinsViewCach
     UpdateCoins(tx, state, inputs, txundo, nHeight);
 }
 
+class CachingTransactionSignatureCheckerWithBlockReader : public CachingTransactionSignatureChecker, public BaseBlockReader {
+    int nHeight;
+    uint256 hash;
+public:
+    virtual int GetBlockNumber() const;
+
+    virtual CTransaction GetBlockCoinbase(int blockNumber) const;
+
+    virtual bool CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positive, int& negative) const;
+
+    CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, const CAmount& amount, bool storeIn, int height)
+            :CachingTransactionSignatureChecker(txToIn, nInIn, storeIn), nHeight(height), hash(txToIn->GetHash())
+    {
+    }
+};
+
+int CachingTransactionSignatureCheckerWithBlockReader::GetBlockNumber() const
+{
+    return nHeight;
+}
+
+CTransaction CachingTransactionSignatureCheckerWithBlockReader::GetBlockCoinbase(int blockNumber) const
+{
+    //AssertLockHeld(cs_main);
+
+    int nHeight = blockNumber;
+    if (nHeight < 0 || nHeight > chainActive.Height())
+        return CTransaction();
+
+    CBlockIndex* pblockindex = chainActive[nHeight];
+
+    CBlock block;
+
+    if (fHavePruned && !(pblockindex->nStatus & BLOCK_HAVE_DATA) && pblockindex->nTx > 0)
+        return CTransaction();
+
+    if(!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus()))
+        return CTransaction();
+
+    if (block.vtx.empty())
+        return CTransaction();
+
+    if (!block.vtx[0].IsCoinBase())
+        return CTransaction();
+
+    return block.vtx[0];
+}
+
+bool CachingTransactionSignatureCheckerWithBlockReader::CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positiveAcks, int& negativeAcks) const
+{
+    std::vector<unsigned char> hashSpend(hash.begin(), hash.end());
+    return ::CountAcks(hashSpend, chainId, periodAck, periodLiveness, positiveAcks, negativeAcks, *this);
+}
+
 bool CScriptCheck::operator()() {
     const CScript &scriptSig = ptxTo->vin[nIn].scriptSig;
-    if (!VerifyScript(scriptSig, scriptPubKey, nFlags, CachingTransactionSignatureChecker(ptxTo, nIn, cacheStore), &error)) {
+    if (!VerifyScript(scriptSig, scriptPubKey, nFlags, CachingTransactionSignatureChecker(ptxTo, nIn, nHeight, cacheStore), &error)) {
         return false;
     }
     return true;
@@ -1959,7 +2014,8 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
 {
     if (!tx.IsCoinBase())
     {
-        if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs)))
+    	int height = GetSpendHeight(inputs);
+        if (!Consensus::CheckTxInputs(tx, state, inputs, height))
             return false;
 
         if (pvChecks)
@@ -1979,7 +2035,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
                 assert(coins);
 
                 // Verify signature
-                CScriptCheck check(*coins, tx, i, flags, cacheStore);
+                CScriptCheck check(*coins, tx, i, flags, cacheStore, height);
                 if (pvChecks) {
                     pvChecks->push_back(CScriptCheck());
                     check.swap(pvChecks->back());
@@ -1992,7 +2048,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
                         // avoid splitting the network between upgraded and
                         // non-upgraded nodes.
                         CScriptCheck check2(*coins, tx, i,
-                                flags & ~STANDARD_NOT_MANDATORY_VERIFY_FLAGS, cacheStore);
+                                flags & ~STANDARD_NOT_MANDATORY_VERIFY_FLAGS, cacheStore, height);
                         if (check2())
                             return state.Invalid(false, REJECT_NONSTANDARD, strprintf("non-mandatory-script-verify-flag (%s)", ScriptErrorString(check.GetScriptError())));
                     }
