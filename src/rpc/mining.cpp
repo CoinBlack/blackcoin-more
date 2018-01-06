@@ -818,7 +818,7 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
 	    	pwalletMain->TopUpKeyPool();
 
 	    CReserveKey pMiningKey(pwalletMain);
-	    auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
+	    std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
 	    if (!pblocktemplate.get())
 	    	throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
 
