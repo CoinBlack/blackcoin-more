@@ -23,7 +23,8 @@
 #include "miner.h"
 #include "net.h"
 #include "policy/policy.h"
-#include "rpcserver.h"
+#include "rpc/server.h"
+#include "rpc/register.h"
 #include "script/standard.h"
 #include "script/sigcache.h"
 #include "scheduler.h"
@@ -917,8 +918,11 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         fPruneMode = true;
     }
 
+    RegisterAllCoreRPCCommands(tableRPC);
 #ifdef ENABLE_WALLET
     bool fDisableWallet = GetBoolArg("-disablewallet", false);
+    if (!fDisableWallet)
+        RegisterWalletRPCCommands(tableRPC);
 #endif
 
     nConnectTimeout = GetArg("-timeout", DEFAULT_CONNECT_TIMEOUT);
@@ -1174,6 +1178,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     fListen = GetBoolArg("-listen", DEFAULT_LISTEN);
     fDiscover = GetBoolArg("-discover", true);
     fNameLookup = GetBoolArg("-dns", DEFAULT_NAME_LOOKUP);
+    fRelayTxes = !GetBoolArg("-blocksonly", DEFAULT_BLOCKSONLY);
 
     bool fBound = false;
     if (fListen) {
