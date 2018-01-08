@@ -15,7 +15,7 @@
 #include "net.h"
 #include "pow.h"
 #include "pos.h"
-#include "rpcserver.h"
+#include "rpc/server.h"
 #include "txmempool.h"
 #include "timedata.h"
 #include "util.h"
@@ -818,7 +818,7 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
 	    	pwalletMain->TopUpKeyPool();
 
 	    CReserveKey pMiningKey(pwalletMain);
-	    auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
+	    std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
 	    if (!pblocktemplate.get())
 	    	throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
 
@@ -964,4 +964,31 @@ UniValue estimatesmartpriority(const UniValue& params, bool fHelp)
     result.push_back(Pair("priority", priority));
     result.push_back(Pair("blocks", answerFound));
     return result;
+}
+
+static const CRPCCommand commands[] =
+{ //  category              name                      actor (function)         okSafeMode
+  //  --------------------- ------------------------  -----------------------  ----------
+    { "mining",             "getnetworkhashps",       &getnetworkhashps,       true  },
+    { "mining",             "getmininginfo",          &getmininginfo,          true  },
+    { "mining",             "prioritisetransaction",  &prioritisetransaction,  true  },
+    { "mining",             "getblocktemplate",       &getblocktemplate,       true  },
+    { "mining",             "submitblock",            &submitblock,            true  },
+    { "mining",             "checkkernel",            &checkkernel,            true  },
+    { "mining",             "getstakinginfo",         &getstakinginfo,         true  },
+
+    { "generating",         "getgenerate",            &getgenerate,            true  },
+    { "generating",         "setgenerate",            &setgenerate,            true  },
+    { "generating",         "generate",               &generate,               true  },
+
+    { "util",               "estimatefee",            &estimatefee,            true  },
+    { "util",               "estimatepriority",       &estimatepriority,       true  },
+    { "util",               "estimatesmartfee",       &estimatesmartfee,       true  },
+    { "util",               "estimatesmartpriority",  &estimatesmartpriority,  true  },
+};
+
+void RegisterMiningRPCCommands(CRPCTable &tableRPC)
+{
+    for (unsigned int vcidx = 0; vcidx < ARRAYLEN(commands); vcidx++)
+        tableRPC.appendCommand(commands[vcidx].name, &commands[vcidx]);
 }
