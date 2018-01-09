@@ -81,6 +81,7 @@ testScripts = [
     'receivedby.py',
     'mempool_resurrect_test.py',
     'txn_doublespend.py --mineblock',
+    'txn_doublespendrelay.py',
     'txn_clone.py',
     'getchaintips.py',
     'rawtransactions.py',
