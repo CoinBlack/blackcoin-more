@@ -429,6 +429,10 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 				case OP_COUNT_ACKS:
 				{
 
+					if (SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS) {
+					    return set_error(serror, SCRIPT_ERR_DISCOURAGE_UPGRADABLE_NOPS);
+					}
+
 					// (secondary_chain_id ack_period liveness_period -- )
 					if (stack.size() < 3)
 						return set_error(serror, SCRIPT_ERR_INVALID_STACK_OPERATION);
