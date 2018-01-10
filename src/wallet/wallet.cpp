@@ -1401,7 +1401,7 @@ void CWallet::MarkConflicted(const uint256& hashBlock, const uint256& hashTx)
     }
 }
 
-void void CWallet::SyncTransaction(const CTransaction& tx, const CBlock* pblock, bool fRespend)
+void CWallet::SyncTransaction(const CTransaction& tx, const CBlock* pblock, bool fRespend)
 {
     LOCK2(cs_main, cs_wallet);
 
