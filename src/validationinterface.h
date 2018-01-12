@@ -7,7 +7,6 @@
 #define BITCOIN_VALIDATIONINTERFACE_H
 
 #include <boost/signals2/signal.hpp>
-#include <boost/shared_ptr.hpp>
 
 class CBlock;
 struct CBlockLocator;
@@ -27,18 +26,18 @@ void UnregisterValidationInterface(CValidationInterface* pwalletIn);
 /** Unregister all wallets from core */
 void UnregisterAllValidationInterfaces();
 /** Push an updated transaction to all registered wallets */
-void SyncWithWallets(const CTransaction& tx, const CBlock* pblock = NULL);
+void SyncWithWallets(const CTransaction& tx, const CBlock* pblock = NULL, bool fRespend = false);
 
 class CValidationInterface {
 protected:
     virtual void UpdatedBlockTip(const CBlockIndex *pindex) {}
-    virtual void SyncTransaction(const CTransaction &tx, const CBlock *pblock) {}
+    virtual void SyncTransaction(const CTransaction &tx, const CBlock *pblock, bool fRespend) {}
     virtual void SetBestChain(const CBlockLocator &locator) {}
     virtual void UpdatedTransaction(const uint256 &hash) {}
     virtual void Inventory(const uint256 &hash) {}
     virtual void ResendWalletTransactions(int64_t nBestBlockTime) {}
     virtual void BlockChecked(const CBlock&, const CValidationState&) {}
-    virtual void GetScriptForMining(boost::shared_ptr<CReserveScript>&) {};
+    virtual void GetScriptForMining(std::shared_ptr<CReserveScript>&) {};
     virtual void ResetRequestCount(const uint256 &hash) {};
     friend void ::RegisterValidationInterface(CValidationInterface*);
     friend void ::UnregisterValidationInterface(CValidationInterface*);
@@ -48,8 +47,8 @@ protected:
 struct CMainSignals {
     /** Notifies listeners of updated block chain tip */
     boost::signals2::signal<void (const CBlockIndex *)> UpdatedBlockTip;
-    /** Notifies listeners of updated transaction data (transaction, and optionally the block it is found in. */
-    boost::signals2::signal<void (const CTransaction &, const CBlock *)> SyncTransaction;
+    /** Notifies listeners of updated transaction data (transaction, optionally the block it is found in, and whether this is a known respend. */
+    boost::signals2::signal<void (const CTransaction &, const CBlock *, bool)> SyncTransaction;
     /** Notifies listeners of an updated transaction without new data (for now: a coinbase potentially becoming visible). */
     boost::signals2::signal<void (const uint256 &)> UpdatedTransaction;
     /** Notifies listeners of a new active block chain. */
@@ -61,7 +60,7 @@ struct CMainSignals {
     /** Notifies listeners of a block validation result */
     boost::signals2::signal<void (const CBlock&, const CValidationState&)> BlockChecked;
     /** Notifies listeners that a key for mining is required (coinbase) */
-    boost::signals2::signal<void (boost::shared_ptr<CReserveScript>&)> ScriptForMining;
+    boost::signals2::signal<void (std::shared_ptr<CReserveScript>&)> ScriptForMining;
     /** Notifies listeners that a block has been successfully mined */
     boost::signals2::signal<void (const uint256 &)> BlockFound;
 };

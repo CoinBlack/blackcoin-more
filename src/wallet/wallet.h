@@ -26,8 +26,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/shared_ptr.hpp>
-
 extern CWallet* pwalletMain;
 
 /**
@@ -413,7 +411,7 @@ public:
 
     bool RelayWalletTransaction();
 
-    std::set<uint256> GetConflicts() const;
+    std::set<uint256> GetConflicts(bool includeEquivalent=true) const;
 };
 
 
@@ -614,6 +612,9 @@ public:
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID;
 
+    // Increment to cause UI refresh, similar to new block
+    int64_t nConflictsReceived;
+    
     CWallet()
     {
         SetNull();
@@ -645,6 +646,7 @@ public:
         nLastResend = 0;
         nTimeFirstKey = 0;
         fBroadcastTransactions = false;
+        nConflictsReceived = 0;
     }
 
     std::map<uint256, CWalletTx> mapWallet;
@@ -743,8 +745,8 @@ public:
 
     void MarkDirty();
     bool AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletDB* pwalletdb);
-    void SyncTransaction(const CTransaction& tx, const CBlock* pblock);
-    bool AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlock* pblock, bool fUpdate);
+    void SyncTransaction(const CTransaction& tx, const CBlock* pblock, bool fRespend);
+    bool AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlock* pblock, bool fUpdate, bool fRespend);
     int ScanForWalletTransactions(CBlockIndex* pindexStart, bool fUpdate = false);
     void ReacceptWalletTransactions();
     void ResendWalletTransactions(int64_t nBestBlockTime);
@@ -812,6 +814,7 @@ public:
     bool IsMine(const CTransaction& tx) const;
     /** should probably be renamed to IsRelevantToMe */
     bool IsFromMe(const CTransaction& tx) const;
+    bool IsConflicting(const CTransaction& tx) const;
     CAmount GetDebit(const CTransaction& tx, const isminefilter& filter) const;
     CAmount GetCredit(const CTransaction& tx, const isminefilter& filter) const;
     CAmount GetChange(const CTransaction& tx) const;
@@ -837,7 +840,7 @@ public:
         }
     }
 
-    void GetScriptForMining(boost::shared_ptr<CReserveScript> &script);
+    void GetScriptForMining(std::shared_ptr<CReserveScript> &script);
     void ResetRequestCount(const uint256 &hash)
     {
         LOCK(cs_wallet);
@@ -864,7 +867,7 @@ public:
     void DisableTransaction(const CTransaction &tx);
 
     //! Get wallet transactions that conflict with given transaction (spend same outputs)
-    std::set<uint256> GetConflicts(const uint256& txid) const;
+    std::set<uint256> GetConflicts(const uint256& txid, bool includeEquivalent) const;
 
     //! Flush wallet (bitdb flush)
     void Flush(bool shutdown=false);

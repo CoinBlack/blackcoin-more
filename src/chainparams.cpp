@@ -20,22 +20,39 @@ using namespace std;
 
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
+    // Genesis block
 
-	CMutableTransaction txNew;
-	txNew.nTime = 1393221600;
-	txNew.vin.resize(1);
-	txNew.vout.resize(1);
-	txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-	txNew.vout[0].SetEmpty();
+    // MainNet:
 
-	CBlock genesis;
-	genesis.vtx.push_back(txNew);
-	genesis.hashPrevBlock.SetNull();
-	genesis.hashMerkleRoot = uint256S("12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90");
-	genesis.nVersion = 1;
-	genesis.nTime    = 1393221600;
-	genesis.nBits    = 0x1e0fffff;
-	genesis.nNonce   = 164482;
+    //CBlock(hash=000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1e0fffff, nNonce=164482, vtx=1, vchBlockSig=)
+    //  Coinbase(hash=12630d16a9, nTime=1393221600, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+    //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
+    //    CTxOut(empty)
+    //  vMerkleTree: 12630d16a9
+
+    // TestNet:
+
+    //CBlock(hash=0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1f00ffff, nNonce=216178, vtx=1, vchBlockSig=)
+    //  Coinbase(hash=12630d16a9, nTime=1393221600, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+    //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
+    //    CTxOut(empty)
+    //  vMerkleTree: 12630d16a9
+
+    CMutableTransaction txNew;
+    txNew.nTime = nTime;
+    txNew.vin.resize(1);
+    txNew.vout.resize(1);
+    txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+    txNew.vout[0].SetEmpty();
+
+    CBlock genesis;
+    genesis.vtx.push_back(txNew);
+    genesis.hashPrevBlock.SetNull();
+    genesis.nVersion = nVersion;
+    genesis.nTime    = nTime;
+    genesis.nBits    = nBits;
+    genesis.nNonce   = nNonce;
+    genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
     return genesis;
 }
 
@@ -43,12 +60,6 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  * Build the genesis block. Note that the output of its generation
  * transaction cannot be spent since it did not originally exist in the
  * database.
- *
- * CBlock(hash=000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1e0fffff, nNonce=164482, vtx=1, vchBlockSig=)
- *   Coinbase(hash=12630d16a9, ver=1, nTime=1393221600, vin.size=1, vout.size=1, nLockTime=0)
- *     CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
- *     CTxOut(empty)
- *   vMerkleTree: 12630d16a9
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
@@ -82,8 +93,8 @@ public:
         consensus.nTargetTimespan = 16 * 60; // 16 mins
         consensus.nTargetSpacingV1 = 60;
         consensus.nTargetSpacing = 64;
-        consensus.BIP34Height = 227931;
-        consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
+        consensus.BIP34Height = -1;
+        consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -92,10 +103,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        // Deployment of BIP68, BIP112, and BIP113.
-//        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-//        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
-//        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
+//      Deployment of BIP68, BIP112, and BIP113.
+//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
+//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
+//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
@@ -120,17 +131,6 @@ public:
         nMaxTipAge = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
-        /**
-                 * Build the genesis block. Note that the output of its generation
-                 * transaction cannot be spent since it did not originally exist in the
-                 * database.
-                 *
-                 * CBlock(hash=000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1e0fffff, nNonce=164482, vtx=1, vchBlockSig=)
-                 *   Coinbase(hash=12630d16a9, ver=1, nTime=1393221600, vin.size=1, vout.size=1, nLockTime=0)
-                 *     CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
-                 *     CTxOut(empty)
-                 *   vMerkleTree: 12630d16a9
-                 */
         const char* pszTimestamp = "20 Feb 2014 Bitcoin ATMs come to USA";
         CMutableTransaction txNew;
         txNew.nTime = 1393221600;
@@ -184,23 +184,36 @@ public:
 static CMainParams mainParams;
 
 /**
- * Testnet (v3)
+ * Testnet
  */
 class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
+        consensus.nMaxReorganizationDepth = 50;
         consensus.nMajorityEnforceBlockUpgrade = 51;
         consensus.nMajorityRejectBlockOutdated = 75;
         consensus.nMajorityWindow = 100;
-        consensus.BIP34Height = 21111;
-        consensus.BIP34Hash = uint256S("0x0000000023b3a96d3484e5abb3755c413e7d41500f8e2a5c3f0dd01299cd8ef8");
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.nTargetTimespan = 16 * 60; // 16 mins
+        consensus.nTargetSpacingV1 = 60;
+        consensus.nTargetSpacing = 64;
+        consensus.BIP34Height = -1;
+        consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = true;
-        consensus.nProtocolV1RetargetingFixedTime = 0;
-        consensus.nProtocolV2Time = 0;
-        consensus.nProtocolV3Time = 0;
+        consensus.fPowNoRetargeting = false;
+
+        consensus.nProtocolV1RetargetingFixedTime = 1395631999;
+        consensus.nProtocolV2Time = 1407053625;
+        consensus.nProtocolV3Time = 1444028400;
         consensus.nLastPOWBlock = 0x7fffffff;
+        consensus.nStakeTimestampMask = 0xf; // 15
+        consensus.nCoinbaseMaturity = 50;
+        consensus.nStakeMinConfirmations = 50;
+        consensus.nStakeMinAge = 1 * 60 * 60; // 1 hour
+
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
         pchMessageStart[2] = 0xc0;
@@ -210,15 +223,13 @@ public:
         nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1411111111, 216178, 0x1f00ffff, 2, 50 * COIN);
+        genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
-
+        assert(consensus.hashGenesisBlock == uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
+        assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("bitcoin.petertodd.org", "testnet-seed.bitcoin.petertodd.org"));
-        vSeeds.push_back(CDNSSeedData("bluematt.me", "testnet-seed.bluematt.me"));
-        vSeeds.push_back(CDNSSeedData("bitcoin.schildbach.de", "testnet-seed.bitcoin.schildbach.de"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -236,7 +247,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-			( 0, uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")),
+            ( 0, uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")),
             0,
             0,
             0
