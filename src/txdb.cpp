@@ -171,7 +171,7 @@ bool CBlockTreeDB::ReadSpentIndex(CSpentIndexKey &key, CSpentIndexValue &value) 
 }
 
 bool CBlockTreeDB::UpdateSpentIndex(const std::vector<std::pair<CSpentIndexKey, CSpentIndexValue> >&vect) {
-    CDBBatch batch(&GetObfuscateKey());
+    CDBBatch batch(*this);
     for (std::vector<std::pair<CSpentIndexKey,CSpentIndexValue> >::const_iterator it=vect.begin(); it!=vect.end(); it++) {
         if (it->second.IsNull()) {
             batch.Erase(make_pair(DB_SPENTINDEX, it->first));
@@ -183,7 +183,7 @@ bool CBlockTreeDB::UpdateSpentIndex(const std::vector<std::pair<CSpentIndexKey, 
 }
 
 bool CBlockTreeDB::UpdateAddressUnspentIndex(const std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue > >&vect) {
-	CDBBatch batch(&GetObfuscateKey());
+    CDBBatch batch(*this);
     for (std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue> >::const_iterator it=vect.begin(); it!=vect.end(); it++) {
         if (it->second.IsNull()) {
             batch.Erase(make_pair(DB_ADDRESSUNSPENTINDEX, it->first));
@@ -220,14 +220,14 @@ bool CBlockTreeDB::ReadAddressUnspentIndex(uint160 addressHash, int type,
 }
 
 bool CBlockTreeDB::WriteAddressIndex(const std::vector<std::pair<CAddressIndexKey, CAmount > >&vect) {
-    CDBBatch batch(&GetObfuscateKey());
+    CDBBatch batch(*this);
     for (std::vector<std::pair<CAddressIndexKey, CAmount> >::const_iterator it=vect.begin(); it!=vect.end(); it++)
         batch.Write(make_pair(DB_ADDRESSINDEX, it->first), it->second);
     return WriteBatch(batch);
 }
 
 bool CBlockTreeDB::EraseAddressIndex(const std::vector<std::pair<CAddressIndexKey, CAmount > >&vect) {
-    CDBBatch batch(&GetObfuscateKey());
+    CDBBatch batch(*this);
     for (std::vector<std::pair<CAddressIndexKey, CAmount> >::const_iterator it=vect.begin(); it!=vect.end(); it++)
         batch.Erase(make_pair(DB_ADDRESSINDEX, it->first));
     return WriteBatch(batch);
@@ -268,7 +268,7 @@ bool CBlockTreeDB::ReadAddressIndex(uint160 addressHash, int type,
 }
 
 bool CBlockTreeDB::WriteTimestampIndex(const CTimestampIndexKey &timestampIndex) {
-    CDBBatch batch(&GetObfuscateKey());
+    CDBBatch batch(*this);
     batch.Write(make_pair(DB_TIMESTAMPINDEX, timestampIndex), 0);
     return WriteBatch(batch);
 }
@@ -301,7 +301,7 @@ bool CBlockTreeDB::ReadTimestampIndex(const unsigned int &high, const unsigned i
 }
 
 bool CBlockTreeDB::WriteTimestampBlockIndex(const CTimestampBlockIndexKey &blockhashIndex, const CTimestampBlockIndexValue &logicalts) {
-    CDBBatch batch(&GetObfuscateKey());
+    CDBBatch batch(*this);
     batch.Write(make_pair(DB_BLOCKHASHINDEX, blockhashIndex), logicalts);
     return WriteBatch(batch);
 }
