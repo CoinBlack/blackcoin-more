@@ -28,7 +28,6 @@
 #include <stdint.h>
 
 #include <boost/assign/list_of.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <univalue.h>
 
@@ -141,7 +140,7 @@ UniValue generate(const UniValue& params, bool fHelp)
     int nHeight = 0;
     int nGenerate = params[0].get_int();
 
-    boost::shared_ptr<CReserveScript> coinbaseScript;
+    std::shared_ptr<CReserveScript> coinbaseScript;
     GetMainSignals().ScriptForMining(coinbaseScript);
 
     // If the keypool is exhausted, no script is returned at all.  Catch this.
