@@ -56,7 +56,11 @@ void CCoinsViewBacked::SetBackend(CCoinsView &viewIn) { base = &viewIn; }
 bool CCoinsViewBacked::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock) { return base->BatchWrite(mapCoins, hashBlock); }
 CCoinsViewCursor *CCoinsViewBacked::Cursor() const { return base->Cursor(); }
 
-CCoinsKeyHasher::CCoinsKeyHasher() : salt(GetRandHash()) {}
+SaltedTxidHasher::SaltedTxidHasher()
+{
+    GetRandBytes((unsigned char*)&k0, sizeof(k0));
+    GetRandBytes((unsigned char*)&k1, sizeof(k1));
+}
 
 CCoinsViewCache::CCoinsViewCache(CCoinsView *baseIn) : CCoinsViewBacked(baseIn), hasModifier(false), cachedCoinsUsage(0) { }
 
@@ -117,11 +121,17 @@ CCoinsModifier CCoinsViewCache::ModifyCoins(const uint256 &txid) {
     return CCoinsModifier(*this, ret.first, cachedCoinUsage);
 }
 
-CCoinsModifier CCoinsViewCache::ModifyNewCoins(const uint256 &txid) {
+// ModifyNewCoins has to know whether the new outputs its creating are for a
+// coinbase or not.  If they are for a coinbase, it can not mark them as fresh.
+// This is to ensure that the historical duplicate coinbases before BIP30 was
+// in effect will still be properly overwritten when spent.
+CCoinsModifier CCoinsViewCache::ModifyNewCoins(const uint256 &txid, bool coinbase) {
     assert(!hasModifier);
     std::pair<CCoinsMap::iterator, bool> ret = cacheCoins.insert(std::make_pair(txid, CCoinsCacheEntry()));
     ret.first->second.coins.Clear();
-    ret.first->second.flags = CCoinsCacheEntry::FRESH;
+    if (!coinbase) {
+        ret.first->second.flags = CCoinsCacheEntry::FRESH;
+    }
     ret.first->second.flags |= CCoinsCacheEntry::DIRTY;
     return CCoinsModifier(*this, ret.first, 0);
 }
@@ -269,7 +279,7 @@ double CCoinsViewCache::GetPriority(const CTransaction &tx, int nHeight, CAmount
         assert(coins);
         if (!coins->IsAvailable(txin.prevout.n)) continue;
         if (coins->nHeight <= nHeight) {
-            dResult += coins->vout[txin.prevout.n].nValue * (nHeight-coins->nHeight);
+            dResult += (double)(coins->vout[txin.prevout.n].nValue) * (nHeight-coins->nHeight);
             inChainInputValue += coins->vout[txin.prevout.n].nValue;
         }
     }

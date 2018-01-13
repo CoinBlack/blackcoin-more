@@ -32,7 +32,6 @@ extern CWallet* pwalletMain;
  * Settings
  */
 extern CFeeRate payTxFee;
-extern CAmount maxTxFee;
 extern CAmount nReserveBalance;
 extern CAmount nMinimumInputValue;
 extern unsigned int nTxConfirmTarget;
@@ -47,8 +46,6 @@ static const CAmount DEFAULT_TRANSACTION_FEE = 10000;
 static const CAmount DEFAULT_FALLBACK_FEE = 10000;
 //! -mintxfee default
 static const CAmount DEFAULT_TRANSACTION_MINFEE = 10000;
-//! -maxtxfee default
-static const CAmount DEFAULT_TRANSACTION_MAXFEE = 1 * COIN;
 //! minimum change amount
 static const CAmount MIN_CHANGE = CENT;
 //! Default for -spendzeroconfchange
@@ -215,6 +212,7 @@ public:
     int GetDepthInMainChain() const { const CBlockIndex *pindexRet; return GetDepthInMainChain(pindexRet); }
     bool IsInMainChain() const { const CBlockIndex *pindexRet; return GetDepthInMainChain(pindexRet) > 0; }
     int GetBlocksToMaturity() const;
+    /** Pass this transaction to the mempool. Fails if absolute fee exceeds maxTxFee. */
     bool AcceptToMemoryPool(bool fLimitFree=true, bool fRejectAbsurdFee=true);
     bool hashUnset() const { return (hashBlock.IsNull() || hashBlock == ABANDON_HASH); }
     bool isAbandoned() const { return (hashBlock == ABANDON_HASH); }
