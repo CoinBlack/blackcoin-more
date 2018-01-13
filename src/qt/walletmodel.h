@@ -199,7 +199,6 @@ public:
 
     void loadReceiveRequests(std::vector<std::string>& vReceiveRequests);
     bool saveReceiveRequest(const std::string &sAddress, const int64_t nId, const std::string &sRequest);
-    unsigned long long updateWeight();
 
     bool hdEnabled() const;
 
