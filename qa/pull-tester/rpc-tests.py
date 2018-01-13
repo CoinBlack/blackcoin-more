@@ -29,6 +29,7 @@ import subprocess
 import tempfile
 import re
 
+sys.path.append("qa/pull-tester/")
 from tests_config import *
 
 #If imported values are not defined then set to zero (or disabled)

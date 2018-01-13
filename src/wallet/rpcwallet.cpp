@@ -95,7 +95,7 @@ void WalletTxToJSON(const CWalletTx& wtx, UniValue& entry)
         conflicts.push_back(conflict.GetHex());
     entry.push_back(Pair("walletconflicts", conflicts));
     UniValue respends;
-    BOOST_FOREACH(const uint256& respend, wtx.GetConflicts())
+    BOOST_FOREACH(const uint256& respend, wtx.GetConflicts(false))
         respends.push_back(respend.GetHex());
     entry.push_back(Pair("respendsobserved", respends));
     entry.push_back(Pair("time", wtx.GetTxTime()));
@@ -2525,7 +2525,7 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
     if (origTx.vout.size() == 0)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "TX must have at least one output");
 
-    if (changePosition != -1 && (changePosition < 0 || changePosition > origTx.vout.size()))
+    if (changePosition != -1 && (changePosition < 0 || (unsigned int)changePosition > origTx.vout.size()))
         throw JSONRPCError(RPC_INVALID_PARAMETER, "changePosition out of bounds");
 
     CMutableTransaction tx(origTx);
