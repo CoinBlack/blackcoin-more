@@ -76,8 +76,6 @@ public Q_SLOTS:
 
     void lockWallet();
 
-    unsigned long long updateWeight();
-
     /** Show used sending addresses */
     void usedSendingAddresses();
     /** Show used receiving addresses */

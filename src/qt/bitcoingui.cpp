@@ -16,10 +16,13 @@
 #include "platformstyle.h"
 #include "rpcconsole.h"
 #include "utilitydialog.h"
+#include "validation.h"
+#include "rpc/server.h"
 
 #ifdef ENABLE_WALLET
 #include "walletframe.h"
 #include "walletmodel.h"
+#include "wallet/wallet.h"
 #endif // ENABLE_WALLET
 
 #ifdef Q_OS_MAC
@@ -222,9 +225,8 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     {
         QTimer *timerStakingIcon = new QTimer(labelStakingIcon);
         connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(updateStakingIcon()));
+		QTimer::singleShot(1000, this, SLOT(updateStakingIcon()));
         timerStakingIcon->start(30 * 1000);
-
-        updateStakingIcon();
     }
 
 
@@ -1090,10 +1092,29 @@ void BitcoinGUI::toggleHidden()
     showNormalIfMinimized(true);
 }
 
+void BitcoinGUI::updateWeight()
+{
+    if(!pwalletMain)
+        return;
+
+    TRY_LOCK(cs_main, lockMain);
+    if (!lockMain)
+        return;
+
+    TRY_LOCK(pwalletMain->cs_wallet, lockWallet);
+    if (!lockWallet)
+        return;
+
+#ifdef ENABLE_WALLET
+    if (pwalletMain)
+    nWeight = pwalletMain->GetStakeWeight();
+#endif
+}
+
+
 void BitcoinGUI::updateStakingIcon()
 {
-	if (walletFrame)
-		nWeight = walletFrame->updateWeight();
+	updateWeight();
 
     if (nLastCoinStakeSearchInterval && nWeight)
     {
@@ -1133,6 +1154,8 @@ void BitcoinGUI::updateStakingIcon()
             labelStakingIcon->setToolTip(tr("Not staking because wallet is syncing"));
         else if (!nWeight)
             labelStakingIcon->setToolTip(tr("Not staking because you don't have mature coins"));
+		else if (pwalletMain && pwalletMain->IsLocked())
+            labelStakingIcon->setToolTip(tr("Not staking because wallet is locked"));
         else
             labelStakingIcon->setToolTip(tr("Not staking"));
     }
