@@ -30,6 +30,7 @@ class WalletFrame;
 class WalletModel;
 class HelpMessageDialog;
 
+class Config;
 class CWallet;
 
 QT_BEGIN_NAMESPACE
@@ -50,7 +51,10 @@ public:
     static const QString DEFAULT_WALLET;
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
+    explicit BitcoinGUI(const Config *,
+        const PlatformStyle *platformStyle,
+        const NetworkStyle *networkStyle,
+        QWidget *parent = 0);
     ~BitcoinGUI();
 
     /** Set the client model.
@@ -129,6 +133,7 @@ private:
     uint64_t nWeight;
 
     const PlatformStyle *platformStyle;
+    const Config *cfg;
 
     /** Create the main UI actions. */
     void createActions();
