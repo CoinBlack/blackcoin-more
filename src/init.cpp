@@ -15,6 +15,7 @@
 #include "chainparams.h"
 #include "checkpoints.h"
 #include "compat/sanity.h"
+#include "config.h"
 #include "consensus/validation.h"
 #include "httpserver.h"
 #include "httprpc.h"
@@ -768,7 +769,7 @@ void InitLogging()
 /** Initialize bitcoin.
  *  @pre Parameters should be parsed and config file should be read.
  */
-bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
+bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& scheduler)
 {
     // ********************************************************* Step 1: setup
 #ifdef _MSC_VER
@@ -1377,6 +1378,11 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     fFeeEstimatesInitialized = true;
 
     // ********************************************************* Step 8: load wallet
+
+    // Encoded addresses using cashaddr instead of base58
+    // Activates by default on Feb, 15, 2018
+    config.SetCashAddrEncoding(GetBoolArg("-usecashaddr", GetAdjustedTime() > 1518652800));
+
 #ifdef ENABLE_WALLET
     if (fDisableWallet) {
         pwalletMain = NULL;

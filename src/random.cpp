@@ -93,7 +93,7 @@ static void RandAddSeedPerfmon()
 }
 
 /** Get 32 bytes of system entropy. */
-static void GetOSRand(unsigned char *ent32)
+void GetOSRand(unsigned char *ent32)
 {
 #ifdef WIN32
     HCRYPTPROV hProvider;
@@ -195,5 +195,28 @@ void seed_insecure_rand(bool fDeterministic)
             GetRandBytes((unsigned char*)&tmp, 4);
         } while (tmp == 0 || tmp == 0x464fffffU);
         insecure_rand_Rw = tmp;
+    }
+}
+
+FastRandomContext::FastRandomContext(bool fDeterministic)
+{
+    // The seed values have some unlikely fixed points which we avoid.
+    if (fDeterministic)
+    {
+        Rz = Rw = 11;
+    }
+    else
+    {
+        uint32_t tmp;
+        do
+        {
+            GetRandBytes((unsigned char *)&tmp, 4);
+        } while (tmp == 0 || tmp == 0x9068ffffU);
+        Rz = tmp;
+        do
+        {
+            GetRandBytes((unsigned char *)&tmp, 4);
+        } while (tmp == 0 || tmp == 0x464fffffU);
+        Rw = tmp;
     }
 }
