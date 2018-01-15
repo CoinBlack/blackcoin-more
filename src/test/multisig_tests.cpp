@@ -2,6 +2,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "base58.h" // Freeze CBitcoinAddress
+#include "chain.h" // Freeze CBlockIndex
+#include "dstencode.h"
 #include "key.h"
 #include "keystore.h"
 #include "policy/policy.h"
@@ -305,6 +308,84 @@ BOOST_AUTO_TEST_CASE(multisig_Sign)
         BOOST_CHECK_MESSAGE(SignSignature(keystore, txFrom, txTo[i], 0), strprintf("SignSignature %d", i));
     }
 }
+
+/*
+#ifdef ENABLE_WALLET
+BOOST_AUTO_TEST_CASE(cltv_freeze)
+{
+    CKey key[4];
+    for (int i = 0; i < 2; i++)
+        key[i].MakeNewKey(true);
+
+    // Create and unpack a CLTV script
+    vector<valtype> solutions;
+    txnouttype whichType;
+    vector<CTxDestination> addresses;
+    int nRequiredReturn;
+    txnouttype type = TX_CLTV;
+
+    // check cltv solve for block
+    CPubKey newKey1 = ToByteVector(key[0].GetPubKey());
+    CTxDestination newAddr1 = CTxDestination(newKey1.GetID());
+    CScriptNum nFreezeLockTime(50000);
+    CScript s1 = GetScriptForFreeze(nFreezeLockTime, newKey1);
+
+    BOOST_CHECK(Solver(s1, whichType, solutions));
+    BOOST_CHECK(whichType == TX_CLTV);
+    BOOST_CHECK(solutions.size() == 2);
+    BOOST_CHECK(CScriptNum(solutions[0], false) == nFreezeLockTime);
+
+    nRequiredReturn = 0;
+    ExtractDestinations(s1, type, addresses, nRequiredReturn);
+
+    for (const CTxDestination &addr : addresses)
+        BOOST_CHECK(EncodeDestination(newAddr1) == EncodeDestination(addr));
+    BOOST_CHECK(nRequiredReturn == 1);
+
+
+    // check cltv solve for datetime
+    CPubKey newKey2 = ToByteVector(key[0].GetPubKey());
+    CTxDestination newAddr2 = CTxDestination(newKey2.GetID());
+    nFreezeLockTime = CScriptNum(1482255731);
+    CScript s2 = GetScriptForFreeze(nFreezeLockTime, newKey2);
+
+    BOOST_CHECK(Solver(s2, whichType, solutions));
+    BOOST_CHECK(whichType == TX_CLTV);
+    BOOST_CHECK(solutions.size() == 2);
+    BOOST_CHECK(CScriptNum(solutions[0], false) == nFreezeLockTime);
+
+    nRequiredReturn = 0;
+    ExtractDestinations(s2, type, addresses, nRequiredReturn);
+
+    for (const CTxDestination &addr : addresses)
+        BOOST_CHECK(newAddr2 == addr);
+
+    BOOST_CHECK(nRequiredReturn == 1);
+}
+
+BOOST_AUTO_TEST_CASE(opreturn_send)
+{
+    CKey key[4];
+    for (int i = 0; i < 2; i++)
+        key[i].MakeNewKey(true);
+
+    CBasicKeyStore keystore;
+
+    // Create and unpack a CLTV script
+    vector<valtype> solutions;
+    txnouttype whichType;
+    vector<CTxDestination> addresses;
+
+    string inMsg = "hello world", outMsg = "";
+    CScript s = GetScriptLabelPublic(inMsg);
+
+    outMsg = getLabelPublic(s);
+    BOOST_CHECK(inMsg == outMsg);
+    BOOST_CHECK(Solver(s, whichType, solutions));
+    BOOST_CHECK(whichType == TX_LABELPUBLIC);
+}
+#endif
+*/
 
 
 BOOST_AUTO_TEST_SUITE_END()

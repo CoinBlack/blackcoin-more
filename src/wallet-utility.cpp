@@ -5,6 +5,7 @@
 #include "wallet/walletdb.h"
 #include "util.h"
 #include "base58.h"
+#include "dstencode.h"
 #include "wallet/crypter.h"
 #include <boost/foreach.hpp>
 
@@ -65,7 +66,7 @@ std::string WalletUtilityDB::getAddress(CDataStream ssKey)
     CPubKey vchPubKey;
     ssKey >> vchPubKey;
     CKeyID id = vchPubKey.GetID();
-    std::string strAddr = CBitcoinAddress(id).ToString();
+    std::string strAddr = EncodeDestination(id);
 
     return strAddr;
 }

@@ -10,6 +10,7 @@
 
 #include "chainparams.h"
 #include "clientmodel.h"
+#include "config.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 #include "intro.h"
@@ -81,10 +82,10 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 Q_DECLARE_METATYPE(bool*)
 Q_DECLARE_METATYPE(CAmount)
 
-static void InitMessage(const std::string &message)
-{
-    LogPrintf("init message: %s\n", message);
-}
+// Config is non-copyable so we can only register pointers to it
+Q_DECLARE_METATYPE(Config *)
+
+static void InitMessage(const std::string &message) { LogPrintf("init message: %s\n", message); }
 
 /*
    Translate string to current locale using Qt.
@@ -173,7 +174,7 @@ public:
     explicit BitcoinCore();
 
 public Q_SLOTS:
-    void initialize();
+    void initialize(Config *config);
     void shutdown();
 
 Q_SIGNALS:
@@ -206,12 +207,12 @@ public:
     /// Create options model
     void createOptionsModel(bool resetSettings);
     /// Create main window
-    void createWindow(const NetworkStyle *networkStyle);
+    void createWindow(const Config *, const NetworkStyle *networkStyle);
     /// Create splash screen
     void createSplashScreen(const NetworkStyle *networkStyle);
 
     /// Request core initialization
-    void requestInitialize();
+    void requestInitialize(Config &config);
     /// Request core shutdown
     void requestShutdown();
 
@@ -228,7 +229,7 @@ public Q_SLOTS:
     void handleRunawayException(const QString &message);
 
 Q_SIGNALS:
-    void requestedInitialize();
+    void requestedInitialize(Config *config);
     void requestedShutdown();
     void stopThread();
     void splashFinished(QWidget *window);
@@ -262,12 +263,13 @@ void BitcoinCore::handleRunawayException(const std::exception *e)
     Q_EMIT runawayException(QString::fromStdString(strMiscWarning));
 }
 
-void BitcoinCore::initialize()
+void BitcoinCore::initialize(Config *cfg)
 {
+    Config &config(*cfg);
     try
     {
         qDebug() << __func__ << ": Running AppInit2 in thread";
-        int rv = AppInit2(threadGroup, scheduler);
+        int rv = AppInit2(config, threadGroup, scheduler);
         Q_EMIT initializeResult(rv);
     } catch (const std::exception& e) {
         handleRunawayException(&e);
@@ -353,9 +355,9 @@ void BitcoinApplication::createOptionsModel(bool resetSettings)
     optionsModel = new OptionsModel(NULL, resetSettings);
 }
 
-void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
+void BitcoinApplication::createWindow(const Config *config, const NetworkStyle *networkStyle)
 {
-    window = new BitcoinGUI(platformStyle, networkStyle, 0);
+    window = new BitcoinGUI(config, platformStyle, networkStyle, 0);
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, SIGNAL(timeout()), window, SLOT(detectShutdown()));
@@ -384,7 +386,7 @@ void BitcoinApplication::startThread()
     connect(executor, SIGNAL(initializeResult(int)), this, SLOT(initializeResult(int)));
     connect(executor, SIGNAL(shutdownResult(int)), this, SLOT(shutdownResult(int)));
     connect(executor, SIGNAL(runawayException(QString)), this, SLOT(handleRunawayException(QString)));
-    connect(this, SIGNAL(requestedInitialize()), executor, SLOT(initialize()));
+    connect(this, SIGNAL(requestedInitialize(Config *)), executor, SLOT(initialize(Config *)));
     connect(this, SIGNAL(requestedShutdown()), executor, SLOT(shutdown()));
     /*  make sure executor object is deleted in its own thread */
     connect(this, SIGNAL(stopThread()), executor, SLOT(deleteLater()));
@@ -399,11 +401,11 @@ void BitcoinApplication::parameterSetup()
     InitParameterInteraction();
 }
 
-void BitcoinApplication::requestInitialize()
+void BitcoinApplication::requestInitialize(Config &config)
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
-    Q_EMIT requestedInitialize();
+    Q_EMIT requestedInitialize(&config);
 }
 
 void BitcoinApplication::requestShutdown()
@@ -472,7 +474,7 @@ void BitcoinApplication::initializeResult(int retval)
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // bitcoin: URIs or payment requests:
+        // blackcoin: URIs or payment requests:
         connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
                          window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
         connect(window, SIGNAL(receivedURI(QString)),
@@ -547,7 +549,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType< bool* >();
     //   Need to pass name here as CAmount is a typedef (see http://qt-project.org/doc/qt-5/qmetatype.html#qRegisterMetaType)
     //   IMPORTANT if it is no longer a typedef use the normal variant above
-    qRegisterMetaType< CAmount >("CAmount");
+    qRegisterMetaType<CAmount>("CAmount");
+    // Config is non-copyable so we can't register as a non pointer type
+    qRegisterMetaType<Config *>();
 
     /// 3. Application identification
     // must be set before OptionsModel is initialized or translations are loaded,
@@ -629,7 +633,8 @@ int main(int argc, char *argv[])
         exit(0);
 
     // Start up the payment server early, too, so impatient users that click on
-    // bitcoin: links repeatedly have their payment requests routed to this process:
+    // blackcoin: links repeatedly have their payment requests routed to this
+    // process:
     app.createPaymentServer();
 #endif
 
@@ -658,10 +663,13 @@ int main(int argc, char *argv[])
     if (GetBoolArg("-splash", DEFAULT_SPLASHSCREEN) && !GetBoolArg("-min", false))
         app.createSplashScreen(networkStyle.data());
 
+    // Get global config
+    Config &config = const_cast<Config &>(GetConfig());
+
     try
     {
-        app.createWindow(networkStyle.data());
-        app.requestInitialize();
+        app.createWindow(&config, networkStyle.data());
+        app.requestInitialize(config);
 #if defined(Q_OS_WIN) && QT_VERSION >= 0x050000
         WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("Bitcoin Core didn't yet exit safely..."), (HWND)app.getMainWinId());
 #endif
