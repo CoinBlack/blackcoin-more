@@ -338,6 +338,8 @@ struct CMutableTransaction
      * fly, as opposed to GetHash() in CTransaction, which uses a cached result.
      */
     uint256 GetHash() const;
+
+    uint256 GetNormalizedHash() const;
 };
 
 #endif // BITCOIN_PRIMITIVES_TRANSACTION_H

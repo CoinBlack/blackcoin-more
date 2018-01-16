@@ -676,6 +676,21 @@ static void TxInErrorToJSON(const CTxIn& txin, UniValue& vErrorsRet, const std::
     vErrorsRet.push_back(entry);
 }
 
+UniValue getnormalizedtxid(const UniValue& params, bool fHelp)
+{
+	if (fHelp || params.size() != 1)
+	        throw runtime_error(
+	        		            "getnormalizedtxid <hex string>\n"
+	        		            "Return the normalized transaction ID.");
+	// parse hex string from parameter
+	CTransaction tx;
+	if (!DecodeHexTx(tx, params[0].get_str()))
+		throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
+
+	uint256 hashNormalized = CMutableTransaction(tx).GetNormalizedHash();
+	return hashNormalized.GetHex();
+}
+
 UniValue signrawtransaction(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 4)
@@ -1003,6 +1018,7 @@ static const CRPCCommand commands[] =
     { "rawtransactions",    "decodescript",           &decodescript,           true  },
     { "rawtransactions",    "sendrawtransaction",     &sendrawtransaction,     false },
     { "rawtransactions",    "signrawtransaction",     &signrawtransaction,     false }, /* uses wallet if enabled */
+	{ "rawtransactions",    "getnormalizedtxid",      &getnormalizedtxid,      true },
 
     { "blockchain",         "gettxoutproof",          &gettxoutproof,          true  },
     { "blockchain",         "verifytxoutproof",       &verifytxoutproof,       true  },

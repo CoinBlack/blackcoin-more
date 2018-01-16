@@ -8,6 +8,7 @@
 #include "hash.h"
 #include "tinyformat.h"
 #include "utilstrencodings.h"
+#include "script/interpreter.h"
 
 std::string COutPoint::ToString() const
 {
@@ -66,6 +67,11 @@ CMutableTransaction::CMutableTransaction(const CTransaction& tx) : nVersion(tx.n
 uint256 CMutableTransaction::GetHash() const
 {
     return SerializeHash(*this);
+}
+
+uint256 CMutableTransaction::GetNormalizedHash() const
+{
+    return SignatureHash(CScript(), *this, 0, SIGHASH_ALL);
 }
 
 void CTransaction::UpdateHash() const
