@@ -875,7 +875,6 @@ bool GetStartOnSystemStartup()
     
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
     LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitcoinAppUrl);
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
 
     CFRelease(bitcoinAppUrl);
     return !!foundItem; // return boolified object
@@ -891,7 +890,6 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
     LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitcoinAppUrl);
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
 
     if(fAutoStart && !foundItem) {
         // add bitcoin app to startup item list
