@@ -6,13 +6,13 @@ https://blackcoin.co
 What is Blackcoin Lore?
 ----------------
 
-Blackcoin is a decentralised digital currency with near-instant transaction speeds and i
-negligible transaction fees build upon Proof of Stake 3.0 as introduced by the Blackcoin development team. 
+Blackcoin is a decentralised digital currency with near-instant transaction speeds and
+negligible transaction fees built upon Proof of Stake 3.0 as introduced by the Blackcoin development team. 
 
 Lore takes Blackcoin to the next level by building upon Bitcoin Core 0.12 to offer performance enhancements,
 wider compatibility with third party services and a more advanced base.
 
-For downloads vist: https://https://github.com/janko33bd/bitcoin/releases
+For downloads vist: https://github.com/janko33bd/bitcoin/releases
 
 License
 -------
