@@ -1,43 +1,35 @@
-Bitcoin Core integration/staging tree
+Blackcoin Lore
 =====================================
 
-[![Build Status](https://travis-ci.org/bitcoin/bitcoin.svg?branch=master)](https://travis-ci.org/bitcoin/bitcoin)
+https://blackcoin.co
 
-https://bitcoincore.org
-
-What is Bitcoin?
+What is Blackcoin Lore?
 ----------------
 
-Bitcoin is an experimental new digital currency that enables instant payments to
-anyone, anywhere in the world. Bitcoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Bitcoin Core is the name of open source
-software which enables the use of this currency.
+Blackcoin is a decentralised digital currency with near-instant transaction speeds and
+negligible transaction fees built upon Proof of Stake 3.0 as introduced by the Blackcoin development team. 
 
-For more information, as well as an immediately useable, binary version of
-the Bitcoin Core software, see https://bitcoin.org/en/download, or read the
-[original whitepaper](https://bitcoincore.org/bitcoin.pdf).
+Lore takes Blackcoin to the next level by building upon Bitcoin Core 0.12 to offer performance enhancements,
+wider compatibility with third party services and a more advanced base.
+
+For downloads vist: https://github.com/janko33bd/bitcoin/releases
 
 License
 -------
 
-Bitcoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+Blackcoin Lore is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
 Development Process
 -------------------
 
-The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
-regularly to indicate new official, stable release versions of Bitcoin Core.
+The `Blackcoin-Lore` branch is regularly built and tested, but is not guaranteed to be
+completely stable. [Tags](https://github.com/janko33bd/bitcoin/tags) are created
+regularly to indicate new official, stable release versions of Blackcoin Lore.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The developer [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
-should be used to discuss complicated or controversial changes before working
-on a patch set.
-
-Developer IRC can be found on Freenode at #bitcoin-core-dev.
+The best place to get started is to join the Development channel on Gitter: https://gitter.im/Blackcoin\_Hub/Development
 
 Testing
 -------
@@ -57,26 +49,9 @@ There are also [regression and integration tests](/qa) of the RPC interface, wri
 in Python, that are run automatically on the build server.
 These tests can be run with: `qa/pull-tester/rpc-tests.py`
 
-The Travis CI system makes sure that every pull request is built for Windows
-and Linux, OSX, and that unit and sanity tests are automatically run.
-
 ### Manual Quality Assurance (QA) Testing
 
 Changes should be tested by somebody other than the developer who wrote the
 code. This is especially important for large or high-risk changes. It is useful
 to add a test plan to the pull request description if testing the changes is
 not straightforward.
-
-Translations
-------------
-
-Changes to translations as well as new translations can be submitted to
-[Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
-
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
-
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
-
-Translators should also subscribe to the [mailing list](https://groups.google.com/forum/#!forum/bitcoin-translators).
