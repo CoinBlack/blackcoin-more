@@ -661,31 +661,6 @@ bool CWallet::SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<co
     return true;
 }
 
-bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, int64_t nTime, const COutPoint& prevout, int64_t* pBlockTime)
-{
-    uint256 hashProofOfStake, targetProofOfStake;
-
-    CTransaction txPrev;
-    CDiskTxPos txindex;
-    if (!ReadFromDisk(txPrev, txindex, *pblocktree, prevout))
-        return false;
-
-    // Read block header
-    CBlock block;
-    const CDiskBlockPos& pos = CDiskBlockPos(txindex.nFile, txindex.nPos);
-    if (!ReadBlockFromDisk(block, pos, Params().GetConsensus()))
-        return false;
-
-    int nDepth;
-    if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, Params().GetConsensus().nStakeMinConfirmations - 1, nDepth))
-        return false;
-
-    if (pBlockTime)
-        *pBlockTime = block.GetBlockTime();
-
-    return CheckStakeKernelHash(pindexPrev, nBits, new CCoins(txPrev, pindexPrev->nHeight), prevout, nTime);
-}
-
 // miner's coin stake reward
 int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
 {
@@ -735,6 +710,21 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     if (setCoins.empty())
     	return false;
 
+    static std::map<COutPoint, CStakeCache> stakeCache;
+    if(stakeCache.size() > setCoins.size() + 100){
+		//Determining if the cache is still valid is harder than just clearing it when it gets too big, so instead just clear it
+		//when it has more than 100 entries more than the actual setCoins.
+		stakeCache.clear();
+    }
+    if(GetBoolArg("-stakecache", DEFAULT_STAKE_CACHE)) {
+    	BOOST_FOREACH(const PAIRTYPE(const CWalletTx*, unsigned int)& pcoin, setCoins)
+    	{
+    		boost::this_thread::interruption_point();
+    		COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
+    		CacheKernel(stakeCache, prevoutStake); //this will do a 2 disk loads per op
+    	}
+
+    }
 
     int64_t nCredit = 0;
     CScript scriptPubKeyKernel;
@@ -748,9 +738,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             // Search backward in time from the given txNew timestamp
             // Search nSearchInterval seconds back up to nMaxStakeSearchInterval
             COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
-            int64_t nBlockTime;
+            uint32_t nBlockTime;
             //LogPrintf("looking for coinstake \n");
-            if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake, &nBlockTime))
+            if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake, &nBlockTime, stakeCache))
             {
                 // Found a kernel
                 LogPrint("coinstake", "CreateCoinStake : kernel found\n");

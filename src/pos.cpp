@@ -154,3 +154,62 @@ bool VerifySignature(const CTransaction& txFrom, const CTransaction& txTo, unsig
 
     return VerifyScript(txin.scriptSig, txout.scriptPubKey, flags, TransactionSignatureChecker(&txTo, nIn),  NULL);
 }
+
+bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTimeBlock, const COutPoint& prevout, uint32_t* pBlockTime){
+    std::map<COutPoint, CStakeCache> tmp;
+    return CheckKernel(pindexPrev, nBits, nTimeBlock, prevout, pBlockTime, tmp);
+}
+
+bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, const COutPoint& prevout, uint32_t* pBlockTime, const std::map<COutPoint, CStakeCache>& cache)
+{
+    uint256 hashProofOfStake, targetProofOfStake;
+    auto it=cache.find(prevout);
+
+    if(it == cache.end()) {
+    	CTransaction txPrev;
+		CDiskTxPos txindex;
+		if (!ReadFromDisk(txPrev, txindex, *pblocktree, prevout))
+			return false;
+
+		// Read block header
+		CBlock block;
+		const CDiskBlockPos& pos = CDiskBlockPos(txindex.nFile, txindex.nPos);
+		if (!ReadBlockFromDisk(block, pos, Params().GetConsensus()))
+			return false;
+
+		int nDepth;
+		if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, Params().GetConsensus().nStakeMinConfirmations - 1, nDepth))
+			return false;
+
+		if (pBlockTime)
+			*pBlockTime = block.GetBlockTime();
+
+		return CheckStakeKernelHash(pindexPrev, nBits, new CCoins(txPrev, pindexPrev->nHeight), prevout, nTime);
+    }else{
+    	//found in cache
+    	const CStakeCache& stake = it->second;
+    	if (pBlockTime)
+    		*pBlockTime = stake.blockFrom.GetBlockTime();
+    	return CheckStakeKernelHash(pindexPrev, nBits, new CCoins(stake.txPrev, pindexPrev->nHeight), prevout, nTime);
+    }
+
+}
+
+void CacheKernel(std::map<COutPoint, CStakeCache>& cache, const COutPoint& prevout){
+    if(cache.find(prevout) != cache.end()){
+        //already in cache
+        return;
+    }
+    CTransaction txPrev;
+    CDiskTxPos txindex;
+    if (!ReadFromDisk(txPrev, txindex, *pblocktree, prevout))
+        return;
+    // Read block
+    CBlock block;
+    const CDiskBlockPos& pos = CDiskBlockPos(txindex.nFile, txindex.nPos);
+    if (!ReadBlockFromDisk(block, pos, Params().GetConsensus()))
+        return;
+    CStakeCache c(block, txindex, txPrev);
+    cache.insert({prevout, c});
+}
+

@@ -67,7 +67,7 @@ isminetype IsMine(const CKeyStore &keystore, const CScript& scriptPubKey)
         CScript subscript;
         if (keystore.GetCScript(scriptID, subscript)) {
             isminetype ret = IsMine(keystore, subscript);
-            if (ret == ISMINE_SPENDABLE)
+            if (ret == ISMINE_SPENDABLE || ret == ISMINE_WATCH_SOLVABLE || ret == ISMINE_NO)
                 return ret;
         }
         break;
@@ -84,6 +84,9 @@ isminetype IsMine(const CKeyStore &keystore, const CScript& scriptPubKey)
             return ISMINE_SPENDABLE;
         break;
     }
+
+    default:
+    	break;
     }
 
     if (keystore.HaveWatchOnly(scriptPubKey)) {
