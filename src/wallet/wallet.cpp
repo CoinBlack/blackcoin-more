@@ -1192,7 +1192,7 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
         // Notifications for existing transactions that now have conflicts with this one
         if (fInsertedNew)
         {
-            BOOST_FOREACH(const uint256& conflictHash, wtxIn.GetConflicts())
+            BOOST_FOREACH(const uint256& conflictHash, wtxIn.GetConflicts(false))
             {
                 CWalletTx& txConflict = mapWallet[conflictHash];
                 NotifyTransactionChanged(this, conflictHash, CT_UPDATED); //Updates UI table
