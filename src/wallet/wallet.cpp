@@ -1815,8 +1815,7 @@ void CWallet::ReacceptWalletTransactions()
         assert(wtx.GetHash() == wtxid);
 
         int nDepth = wtx.GetDepthInMainChain();
-
-        if (!wtx.IsCoinBase() && !wtx.IsCoinStake() && (nDepth == 0 && !wtx.isAbandoned() && (IsMine(wtx) || IsFromMe(wtx)))) {
+		if (!(wtx.IsCoinBase() || wtx.IsCoinStake()) && (nDepth == 0 && !wtx.isAbandoned()) && (IsMine(wtx) || IsFromMe(wtx))){
             mapSorted.insert(std::make_pair(wtx.nOrderPos, &wtx));
         }
     }
