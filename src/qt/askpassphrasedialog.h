@@ -23,6 +23,7 @@ public:
     enum Mode {
         Encrypt,    /**< Ask passphrase twice and encrypt */
         Unlock,     /**< Ask passphrase and unlock */
+		UnlockStaking,  /**< Ask passphrase and unlock staking only */
         ChangePass, /**< Ask old passphrase + new passphrase twice */
         Decrypt,     /**< Ask passphrase and decrypt wallet */
     };
