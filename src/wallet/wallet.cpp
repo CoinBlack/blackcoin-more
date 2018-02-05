@@ -1197,9 +1197,17 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
                 CWalletTx& txConflict = mapWallet[conflictHash];
                 NotifyTransactionChanged(this, conflictHash, CT_UPDATED); //Updates UI table
                 if (IsFromMe(txConflict) || IsMine(txConflict))
-                {
-                    NotifyTransactionChanged(this, conflictHash, CT_GOT_CONFLICT);  //Throws dialog
-                }
+			    {
+				   // external respend notify
+				   std::string strCmd = GetArg("-respendnotify", "");
+				   if (!strCmd.empty())
+				   {
+					   NotifyTransactionChanged(this, conflictHash, CT_GOT_CONFLICT);  //Throws dialog
+					   boost::replace_all(strCmd, "%s", wtxIn.GetHash().GetHex());
+					   boost::replace_all(strCmd, "%t", conflictHash.GetHex());
+					   boost::thread t(runCommand, strCmd); // thread runs free
+				   }
+               }
             }
         }
     
@@ -1209,15 +1217,6 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
         if ( !strCmd.empty())
         {
             boost::replace_all(strCmd, "%s", wtxIn.GetHash().GetHex());
-            boost::thread t(runCommand, strCmd); // thread runs free
-        }
-
-        // external respend notify
-        std::string strCmdRespend = GetArg("-respendnotify", "");
-        if (!strCmdRespend.empty())
-        {
-            boost::replace_all(strCmd, "%s", wtxIn.GetHash().GetHex());
-            boost::replace_all(strCmd, "%t", hash.GetHex());
             boost::thread t(runCommand, strCmd); // thread runs free
         }
 

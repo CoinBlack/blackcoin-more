@@ -241,7 +241,7 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
         if (status.depth < 0)
         {
             status.status = TransactionStatus::Conflicted;
-            status.hasConflicting = !(wtx.GetConflicts(false).empty());
+            status.hasConflicting = !(wtx.GetConflicts().empty());
         }
         else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
         {
@@ -250,7 +250,7 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
         else if (status.depth == 0)
         {
             status.status = TransactionStatus::Unconfirmed;
-            status.hasConflicting = !(wtx.GetConflicts(false).empty());
+            status.hasConflicting = !(wtx.GetConflicts().empty());
             if (wtx.isAbandoned())
                 status.status = TransactionStatus::Abandoned;
         }
