@@ -16,6 +16,7 @@ WALLET_UTILITY_BIN=$(top_builddir)/src/wallet-utility$(EXEEXT)
 BITCOIN_WIN_INSTALLER=$(PACKAGE)-$(PACKAGE_VERSION)-win$(WINDOWS_BITS)-setup$(EXEEXT)
 
 OSX_APP=Lore-Qt.app
+OSX_VOLNAME =Blackcoin-Lore.dmg
 OSX_DMG=Blackcoin-Lore.dmg
 OSX_BACKGROUND_IMAGE=background.tiff
 OSX_DSSTORE_GEN=$(top_srcdir)/contrib/macdeploy/custom_dsstore.py
