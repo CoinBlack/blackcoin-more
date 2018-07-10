@@ -1,7 +1,7 @@
 Blackcoin Lore
 =====================================
 
-https://blackcoin.co
+https://blackcoin.org
 
 What is Blackcoin Lore?
 ----------------
