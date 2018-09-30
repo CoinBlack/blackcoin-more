@@ -119,10 +119,12 @@ void SendCoinsEntry::clear()
     updateDisplayUnit();
 }
 
+/*
 void SendCoinsEntry::checkSubtractFeeFromAmount()
 {
     ui->checkboxSubtractFeeFromAmount->setChecked(true);
 }
+*/
 
 void SendCoinsEntry::deleteClicked()
 {

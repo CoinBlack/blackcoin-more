@@ -49,7 +49,7 @@ public:
 
 public Q_SLOTS:
     void clear();
-    void checkSubtractFeeFromAmount();
+    // void checkSubtractFeeFromAmount();
 
 Q_SIGNALS:
     void removeEntry(SendCoinsEntry *entry);
