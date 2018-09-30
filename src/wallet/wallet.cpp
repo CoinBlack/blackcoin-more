@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// Stake cache by Qtum
+// Copyright (c) 2016-2018 The Qtum developers
+
 #include "wallet/wallet.h"
 
 #include "chain.h"

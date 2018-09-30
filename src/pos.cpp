@@ -1,7 +1,10 @@
-// Copyright (c) 2014-2016 The BlackCoin Core developers
-// Copyright (c) 2012-2013 The PPCoin developers
+// Copyright (c) 2014-2018 The BlackCoin Developers
+// Copyright (c) 2011-2013 The PPCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+// Stake cache by Qtum
+// Copyright (c) 2016-2018 The Qtum developers
 
 #include "pos.h"
 
@@ -15,7 +18,6 @@
 #include "primitives/transaction.h"
 #include <stdio.h>
 #include "util.h"
-
 
 // Stake Modifier (hash modifier of proof-of-stake):
 // The purpose of stake modifier is to prevent a txout (coin) owner from
