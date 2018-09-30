@@ -273,10 +273,10 @@ UniValue stop(const UniValue& params, bool fHelp)
     return "Blackcoin server stopping";
 }
 
-UniValue uptime(const JSONRPCRequest& jsonRequest)
+UniValue uptime(const UniValue& params, bool fHelp)
 {
-    if (jsonRequest.fHelp || jsonRequest.params.size() > 1)
-        throw std::runtime_error(
+    if (fHelp || params.size() > 1)
+        throw runtime_error(
                 "uptime\n"
                         "\nReturns the total uptime of the server.\n"
                         "\nResult:\n"
