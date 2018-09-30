@@ -585,7 +585,7 @@ void SendCoinsDialog::useAvailableBalance(SendCoinsEntry* entry)
     }
 
     if (amount > 0) {
-      // entry->checkSubtractFeeFromAmount();
+      entry->checkSubtractFeeFromAmount();
       entry->setAmount(amount);
     } else {
       entry->setAmount(0);
