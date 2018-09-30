@@ -430,9 +430,6 @@ void BitcoinApplication::requestShutdown()
     delete clientModel;
     clientModel = 0;
 
-    // Show a simple window indicating shutdown status
-    ShutdownWindow::showShutdownWindow(window);
-
     // Request shutdown from core thread
     Q_EMIT requestedShutdown();
 }
