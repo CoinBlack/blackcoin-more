@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Упозорење: Ако се ваш новчаник шифрује а потом изгубите лозинкзу, ви ћете &lt;b&gt;ИЗГУБИТИ СВЕ BITCOIN-Е&lt;/b&gt;!</translation>
+        <translation>Упозорење: Ако се ваш новчаник шифрује а потом изгубите лозинкзу, ви ћете &lt;b&gt;ИЗГУБИТИ СВЕ BLACKCOIN-Е&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -191,7 +191,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Пошаљите новац на bitcoin адресу</translation>
+        <translation>Пошаљите новац на blackcoin адресу</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -223,7 +223,7 @@
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>O Bitcoin Coru</translation>
+        <translation>O Blackcoin More</translation>
     </message>
     <message>
         <source>Up to date</source>
@@ -322,7 +322,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>O Bitcoin Coru</translation>
+        <translation>O Blackcoin More</translation>
     </message>
     <message>
         <source>Usage:</source>

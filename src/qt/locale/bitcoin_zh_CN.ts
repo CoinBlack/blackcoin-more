@@ -919,7 +919,7 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>欢迎使用 Blackcoin币核心 程序。</translation>
+        <translation>欢迎使用 Blackcoin More币核心 程序。</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where Bitcoin Core will store its data.</source>
@@ -3290,7 +3290,7 @@
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>版权所有 (C) 2014-%i Blackcoin Core 开发者</translation>
+        <translation>版权所有 (C) 2009-%i The Blackcoin More 开发者</translation>
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>

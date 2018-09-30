@@ -202,7 +202,7 @@
     <message>
         <location line="+1"/>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</translation>
+        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -212,7 +212,7 @@
     <message>
         <location line="+11"/>
         <source>Bitcoin Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Blackcoin Lore will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your blackcoins from being stolen by malware infecting your computer.</translation>
+        <translation>Blackcoin More will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your blackcoins from being stolen by malware infecting your computer.</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -391,7 +391,7 @@
     <message>
         <location line="+183"/>
         <source>Bitcoin Core client</source>
-        <translation>Blackcoin Lore client</translation>
+        <translation>Blackcoin More client</translation>
     </message>
     <message>
         <location line="+169"/>
@@ -456,7 +456,7 @@
     <message>
         <location line="+40"/>
         <source>Show information about Bitcoin Core</source>
-        <translation>Show information about Blackcoin Lore</translation>
+        <translation>Show information about Blackcoin More</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -506,7 +506,7 @@
     <message>
         <location line="-314"/>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <location line="+160"/>
@@ -516,12 +516,12 @@
     <message>
         <location line="+38"/>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;About Blackcoin Lore</translation>
+        <translation>&amp;About Blackcoin More</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation>Modify configuration options for Blackcoin Lore</translation>
+        <translation>Modify configuration options for Blackcoin More</translation>
     </message>
     <message>
         <location line="+21"/>
@@ -546,7 +546,7 @@
     <message>
         <location line="+2"/>
         <source>Show the Bitcoin Core help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Show the Blackcoin Lore help message to get a list with possible Blackcoin command-line options</translation>
+        <translation>Show the Blackcoin More help message to get a list with possible Blackcoin command-line options</translation>
     </message>
     <message numerus="yes">
         <location line="+329"/>
@@ -1088,7 +1088,7 @@
     <message>
         <location filename="../utilitydialog.cpp" line="+36"/>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1104,7 +1104,7 @@
     <message>
         <location line="+5"/>
         <source>About Bitcoin Core</source>
-        <translation>About Blackcoin Lore</translation>
+        <translation>About Blackcoin More</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -1167,17 +1167,17 @@
     <message>
         <location line="+9"/>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Welcome to Bitcoin Lore.</translation>
+        <translation>Welcome to Blackcoin More.</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>As this is the first time the program is launched, you can choose where Bitcoin Core will store its data.</source>
-        <translation>As this is the first time the program is launched, you can choose where Blackcoin Lore will store its data.</translation>
+        <translation>As this is the first time the program is launched, you can choose where Blackcoin More will store its data.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Bitcoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Blackcoin Lore will download and store a copy of the Blackcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
+        <translation>Blackcoin More will download and store a copy of the Blackcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1192,7 +1192,7 @@
     <message>
         <location filename="../intro.cpp" line="+86"/>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1300,7 +1300,7 @@
     <message>
         <location line="+45"/>
         <source>The user interface language can be set here. This setting will take effect after restarting Bitcoin Core.</source>
-        <translation type="unfinished">The user interface language can be set here. This setting will take effect after restarting Blackcoin Lore.</translation>
+        <translation type="unfinished">The user interface language can be set here. This setting will take effect after restarting Blackcoin More.</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -1336,12 +1336,12 @@
     <message>
         <location line="-153"/>
         <source>Automatically start Bitcoin Core after logging in to the system.</source>
-        <translation>Automatically start Blackcoin Lore after logging in to the system.</translation>
+        <translation>Automatically start Blackcoin More after logging in to the system.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>&amp;Start Bitcoin Core on system login</source>
-        <translation type="unfinished">&amp;Start Blackcoin Lore on system login</translation>
+        <translation type="unfinished">&amp;Start Blackcoin More on system login</translation>
     </message>
     <message>
         <location line="+65"/>
@@ -1963,7 +1963,7 @@
     <message>
         <location line="+48"/>
         <source>Open the Bitcoin Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open the Blackcoin Lore debug log file from the current data directory. This can take a few seconds for large log files.</translation>
+        <translation>Open the Blackcoin More debug log file from the current data directory. This can take a few seconds for large log files.</translation>
     </message>
     <message>
         <location line="+233"/>
@@ -2171,7 +2171,7 @@
     <message>
         <location line="+74"/>
         <source>Welcome to the Bitcoin Core RPC console.</source>
-        <translation>Welcome to the Blackcoin Lore RPC console.</translation>
+        <translation>Welcome to the Blackcoin More RPC console.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2919,7 +2919,7 @@
     <message>
         <location filename="../utilitydialog.cpp" line="+78"/>
         <source>Bitcoin Core is shutting down...</source>
-        <translation>Blackcoin Lore is shutting down...</translation>
+        <translation>Blackcoin More is shutting down...</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3114,12 +3114,12 @@
     <message>
         <location filename="../splashscreen.cpp" line="+41"/>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>The Bitcoin Core developers</source>
-        <translation>The Blackcoin Lore developers</translation>
+        <translation>The Blackcoin More developers</translation>
     </message>
     <message>
         <location filename="../networkstyle.cpp" line="+19"/>
@@ -3786,7 +3786,7 @@
     <message>
         <location line="+7"/>
         <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong Bitcoin Core will not work properly.</source>
-        <translation type="unfinished">Please check that your computer&apos;s date and time are correct! If your clock is wrong Blackcoin Lore will not work properly.</translation>
+        <translation type="unfinished">Please check that your computer&apos;s date and time are correct! If your clock is wrong Blackcoin More will not work properly.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3896,7 +3896,7 @@
     <message>
         <location line="+13"/>
         <source>Unable to bind to %s on this computer. Bitcoin Core is probably already running.</source>
-        <translation type="unfinished">Unable to bind to %s on this computer. Blackcoin Lore is probably already running.</translation>
+        <translation type="unfinished">Unable to bind to %s on this computer. Blackcoin More is probably already running.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -4191,7 +4191,7 @@
     <message>
         <location line="+4"/>
         <source>Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running.</source>
-        <translation type="unfinished">Cannot obtain a lock on data directory %s. Blackcoin Lore is probably already running.</translation>
+        <translation type="unfinished">Cannot obtain a lock on data directory %s. Blackcoin More is probably already running.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4311,12 +4311,12 @@
     <message>
         <location line="+3"/>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Copyright (C) 2009-%i The Bitcoin Core Developers</translation>
+        <translation>Copyright (C) 2018-%i The Blackcoin More Developers</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>
-        <translation>Error loading wallet.dat: Wallet requires newer version of Blackcoin Lore</translation>
+        <translation>Error loading wallet.dat: Wallet requires newer version of Blackcoin More</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4336,7 +4336,7 @@
     <message>
         <location line="+1"/>
         <source>Initialization sanity check failed. Bitcoin Core is shutting down.</source>
-        <translation type="unfinished">Initialization sanity check failed. Blackcoin Lore is shutting down.</translation>
+        <translation type="unfinished">Initialization sanity check failed. Blackcoin More is shutting down.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -4486,7 +4486,7 @@
     <message>
         <location line="+4"/>
         <source>Wallet needed to be rewritten: restart Bitcoin Core to complete</source>
-        <translation type="unfinished">Wallet needed to be rewritten: restart Blackcoin Lore to complete</translation>
+        <translation type="unfinished">Wallet needed to be rewritten: restart Blackcoin More to complete</translation>
     </message>
     <message>
         <location line="+2"/>

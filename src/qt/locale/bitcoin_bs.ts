@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Jezrga</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>
@@ -38,14 +38,14 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Jezrga</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Jezrga</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>
@@ -113,7 +113,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Jezrga</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>

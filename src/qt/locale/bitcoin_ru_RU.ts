@@ -59,11 +59,11 @@
     <name>BitcoinGUI</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>О Bitcoin Core</translation>
+        <translation>О Blackcoin More</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -126,7 +126,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>version</source>
@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>О Bitcoin Core</translation>
+        <translation>О Blackcoin More</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -149,7 +149,7 @@
     <name>Intro</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Error</source>
@@ -221,7 +221,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>

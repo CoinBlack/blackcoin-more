@@ -35,11 +35,11 @@
     <name>BitcoinGUI</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткойн ядро</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>За Биткойн ядрото</translation>
+        <translation>За Blackcoin More</translation>
     </message>
     </context>
 <context>
@@ -58,18 +58,18 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткойн ядро</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>За Биткойн ядрото</translation>
+        <translation>За Blackcoin More</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткойн ядро</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>
@@ -121,7 +121,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткойн ядро</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>

@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Предупредување: Ако го шифрирате вашиот паричник и ја изгубите вашата тајна фраза, ќе &lt;b&gt;ГИ ИЗГУБИТЕ СИТЕ ВАШИ БИТКОИНИ&lt;/b&gt;!</translation>
+        <translation>Предупредување: Ако го шифрирате вашиот паричник и ја изгубите вашата тајна фраза, ќе &lt;b&gt;ГИ ИЗГУБИТЕ СИТЕ ВАШИ БЛЭККОИНИ&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Биткоин Core софтверот</translation>
+        <translation>Blackcoin More софтверот</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -263,7 +263,7 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Испрати биткоини на Биткоин адреса</translation>
+        <translation>Испрати биткоини на Блэккоин адреса</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
@@ -271,7 +271,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Биткоин</translation>
+        <translation>Блэккоин</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -287,7 +287,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Прикажи информации за Биткоин Core</translation>
+        <translation>Прикажи информации за Blackcoin More</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -307,11 +307,11 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткоин Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;За Биткоин Core</translation>
+        <translation>&amp;За Blackcoin More</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -576,7 +576,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткоин Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>version</source>
@@ -588,14 +588,14 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>За Биткоин Core</translation>
+        <translation>За Blackcoin More</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткоин Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Error</source>
@@ -935,7 +935,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Биткоин Core</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>

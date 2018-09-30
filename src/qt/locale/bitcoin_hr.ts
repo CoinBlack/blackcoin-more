@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Blackcoin Lore klijent</translation>
+        <translation>Blackcoin More klijent</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -347,7 +347,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Prikaži informacije o programu Blackcoin Lore</translation>
+        <translation>Prikaži informacije o programu Blackcoin More</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -387,7 +387,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -395,7 +395,7 @@
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;O programu Blackcoin Lore</translation>
+        <translation>&amp;O programu Blackcoin More</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
@@ -748,7 +748,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>version</source>
@@ -760,7 +760,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>O programu Blackcoin Lore</translation>
+        <translation>O programu Blackcoin More</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -783,11 +783,11 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Dobrodošli u programu Blackcoin Lore.</translation>
+        <translation>Dobrodošli u programu Blackcoin More.</translation>
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1407,7 +1407,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>[testnet]</source>

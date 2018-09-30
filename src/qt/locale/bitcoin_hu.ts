@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Figyelem: ha titkosítod a tárcát és elveszted a jelszavad, akkor &lt;b&gt;AZ ÖSSZES BITCOINOD ELVESZIK!&lt;/b&gt;</translation>
+        <translation>Figyelem: ha titkosítod a tárcát és elveszted a jelszavad, akkor &lt;b&gt;AZ ÖSSZES BLACKCOINOD ELVESZIK!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Blackcoin Lore kliens</translation>
+        <translation>Blackcoin More kliens</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -347,7 +347,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Blackcoin Lore információ megjelenítése</translation>
+        <translation>Blackcoin More információ megjelenítése</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -387,7 +387,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -395,11 +395,11 @@
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;A Blackcoin Lore-ról</translation>
+        <translation>&amp;A Blackcoin More-ról</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation>Konfigurációs opciók módosítása a Blackcoin Lore-hoz</translation>
+        <translation>Konfigurációs opciók módosítása a Blackcoin More-hoz</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -419,7 +419,7 @@
     </message>
     <message>
         <source>Show the Bitcoin Core help message to get a list with possible Bitcoin command-line options</source>
-        <translation>A Blackcoin Lore súgóüzenet megjelenítése a Blackcoin lehetséges parancssori kapcsolóival.</translation>
+        <translation>A Blackcoin More súgóüzenet megjelenítése a Blackcoin lehetséges parancssori kapcsolóival.</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
@@ -840,7 +840,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>version</source>
@@ -852,7 +852,7 @@
     </message>
     <message>
         <source>About Bitcoin Core</source>
-        <translation>A Blackcoin Lore-ról</translation>
+        <translation>A Blackcoin More-ról</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -875,11 +875,11 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>Üdvözlünk a Blackcoin Lore-ban.</translation>
+        <translation>Üdvözlünk a Blackcoin More-ban.</translation>
     </message>
     <message>
         <source>Bitcoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>A Blackcoin Lore le fogja tölteni és tárolni fogja a Blackcoin blokklánc egy másolatát. Legalább %1GB adat lesz tárolva ebben a mappában, és ez folyamatosan nőni fog. A tárca szintén itt lesz tárolva.</translation>
+        <translation>A Blackcoin More le fogja tölteni és tárolni fogja a Blackcoin blokklánc egy másolatát. Legalább %1GB adat lesz tárolva ebben a mappában, és ez folyamatosan nőni fog. A tárca szintén itt lesz tárolva.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -891,7 +891,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1830,7 +1830,7 @@
     <name>ShutdownWindow</name>
     <message>
         <source>Bitcoin Core is shutting down...</source>
-        <translation>A Blackcoin Lore leáll...</translation>
+        <translation>A Blackcoin More leáll...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -1936,11 +1936,11 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Lore</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
-        <translation>A Blackcoin Lore fejlesztői</translation>
+        <translation>A Blackcoin More fejlesztői</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2434,7 +2434,7 @@
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Copyright (C) 2014-%i A Blackcoin Lore Fejlesztői</translation>
+        <translation>Copyright (C) 2018-%i A Blackcoin More Fejlesztői</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>

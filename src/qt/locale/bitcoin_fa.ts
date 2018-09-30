@@ -383,7 +383,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation> هسته Bitcoin </translation>
+        <translation> هسته Blackcoin </translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
@@ -702,7 +702,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation> هسته Bitcoin </translation>
+        <translation> هسته Blackcoin </translation>
     </message>
     <message>
         <source>version</source>
@@ -749,7 +749,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation> هسته Bitcoin </translation>
+        <translation> هسته Blackcoin </translation>
     </message>
     <message>
         <source>Error</source>
@@ -1477,7 +1477,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation> هسته Bitcoin </translation>
+        <translation> هسته Blackcoin </translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>

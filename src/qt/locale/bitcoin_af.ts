@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Waarskuwing: Indien u die beursie kodifiseer en u vergeet u wagwoord &lt;b&gt;VERLOOR U AL U BITCOINS&lt;/b&gt;!</translation>
+        <translation>Waarskuwing: Indien u die beursie kodifiseer en u vergeet u wagwoord &lt;b&gt;VERLOOR U AL U BLACKCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Bitcoin Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Blackcoin Kern gaan nou toemaak om die kodifikasie af te handel. Onthou dat die kodifikasie van u beursie nie altyd u munte kan beskerm teen diefstal deur kwaadwillige sagteware op u rekenaar nie.</translation>
+        <translation>Blackcoin More gaan nou toemaak om die kodifikasie af te handel. Onthou dat die kodifikasie van u beursie nie altyd u munte kan beskerm teen diefstal deur kwaadwillige sagteware op u rekenaar nie.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>Bitcoin Core client</source>
-        <translation>Blackcoin Lern klient</translation>
+        <translation>Blackcoin More klient</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Show information about Bitcoin Core</source>
-        <translation>Vertoon inligting oor Blackcoin Kern</translation>
+        <translation>Vertoon inligting oor Blackcoin More</translation>
     </message>
     <message>
         <source>Show or hide the main Window</source>
@@ -323,7 +323,7 @@
     </message>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Kern</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -331,11 +331,11 @@
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;Omtrent Blackcoin Kern</translation>
+        <translation>&amp;Omtrent Blackcoin More</translation>
     </message>
     <message>
         <source>Modify configuration options for Bitcoin Core</source>
-        <translation>Verander konfigurasie-opsies vir Blackcoin Kern</translation>
+        <translation>Verander konfigurasie-opsies vir Blackcoin More</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -370,7 +370,7 @@
     <name>HelpMessageDialog</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Kern</translation>
+        <translation>Blackcoin More</translation>
     </message>
     <message>
         <source>Reset all settings changes made over the GUI</source>
@@ -381,7 +381,7 @@
     <name>Intro</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Kern</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>
@@ -445,7 +445,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Blackcoin Kern</translation>
+        <translation>Blackcoin More</translation>
     </message>
     </context>
 <context>
