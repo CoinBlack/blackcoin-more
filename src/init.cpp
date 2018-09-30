@@ -478,11 +478,11 @@ std::string LicenseInfo()
     const std::string URL_SOURCE_CODE = "<https://gitlab.com/blackcoin/blackcoin-more>";
     const std::string URL_WEBSITE = "<http://blackcoin.co/>";
     // todo: remove urls from translations on next change
-    return FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
+    return FormatParagraph(strprintf("Copyright (C) 2009-%i The Bitcoin Core Developers", COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph(strprintf(_("Copyright (C) 2014-2018 The Blackcoin Developers"), COPYRIGHT_YEAR)) + "\n" +
+           FormatParagraph(strprintf("Copyright (C) 2014-2018 The Blackcoin Developers", COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph(strprintf(_("Copyright (C) 2018-%i The Blackcoin More Developers"), COPYRIGHT_YEAR)) + "\n" +
+           FormatParagraph(strprintf("Copyright (C) 2018-%i The Blackcoin More Developers", COPYRIGHT_YEAR)) + "\n" +
            "\n" +
            FormatParagraph(strprintf(_("Please contribute if you find Blackcoin More useful. "
                        "Visit %s for further information about the software."),
@@ -991,7 +991,7 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. Blackcoin Lore is shutting down."));
+        return InitError(_("Initialization sanity check failed. Bitcoin Core is shutting down."));
 
     std::string strDataDir = GetDataDir().string();
 
@@ -1003,9 +1003,9 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     try {
         static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
         if (!lock.try_lock())
-            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Blackcoin Lore is probably already running."), strDataDir));
+            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running."), strDataDir));
     } catch(const boost::interprocess::interprocess_exception& e) {
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Blackcoin Lore is probably already running.") + " %s.", strDataDir, e.what()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running.") + " %s.", strDataDir, e.what()));
     }
 
 #ifndef WIN32

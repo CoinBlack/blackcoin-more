@@ -76,7 +76,7 @@ bool AppInit(int argc, char* argv[])
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-h") ||  mapArgs.count("-help") || mapArgs.count("-version"))
     {
-        std::string strUsage = _("Blackcoin Lore Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = _("Blackcoin More Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
 
         if (mapArgs.count("-version"))
         {
@@ -85,7 +85,7 @@ bool AppInit(int argc, char* argv[])
         else
         {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  lored [options]                     " + _("Start Blackcoin Lore Daemon") + "\n";
+                  "  blackmored [options]                     " + _("Start Blackcoin More Daemon") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
@@ -124,7 +124,7 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in lored anymore. Use the lore-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in blackmored anymore. Use the blackmore-cli utility instead.\n");
             exit(1);
         }
 #ifndef WIN32
