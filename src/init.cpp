@@ -477,11 +477,11 @@ std::string LicenseInfo()
     const std::string URL_SOURCE_CODE = "<https://gitlab.com/blackcoin/blackcoin-more>";
     const std::string URL_WEBSITE = "<http://blackcoin.co/>";
     // todo: remove urls from translations on next change
-    return FormatParagraph(strprintf("Copyright (C) 2009-%i The Bitcoin Core Developers", COPYRIGHT_YEAR)) +
+    return FormatParagraph(strprintf("Copyright (C) 2009-%i The Bitcoin Core Developers", COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph("Copyright (C) 2014-2018 The Blackcoin Developers") +
+           FormatParagraph("Copyright (C) 2014-2018 The Blackcoin Developers") + "\n" +
            "\n" +
-           FormatParagraph(strprintf("Copyright (C) 2018-%i The Blackcoin More Developers", COPYRIGHT_YEAR)) +
+           FormatParagraph(strprintf("Copyright (C) 2018-%i The Blackcoin More Developers", COPYRIGHT_YEAR)) + "\n" +
            "\n" +
            FormatParagraph(strprintf(_("Please contribute if you find Blackcoin More useful. "
                        "Visit %s for further information about the software."),
