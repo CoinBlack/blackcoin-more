@@ -89,7 +89,7 @@ int64_t GetMaxTransactionTime(CBlock* pblock)
     {
         int64_t maxTransactionTime = 0;
         for (std::vector<CTransaction>::const_iterator it(pblock->vtx.begin()); it != pblock->vtx.end(); ++it)
-        		maxTransactionTime = std::max(maxTransactionTime, (int64_t)it->nTime);
+                maxTransactionTime = std::max(maxTransactionTime, (int64_t)it->nTime);
         return maxTransactionTime;
     }
 
@@ -109,12 +109,12 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
     int nHeight = chainActive.Tip()->nHeight + 1;
     if (!fProofOfStake)
     {
-    	txNew.vout[0].scriptPubKey = scriptPubKeyIn;
+        txNew.vout[0].scriptPubKey = scriptPubKeyIn;
     }
     else
     {
-    	txNew.vin[0].scriptSig = (CScript() << nHeight) + COINBASE_FLAGS;
-    	txNew.vout[0].SetEmpty();
+        txNew.vin[0].scriptSig = (CScript() << nHeight) + COINBASE_FLAGS;
+        txNew.vout[0].SetEmpty();
     }
 
     // Add dummy coinbase tx as first transaction
@@ -166,7 +166,7 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
         // -regtest only: allow overriding block.nVersion with
         // -blockversion=N to test forking scenarios
         if (chainparams.MineBlocksOnDemand())
-        	pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
+            pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
         int64_t nLockTimeCutoff = pblock->GetBlockTime();
 
@@ -302,25 +302,25 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
         }
         nLastBlockTx = nBlockTx;
         nLastBlockSize = nBlockSize;
-		// LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOps);
+        // LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOps);
 
         // Compute final coinbase transaction.
-		if (!fProofOfStake) {
-			txNew.vout[0].nValue = nFees +  GetProofOfWorkSubsidy();
-			txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
-			pblocktemplate->vTxFees[0] = -nFees;
-		}
-		txNew.nTime = pblock->nTime;
+        if (!fProofOfStake) {
+            txNew.vout[0].nValue = nFees + GetProofOfWorkSubsidy();
+            txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
+            pblocktemplate->vTxFees[0] = -nFees;
+        }
+        txNew.nTime = pblock->nTime;
         pblock->vtx[0] = txNew;
 
         if (pFees)
-        	*pFees = nFees;
+            *pFees = nFees;
 
         // Fill in header
         pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
         pblock->nTime          = max(pindexPrev->GetPastTimeLimit()+1, GetMaxTransactionTime(pblock));
         if (!fProofOfStake)
-        	UpdateTime(pblock, Params().GetConsensus(), pindexPrev);
+            UpdateTime(pblock, Params().GetConsensus(), pindexPrev);
         pblock->nBits = GetNextTargetRequired(pindexPrev, pblock, fProofOfStake, Params().GetConsensus());
         pblock->nNonce = 0;
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
@@ -358,8 +358,7 @@ void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned
 // Internal miner
 //
 
-
-static bool ProcessBlockFound(const CBlock* pblock, const CChainParams& chainparams, const uint256& hash)
+static bool ProcessBlockFound(const CBlock* pblock, const CChainParams& chainparams)
 {
     LogPrintf("%s\n", pblock->ToString());
     LogPrintf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue));
@@ -376,7 +375,7 @@ static bool ProcessBlockFound(const CBlock* pblock, const CChainParams& chainpar
 
     // Process this block the same as if we had received it from another node
     CValidationState state;
-    if (!ProcessNewBlock(state, chainparams, NULL, pblock, true, NULL, hash))
+    if (!ProcessNewBlock(state, chainparams, NULL, pblock, true, NULL))
         return error("BitcoinMiner: ProcessNewBlock, block not accepted");
 
     return true;
@@ -457,18 +456,18 @@ void static BitcoinMiner(const CChainParams& chainparams)
 
             while (true) {
                 // Check if something found
-            	 unsigned int nHashesDone = 0;
-            	 char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-            	 while(true)
-                 {
-            		scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
+                unsigned int nHashesDone = 0;
+                char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
+                while(true)
+                {
+                    scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
                     if (UintToArith256(thash) <= hashTarget)
                     {
 
                         SetThreadPriority(THREAD_PRIORITY_NORMAL);
                         LogPrintf("BitcoinMiner:\n");
                         LogPrintf("proof-of-work found  \n  powhash: %s  \ntarget: %s\n", thash.GetHex(), hashTarget.GetHex());
-                        ProcessBlockFound(pblock, chainparams, thash);
+                        ProcessBlockFound(pblock, chainparams);
                         SetThreadPriority(THREAD_PRIORITY_LOWEST);
                         coinbaseScript->KeepScript();
 
@@ -481,7 +480,7 @@ void static BitcoinMiner(const CChainParams& chainparams)
                     pblock->nNonce += 1;
                     nHashesDone += 1;
                     if ((pblock->nNonce & 0xFF) == 0)
-                    	break;
+                        break;
                 }
 
                 // Check for stop or if block needs to be rebuilt
@@ -549,18 +548,16 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     // if we are trying to sign
     //    something except proof-of-stake block template
     if (!block.vtx[0].vout[0].IsEmpty()){
-    	LogPrintf("something except proof-of-stake block\n");
-    	return false;
+        LogPrintf("something except proof-of-stake block\n");
+        return false;
     }
-
 
     // if we are trying to sign
     //    a complete proof-of-stake block
     if (block.IsProofOfStake()){
-    	LogPrintf("trying to sign a complete proof-of-stake block\n");
-    	return true;
+        LogPrintf("trying to sign a complete proof-of-stake block\n");
+        return true;
     }
-
 
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // startup timestamp
 
@@ -607,7 +604,6 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
 
 void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
 {
-
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
 
     // Make this thread recognisable as the mining thread
@@ -693,31 +689,9 @@ bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams
         }
 
         // Process this block the same as if we had received it from another node
-        if (!ProcessBlockFound(pblock, chainparams, pblock->GetHash()))
+        if (!ProcessBlockFound(pblock, chainparams))
             return error("CheckStake() : ProcessBlock, block not accepted");
     }
 
     return true;
 }
-
-//void GenerateBitcoins(bool fGenerate, int nThreads, const CChainParams& chainparams)
-//{
-//    static boost::thread_group* minerThreads = NULL;
-//
-//    if (nThreads < 0)
-//        nThreads = GetNumCores();
-//
-//    if (minerThreads != NULL)
-//    {
-//        minerThreads->interrupt_all();
-//        delete minerThreads;
-//        minerThreads = NULL;
-//    }
-//
-//    if (nThreads == 0 || !fGenerate)
-//        return;
-//
-//    minerThreads = new boost::thread_group();
-//    for (int i = 0; i < nThreads; i++)
-//        minerThreads->create_thread(boost::bind(&BitcoinMiner, boost::cref(chainparams)));
-//}

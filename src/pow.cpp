@@ -30,26 +30,26 @@ static arith_uint256 GetTargetLimit(int64_t nTime, bool fProofOfStake, const Con
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, bool fProofOfStake, const Consensus::Params& params)
 {
-	unsigned int nTargetLimit = UintToArith256(params.powLimit).GetCompact();
+    unsigned int nTargetLimit = UintToArith256(params.powLimit).GetCompact();
 
-	    // Genesis block
-	    if (pindexLast == NULL)
-	        return nTargetLimit;
+        // Genesis block
+        if (pindexLast == NULL)
+            return nTargetLimit;
 
-	    const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
-	    if (pindexPrev->pprev == NULL)
-	        return nTargetLimit; // first block
-	    const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
-	    if (pindexPrevPrev->pprev == NULL)
-	        return nTargetLimit; // second block
+        const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
+        if (pindexPrev->pprev == NULL)
+            return nTargetLimit; // first block
+        const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
+        if (pindexPrevPrev->pprev == NULL)
+            return nTargetLimit; // second block
 
-	return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params);
+    return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params);
 }
 
 unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
-	if (params.fPowNoRetargeting)
-	    	return pindexLast->nBits;
+    if (params.fPowNoRetargeting)
+            return pindexLast->nBits;
 
     int64_t nActualSpacing = pindexLast->GetBlockTime() - nFirstBlockTime;
     int64_t nTargetSpacing = params.IsProtocolV2(pindexLast->GetBlockTime()) ? params.nTargetSpacing : params.nTargetSpacingV1;
@@ -73,6 +73,7 @@ unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t 
 
     return bnNew.GetCompact();
 }
+
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
     bool fNegative;
@@ -83,8 +84,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
 
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
-    	return error("CheckProofOfWork(): nBits below minimum work");
-
+        return error("CheckProofOfWork(): nBits below minimum work");
 
     // Check proof of work matches claimed amount
     if (UintToArith256(hash) > bnTarget)
