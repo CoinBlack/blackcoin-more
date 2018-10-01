@@ -27,6 +27,8 @@ The `master` branch is regularly built and tested, but is not guaranteed to be
 completely stable. [Tags](https://gitlab.com/blackcoin/blackcoin-more/tags) are created
 regularly to indicate new official, stable release versions of Blackcoin More.
 
+Change log can be found in [CHANGELOG.md](CHANGELOG.md).
+
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 The best place to get started is to join the Development channel on Gitter: https://gitter.im/Blackcoin_Hub/Development
