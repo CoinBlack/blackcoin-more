@@ -5,7 +5,7 @@ $(package)_file_name=$(package)-$($(package)_version).tar.bz2
 $(package)_sha256_hash=db8d87ea720ea9d5edc5388fc7a0497bb11ba9fe972245e0f7f4c7e8b1e1e84d
 
 define $(package)_set_vars
-  $(package)_config_opts=--without-zlib --without-png --disable-static
+  $(package)_config_opts=--without-zlib --without-png --without-harfbuzz --without-bzip2 --disable-static
   $(package)_config_opts_linux=--with-pic
 endef
 
