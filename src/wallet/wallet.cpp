@@ -664,20 +664,6 @@ bool CWallet::SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<co
     return true;
 }
 
-// miner's coin stake reward
-int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
-{
-    int64_t nSubsidy;
-    if (Params().GetConsensus().IsProtocolV3(pindexPrev->nTime))
-        nSubsidy = COIN * 3 / 2;
-    else
-        nSubsidy = nCoinAge * 1 * CENT * 33 / (365 * 33 + 8);
-
-    LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
-
-    return nSubsidy + nFees;
-}
-
 bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CAmount& nFees, CMutableTransaction& tx, CKey& key)
 {
     CBlockIndex* pindexPrev = pindexBestHeader;
@@ -697,7 +683,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     CAmount nBalance = GetBalance();
 
     if (nBalance <= nReserveBalance)
-    	return false;
+        return false;
 
     vector<const CWalletTx*> vwtxPrev;
 
@@ -707,25 +693,24 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // Select coins with suitable depth
     CAmount nTargetValue = nBalance - nReserveBalance;
     if (!SelectCoinsForStaking(nTargetValue, setCoins, nValueIn))
-    	return false;
-
+        return false;
 
     if (setCoins.empty())
-    	return false;
+        return false;
 
     static std::map<COutPoint, CStakeCache> stakeCache;
     if(stakeCache.size() > setCoins.size() + 100){
-		//Determining if the cache is still valid is harder than just clearing it when it gets too big, so instead just clear it
-		//when it has more than 100 entries more than the actual setCoins.
-		stakeCache.clear();
+        //Determining if the cache is still valid is harder than just clearing it when it gets too big, so instead just clear it
+        //when it has more than 100 entries more than the actual setCoins.
+        stakeCache.clear();
     }
     if(GetBoolArg("-stakecache", DEFAULT_STAKE_CACHE)) {
-    	BOOST_FOREACH(const PAIRTYPE(const CWalletTx*, unsigned int)& pcoin, setCoins)
-    	{
-    		boost::this_thread::interruption_point();
-    		COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
-    		CacheKernel(stakeCache, prevoutStake); //this will do a 2 disk loads per op
-    	}
+        BOOST_FOREACH(const PAIRTYPE(const CWalletTx*, unsigned int)& pcoin, setCoins)
+        {
+            boost::this_thread::interruption_point();
+            COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
+            CacheKernel(stakeCache, prevoutStake); //this will do a 2 disk loads per op
+        }
 
     }
 
@@ -833,31 +818,26 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         }
     }
 
-    // Calculate coin age reward
-        {
-            uint64_t nCoinAge;
-            if (!GetCoinAge(txNew, *pblocktree, pindexPrev, nCoinAge))
-                return error("CreateCoinStake : failed to calculate coin age");
+    // Calculate reward
+    {
+        int64_t nReward = GetProofOfStakeSubsidy() + nFees;
+        if (nReward < 0)
+           return false;
 
-            int64_t nReward = GetProofOfStakeReward(pindexPrev, nCoinAge, nFees);
-            if (nReward <= 0)
-                return false;
-
-            nCredit += nReward;
-        }
-
+        nCredit += nReward;
+    }
 
     if (nCredit >= GetStakeSplitThreshold())
-    	txNew.vout.push_back(CTxOut(0, txNew.vout[1].scriptPubKey)); //split stake
+        txNew.vout.push_back(CTxOut(0, txNew.vout[1].scriptPubKey)); //split stake
 
     // Set output amount
     if (txNew.vout.size() == 3)
     {
-    	txNew.vout[1].nValue = (nCredit / 2 / CENT) * CENT;
-    	txNew.vout[2].nValue = nCredit - txNew.vout[1].nValue;
+        txNew.vout[1].nValue = (nCredit / 2 / CENT) * CENT;
+        txNew.vout[2].nValue = nCredit - txNew.vout[1].nValue;
     }
     else
-    	txNew.vout[1].nValue = nCredit;
+        txNew.vout[1].nValue = nCredit;
 
     // Sign
     int nIn = 0;
