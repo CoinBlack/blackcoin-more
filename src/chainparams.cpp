@@ -297,7 +297,7 @@ public:
         consensus.nProtocolV1RetargetingFixedTime = 1400000000;
         consensus.nProtocolV2Time = 1410000000;
         consensus.nProtocolV3Time = 1420000000;
-        consensus.nLastPOWBlock = 10000;
+        consensus.nLastPOWBlock = 1000;
         consensus.nStakeTimestampMask = 0xf;
 
         /**
