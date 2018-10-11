@@ -2413,14 +2413,14 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return true;
     }
 
-    // Reject proof-of-work after nLastPOWBlock
+    // Reject proof of work at height nLastPOWBlock
     if (block.IsProofOfWork() && pindex->nHeight > chainparams.GetConsensus().nLastPOWBlock)
-        return state.DoS(100, error("%s: reject proof-of-work at height %d", __func__, pindex->nHeight),
+        return state.DoS(100, error("ConnectBlock(): reject proof-of-work at height %d", pindex->nHeight),
                         REJECT_INVALID, "bad-pow-height");
     
     // Check difficulty
     if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, block.IsProofOfStake(), chainparams.GetConsensus()))
-        return state.DoS(100, error("%s: incorrect difficulty", __func__),
+        return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
                         REJECT_INVALID, "bad-diffbits");
 
     pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : pindex->GetBlockHash());
@@ -2430,17 +2430,17 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
          const COutPoint &prevout = block.vtx[1].vin[0].prevout;
          const CCoins *coins = view.AccessCoins(prevout.hash);
           if (!coins)
-              return state.DoS(100, error("%s: kernel input unavailable", __func__),
+              return state.DoS(100, error("ConnectBlock(): kernel input unavailable"),
                                 REJECT_INVALID, "bad-cs-kernel");
 
          // Check proof-of-stake min confirmations
          if (pindex->nHeight - coins->nHeight < chainparams.GetConsensus().nStakeMinConfirmations)
               return state.DoS(100,
-                  error("%s: tried to stake at depth %d", __func__, pindex->nHeight - coins->nHeight),
+                  error("ConnectBlock(): tried to stake at depth %d", pindex->nHeight - coins->nHeight),
                     REJECT_INVALID, "bad-cs-premature");
 
          if (!CheckStakeKernelHash(pindex->pprev, block.nBits, coins, prevout, block.vtx[1].nTime))
-              return state.DoS(100, error("%s: proof-of-stake hash doesn't match nBits", __func__),
+              return state.DoS(100, error("ConnectBlock(): proof-of-stake hash doesn't match nBits"),
                                  REJECT_INVALID, "bad-cs-proofhash");
     }
 
