@@ -71,14 +71,19 @@ bool CheckStakeBlockTimestamp(int64_t nTimeBlock)
 //
 bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, const CCoins* txPrev, const COutPoint& prevout, unsigned int nTimeTx, bool fPrintProofOfStake)
 {
-    // Weight
-    int64_t nValueIn = txPrev->vout[prevout.n].nValue;
-    if (nValueIn == 0)
-        return false;
+    if (nTimeTx < txPrev->nTime)  // Transaction timestamp violation
+        return error("CheckStakeKernelHash() : nTime violation");
 
     // Base target
     arith_uint256 bnTarget;
     bnTarget.SetCompact(nBits);
+
+    // Weighted target
+    int64_t nValueIn = txPrev->vout[prevout.n].nValue;
+    if (nValueIn == 0)
+        return error("CheckStakeKernelHash() : nValueIn == 0");
+    arith_uint256 bnWeight = arith_uint256(nValueIn);
+    bnTarget *= bnWeight;
 
     uint256 nStakeModifier = pindexPrev->nStakeModifier;
 
@@ -98,7 +103,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
     }
 
     // Now check if proof-of-stake hash meets target protocol
-    if (UintToArith256(hashProofOfStake) / nValueIn > bnTarget)
+    if (UintToArith256(hashProofOfStake) > bnTarget)
         return false;
 
     if (fDebug && !fPrintProofOfStake)
