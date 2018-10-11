@@ -66,16 +66,11 @@ endif
 
 if BUILD_BITCOIN_UTILS
   bin_PROGRAMS += blackmore-cli blackmore-tx
-if ENABLE_WALLET
-  bin_PROGRAMS += wallet-utility
-endif
 endif
 
 .PHONY: FORCE check-symbols check-security
 # bitcoin core #
 BITCOIN_CORE_H = \
-  addressindex.h \
-  spentindex.h \
   addrman.h \
   amount.h \
   arith_uint256.h \
@@ -407,14 +402,6 @@ blackmore_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 blackmore_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 blackmore_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-# wallet-utility binary #
-if ENABLE_WALLET
-wallet_utility_SOURCES = wallet-utility.cpp
-wallet_utility_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAG)
-wallet_utility_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-wallet_utility_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-endif
-
 if TARGET_WINDOWS
 blackmore_cli_SOURCES += bitcoin-cli-res.rc
 endif
@@ -426,11 +413,6 @@ blackmore_cli_LDADD = \
   $(LIBBITCOIN_CRYPTO)
 
 blackmore_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
-if ENABLE_WALLET
-wallet_utility_LDADD = libbitcoin_wallet.a $(LIBBITCOIN_COMMON) $(LIBBITCOIN_CRYPTO) $(LIBSECP256K1) $(LIBBITCOIN_UTIL) $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS)
-endif
-
-#
 
 # blackmore-tx binary #
 blackmore_tx_SOURCES = bitcoin-tx.cpp

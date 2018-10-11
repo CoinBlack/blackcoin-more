@@ -114,6 +114,5 @@ share/BitcoindComparisonTool.jar
 /doc/doxygen/
 
 libbitcoinconsensus.pc
-wallet-utility
 /.cproject
 /.project
