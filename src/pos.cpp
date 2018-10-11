@@ -83,7 +83,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
     uint256 nStakeModifier = pindexPrev->nStakeModifier;
 
     // Calculate hash
-    CDataStream ss(SER_GETHASH, 0);
+    CHashWriter ss(SER_GETHASH, 0);
     ss << nStakeModifier;
     ss << txPrev->nTime << prevout.hash << prevout.n << nTimeTx;
 
