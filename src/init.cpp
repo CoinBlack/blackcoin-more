@@ -471,7 +471,7 @@ std::string HelpMessage(HelpMessageMode mode)
 std::string LicenseInfo()
 {
     const std::string URL_SOURCE_CODE = "<https://gitlab.com/blackcoin/blackcoin-more>";
-    const std::string URL_WEBSITE = "<http://blackcoin.co/>";
+    const std::string URL_WEBSITE = "<http://blackcoin.org/>";
     // todo: remove urls from translations on next change
     return FormatParagraph(strprintf("Copyright (C) 2009-%i The Bitcoin Core Developers", COPYRIGHT_YEAR)) + "\n" +
            "\n" +
