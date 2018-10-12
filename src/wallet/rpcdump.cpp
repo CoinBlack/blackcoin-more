@@ -173,8 +173,8 @@ UniValue abortrescan(const UniValue& params, bool fHelp)
             + HelpExampleRpc("abortrescan", "")
         );
 
-    if (!pwallet->IsScanning() || pwallet->IsAbortingRescan()) return false;
-    pwallet->AbortRescan();
+    if (!pwalletMain->IsScanning() || pwalletMain->IsAbortingRescan()) return false;
+    pwalletMain->AbortRescan();
     return true;
 }
 
