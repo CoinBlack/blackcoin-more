@@ -608,7 +608,7 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
     LogPrintf("Staking started\n");
 
     // Make this thread recognisable as the mining thread
-    RenameThread("BlackcoinMiner");
+    RenameThread("blackcoin-miner");
 
     CReserveKey reservekey(pwallet);
 
@@ -623,7 +623,7 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
         while (pwallet->IsLocked())
         {
             nLastCoinStakeSearchInterval = 0;
-            MilliSleep(1000);
+            MilliSleep(10000);
         }
 
         if (!regtestMode) {
@@ -658,14 +658,16 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
             // Trying to sign a block
             if (SignBlock(*pblock, *pwallet, nFees))
             {
-                SetThreadPriority(THREAD_PRIORITY_NORMAL);
+                // increase priority
+                SetThreadPriority(THREAD_PRIORITY_ABOVE_NORMAL);
+                 // Sign the full block
                 CheckStake(pblock, *pwallet, chainparams);
+                // return back to low priority
                 SetThreadPriority(THREAD_PRIORITY_LOWEST);
                 MilliSleep(500);
             }
-            else
-                MilliSleep(nMinerSleep);
         }
+        MilliSleep(nMinerSleep);
     }
 }
 
