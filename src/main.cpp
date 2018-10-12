@@ -2419,7 +2419,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                         REJECT_INVALID, "bad-pow-height");
     
     // Check difficulty
-    if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, block.IsProofOfStake(), chainparams.GetConsensus()))
+    if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
         return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
                         REJECT_INVALID, "bad-diffbits");
 
@@ -3494,13 +3494,12 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const 
 {
     if (block.nVersion < 7 && Params().GetConsensus().IsProtocolV2(block.GetBlockTime()))
             return state.Invalid(error("%s: rejected nVersion=%d block", __func__, block.nVersion),
-                         REJECT_OBSOLETE, "bad-version");
+                        REJECT_OBSOLETE, "bad-version");
 
     // Check proof of work matches claimed amount
     if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
         return state.DoS(50, error("CheckBlockHeader(): proof of work failed"),
-                         REJECT_INVALID, "high-hash");
-
+                        REJECT_INVALID, "high-hash");
     return true;
 }
 
@@ -3635,7 +3634,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
        return state.DoS(1, error("%s: forked chain older than max reorganization depth (height %d)", __func__, nHeight));
 
     // Preliminary check difficulty in pos-only stage
-    if (chainActive.Height() > consensusParams.nLastPOWBlock && nHeight > consensusParams.nLastPOWBlock && block.nBits != GetNextTargetRequired(pindexPrev, &block, true, consensusParams))
+    if (chainActive.Height() > consensusParams.nLastPOWBlock && nHeight > consensusParams.nLastPOWBlock && block.nBits != GetNextTargetRequired(pindexPrev, &block, consensusParams, true))
          return state.DoS(100, error("%s: incorrect difficulty", __func__),
                              REJECT_INVALID, "bad-diffbits");
 

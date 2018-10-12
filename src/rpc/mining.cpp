@@ -759,124 +759,96 @@ UniValue estimatefee(const UniValue& params, bool fHelp)
 
 UniValue checkkernel(const UniValue& params, bool fHelp)
 {
-	if (fHelp || params.size() < 1 || params.size() > 2)
-	        throw runtime_error(
-	            "checkkernel [{\"txid\":txid,\"vout\":n},...] [createblocktemplate=false]\n"
-	            "Check if one of given inputs is a kernel input at the moment.\n"
-	        );
-
-	    RPCTypeCheck(params, boost::assign::list_of(UniValue::VARR)(UniValue::VBOOL));
-
-	    UniValue inputs = params[0].get_array();
-	    bool fCreateBlockTemplate = params.size() > 1 ? params[1].get_bool() : false;
-
-	    if (vNodes.empty())
-	        throw JSONRPCError(-9, "BlackCoin is not connected!");
-
-	    if (IsInitialBlockDownload())
-	        throw JSONRPCError(-10, "BlackCoin is downloading blocks...");
-
-	    COutPoint kernel;
-	    CBlockIndex* pindexPrev = chainActive.Tip();
-	    CBlockHeader blockHeader = pindexPrev->GetBlockHeader();
-	    unsigned int nBits = GetNextTargetRequired(pindexPrev, &blockHeader, true, Params().GetConsensus());
-	    int64_t nTime = GetAdjustedTime();
-	    nTime &= ~Params().GetConsensus().nStakeTimestampMask;
-
-	    for (unsigned int idx = 0; idx < inputs.size(); idx++) {
-	    	const UniValue& input = inputs[idx];
-	    	const UniValue& o = input.get_obj();
-
-	        const UniValue& txid_v = find_value(o, "txid");
-	        if (!txid_v.isStr())
-	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing txid key");
-	        string txid = txid_v.get_str();
-	        if (!IsHex(txid))
-	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected hex txid");
-
-	        const UniValue& vout_v = find_value(o, "vout");
-	        if (!vout_v.isNum())
-	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing vout key");
-	        int nOutput = vout_v.get_int();
-	        if (nOutput < 0)
-	            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout must be positive");
-
-	        COutPoint cInput(uint256S(txid), nOutput);
-	        if (CheckKernel(pindexPrev, nBits, nTime, cInput))
-	        {
-	            kernel = cInput;
-	            break;
-	        }
-	    }
-
-
-	    UniValue result(UniValue::VOBJ);
-	    result.push_back(Pair("found", !kernel.IsNull()));
-
-	    if (kernel.IsNull())
-	        return result;
-
-	    UniValue oKernel(UniValue::VOBJ);
-	    oKernel.push_back(Pair("txid", kernel.hash.GetHex()));
-	    oKernel.push_back(Pair("vout", (int64_t)kernel.n));
-	    oKernel.push_back(Pair("time", nTime));
-	    result.push_back(Pair("kernel", oKernel));
-
-	    if (!fCreateBlockTemplate)
-	        return result;
-
-	    int64_t nFees;
-	    if (!pwalletMain->IsLocked())
-	    	pwalletMain->TopUpKeyPool();
-
-	    CReserveKey pMiningKey(pwalletMain);
-	    std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
-	    if (!pblocktemplate.get())
-	    	throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
-
-	    CBlock *pblock = &pblocktemplate->block;
-	    pblock->nTime = pblock->vtx[0].nTime = nTime;
-
-	    CDataStream ss(SER_DISK, PROTOCOL_VERSION);
-	    ss << *pblock;
-
-	    result.push_back(Pair("blocktemplate", HexStr(ss.begin(), ss.end())));
-	    result.push_back(Pair("blocktemplatefees", nFees));
-
-	    CPubKey pubkey;
-	    if (!pMiningKey.GetReservedKey(pubkey))
-	        throw JSONRPCError(RPC_MISC_ERROR, "GetReservedKey failed");
-
-	    result.push_back(Pair("blocktemplatesignkey", HexStr(pubkey)));
-
-	    return result;
-    if (fHelp || params.size() != 1)
-        throw runtime_error(
-            "estimatefee nblocks\n"
-            "\nEstimates the approximate fee per kilobyte needed for a transaction to begin\n"
-            "confirmation within nblocks blocks.\n"
-            "\nArguments:\n"
-            "1. nblocks     (numeric)\n"
-            "\nResult:\n"
-            "n              (numeric) estimated fee-per-kilobyte\n"
-            "\n"
-            "A negative value is returned if not enough transactions and blocks\n"
-            "have been observed to make an estimate.\n"
-            "\nExample:\n"
-            + HelpExampleCli("estimatefee", "6")
+    if (fHelp || params.size() < 1 || params.size() > 2)
+            throw runtime_error(
+                "checkkernel [{\"txid\":txid,\"vout\":n},...] [createblocktemplate=false]\n"
+                "Check if one of given inputs is a kernel input at the moment.\n"
             );
 
-    RPCTypeCheck(params, boost::assign::list_of(UniValue::VNUM));
+        RPCTypeCheck(params, boost::assign::list_of(UniValue::VARR)(UniValue::VBOOL));
 
-    int nBlocks = params[0].get_int();
-    if (nBlocks < 1)
-        nBlocks = 1;
+        UniValue inputs = params[0].get_array();
+        bool fCreateBlockTemplate = params.size() > 1 ? params[1].get_bool() : false;
 
-    CFeeRate feeRate = mempool.estimateFee(nBlocks);
-    if (feeRate == CFeeRate(0))
-        return -1.0;
+        if (vNodes.empty())
+            throw JSONRPCError(-9, "BlackCoin is not connected!");
 
-    return ValueFromAmount(feeRate.GetFeePerK());
+        if (IsInitialBlockDownload())
+            throw JSONRPCError(-10, "BlackCoin is downloading blocks...");
+
+        COutPoint kernel;
+        CBlockIndex* pindexPrev = chainActive.Tip();
+        CBlockHeader blockHeader = pindexPrev->GetBlockHeader();
+        unsigned int nBits = GetNextTargetRequired(pindexPrev, &blockHeader, Params().GetConsensus(), true);
+        int64_t nTime = GetAdjustedTime();
+        nTime &= ~Params().GetConsensus().nStakeTimestampMask;
+
+        for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+            const UniValue& input = inputs[idx];
+            const UniValue& o = input.get_obj();
+
+            const UniValue& txid_v = find_value(o, "txid");
+            if (!txid_v.isStr())
+                throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing txid key");
+            string txid = txid_v.get_str();
+            if (!IsHex(txid))
+                throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected hex txid");
+
+            const UniValue& vout_v = find_value(o, "vout");
+            if (!vout_v.isNum())
+                throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing vout key");
+            int nOutput = vout_v.get_int();
+            if (nOutput < 0)
+                throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout must be positive");
+
+            COutPoint cInput(uint256S(txid), nOutput);
+            if (CheckKernel(pindexPrev, nBits, nTime, cInput))
+            {
+                kernel = cInput;
+                break;
+            }
+        }
+
+        UniValue result(UniValue::VOBJ);
+        result.push_back(Pair("found", !kernel.IsNull()));
+
+        if (kernel.IsNull())
+            return result;
+
+        UniValue oKernel(UniValue::VOBJ);
+        oKernel.push_back(Pair("txid", kernel.hash.GetHex()));
+        oKernel.push_back(Pair("vout", (int64_t)kernel.n));
+        oKernel.push_back(Pair("time", nTime));
+        result.push_back(Pair("kernel", oKernel));
+
+        if (!fCreateBlockTemplate)
+            return result;
+
+        int64_t nFees;
+        if (!pwalletMain->IsLocked())
+            pwalletMain->TopUpKeyPool();
+
+        CReserveKey pMiningKey(pwalletMain);
+        std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
+        if (!pblocktemplate.get())
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
+
+        CBlock *pblock = &pblocktemplate->block;
+        pblock->nTime = pblock->vtx[0].nTime = nTime;
+
+        CDataStream ss(SER_DISK, PROTOCOL_VERSION);
+        ss << *pblock;
+
+        result.push_back(Pair("blocktemplate", HexStr(ss.begin(), ss.end())));
+        result.push_back(Pair("blocktemplatefees", nFees));
+
+        CPubKey pubkey;
+        if (!pMiningKey.GetReservedKey(pubkey))
+            throw JSONRPCError(RPC_MISC_ERROR, "GetReservedKey failed");
+
+        result.push_back(Pair("blocktemplatesignkey", HexStr(pubkey)));
+
+        return result;
 }
 
 UniValue estimatepriority(const UniValue& params, bool fHelp)

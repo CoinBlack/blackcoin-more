@@ -81,7 +81,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
     // Weighted target
     int64_t nValueIn = txPrev->vout[prevout.n].nValue;
     if (nValueIn == 0)
-        return error("CheckStakeKernelHash() : nValueIn == 0");
+        return error("CheckStakeKernelHash() : nValueIn = 0");
     arith_uint256 bnWeight = arith_uint256(nValueIn);
     bnTarget *= bnWeight;
 
@@ -96,7 +96,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
 
     if (fPrintProofOfStake)
     {
-        LogPrintf("CheckStakeKernelHash() : nStakeModifier=%s txPrev.nTime=%u txPrev.vout.hash=%s txPrev.vout.n=%u nTime=%u hashProof=%s\n",
+        LogPrintf("CheckStakeKernelHash() : nStakeModifier=%s, txPrev.nTime=%u, txPrev.vout.hash=%s, txPrev.vout.n=%u, nTime=%u, hashProof=%s\n",
             nStakeModifier.GetHex().c_str(),
             txPrev->nTime, prevout.hash.ToString(), prevout.n, nTimeTx,
             hashProofOfStake.ToString());
@@ -108,7 +108,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
 
     if (fDebug && !fPrintProofOfStake)
     {
-        LogPrintf("CheckStakeKernelHash() : nStakeModifier=%s txPrev.nTime=%u txPrev.vout.hash=%s txPrev.vout.n=%u nTime=%u hashProof=%s\n",
+        LogPrintf("CheckStakeKernelHash() : nStakeModifier=%s, txPrev.nTime=%u, txPrev.vout.hash=%s, txPrev.vout.n=%u, nTime=%u, hashProof=%s\n",
             nStakeModifier.GetHex().c_str(),
             txPrev->nTime, prevout.hash.ToString(), prevout.n, nTimeTx,
             hashProofOfStake.ToString());

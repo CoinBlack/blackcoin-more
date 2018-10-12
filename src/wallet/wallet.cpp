@@ -607,8 +607,8 @@ void CWallet::AvailableCoinsForStaking(std::vector<COutput>& vCoins) const
             if (nDepth < 1)
                 continue;
 
-			if (nDepth < Params().GetConsensus().nStakeMinConfirmations)
-				continue;
+            if (nDepth < Params().GetConsensus().nStakeMinConfirmations)
+                continue;
 
             if (pcoin->GetBlocksToMaturity() > 0)
                 continue;
@@ -624,6 +624,13 @@ void CWallet::AvailableCoinsForStaking(std::vector<COutput>& vCoins) const
             }
         }
     }
+}
+
+bool CWallet::HaveAvailableCoinsForStaking() const
+{
+    vector<COutput> vCoins;
+    AvailableCoinsForStaking(vCoins);
+    return vCoins.size() > 0;
 }
 
 // Select some coins without random shuffle or best subset approximation

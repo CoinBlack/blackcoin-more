@@ -59,6 +59,7 @@ struct Params {
     bool fPowAllowMinDifficultyBlocks;
     int64_t nTargetSpacingV1;
     bool fPowNoRetargeting;
+    bool fPoSNoRetargeting;
     int64_t nTargetSpacing;
     int64_t nTargetTimespan;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }

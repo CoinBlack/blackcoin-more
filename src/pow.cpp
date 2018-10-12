@@ -12,7 +12,7 @@
 #include "util.h"
 #include <stdio.h>
 
-static arith_uint256 GetTargetLimit(int64_t nTime, bool fProofOfStake, const Consensus::Params& params)
+static arith_uint256 GetTargetLimit(int64_t nTime, const Consensus::Params& params, bool fProofOfStake)
 {
     uint256 nLimit;
 
@@ -28,7 +28,7 @@ static arith_uint256 GetTargetLimit(int64_t nTime, bool fProofOfStake, const Con
     return UintToArith256(nLimit);
 }
 
-unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, bool fProofOfStake, const Consensus::Params& params)
+unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params, bool fProofOfStake)
 {
     unsigned int nTargetLimit = UintToArith256(params.powLimit).GetCompact();
 
@@ -43,13 +43,18 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHe
         if (pindexPrevPrev->pprev == NULL)
             return nTargetLimit; // second block
 
-    return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params);
+    return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params, fProofOfStake);
 }
 
-unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params, bool fProofOfStake)
 {
-    if (params.fPowNoRetargeting)
+    if (fProofOfStake) {
+        if (params.fPoSNoRetargeting)
             return pindexLast->nBits;
+    } else {
+        if (params.fPowNoRetargeting)
+            return pindexLast->nBits;
+    }
 
     int64_t nActualSpacing = pindexLast->GetBlockTime() - nFirstBlockTime;
     int64_t nTargetSpacing = params.IsProtocolV2(pindexLast->GetBlockTime()) ? params.nTargetSpacing : params.nTargetSpacingV1;
@@ -61,7 +66,7 @@ unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t 
         nActualSpacing = nTargetSpacing*10;
 
     // retarget with exponential moving toward target spacing
-    const arith_uint256 bnTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), pindexLast->IsProofOfStake(), params);
+    const arith_uint256 bnTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), params, fProofOfStake);
     arith_uint256 bnNew;
     bnNew.SetCompact(pindexLast->nBits);
     int64_t nInterval = params.nTargetTimespan / nTargetSpacing;
