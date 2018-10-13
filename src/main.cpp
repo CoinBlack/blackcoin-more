@@ -1290,7 +1290,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
             LogPrint("mempool", "Rate limit dFreeCount: %g => %g\n", dFreeCount, dFreeCount+nSize);
         }
 
-        if (fRejectAbsurdFee && nFees > maxTxFee)
+        if (nAbsurdFee && nFees > maxTxFee)
             return state.Invalid(false,
                 REJECT_HIGHFEE, "absurdly-high-fee",
                 strprintf("%d > %d", nFees, maxTxFee));
@@ -1486,7 +1486,8 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
             if (insecure_rand()%MAX_DOUBLESPEND_BLOOM == 0)
                 doubleSpendFilter.clear();
             doubleSpendFilter.insert(relayForOutpoint);
-            RelayTransaction(tx);
+            CFeeRate txFeeRate = CFeeRate(0);
+            RelayTransaction(tx, txFeeRate);
         }
         else
         {
