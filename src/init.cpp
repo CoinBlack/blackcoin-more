@@ -479,11 +479,13 @@ std::string LicenseInfo()
     const std::string URL_SOURCE_CODE = "<https://gitlab.com/blackcoin/blackcoin-more>";
     const std::string URL_WEBSITE = "<http://blackcoin.org/>";
     // todo: remove urls from translations on next change
-    return FormatParagraph(strprintf("Copyright (C) 2009-%i The Bitcoin Core Developers", COPYRIGHT_YEAR)) + "\n" +
+
+    // return FormatParagraph(strprintf(_("Copyright (C) %i-%i %s"), 2009, COPYRIGHT_YEAR, CopyrightHolders())) + "\n" +
+    return FormatParagraph(strprintf("Copyright (C) %i-%i The Bitcoin Core Developers", 2009, COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph("Copyright (C) 2014-2018 The Blackcoin Developers") + "\n" +
+           FormatParagraph(strprintf("Copyright (C) %i-%i The Blackcoin Developers", 2014, 2018)) + "\n" +
            "\n" +
-           FormatParagraph(strprintf("Copyright (C) 2018-%i The Blackcoin More Developers", COPYRIGHT_YEAR)) + "\n" +
+           FormatParagraph(strprintf("Copyright (C) %i-%i The Blackcoin More Developers", 2018, COPYRIGHT_YEAR)) + "\n" +
            "\n" +
            FormatParagraph(strprintf(_("Please contribute if you find Blackcoin More useful. "
                        "Visit %s for further information about the software."),
@@ -753,7 +755,7 @@ void InitLogging()
     fLogIPs = GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Blackcoin version %s\n", FormatFullVersion());
+    LogPrintf(PACKAGE_NAME " version %s\n", FormatFullVersion());
 }
 
 /** Initialize bitcoin.

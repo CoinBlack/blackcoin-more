@@ -17,7 +17,7 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "Blackcoin"
-            VALUE "FileDescription",    "blackmore-cli (JSON-RPC client for Blackcoin More)"
+            VALUE "FileDescription",    "blackmore-cli (JSON-RPC client for " PACKAGE_NAME ")"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "blackmore-cli"
             VALUE "LegalCopyright",     COPYRIGHT_STR

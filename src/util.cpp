@@ -3,10 +3,6 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
-#endif
-
 #include "util.h"
 
 #include "chainparamsbase.h"
@@ -839,9 +835,18 @@ int GetNumCores()
 #endif
 }
 
+std::string CopyrightHolders(const std::string& strPrefix)
+{
+    std::string strCopyrightHolders =
+        strPrefix + "The Bitcoin Core developers" +
+        "\n" + strPrefix + "The Blackcoin developers" +
+        "\n" + strPrefix + "The Blackcoin More developers";
+
+    return strCopyrightHolders;
+}
+
 // Obtain the application startup time (used for uptime calculation)
 int64_t GetStartupTime()
 {
     return nStartupTime;
 }
-
