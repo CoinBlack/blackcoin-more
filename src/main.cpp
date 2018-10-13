@@ -26,7 +26,6 @@
 #include "primitives/block.h"
 #include "primitives/transaction.h"
 #include "random.h"
-#include "script/drivechain.h"
 #include "script/script.h"
 #include "script/sigcache.h"
 #include "script/standard.h"
@@ -1898,113 +1897,6 @@ void UpdateCoins(const CTransaction& tx, CValidationState &state, CCoinsViewCach
     UpdateCoins(tx, state, inputs, txundo, nHeight);
 }
 
-class CachingTransactionSignatureCheckerWithBlockReader : public CachingTransactionSignatureChecker, public BaseBlockReader 
-{
-    typedef std::pair<uint256, CTransaction> CoinbaseCacheItem;
-    typedef boost::multi_index_container<
-        CoinbaseCacheItem,
-        boost::multi_index::indexed_by<
-            boost::multi_index::sequenced<>,
-            boost::multi_index::ordered_unique<
-                boost::multi_index::member<CoinbaseCacheItem, uint256, &CoinbaseCacheItem::first>
-            >
-        >
-    > CoinbaseCacheContainer;
-    
-    int nHeight;
-    uint256 hash;
-    
-    mutable boost::mutex mutexCache;
-    mutable CoinbaseCacheContainer cacheCoinbase; // block hash -> block coinbase
-
-    void UpdateCache(const CoinbaseCacheItem& coinbase) const;
-
-    CTransaction ReadBlockCoinbase(CBlockIndex* pblockindex) const;
-
-public:
-const unsigned int MAX_COUNT_ACKS_CACHE = 1000;
-
-public:
-    virtual int GetBlockNumber() const;
-
-    virtual CTransaction GetBlockCoinbase(int blockNumber) const;
-
-    virtual bool CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positive, int& negative) const;
-
-    CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, bool storeIn, int height);           
-};
-
-CachingTransactionSignatureCheckerWithBlockReader::CachingTransactionSignatureCheckerWithBlockReader(const CTransaction* txToIn, unsigned int nInIn, bool storeIn, int height)
-    : CachingTransactionSignatureChecker(txToIn, nInIn, storeIn), nHeight(height), hash(txToIn->GetHash())
-{
-}
-
-int CachingTransactionSignatureCheckerWithBlockReader::GetBlockNumber() const
-{
-    return nHeight;
-}
-
-CTransaction CachingTransactionSignatureCheckerWithBlockReader::GetBlockCoinbase(int blockNumber) const
-{
-    //AssertLockHeld(cs_main);
-
-    int nHeight = blockNumber;
-    if (nHeight < 0 || nHeight > chainActive.Height())
-        return CTransaction();
-
-    CBlockIndex* pblockindex = chainActive[nHeight];
-    
-    {
-        boost::lock_guard<boost::mutex> lock(mutexCache);
-        CoinbaseCacheContainer::nth_index<1>::type::iterator it = cacheCoinbase.get<1>().find(*pblockindex->phashBlock);
-        if (it != cacheCoinbase.get<1>().end())
-            return it->second;
-    }
-
-    CTransaction coinbase = ReadBlockCoinbase(pblockindex);
-    if (!coinbase.IsNull())
-        UpdateCache(std::make_pair(*pblockindex->phashBlock, coinbase));
-
-    return coinbase;
-}
-
-CTransaction CachingTransactionSignatureCheckerWithBlockReader::ReadBlockCoinbase(CBlockIndex* pblockindex) const
-{
-    
-    CBlock block;
-
-    if (fHavePruned && !(pblockindex->nStatus & BLOCK_HAVE_DATA) && pblockindex->nTx > 0)
-        return CTransaction();
-
-    if (!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus()))
-        return CTransaction();
-
-    if (block.vtx.empty())
-        return CTransaction();
-
-    if (!block.vtx[0].IsCoinBase())
-        return CTransaction();
-
-    return block.vtx[0];
-}
-
-void CachingTransactionSignatureCheckerWithBlockReader::UpdateCache(const CachingTransactionSignatureCheckerWithBlockReader::CoinbaseCacheItem& coinbase) const
-{
-    boost::lock_guard<boost::mutex> lock(mutexCache);
-    std::pair<CoinbaseCacheContainer::iterator, bool> result = cacheCoinbase.push_front(coinbase);
-    if (!result.second) {
-        cacheCoinbase.relocate(cacheCoinbase.begin(), result.first);
-    } else if (cacheCoinbase.size() > MAX_COUNT_ACKS_CACHE) {
-        cacheCoinbase.pop_back();
-    }
-}
-
-bool CachingTransactionSignatureCheckerWithBlockReader::CountAcks(const std::vector<unsigned char>& chainId, int periodAck, int periodLiveness, int& positiveAcks, int& negativeAcks) const
-{
-    std::vector<unsigned char> hashSpend(hash.begin(), hash.end());
-    return ::CountAcks(hashSpend, chainId, periodAck, periodLiveness, positiveAcks, negativeAcks, *this);
-}
-
 bool CScriptCheck::operator()() {
     const CScript &scriptSig = ptxTo->vin[nIn].scriptSig;
     if (!VerifyScript(scriptSig, scriptPubKey, nFlags, CachingTransactionSignatureChecker(ptxTo, nIn, cacheStore), &error)) {
@@ -2082,8 +1974,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
 {
     if (!tx.IsCoinBase())
     {
-        int height = GetSpendHeight(inputs);
-        if (!Consensus::CheckTxInputs(tx, state, inputs, height))
+        if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs)))
             return false;
 
         if (pvChecks)
@@ -2103,7 +1994,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
                 assert(coins);
 
                 // Verify signature
-                CScriptCheck check(*coins, tx, i, flags, cacheStore, height);
+                CScriptCheck check(*coins, tx, i, flags, cacheStore);
                 if (pvChecks) {
                     pvChecks->push_back(CScriptCheck());
                     check.swap(pvChecks->back());
@@ -2116,7 +2007,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
                         // avoid splitting the network between upgraded and
                         // non-upgraded nodes.
                         CScriptCheck check2(*coins, tx, i,
-                                flags & ~STANDARD_NOT_MANDATORY_VERIFY_FLAGS, cacheStore, height);
+                                flags & ~STANDARD_NOT_MANDATORY_VERIFY_FLAGS, cacheStore);
                         if (check2())
                             return state.Invalid(false, REJECT_NONSTANDARD, strprintf("non-mandatory-script-verify-flag (%s)", ScriptErrorString(check.GetScriptError())));
                     }

@@ -34,18 +34,6 @@ static const int MAX_SCRIPT_SIZE = 10000;
 // otherwise as UNIX timestamp.
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 
-// Maximum chain id length
-static const int MAX_CHAIN_ID_LENGTH = 20;
-
-// Maximum chain ack period (in blocks)
-static const int MAX_ACK_PERIOD = 144;
-
-// Minimum chain ack liveness period
-static const int MIN_LIVENESS_PERIOD = 100;
-
-// Maximum chain ack liveness period
-static const int MAX_LIVENESS_PERIOD = 144;
-
 template <typename T>
 std::vector<unsigned char> ToByteVector(const T& in)
 {
@@ -181,8 +169,7 @@ enum opcodetype
     OP_NOP2 = OP_CHECKLOCKTIMEVERIFY,
     OP_NOP3 = 0xb2,
     OP_CHECKSEQUENCEVERIFY = OP_NOP3,
-	OP_COUNT_ACKS = 0xb3,
-	OP_NOP4 = OP_COUNT_ACKS,
+    OP_NOP4 = 0xb3,
     OP_NOP5 = 0xb4,
     OP_NOP6 = 0xb5,
     OP_NOP7 = 0xb6,
