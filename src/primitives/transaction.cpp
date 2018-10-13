@@ -57,7 +57,7 @@ uint256 CTxOut::GetHash() const
 
 std::string CTxOut::ToString() const
 {
-	if (IsEmpty()) return "CTxOut(empty)";
+    if (IsEmpty()) return "CTxOut(empty)";
     return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, HexStr(scriptPubKey).substr(0, 30));
 }
 
@@ -71,7 +71,7 @@ uint256 CMutableTransaction::GetHash() const
 
 uint256 CMutableTransaction::GetNormalizedHash() const
 {
-    return SignatureHash(CScript(), *this, 0, SIGHASH_ALL);
+    return SignatureHash(CScript(), *this, 0, SIGHASH_ALL, 0);
 }
 
 void CTransaction::UpdateHash() const
