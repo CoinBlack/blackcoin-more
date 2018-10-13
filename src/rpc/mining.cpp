@@ -100,7 +100,7 @@ UniValue getnetworkhashps(const UniValue& params, bool fHelp)
     return GetNetworkHashPS(params.size() > 0 ? params[0].get_int() : 120, params.size() > 1 ? params[1].get_int() : -1);
 }
 
-UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript)
+UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript)
 {
     static const int nInnerLoopCount = 0x10000;
     int nHeightStart = 0;
@@ -172,7 +172,7 @@ UniValue generate(const UniValue& params, bool fHelp)
         nMaxTries = params[1].get_int();
     }
 
-    boost::shared_ptr<CReserveScript> coinbaseScript;
+    std::shared_ptr<CReserveScript> coinbaseScript;
     GetMainSignals().ScriptForMining(coinbaseScript);
 
     // If the keypool is exhausted, no script is returned at all.  Catch this.
@@ -209,12 +209,13 @@ UniValue generatetoaddress(const UniValue& params, bool fHelp)
         nMaxTries = params[2].get_int();
     }
 
-    CBitcoinAddress address(params[1].get_str());
-    if (!address.IsValid())
+    CTxDestination destination = DecodeDestination(params[1].get_str());
+    if (!IsValidDestination(destination)) {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address");
+    }
     
-    boost::shared_ptr<CReserveScript> coinbaseScript(new CReserveScript());
-    coinbaseScript->reserveScript = GetScriptForDestination(address.Get());
+    std::shared_ptr<CReserveScript> coinbaseScript(new CReserveScript());
+    coinbaseScript->reserveScript = GetScriptForDestination(destination);
 
     return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false);
 }
