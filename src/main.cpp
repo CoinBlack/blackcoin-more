@@ -3404,7 +3404,7 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const 
                         REJECT_OBSOLETE, "bad-version");
 
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
+    if (fCheckPOW && !CheckProofOfWork(block.GetHash(), block.nBits, consensusParams))
         return state.DoS(50, error("CheckBlockHeader(): proof of work failed"),
                         REJECT_INVALID, "high-hash");
     return true;

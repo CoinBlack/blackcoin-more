@@ -960,14 +960,6 @@ void BitcoinGUI::showEvent(QShowEvent *event)
     optionsAction->setEnabled(true);
 }
 
-void BitcoinGUI::showEvent(QShowEvent *event)
-{
-    // enable the debug window when the main window shows up
-    openRPCConsoleAction->setEnabled(true);
-    aboutAction->setEnabled(true);
-    optionsAction->setEnabled(true);
-}
-
 #ifdef ENABLE_WALLET
 void BitcoinGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label)
 {

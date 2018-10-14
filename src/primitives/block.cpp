@@ -13,9 +13,9 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-	if (nVersion > 6)
-	        return SerializeHash(*this);
-	    return GetPoWHash();
+    if (nVersion > 6)
+            return SerializeHash(*this);
+        return GetPoWHash();
 }
 
 uint256 CBlockHeader::GetPoWHash() const
@@ -34,8 +34,8 @@ std::string CBlock::ToString() const
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
         nTime, nBits, nNonce,
-		vtx.size(),
-		HexStr(vchBlockSig.begin(), vchBlockSig.end()));
+        vtx.size(),
+        HexStr(vchBlockSig.begin(), vchBlockSig.end()));
     for (unsigned int i = 0; i < vtx.size(); i++)
     {
         s << "  " << vtx[i].ToString() << "\n";

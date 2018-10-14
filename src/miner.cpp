@@ -71,8 +71,7 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
 
     // Updating time can change work required on testnet:
     if (consensusParams.fPowAllowMinDifficultyBlocks)
-    	pblock->nBits =  GetNextTargetRequired(pindexPrev, pblock, consensusParams, pblock->IsProofOfStake());
-
+        pblock->nBits =  GetNextTargetRequired(pindexPrev, pblock, consensusParams, pblock->IsProofOfStake());
 
     return nNewTime - nOldTime;
 }
@@ -434,7 +433,7 @@ void static BitcoinMiner(const CChainParams& chainparams)
             //
             unsigned int nTransactionsUpdatedLast = mempool.GetTransactionsUpdated();
             CBlockIndex* pindexPrev = chainActive.Tip();
-            int64_t *nFees;
+            int64_t* nFees = 0;
             std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(chainparams, coinbaseScript->reserveScript, nFees, false));
             if (!pblocktemplate.get())
             {
