@@ -1119,12 +1119,12 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     {
         COutPoint outpoint = txin.prevout;
         // A respend is a tx that conflicts with a member of the pool
-        auto itConflicting = pool.mapNextTx.find(txin.prevout);
+        auto itConflicting = pool.mapNextTx.find(outpoint);
         if (itConflicting != pool.mapNextTx.end())
         {
             fRespend = true;
             // Relay only one tx per respent outpoint, but not if tx is equivalent to pool member
-            if (!doubleSpendFilter.contains(outpoint) && !tx.IsEquivalentTo(*pool.mapNextTx[outpoint].ptx))
+            if (!doubleSpendFilter.contains(outpoint) && !tx.IsEquivalentTo(*itConflicting->second))
             {
                 relayForOutpoint = outpoint;
                 break;
