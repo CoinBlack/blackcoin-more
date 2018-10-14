@@ -323,14 +323,6 @@ public:
         fMineBlocksOnDemand = true;
         fTestnetToBeDeprecatedFieldRPC = false;
 
-        checkpointData = (CCheckpointData) {
-            boost::assign::map_list_of
-            ( 0, uint256S("0xf42eb1d043cb8003e491b48e6404f7c3465df16c04ba9370b8307fad87b21216")),
-            0,
-            0,
-            0
-        };
-
     }
 };
 static CRegTestParams regTestParams;
