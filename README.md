@@ -10,7 +10,7 @@ Blackcoin is a decentralised digital currency with near-instant transaction spee
 introduced by the Blackcoin development team.
 
 Blackcoin More is the name of open source software which enables the use of this currency. It takes Blackcoin to the next level by building upon
-Bitcoin Core 0.12.1 with some patches from newer Bitcoin Core versions to offer performance enhancements, wider compatibility with third party services and a more advanced base.
+Bitcoin Core 0.12.2 with some patches from newer Bitcoin Core versions to offer performance enhancements, wider compatibility with third party services and a more advanced base.
 
 For more information, as well as an immediately useable, binary version of the Blackcoin More software, see https://blackcoin.org.
 
