@@ -116,6 +116,11 @@ CAmount CTransaction::GetValueOut() const
     return nValueOut;
 }
 
+unsigned int CTransaction::GetTotalSize() const
+{
+    return ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION);
+}
+
 double CTransaction::ComputePriority(double dPriorityInputs, unsigned int nTxSize) const
 {
     nTxSize = CalculateModifiedSize(nTxSize);
@@ -148,7 +153,7 @@ std::string CTransaction::ToString() const
     str += strprintf("CTransaction(hash=%s, ver=%d, nTime=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
         GetHash().ToString().substr(0,10),
         nVersion,
-		nTime,
+        nTime,
         vin.size(),
         vout.size(),
         nLockTime);
