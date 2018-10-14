@@ -470,9 +470,7 @@ boost::filesystem::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    pathRet /= "Library/Application Support";
-    TryCreateDirectory(pathRet);
-    return pathRet / "Blackmore";
+    return pathRet / "Library/Application Support/Blackmore";
 #else
     // Unix
     return pathRet / ".blackmore";

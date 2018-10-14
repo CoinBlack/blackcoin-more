@@ -1,5 +1,5 @@
-#!/usr/bin/env python2
-# Copyright (c) 2014-2015 The Bitcoin Core developers
+#!/usr/bin/env python3
+# Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,28 +9,6 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
-
-
-def check_array_result(object_array, to_match, expected):
-    """
-    Pass in array of JSON objects, a dictionary with key/value pairs
-    to match against, and another dictionary with expected key/value
-    pairs.
-    """
-    num_matched = 0
-    for item in object_array:
-        all_match = True
-        for key,value in to_match.items():
-            if item[key] != value:
-                all_match = False
-        if not all_match:
-            continue
-        for key,value in expected.items():
-            if item[key] != value:
-                raise AssertionError("%s : expected %s=%s"%(str(item), str(key), str(value)))
-            num_matched = num_matched+1
-    if num_matched == 0:
-        raise AssertionError("No objects matched %s"%(str(to_match)))
 
 class KeyPoolTest(BitcoinTestFramework):
 
@@ -78,9 +56,11 @@ class KeyPoolTest(BitcoinTestFramework):
             assert(e.error['code']==-12)
 
         # refill keypool with three new addresses
-        nodes[0].walletpassphrase('test', 12000)
+        nodes[0].walletpassphrase('test', 1)
         nodes[0].keypoolrefill(3)
-        nodes[0].walletlock()
+        # test walletpassphrase timeout
+        time.sleep(1.1)
+        assert_equal(nodes[0].getwalletinfo()["unlocked_until"], 0)
 
         # drain them by mining
         nodes[0].generate(1)
