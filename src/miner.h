@@ -27,15 +27,13 @@ struct CBlockTemplate
     std::vector<int64_t> vTxSigOps;
 };
 
-/** Run the miner threads */
-void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams);
-/** Sign a block */
-bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees);
+CAmount GetProofOfWorkReward();
 /** Generate a new block, without valid proof-of-work */
 CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& scriptPubKeyIn, int64_t* nFees = 0, bool fProofOfStake = false);
 /** Modify the extranonce in a block */
 void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
 int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev);
-bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams);
-CAmount GetProofOfWorkReward();
+/** Run the miner threads */
+void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams);
+
 #endif // BITCOIN_MINER_H

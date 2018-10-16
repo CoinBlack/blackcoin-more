@@ -105,10 +105,12 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-//      Deployment of BIP68, BIP112, and BIP113.
-//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
-//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
+        /*
+        Deployment of BIP68, BIP112, and BIP113.
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
+        */
 
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
@@ -206,11 +208,11 @@ public:
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
-        consensus.nLastPOWBlock = 10000;
-        consensus.nStakeTimestampMask = 0xf; // 15
-        consensus.nCoinbaseMaturity = 50;
-        consensus.nStakeMinConfirmations = 50;
-        consensus.nStakeMinAge = 1 * 60 * 60; // 1 hour
+        consensus.nLastPOWBlock = 0x7fffffff;
+        consensus.nStakeTimestampMask = 0xf;
+        consensus.nCoinbaseMaturity = 10;
+        consensus.nStakeMinConfirmations = 10;
+        consensus.nStakeMinAge = 8 * 60 * 60;
 
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
@@ -221,6 +223,12 @@ public:
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
+
+        /*
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
+        */
 
         nPruneAfterHeight = 1000;
 
@@ -270,11 +278,11 @@ public:
         consensus.nMajorityEnforceBlockUpgrade = 51;
         consensus.nMajorityRejectBlockOutdated = 75;
         consensus.nMajorityWindow = 100;
-        consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.posLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.posLimitV2 = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nTargetTimespan = 16 * 60; // 16 mins
-        consensus.nTargetSpacingV1 = 60;
+        consensus.nTargetSpacingV1 = 64;
         consensus.nTargetSpacing = 64;
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
         consensus.BIP34Hash = uint256();
@@ -290,18 +298,19 @@ public:
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
-//      Deployment of BIP68, BIP112, and BIP113.
-//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
-//      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
+        /*
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
+        */
 
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
         consensus.nLastPOWBlock = 1000;
         consensus.nStakeTimestampMask = 0xf;
-        consensus.nCoinbaseMaturity = 50;
-        consensus.nStakeMinConfirmations = 50;
+        consensus.nCoinbaseMaturity = 10;
+        consensus.nStakeMinConfirmations = 10;
         consensus.nStakeMinAge = 1 * 60 * 60;
 
         pchMessageStart[0] = 0x70;
@@ -312,10 +321,10 @@ public:
         nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1504695029, 17, 0x207fffff, 7, 0);
+        genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xf42eb1d043cb8003e491b48e6404f7c3465df16c04ba9370b8307fad87b21216"));
-        assert(genesis.hashMerkleRoot == uint256S("0xca4884e59066db370e5bf6d368c49d5ec8c7dc1161109f71be5f17c6aeb0e30f"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
+        assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();  //! Regtest mode doesn't have any DNS seeds.

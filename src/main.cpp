@@ -1630,9 +1630,11 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus:
         return error("%s: Deserialize or I/O error - %s at %s", __func__, e.what(), pos.ToString());
     }
 
-    // Check the header
-//    if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
-//        return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
+    // Check headers for proof-of-work blocks
+    if (block.GetHash() != consensusParams.hashGenesisBlock && block.IsProofOfWork()) {
+        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
+            return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
+    }
 
     return true;
 }
@@ -2318,14 +2320,19 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return true;
     }
 
-    // Reject proof of work at height nLastPOWBlock
+    // Check block version
+    if (block.nVersion < 7 && chainparams.GetConsensus().IsProtocolV2(block.GetBlockTime()))
+        return state.DoS(100, error("%s: rejected nVersion=%d block", __func__, block.nVersion),
+                        REJECT_OBSOLETE, "bad-version");
+
+    // Reject proof of work at height > nLastPOWBlock
     if (block.IsProofOfWork() && pindex->nHeight > chainparams.GetConsensus().nLastPOWBlock)
-        return state.DoS(100, error("ConnectBlock(): reject proof-of-work at height %d", pindex->nHeight),
+        return state.DoS(100, error("%s: reject proof-of-work at height %d",  __func__, pindex->nHeight),
                         REJECT_INVALID, "bad-pow-height");
-    
+
     // Check difficulty
     if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
-        return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
+         return state.DoS(100, error("%s: incorrect difficulty", __func__),
                         REJECT_INVALID, "bad-diffbits");
 
     pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : pindex->GetBlockHash());
@@ -2412,11 +2419,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
-// Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY) using versionbits logic.
-//    int nLockTimeFlags = 0;
-//    if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {
-//        flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
-//    }
+    /*
+    Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY) using versionbits logic.
+    int nLockTimeFlags = 0;
+    if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {
+        flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
+    }
+    */
 
     int64_t nTime2 = GetTimeMicros(); nTimeForks += nTime2 - nTime1;
     LogPrint("bench", "    - Fork checks: %.2fms [%.2fs]\n", 0.001 * (nTime2 - nTime1), nTimeForks * 0.000001);
@@ -3399,14 +3408,7 @@ static bool CheckBlockSignature(const CBlock& block)
 
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW)
 {
-    if (block.nVersion < 7 && Params().GetConsensus().IsProtocolV2(block.GetBlockTime()))
-            return state.Invalid(error("%s: rejected nVersion=%d block", __func__, block.nVersion),
-                        REJECT_OBSOLETE, "bad-version");
-
-    // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetHash(), block.nBits, consensusParams))
-        return state.DoS(50, error("CheckBlockHeader(): proof of work failed"),
-                        REJECT_INVALID, "high-hash");
+    // This is redundant for proof-of-stake currency as blocks have to be fully downloaded to be checked
     return true;
 }
 
@@ -3451,21 +3453,23 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
     if (block.vtx.empty() || !block.vtx[0].IsCoinBase())
         return state.DoS(100, error("CheckBlock(): first tx is not coinbase"),
                          REJECT_INVALID, "bad-cb-missing");
+
     for (unsigned int i = 1; i < block.vtx.size(); i++)
         if (block.vtx[i].IsCoinBase())
             return state.DoS(100, error("CheckBlock(): more than one coinbase"),
                              REJECT_INVALID, "bad-cb-multiple");
+
     // Check coinbase timestamp
     if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime))
-            return state.DoS(25, error("CheckBlock(): coinbase timestamp is too early"),
+            return state.DoS(50, error("CheckBlock(): coinbase timestamp is too early"),
                              REJECT_INVALID, "bad-cb-time");
+
     // Check coinstake timestamp
     if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
             return state.DoS(50, error("CheckBlock(): coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", block.GetBlockTime(), block.vtx[1].nTime),
                             REJECT_INVALID, "bad-cs-time");
 
-    if (block.IsProofOfStake())
-    {
+    if (block.IsProofOfStake()) {
             // Coinbase output must be empty if proof-of-stake block
             if (block.vtx[0].vout.size() != 1 || !block.vtx[0].vout[0].IsEmpty())
                 return state.DoS(100, error("CheckBlock(): coinbase output not empty for proof-of-stake block"),
@@ -3480,6 +3484,11 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
                     return state.DoS(100, error("CheckBlock(): more than one coinstake"),
                                      REJECT_INVALID, "bad-cs-multiple");
     }
+
+    // Check proof of work hash
+    if (block.IsProofOfWork() && fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
+        return state.DoS(100, error("CheckBlock(): proof of work failed"),
+                        REJECT_INVALID, "high-hash");
 
     // Check proof-of-stake block signature
     if (fCheckSig && !CheckBlockSignature(block))
@@ -3590,6 +3599,100 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
     }
 
     return true;
+}
+
+bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams)
+{
+    uint256 hashBlock = pblock->GetHash();
+
+    if(!pblock->IsProofOfStake())
+        return error("CheckStake() : %s is not a proof-of-stake block", hashBlock.GetHex());
+
+    CValidationState state;
+    // verify hash target and signature of coinstake tx
+    if (!CheckProofOfStake(mapBlockIndex[pblock->hashPrevBlock], pblock->vtx[1], pblock->nBits, state))
+        return error("CheckStake() : proof-of-stake checking failed");
+
+    //// debug print
+    LogPrintf("%s\n", pblock->ToString());
+    LogPrintf("out %s\n", FormatMoney(pblock->vtx[1].GetValueOut()));
+
+    // Found a solution
+    {
+        LOCK(cs_main);
+        if (pblock->hashPrevBlock != chainActive.Tip()->GetBlockHash())
+            return error("CheckStake() : generated block is stale");
+
+        // Track how many getdata requests this block gets
+        {
+            LOCK(wallet.cs_wallet);
+            wallet.mapRequestCount[hashBlock] = 0;
+        }
+
+        // Process this block the same as if we had received it from another node
+        if (!ProcessNewBlock(state, chainparams, NULL, pblock, true, NULL))
+            return error("CheckStake() : ProcessNewBlock, block not accepted");
+    }
+
+    return true;
+}
+
+// novacoin: attempt to generate suitable proof-of-stake
+bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
+{
+    // if we are trying to sign
+    // something except proof-of-stake block template
+    if (!block.vtx[0].vout[0].IsEmpty()){
+        LogPrintf("something except proof-of-stake block\n");
+        return false;
+    }
+
+    // if we are trying to sign
+    // a complete proof-of-stake block
+    if (block.IsProofOfStake()){
+        LogPrintf("trying to sign a complete proof-of-stake block\n");
+        return true;
+    }
+
+    static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // startup timestamp
+
+    CKey key;
+    CMutableTransaction txCoinBase(block.vtx[0]);
+    CMutableTransaction txCoinStake;
+    txCoinStake.nTime = GetAdjustedTime();
+    txCoinStake.nTime &= ~Params().GetConsensus().nStakeTimestampMask;
+
+    int64_t nSearchTime = txCoinStake.nTime; // search to current time
+
+    if (nSearchTime > nLastCoinStakeSearchTime)
+    {
+        if (wallet.CreateCoinStake(wallet, block.nBits, 1, nFees, txCoinStake, key))
+        {
+            if (txCoinStake.nTime >= pindexBestHeader->GetPastTimeLimit()+1)
+            {
+                // make sure coinstake would meet timestamp protocol
+                // as it would be the same as the block timestamp
+                txCoinBase.nTime = block.nTime = txCoinStake.nTime;
+                block.vtx[0] = txCoinBase;
+
+                // we have to make sure that we have no future timestamps in
+                // our transactions set
+                for (vector<CTransaction>::iterator it = block.vtx.begin(); it != block.vtx.end();)
+                    if (it->nTime > block.nTime) { it = block.vtx.erase(it); } else { ++it; }
+
+                block.vtx.insert(block.vtx.begin() + 1, txCoinStake);
+
+                block.hashMerkleRoot = BlockMerkleRoot(block);
+
+                // append a signature to our block
+                return key.Sign(block.GetHash(), block.vchBlockSig);
+            }
+        }
+        nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
+        nLastCoinStakeSearchTime = nSearchTime;
+    }
+
+    return false;
 }
 
 static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex=NULL)
@@ -3781,7 +3884,7 @@ bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams,
     if (!ContextualCheckBlock(block, state, pindexPrev))
         return error("%s: Consensus::ContextualCheckBlock: %s", __func__, FormatStateMessage(state));
     if (!ConnectBlock(block, state, &indexDummy, viewNew, chainparams, true))
-        return false;
+        return error("%s: Consensus::ConnectBlock: %s", __func__, FormatStateMessage(state));
     assert(state.IsValid());
 
     return true;
