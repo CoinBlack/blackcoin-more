@@ -76,7 +76,7 @@ class CTxMemPool;
 class CTxMemPoolEntry
 {
 private:
-shared_ptr<const CTransaction> tx;
+    std::shared_ptr<const CTransaction> tx;
     CAmount nFee;              //!< Cached to avoid expensive parent-transaction lookups
     size_t nTxSize;            //!< ... and avoid recomputing tx size
     size_t nModSize;           //!< ... and modified size for priority
