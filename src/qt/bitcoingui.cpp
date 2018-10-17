@@ -533,7 +533,9 @@ void BitcoinGUI::setClientModel(ClientModel *clientModel)
         walletFrame->setClientModel(nullptr);
 #endif // ENABLE_WALLET
         unitDisplayControl->setOptionsModel(nullptr);
-        connectionsControl->setClientModel(nullptr);
+
+        // TODO: FIX
+        // connectionsControl->setClientModel(nullptr);
     }
 }
 
