@@ -636,6 +636,7 @@ void CNode::SweepBanned()
     banmap_t::iterator it = setBanned.begin();
     while(it != setBanned.end())
     {
+        CSubNet subNet = (*it).first;
         CBanEntry banEntry = (*it).second;
         if(now > banEntry.nBanUntil)
         {

@@ -38,9 +38,6 @@
 /** Maximum size of http request (request line + headers) */
 static const size_t MAX_HEADERS_SIZE = 8192;
 
-/** Maximum size of http request (request line + headers) */
-static const size_t MAX_HEADERS_SIZE = 8192;
-
 /** HTTP request work item */
 class HTTPWorkItem : public HTTPClosure
 {
