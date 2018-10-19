@@ -574,7 +574,7 @@ UniValue getnormalizedtxid(const UniValue& params, bool fHelp)
 {
 	if (fHelp || params.size() != 1)
 	        throw runtime_error(
-	        		            "getnormalizedtxid <hex string>\n"
+	        		            "getnormalizedtxid \"hexstring\"\n"
 	        		            "Return the normalized transaction ID.");
 	// parse hex string from parameter
 	CTransaction tx;
