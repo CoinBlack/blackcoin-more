@@ -3105,6 +3105,7 @@ bool ActivateBestChain(CValidationState &state, const CChainParams& chainparams,
 
         const CBlockIndex *pindexFork;
         bool fInitialDownload;
+        int nNewHeight;
         {
             LOCK(cs_main);
             CBlockIndex *pindexOldTip = chainActive.Tip();
