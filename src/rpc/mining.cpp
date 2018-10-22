@@ -116,7 +116,7 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
     UniValue blockHashes(UniValue::VARR);
     while (nHeight < nHeightEnd)
     {
-        std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), coinbaseScript->reserveScript, 0, false));
+        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, 0, false));
         if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
         CBlock *pblock = &pblocktemplate->block;
@@ -579,7 +579,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             pblocktemplate = NULL;
         }
         CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = CreateNewBlock(Params(), scriptDummy, 0, false);
+        pblocktemplate = BlockAssembler(Params()).CreateNewBlock(scriptDummy, 0, false);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
 
@@ -896,7 +896,7 @@ UniValue checkkernel(const UniValue& params, bool fHelp)
             pwalletMain->TopUpKeyPool();
 
         CReserveKey pMiningKey(pwalletMain);
-        std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), pMiningKey.reserveScript, &nFees, true));
+        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(pMiningKey.reserveScript, &nFees, true));
         if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
 
