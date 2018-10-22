@@ -3697,7 +3697,7 @@ bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams
         }
 
         // Process this block the same as if we had received it from another node
-        if (!ProcessNewBlock(state, chainparams, NULL, pblock, true, NULL))
+        if (!ProcessNewBlock(state, chainparams, NULL, pblock, true, NULL, false))
             return error("CheckStake() : ProcessNewBlock, block not accepted");
     }
 
