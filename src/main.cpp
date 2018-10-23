@@ -83,7 +83,6 @@ bool fPruneMode = false;
 bool fIsBareMultisigStd = DEFAULT_PERMIT_BAREMULTISIG;
 bool fBIP37 = false;
 bool fRequireStandard = true;
-unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP;
 bool fCheckBlockIndex = false;
 bool fCheckpointsEnabled = DEFAULT_CHECKPOINTS_ENABLED;
 size_t nCoinCacheUsage = 5000 * 300;
