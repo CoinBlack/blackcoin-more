@@ -171,3 +171,5 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
 
     return true;
 }
+
+unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP;
