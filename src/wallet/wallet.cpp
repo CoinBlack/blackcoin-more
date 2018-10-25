@@ -1181,28 +1181,6 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
         // Notify UI of new or updated transaction
         NotifyTransactionChanged(this, hash, fInsertedNew ? CT_NEW : CT_UPDATED);
 
-        // Notifications for existing transactions that now have conflicts with this one
-        if (fInsertedNew)
-        {
-            BOOST_FOREACH(const uint256& conflictHash, wtxIn.GetConflicts(false))
-            {
-                CWalletTx& txConflict = mapWallet[conflictHash];
-                NotifyTransactionChanged(this, conflictHash, CT_UPDATED); //Updates UI table
-                if (IsFromMe(txConflict) || IsMine(txConflict))
-			    {
-				   // external respend notify
-				   std::string strCmd = GetArg("-respendnotify", "");
-				   if (!strCmd.empty())
-				   {
-					   NotifyTransactionChanged(this, conflictHash, CT_GOT_CONFLICT);  //Throws dialog
-					   boost::replace_all(strCmd, "%s", wtxIn.GetHash().GetHex());
-					   boost::replace_all(strCmd, "%t", conflictHash.GetHex());
-					   boost::thread t(runCommand, strCmd); // thread runs free
-				   }
-               }
-            }
-        }
-    
         // notify an external script when a wallet transaction comes in or is updated
         std::string strCmd = GetArg("-walletnotify", "");
 
@@ -3751,7 +3729,6 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     strUsage += HelpMessageOpt("-wallet=<file>", _("Specify wallet file (within data directory)") + " " + strprintf(_("(default: %s)"), DEFAULT_WALLET_DAT));
     strUsage += HelpMessageOpt("-walletbroadcast", _("Make the wallet broadcast transactions") + " " + strprintf(_("(default: %u)"), DEFAULT_WALLETBROADCAST));
     strUsage += HelpMessageOpt("-walletnotify=<cmd>", _("Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)"));
-    strUsage += HelpMessageOpt("-respendnotify=<cmd>", _("Execute command when a network tx respends wallet tx input (%s=respend TxID, %t=wallet TxID)"));
     strUsage += HelpMessageOpt("-zapwallettxes=<mode>", _("Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup") +
                                " " + _("(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)"));
 
