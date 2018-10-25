@@ -398,7 +398,7 @@ bool CWallet::SetMaxVersion(int nVersion)
     return true;
 }
 
-set<uint256> CWallet::GetConflicts(const uint256& txid, bool includeEquivalent) const
+set<uint256> CWallet::GetConflicts(const uint256& txid) const
 {
     set<uint256> result;
     AssertLockHeld(cs_wallet);
@@ -416,8 +416,7 @@ set<uint256> CWallet::GetConflicts(const uint256& txid, bool includeEquivalent) 
             continue;  // No conflict if zero or one spends
         range = mapTxSpends.equal_range(txin.prevout);
         for (TxSpends::const_iterator it = range.first; it != range.second; ++it)
-            if (includeEquivalent || !wtx.IsEquivalentTo(mapWallet.at(it->second)))
-                result.insert(it->second);
+            result.insert(it->second);
     }
     return result;
 }
@@ -1199,7 +1198,7 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
  * pblock is optional, but should be provided if the transaction is known to be in a block.
  * If fUpdate is true, existing transactions will be updated.
  */
-bool CWallet::AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlock* pblock, bool fUpdate, bool fRespend)
+bool CWallet::AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlock* pblock, bool fUpdate)
 {
     {
         AssertLockHeld(cs_wallet);
@@ -1219,15 +1218,7 @@ bool CWallet::AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlock* pbl
 
         bool fExisted = mapWallet.count(tx.GetHash()) != 0;
         if (fExisted && !fUpdate) return false;
-
-        bool fIsConflicting = IsConflicting(tx);
-        // Don't add respends that pay us, unless they conflict with us.  Prevents resource exhaustion.
-        if (!fIsConflicting && fRespend) return false;
-
-        if (fIsConflicting)
-            nConflictsReceived++;
-
-        if (fExisted || IsMine(tx) || IsFromMe(tx) || fIsConflicting)
+        if (fExisted || IsMine(tx) || IsFromMe(tx))
         {
             CWalletTx wtx(this,tx);
 
@@ -1362,7 +1353,7 @@ void CWallet::MarkConflicted(const uint256& hashBlock, const uint256& hashTx)
     }
 }
 
-void CWallet::SyncTransaction(const CTransaction& tx, const CBlockIndex *pindex, const CBlock* pblock, bool fRespend)
+void CWallet::SyncTransaction(const CTransaction& tx, const CBlockIndex *pindex, const CBlock* pblock)
 {
     LOCK2(cs_main, cs_wallet);
 
@@ -1376,7 +1367,7 @@ void CWallet::SyncTransaction(const CTransaction& tx, const CBlockIndex *pindex,
         }
     }
 
-    if (!AddToWalletIfInvolvingMe(tx, pblock, true, fRespend))
+    if (!AddToWalletIfInvolvingMe(tx, pblock, true))
         return; // Not one of ours
 
     // If a transaction changes 'conflicted' state, that changes the balance
@@ -1388,7 +1379,6 @@ void CWallet::SyncTransaction(const CTransaction& tx, const CBlockIndex *pindex,
             mapWallet[txin.prevout.hash].MarkDirty();
     }
 }
-
 
 isminetype CWallet::IsMine(const CTxIn &txin) const
 {
@@ -1403,14 +1393,6 @@ isminetype CWallet::IsMine(const CTxIn &txin) const
         }
     }
     return ISMINE_NO;
-}
-
-bool CWallet::IsConflicting(const CTransaction& tx) const
-{
-    BOOST_FOREACH(const CTxIn& txin, tx.vin)
-    if (mapTxSpends.count(txin.prevout))
-        return true;
-    return false;
 }
 
 CAmount CWallet::GetDebit(const CTxIn &txin, const isminefilter& filter) const
@@ -1756,7 +1738,7 @@ int CWallet::ScanForWalletTransactions(CBlockIndex* pindexStart, bool fUpdate)
             ReadBlockFromDisk(block, pindex, Params().GetConsensus());
             BOOST_FOREACH(CTransaction& tx, block.vtx)
             {
-                if (AddToWalletIfInvolvingMe(tx, &block, fUpdate, false))
+                if (AddToWalletIfInvolvingMe(tx, &block, fUpdate))
                     ret++;
             }
             pindex = chainActive.Next(pindex);
@@ -1791,7 +1773,8 @@ void CWallet::ReacceptWalletTransactions()
         assert(wtx.GetHash() == wtxid);
 
         int nDepth = wtx.GetDepthInMainChain();
-        if (!(wtx.IsCoinBase() || wtx.IsCoinStake()) && (nDepth == 0 && !wtx.isAbandoned()) && (IsMine(wtx) || IsFromMe(wtx))){
+
+        if (!wtx.IsCoinBase() && !wtx.IsCoinStake() && (nDepth == 0 && !wtx.isAbandoned())) {
             mapSorted.insert(std::make_pair(wtx.nOrderPos, &wtx));
         }
     }
@@ -1823,13 +1806,13 @@ bool CWalletTx::RelayWalletTransaction()
     return false;
 }
 
-set<uint256> CWalletTx::GetConflicts(bool includeEquivalent) const
+set<uint256> CWalletTx::GetConflicts() const
 {
     set<uint256> result;
     if (pwallet != NULL)
     {
         uint256 myHash = GetHash();
-        result = pwallet->GetConflicts(myHash, includeEquivalent);
+        result = pwallet->GetConflicts(myHash);
         result.erase(myHash);
     }
     return result;

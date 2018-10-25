@@ -634,14 +634,6 @@ void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vector<CBl
 
 } // anon namespace
 
-// Bloom filter to limit respend relays to one
-static const unsigned int MAX_DOUBLESPEND_BLOOM = 100000;
-static CBloomFilter doubleSpendFilter;
-void InitRespendFilter() {
-    seed_insecure_rand();
-    doubleSpendFilter = CBloomFilter(MAX_DOUBLESPEND_BLOOM, 0.01, insecure_rand(), BLOOM_UPDATE_NONE);
-}
-
 bool GetNodeStateStats(NodeId nodeid, CNodeStateStats &stats) {
     LOCK(cs_main);
     CNodeState *state = State(nodeid);
@@ -1119,41 +1111,6 @@ std::string FormatStateMessage(const CValidationState &state)
         state.GetRejectCode());
 }
 
-// Exponentially limit the rate of nSize flow to nLimit.  nLimit unit is thousands-per-minute.
-bool RateLimitExceeded(double& dCount, int64_t& nLastTime, int64_t nLimit, unsigned int nSize)
-{
-    static CCriticalSection csLimiter;
-    int64_t nNow = GetTime();
-
-    LOCK(csLimiter);
-
-    dCount *= pow(1.0 - 1.0/600.0, (double)(nNow - nLastTime));
-    nLastTime = nNow;
-    if (dCount >= nLimit*10*1000)
-        return true;
-    dCount += nSize;
-    return false;
-}
-
-static bool RespendRelayExceeded(const CTransaction& doubleSpend)
-{
-    // Apply an independent rate limit to double-spend relays
-    static double dRespendCount;
-    static int64_t nLastRespendTime;
-    static int64_t nRespendLimit = GetArg("-limitrespendrelay", 100);
-    unsigned int nSize = ::GetSerializeSize(doubleSpend, SER_NETWORK, PROTOCOL_VERSION);
-
-    if (RateLimitExceeded(dRespendCount, nLastRespendTime, nRespendLimit, nSize))
-    {
-        LogPrint("mempool", "Double-spend relay rejected by rate limiter\n");
-        return true;
-    }
-
-    LogPrint("mempool", "Rate limit dRespendCount: %g => %g\n", dRespendCount, dRespendCount+nSize);
-
-    return false;
-}
-
 bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree,
                               bool* pfMissingInputs, bool fOverrideMempoolLimit, const CAmount& nAbsurdFee,
                               std::vector<uint256>& vHashTxnToUncache)
@@ -1202,65 +1159,18 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         return state.Invalid(false, REJECT_ALREADY_KNOWN, "txn-already-in-mempool");
 
     // Check for conflicts with in-memory transactions
-    bool fRespend = false;
-    COutPoint relayForOutpoint;
-
     set<uint256> setConflicts;
     {
     LOCK(pool.cs); // protect pool.mapNextTx
     BOOST_FOREACH(const CTxIn &txin, tx.vin)
     {
-        COutPoint outpoint = txin.prevout;
-        // A respend is a tx that conflicts with a member of the pool
-        auto itConflicting = pool.mapNextTx.find(outpoint);
+        auto itConflicting = pool.mapNextTx.find(txin.prevout);
         if (itConflicting != pool.mapNextTx.end())
         {
-            fRespend = true;
-            // Relay only one tx per respent outpoint, but not if tx is equivalent to pool member
-            if (!doubleSpendFilter.contains(outpoint) && !tx.IsEquivalentTo(*itConflicting->second))
-            {
-                relayForOutpoint = outpoint;
-                break;
-            }
-            /*
-            const CTransaction *ptxConflicting = itConflicting->second;
-            if (!setConflicts.count(ptxConflicting->GetHash()))
-            {
-                // Allow opt-out of transaction replacement by setting
-                // nSequence >= maxint-1 on all inputs.
-                //
-                // maxint-1 is picked to still allow use of nLockTime by
-                // non-replaceable transactions. All inputs rather than just one
-                // is for the sake of multi-party protocols, where we don't
-                // want a single party to be able to disable replacement.
-                //
-                // The opt-out ignores descendants as anyone relying on
-                // first-seen mempool behavior should be checking all
-                // unconfirmed ancestors anyway; doing otherwise is hopelessly
-                // insecure.
-                bool fReplacementOptOut = true;
-                if (0)
-                {
-                    BOOST_FOREACH(const CTxIn &txin, ptxConflicting->vin)
-                    {
-                        if (txin.nSequence < std::numeric_limits<unsigned int>::max()-1)
-                        {
-                            fReplacementOptOut = false;
-                            break;
-                        }
-                    }
-                }
-                if (fReplacementOptOut)
-                    return state.Invalid(false, REJECT_CONFLICT, "txn-mempool-conflict");
-
-                setConflicts.insert(ptxConflicting->GetHash());
-            }
-            */
-            
+            // Disable replacement feature for good
+            return state.Invalid(false, REJECT_CONFLICT, "txn-mempool-conflict");
         }
     }
-    if (fRespend && (relayForOutpoint.IsNull() || RespendRelayExceeded(tx)))
-        return false;
     }
 
     {
@@ -1369,15 +1279,22 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         // be annoying or make others' transactions take longer to confirm.
         if (fLimitFree && nModifiedFees < ::minRelayTxFee.GetFee(nSize))
         {
+            static CCriticalSection csFreeLimiter;
             static double dFreeCount;
-            static int64_t nLastFreeTime;
-            static int64_t nFreeLimit = GetArg("-limitfreerelay", DEFAULT_LIMITFREERELAY);
+            static int64_t nLastTime;
+            int64_t nNow = GetTime();
 
+            LOCK(csFreeLimiter);
+
+            // Use an exponentially decaying ~10-minute window:
+            dFreeCount *= pow(1.0 - 1.0/600.0, (double)(nNow - nLastTime));
+            nLastTime = nNow;
             // -limitfreerelay unit is thousand-bytes-per-minute
             // At default rate it would take over a month to fill 1GB
-            if (RateLimitExceeded(dFreeCount, nLastFreeTime, nFreeLimit, nSize))
+            if (dFreeCount + nSize >= GetArg("-limitfreerelay", DEFAULT_LIMITFREERELAY) * 10 * 1000)
                 return state.DoS(0, false, REJECT_INSUFFICIENTFEE, "rate limited free transaction");
             LogPrint("mempool", "Rate limit dFreeCount: %g => %g\n", dFreeCount, dFreeCount+nSize);
+            dFreeCount += nSize;
         }
 
         if (nAbsurdFee && nFees > nAbsurdFee)
@@ -1571,19 +1488,8 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         }
         pool.RemoveStaged(allConflicting, false);
 
-        if (fRespend)
-        {
-            // Clear the filter on average every MAX_DOUBLE_SPEND_BLOOM insertions
-            if (insecure_rand()%MAX_DOUBLESPEND_BLOOM == 0)
-                doubleSpendFilter.clear();
-            doubleSpendFilter.insert(relayForOutpoint);
-            RelayTransaction(tx);
-        }
-        else
-        {
-            // Store transaction in memory
-            pool.addUnchecked(hash, entry, !IsInitialBlockDownload());
-        }
+        // Store transaction in memory
+        pool.addUnchecked(hash, entry, setAncestors, !IsInitialBlockDownload());
 
         // trim mempool and check if tx was trimmed
         if (!fOverrideMempoolLimit) {
@@ -1593,9 +1499,9 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         }
     }
 
-    SyncWithWallets(tx, NULL, NULL, fRespend);
+    SyncWithWallets(tx, NULL, NULL);
 
-    return !fRespend;
+    return true;
 }
 
 bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState &state, const CTransaction &tx, bool fLimitFree,
@@ -2888,7 +2794,7 @@ bool static DisconnectTip(CValidationState& state, const CChainParams& chainpara
     // Let wallets know transactions went from 1-confirmed to
     // 0-confirmed or conflicted:
     BOOST_FOREACH(const CTransaction &tx, block.vtx) {
-        SyncWithWallets(tx, pindexDelete->pprev, NULL, false);
+        SyncWithWallets(tx, pindexDelete->pprev, NULL);
     }
     return true;
 }
@@ -2947,11 +2853,11 @@ bool static ConnectTip(CValidationState& state, const CChainParams& chainparams,
     // Tell wallet about transactions that went from mempool
     // to conflicted:
     BOOST_FOREACH(const CTransaction &tx, txConflicted) {
-        SyncWithWallets(tx, pindexNew, NULL, false);
+        SyncWithWallets(tx, pindexNew, NULL);
     }
     // ... and about transactions that got confirmed:
     BOOST_FOREACH(const CTransaction &tx, pblock->vtx) {
-        SyncWithWallets(tx, pindexNew, pblock, false);
+        SyncWithWallets(tx, pindexNew, pblock);
     }
 
     int64_t nTime6 = GetTimeMicros(); nTimePostConnect += nTime6 - nTime5; nTimeTotal += nTime6 - nTime1;

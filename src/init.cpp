@@ -1521,7 +1521,6 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     if (GetBoolArg("-listenonion", DEFAULT_LISTEN_ONION))
         StartTorControl(threadGroup, scheduler);
 
-    InitRespendFilter();
     StartNode(threadGroup, scheduler);
 
 #ifdef ENABLE_WALLET
