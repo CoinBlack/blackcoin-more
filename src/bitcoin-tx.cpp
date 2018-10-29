@@ -400,6 +400,18 @@ vector<unsigned char> ParseHexUO(map<string,UniValue>& o, string strKey)
     return ParseHexUV(o[strKey], strKey);
 }
 
+static CAmount AmountFromValue(const UniValue& value)
+{
+    if (!value.isNum() && !value.isStr())
+        throw runtime_error("Amount is not a number or string");
+    CAmount amount;
+    if (!ParseFixedPoint(value.getValStr(), 8, &amount))
+        throw runtime_error("Invalid amount");
+    if (!MoneyRange(amount))
+        throw runtime_error("Amount out of range");
+    return amount;
+}
+
 static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
 {
     int nHashType = SIGHASH_ALL;
@@ -471,7 +483,10 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
                 if ((unsigned int)nOut >= coins->vout.size())
                     coins->vout.resize(nOut+1);
                 coins->vout[nOut].scriptPubKey = scriptPubKey;
-                coins->vout[nOut].nValue = 0; // we don't know the actual output value
+                coins->vout[nOut].nValue = 0;
+                if (prevOut.exists("amount")) {
+                    coins->vout[nOut].nValue = AmountFromValue(prevOut["amount"]);
+                }
             }
 
             // if redeemScript given and private keys given,
