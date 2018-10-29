@@ -29,7 +29,7 @@ struct CBlockTemplate
 {
     CBlock block;
     std::vector<CAmount> vTxFees;
-    std::vector<int64_t> vTxSigOps;
+    std::vector<int64_t> vTxSigOpsCost;
 };
 
 // Container for tracking updates to ancestor feerate as we include (parent)
