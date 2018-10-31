@@ -2338,7 +2338,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
          return state.DoS(100, error("%s: incorrect difficulty", __func__),
                         REJECT_INVALID, "bad-diffbits");
 
-    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : pindex->GetBlockHash());
+    // Set proof-of-stake hash modifier
+    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
 
     // Check proof-of-stake
     if (block.IsProofOfStake() && block.GetBlockTime() > chainparams.GetConsensus().nProtocolV3Time) {
