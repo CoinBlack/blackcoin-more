@@ -1,60 +1,104 @@
-<TS language="fr_CA" version="2.1">
+<TS language="it_IT" version="2.1">
 <context>
     <name>AddressBookPage</name>
     <message>
+        <source>Right-click to edit address or label</source>
+        <translation>Click destro per modificare indirizzo o etichetta</translation>
+    </message>
+    <message>
         <source>Create a new address</source>
-        <translation>Créer une nouvelle adresse</translation>
+        <translation>Crea un nuovo indirizzo</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>nuovo</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Copier l'adresse surligné a votre presse-papier</translation>
+        <translation>copia l'indirizzo selezionato correntemente nella clipboard di sistema</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>copia</translation>
+    </message>
+    <message>
+        <source>C&amp;lose</source>
+        <translation>chiudi </translation>
+    </message>
+    <message>
+        <source>Delete the currently selected address from the list</source>
+        <translation>Cancella l'indirizzo attualmente selezionato dalla lista.</translation>
+    </message>
+    <message>
+        <source>Export the data in the current tab to a file</source>
+        <translation>Esportare i dati nella scheda corrente in un file</translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation>Esporta</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Supprimer</translation>
+        <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Choose the address to send coins to</source>
+        <translation>Scegli l'indirizzo a cui inviare denaro</translation>
+    </message>
+    <message>
+        <source>C&amp;hoose</source>
+        <translation>Scegli</translation>
     </message>
     </context>
 <context>
     <name>AddressTableModel</name>
+    <message>
+        <source>Address</source>
+        <translation>Indirizzo</translation>
+    </message>
     </context>
 <context>
     <name>AskPassphraseDialog</name>
     <message>
         <source>Enter passphrase</source>
-        <translation>Entrer Mot de Passe</translation>
+        <translation>Invia passphrase</translation>
     </message>
     <message>
         <source>New passphrase</source>
-        <translation>Nouveau Mot de passe</translation>
+        <translation>Nuova passphrase</translation>
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>Répéter Mot de Passe</translation>
+        <translation>Ripeti nuova passphrase</translation>
     </message>
-    </context>
+    <message>
+        <source>Warning: The Caps Lock key is on!</source>
+        <translation>Attenzione: Il tasto blocco delle maiuscole è attivo!</translation>
+    </message>
+</context>
 <context>
     <name>BanTableModel</name>
-    </context>
+    <message>
+        <source>IP/Netmask</source>
+        <translation>IP/Netmask</translation>
+    </message>
+    <message>
+        <source>Banned Until</source>
+        <translation>bannato fino </translation>
+    </message>
+</context>
 <context>
     <name>BitcoinGUI</name>
+    <message>
+        <source>&amp;Transactions</source>
+        <translation>Transazioni</translation>
+    </message>
     </context>
 <context>
     <name>CoinControlDialog</name>
-    <message>
-        <source>(un)select all</source>
-        <translation>Toute sélectionner </translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
-    <message>
-        <source>&amp;Label</source>
-        <translation>Record</translation>
-    </message>
-    <message>
-        <source>&amp;Address</source>
-        <translation>Addresse</translation>
-    </message>
     </context>
 <context>
     <name>FreespaceChecker</name>
@@ -64,10 +108,6 @@
     </context>
 <context>
     <name>Intro</name>
-    <message>
-        <source>Welcome</source>
-        <translation>Bienvenue </translation>
-    </message>
     </context>
 <context>
     <name>ModalOverlay</name>
@@ -104,6 +144,10 @@
     </context>
 <context>
     <name>ReceiveRequestDialog</name>
+    <message>
+        <source>Address</source>
+        <translation>Indirizzo</translation>
+    </message>
     </context>
 <context>
     <name>RecentRequestsTableModel</name>
@@ -140,6 +184,10 @@
     </context>
 <context>
     <name>TransactionView</name>
+    <message>
+        <source>Address</source>
+        <translation>Indirizzo</translation>
+    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>

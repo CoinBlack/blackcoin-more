@@ -13,11 +13,9 @@ QT_TS = \
   qt/locale/bitcoin_be_BY.ts \
   qt/locale/bitcoin_bg_BG.ts \
   qt/locale/bitcoin_bg.ts \
-  qt/locale/bitcoin_bs.ts \
   qt/locale/bitcoin_ca_ES.ts \
   qt/locale/bitcoin_ca.ts \
   qt/locale/bitcoin_ca@valencia.ts \
-  qt/locale/bitcoin_cs_CZ.ts \
   qt/locale/bitcoin_cs.ts \
   qt/locale/bitcoin_cy.ts \
   qt/locale/bitcoin_da.ts \
@@ -36,6 +34,7 @@ QT_TS = \
   qt/locale/bitcoin_es.ts \
   qt/locale/bitcoin_es_UY.ts \
   qt/locale/bitcoin_es_VE.ts \
+  qt/locale/bitcoin_et_EE.ts \
   qt/locale/bitcoin_et.ts \
   qt/locale/bitcoin_eu_ES.ts \
   qt/locale/bitcoin_fa_IR.ts \
@@ -50,11 +49,13 @@ QT_TS = \
   qt/locale/bitcoin_hr.ts \
   qt/locale/bitcoin_hu.ts \
   qt/locale/bitcoin_id_ID.ts \
+  qt/locale/bitcoin_it_IT.ts \
   qt/locale/bitcoin_it.ts \
   qt/locale/bitcoin_ja.ts \
   qt/locale/bitcoin_ka.ts \
   qt/locale/bitcoin_kk_KZ.ts \
   qt/locale/bitcoin_ko_KR.ts \
+  qt/locale/bitcoin_ku_IQ.ts \
   qt/locale/bitcoin_ky.ts \
   qt/locale/bitcoin_la.ts \
   qt/locale/bitcoin_lt.ts \
@@ -63,6 +64,7 @@ QT_TS = \
   qt/locale/bitcoin_mn.ts \
   qt/locale/bitcoin_ms_MY.ts \
   qt/locale/bitcoin_nb.ts \
+  qt/locale/bitcoin_ne.ts \
   qt/locale/bitcoin_nl.ts \
   qt/locale/bitcoin_pam.ts \
   qt/locale/bitcoin_pl.ts \
@@ -75,6 +77,7 @@ QT_TS = \
   qt/locale/bitcoin_sk.ts \
   qt/locale/bitcoin_sl_SI.ts \
   qt/locale/bitcoin_sq.ts \
+  qt/locale/bitcoin_sr@latin.ts \
   qt/locale/bitcoin_sr.ts \
   qt/locale/bitcoin_sv.ts \
   qt/locale/bitcoin_ta.ts \
@@ -84,10 +87,10 @@ QT_TS = \
   qt/locale/bitcoin_uk.ts \
   qt/locale/bitcoin_ur_PK.ts \
   qt/locale/bitcoin_uz@Cyrl.ts \
-  qt/locale/bitcoin_uz@Latn.ts \
   qt/locale/bitcoin_vi.ts \
   qt/locale/bitcoin_vi_VN.ts \
   qt/locale/bitcoin_zh_CN.ts \
+  qt/locale/bitcoin_zh_HK.ts \
   qt/locale/bitcoin_zh.ts \
   qt/locale/bitcoin_zh_TW.ts
 
