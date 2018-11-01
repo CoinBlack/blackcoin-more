@@ -172,7 +172,7 @@ private:
 
     // Methods for how to add transactions to a block.
     /** Add transactions based on tx "priority" */
-    void addPriorityTxs();
+    void addPriorityTxs(int64_t nBlockTime, bool fProofOfStake);
     /** Add transactions based on feerate including unconfirmed ancestors */
     void addPackageTxs();
 

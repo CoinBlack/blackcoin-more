@@ -147,7 +147,7 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
 
     nLockTimeCutoff = pblock->GetBlockTime();
 
-    addPriorityTxs();
+    addPriorityTxs(pblock->GetBlockTime(), fProofOfStake);
     addPackageTxs();
 
     nLastBlockTx = nBlockTx;
@@ -480,7 +480,7 @@ void BlockAssembler::addPackageTxs()
     }
 }
 
-void BlockAssembler::addPriorityTxs()
+void BlockAssembler::addPriorityTxs(int64_t nBlockTime, bool fProofOfStake)
 {
     // How much of the block should be dedicated to high-priority transactions,
     // included regardless of the fees they pay
@@ -521,6 +521,9 @@ void BlockAssembler::addPriorityTxs()
             assert(false); // shouldn't happen for priority txs
             continue;
         }
+
+        if (fProofOfStake && nBlockTime < (int64_t)iter->GetTx().nTime)
+            continue;
 
         // If tx is dependent on other mempool txs which haven't yet been included
         // then put it in the waitSet
