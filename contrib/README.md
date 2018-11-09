@@ -51,9 +51,5 @@ Test and Verify Tools
 ### [TestGen](/contrib/testgen) ###
 Utilities to generate test vectors for the data-driven Bitcoin tests.
 
-### [Test Patches](/contrib/test-patches) ###
-These patches are applied when the automated pull-tester
-tests each pull and when master is tested using jenkins.
-
 ### [Verify Binaries](/contrib/verifybinaries) ###
 This script attempts to download and verify the signature file SHA256SUMS.asc from bitcoin.org.
