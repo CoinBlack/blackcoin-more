@@ -287,6 +287,8 @@ bool BlockAssembler::TestForBlock(CTxMemPool::txiter iter)
 
 void BlockAssembler::AddToBlock(CTxMemPool::txiter iter)
 {
+    CBlock *pblock = &pblocktemplate->block;
+
     pblock->vtx.push_back(iter->GetTx());
     pblocktemplate->vTxFees.push_back(iter->GetFee());
     pblocktemplate->vTxSigOpsCost.push_back(iter->GetSigOpCost());
