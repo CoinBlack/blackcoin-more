@@ -18,10 +18,9 @@ for LINE in $(echo "$INPUT" | gpg --trust-model always "$@" 2>/dev/null); do
 	"[GNUPG:] REVKEYSIG "*)
 		[ "$BITCOIN_VERIFY_COMMITS_ALLOW_REVSIG" != 1 ] && exit 1
 		while read KEY; do
-			case "$LINE" in "[GNUPG:] REVKEYSIG ${KEY:24:40} "*)
+			case "$LINE" in "[GNUPG:] REVKEYSIG ${KEY#????????????????????????} "*)
 				REVSIG=true
-				GOODREVSIG="[GNUPG:] GOODSIG ${KEY:24:40} "
-				;;
+				GOODREVSIG="[GNUPG:] GOODSIG ${KEY#????????????????????????} "
 			esac
 		done < ./contrib/verify-commits/trusted-keys
 		;;
