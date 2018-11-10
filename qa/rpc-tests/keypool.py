@@ -5,8 +5,6 @@
 
 # Exercise the wallet keypool, and interaction with wallet encryption/locking
 
-# Add python-bitcoinrpc to module search path:
-
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 
@@ -18,6 +16,7 @@ class KeyPoolTest(BitcoinTestFramework):
         addr_before_encrypting_data = nodes[0].validateaddress(addr_before_encrypting)
         wallet_info_old = nodes[0].getwalletinfo()
         assert(addr_before_encrypting_data['hdmasterkeyid'] == wallet_info_old['hdmasterkeyid'])
+        
         # Encrypt wallet and wait to terminate
         nodes[0].encryptwallet('test')
         bitcoind_processes[0].wait()
@@ -29,6 +28,7 @@ class KeyPoolTest(BitcoinTestFramework):
         wallet_info = nodes[0].getwalletinfo()
         assert(addr_before_encrypting_data['hdmasterkeyid'] != wallet_info['hdmasterkeyid'])
         assert(addr_data['hdmasterkeyid'] == wallet_info['hdmasterkeyid'])
+        
         try:
             addr = nodes[0].getnewaddress()
             raise AssertionError('Keypool should be exhausted after one address')
@@ -73,12 +73,13 @@ class KeyPoolTest(BitcoinTestFramework):
         except JSONRPCException as e:
             assert(e.error['code']==-12)
 
-    def setup_chain(self):
-        print("Initializing test directory "+self.options.tmpdir)
-        initialize_chain(self.options.tmpdir)
+    def __init__(self):
+        super().__init__()
+        self.setup_clean_chain = False
+        self.num_nodes = 1
 
     def setup_network(self):
-        self.nodes = start_nodes(1, self.options.tmpdir)
+        self.nodes = self.setup_nodes()
 
 if __name__ == '__main__':
     KeyPoolTest().main()

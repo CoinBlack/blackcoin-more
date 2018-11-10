@@ -58,7 +58,7 @@ def netstat(typ='tcp'):
     To get pid of all network process running on system, you must run this script
     as superuser
     '''
-    with open('/proc/net/'+typ,'r') as f:
+    with open('/proc/net/'+typ,'r',encoding='utf8') as f:
         content = f.readlines()
         content.pop(0)
     result = []
@@ -135,7 +135,6 @@ def addr_to_hex(addr):
         nullbytes = 16 - len(sub[0]) - len(sub[1])
         assert((x == 0 and nullbytes == 0) or (x == 1 and nullbytes > 0))
         addr = sub[0] + ([0] * nullbytes) + sub[1]
-    else:
     else:
         raise ValueError('Could not parse address %s' % addr)
     return hexlify(bytearray(addr)).decode('ascii')

@@ -14,8 +14,13 @@ import http.client
 import urllib.parse
 
 class HTTPBasicsTest (BitcoinTestFramework):
-    def setup_nodes(self):
-        return start_nodes(4, self.options.tmpdir)
+    def __init__(self):
+        super().__init__()
+        self.num_nodes = 3
+        self.setup_clean_chain = False
+
+    def setup_network(self):
+        self.nodes = self.setup_nodes()
 
     def run_test(self):
 
@@ -102,20 +107,6 @@ class HTTPBasicsTest (BitcoinTestFramework):
         conn.request('GET', '/' + ('x'*10000), '', headers)
         out1 = conn.getresponse()
         assert_equal(out1.status, http.client.BAD_REQUEST)
-
-
-        # Check excessive request size
-        conn = httplib.HTTPConnection(urlNode2.hostname, urlNode2.port)
-        conn.connect()
-        conn.request('GET', '/' + ('x'*1000), '', headers)
-        out1 = conn.getresponse()
-        assert_equal(out1.status, httplib.NOT_FOUND)
-
-        conn = httplib.HTTPConnection(urlNode2.hostname, urlNode2.port)
-        conn.connect()
-        conn.request('GET', '/' + ('x'*10000), '', headers)
-        out1 = conn.getresponse()
-        assert_equal(out1.status, httplib.BAD_REQUEST)
 
 
 if __name__ == '__main__':

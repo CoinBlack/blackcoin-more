@@ -20,13 +20,13 @@ def calc_usage(blockdir):
 class PruneTest(BitcoinTestFramework):
 
     def __init__(self):
+        super().__init__()
+        self.setup_clean_chain = True
+        self.num_nodes = 3
+
         self.utxo = []
         self.address = ["",""]
         self.txouts = gen_return_txouts()
-
-    def setup_chain(self):
-        print("Initializing test directory "+self.options.tmpdir)
-        initialize_chain_clean(self.options.tmpdir, 3)
 
     def setup_network(self):
         self.nodes = []
@@ -75,7 +75,7 @@ class PruneTest(BitcoinTestFramework):
         waitstart = time.time()
         while os.path.isfile(self.prunedir+"blk00000.dat"):
             time.sleep(0.1)
-            if time.time() - waitstart > 10:
+            if time.time() - waitstart > 30:
                 raise AssertionError("blk00000.dat not pruned when it should be")
 
         print("Success")
@@ -151,14 +151,17 @@ class PruneTest(BitcoinTestFramework):
         print("Reconnect nodes")
         connect_nodes(self.nodes[0], 1)
         connect_nodes(self.nodes[2], 1)
-        sync_blocks(self.nodes[0:3])
+        sync_blocks(self.nodes[0:3], timeout=120)
 
         print("Verify height on node 2:",self.nodes[2].getblockcount())
         print("Usage possibly still high bc of stale blocks in block files:", calc_usage(self.prunedir))
 
         print("Mine 220 more blocks so we have requisite history (some blocks will be big and cause pruning of previous chain)")
-        self.nodes[0].generate(220) #node 0 has many large tx's in its mempool from the disconnects
-        sync_blocks(self.nodes[0:3])
+        for i in range(22):
+            # This can be slow, so do this in multiple RPC calls to avoid
+            # RPC timeouts.
+            self.nodes[0].generate(10) #node 0 has many large tx's in its mempool from the disconnects
+        sync_blocks(self.nodes[0:3], timeout=300)
 
         usage = calc_usage(self.prunedir)
         print("Usage should be below target:", usage)

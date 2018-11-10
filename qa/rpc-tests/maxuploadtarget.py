@@ -75,27 +75,29 @@ class TestNode(NodeConnCB):
         def received_pong():
             return (self.last_pong.nonce == self.ping_counter)
         self.connection.send_message(msg_ping(nonce=self.ping_counter))
-        success = wait_until(received_pong, timeout)
+        success = wait_until(received_pong, timeout=timeout)
         self.ping_counter += 1
         return success
 
 class MaxUploadTest(BitcoinTestFramework):
-    def __init__(self):
-        self.utxo = []
-        self.txouts = gen_return_txouts()
  
     def add_options(self, parser):
         parser.add_option("--testbinary", dest="testbinary",
                           default=os.getenv("BITCOIND", "bitcoind"),
                           help="bitcoind binary to test")
 
-    def setup_chain(self):
-        initialize_chain_clean(self.options.tmpdir, 2)
+    def __init__(self):
+        super().__init__()
+        self.setup_clean_chain = True
+        self.num_nodes = 1
+
+        self.utxo = []
+        self.txouts = gen_return_txouts()
 
     def setup_network(self):
         # Start a node with maxuploadtarget of 200 MB (/24h)
         self.nodes = []
-        self.nodes.append(start_node(0, self.options.tmpdir, ["-debug", "-maxuploadtarget=200", "-blockmaxsize=999000"]))
+        self.nodes.append(start_node(0, self.options.tmpdir, ["-debug", "-maxuploadtarget=800", "-blockmaxsize=999000"]))
 
     def mine_full_block(self, node, address):
         # Want to create a full block
@@ -173,13 +175,13 @@ class MaxUploadTest(BitcoinTestFramework):
         getdata_request = msg_getdata()
         getdata_request.inv.append(CInv(2, big_old_block))
 
-        max_bytes_per_day = 200*1024*1024
-        daily_buffer = 144 * MAX_BLOCK_SIZE
+        max_bytes_per_day = 800*1024*1024
+        daily_buffer = 144 * 4000000
         max_bytes_available = max_bytes_per_day - daily_buffer
         success_count = max_bytes_available // old_block_size
 
-        # 144MB will be reserved for relaying new blocks, so expect this to
-        # succeed for ~70 tries.
+        # 576MB will be reserved for relaying new blocks, so expect this to
+        # succeed for ~235 tries.
         for i in range(success_count):
             test_nodes[0].send_message(getdata_request)
             test_nodes[0].sync_with_ping()
@@ -196,9 +198,9 @@ class MaxUploadTest(BitcoinTestFramework):
 
         # Requesting the current block on test_nodes[1] should succeed indefinitely,
         # even when over the max upload target.
-        # We'll try 200 times
+        # We'll try 800 times
         getdata_request.inv = [CInv(2, big_new_block)]
-        for i in range(200):
+        for i in range(800):
             test_nodes[1].send_message(getdata_request)
             test_nodes[1].sync_with_ping()
             assert_equal(test_nodes[1].block_receive_map[big_new_block], i+1)

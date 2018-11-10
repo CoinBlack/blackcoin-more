@@ -1,6 +1,6 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Distributed under the MIT/X11 software license, see the accompanying
+# Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
 
@@ -14,11 +14,11 @@ FeeFilterTest -- test processing of feefilter messages
 '''
 
 def hashToHex(hash):
-    return format(hash, '064x').decode('utf-8')
+    return format(hash, '064x')
 
 # Wait up to 60 secs to see if the testnode has received all the expected invs
 def allInvsMatch(invsExpected, testnode):
-    for x in xrange(60):
+    for x in range(60):
         with mininode_lock:
             if (sorted(invsExpected) == sorted(testnode.txinvs)):
                 return True;
@@ -46,6 +46,12 @@ class TestNode(SingleNodeConnCB):
         self.sync_with_ping()
 
 class FeeFilterTest(BitcoinTestFramework):
+
+    def __init__(self):
+        super().__init__()
+        self.num_nodes = 2
+        self.setup_clean_chain = False
+
     def setup_network(self):
         # Node1 will be used to generate txs which should be relayed from Node0
         # to our test node
@@ -56,6 +62,7 @@ class FeeFilterTest(BitcoinTestFramework):
 
     def run_test(self):
         node1 = self.nodes[1]
+        node0 = self.nodes[0]
         # Get out of IBD
         node1.generate(1)
         sync_blocks(self.nodes)
@@ -69,7 +76,7 @@ class FeeFilterTest(BitcoinTestFramework):
 
         # Test that invs are received for all txs at feerate of 20 sat/byte
         node1.settxfee(Decimal("0.00020000"))
-        txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for x in xrange(3)]
+        txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for x in range(3)]
         assert(allInvsMatch(txids, test_node))
         test_node.clear_invs()
 
@@ -77,21 +84,30 @@ class FeeFilterTest(BitcoinTestFramework):
         test_node.send_filter(15000)
 
         # Test that txs are still being received (paying 20 sat/byte)
-        txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for x in xrange(3)]
+        txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for x in range(3)]
         assert(allInvsMatch(txids, test_node))
         test_node.clear_invs()
 
         # Change tx fee rate to 10 sat/byte and test they are no longer received
         node1.settxfee(Decimal("0.00010000"))
-        [node1.sendtoaddress(node1.getnewaddress(), 1) for x in xrange(3)]
+        [node1.sendtoaddress(node1.getnewaddress(), 1) for x in range(3)]
         sync_mempools(self.nodes) # must be sure node 0 has received all txs 
-        time.sleep(10) # wait 10 secs to be sure its doesn't relay any
-        assert(allInvsMatch([], test_node))
+
+        # Send one transaction from node0 that should be received, so that we
+        # we can sync the test on receipt (if node1's txs were relayed, they'd
+        # be received by the time this node0 tx is received). This is
+        # unfortunately reliant on the current relay behavior where we batch up
+        # to 35 entries in an inv, which means that when this next transaction
+        # is eligible for relay, the prior transactions from node1 are eligible
+        # as well.
+        node0.settxfee(Decimal("0.00020000"))
+        txids = [node0.sendtoaddress(node0.getnewaddress(), 1)]
+        assert(allInvsMatch(txids, test_node))
         test_node.clear_invs()
 
         # Remove fee filter and check that txs are received again
         test_node.send_filter(0)
-        txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for x in xrange(3)]
+        txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for x in range(3)]
         assert(allInvsMatch(txids, test_node))
         test_node.clear_invs()
 
