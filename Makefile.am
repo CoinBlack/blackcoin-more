@@ -8,6 +8,8 @@ SUBDIRS = src
 
 GZIP_ENV="-9n"
 
+export PYTHONPATH
+
 if BUILD_BITCOIN_LIBS
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbitcoinconsensus.pc
