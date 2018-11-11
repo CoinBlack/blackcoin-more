@@ -185,7 +185,7 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
         UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
     pblock->nBits          = GetNextTargetRequired(pindexPrev, pblock, chainparams.GetConsensus(), fProofOfStake);
     pblock->nNonce         = 0;
-    pblocktemplate->vTxSigOpsCost[0] = GetLegacySigOpCount(pblock->vtx[0]);
+    pblocktemplate->vTxSigOpsCost[0] = GetSigOpCountWithoutP2SH(pblock->vtx[0]);
 
     CValidationState state;
     if (!fProofOfStake && !TestBlockValidity(state, chainparams, *pblock, pindexPrev, false, false, true)) {

@@ -1004,8 +1004,7 @@ bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp, bool 
     return EvaluateSequenceLocks(index, lockPair);
 }
 
-
-unsigned int GetLegacySigOpCount(const CTransaction& tx)
+unsigned int GetSigOpCountWithoutP2SH(const CTransaction& tx)
 {
     unsigned int nSigOps = 0;
     BOOST_FOREACH(const CTxIn& txin, tx.vin)
@@ -1034,12 +1033,19 @@ unsigned int GetP2SHSigOpCount(const CTransaction& tx, const CCoinsViewCache& in
     return nSigOps;
 }
 
+uint64_t GetTransactionSigOpCount(const CTransaction &tx, const CCoinsViewCache &inputs, int flags)
+{
+    uint64_t nSigOps = GetSigOpCountWithoutP2SH(tx);
+    if (tx.IsCoinBase()) {
+        return nSigOps;
+    }
 
+    if (flags & SCRIPT_VERIFY_P2SH) {
+        nSigOps += GetP2SHSigOpCount(tx, inputs);
+    }
 
-
-
-
-
+    return nSigOps;
+}
 
 bool CheckTransaction(const CTransaction& tx, CValidationState &state)
 {
@@ -1230,7 +1236,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         if (fRequireStandard && !AreInputsStandard(tx, view))
             return state.Invalid(false, REJECT_NONSTANDARD, "bad-txns-nonstandard-inputs");
 
-        unsigned int nSigOps = GetLegacySigOpCount(tx);
+        unsigned int nSigOps = GetSigOpCountWithoutP2SH(tx);
         nSigOps += GetP2SHSigOpCount(tx, view);
 
         CAmount nValueOut = tx.GetValueOut();
@@ -2453,7 +2459,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         const CTransaction &tx = block.vtx[i];
 
         nInputs += tx.vin.size();
-        nSigOps += GetLegacySigOpCount(tx);
+        nSigOps += GetSigOpCountWithoutP2SH(tx);
         if (nSigOps > MAX_BLOCK_SIGOPS)
             return state.DoS(100, error("ConnectBlock(): too many sigops"),
                              REJECT_INVALID, "bad-blk-sigops");
@@ -3516,7 +3522,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
     unsigned int nSigOps = 0;
     BOOST_FOREACH(const CTransaction& tx, block.vtx)
     {
-        nSigOps += GetLegacySigOpCount(tx);
+        nSigOps += GetSigOpCountWithoutP2SH(tx);
     }
     if (nSigOps > MAX_BLOCK_SIGOPS)
         return state.DoS(100, error("CheckBlock(): out-of-bounds SigOpCount"),
