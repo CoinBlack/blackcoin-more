@@ -1033,9 +1033,9 @@ unsigned int GetP2SHSigOpCount(const CTransaction& tx, const CCoinsViewCache& in
     return nSigOps;
 }
 
-uint64_t GetTransactionSigOpCount(const CTransaction &tx, const CCoinsViewCache &inputs, int flags)
+int64_t GetTransactionSigOpCount(const CTransaction& tx, const CCoinsViewCache& inputs, int flags)
 {
-    uint64_t nSigOps = GetSigOpCountWithoutP2SH(tx);
+    int64_t nSigOps = GetSigOpCountWithoutP2SH(tx);
     if (tx.IsCoinBase()) {
         return nSigOps;
     }
