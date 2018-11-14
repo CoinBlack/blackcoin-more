@@ -464,7 +464,7 @@ public:
     }
 };
 
-/** 
+/**
  * Internal transfers.
  * Database key is acentry<account><counter>.
  */
@@ -937,7 +937,7 @@ public:
     static bool ParameterInteraction();
 
     bool BackupWallet(const std::string& strDest);
-    
+
     /* Set the HD chain model (chain child index counters) */
     bool SetHDChain(const CHDChain& chain, bool memonly);
     const CHDChain& GetHDChain() { return hdChain; }
@@ -950,6 +950,7 @@ public:
 
     /* Set the current HD master key (will reset the chain child index counters) */
     bool SetHDMasterKey(const CPubKey& key);
+
     static const bool DEFAULT_STAKE_CACHE = true;
 };
 

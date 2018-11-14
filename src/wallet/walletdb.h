@@ -91,7 +91,7 @@ public:
     }
     CKeyMetadata(int64_t nCreateTime_)
     {
-    	SetNull();
+        SetNull();
         nCreateTime = nCreateTime_;
     }
 
@@ -168,7 +168,6 @@ public:
     bool WriteDestData(const CTxDestination &address, const std::string &key, const std::string &value);
     /// Erase destination data tuple from wallet database
     bool EraseDestData(const CTxDestination &address, const std::string &key);
-    bool WriteHDChain(const CHDChain& chain);
     CAmount GetAccountCreditDebit(const std::string& strAccount);
     void ListAccountCreditDebit(const std::string& strAccount, std::list<CAccountingEntry>& acentries);
 
@@ -179,6 +178,9 @@ public:
     DBErrors ZapSelectTx(CWallet* pwallet, std::vector<uint256>& vHashIn, std::vector<uint256>& vHashOut);
     static bool Recover(CDBEnv& dbenv, const std::string& filename, bool fOnlyKeys);
     static bool Recover(CDBEnv& dbenv, const std::string& filename);
+
+    //! write the hdchain model (external chain child index counter)
+    bool WriteHDChain(const CHDChain& chain);
 
 private:
     CWalletDB(const CWalletDB&);

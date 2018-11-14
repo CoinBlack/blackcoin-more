@@ -1,5 +1,5 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -94,6 +94,7 @@ void WalletTxToJSON(const CWalletTx& wtx, UniValue& entry)
     entry.push_back(Pair("walletconflicts", conflicts));
     entry.push_back(Pair("time", wtx.GetTxTime()));
     entry.push_back(Pair("timereceived", (int64_t)wtx.nTimeReceived));
+
     BOOST_FOREACH(const PAIRTYPE(string,string)& item, wtx.mapValue)
         entry.push_back(Pair(item.first, item.second));
 }
@@ -1043,7 +1044,6 @@ UniValue addmultisigaddress(const UniValue& params, bool fHelp)
     return EncodeDestination(innerID);
 }
 
-
 struct tallyitem
 {
     CAmount nAmount;
@@ -1847,7 +1847,7 @@ UniValue walletpassphrase(const UniValue& params, bool fHelp)
     if (!EnsureWalletIsAvailable(fHelp))
         return NullUniValue;
 
-    if (pwalletMain->IsCrypted() && (fHelp || params.size() < 2 || params.size() > 3))
+    if (pwalletMain->IsCrypted() && (fHelp || params.size() != 2))
         throw runtime_error(
             "walletpassphrase \"passphrase\" timeout staking\n"
             "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
@@ -2297,7 +2297,7 @@ UniValue getwalletinfo(const UniValue& params, bool fHelp)
     obj.push_back(Pair("paytxfee",      ValueFromAmount(payTxFee.GetFeePerK())));
     CKeyID masterKeyID = pwalletMain->GetHDChain().masterKeyID;
     if (!masterKeyID.IsNull())
-    	obj.push_back(Pair("hdmasterkeyid", masterKeyID.GetHex()));
+        obj.push_back(Pair("hdmasterkeyid", masterKeyID.GetHex()));
     return obj;
 }
 
@@ -2497,7 +2497,8 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
         // backward compatibility bool only fallback
         includeWatching = params[1].get_bool();
       }
-    } else {
+    }
+    else {
         RPCTypeCheck(params, boost::assign::list_of(UniValue::VSTR)(UniValue::VOBJ));
 
         UniValue options = params[1];

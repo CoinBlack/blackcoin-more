@@ -1,4 +1,4 @@
- // Copyright (c) 2009-2010 Satoshi Nakamoto
+// Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -109,7 +109,7 @@ struct CDiskBlockPos
 
 };
 
-enum BlockStatus {
+enum BlockStatus: uint32_t {
     //! Unused.
     BLOCK_VALID_UNKNOWN      =    0,
 
@@ -293,7 +293,6 @@ public:
         return (int64_t)nTime;
     }
 
-private:
     enum { nMedianTimeSpan=11 };
 
     int64_t GetMedianTimePast() const
@@ -310,7 +309,6 @@ private:
         return pbegin[(pend - pbegin)/2];
     }
 
-public:
     int64_t GetPastTimeLimit() const
     {
         if (Params().GetConsensus().IsProtocolV2(GetBlockTime()))

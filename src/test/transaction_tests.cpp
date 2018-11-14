@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,6 +7,7 @@
 #include "test/test_bitcoin.h"
 
 #include "clientversion.h"
+#include "checkqueue.h"
 #include "consensus/validation.h"
 #include "core_io.h"
 #include "key.h"
@@ -14,7 +15,9 @@
 #include "main.h" // For CheckTransaction
 #include "policy/policy.h"
 #include "script/script.h"
+#include "script/sign.h"
 #include "script/script_error.h"
+#include "script/standard.h"
 #include "utilstrencodings.h"
 
 #include <map>
@@ -29,6 +32,8 @@
 #include <univalue.h>
 
 using namespace std;
+
+typedef vector<unsigned char> valtype;
 
 // In script_tests.cpp
 extern UniValue read_json(const std::string& jsondata);
@@ -110,6 +115,7 @@ BOOST_AUTO_TEST_CASE(tx_valid)
             }
 
             map<COutPoint, CScript> mapprevOutScriptPubKeys;
+            map<COutPoint, int64_t> mapprevOutValues;
             UniValue inputs = test[0].get_array();
             bool fValid = true;
 	    for (unsigned int inpIdx = 0; inpIdx < inputs.size(); inpIdx++) {
@@ -120,13 +126,17 @@ BOOST_AUTO_TEST_CASE(tx_valid)
                     break;
                 }
                 UniValue vinput = input.get_array();
-                if (vinput.size() != 3)
+                if (vinput.size() < 3 || vinput.size() > 4)
                 {
                     fValid = false;
                     break;
                 }
-
-                mapprevOutScriptPubKeys[COutPoint(uint256S(vinput[0].get_str()), vinput[1].get_int())] = ParseScript(vinput[2].get_str());
+                COutPoint outpoint(uint256S(vinput[0].get_str()), vinput[1].get_int());
+                mapprevOutScriptPubKeys[outpoint] = ParseScript(vinput[2].get_str());
+                if (vinput.size() >= 4)
+                {
+                    mapprevOutValues[outpoint] = vinput[3].get_int64();
+                }
             }
             if (!fValid)
             {
@@ -153,6 +163,9 @@ BOOST_AUTO_TEST_CASE(tx_valid)
                 }
 
                 CAmount amount = 0;
+                if (mapprevOutValues.count(tx.vin[i].prevout)) {
+                    amount = mapprevOutValues[tx.vin[i].prevout];
+                }
                 unsigned int verify_flags = ParseScriptFlags(test[2].get_str());
                 BOOST_CHECK_MESSAGE(VerifyScript(tx.vin[i].scriptSig, mapprevOutScriptPubKeys[tx.vin[i].prevout],
                                                  verify_flags, TransactionSignatureChecker(&tx, i, amount, txdata), &err),
@@ -187,6 +200,7 @@ BOOST_AUTO_TEST_CASE(tx_invalid)
             }
 
             map<COutPoint, CScript> mapprevOutScriptPubKeys;
+            map<COutPoint, int64_t> mapprevOutValues;
             UniValue inputs = test[0].get_array();
             bool fValid = true;
 	    for (unsigned int inpIdx = 0; inpIdx < inputs.size(); inpIdx++) {
@@ -197,13 +211,17 @@ BOOST_AUTO_TEST_CASE(tx_invalid)
                     break;
                 }
                 UniValue vinput = input.get_array();
-                if (vinput.size() != 3)
+                if (vinput.size() < 3 || vinput.size() > 4)
                 {
                     fValid = false;
                     break;
                 }
-
-                mapprevOutScriptPubKeys[COutPoint(uint256S(vinput[0].get_str()), vinput[1].get_int())] = ParseScript(vinput[2].get_str());
+                COutPoint outpoint(uint256S(vinput[0].get_str()), vinput[1].get_int());
+                mapprevOutScriptPubKeys[outpoint] = ParseScript(vinput[2].get_str());
+                if (vinput.size() >= 4)
+                {
+                    mapprevOutValues[outpoint] = vinput[3].get_int64();
+                }
             }
             if (!fValid)
             {
@@ -230,6 +248,9 @@ BOOST_AUTO_TEST_CASE(tx_invalid)
 
                 unsigned int verify_flags = ParseScriptFlags(test[2].get_str());
                 CAmount amount = 0;
+                if (mapprevOutValues.count(tx.vin[i].prevout)) {
+                    amount = mapprevOutValues[tx.vin[i].prevout];
+                }
                 fValid = VerifyScript(tx.vin[i].scriptSig, mapprevOutScriptPubKeys[tx.vin[i].prevout],
                                       verify_flags, TransactionSignatureChecker(&tx, i, amount, txdata), &err);
             }

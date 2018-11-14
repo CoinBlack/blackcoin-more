@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,20 +16,14 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#ifdef HAVE_GETADDRINFO_A
-#include <netdb.h>
-#endif
+#include <atomic>
 
 #ifndef WIN32
-#if HAVE_INET_PTON
-#include <arpa/inet.h>
-#endif
 #include <fcntl.h>
 #endif
 
 #include <boost/algorithm/string/case_conv.hpp> // for to_lower()
 #include <boost/algorithm/string/predicate.hpp> // for startswith() and endswith()
-#include <boost/thread.hpp>
 
 #if !defined(HAVE_MSG_NOSIGNAL) && !defined(MSG_NOSIGNAL)
 #define MSG_NOSIGNAL 0
@@ -44,6 +38,7 @@ bool fNameLookup = DEFAULT_NAME_LOOKUP;
 
 // Need ample time for negotiation for very slow proxies such as Tor (milliseconds)
 static const int SOCKS5_RECV_TIMEOUT = 20 * 1000;
+static std::atomic<bool> interruptSocks5Recv(false);
 
 enum Network ParseNetwork(std::string net) {
     boost::to_lower(net);
@@ -206,7 +201,7 @@ struct timeval MillisToTimeval(int64_t nTimeout)
 /**
  * Read bytes from socket. This will either read the full number of bytes requested
  * or return False on error or timeout.
- * This function can be interrupted by boost thread interrupt.
+ * This function can be interrupted by calling InterruptSocks5()
  *
  * @param data Buffer to receive into
  * @param len  Length of data to receive
@@ -246,7 +241,8 @@ bool static InterruptibleRecv(char* data, size_t len, int timeout, SOCKET& hSock
                 return false;
             }
         }
-        boost::this_thread::interruption_point();
+        if (interruptSocks5Recv)
+            return false;
         curTime = GetTimeMillis();
     }
     return len == 0;
@@ -292,7 +288,7 @@ static bool Socks5(const std::string& strDest, int port, const ProxyCredentials 
         vSocks5Init.push_back(0x01); // # METHODS
         vSocks5Init.push_back(0x00); // X'00' NO AUTHENTICATION REQUIRED
     }
-    ssize_t ret = send(hSocket, (const char*)begin_ptr(vSocks5Init), vSocks5Init.size(), MSG_NOSIGNAL);
+    ssize_t ret = send(hSocket, (const char*)vSocks5Init.data(), vSocks5Init.size(), MSG_NOSIGNAL);
     if (ret != (ssize_t)vSocks5Init.size()) {
         CloseSocket(hSocket);
         return error("Error sending to proxy");
@@ -317,7 +313,7 @@ static bool Socks5(const std::string& strDest, int port, const ProxyCredentials 
         vAuth.insert(vAuth.end(), auth->username.begin(), auth->username.end());
         vAuth.push_back(auth->password.size());
         vAuth.insert(vAuth.end(), auth->password.begin(), auth->password.end());
-        ret = send(hSocket, (const char*)begin_ptr(vAuth), vAuth.size(), MSG_NOSIGNAL);
+        ret = send(hSocket, (const char*)vAuth.data(), vAuth.size(), MSG_NOSIGNAL);
         if (ret != (ssize_t)vAuth.size()) {
             CloseSocket(hSocket);
             return error("Error sending authentication to proxy");
@@ -347,7 +343,7 @@ static bool Socks5(const std::string& strDest, int port, const ProxyCredentials 
     vSocks5.insert(vSocks5.end(), strDest.begin(), strDest.end());
     vSocks5.push_back((port >> 8) & 0xFF);
     vSocks5.push_back((port >> 0) & 0xFF);
-    ret = send(hSocket, (const char*)begin_ptr(vSocks5), vSocks5.size(), MSG_NOSIGNAL);
+    ret = send(hSocket, (const char*)vSocks5.data(), vSocks5.size(), MSG_NOSIGNAL);
     if (ret != (ssize_t)vSocks5.size()) {
         CloseSocket(hSocket);
         return error("Error sending to proxy");
@@ -550,8 +546,8 @@ static bool ConnectThroughProxy(const proxyType &proxy, const std::string& strDe
     // do socks negotiation
     if (proxy.randomize_credentials) {
         ProxyCredentials random_auth;
-        random_auth.username = strprintf("%i", insecure_rand());
-        random_auth.password = strprintf("%i", insecure_rand());
+        static std::atomic_int counter;
+        random_auth.username = random_auth.password = strprintf("%i", counter++);
         if (!Socks5(strDest, (unsigned short)port, &random_auth, hSocket))
             return false;
     } else {
@@ -585,8 +581,8 @@ bool ConnectSocketByName(CService &addr, SOCKET& hSocketRet, const char *pszDest
 
     SplitHostPort(std::string(pszDest), port, strDest);
 
-    proxyType nameProxy;
-    GetNameProxy(nameProxy);
+    proxyType proxy;
+    GetNameProxy(proxy);
 
     std::vector<CService> addrResolved;
     if (Lookup(strDest.c_str(), addrResolved, port, fNameLookup && !HaveNameProxy(), 256)) {
@@ -600,7 +596,7 @@ bool ConnectSocketByName(CService &addr, SOCKET& hSocketRet, const char *pszDest
 
     if (!HaveNameProxy())
         return false;
-    return ConnectThroughProxy(nameProxy, strDest, port, hSocketRet, nTimeout, outProxyConnectionFailed);
+    return ConnectThroughProxy(proxy, strDest, port, hSocketRet, nTimeout, outProxyConnectionFailed);
 }
 
 bool LookupSubNet(const char* pszName, CSubNet& ret)
@@ -714,4 +710,9 @@ bool SetSocketNonBlocking(SOCKET& hSocket, bool fNonBlocking)
     }
 
     return true;
+}
+
+void InterruptSocks5(bool interrupt)
+{
+    interruptSocks5Recv = interrupt;
 }

@@ -349,8 +349,6 @@ public:
 };
 static CRegTestParams regTestParams;
 
-
-
 static CChainParams *pCurrentParams = 0;
 
 const CChainParams &Params() {

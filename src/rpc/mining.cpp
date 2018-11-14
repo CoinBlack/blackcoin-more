@@ -233,9 +233,10 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
             "  \"currentblocktx\": nnn,     (numeric) The last block transaction\n"
             "  \"difficulty\": xxx.xxxxx    (numeric) The current difficulty\n"
             "  \"errors\": \"...\"            (string) Current errors\n"
+            "  \"networkhashps\": nnn,      (numeric) The network hashes per second\n"
             "  \"pooledtx\": n              (numeric) The size of the mempool\n"
             "  \"testnet\": true|false      (boolean) If using testnet or not\n"
-            "  \"chain\": \"xxxx\",         (string) current network name as defined in BIP70 (main, test, regtest)\n"
+            "  \"chain\": \"xxxx\",           (string) current network name as defined in BIP70 (main, test, regtest)\n"
             "}\n"
             "\nExamples:\n"
             + HelpExampleCli("getmininginfo", "")
@@ -598,7 +599,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     UniValue transactions(UniValue::VARR);
     map<uint256, int64_t> setTxIndex;
     int i = 0;
-    BOOST_FOREACH (const CTransaction& tx, pblock->vtx) {
+    BOOST_FOREACH (CTransaction& tx, pblock->vtx) {
         uint256 txHash = tx.GetHash();
         setTxIndex[txHash] = i++;
 
@@ -608,7 +609,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
         UniValue entry(UniValue::VOBJ);
 
         entry.push_back(Pair("data", EncodeHexTx(tx)));
-
         entry.push_back(Pair("hash", txHash.GetHex()));
 
         UniValue deps(UniValue::VARR);

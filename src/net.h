@@ -90,7 +90,6 @@ CNode* FindNode(const CNetAddr& ip);
 CNode* FindNode(const CSubNet& subNet);
 CNode* FindNode(const std::string& addrName);
 CNode* FindNode(const CService& ip);
-CNode* ConnectNode(CAddress addrConnect, const char *pszDest = NULL);
 CNode* FindNode(const NodeId id); //TODO: Remove this
 bool OpenNetworkConnection(const CAddress& addrConnect, bool fCountFailure, CSemaphoreGrant *grantOutbound = NULL, const char *strDest = NULL, bool fOneShot = false, bool fFeeler = false);
 void MapPort(bool fUseUPnP);
@@ -159,6 +158,7 @@ CAddress GetLocalAddress(const CNetAddr *paddrPeer = NULL);
 extern bool fDiscover;
 extern bool fListen;
 extern ServiceFlags nLocalServices;
+extern ServiceFlags nRelevantServices;
 extern bool fRelayTxes;
 extern uint64_t nLocalHostNonce;
 extern CAddrMan addrman;

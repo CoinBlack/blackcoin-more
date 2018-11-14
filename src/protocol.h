@@ -309,13 +309,26 @@ public:
     unsigned int nTime;
 };
 
+/** getdata message type flags */
+const uint32_t MSG_TYPE_MASK    = 0xffffffff >> 2;
+
+/** getdata message types */
+enum GetDataMsg
+{
+    UNDEFINED = 0,
+    MSG_TX = 1,
+    MSG_BLOCK,
+    // The following can only occur in getdata. Invs always use TX or BLOCK.
+    MSG_FILTERED_BLOCK,
+    MSG_CMPCT_BLOCK,
+};
+
 /** inv message data */
 class CInv
 {
 public:
     CInv();
     CInv(int typeIn, const uint256& hashIn);
-    CInv(const std::string& strType, const uint256& hashIn);
 
     ADD_SERIALIZE_METHODS;
 
@@ -328,23 +341,13 @@ public:
 
     friend bool operator<(const CInv& a, const CInv& b);
 
-    bool IsKnownType() const;
-    const char* GetCommand() const;
+    std::string GetCommand() const;
     std::string ToString() const;
 
     // TODO: make private (improves encapsulation)
 public:
     int type;
     uint256 hash;
-};
-
-enum {
-    MSG_TX = 1,
-    MSG_BLOCK,
-    // Nodes may always request a MSG_FILTERED_BLOCK/MSG_CMPCT_BLOCK in a getdata, however,
-    // MSG_FILTERED_BLOCK/MSG_CMPCT_BLOCK should not appear in any invs except as a part of getdata.
-    MSG_FILTERED_BLOCK,
-    MSG_CMPCT_BLOCK,
 };
 
 #endif // BITCOIN_PROTOCOL_H

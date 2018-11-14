@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -29,7 +29,7 @@ class proxyType
 {
 public:
     proxyType(): randomize_credentials(false) {}
-    proxyType(const CService &proxy, bool randomize_credentials=false): proxy(proxy), randomize_credentials(randomize_credentials) {}
+    proxyType(const CService &_proxy, bool _randomize_credentials=false): proxy(_proxy), randomize_credentials(_randomize_credentials) {}
 
     bool IsValid() const { return proxy.IsValid(); }
 
@@ -63,5 +63,6 @@ bool SetSocketNonBlocking(SOCKET& hSocket, bool fNonBlocking);
  * Convert milliseconds to a struct timeval for e.g. select.
  */
 struct timeval MillisToTimeval(int64_t nTimeout);
+void InterruptSocks5(bool interrupt);
 
 #endif // BITCOIN_NETBASE_H

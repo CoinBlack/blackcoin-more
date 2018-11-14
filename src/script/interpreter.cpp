@@ -79,8 +79,20 @@ bool IsCompressedOrUncompressedPubKey(const vector<unsigned char> &vchPubKey) {
             return false;
         }
     } else {
-          //  Non-canonical public key: neither compressed nor uncompressed
-          return false;
+        //  Non-canonical public key: neither compressed nor uncompressed
+        return false;
+    }
+    return true;
+}
+
+bool static IsCompressedPubKey(const valtype &vchPubKey) {
+    if (vchPubKey.size() != 33) {
+        //  Non-canonical public key: invalid length for compressed key
+        return false;
+    }
+    if (vchPubKey[0] != 0x02 && vchPubKey[0] != 0x03) {
+        //  Non-canonical public key: invalid prefix for compressed key
+        return false;
     }
     return true;
 }
@@ -176,16 +188,18 @@ bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror, bool haveHash
     return true;
 }
 
-//bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
-//    if (!IsValidSignatureEncoding(vchSig)) {
-//        return set_error(serror, SCRIPT_ERR_SIG_DER);
-//    }
-//    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
-//    if (!CPubKey::CheckLowS(vchSigCopy)) {
-//        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
-//    }
-//    return true;
-//}
+/*
+bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
+    if (!IsValidSignatureEncoding(vchSig)) {
+        return set_error(serror, SCRIPT_ERR_SIG_DER);
+    }
+    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
+    if (!CPubKey::CheckLowS(vchSigCopy)) {
+        return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
+    }
+    return true;
+}
+*/
 
 bool static IsDefinedHashtypeSignature(const valtype &vchSig) {
     if (vchSig.size() == 0) {

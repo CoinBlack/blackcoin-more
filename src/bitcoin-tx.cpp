@@ -236,7 +236,7 @@ static void MutateTxAddInput(CMutableTransaction& tx, const string& strInput)
     // extract the optional sequence number
     uint32_t nSequenceIn=std::numeric_limits<unsigned int>::max();
     if (vStrInputParts.size() > 2)
-        nSequenceIn = atoi(vStrInputParts[2]);
+        nSequenceIn = std::stoul(vStrInputParts[2]);
 
     // append to transaction input list
     CTxIn txin(txid, vout, CScript(), nSequenceIn);
@@ -516,15 +516,16 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
         const CScript& prevPubKey = coins->vout[txin.prevout.n].scriptPubKey;
         const CAmount& amount = coins->vout[txin.prevout.n].nValue;
 
-        txin.scriptSig.clear();
+        SignatureData sigdata;
         // Only sign SIGHASH_SINGLE if there's a corresponding output:
         if (!fHashSingle || (i < mergedTx.vout.size()))
-            SignSignature(keystore, prevPubKey, mergedTx, i, nHashType);
+            ProduceSignature(MutableTransactionSignatureCreator(&keystore, &mergedTx, i, amount, nHashType), prevPubKey, sigdata);
 
         // ... and merge in other signatures:
-        BOOST_FOREACH(const CTransaction& txv, txVariants) {
-            txin.scriptSig = CombineSignatures(prevPubKey, MutableTransactionSignatureChecker(&mergedTx, i, amount), txin.scriptSig, txv.vin[i].scriptSig);
-        }
+        BOOST_FOREACH(const CTransaction& txv, txVariants)
+            sigdata = CombineSignatures(prevPubKey, MutableTransactionSignatureChecker(&mergedTx, i, amount), sigdata, DataFromTransaction(txv, i));
+        UpdateTransaction(mergedTx, i, sigdata);
+
         if (!VerifyScript(txin.scriptSig, prevPubKey, STANDARD_SCRIPT_VERIFY_FLAGS, MutableTransactionSignatureChecker(&mergedTx, i, amount)))
             fComplete = false;
     }

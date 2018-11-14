@@ -40,13 +40,13 @@ struct CTxMemPoolModifiedEntry {
         iter = entry;
         nSizeWithAncestors = entry->GetSizeWithAncestors();
         nModFeesWithAncestors = entry->GetModFeesWithAncestors();
-        nSigOpCostWithAncestors = entry->GetSigOpCostWithAncestors();
+        nSigOpCountWithAncestors = entry->GetSigOpCountWithAncestors();
     }
 
     CTxMemPool::txiter iter;
     uint64_t nSizeWithAncestors;
     CAmount nModFeesWithAncestors;
-    int64_t nSigOpCostWithAncestors;
+    int64_t nSigOpCountWithAncestors;
 };
 
 /** Comparator for CTxMemPool::txiter objects.
@@ -124,7 +124,7 @@ struct update_for_parent_inclusion
     {
         e.nModFeesWithAncestors -= iter->GetFee();
         e.nSizeWithAncestors -= iter->GetTxSize();
-        e.nSigOpCostWithAncestors -= iter->GetSigOpCost();
+        e.nSigOpCountWithAncestors -= iter->GetSigOpCount();
     }
 
     CTxMemPool::txiter iter;
@@ -145,7 +145,7 @@ private:
     // Information on the current status of the block
     uint64_t nBlockSize;
     uint64_t nBlockTx;
-    uint64_t nBlockSigOpsCost;
+    uint64_t nBlockSigOps;
     CAmount nFees;
     CTxMemPool::setEntries inBlock;
 
@@ -186,7 +186,7 @@ private:
     /** Remove confirmed (inBlock) entries from given set */
     void onlyUnconfirmed(CTxMemPool::setEntries& testSet);
     /** Test if a new package would "fit" in the block */
-    bool TestPackage(uint64_t packageSize, int64_t packageSigOpsCost);
+    bool TestPackage(uint64_t packageSize, int64_t packageSigOps);
     /** Perform checks on each transaction in a package:
       * locktime, premature-witness, serialized size (if necessary)
       * These checks should always succeed, and they're here

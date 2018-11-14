@@ -21,7 +21,9 @@ EXTRA_DIST += \
 	test/data/txcreate2.hex \
 	test/data/txcreatedata1.hex \
 	test/data/txcreatedata2.hex \
-	test/data/txcreatesign.hex
+	test/data/txcreatesign.hex \
+	test/data/txcreatedata_seq0.hex \
+	test/data/txcreatedata_seq1.hex
 
 JSON_TEST_FILES = \
   test/data/script_tests.json \
@@ -99,14 +101,14 @@ BITCOIN_TESTS += \
   wallet/test/wallet_test_fixture.h \
   wallet/test/accounting_tests.cpp \
   wallet/test/wallet_tests.cpp \
-  wallet/test/rpc_wallet_tests.cpp \
   wallet/test/walletdb_tests.cpp \
-  wallet/test/crypto_tests.cpp
+  wallet/test/crypto_tests.cpp \
+  wallet/test/rpc_wallet_tests.cpp
 endif
 
 test_test_bitcoin_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
 test_test_bitcoin_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS)
-test_test_bitcoin_LDADD = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+test_test_bitcoin_LDADD = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
   $(BOOST_LIBS) $(BOOST_UNIT_TEST_FRAMEWORK_LIB) $(LIBSECP256K1)
 test_test_bitcoin_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 if ENABLE_WALLET

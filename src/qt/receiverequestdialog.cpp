@@ -49,7 +49,7 @@ QImage QRImageWidget::exportImage()
 {
     if(!pixmap())
         return QImage();
-    return pixmap()->toImage().scaled(QR_IMAGE_SIZE, QR_IMAGE_SIZE);
+    return pixmap()->toImage();
 }
 
 void QRImageWidget::mousePressEvent(QMouseEvent *event)
@@ -203,16 +203,16 @@ void ReceiveRequestDialog::update()
             }
             QRcode_free(code);
 
-            QImage qrAddrImage = QImage(QR_IMAGE_SIZE, QR_IMAGE_SIZE + 20, QImage::Format_RGB32);
+            QImage qrAddrImage = QImage(QR_IMAGE_SIZE, QR_IMAGE_SIZE+20, QImage::Format_RGB32);
             qrAddrImage.fill(0xffffff);
             QPainter painter(&qrAddrImage);
             painter.drawImage(0, 0, qrImage.scaled(QR_IMAGE_SIZE, QR_IMAGE_SIZE));
             QFont font = GUIUtil::fixedPitchFont();
-            font.setPixelSize(fontSize);
+            font.setPixelSize(12);
             painter.setFont(font);
             QRect paddedRect = qrAddrImage.rect();
-            paddedRect.setHeight(QR_IMAGE_SIZE + 12);
-            painter.drawText(paddedRect, Qt::AlignBottom | Qt::AlignCenter, info.address);
+            paddedRect.setHeight(QR_IMAGE_SIZE+12);
+            painter.drawText(paddedRect, Qt::AlignBottom|Qt::AlignCenter, info.address);
             painter.end();
 
             ui->lblQRCode->setPixmap(QPixmap::fromImage(qrAddrImage));

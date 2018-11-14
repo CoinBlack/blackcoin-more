@@ -48,8 +48,6 @@ bool fSendFreeTransactions = DEFAULT_SEND_FREE_TRANSACTIONS;
 const char * DEFAULT_WALLET_DAT = "wallet.dat";
 const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
 
-CAmount nReserveBalance = 0;
-
 static int64_t GetStakeCombineThreshold() { return 500 * COIN; }
 static int64_t GetStakeSplitThreshold() { return 2 * GetStakeCombineThreshold(); }
 
@@ -67,6 +65,7 @@ CFeeRate CWallet::fallbackFee = CFeeRate(DEFAULT_FALLBACK_FEE);
 
 const uint256 CMerkleTx::ABANDON_HASH(uint256S("0000000000000000000000000000000000000000000000000000000000000001"));
 
+CAmount nReserveBalance = 0;
 CAmount nMinimumInputValue = 0;
 
 /** @defgroup mapWallet
@@ -148,7 +147,7 @@ CPubKey CWallet::GenerateNewKey()
         if (!CWalletDB(strWalletFile).WriteHDChain(hdChain))
             throw std::runtime_error(std::string(__func__) + ": Writing HD chain model failed");
     } else {
-            secret.MakeNewKey(fCompressed);
+        secret.MakeNewKey(fCompressed);
     }
 
     // Compressed public keys were introduced in version 0.6.0
@@ -158,7 +157,6 @@ CPubKey CWallet::GenerateNewKey()
     CPubKey pubkey = secret.GetPubKey();
     assert(secret.VerifyPubKey(pubkey));
 
-    // Create new metadata
     mapKeyMetadata[pubkey.GetID()] = metadata;
     if (!nTimeFirstKey || nCreationTime < nTimeFirstKey)
         nTimeFirstKey = nCreationTime;
@@ -1534,7 +1532,7 @@ CAmount CWallet::GetDebit(const CTransaction& tx, const isminefilter& filter) co
     {
         nDebit += GetDebit(txin, filter);
         if (!MoneyRange(nDebit))
-            throw std::runtime_error("CWallet::GetDebit(): value out of range");
+            throw std::runtime_error(std::string(__func__) + ": value out of range");
     }
     return nDebit;
 }
@@ -1546,7 +1544,7 @@ CAmount CWallet::GetCredit(const CTransaction& tx, const isminefilter& filter) c
     {
         nCredit += GetCredit(txout, filter);
         if (!MoneyRange(nCredit))
-            throw std::runtime_error("CWallet::GetCredit(): value out of range");
+            throw std::runtime_error(std::string(__func__) + ": value out of range");
     }
     return nCredit;
 }
@@ -1558,7 +1556,7 @@ CAmount CWallet::GetChange(const CTransaction& tx) const
     {
         nChange += GetChange(txout);
         if (!MoneyRange(nChange))
-            throw std::runtime_error("CWallet::GetChange(): value out of range");
+            throw std::runtime_error(std::string(__func__) + ": value out of range");
     }
     return nChange;
 }
@@ -1649,7 +1647,7 @@ void CWalletTx::GetAmounts(list<COutputEntry>& listReceived,
         // In either case, we need to get the destination address
         CTxDestination address;
 
-        if (!ExtractDestination(txout.scriptPubKey, address)&& !txout.IsUnspendable())
+        if (!ExtractDestination(txout.scriptPubKey, address) && !txout.IsUnspendable())
         {
             LogPrintf("CWalletTx::GetAmounts: Unknown transaction type found, txid %s\n",
                      this->GetHash().ToString());
@@ -1793,7 +1791,7 @@ void CWallet::ReacceptWalletTransactions()
 bool CWalletTx::RelayWalletTransaction()
 {
     assert(pwallet->GetBroadcastTransactions());
-    if (!(IsCoinBase() || IsCoinStake()) && !isAbandoned() && GetDepthInMainChain() == 0)
+    if (!IsCoinBase() && !IsCoinStake() && !isAbandoned() && GetDepthInMainChain() == 0)
     {
         CValidationState state;
         /* GetDepthInMainChain already catches known conflicts. */
@@ -2292,19 +2290,6 @@ static void ApproximateBestSubset(vector<pair<CAmount, pair<const CWalletTx*,uns
     }
 }
 
-CAmount CWallet::GetWatchOnlyStake() const
-{
-    CAmount nTotal = 0;
-    LOCK2(cs_main, cs_wallet);
-    for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
-    {
-        const CWalletTx* pcoin = &(*it).second;
-        if (pcoin->IsCoinStake() && pcoin->GetBlocksToMaturity() > 0 && pcoin->GetDepthInMainChain() > 0)
-            nTotal += CWallet::GetCredit(*pcoin, ISMINE_WATCH_ONLY);
-    }
-    return nTotal;
-}
-
 bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMine, const int nConfTheirs, const uint64_t nMaxAncestors, vector<COutput> vCoins,
                                  set<pair<const CWalletTx*,unsigned int> >& setCoinsRet, CAmount& nValueRet) const
 {
@@ -2375,7 +2360,8 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMin
     }
 
     // Solve subset sum by stochastic approximation
-    sort(vValue.rbegin(), vValue.rend(), CompareValueOnly());
+    std::sort(vValue.begin(), vValue.end(), CompareValueOnly());
+    std::reverse(vValue.begin(), vValue.end());
     vector<char> vfBest;
     CAmount nBest;
 
@@ -2763,17 +2749,20 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
                 {
                     bool signSuccess;
                     const CScript& scriptPubKey = coin.first->vout[coin.second].scriptPubKey;
-                    CScript& scriptSigRes = txNew.vin[nIn].scriptSig;
+                    SignatureData sigdata;
                     if (sign)
-                        signSuccess = ProduceSignature(TransactionSignatureCreator(this, &txNewConst, nIn, coin.first->vout[coin.second].nValue, SIGHASH_ALL), scriptPubKey, scriptSigRes);
+                        signSuccess = ProduceSignature(TransactionSignatureCreator(this, &txNewConst, nIn, coin.first->vout[coin.second].nValue, SIGHASH_ALL), scriptPubKey, sigdata);
                     else
-                        signSuccess = ProduceSignature(DummySignatureCreator(this), scriptPubKey, scriptSigRes);
+                        signSuccess = ProduceSignature(DummySignatureCreator(this), scriptPubKey, sigdata);
 
                     if (!signSuccess)
                     {
                         strFailReason = _("Signing transaction failed");
                         return false;
+                    } else {
+                        UpdateTransaction(txNew, nIn, sigdata);
                     }
+
                     nIn++;
                 }
 
@@ -2921,7 +2910,18 @@ CAmount CWallet::GetRequiredFee(unsigned int nTxBytes)
 
 CAmount CWallet::GetMinimumFee(unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool)
 {
-    CAmount nFeeNeeded = GetRequiredFee(nTxBytes);
+    // payTxFee is user-set "I want to pay this much"
+    CAmount nFeeNeeded = payTxFee.GetFee(nTxBytes);
+    // User didn't set: use -txconfirmtarget to estimate...
+    if (nFeeNeeded == 0) {
+        int estimateFoundTarget = nConfirmTarget;
+        nFeeNeeded = pool.estimateSmartFee(nConfirmTarget, &estimateFoundTarget).GetFee(nTxBytes);
+        // ... unless we don't have enough mempool data for estimatefee, then use fallbackFee
+        if (nFeeNeeded == 0)
+            nFeeNeeded = fallbackFee.GetFee(nTxBytes);
+    }
+    // prevent user from paying a fee below minRelayTxFee or minTxFee
+    nFeeNeeded = std::max(nFeeNeeded, GetRequiredFee(nTxBytes));
     // But always obey the maximum
     if (nFeeNeeded > maxTxFee)
         nFeeNeeded = maxTxFee;
@@ -3526,6 +3526,19 @@ void CWallet::ListLockedCoins(std::vector<COutPoint>& vOutpts)
     }
 }
 
+CAmount CWallet::GetWatchOnlyStake() const
+{
+    CAmount nTotal = 0;
+    LOCK2(cs_main, cs_wallet);
+    for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
+    {
+        const CWalletTx* pcoin = &(*it).second;
+        if (pcoin->IsCoinStake() && pcoin->GetBlocksToMaturity() > 0 && pcoin->GetDepthInMainChain() > 0)
+            nTotal += CWallet::GetCredit(*pcoin, ISMINE_WATCH_ONLY);
+    }
+    return nTotal;
+}
+
 uint64_t CWallet::GetStakeWeight() const
 {
     // Choose coins to use
@@ -3706,8 +3719,6 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     strUsage += HelpMessageOpt("-spendzeroconfchange", strprintf(_("Spend unconfirmed change when sending transactions (default: %u)"), DEFAULT_SPEND_ZEROCONF_CHANGE));
     strUsage += HelpMessageOpt("-txconfirmtarget=<n>", strprintf(_("If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)"), DEFAULT_TX_CONFIRM_TARGET));
     strUsage += HelpMessageOpt("-usehd", _("Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start") + " " + strprintf(_("(default: %u)"), DEFAULT_USE_HD_WALLET));
-    strUsage += HelpMessageOpt("-maxtxfee=<amt>", strprintf(_("Maximum total fees (in %s) to use in a single wallet transaction; setting this too low may abort large transactions (default: %s)"),
-        CURRENCY_UNIT, FormatMoney(DEFAULT_TRANSACTION_MAXFEE)));
     strUsage += HelpMessageOpt("-upgradewallet", _("Upgrade wallet to latest format on startup"));
     strUsage += HelpMessageOpt("-wallet=<file>", _("Specify wallet file (within data directory)") + " " + strprintf(_("(default: %s)"), DEFAULT_WALLET_DAT));
     strUsage += HelpMessageOpt("-walletbroadcast", _("Make the wallet broadcast transactions") + " " + strprintf(_("(default: %u)"), DEFAULT_WALLETBROADCAST));
@@ -3802,7 +3813,6 @@ bool CWallet::InitLoadWallet()
             if (!walletInstance->SetHDMasterKey(masterPubKey))
                 throw std::runtime_error(std::string(__func__) + ": Storing master key failed");
         }
-
         CPubKey newDefaultKey;
         if (walletInstance->GetKeyFromPool(newDefaultKey)) {
             walletInstance->SetDefaultKey(newDefaultKey);

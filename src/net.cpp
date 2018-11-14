@@ -40,7 +40,7 @@
 
 #include <math.h>
 
-// Dump addresses to peers.dat every 15 minutes (900s)
+// Dump addresses to peers.dat and banlist.dat every 15 minutes (900s)
 #define DUMP_ADDRESSES_INTERVAL 900
 
 // We add a random period time (0 to 1 seconds) to feeler connections to prevent synchronization.
@@ -77,7 +77,7 @@ namespace {
 const static std::string NET_MESSAGE_COMMAND_OTHER = "*other*";
 
 /** Services this node implementation cares about */
-static const ServiceFlags nRelevantServices = NODE_NETWORK;
+ServiceFlags nRelevantServices = NODE_NETWORK;
 
 //
 // Global state variables
@@ -2074,7 +2074,7 @@ void static Discover(boost::thread_group& threadGroup)
 void StartNode(boost::thread_group& threadGroup, CScheduler& scheduler)
 {
     uiInterface.InitMessage(_("Loading addresses..."));
-    // Load addresses for peers.dat
+    // Load addresses from peers.dat
     int64_t nStart = GetTimeMillis();
     {
         CAddrDB adb;
@@ -2742,14 +2742,14 @@ bool CBanDB::Read(banmap_t& banSet)
         // ... verify the network matches ours
         if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp)))
             return error("%s: Invalid network magic number", __func__);
-        
+
         // de-serialize address data into one CAddrMan object
         ssBanlist >> banSet;
     }
     catch (const std::exception& e) {
         return error("%s: Deserialize or I/O error - %s", __func__, e.what());
     }
-    
+
     return true;
 }
 

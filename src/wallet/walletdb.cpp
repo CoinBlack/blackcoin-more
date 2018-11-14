@@ -615,12 +615,12 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             }
         }
         else if (strType == "hdchain")
-            {
+        {
             CHDChain chain;
             ssValue >> chain;
             if (!pwallet->SetHDChain(chain, true))
             {
-            	strErr = "Error reading wallet database: SetHDChain failed";
+                strErr = "Error reading wallet database: SetHDChain failed";
                 return false;
             }
         }
@@ -920,7 +920,7 @@ void ThreadFlushWalletDB(const string& strFile)
                         bitdb.CheckpointLSN(strFile);
 
                         bitdb.mapFileUseCount.erase(mi++);
-                        LogPrint("db", "Flushed %s %dms\n", strFile, GetTimeMillis() - nStart);;
+                        LogPrint("db", "Flushed %s %dms\n", strFile, GetTimeMillis() - nStart);
                     }
                 }
             }
@@ -929,7 +929,7 @@ void ThreadFlushWalletDB(const string& strFile)
 }
 
 //
-// Try to (very carefully!) recover wallet file if there is a problem..
+// Try to (very carefully!) recover wallet file if there is a problem.
 //
 bool CWalletDB::Recover(CDBEnv& dbenv, const std::string& filename, bool fOnlyKeys)
 {
@@ -1026,12 +1026,6 @@ bool CWalletDB::WriteDestData(const CTxDestination &address, const std::string &
     return Write(std::make_pair(std::string("destdata"), std::make_pair(EncodeLegacyAddr(address, Params()), key)), value);
 }
 
-bool CWalletDB::WriteHDChain(const CHDChain& chain)
-{
-    nWalletDBUpdated++;
-    return Write(std::string("hdchain"), chain);
-}
-
 bool CWalletDB::EraseDestData(const CTxDestination &address, const std::string &key)
 {
     if (!IsValidDestination(address))
@@ -1039,4 +1033,11 @@ bool CWalletDB::EraseDestData(const CTxDestination &address, const std::string &
 
     nWalletDBUpdated++;
     return Erase(std::make_pair(std::string("destdata"), std::make_pair(EncodeLegacyAddr(address, Params()), key)));
+}
+
+
+bool CWalletDB::WriteHDChain(const CHDChain& chain)
+{
+    nWalletDBUpdated++;
+    return Write(std::string("hdchain"), chain);
 }

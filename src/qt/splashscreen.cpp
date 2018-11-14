@@ -84,10 +84,9 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     // check font size and drawing with
     pixPaint.setFont(QFont(font, 33*fontFactor));
     QFontMetrics fm = pixPaint.fontMetrics();
-    int titleTextWidth  = fm.width(titleText);
-    if(titleTextWidth > 160) {
-        // strange font rendering, Arial probably not found
-        fontFactor = 0.75;
+    int titleTextWidth = fm.width(titleText);
+    if (titleTextWidth > 176) {
+        fontFactor = fontFactor * 176 / titleTextWidth;
     }
 
     pixPaint.setFont(QFont(font, 33*fontFactor));
@@ -107,11 +106,15 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+2,paddingTop+titleVersionVSpace,versionText);
 
     // draw copyright stuff
-    pixPaint.setFont(QFont(font, 10*fontFactor));
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace,copyrightTextBitcoin);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace+15,copyrightTextBlackcoin);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace+30,copyrightTextBlackmore);
-    
+    {
+        pixPaint.setFont(QFont(font, 10*fontFactor));
+        const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight;
+        const int y = paddingTop+titleCopyrightVSpace;
+        pixPaint.drawText(x,y,copyrightTextBitcoin);
+        pixPaint.drawText(x,y+15,copyrightTextBlackcoin);
+        pixPaint.drawText(x,y+30,copyrightTextBlackmore);
+    }
+
     // draw additional text if special network
     if(!titleAddText.isEmpty()) {
         QFont boldFont = QFont(font, 10*fontFactor);

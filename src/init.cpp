@@ -304,7 +304,7 @@ std::string HelpMessage(HelpMessageMode mode)
     // When adding new options to the categories, please keep and ensure alphabetical ordering.
     // Do not translate _(...) -help-debug options, Many technical terms, and only a very small audience, so is unnecessary stress to translators.
     string strUsage = HelpMessageGroup(_("Options:"));
-    strUsage += HelpMessageOpt("-?", _("This help message"));
+    strUsage += HelpMessageOpt("-?", _("Print this help message and exit"));
     strUsage += HelpMessageOpt("-version", _("Print version and exit"));
     strUsage += HelpMessageOpt("-alertnotify=<cmd>", _("Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)"));
     strUsage += HelpMessageOpt("-blocknotify=<cmd>", _("Execute command when the best block changes (%s in cmd is replaced by block hash)"));
@@ -380,10 +380,10 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-whitebind=<addr>", _("Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6"));
     strUsage += HelpMessageOpt("-whitelist=<IP address or network>", _("Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.") +
         " " + _("Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway"));
-    strUsage += HelpMessageOpt("-synctime", strprintf(_("Sync time with other nodes (default: %u)"), 0));
     strUsage += HelpMessageOpt("-whitelistrelay", strprintf(_("Accept relayed transactions received from whitelisted peers even when not relaying transactions (default: %d)"), DEFAULT_WHITELISTRELAY));
     strUsage += HelpMessageOpt("-whitelistforcerelay", strprintf(_("Force relay of transactions from whitelisted peers even if they violate local relay policy (default: %d)"), DEFAULT_WHITELISTFORCERELAY));
     strUsage += HelpMessageOpt("-maxuploadtarget=<n>", strprintf(_("Tries to keep outbound traffic under the given target (in MiB per 24h), 0 = no limit (default: %d)"), DEFAULT_MAX_UPLOAD_TARGET));
+    strUsage += HelpMessageOpt("-synctime", strprintf(_("Sync time with other nodes (default: %u)"), 0));
 
 #ifdef ENABLE_WALLET
     strUsage += CWallet::GetWalletHelpString(showDebug);
@@ -435,6 +435,8 @@ std::string HelpMessage(HelpMessageMode mode)
     }
     strUsage += HelpMessageOpt("-minrelaytxfee=<amt>", strprintf(_("Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)"),
         CURRENCY_UNIT, FormatMoney(DEFAULT_MIN_RELAY_TX_FEE)));
+    strUsage += HelpMessageOpt("-maxtxfee=<amt>", strprintf(_("Maximum total fees (in %s) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions (default: %s)"),
+        CURRENCY_UNIT, FormatMoney(DEFAULT_TRANSACTION_MAXFEE)));
     strUsage += HelpMessageOpt("-printtoconsole", _("Send trace/debug info to console instead of debug.log file"));
     if (showDebug)
     {
@@ -507,7 +509,7 @@ std::string LicenseInfo()
            FormatParagraph(_("This is experimental software.")) + "\n" +
            FormatParagraph(_("Distributed under the MIT software license, see the accompanying file COPYING or <http://www.opensource.org/licenses/mit-license.php>.")) + "\n" +
            "\n" +
-           FormatParagraph(_("This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit <https://www.openssl.org/> and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.")) +
+           _("This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit <https://www.openssl.org/> and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.") +
            "\n";
 }
 
@@ -999,15 +1001,6 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
     nMaxTipAge = GetArg("-maxtipage", DEFAULT_MAX_TIP_AGE);
 
-    fEnableReplacement = GetBoolArg("-mempoolreplacement", DEFAULT_ENABLE_REPLACEMENT);
-    if ((!fEnableReplacement) && mapArgs.count("-mempoolreplacement")) {
-        // Minimal effort at forwards compatibility
-        std::string strReplacementModeList = GetArg("-mempoolreplacement", "");  // default is impossible
-        std::vector<std::string> vstrReplacementModes;
-        boost::split(vstrReplacementModes, strReplacementModeList, boost::is_any_of(","));
-        fEnableReplacement = (std::find(vstrReplacementModes.begin(), vstrReplacementModes.end(), "fee") != vstrReplacementModes.end());
-    }
-
     if (!mapMultiArgs["-bip9params"].empty()) {
         // Allow overriding bip9 parameters for testing
         if (!Params().MineBlocksOnDemand()) {
@@ -1051,7 +1044,7 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. Bitcoin Core is shutting down."));
+        return InitError(strprintf(_("Initialization sanity check failed. %s is shutting down."), _(PACKAGE_NAME)));
 
     std::string strDataDir = GetDataDir().string();
 
@@ -1063,9 +1056,9 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     try {
         static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
         if (!lock.try_lock())
-            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running."), strDataDir));
+            return InitError(strprintf(_("Cannot obtain a lock on data directory %s. %s is probably already running."), strDataDir, _(PACKAGE_NAME)));
     } catch(const boost::interprocess::interprocess_exception& e) {
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Bitcoin Core is probably already running.") + " %s.", strDataDir, e.what()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. %s is probably already running.") + " %s.", strDataDir, _(PACKAGE_NAME), e.what()));
     }
 
 #ifndef WIN32
@@ -1368,6 +1361,14 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
                 if (fHavePruned && !fPruneMode) {
                     strLoadError = _("You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain");
                     break;
+                }
+
+                if (!fReindex && chainActive.Tip() != NULL) {
+                    uiInterface.InitMessage(_("Rewinding blocks..."));
+                    if (!RewindBlockIndex(chainparams)) {
+                        strLoadError = _("Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain");
+                        break;
+                    }
                 }
 
                 uiInterface.InitMessage(_("Verifying blocks..."));

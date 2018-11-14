@@ -162,7 +162,6 @@ public:
     */
     std::vector<std::string> listCommands() const;
 
-    
     /**
      * Appends a CRPCCommand to the dispatch table.
      * Returns false if RPC server is already running (dump concurrency protection).

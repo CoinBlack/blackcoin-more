@@ -174,12 +174,12 @@ extern bool fRequireStandard;
 extern bool fCheckBlockIndex;
 extern bool fCheckpointsEnabled;
 extern size_t nCoinCacheUsage;
+extern int64_t nLastCoinStakeSearchInterval;
+
 /** A fee rate smaller than this is considered zero fee (for relaying, mining and transaction creation) */
 extern CFeeRate minRelayTxFee;
 /** Absolute maximum transaction fee (in satoshis) used by wallet and mempool (rejects high fee in sendrawtransaction) */
 extern CAmount maxTxFee;
-extern bool fEnableReplacement;
-extern int64_t nLastCoinStakeSearchInterval;
 /** If the tip is older than this (in seconds), the node is considered to be in initial block download. */
 extern int64_t nMaxTipAge;
 
@@ -478,6 +478,9 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees);
 
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
 bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
+
+/** When there are blocks in the active chain with missing data, rewind the chainstate and remove them from the block index */
+bool RewindBlockIndex(const CChainParams& params);
 
 /** RAII wrapper for VerifyDB: Verify consistency of the block and coin databases */
 class CVerifyDB {

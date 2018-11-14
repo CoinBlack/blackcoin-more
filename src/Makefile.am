@@ -25,8 +25,8 @@ BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
 LIBBITCOIN_SERVER=libbitcoin_server.a
-
 LIBBITCOIN_COMMON=libbitcoin_common.a
+LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
 LIBBITCOIN_CLI=libbitcoin_cli.a
 LIBBITCOIN_UTIL=libbitcoin_util.a
 LIBBITCOIN_CRYPTO=crypto/libbitcoin_crypto.a
@@ -79,10 +79,10 @@ BITCOIN_CORE_H = \
   amount.h \
   arith_uint256.h \
   base58.h \
+  blockencodings.h \
   bloom.h \
   cashaddr.h \
   cashaddrenc.h \
-  blockencodings.h \
   chain.h \
   chainparams.h \
   chainparamsbase.h \
@@ -104,8 +104,8 @@ BITCOIN_CORE_H = \
   consensus/validation.h \
   core_io.h \
   core_memusage.h \
-  hash.h \
   dstencode.h \
+  hash.h \
   httprpc.h \
   httpserver.h \
   indirectmap.h \
@@ -318,10 +318,10 @@ libbitcoin_common_a_SOURCES = \
   coins.cpp \
   compressor.cpp \
   consensus/merkle.cpp \
+  config.cpp \
   core_read.cpp \
   core_write.cpp \
   hash.cpp \
-  config.cpp \
   dstencode.cpp \
   key.cpp \
   keystore.cpp \
@@ -433,6 +433,7 @@ blackmore_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CONSENSUS) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
@@ -485,6 +486,7 @@ clean-local:
 	-$(MAKE) -C secp256k1 clean
 	-$(MAKE) -C univalue clean
 	-rm -f leveldb/*/*.gcda leveldb/*/*.gcno leveldb/helpers/memenv/*.gcda leveldb/helpers/memenv/*.gcno
+	-rm -f config.h
 	-rm -rf test/__pycache__
 
 .rc.o:

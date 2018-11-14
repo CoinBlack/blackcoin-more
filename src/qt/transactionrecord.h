@@ -24,7 +24,6 @@ public:
         sortKey(""),
         matures_in(0),
         status(Offline),
-        hasConflicting(false),
         depth(0),
         open_for(0),
         cur_num_blocks(-1),
@@ -61,10 +60,6 @@ public:
     /** @name Reported status
        @{*/
     Status status;
-
-    // Has conflicting transactions spending same prevout
-    bool hasConflicting;
-
     qint64 depth;
     qint64 open_for; /**< Timestamp if status==OpenUntilDate, otherwise number
                       of additional blocks that need to be mined before

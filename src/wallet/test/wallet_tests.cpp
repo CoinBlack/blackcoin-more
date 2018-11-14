@@ -29,7 +29,7 @@ typedef set<pair<const CWalletTx*,unsigned int> > CoinSet;
 
 BOOST_FIXTURE_TEST_SUITE(wallet_tests, WalletTestingSetup)
 
-static CWallet wallet;
+static const CWallet wallet;
 static vector<COutput> vCoins;
 
 static void add_coin(const CAmount& nValue, int nAge = 6*24, bool fIsFromMe = false, int nInput=0)
@@ -190,11 +190,11 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
         // empty the wallet and start again, now with fractions of a cent, to test small change avoidance
 
         empty_wallet();
-        add_coin(0.1*MIN_CHANGE);
-        add_coin(0.2*MIN_CHANGE);
-        add_coin(0.3*MIN_CHANGE);
-        add_coin(0.4*MIN_CHANGE);
-        add_coin(0.5*MIN_CHANGE);
+        add_coin(MIN_CHANGE * 1 / 10);
+        add_coin(MIN_CHANGE * 2 / 10);
+        add_coin(MIN_CHANGE * 3 / 10);
+        add_coin(MIN_CHANGE * 4 / 10);
+        add_coin(MIN_CHANGE * 5 / 10);
 
         // try making 1 * MIN_CHANGE from the 1.5 * MIN_CHANGE
         // we'll get change smaller than MIN_CHANGE whatever happens, so can expect MIN_CHANGE exactly
@@ -209,8 +209,8 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
         BOOST_CHECK_EQUAL(nValueRet, 1 * MIN_CHANGE); // we should get the exact amount
 
         // if we add more small coins:
-        add_coin(0.6*MIN_CHANGE);
-        add_coin(0.7*MIN_CHANGE);
+        add_coin(MIN_CHANGE * 6 / 10);
+        add_coin(MIN_CHANGE * 7 / 10);
 
         // and try again to make 1.0 * MIN_CHANGE
         BOOST_CHECK( wallet.SelectCoinsMinConf(1 * MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
@@ -231,9 +231,9 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
 
         // sometimes it will fail, and so we use the next biggest coin:
         empty_wallet();
-        add_coin(0.5 * MIN_CHANGE);
-        add_coin(0.6 * MIN_CHANGE);
-        add_coin(0.7 * MIN_CHANGE);
+        add_coin(MIN_CHANGE * 5 / 10);
+        add_coin(MIN_CHANGE * 6 / 10);
+        add_coin(MIN_CHANGE * 7 / 10);
         add_coin(1111 * MIN_CHANGE);
         BOOST_CHECK( wallet.SelectCoinsMinConf(1 * MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
         BOOST_CHECK_EQUAL(nValueRet, 1111 * MIN_CHANGE); // we get the bigger coin
@@ -241,9 +241,9 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
 
         // but sometimes it's possible, and we use an exact subset (0.4 + 0.6 = 1.0)
         empty_wallet();
-        add_coin(0.4 * MIN_CHANGE);
-        add_coin(0.6 * MIN_CHANGE);
-        add_coin(0.8 * MIN_CHANGE);
+        add_coin(MIN_CHANGE * 4 / 10);
+        add_coin(MIN_CHANGE * 6 / 10);
+        add_coin(MIN_CHANGE * 8 / 10);
         add_coin(1111 * MIN_CHANGE);
         BOOST_CHECK( wallet.SelectCoinsMinConf(MIN_CHANGE, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
         BOOST_CHECK_EQUAL(nValueRet, MIN_CHANGE);   // we should get the exact amount
@@ -251,9 +251,9 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
 
         // test avoiding small change
         empty_wallet();
-        add_coin(0.05 * MIN_CHANGE);
-        add_coin(1    * MIN_CHANGE);
-        add_coin(100  * MIN_CHANGE);
+        add_coin(MIN_CHANGE * 5 / 100);
+        add_coin(MIN_CHANGE * 1);
+        add_coin(MIN_CHANGE * 100);
 
         // trying to make 100.01 from these three coins
         BOOST_CHECK(wallet.SelectCoinsMinConf(MIN_CHANGE * 10001 / 100, 1, 1, 0, vCoins, setCoinsRet, nValueRet));
@@ -312,7 +312,11 @@ BOOST_AUTO_TEST_CASE(coin_selection_tests)
             // add 75 cents in small change.  not enough to make 90 cents,
             // then try making 90 cents.  there are multiple competing "smallest bigger" coins,
             // one of which should be picked at random
-            add_coin( 5*CENT); add_coin(10*CENT); add_coin(15*CENT); add_coin(20*CENT); add_coin(25*CENT);
+            add_coin(5 * CENT);
+            add_coin(10 * CENT);
+            add_coin(15 * CENT);
+            add_coin(20 * CENT);
+            add_coin(25 * CENT);
 
             fails = 0;
             for (int i = 0; i < RANDOM_REPEATS; i++)

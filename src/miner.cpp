@@ -28,6 +28,7 @@
 #include "validationinterface.h"
 #include "wallet/wallet.h"
 
+#include <algorithm>
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <queue>
@@ -107,7 +108,7 @@ void BlockAssembler::resetBlock()
 
     // Reserve space for coinbase tx
     nBlockSize = 1000;
-    nBlockSigOpsCost = 100;
+    nBlockSigOps = 100;
 
     // These counters do not include coinbase tx
     nBlockTx = 0;
@@ -172,7 +173,7 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
     pblocktemplate->vTxFees[0] = -nFees;
 
     /*
-    LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOpsCost);
+    LogPrintf("CreateNewBlock(): total size %u txs: %u fees: %ld sigops %d\n", nBlockSize, nBlockTx, nFees, nBlockSigOps);
     */
 
     if (pFees)
@@ -219,12 +220,12 @@ void BlockAssembler::onlyUnconfirmed(CTxMemPool::setEntries& testSet)
     }
 }
 
-bool BlockAssembler::TestPackage(uint64_t packageSize, int64_t packageSigOpsCost)
+bool BlockAssembler::TestPackage(uint64_t packageSize, int64_t packageSigOps)
 {
     auto blockSizeWithPackage = nBlockSize + packageSize;
     if (blockSizeWithPackage >= DEFAULT_BLOCK_MAX_SIZE)
         return false;
-    if (nBlockSigOpsCost + packageSigOpsCost >= MAX_BLOCK_SIGOPS)
+    if (nBlockSigOps + packageSigOps >= MAX_BLOCK_SIGOPS)
         return false;
     return true;
 }
@@ -264,10 +265,10 @@ bool BlockAssembler::TestForBlock(CTxMemPool::txiter iter)
         return false;
     }
 
-    if (nBlockSigOpsCost + iter->GetSigOpCost() >= MAX_BLOCK_SIGOPS) {
+    if (nBlockSigOps + iter->GetSigOpCount() >= MAX_BLOCK_SIGOPS) {
         // If the block has room for no more sig ops then
         // flag that the block is finished
-        if (nBlockSigOpsCost > MAX_BLOCK_SIGOPS - 2) {
+        if (nBlockSigOps > MAX_BLOCK_SIGOPS - 2) {
             blockFinished = true;
             return false;
         }
@@ -291,10 +292,10 @@ void BlockAssembler::AddToBlock(CTxMemPool::txiter iter)
 
     pblock->vtx.push_back(iter->GetTx());
     pblocktemplate->vTxFees.push_back(iter->GetFee());
-    pblocktemplate->vTxSigOpsCost.push_back(iter->GetSigOpCost());
+    pblocktemplate->vTxSigOpsCost.push_back(iter->GetSigOpCount());
     nBlockSize += iter->GetTxSize();
     ++nBlockTx;
-    nBlockSigOpsCost += iter->GetSigOpCost();
+    nBlockSigOps += iter->GetSigOpCount();
     nFees += iter->GetFee();
     inBlock.insert(iter);
 
@@ -325,7 +326,7 @@ void BlockAssembler::UpdatePackagesForAdded(const CTxMemPool::setEntries& alread
                 CTxMemPoolModifiedEntry modEntry(desc);
                 modEntry.nSizeWithAncestors -= it->GetTxSize();
                 modEntry.nModFeesWithAncestors -= it->GetModifiedFee();
-                modEntry.nSigOpCostWithAncestors -= it->GetSigOpCost();
+                modEntry.nSigOpCountWithAncestors -= it->GetSigOpCount();
                 mapModifiedTx.insert(modEntry);
             } else {
                 mapModifiedTx.modify(mit, update_for_parent_inclusion(it));
@@ -427,11 +428,11 @@ void BlockAssembler::addPackageTxs()
 
         uint64_t packageSize = iter->GetSizeWithAncestors();
         CAmount packageFees = iter->GetModFeesWithAncestors();
-        int64_t packageSigOpsCost = iter->GetSigOpCostWithAncestors();
+        int64_t packageSigOps = iter->GetSigOpCountWithAncestors();
         if (fUsingModified) {
             packageSize = modit->nSizeWithAncestors;
             packageFees = modit->nModFeesWithAncestors;
-            packageSigOpsCost = modit->nSigOpCostWithAncestors;
+            packageSigOps = modit->nSigOpCountWithAncestors;
         }
 
         if (packageFees < ::minRelayTxFee.GetFee(packageSize)) {
@@ -439,7 +440,7 @@ void BlockAssembler::addPackageTxs()
             return;
         }
 
-        if (!TestPackage(packageSize, packageSigOpsCost)) {
+        if (!TestPackage(packageSize, packageSigOps)) {
             if (fUsingModified) {
                 // Since we always look at the best entry in mapModifiedTx,
                 // we must erase failed entries so that we can consider the

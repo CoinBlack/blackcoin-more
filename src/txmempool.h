@@ -87,7 +87,7 @@ private:
     bool hadNoDependencies;    //!< Not dependent on any other txs when it entered the mempool
     CAmount inChainInputValue; //!< Sum of all txin values that are already in blockchain
     bool spendsCoinbase;       //!< keep track of transactions that spend a coinbase
-    unsigned int sigOpCost;    //!< Legacy sig ops plus P2SH sig op count
+    int64_t sigOpCount;        //!< Total sigop plus P2SH sigops count
     int64_t feeDelta;          //!< Used for determining the priority of the transaction for mining in a block
     LockPoints lockPoints;     //!< Track the height and time at which tx was final
 
@@ -104,7 +104,7 @@ private:
     uint64_t nCountWithAncestors;
     uint64_t nSizeWithAncestors;
     CAmount nModFeesWithAncestors;
-    int64_t nSigOpCostWithAncestors;
+    int64_t nSigOpCountWithAncestors;
 
 public:
     CTxMemPoolEntry(const CTransaction& _tx, const CAmount& _nFee,
@@ -125,7 +125,7 @@ public:
     int64_t GetTime() const { return nTime; }
     unsigned int GetHeight() const { return entryHeight; }
     bool WasClearAtEntry() const { return hadNoDependencies; }
-    int64_t GetSigOpCost() const { return sigOpCost; }
+    int64_t GetSigOpCount() const { return sigOpCount; }
     int64_t GetModifiedFee() const { return nFee + feeDelta; }
     size_t DynamicMemoryUsage() const { return nUsageSize; }
     const LockPoints& GetLockPoints() const { return lockPoints; }
@@ -149,7 +149,7 @@ public:
     uint64_t GetCountWithAncestors() const { return nCountWithAncestors; }
     uint64_t GetSizeWithAncestors() const { return nSizeWithAncestors; }
     CAmount GetModFeesWithAncestors() const { return nModFeesWithAncestors; }
-    int64_t GetSigOpCostWithAncestors() const { return nSigOpCostWithAncestors; }
+    int64_t GetSigOpCountWithAncestors() const { return nSigOpCountWithAncestors; }
 
     mutable size_t vTxHashesIdx; //!< Index in mempool's vTxHashes
 };
@@ -172,18 +172,18 @@ struct update_descendant_state
 
 struct update_ancestor_state
 {
-    update_ancestor_state(int64_t _modifySize, CAmount _modifyFee, int64_t _modifyCount, int _modifySigOps) :
-        modifySize(_modifySize), modifyFee(_modifyFee), modifyCount(_modifyCount), modifySigOps(_modifySigOps)
+    update_ancestor_state(int64_t _modifySize, CAmount _modifyFee, int64_t _modifyCount, int64_t _modifySigOpsCost) :
+        modifySize(_modifySize), modifyFee(_modifyFee), modifyCount(_modifyCount), modifySigOpsCost(_modifySigOpsCost)
     {}
 
     void operator() (CTxMemPoolEntry &e)
-        { e.UpdateAncestorState(modifySize, modifyFee, modifyCount, modifySigOps); }
+        { e.UpdateAncestorState(modifySize, modifyFee, modifyCount, modifySigOpsCost); }
 
     private:
         int64_t modifySize;
         CAmount modifyFee;
         int64_t modifyCount;
-        int modifySigOps;
+        int64_t modifySigOpsCost;
 };
 
 struct update_fee_delta
@@ -283,7 +283,7 @@ public:
 class CompareTxMemPoolEntryByAncestorFee
 {
 public:
-    bool operator()(const CTxMemPoolEntry& a, const CTxMemPoolEntry& b) const
+    bool operator()(const CTxMemPoolEntry& a, const CTxMemPoolEntry& b)
     {
         double aFees = a.GetModFeesWithAncestors();
         double aSize = a.GetSizeWithAncestors();

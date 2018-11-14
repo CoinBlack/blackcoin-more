@@ -96,7 +96,7 @@ void RPCTypeCheckObj(const UniValue& o,
         if (!fAllowNull && v.isNull())
             throw JSONRPCError(RPC_TYPE_ERROR, strprintf("Missing %s", t.first));
 
-        if (!(t.second.typeAny || (v.type() == t.second.type) || (fAllowNull && (v.isNull())))) {
+        if (!(t.second.typeAny || v.type() == t.second.type || (fAllowNull && v.isNull()))) {
             string err = strprintf("Expected type %s for %s, got %s",
                 uvTypeName(t.second.type), t.first, uvTypeName(v.type()));
             throw JSONRPCError(RPC_TYPE_ERROR, err);
