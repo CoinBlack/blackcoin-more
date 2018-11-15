@@ -1,1 +1,2 @@
 # List of fixed seed nodes for testnet
+testnet.nedwork.com.br
