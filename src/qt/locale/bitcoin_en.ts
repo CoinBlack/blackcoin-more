@@ -612,7 +612,7 @@
     <message>
         <location line="-440"/>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished"></translation>
+        <translation>Show the %1 help message to get a list with possible Blackcoin command-line options</translation>
     </message>
     <message>
         <location line="+199"/>
