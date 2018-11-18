@@ -2,7 +2,7 @@ OpenBSD build guide
 ======================
 (updated for OpenBSD 5.9)
 
-This guide describes how to build bitcoind and command-line utilities on OpenBSD.
+This guide describes how to build blackmored and command-line utilities on OpenBSD.
 
 As OpenBSD is most common as a server OS, we will not bother with the GUI.
 
@@ -18,7 +18,7 @@ pkg_add automake # (select highest version, e.g. 1.15)
 pkg_add python # (select highest version, e.g. 3.5)
 ```
 
-The default C++ compiler that comes with OpenBSD 5.9 is g++ 4.2. This version is old (from 2007), and is not able to compile the current version of Bitcoin Core, primarily as it has no C++11 support, but even before there were issues. So here we will be installing a newer compiler.
+The default C++ compiler that comes with OpenBSD 5.9 is g++ 4.2. This version is old (from 2007), and is not able to compile the current version of Blackcoin More, primarily as it has no C++11 support, but even before there were issues. So here we will be installing a newer compiler.
 
 GCC
 -------
@@ -39,10 +39,10 @@ Do not use `pkg_add boost`! The boost version installed thus is compiled using t
     ...
     Segmentation fault (core dumped)
 
-This makes it necessary to build boost, or at least the parts used by Bitcoin Core, manually:
+This makes it necessary to build boost, or at least the parts used by Blackcoin More, manually:
 
 ```
-# Pick some path to install boost to, here we create a directory within the bitcoin directory
+# Pick some path to install boost to, here we create a directory within the blackcoin directory
 BITCOIN_ROOT=$(pwd)
 BOOST_PREFIX="${BITCOIN_ROOT}/boost"
 mkdir -p $BOOST_PREFIX
@@ -58,7 +58,7 @@ cd boost_1_61_0
 # Also here: https://gist.githubusercontent.com/laanwj/bf359281dc319b8ff2e1/raw/92250de8404b97bb99d72ab898f4a8cb35ae1ea3/patch-boost_test_impl_execution_monitor_ipp.patch
 patch -p0 < /usr/ports/devel/boost/patches/patch-boost_test_impl_execution_monitor_ipp
 
-# Build w/ minimum configuration necessary for bitcoin
+# Build w/ minimum configuration necessary for blackcoin
 echo 'using gcc : : eg++ : <cxxflags>"-fvisibility=hidden -fPIC" <linkflags>"" <archiver>"ar" <striper>"strip"  <ranlib>"ranlib" <rc>"" : ;' > user-config.jam
 config_opts="runtime-link=shared threadapi=pthread threading=multi link=static variant=release --layout=tagged --build-type=complete --user-config=user-config.jam -sNO_BZIP2=1"
 ./bootstrap.sh --without-icu --with-libraries=chrono,filesystem,program_options,system,thread,test
@@ -74,19 +74,19 @@ See "Berkeley DB" in [build_unix.md](build_unix.md) for instructions on how to b
 You cannot use the BerkeleyDB library from ports, for the same reason as boost above (g++/libstd++ incompatibility).
 
 ```bash
-# Pick some path to install BDB to, here we create a directory within the bitcoin directory
+# Pick some path to install BDB to, here we create a directory within the blackcoin directory
 BITCOIN_ROOT=$(pwd)
-BDB_PREFIX="${BITCOIN_ROOT}/db4"
+BDB_PREFIX="${BITCOIN_ROOT}/build"
 mkdir -p $BDB_PREFIX
 
 # Fetch the source and verify that it is not tampered with
-curl -o db-4.8.30.NC.tar.gz 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
-echo '12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.30.NC.tar.gz' | sha256 -c
-# MUST output: (SHA256) db-4.8.30.NC.tar.gz: OK
-tar -xzf db-4.8.30.NC.tar.gz
+curl -o db-6.2.32.tar.gz 'http://download.oracle.com/berkeley-db/db-6.2.32.tar.gz'
+echo 'a9c5e2b004a5777aa03510cfe5cd766a4a3b777713406b02809c17c8e0e7a8fb  db-6.2.32.tar.gz' | sha256 -c
+# MUST output: (SHA256) db-6.2.32.tar.gz: OK
+tar -xzf db-6.2.32.tar.gz
 
 # Build the library and install to specified prefix
-cd db-4.8.30.NC/build_unix/
+cd db-6.2.32/build_unix/
 #  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
 ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX CC=egcc CXX=eg++ CPP=ecpp
 make install # do NOT use -jX, this is broken
@@ -108,7 +108,7 @@ The change will only affect the current shell and processes spawned by it. To
 make the change system-wide, change `datasize-cur` and `datasize-max` in
 `/etc/login.conf`, and reboot.
 
-### Building Bitcoin Core
+### Building Blackcoin More
 
 **Important**: use `gmake`, not `make`. The non-GNU `make` will exit with a horrible error.
 
