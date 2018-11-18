@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(GetTxSigOpCost)
     key.MakeNewKey(true);
     CPubKey pubkey = key.GetPubKey();
     // Default flags
-    int flags = SCRIPT_VERIFY_P2SH;
+    unsigned int flags = SCRIPT_VERIFY_P2SH;
 
     // Multisig script
     {
@@ -140,6 +140,11 @@ BOOST_AUTO_TEST_CASE(GetTxSigOpCost)
         assert(GetTransactionSigOpCount(CTransaction(creationTx), coins, flags) == MAX_PUBKEYS_PER_MULTISIG);
         // Sanity check: script verification fails because of an invalid signature.
         assert(VerifyWithFlag(creationTx, spendingTx, flags) == SCRIPT_ERR_CHECKMULTISIGVERIFY);
+
+        // Make sure non P2SH sigops are counted even if the flag for P2SH is
+        // not passed in.
+        assert(GetTransactionSigOpCount(CTransaction(spendingTx), coins, SCRIPT_VERIFY_NONE) == 0);
+        assert(GetTransactionSigOpCount(CTransaction(creationTx), coins, SCRIPT_VERIFY_NONE) == MAX_PUBKEYS_PER_MULTISIG);
     }
 
     // Multisig nested in P2SH
@@ -151,6 +156,10 @@ BOOST_AUTO_TEST_CASE(GetTxSigOpCost)
         BuildTxs(spendingTx, coins, creationTx, scriptPubKey, scriptSig);
         assert(GetTransactionSigOpCount(CTransaction(spendingTx), coins, flags) == 2);
         assert(VerifyWithFlag(creationTx, spendingTx, flags) == SCRIPT_ERR_CHECKMULTISIGVERIFY);
+
+        // Make sure P2SH sigops are not counted if the flag for P2SH is not
+        // passed in.
+        assert(GetTransactionSigOpCount(CTransaction(spendingTx), coins, SCRIPT_VERIFY_NONE) == 0);
     }
 }
 
