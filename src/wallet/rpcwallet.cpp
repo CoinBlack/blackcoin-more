@@ -121,7 +121,7 @@ UniValue getnewaddress(const UniValue& params, bool fHelp)
             "\nArguments:\n"
             "1. \"account\"        (string, optional) DEPRECATED. The account name for the address to be linked to. If not provided, the default account \"\" is used. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created if there is no account by the given name.\n"
             "\nResult:\n"
-            "\"bitcoinaddress\"    (string) The new blackcoin address\n"
+            "\"blackcoinaddress\"    (string) The new blackcoin address\n"
             "\nExamples:\n"
             + HelpExampleCli("getnewaddress", "")
             + HelpExampleRpc("getnewaddress", "")
@@ -170,7 +170,7 @@ UniValue getaccountaddress(const UniValue& params, bool fHelp)
             "\nArguments:\n"
             "1. \"account\"       (string, required) The account name for the address. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created and a new address created  if there is no account by the given name.\n"
             "\nResult:\n"
-            "\"bitcoinaddress\"   (string) The account blackcoin address\n"
+            "\"blackcoinaddress\"   (string) The account blackcoin address\n"
             "\nExamples:\n"
             + HelpExampleCli("getaccountaddress", "")
             + HelpExampleCli("getaccountaddress", "\"\"")
@@ -231,10 +231,10 @@ UniValue setaccount(const UniValue& params, bool fHelp)
 
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "setaccount \"bitcoinaddress\" \"account\"\n"
+            "setaccount \"blackcoinaddress\" \"account\"\n"
             "\nDEPRECATED. Sets the account associated with the given address.\n"
             "\nArguments:\n"
-            "1. \"bitcoinaddress\"  (string, required) The blackcoin address to be associated with an account.\n"
+            "1. \"blackcoinaddress\"  (string, required) The blackcoin address to be associated with an account.\n"
             "2. \"account\"         (string, required) The account to assign the address to.\n"
             "\nExamples:\n"
             + HelpExampleCli("setaccount", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\" \"tabby\"")
@@ -279,10 +279,10 @@ UniValue getaccount(const UniValue& params, bool fHelp)
 
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "getaccount \"bitcoinaddress\"\n"
+            "getaccount \"blackcoinaddress\"\n"
             "\nDEPRECATED. Returns the account associated with the given address.\n"
             "\nArguments:\n"
-            "1. \"bitcoinaddress\"  (string, required) The blackcoin address for account lookup.\n"
+            "1. \"blackcoinaddress\"  (string, required) The blackcoin address for account lookup.\n"
             "\nResult:\n"
             "\"accountname\"        (string) the account address\n"
             "\nExamples:\n"
@@ -320,7 +320,7 @@ UniValue getaddressesbyaccount(const UniValue& params, bool fHelp)
             "1. \"account\"  (string, required) The account name.\n"
             "\nResult:\n"
             "[                     (json array of string)\n"
-            "  \"bitcoinaddress\"  (string) a blackcoin address associated with the given account\n"
+            "  \"blackcoinaddress\"  (string) a blackcoin address associated with the given account\n"
             "  ,...\n"
             "]\n"
             "\nExamples:\n"
@@ -391,11 +391,11 @@ UniValue sendtoaddress(const UniValue& params, bool fHelp)
 
     if (fHelp || params.size() < 2 || params.size() > 5)
         throw runtime_error(
-            "sendtoaddress \"bitcoinaddress\" amount ( \"comment\" \"comment-to\" subtractfeefromamount )\n"
+            "sendtoaddress \"blackcoinaddress\" amount ( \"comment\" \"comment-to\" subtractfeefromamount )\n"
             "\nSend an amount to a given address.\n"
             + HelpRequiringPassphrase() +
             "\nArguments:\n"
-            "1. \"bitcoinaddress\"  (string, required) The blackcoin address to send to.\n"
+            "1. \"blackcoinaddress\"  (string, required) The blackcoin address to send to.\n"
             "2. \"amount\"      (numeric or string, required) The amount in " + CURRENCY_UNIT + " to send. eg 0.1\n"
             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
             "                             This is not part of the transaction, just kept in your wallet.\n"
@@ -458,7 +458,7 @@ UniValue listaddressgroupings(const UniValue& params, bool fHelp)
             "[\n"
             "  [\n"
             "    [\n"
-            "      \"bitcoinaddress\",     (string) The blackcoin address\n"
+            "      \"blackcoinaddress\",     (string) The blackcoin address\n"
             "      amount,                 (numeric) The amount in " + CURRENCY_UNIT + "\n"
             "      \"account\"             (string, optional) The account (DEPRECATED)\n"
             "    ]\n"
@@ -503,11 +503,11 @@ UniValue signmessage(const UniValue& params, bool fHelp)
 
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "signmessage \"bitcoinaddress\" \"message\"\n"
+            "signmessage \"blackcoinaddress\" \"message\"\n"
             "\nSign a message with the private key of an address"
             + HelpRequiringPassphrase() + "\n"
             "\nArguments:\n"
-            "1. \"bitcoinaddress\"  (string, required) The blackcoin address to use for the private key.\n"
+            "1. \"blackcoinaddress\"  (string, required) The blackcoin address to use for the private key.\n"
             "2. \"message\"         (string, required) The message to create a signature of.\n"
             "\nResult:\n"
             "\"signature\"          (string) The signature of the message encoded in base 64\n"
@@ -559,10 +559,10 @@ UniValue getreceivedbyaddress(const UniValue& params, bool fHelp)
 
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "getreceivedbyaddress \"bitcoinaddress\" ( minconf )\n"
+            "getreceivedbyaddress \"blackcoinaddress\" ( minconf )\n"
             "\nReturns the total amount received by the given blackcoin address in transactions with at least minconf confirmations.\n"
             "\nArguments:\n"
-            "1. \"bitcoinaddress\"  (string, required) The blackcoin address for transactions.\n"
+            "1. \"blackcoinaddress\"  (string, required) The blackcoin address for transactions.\n"
             "2. minconf             (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
             "\nResult:\n"
             "amount   (numeric) The total amount in " + CURRENCY_UNIT + " received at this address.\n"
@@ -818,12 +818,12 @@ UniValue sendfrom(const UniValue& params, bool fHelp)
 
     if (fHelp || params.size() < 3 || params.size() > 6)
         throw runtime_error(
-            "sendfrom \"fromaccount\" \"tobitcoinaddress\" amount ( minconf \"comment\" \"comment-to\" )\n"
+            "sendfrom \"fromaccount\" \"toblackcoinaddress\" amount ( minconf \"comment\" \"comment-to\" )\n"
             "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a blackcoin address."
             + HelpRequiringPassphrase() + "\n"
             "\nArguments:\n"
             "1. \"fromaccount\"       (string, required) The name of the account to send funds from. May be the default account using \"\".\n"
-            "2. \"tobitcoinaddress\"  (string, required) The blackcoin address to send funds to.\n"
+            "2. \"toblackcoinaddress\"  (string, required) The blackcoin address to send funds to.\n"
             "3. amount                (numeric or string, required) The amount in " + CURRENCY_UNIT + " (transaction fee is added on top).\n"
             "4. minconf               (numeric, optional, default=1) Only use funds with at least this many confirmations.\n"
             "5. \"comment\"           (string, optional) A comment used to store what the transaction is for. \n"
@@ -1018,7 +1018,7 @@ UniValue addmultisigaddress(const UniValue& params, bool fHelp)
             "3. \"account\"      (string, optional) DEPRECATED. An account to assign the addresses to.\n"
 
             "\nResult:\n"
-            "\"bitcoinaddress\"  (string) A blackcoin address associated with the keys.\n"
+            "\"blackcoinaddress\"  (string) A blackcoin address associated with the keys.\n"
 
             "\nExamples:\n"
             "\nAdd a multisig address from 2 addresses\n"
@@ -1380,7 +1380,7 @@ UniValue listtransactions(const UniValue& params, bool fHelp)
             "  {\n"
             "    \"account\":\"accountname\",       (string) DEPRECATED. The account name associated with the transaction. \n"
             "                                                It will be \"\" for the default account.\n"
-            "    \"address\":\"bitcoinaddress\",    (string) The blackcoin address of the transaction. Not present for \n"
+            "    \"address\":\"blackcoinaddress\",    (string) The blackcoin address of the transaction. Not present for \n"
             "                                                move transactions (category = move).\n"
             "    \"category\":\"send|receive|move\", (string) The transaction category. 'move' is a local (off blockchain)\n"
             "                                                transaction between accounts, and not associated with an address,\n"
@@ -1584,7 +1584,7 @@ UniValue listsinceblock(const UniValue& params, bool fHelp)
             "{\n"
             "  \"transactions\": [\n"
             "    \"account\":\"accountname\",       (string) DEPRECATED. The account name associated with the transaction. Will be \"\" for the default account.\n"
-            "    \"address\":\"bitcoinaddress\",    (string) The blackcoin address of the transaction. Not present for move transactions (category = move).\n"
+            "    \"address\":\"blackcoinaddress\",    (string) The blackcoin address of the transaction. Not present for move transactions (category = move).\n"
             "    \"category\":\"send|receive\",     (string) The transaction category. 'send' has negative amounts, 'receive' has positive amounts.\n"
             "    \"amount\": x.xxx,          (numeric) The amount in " + CURRENCY_UNIT + ". This is negative for the 'send' category, and for the 'move' category for moves \n"
             "                                          outbound. It is positive for the 'receive' category, and for the 'move' category for inbound funds.\n"
@@ -1684,7 +1684,7 @@ UniValue gettransaction(const UniValue& params, bool fHelp)
             "  \"details\" : [\n"
             "    {\n"
             "      \"account\" : \"accountname\",  (string) DEPRECATED. The account name involved in the transaction, can be \"\" for the default account.\n"
-            "      \"address\" : \"bitcoinaddress\",   (string) The blackcoin address involved in the transaction\n"
+            "      \"address\" : \"blackcoinaddress\",   (string) The blackcoin address involved in the transaction\n"
             "      \"category\" : \"send|receive\",    (string) The category, either 'send' or 'receive'\n"
             "      \"amount\" : x.xxx,                 (numeric) The amount in " + CURRENCY_UNIT + "\n"
             "      \"label\" : \"label\",              (string) A comment for the address/transaction, if any\n"
@@ -2016,7 +2016,7 @@ UniValue encryptwallet(const UniValue& params, bool fHelp)
             "\nNow set the passphrase to use the wallet, such as for signing or sending blackcoin\n"
             + HelpExampleCli("walletpassphrase", "\"my pass phrase\"") +
             "\nNow we can so something like sign\n"
-            + HelpExampleCli("signmessage", "\"bitcoinaddress\" \"test message\"") +
+            + HelpExampleCli("signmessage", "\"blackcoinaddress\" \"test message\"") +
             "\nNow lock the wallet again by removing the passphrase\n"
             + HelpExampleCli("walletlock", "") +
             "\nAs a json rpc call\n"
