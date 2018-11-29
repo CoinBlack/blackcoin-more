@@ -81,12 +81,12 @@
     <message>
         <location line="+7"/>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your Blackcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your Blackcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -212,7 +212,7 @@
     <message>
         <location line="+1"/>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -228,7 +228,7 @@
     <message>
         <location line="-56"/>
         <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your blackcoins from being stolen by malware infecting your computer.</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -526,7 +526,7 @@
     <message>
         <location line="-158"/>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished"></translation>
+        <translation>Request payments (generates QR codes and blackcoin: URIs)</translation>
     </message>
     <message>
         <location line="+70"/>
@@ -541,7 +541,7 @@
     <message>
         <location line="+3"/>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation type="unfinished"></translation>
+        <translation>Open a blackcoin: URI or payment request</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -935,7 +935,7 @@
     <message>
         <location line="+71"/>
         <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
-        <translation type="unfinished"></translation>
+        <translation>The entered address &quot;%1&quot; is not a valid Bitcoin address.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1070,7 +1070,7 @@
     <message>
         <location line="+10"/>
         <source>%1 will download and store a copy of the Bitcoin block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 will download and store a copy of the Blackcoin block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1335,7 +1335,7 @@
     <message>
         <location line="+17"/>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connect to the Blackcoin network through a SOCKS5 proxy.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1390,7 +1390,7 @@
     <message>
         <location line="+25"/>
         <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connect to the Blackcoin network through a separate SOCKS5 proxy for Tor hidden services.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1613,7 +1613,7 @@
     <message>
         <location line="-402"/>
         <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannot start blackcoin: click-to-pay handler</translation>
     </message>
     <message>
         <location line="+103"/>
@@ -1635,7 +1635,7 @@
     <message>
         <location line="+8"/>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation>URI cannot be parsed! This can be caused by an invalid Blackcoin address or malformed URI parameters.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1757,7 +1757,7 @@
     <message>
         <location filename="../guiutil.cpp" line="+136"/>
         <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter a Blackcoin address (e.g. %1)</translation>
     </message>
     <message>
         <location line="+762"/>
@@ -2343,7 +2343,7 @@
         <location line="+14"/>
         <location line="+23"/>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation type="unfinished"></translation>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Blackcoin network.</translation>
     </message>
     <message>
         <location line="-7"/>
@@ -2637,7 +2637,7 @@
         <location line="+30"/>
         <location line="+13"/>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for blackcoin transactions than the network can process.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2851,7 +2851,7 @@
     <message>
         <location line="+102"/>
         <source>Warning: Invalid Bitcoin address</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning: Invalid Blackcoin address</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -2906,7 +2906,7 @@
     <message>
         <location line="+39"/>
         <source>The Bitcoin address to send the payment to</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin address to send the payment to</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -2933,7 +2933,7 @@
     <message>
         <location line="-1021"/>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation type="unfinished"></translation>
+        <translation>he fee will be deducted from the amount being sent. The recipient will receive less blackcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2963,7 +2963,7 @@
     <message>
         <location line="+47"/>
         <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation type="unfinished"></translation>
+        <translation>A message that was attached to the blackcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Blackcoin network.</translation>
     </message>
     <message>
         <location line="+448"/>
@@ -3020,12 +3020,12 @@
     <message>
         <location line="+6"/>
         <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished"></translation>
+        <translation>You can sign messages/agreements with your addresses to prove you can receive blackcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>The Bitcoin address to sign the message with</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin address to sign the message with</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -3098,7 +3098,7 @@
     <message>
         <location line="+21"/>
         <source>The Bitcoin address the message was signed with</source>
-        <translation type="unfinished"></translation>
+        <translation>The Blackcoin address the message was signed with</translation>
     </message>
     <message>
         <location line="+37"/>
