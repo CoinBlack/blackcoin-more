@@ -4,8 +4,9 @@
 
 - Updated to Bitcoin Core 0.13.2
 - Some small fixes and updates from Bitcoin Core 0.14.x branch
-- Qt updated to 5.9.6
 - Fixed testnet and regtest
+- Added Qt 5.9 support for cross-compile
+- Added Qt support for ARMv7
 - Added out-of-sync modal window (backport of Core's PR8371, PR8802, PR8805, PR8906, PR8985, PR9088, PR9461, PR9462)
 - Added support for nested commands and simple value queries in RPC console (backport of Core's PR7783)
 - Added abortrescan RPC call (backport of Core's PR10208)
