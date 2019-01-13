@@ -15,8 +15,8 @@ These are the dependencies currently used by Bitcoin Core. You can find instruct
 | GCC |  | [4.8+](https://gcc.gnu.org/) (C++11 support) |  |  |  |
 | HarfBuzz-NG |  |  |  |  |  |
 | libevent | [2.1.8-stable](https://github.com/libevent/libevent/releases) | 2.0.22 | No |  |  |
-| libjpeg |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk#L65) |
-| libpng |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk#L64) |
+| libjpeg |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk#L75) |
+| libpng |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk#L74) |
 | MiniUPnPc | [2.0.20180203](http://miniupnp.free.fr/files) |  | No |  |  |
 | OpenSSL | [1.0.1k](https://www.openssl.org/source) |  | Yes |  |  |
 | PCRE |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk#L66) |
