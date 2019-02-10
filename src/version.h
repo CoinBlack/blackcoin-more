@@ -17,8 +17,9 @@ static const int INIT_PROTO_VERSION = 209;
 //! In this version, 'getheaders' was introduced.
 static const int GETHEADERS_VERSION = 31800;
 
-//! demand canonical block signatures starting from this version
-static const int CANONICAL_BLOCK_SIG_VERSION = 60018;
+//! reject blocks with non-canonical signatures starting from this version
+static const int CANONICAL_BLOCK_SIG_VERSION = 60016;
+static const int CANONICAL_BLOCK_SIG_LOW_S_VERSION = 60018;
 
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION = CANONICAL_BLOCK_SIG_VERSION;
