@@ -1,6 +1,6 @@
 # Changelog
 
-## v2.13.2.1 (2018-12-02)
+## v2.13.2.1 (2018-12-03)
 
 - Updated to Bitcoin Core 0.13.2
 - Some small fixes and updates from Bitcoin Core 0.14.x branch

@@ -1,8 +1,8 @@
 package=dbus
-$(package)_version=1.10.18
+$(package)_version=1.12.12
 $(package)_download_path=https://dbus.freedesktop.org/releases/dbus
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
-$(package)_sha256_hash=6049ddd5f3f3e2618f615f1faeda0a115104423a7996b7aa73e2f36e38cc514a
+$(package)_sha256_hash=9546f226011a1e5d9d77245fe5549ef25af4694053189d624d0d6ac127ecf5f8
 $(package)_dependencies=expat
 
 define $(package)_set_vars
