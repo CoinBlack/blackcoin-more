@@ -37,7 +37,8 @@ JSON_TEST_FILES = \
 RAW_TEST_FILES =
 
 GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
-
+# Disable BIP152
+# test/blockencodings_tests.cpp
 BITCOIN_TESTS =\
   test/arith_uint256_tests.cpp \
   test/scriptnum10.h \
@@ -47,7 +48,6 @@ BITCOIN_TESTS =\
   test/base32_tests.cpp \
   test/base64_tests.cpp \
   test/bip32_tests.cpp \
-  test/blockencodings_tests.cpp \
   test/bloom_tests.cpp \
   test/bswap_tests.cpp \
   test/checkblock_tests.cpp \

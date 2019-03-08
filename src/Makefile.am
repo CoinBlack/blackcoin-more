@@ -74,13 +74,15 @@ endif
 
 .PHONY: FORCE check-symbols check-security
 # bitcoin core #
+
+# Disable BIP152
+# blockencodings.h
 BITCOIN_CORE_H = \
   addrdb.h \
   addrman.h \
   amount.h \
   arith_uint256.h \
   base58.h \
-  blockencodings.h \
   bloom.h \
   cashaddr.h \
   cashaddrenc.h \
@@ -190,11 +192,13 @@ libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 # server: shared between bitcoind and bitcoin-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+
+# Disable BIP152
+# blockencodings.cpp
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
   addrdb.cpp \
   bloom.cpp \
-  blockencodings.cpp \
   chain.cpp \
   checkpoints.cpp \
   httprpc.cpp \
@@ -495,6 +499,10 @@ clean-local:
 	@test -f $(WINDRES)
 	## FIXME: How to get the appropriate modulename_CPPFLAGS in here?
 	$(AM_V_GEN) $(WINDRES) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(CPPFLAGS) -DWINDRES_PREPROC -i $< -o $@
+
+.mm.o:
+	$(AM_V_CXX) $(OBJCXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	  $(CPPFLAGS) $(AM_CXXFLAGS) $(QT_INCLUDES) $(AM_CXXFLAGS) $(PIE_FLAGS) $(CXXFLAGS) -c -o $@ $<
 
 check-symbols: $(bin_PROGRAMS)
 if GLIBC_BACK_COMPAT
