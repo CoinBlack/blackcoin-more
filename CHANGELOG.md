@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.13.2.2 (2019-03-13)
+- Updated dependencies
+- Updated fixed seeds
+- Some small fixes and updates
+- Fixed walletpassphrase RPC call (wallet now can be unlocked for staking only)
+- Allowed connections from peers with protocol version 60016
+- Disabled BIP 152
+
 ## v2.13.2.1 (2018-12-03)
 
 - Updated to Bitcoin Core 0.13.2
