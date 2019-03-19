@@ -16,6 +16,7 @@
 #include "wallet/crypter.h"
 #include "wallet/walletdb.h"
 #include "wallet/rpcwallet.h"
+#include "pos.h"
 
 #include <algorithm>
 #include <atomic>
@@ -574,6 +575,8 @@ private:
     int64_t nNextResend;
     int64_t nLastResend;
     bool fBroadcastTransactions;
+
+    std::map<COutPoint, CStakeCache> stakeCache;
 
     /**
      * Used to keep track of spent outpoints, and

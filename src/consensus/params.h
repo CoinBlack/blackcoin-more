@@ -73,7 +73,6 @@ struct Params {
     int nLastPOWBlock;
     int nStakeTimestampMask;
     int nCoinbaseMaturity;
-    int nStakeMinConfirmations;
     unsigned int nStakeMinAge;
     uint256 nMinimumChainWork;
 };

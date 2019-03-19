@@ -1679,41 +1679,6 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus
     return true;
 }
 
-bool ReadFromDisk(CTransaction& tx, CDiskTxPos& txindex, CBlockTreeDB& txdb, COutPoint prevout)
-{
-    if (!txdb.ReadTxIndex(prevout.hash, txindex)){
-        LogPrintf("no tx index %s \n", prevout.hash.ToString());
-        return false;
-    }
-    if (!ReadFromDisk(tx, txindex))
-        return false;
-    if (prevout.n >= tx.vout.size())
-    {
-        return false;
-    }
-    return true;
-}
-
-bool ReadFromDisk(CTransaction& tx, CDiskTxPos& txindex)
-{
-    CAutoFile filein(OpenBlockFile(txindex, true), SER_DISK, CLIENT_VERSION);
-    if (filein.IsNull())
-        return error("CTransaction::ReadFromDisk() : OpenBlockFile failed");
-
-    // Read transaction
-    CBlockHeader header;
-    try {
-        filein >> header;
-        fseek(filein.Get(), txindex.nTxOffset, SEEK_CUR);
-        filein >> tx;
-    }
-    catch (const std::exception& e) {
-        return error("%s: Deserialize or I/O error - %s", __func__, e.what());
-    }
-
-    return true;
-}
-
 CAmount GetProofOfWorkSubsidy()
 {
     return 10000 * COIN;
@@ -2383,7 +2348,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                 REJECT_INVALID, "bad-cs-kernel");
 
          // Check proof-of-stake min confirmations
-         if (pindex->nHeight - coins->nHeight < chainparams.GetConsensus().nStakeMinConfirmations)
+         if (pindex->nHeight - coins->nHeight < chainparams.GetConsensus().nCoinbaseMaturity)
               return state.DoS(100,
                   error("ConnectBlock(): tried to stake at depth %d", pindex->nHeight - coins->nHeight),
                     REJECT_INVALID, "bad-cs-premature");
