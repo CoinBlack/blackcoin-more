@@ -319,17 +319,17 @@ public:
 
     bool IsProofOfWork() const
     {
-          return !IsProofOfStake();
+        return !IsProofOfStake();
     }
 
     bool IsProofOfStake() const
     {
-         return (nStatus & BLOCK_PROOF_OF_STAKE);
+        return (nStatus & BLOCK_PROOF_OF_STAKE);
     }
 
     void SetProofOfStake()
     {
-         nStatus |= BLOCK_PROOF_OF_STAKE;
+        nStatus |= BLOCK_PROOF_OF_STAKE;
     }
 
     std::string ToString() const

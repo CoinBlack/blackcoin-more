@@ -3434,7 +3434,10 @@ static bool CheckBlockSignature(const CBlock& block)
 
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW)
 {
-    // This is redundant for proof-of-stake currency as blocks have to be fully downloaded to be checked
+    // Check proof of work hash
+    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
+        return state.DoS(50, false, REJECT_INVALID, "high-hash", false, "proof of work failed");
+
     return true;
 }
 
@@ -3447,7 +3450,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
 
     // Check that the header is valid (particularly PoW).  This is mostly
     // redundant with the call in AcceptBlockHeader.
-    if (!CheckBlockHeader(block, state, consensusParams, block.IsProofOfWork()))
+    if (!CheckBlockHeader(block, state, consensusParams, fCheckPOW && block.IsProofOfWork()))
         return false;
 
     // Check the merkle root.
@@ -3489,23 +3492,18 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             return state.DoS(50, false, REJECT_INVALID, "bad-cs-time", false, "coinstake timestamp violation");
 
     if (block.IsProofOfStake()) {
-            // Coinbase output must be empty if proof-of-stake block
-            if (block.vtx[0].vout.size() != 1 || !block.vtx[0].vout[0].IsEmpty())
-                return state.DoS(100, false, REJECT_INVALID, "bad-cb-not-empty", false, "coinbase output not empty for proof-of-stake block");
+        // Coinbase output must be empty if proof-of-stake block
+        if (block.vtx[0].vout.size() != 1 || !block.vtx[0].vout[0].IsEmpty())
+            return state.DoS(100, false, REJECT_INVALID, "bad-cb-not-empty", false, "coinbase output not empty for proof-of-stake block");
 
-            // Second transaction must be coinstake, the rest must not be
-            if (block.vtx.size() < 2 || !block.vtx[1].IsCoinStake())
-                return state.DoS(100, false, REJECT_INVALID, "bad-cs-missing", false, "second tx is not coinstake");
+        // Second transaction must be coinstake, the rest must not be
+        if (block.vtx.size() < 2 || !block.vtx[1].IsCoinStake())
+            return state.DoS(100, false, REJECT_INVALID, "bad-cs-missing", false, "second tx is not coinstake");
 
-            for (unsigned int i = 2; i < block.vtx.size(); i++)
-                if (block.vtx[i].IsCoinStake())
-                return state.DoS(100, false, REJECT_INVALID, "bad-cs-multiple", false, "more than one coinstake");
-
+        for (unsigned int i = 2; i < block.vtx.size(); i++)
+            if (block.vtx[i].IsCoinStake())
+            return state.DoS(100, false, REJECT_INVALID, "bad-cs-multiple", false, "more than one coinstake");
     }
-
-    // Check proof of work hash
-    if (block.IsProofOfWork() && fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
-        return state.DoS(100, false, REJECT_INVALID, "high-hash", false, "proof of work failed");
 
     // Check proof-of-stake block signature
     if (fCheckSig && !CheckBlockSignature(block))
@@ -3720,7 +3718,7 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     return false;
 }
 
-static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex=NULL)
+static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex=NULL, bool fProofOfStake=true)
 {
     AssertLockHeld(cs_main);
     // Check for duplicate
@@ -3739,7 +3737,7 @@ static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state
             return true;
         }
 
-        if (!CheckBlockHeader(block, state, chainparams.GetConsensus()))
+        if (!CheckBlockHeader(block, state, chainparams.GetConsensus(), !fProofOfStake))
             return error("%s: Consensus::CheckBlockHeader: %s, %s", __func__, hash.ToString(), FormatStateMessage(state));
 
         // Get prev block index
@@ -3779,7 +3777,7 @@ static bool AcceptBlock(const CBlock& block, CValidationState& state, const CCha
     CBlockIndex *pindexDummy = NULL;
     CBlockIndex *&pindex = ppindex ? *ppindex : pindexDummy;
 
-    if (!AcceptBlockHeader(block, state, chainparams, &pindex))
+    if (!AcceptBlockHeader(block, state, chainparams, &pindex, block.IsProofOfStake()))
         return false;
 
     // Try to process all requested blocks that we don't have, but only
@@ -6019,6 +6017,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 Misbehaving(pfrom->GetId(), 20);
                 return error("non-continuous headers sequence");
             }
+            // ToDo: enable header check for PoW blocks
             if (!AcceptBlockHeader(header, state, chainparams, &pindexLast)) {
                 int nDoS;
                 if (state.IsInvalid(nDoS)) {
