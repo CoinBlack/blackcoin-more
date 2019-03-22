@@ -2265,8 +2265,9 @@ UniValue getwalletinfo(const UniValue& params, bool fHelp)
             "\nResult:\n"
             "{\n"
             "  \"walletversion\": xxxxx,       (numeric) the wallet version\n"
+            "  \"total_balance\": xxxxxxx,     (numeric) the total balance of the wallet in " + CURRENCY_UNIT + "\n"
             "  \"balance\": xxxxxxx,           (numeric) the total confirmed balance of the wallet in " + CURRENCY_UNIT + "\n"
-            "  \"stake\": xxxxxx,              (numeric) the total coins staked (non-spendable until maturity) in " + CURRENCY_UNIT + "\n"
+            "  \"staked_balance\": xxxxxx,     (numeric) the total staked balance of the wallet in " + CURRENCY_UNIT + "\n"
             "  \"unconfirmed_balance\": xxx,   (numeric) the total unconfirmed balance of the wallet in " + CURRENCY_UNIT + "\n"
             "  \"immature_balance\": xxxxxx,   (numeric) the total immature balance of the wallet in " + CURRENCY_UNIT + "\n"
             "  \"txcount\": xxxxxxx,           (numeric) the total number of transactions in the wallet\n"
@@ -2285,8 +2286,9 @@ UniValue getwalletinfo(const UniValue& params, bool fHelp)
 
     UniValue obj(UniValue::VOBJ);
     obj.push_back(Pair("walletversion", pwalletMain->GetVersion()));
+    obj.push_back(Pair("total_balance", ValueFromAmount(pwalletMain->GetBalance() + pwalletMain->GetUnconfirmedBalance() + pwalletMain->GetImmatureBalance() + pwalletMain->GetStake())));
     obj.push_back(Pair("balance",       ValueFromAmount(pwalletMain->GetBalance())));
-    obj.push_back(Pair("stake",         ValueFromAmount(pwalletMain->GetStake())));
+    obj.push_back(Pair("staked_balance",      ValueFromAmount(pwalletMain->GetStake())));
     obj.push_back(Pair("unconfirmed_balance", ValueFromAmount(pwalletMain->GetUnconfirmedBalance())));
     obj.push_back(Pair("immature_balance",    ValueFromAmount(pwalletMain->GetImmatureBalance())));
     obj.push_back(Pair("txcount",       (int)pwalletMain->mapWallet.size()));
