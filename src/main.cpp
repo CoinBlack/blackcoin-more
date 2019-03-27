@@ -3562,19 +3562,18 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 
     // Preliminary check of pos timestamp
     if (nHeight > consensusParams.nLastPOWBlock && !CheckStakeBlockTimestamp(block.GetBlockTime()))
-        return state.DoS(100, error("%s: incorrect pos block timestamp", __func__),
+        return state.DoS(50, error("%s: incorrect pos block timestamp", __func__),
                              REJECT_INVALID, "bad-pos-time");
+
+    // Check timestamp
+    if (block.GetBlockTime() > FutureDrift(GetAdjustedTime()))
+        return state.DoS(50, error("%s: block timestamp too far in the future", __func__),
+                             REJECT_INVALID, "time-too-new");
 
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetPastTimeLimit())
         return state.Invalid(error("%s: block's timestamp is too early", __func__),
                              REJECT_INVALID, "time-too-old");
-
-    // Check timestamp
-    if (block.GetBlockTime() > FutureDrift(GetAdjustedTime()))
-        return state.Invalid(error("%s: block timestamp too far in the future", __func__),
-                             REJECT_INVALID, "time-too-new");
-
     /*
     // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
     for (int32_t version = 2; version < 5; ++version) // check for version 2, 3 and 4 upgrades
