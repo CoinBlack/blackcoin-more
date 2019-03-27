@@ -2321,23 +2321,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return true;
     }
 
-    // Check block version
-    if (block.nVersion < 7 && chainparams.GetConsensus().IsProtocolV2(block.GetBlockTime()))
-        return state.DoS(100, error("%s: rejected nVersion=%d block", __func__, block.nVersion),
-                        REJECT_OBSOLETE, "bad-version");
-
-    // Reject proof of work at height > nLastPOWBlock
-    if (block.IsProofOfWork() && pindex->nHeight > chainparams.GetConsensus().nLastPOWBlock)
-        return state.DoS(100, error("%s: reject proof-of-work at height %d",  __func__, pindex->nHeight),
-                        REJECT_INVALID, "bad-pow-height");
+    // Set proof-of-stake hash modifier
+    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
 
     // Check difficulty
     if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
-         return state.DoS(100, error("%s: incorrect difficulty", __func__),
+         return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
                         REJECT_INVALID, "bad-diffbits");
-
-    // Set proof-of-stake hash modifier
-    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
 
     // Check proof-of-stake
     if (block.IsProofOfStake() && chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
@@ -3434,6 +3424,10 @@ static bool CheckBlockSignature(const CBlock& block)
 
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW)
 {
+    // Check block version
+    if (block.nVersion < 7 && consensusParams.IsProtocolV2(block.GetBlockTime()))
+        return state.DoS(100, false, REJECT_OBSOLETE, "bad-version", false, strprintf("rejected nVersion=%d block", block.nVersion));
+
     // Check proof of work hash
     if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
         return state.DoS(50, false, REJECT_INVALID, "high-hash", false, "proof of work failed");
@@ -3810,7 +3804,13 @@ static bool AcceptBlock(const CBlock& block, CValidationState& state, const CCha
         return error("%s: %s", __func__, FormatStateMessage(state));
     }
 
+    // Get block height
     int nHeight = pindex->nHeight;
+
+    // Check for the last proof of work block
+    if (block.IsProofOfWork() && nHeight > chainparams.GetConsensus().nLastPOWBlock)
+        return state.DoS(100, error("%s: reject proof-of-work at height %d",  __func__, nHeight),
+                        REJECT_INVALID, "bad-pow-height");
 
     // Write block to history file
     try {
