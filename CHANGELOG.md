@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.13.2.3 (2019-04-02)
+- Updated fixed seeds
+- Some small fixes and refactorings
+- Fixed wrongly displayed balances in GUI and RPC
+- Added header spam filter (fake stake vulnerability fix)
+- Added total balance in RPC call getwalletinfo
+
 ## v2.13.2.2 (2019-03-13)
 - Updated dependencies
 - Updated fixed seeds
