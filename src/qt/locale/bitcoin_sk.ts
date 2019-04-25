@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>Kliknutím pravým tlačidlom upraviť adresu alebo popis</translation>
+        <translation>Kliknutím pravým tlačidlom upravíte adresu alebo popis</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -181,7 +181,7 @@
     </message>
     <message>
         <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>%1 sa teraz zavrie, aby sa ukončil proces šifrovania. Zašifrovanie peňaženky neochráni úplne pred krádežou blackcoinov škodlivými programami, ktoré prenikli do vášho počítača.</translation>
+        <translation>%1 sa teraz zatvori, aby sa ukončil proces šifrovania. Zašifrovanie peňaženky vás úplne nechráni pred krádežou blackcoinov škodlivými programami, ktoré prenikli do vášho počítača.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>Wallet unlock failed</source>
-        <translation>Odomykanie peňaženky zlyhalo</translation>
+        <translation>Odomknutie peňaženky zlyhalo</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
@@ -335,11 +335,11 @@
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
-        <translation>Preindexúvam bloky na disku...</translation>
+        <translation>Reindexujem bloky na disku...</translation>
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Poslať blackcoins na adresu</translation>
+        <translation>Poslať mince na Blackcoin adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -355,7 +355,7 @@
     </message>
     <message>
         <source>Open debugging and diagnostic console</source>
-        <translation>Otvor konzolu pre ladenie a diagnostiku</translation>
+        <translation>Otvoriť konzolu pre ladenie a diagnostiku</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
@@ -387,11 +387,11 @@
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>Zašifruj súkromné kľúče ktoré patria do vašej peňaženky</translation>
+        <translation>Zašifrovať súkromné kľúče ktoré patria do Vašej peňaženky</translation>
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Podpísať správu s vašou adresou Blackcoin aby ste preukázali že ju vlastníte</translation>
+        <translation>Podpísať správu s Vašou Blackcoin adresou, aby ste preukázali že ju vlastníte</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
@@ -427,7 +427,7 @@
     </message>
     <message>
         <source>Open a bitcoin: URI or payment request</source>
-        <translation>Otvoriť blackcoin URI alebo výzvu k platbe</translation>
+        <translation>Otvoriť blackcoin: URI alebo výzvu k platbe</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -435,15 +435,15 @@
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktívne pripojenie do siete Blackcoin</numerusform><numerusform>%n aktívne pripojenia do siete Blackcoin</numerusform><numerusform>%n aktívnych pripojení do siete Blackcoin</numerusform></translation>
+        <translation><numerusform>%n aktívnych pripojení do siete Blackcoin</numerusform><numerusform>%n aktívne pripojenia do siete Blackcoin</numerusform><numerusform>%n aktívnych pripojení do siete Blackcoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
-        <translation>Indexujem bloky na disku...</translation>
+        <translation>Indexujú sa bloky na disku...</translation>
     </message>
     <message>
         <source>Processing blocks on disk...</source>
-        <translation>Spracovávam bloky na disku...</translation>
+        <translation>Spracovávajú sa bloky na disku...</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -576,7 +576,7 @@
     </message>
     <message>
         <source>Change:</source>
-        <translation>Zmena:</translation>
+        <translation>Výdavok:</translation>
     </message>
     <message>
         <source>(un)select all</source>
@@ -648,7 +648,7 @@
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation>Kopírovať po poplatkoch</translation>
+        <translation>Kopírovať po poplatku</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -660,7 +660,7 @@
     </message>
     <message>
         <source>Copy change</source>
-        <translation>Kopírovať zmenu</translation>
+        <translation>Kopírovať výdavok</translation>
     </message>
     <message>
         <source>(%1 locked)</source>
@@ -676,7 +676,7 @@
     </message>
     <message>
         <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>Tento popis sčervenie ak ktorýkoľvek príjemca dostane sumu menšiu ako súčasný limit pre "prach".</translation>
+        <translation>Tento popis sčervená, ak ktorýkoľvek príjemca dostane sumu menšiu ako súčasný limit pre "prach".</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
@@ -688,11 +688,11 @@
     </message>
     <message>
         <source>change from %1 (%2)</source>
-        <translation>zmena od %1 (%2)</translation>
+        <translation>výdavok od %1 (%2)</translation>
     </message>
     <message>
         <source>(change)</source>
-        <translation>(zmena)</translation>
+        <translation>(výdavok)</translation>
     </message>
 </context>
 <context>
@@ -707,7 +707,7 @@
     </message>
     <message>
         <source>The label associated with this address list entry</source>
-        <translation>Popis tejto položký v zozname adries je prázdny</translation>
+        <translation>Popis spojený s týmto záznamom v adresári</translation>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
@@ -719,11 +719,11 @@
     </message>
     <message>
         <source>New receiving address</source>
-        <translation>Nová adresa pre prijímanie</translation>
+        <translation>Nová prijímacia adresa</translation>
     </message>
     <message>
         <source>New sending address</source>
-        <translation>Nová adresa pre odoslanie</translation>
+        <translation>Nová odosielacia adresa</translation>
     </message>
     <message>
         <source>Edit receiving address</source>
@@ -735,7 +735,7 @@
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Vložená adresa "%1" nieje platnou adresou Blackcoin.</translation>
+        <translation>Vložená adresa "%1" nieje platnou Blackcoin adresou.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -762,7 +762,7 @@
     </message>
     <message>
         <source>Directory already exists. Add %1 if you intend to create a new directory here.</source>
-        <translation>Priečinok už existuje. Pridajte "%1" ak chcete vytvoriť nový priečinok tu.</translation>
+        <translation>Priečinok už existuje. Pridajte "%1", ak tu chcete vytvoriť nový priečinok.</translation>
     </message>
     <message>
         <source>Path already exists, and is not a directory.</source>
@@ -844,7 +844,7 @@
     </message>
     <message>
         <source>%1 will download and store a copy of the Bitcoin block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>%1 stiahne a uloží kópiu Blackcoin block chain. Minimálne %2GB dát bude uložených v tejto zložke, a bude sa zväčšovať postupom času. Peňaženka bude taktiež uložená v tejto zložke.</translation>
+        <translation>%1 stiahne a uloží kópiu Blackcoin blockchainu. Minimálne %2GB dát bude uložených v tejto zložke, a bude sa postupom času zväčšovať. Peňaženka bude taktiež uložená v tejto zložke.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1169,11 +1169,11 @@
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
-        <translation>Klient bude vypnutý, chcete pokračovať?</translation>
+        <translation>Klient bude vypnutý. Chcete pokračovať?</translation>
     </message>
     <message>
         <source>This change would require a client restart.</source>
-        <translation>Táto zmena by vyžadovala reštart klienta.</translation>
+        <translation>Táto zmena vyžaduje reštart klienta.</translation>
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
@@ -1184,7 +1184,7 @@
     <name>OverviewPage</name>
     <message>
         <source>Form</source>
-        <translation>Forma</translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
@@ -1200,7 +1200,7 @@
     </message>
     <message>
         <source>Your current spendable balance</source>
-        <translation>Váš aktuálny disponibilný zostatok</translation>
+        <translation>Váš aktuálny minuteľný zostatok</translation>
     </message>
     <message>
         <source>Pending:</source>
@@ -1208,7 +1208,7 @@
     </message>
     <message>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
-        <translation>Suma transakcií ktoré ešte neboli potvrdené a ešte sa nepočítajú do disponibilného zostatku</translation>
+        <translation>Suma transakcií, ktoré ešte neboli potvrdené a ešte sa nepočítajú do disponibilného zostatku</translation>
     </message>
     <message>
         <source>Immature:</source>
@@ -1216,7 +1216,7 @@
     </message>
     <message>
         <source>Mined balance that has not yet matured</source>
-        <translation>Vytvorený zostatok ktorý ešte nedosiahol zrelosť</translation>
+        <translation>Vytvorený zostatok, ktorý ešte nedosiahol zrelosť</translation>
     </message>
     <message>
         <source>Balances</source>
@@ -1443,11 +1443,11 @@
     <name>QRImageWidget</name>
     <message>
         <source>&amp;Save Image...</source>
-        <translation>Uložiť obrázok...</translation>
+        <translation>&amp;Uložiť obrázok...</translation>
     </message>
     <message>
         <source>&amp;Copy Image</source>
-        <translation>Kopírovať obrázok</translation>
+        <translation>&amp;Kopírovať obrázok</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1462,7 +1462,7 @@
     <name>RPCConsole</name>
     <message>
         <source>N/A</source>
-        <translation>nie je k dispozícii</translation>
+        <translation>Nie je k dispozícii</translation>
     </message>
     <message>
         <source>Client version</source>
@@ -1687,7 +1687,7 @@
     </message>
     <message>
         <source>Ban for</source>
-        <translation>Zakázať na</translation>
+        <translation>Zákaz pre</translation>
     </message>
     <message>
         <source>&amp;Unban</source>
@@ -1861,11 +1861,11 @@
     </message>
     <message>
         <source>Copy &amp;Address</source>
-        <translation>Kopírovať adresu</translation>
+        <translation>Kopírovať &amp;adresu</translation>
     </message>
     <message>
         <source>&amp;Save Image...</source>
-        <translation>Uložiť obrázok...</translation>
+        <translation>&amp;Uložiť obrázok...</translation>
     </message>
     <message>
         <source>Request payment to %1</source>
@@ -2187,15 +2187,15 @@
     </message>
     <message>
         <source>Warning: Unknown change address</source>
-        <translation>UPOZORNENIE: Neznáma zmena adresy</translation>
+        <translation>UPOZORNENIE: Neznáma výdavková adresa</translation>
     </message>
     <message>
         <source>Confirm custom change address</source>
-        <translation>Potvrďte zmenu adresy</translation>
+        <translation>Potvrďte vlastnú výdavkovú adresu</translation>
     </message>
     <message>
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
-        <translation>Zadaná adresa nie je súčasťou tejto peňaženky. Časť alebo všetky peniaze z peňaženky môžu byť odoslané na túto adresu. Ste si istý?</translation>
+        <translation>Zadaná adresa pre výdavok nie je súčasťou tejto peňaženky. Časť alebo všetky peniaze z peňaženky môžu byť odoslané na túto adresu. Ste si istý?</translation>
     </message>
     <message>
         <source>(no label)</source>
