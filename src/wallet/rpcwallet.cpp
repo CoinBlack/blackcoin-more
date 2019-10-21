@@ -345,9 +345,7 @@ UniValue getaddressesbyaccount(const UniValue& params, bool fHelp)
     return ret;
 }
 
-
-
-static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew)
+static void SendMoneyToScript(const CScript scriptPubKey, CAmount nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew)
 {
     CAmount curBalance = pwalletMain->GetBalance();
 
@@ -364,9 +362,6 @@ static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtr
             throw JSONRPCError(RPC_WALLET_ERROR, strError);
     }
 
-    // Parse Bitcoin address
-    CScript scriptPubKey = GetScriptForDestination(address);
-
     // Create and send the transaction
     CReserveKey reservekey(pwalletMain);
     CAmount nFeeRequired;
@@ -382,6 +377,14 @@ static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtr
     }
     if (!pwalletMain->CommitTransaction(wtxNew, reservekey))
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of the wallet and coins were spent in the copy but not marked as spent here.");
+}
+
+static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew)
+{
+    // Parse Bitcoin address
+    CScript scriptPubKey = GetScriptForDestination(address);
+
+    SendMoneyToScript(scriptPubKey, nValue, fSubtractFeeFromAmount, wtxNew);
 }
 
 UniValue sendtoaddress(const UniValue& params, bool fHelp)
@@ -2568,6 +2571,96 @@ UniValue fundrawtransaction(const UniValue& params, bool fHelp)
     return result;
 }
 
+UniValue burn(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() < 1 || params.size() > 2)
+        throw runtime_error(
+            "burn <amount> [hex string]\n"
+            "<amount> is a real and is rounded to the nearest 0.00000001"
+            + HelpRequiringPassphrase());
+
+    CScript scriptPubKey;
+
+    if (params.size() > 1) {
+        vector<unsigned char> data;
+        if (params[1].get_str().size() > 0){
+            data = ParseHexV(params[1], "data");
+        } else {
+            // Empty data is valid
+        }
+        scriptPubKey = CScript() << OP_RETURN << data;
+    } else {
+        scriptPubKey = CScript() << OP_RETURN;
+    }
+
+    CAmount nAmount = AmountFromValue(params[0], true);
+    CWalletTx wtx;
+
+    EnsureWalletIsUnlocked();
+
+    SendMoneyToScript(scriptPubKey, nAmount, false, wtx);
+
+    return wtx.GetHash().GetHex();
+}
+
+UniValue burnwallet(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() < 1 || params.size() > 2)
+        throw runtime_error(
+            "burnwallet [hex string] [force]"
+            + HelpRequiringPassphrase());
+
+    CScript scriptPubKey;
+
+    if (params.size() > 0) {
+        vector<unsigned char> data;
+        if (params[0].get_str().size() > 0){
+            data = ParseHexV(params[0], "data");
+        } else {
+            // Empty data is valid
+        }
+        scriptPubKey = CScript() << OP_RETURN << data;
+    } else {
+        scriptPubKey = CScript() << OP_RETURN;
+    }
+
+    bool fForce = false;
+    if (params.size() > 1)
+        fForce = params[1].get_bool();
+
+    EnsureWalletIsUnlocked();
+
+    if (!fForce) {
+        if (scriptPubKey.size() <= 32)
+            throw JSONRPCError(RPC_WALLET_ERROR, "Warning: small data");
+        if (pwalletMain->GetUnconfirmedBalance() != 0)
+            throw JSONRPCError(RPC_WALLET_ERROR, "Warning: unconfirmed balance != 0");
+        if (pwalletMain->GetImmatureBalance() != 0)
+            throw JSONRPCError(RPC_WALLET_ERROR, "Warning: immature balance != 0");
+        if (pwalletMain->GetStake() != 0)
+            throw JSONRPCError(RPC_WALLET_ERROR, "Warning: stake balance != 0");
+    }
+
+    CAmount nAmount = pwalletMain->GetBalance();
+    std::vector<CRecipient> vecSend;
+    CRecipient recipient = {scriptPubKey, nAmount, false};
+    vecSend.push_back(recipient);
+    CWalletTx wtx;
+    CReserveKey keyChange(pwalletMain);
+    CAmount nFeeRequired = 0;
+    int nChangePosRet = -1;
+    std::string strError;
+    pwalletMain->CreateTransaction(vecSend, wtx, keyChange, nFeeRequired, nChangePosRet, strError);
+    vecSend[0].nAmount -= nFeeRequired;
+    if (!pwalletMain->CreateTransaction(vecSend, wtx, keyChange, nFeeRequired, nChangePosRet, strError))
+        throw JSONRPCError(RPC_WALLET_ERROR, "Transaction creation failed");
+
+    if (!pwalletMain->CommitTransaction(wtx, keyChange))
+        throw JSONRPCError(RPC_WALLET_ERROR, "Transaction commit failed");
+
+    return wtx.GetHash().GetHex();
+}
+
 extern UniValue abortrescan(const UniValue& params, bool fHelp); // in rpcdump.cpp
 extern UniValue dumpprivkey(const UniValue& params, bool fHelp); // in rpcdump.cpp
 extern UniValue importprivkey(const UniValue& params, bool fHelp);
@@ -2628,6 +2721,8 @@ static const CRPCCommand commands[] =
     { "wallet",             "walletpassphrasechange",   &walletpassphrasechange,   true  },
     { "wallet",             "walletpassphrase",         &walletpassphrase,         true  },
     { "wallet",             "removeprunedfunds",        &removeprunedfunds,        true  },
+    { "wallet",             "burn",                     &burn,                     false },
+    { "wallet",             "burnwallet",               &burnwallet,               false },
 };
 
 void RegisterWalletRPCCommands(CRPCTable &tableRPC)
