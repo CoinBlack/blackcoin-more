@@ -1,8 +1,8 @@
 package=libevent
-$(package)_version=2.1.8-stable
-$(package)_download_path=https://github.com/libevent/libevent/archive/
-$(package)_file_name=release-$($(package)_version).tar.gz
-$(package)_sha256_hash=316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d
+$(package)_version=2.1.11-stable
+$(package)_download_path=https://github.com/libevent/libevent/releases/download/release-2.1.11-stable
+$(package)_file_name=libevent-$($(package)_version).tar.gz
+$(package)_sha256_hash=a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d
 
 define $(package)_preprocess_cmds
   ./autogen.sh
