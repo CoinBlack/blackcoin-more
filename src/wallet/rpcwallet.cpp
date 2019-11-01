@@ -2603,6 +2603,9 @@ UniValue burn(const UniValue& params, bool fHelp)
     return wtx.GetHash().GetHex();
 }
 
+/*
+// ToDo: fix burnwallet
+
 UniValue burnwallet(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
@@ -2660,6 +2663,7 @@ UniValue burnwallet(const UniValue& params, bool fHelp)
 
     return wtx.GetHash().GetHex();
 }
+*/
 
 extern UniValue abortrescan(const UniValue& params, bool fHelp); // in rpcdump.cpp
 extern UniValue dumpprivkey(const UniValue& params, bool fHelp); // in rpcdump.cpp
@@ -2722,7 +2726,8 @@ static const CRPCCommand commands[] =
     { "wallet",             "walletpassphrase",         &walletpassphrase,         true  },
     { "wallet",             "removeprunedfunds",        &removeprunedfunds,        true  },
     { "wallet",             "burn",                     &burn,                     false },
-    { "wallet",             "burnwallet",               &burnwallet,               false },
+    // ToDo: fix burnwallet
+    // { "wallet",             "burnwallet",               &burnwallet,               false },
 };
 
 void RegisterWalletRPCCommands(CRPCTable &tableRPC)

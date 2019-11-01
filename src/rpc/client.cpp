@@ -108,7 +108,8 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "reservebalance", 0},
     { "reservebalance", 1},
     { "burn", 0 },
-    { "burnwallet", 1 },
+    // ToDo: fix burnwallet
+    // { "burnwallet", 1 },
 };
 
 class CRPCConvertTable
