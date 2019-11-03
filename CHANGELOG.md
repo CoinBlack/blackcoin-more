@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.13.2.4 (2019-11-03)
+- Updated fixed seeds
+- Added burn RPC call
+- Removed unit selector from status bar
+
 ## v2.13.2.3 (2019-04-02)
 - Updated fixed seeds
 - Some small fixes and refactorings
