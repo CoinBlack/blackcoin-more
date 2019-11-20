@@ -115,3 +115,7 @@ share/BitcoindComparisonTool.jar
 
 libbitcoinconsensus.pc
 contrib/devtools/split-debug.sh
+
+#Visual Studio
+.vscode/*
+.vs/*
