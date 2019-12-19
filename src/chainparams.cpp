@@ -142,6 +142,8 @@ public:
 
         vSeeds.push_back(CDNSSeedData("blackcoinNL", "dnsseed.blackcoin.nl"));
         // vSeeds.push_back(CDNSSeedData("vasin.nl", "dnsseed.vasin.nl")); < Disabled for now
+        vSeeds.push_back(CDNSSeedData("ghost.blackcoin.nl", "ghost.blackcoin.nl")); // Michel van Kessel static node
+        vSeeds.push_back(CDNSSeedData("node.blackcoin.io ", "node.blackcoin.io"));  // payBLK static node
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
