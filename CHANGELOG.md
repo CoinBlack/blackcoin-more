@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.13.2.5 (2020-04-28)
+- Updated Berkeley DB to 6.2.38
+- Updated OpenSSL to 1.0.2u
+- Updated fixed seeds
+- Changed default port on regtest to 35714
+
 ## v2.13.2.4 (2019-11-11)
 - Updated fixed seeds
 - Added burn RPC call
