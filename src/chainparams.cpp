@@ -121,7 +121,7 @@ public:
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000026797d24ded64a79e72");
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000029f1452903d2f781416");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -314,7 +314,7 @@ public:
         pchMessageStart[1] = 0x35;
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x06;
-        nDefaultPort = 25714;
+        nDefaultPort = 35714;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
