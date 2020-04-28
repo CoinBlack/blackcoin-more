@@ -1,8 +1,8 @@
 package=bdb
-$(package)_version=6.2.32.NC
-$(package)_download_path=http://download.oracle.com/berkeley-db
+$(package)_version=6.2.38.NC
+$(package)_download_path=https://admin.blackcoin.nl/static/
 $(package)_file_name=db-$($(package)_version).tar.gz
-$(package)_sha256_hash=d86cf1283c519d42dd112b4501ecb2db11ae765b37a1bdad8f8cb06b0ffc69b8
+$(package)_sha256_hash=a4c88b51523684ed0dc8abeacf1f0aa53249c8a057e3cd581dca0159a03cb1c3
 $(package)_build_subdir=build_unix
 
 define $(package)_set_vars
@@ -32,4 +32,3 @@ endef
 define $(package)_stage_cmds
   $(MAKE) DESTDIR=$($(package)_staging_dir) install_lib install_include
 endef
-
