@@ -121,7 +121,7 @@ public:
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000029f1452903d2f781416");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000002bcbdc747da2aad51b7");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
