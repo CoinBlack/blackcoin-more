@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.13.2.6 (2020-07-21)
+- Fix staking memory leak (by JJ12880 from Radium Core)
+- Updated fixed seeds
+- Added secondary Blackcoin DNS seeder
+
 ## v2.13.2.5 (2020-04-28)
 - Updated Berkeley DB to 6.2.38
 - Updated OpenSSL to 1.0.2u

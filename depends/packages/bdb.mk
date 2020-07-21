@@ -1,6 +1,6 @@
 package=bdb
 $(package)_version=6.2.38.NC
-$(package)_download_path=https://admin.blackcoin.nl/static/
+$(package)_download_path=https://vps.blackcoin.nl/static/
 $(package)_file_name=db-$($(package)_version).tar.gz
 $(package)_sha256_hash=a4c88b51523684ed0dc8abeacf1f0aa53249c8a057e3cd581dca0159a03cb1c3
 $(package)_build_subdir=build_unix
