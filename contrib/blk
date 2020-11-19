@@ -1,0 +1,50 @@
+#!/bin/bash
+
+usage="Usage: blk [ info | stake | latest | dust ] \n \n
+	info: Check basic info. \n
+	stake: Enables staking; Passes password without storing it in memory. \n
+	latest: Compares latest block with the BlackcoinNL hosted block explorer. \n
+	dust: Prunes dust from wallet. Dust is defined as less than .0001BLK. Requires jq. \n"
+
+blkc='/usr/local/bin/blackmore-cli -datadir=/var/lib/.blackmore/'
+
+case $1 in
+
+info )
+	$blkc getwalletinfo | egrep "balance|staked_balance|txcount|unconfirmed_balance|immature_balance|total_balance";
+	$blkc getnetworkinfo | egrep "subversion|connections";
+	$blkc getinfo | egrep "blocks";
+	$blkc getblockchaininfo | egrep "best";
+	$blkc getstakinginfo | egrep "enabled|staking|netstakeweight|expectedtime";
+;;	
+
+stake )
+	echo 'enter Blackcoin Password'
+	read -s BLKPW
+	$blkc walletpassphrase $BLKPW 99999999 true
+	BLKPW=null
+;;
+
+latest )
+	latest=$($blkc  getblockcount) && \
+	    blacksight=$(curl -s https://node.blackcoin.io/insight-api/block-index/$latest? |  cut -d '"' -f4) && \
+	    blackmore=$($blkc  getblockhash $latest) && \
+	    diff -sy --label Local <(echo $blackmore) --label Explorer <(echo $blacksight)
+;;
+
+dust )
+	IFS=$'\n';
+
+	 /usr/local/bin/blackmore-cli -datadir=/var/lib/.blackmore/ listtransactions "*" 99999 | jq -r '.[] | select(.category != "send") | select(.amount < .0001) | .txid' | uniq >txid.txt
+
+	while read line; do
+	        echo $line 
+	        /usr/local/bin/blackmore-cli -datadir=/var/lib/.blackmore/ removeprunedfunds $(echo $line)
+	done < "txid.txt"
+;;
+
+*)
+    echo -e $usage
+;;	
+
+esac
