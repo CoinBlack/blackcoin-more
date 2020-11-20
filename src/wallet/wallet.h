@@ -954,7 +954,7 @@ public:
     /* Set the current HD master key (will reset the chain child index counters) */
     bool SetHDMasterKey(const CPubKey& key);
 
-    static const bool DEFAULT_STAKE_CACHE = true;
+    static const bool DEFAULT_STAKE_CACHE = false;
 };
 
 /** A key allocated from the key pool. */
