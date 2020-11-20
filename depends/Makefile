@@ -53,7 +53,6 @@ BUILD_ID_SALT ?= salt
 host:=$(BUILD)
 ifneq ($(HOST),)
 host:=$(HOST)
-host_toolchain:=$(HOST)-
 endif
 
 ifneq ($(DEBUG),)
@@ -237,7 +236,7 @@ install: check-packages $(host_prefix)/share/config.site
 download-one: check-sources $(all_sources)
 
 download-osx:
-	@$(MAKE) -s HOST=x86_64-apple-darwin17 download-one
+	@$(MAKE) -s HOST=x86_64-apple-darwin16 download-one
 download-linux:
 	@$(MAKE) -s HOST=x86_64-linux-gnu download-one
 download-win:

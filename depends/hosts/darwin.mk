@@ -1,7 +1,8 @@
+
 OSX_MIN_VERSION=10.12
-OSX_SDK_VERSION=10.13
-XCODE_VERSION=10.1
-XCODE_BUILD_ID=10B61
+OSX_SDK_VERSION=10.15.1
+XCODE_VERSION=11.3.1
+XCODE_BUILD_ID=11C505
 LD64_VERSION=530
 
 OSX_SDK=$(SDK_PATH)/Xcode-$(XCODE_VERSION)-$(XCODE_BUILD_ID)-extracted-SDK-with-libcxx-headers
@@ -46,3 +47,5 @@ darwin_native_toolchain=native_cctools
 else
 darwin_native_toolchain=
 endif
+
+darwin_cmake_system=Darwin

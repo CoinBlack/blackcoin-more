@@ -150,4 +150,3 @@ This is an example command for a default build with no disabled dependencies:
 
 - [description.md](description.md): General description of the depends system
 - [packages.md](packages.md): Steps for adding packages
-
