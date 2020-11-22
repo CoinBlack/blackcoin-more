@@ -75,6 +75,8 @@ static boost::filesystem::detail::utf8_codecvt_facet utf8;
 #endif
 
 #if defined(Q_OS_MAC)
+
+#include <QProcess>
 extern double NSAppKitVersionNumber;
 #if !defined(NSAppKitVersionNumber10_8)
 #define NSAppKitVersionNumber10_8 1187
@@ -82,6 +84,7 @@ extern double NSAppKitVersionNumber;
 #if !defined(NSAppKitVersionNumber10_9)
 #define NSAppKitVersionNumber10_9 1265
 #endif
+void ForceActivation();
 #endif
 
 namespace GUIUtil {

@@ -142,7 +142,6 @@ public:
 
         vSeeds.push_back(CDNSSeedData("dnsseed.blackcoin.nl", "dnsseed.blackcoin.nl")); //hosted at dns.blackcoin.nl
         vSeeds.push_back(CDNSSeedData("dnsseed2.blackcoin.nl", "dnsseed2.blackcoin.nl")); //hosted at vps.blackcoin.nl
-        // vSeeds.push_back(CDNSSeedData("vasin.nl", "dnsseed.vasin.nl")); < Disabled for now
         vSeeds.push_back(CDNSSeedData("ghost.blackcoin.nl", "ghost.blackcoin.nl")); // Michel van Kessel static node
         vSeeds.push_back(CDNSSeedData("node.blackcoin.io ", "node.blackcoin.io"));  // payBLK static node
 
