@@ -6,8 +6,7 @@
 - Updated dependencies for Win64, Linux64, MacOS, arm64, armv7
 - Sign/Verify compatibility with Legacy clients 
 - Disable Stake Cache (for now)
-- Changed dbcache to 450MB (for txindex) 
-- Add 100 mature inputs during coinstake.  
+- Changed dbcache to 450MB (for txindex)   
 - Updated fix seeds for main and testnet.
 
 ## v2.13.2.6 (2020-07-21)
