@@ -3,9 +3,6 @@ Description=Blackmore daemon
 After=network.target
 
 [Service]
-<<<<<<< HEAD
-ExecStart=/usr/local/bin/blackmored -daemon -conf=/var/lib/.blackmore/blackmore.conf -datadir=/var/lib/.blackmore
-=======
 ExecStart=export MALLOC_ARENA_MAX=1 && /usr/local/bin/blackmored -daemon -conf=/var/lib/.blackmore/blackmore.conf -datadir=/var/lib/.blackmore
 >>>>>>> 5fbf64be585767e86ad48dbd1dfb02141a8f23ab
 ExecStop=/usr/local/bin/blackmored stop
