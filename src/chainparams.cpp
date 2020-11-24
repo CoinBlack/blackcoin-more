@@ -121,7 +121,7 @@ public:
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000002bcbdc747da2aad51b7");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000002e39410b632f6e755fc");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -220,7 +220,7 @@ public:
         nDefaultPort = 25714;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00");
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000027eceae4ce45300bf6");
 
         /*
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
