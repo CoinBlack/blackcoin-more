@@ -1,4 +1,14 @@
 # Changelog
+## v2.13.2.7 (2020-11-24)
+- Dust mitigation in mempool (by JJ12880 from Radium Core) 
+- Compile on MacOS Catalina
+- Cross-compile MacOS with Xcode 11.3.1
+- Updated dependencies for Win64, Linux64, MacOS, arm64, armv7
+- Sign/Verify compatibility with Legacy clients 
+- Disable Stake Cache (for now)
+- Changed dbcache to 450MB (for txindex) 
+- Add 100 mature inputs during coinstake.  
+- Updated fix seeds for main and testnet.
 
 ## v2.13.2.6 (2020-07-21)
 - Fix staking memory leak (by JJ12880 from Radium Core)
