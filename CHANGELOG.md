@@ -3,11 +3,11 @@
 - Dust mitigation in mempool (by JJ12880 from Radium Core) 
 - Compile on MacOS Catalina
 - Cross-compile MacOS with Xcode 11.3.1
-- Updated dependencies for Win64, Linux64, MacOS, arm64, armv7
-- Sign/Verify compatibility with Legacy clients 
-- Disable Stake Cache (for now)
-- Changed dbcache to 450MB (for txindex)   
-- Updated fix seeds for main and testnet.
+- Updated dependencies for Windows x64, Linux x64, MacOS, ARM64, ARMv7
+- Sign/verify compatibility with legacy clients 
+- Increased dbcache to 450MB
+- Disabled stake cache for now
+- Updated fixed seeds for mainnet and testnet
 
 ## v2.13.2.6 (2020-07-21)
 - Fix staking memory leak (by JJ12880 from Radium Core)
