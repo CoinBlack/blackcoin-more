@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'docker exec -it blackmore blackmore-cli help'
+        sh 'blackmored -daemon'
       }
     }
 
