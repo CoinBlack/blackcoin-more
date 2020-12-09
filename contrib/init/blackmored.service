@@ -1,0 +1,31 @@
+[Unit]
+Description=Blackmore daemon
+After=network.target
+
+[Service]
+ExecStart=export MALLOC_ARENA_MAX=1 && /usr/local/bin/blackmored -daemon -conf=/var/lib/.blackmore/blackmore.conf -datadir=/var/lib/.blackmore
+>>>>>>> 5fbf64be585767e86ad48dbd1dfb02141a8f23ab
+ExecStop=/usr/local/bin/blackmored stop
+User=blackmore
+Group=blackmore
+Restart=on-failure
+
+# Because it's a daemon process
+Type=forking
+
+PIDFile=/var/lib/.bitmored/blackmored.pid
+
+ProtectHome=true
+ProtectSystem=full
+PrivateTmp=true
+PrivateDevices=true
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
