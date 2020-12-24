@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'contrib/docker/moreBuilder/Dockerfile.ubase'
-	args '--net=host'
+	args '--network=host'
     }
 
   }
