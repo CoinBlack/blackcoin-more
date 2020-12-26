@@ -1,0 +1,22 @@
+FROM ubase-arm-linux-gnueabihf AS ubuntu-arm-linux-gnueabihf
+
+# Collect dependencies
+
+FROM ubuntu
+ENV TZ=America/Los_Angeles
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get update && \
+	apt-get  -yqq upgrade && \
+	apt-get  -yqq install \
+						libboost-all-dev \
+						libzmq3-dev \ 
+						libminiupnpc-dev 
+
+# Copy the binaries from to our new container
+COPY --from=ubase-arm-linux-gnueabihf /blackcoin-more/src/blackmored /usr/local/bin
+COPY --from=ubase-arm-linux-gnueabihf /blackcoin-more/src/blackmore-cli /usr/local/bin
+COPY --from=ubase-arm-linux-gnueabihf /usr/bin/bc /usr/bin
+COPY --from=ubase-arm-linux-gnueabihf /usr/bin/jq /usr/bin
+
+# Expose the port for the RPC interface
+EXPOSE 15714/tcp

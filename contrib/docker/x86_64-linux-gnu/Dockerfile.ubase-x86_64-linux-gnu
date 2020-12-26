@@ -1,0 +1,24 @@
+FROM ubase-base AS ubase-x86_64-linux-gnu
+
+COPY x86_64-linux-gnu ./x86_64-linux-gnu
+WORKDIR /blackcoin-more
+RUN (git clean -xf && \
+      ./autogen.sh && \
+      ./configure --prefix=/x86_64-linux-gnu --enable-glibc-back-compat --enable-reduce-exports --disable-tests --disable-bench --disable-gui-tests --enable-upnp-default LDFLAGS=-static-libstdc++ && \
+      make -j4  && \
+      make install && \
+      cd src/ && \
+      /usr/bin/strip blackmore*)
+
+RUN cp /blackcoin-more/src/blackmored /usr/local/bin/ && \
+  cp /blackcoin-more/src/blackmore-cli /usr/local/bin/ && \
+  cp /blackcoin-more/contrib/blk /usr/local/bin/
+WORKDIR /x86_64-linux-gnu/parts
+RUN cp --parents /usr/local/bin/blk ./ && \
+  cp --parents /usr/local/bin/blackmored ./ && \
+  for i in `ldd /usr/local/bin/blackmored | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
+  cp --parents /usr/local/bin/blackmore-cli ./ && \
+  for i in `ldd /usr/local/bin/blackmore-cli | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
+  cp /usr/bin/bc --parents ./ && \
+  cp /usr/bin/jq --parents ./
+WORKDIR /

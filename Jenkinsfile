@@ -1,17 +1,10 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'contrib/docker/moreBuilder/Dockerfile.ubase'
-	args '--network=host'
+    agent { label 'master' }
+    stages {
+        stage('build') {
+            steps {
+              sh "contrib/docker/build.sh -o aarch64-linux-gnu blackcoinnl github CoinBlack env.GIT_LOCAL_BRANCH Etc/UTC"
+            }
+        }
     }
-
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh 'blackmored -daemon'
-      }
-    }
-
-  }
 }
