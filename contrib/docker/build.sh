@@ -173,7 +173,7 @@ else
 	minimal="minimal-${architecture}"
 	docker run -itd --network=host --name ${ubase} ${ubase} bash
 	docker cp ${ubase}:${architecture}/parts ${architecture}/parts
-	cd ${BASE_DIR}/${architecture}
+	cd ${architecture}
 	tar -C parts -c . | docker import - ${minimal}
 	docker container rm -f ${ubase}
 	docker tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest
