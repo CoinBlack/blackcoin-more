@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z `echo $PWD | grep jenkins_home` ]] && BASE_DIR=$(dirname $(realpath $0 )) || BASE_DIR="${WORKSPACE}/blackcoin-more/contrib/docker/"
+[[ -z `echo $PWD | grep jenkins_home` ]] && BASE_DIR=$(dirname $(realpath $0 )) || BASE_DIR="${WORKSPACE}/blackcoin-more/contrib/docker"
 Alist="\n
 \t \t \t \t aarch64-linux-gnu \t (eg. Raspi4 with Ubuntu) \n
 \t \t \t \t arm-linux-gnueabihf \t (eg. Other Raspi) \n
