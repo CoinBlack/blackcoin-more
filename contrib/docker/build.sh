@@ -104,6 +104,7 @@ else
 			;;
 		esac
 	else
+		[[ -z `which wget` ]] && apt-get install wget 
 		/usr/bin/wget -qO ${BASE_DIR}/depends-${architecture}.tar.xz https://admin.blackcoin.nl/static/depends-${architecture}.tar.xz 
 
 		case $architecture in
