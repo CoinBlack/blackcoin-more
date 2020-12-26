@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z `echo $PWD | grep jenkins_home` ]] && BASE_DIR=$(dirname $(realpath $0 ))/ || BASE_DIR="${WORKSPACE}"
+[[ -z `echo $PWD | grep jenkins_home` ]] && BASE_DIR=$(dirname $(realpath $0 )) || BASE_DIR="${WORKSPACE}"
 Alist="\n
 \t \t \t \t aarch64-linux-gnu \t (eg. Raspi4 with Ubuntu) \n
 \t \t \t \t arm-linux-gnueabihf \t (eg. Other Raspi) \n
@@ -74,53 +74,53 @@ fi
 
 architecture=${architecture:-${defaultARCH}}
 if [[ ${architecture} == all ]]; then 
-	bash ${BASE_DIR}build.sh -o aarch64-linux-gnu $3 $4 $5 $6 $7
-	bash ${BASE_DIR}build.sh -o arm-linux-gnueabihf $3 $4 $5 $6 $7
-	bash ${BASE_DIR}build.sh -o x86_64-linux-gnu $3 $4 $5 $6 $7
+	bash ${BASE_DIR}/build.sh -o aarch64-linux-gnu $3 $4 $5 $6 $7
+	bash ${BASE_DIR}/build.sh -o arm-linux-gnueabihf $3 $4 $5 $6 $7
+	bash ${BASE_DIR}/build.sh -o x86_64-linux-gnu $3 $4 $5 $6 $7
 	exit 0
 else
 	[[ ${architecture} != ${defaultARCH} ]] &&	sed -i "s/-x86_64-linux-gnu/-${architecture}/" $0
 
 	# Download Dependencies
 
-	if [[ -f ${BASE_DIR}depends-${architecture}.tar.xz ]]; then
+	if [[ -f ${BASE_DIR}/depends-${architecture}.tar.xz ]]; then
 		echo "Dependencies exist! Checking sha256sum!";
 
 		case $architecture in
 			aarch64-linux-gnu)
-				checkSUM=`echo "f6f1b099d876db90396d0d56eb5b3f366f14c90e077524e2b10bfdaaa1aa5805 ${BASE_DIR}depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}depends-${architecture}.tar.xz -C ${BASE_DIR}\
+				checkSUM=`echo "f6f1b099d876db90396d0d56eb5b3f366f14c90e077524e2b10bfdaaa1aa5805 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1					
 			;;
 			arm-linux-gnueabihf)
-				checkSUM=`echo "339c1159adcccecb45155b316f1f5772009b92acb8cfed29464dd7f09775fb79 ${BASE_DIR}depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}depends-${architecture}.tar.xz -C ${BASE_DIR}\
+				checkSUM=`echo "339c1159adcccecb45155b316f1f5772009b92acb8cfed29464dd7f09775fb79 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 			x86_64-linux-gnu)
-				checkSUM=`echo "eed063b26f4c4e0fa35dc085fe09bafd4251cffa76cdabb26bf43077da03b84e ${BASE_DIR}depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}depends-${architecture}.tar.xz -C ${BASE_DIR}\
+				checkSUM=`echo "eed063b26f4c4e0fa35dc085fe09bafd4251cffa76cdabb26bf43077da03b84e ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 		esac
 	else
 		[[ -z `which wget` ]] && apt-get install wget 
-		/usr/bin/wget -qO ${BASE_DIR}depends-${architecture}.tar.xz https://admin.blackcoin.nl/static/depends-${architecture}.tar.xz 
+		/usr/bin/wget -qO ${BASE_DIR}/depends-${architecture}.tar.xz https://admin.blackcoin.nl/static/depends-${architecture}.tar.xz 
 
 		case $architecture in
 			aarch64-linux-gnu)
-				checkSUM=`echo "f6f1b099d876db90396d0d56eb5b3f366f14c90e077524e2b10bfdaaa1aa5805 ${BASE_DIR}depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}depends-${architecture}.tar.xz -C ${BASE_DIR}\
+				checkSUM=`echo "f6f1b099d876db90396d0d56eb5b3f366f14c90e077524e2b10bfdaaa1aa5805 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 			arm-linux-gnueabihf)
-				checkSUM=`echo "339c1159adcccecb45155b316f1f5772009b92acb8cfed29464dd7f09775fb79 ${BASE_DIR}depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}depends-${architecture}.tar.xz -C ${BASE_DIR}\
+				checkSUM=`echo "339c1159adcccecb45155b316f1f5772009b92acb8cfed29464dd7f09775fb79 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 			x86_64-linux-gnu)
-				checkSUM=`echo "eed063b26f4c4e0fa35dc085fe09bafd4251cffa76cdabb26bf43077da03b84e ${BASE_DIR}depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}depends-${architecture}.tar.xz -C ${BASE_DIR}\
+				checkSUM=`echo "eed063b26f4c4e0fa35dc085fe09bafd4251cffa76cdabb26bf43077da03b84e ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 		esac
@@ -137,35 +137,35 @@ else
 	# Git Account
 
 	HubLab=${HubLab:-${defaultHubLab}}
-	[[ $HubLab != $defaultHubLab ]] && sed -i "s|github|${HubLab}|" ${BASE_DIR}Dockerfile.ubase && sed -i "s|github|${HubLab}|" $0
+	[[ $HubLab != $defaultHubLab ]] && sed -i "s|github|${HubLab}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|github|${HubLab}|" $0
 
 	GitAccount=${GitAccount:-${defaultRepo}}
-	[[ ${GitAccount} != ${defaultRepo} ]] && sed -i "s|CoinBlack|$GitAccount|" ${BASE_DIR}Dockerfile.ubase && sed -i "s|CoinBlack|$GitAccount|" $0
+	[[ ${GitAccount} != ${defaultRepo} ]] && sed -i "s|CoinBlack|$GitAccount|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|CoinBlack|$GitAccount|" $0
 
 	# branch
 
 	branch=${branch:-${defaultBranch}}
-	[[ ${branch} != ${defaultBranch} ]] && 	sed -i "s|ENV branch=v2.13.2.7|ENV branch=${branch}|" ${BASE_DIR}Dockerfile.ubase && sed -i "s|v2.13.2.7|${branch}|" $0
+	[[ ${branch} != ${defaultBranch} ]] && 	sed -i "s|ENV branch=v2.13.2.7|ENV branch=${branch}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|v2.13.2.7|${branch}|" $0
 
 	# timezone
 
 	timezone=${timezone:-${defaultTimezone}}
-	[[ ${timezone} != ${defaultTimezone} ]] &&	sed -i "s|America/Los_Angeles|${timezone}|" ${BASE_DIR}Dockerfile.ubase && \
-		sed -i "s|America/Los_Angeles|${timezone}|" ${BASE_DIR}Dockerfile.ubuntu && sed -i "s|America/Los_Angeles|${timezone}|" $0
+	[[ ${timezone} != ${defaultTimezone} ]] &&	sed -i "s|America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.ubase && \
+		sed -i "s|America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.ubuntu && sed -i "s|America/Los_Angeles|${timezone}|" $0
 
 
 	# build ubase-base
-	Dockerfile="${BASE_DIR}Dockerfile.ubase-base"
+	Dockerfile="${BASE_DIR}/Dockerfile.ubase-base"
 	docker build -t ubase-base --network=host - < ${Dockerfile} 
 
 	# build ubase
 	ubase="ubase-${architecture}"
-	Dockerfile="${BASE_DIR}${architecture}/Dockerfile.${ubase}"
+	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubase}"
 	docker build ./${architecture} -t ${ubase} --network=host -f ${Dockerfile}
 
 	# build ubuntu
 	ubuntu="ubuntu-${architecture}"
-	Dockerfile="${BASE_DIR}${architecture}/Dockerfile.${ubuntu}"
+	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubuntu}"
 	docker build -t ${ubuntu} - --network=host < ${Dockerfile}
 	docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest
 
@@ -173,7 +173,7 @@ else
 	minimal="minimal-${architecture}"
 	docker run -itd --network=host --name ${ubase} ${ubase} bash
 	docker cp ${ubase}:${architecture}/parts ${architecture}/parts
-	cd ${BASE_DIR}${architecture}
+	cd ${BASE_DIR}/${architecture}
 	tar -C parts -c . | docker import - ${minimal}
 	docker container rm -f ${ubase}
 	docker tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest
