@@ -8,7 +8,7 @@ Alist="\n
 "
 
 usage="Usage: \n 
-\t option mode: \t \`build.sh -o <architecture> <DockerHub> <HubLab> <GitAccount> <branch> <timezone>\` \n
+\t option mode: \t \`build.sh -o <architecture> <DockerHub> <HubLab> <GitAccount> <BRANCH> <timezone>\` \n
 \t interactive: \t \`build.sh -i\` \n 
 \t \t \t help: \t \`build.sh -h\` \n 
 \n Architectures: ${Alist} \n
@@ -18,7 +18,7 @@ h1="<architecture>  \t Choose your architecture. ${Alist}"
 h2="<DockerHub> \t \t Enter your Docker Hub Account name."
 h3="<HubLab> \t \t \t Enter \"github\" or \"gitlab\"."
 h4="<GitAccount> \t Enter the git account name. (eg. \"CoinBlack\" on GitHub, or \"blackcoin\" on GitLab)"
-h5="<branch> \t \t \t Enter the branch name. (eg. master)"
+h5="<BRANCH> \t \t \t Enter the BRANCH name. (eg. master)"
 h6="<timezone> \t \t Enter your timezone. (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)"
 
 help=" \n
@@ -54,11 +54,11 @@ if [[ $1 == -i ]]; then
 	read -p "What is your DockerHub Account Name? ($defaultDockerHub): " DockerHub
 	read -p "Github or Gitlab? ($defaultHubLab): " HubLab
 	read -p "What is your GitAccount name? ($defaultRepo): " GitAccount
-	read -p "What branch/version? ($defaultBranch): " branch
+	read -p "What BRANCH/version? ($defaultBranch): " BRANCH
 	read -p "What is your timezone? (${defaultTimezone}): " timezone
 	echo "Architecture: ${architecture}"
 	echo "DockerHub Account: ${DockerHub}"
-	echo "Git Account: ${HubLab}.com/${GitAccount} ${branch}"
+	echo "Git Account: ${HubLab}.com/${GitAccount} ${BRANCH}"
 	echo "Timezone: ${timezone}"
 else
 	echo "Option Mode!"
@@ -141,10 +141,10 @@ else
 	GitAccount=${GitAccount:-${defaultRepo}}
 	[[ ${GitAccount} != ${defaultRepo} ]] && sed -i "s|CoinBlack|$GitAccount|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|CoinBlack|$GitAccount|" $0
 
-	# branch
+	# BRANCH
 
-	branch=${branch:-${defaultBranch}}
-	[[ ${branch} != ${defaultBranch} ]] && 	sed -i "s|ENV branch=v2.13.2.7|ENV branch=${branch}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|v2.13.2.7|${branch}|" $0
+	BRANCH=${BRANCH:-${defaultBranch}}
+	[[ ${BRANCH} != ${defaultBranch} ]] && 	sed -i "s|ENV BRANCH=v2.13.2.7|ENV BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|v2.13.2.7|${BRANCH}|" $0
 
 	# timezone
 
@@ -155,7 +155,7 @@ else
 
 	# build ubase-base
 	Dockerfile="${BASE_DIR}/Dockerfile.ubase-base"
-	docker build -t ubase-base --network=host - < ${Dockerfile} 
+	docker build -t ubase-base --build-arg BRANCH=${BRANCH} --network=host - < ${Dockerfile} 
 
 	# build ubase
 	ubase="ubase-${architecture}"
@@ -166,8 +166,8 @@ else
 	ubuntu="ubuntu-${architecture}"
 	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubuntu}"
 	docker build -t ${ubuntu} - --network=host < ${Dockerfile}
-	[[ ${branch} != master ]] && docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${branch} || \
-		(docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest; docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${branch})
+	[[ ${BRANCH} != master ]] && docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH} || \
+		(docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest; docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH})
 
 	# build minimal
 	minimal="minimal-${architecture}"
@@ -176,8 +176,8 @@ else
 	cd ${BASE_DIR}/${architecture}
 	tar -C parts -c . | docker import - ${minimal}
 	docker container rm -f ${ubase}
-	[[ ${branch} != master ]] && docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${branch} || \
-		(docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest; docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${branch})
+	[[ ${BRANCH} != master ]] && docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH} || \
+		(docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest; docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH})
 fi
 ;;
 *)
