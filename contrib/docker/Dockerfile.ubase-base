@@ -1,7 +1,8 @@
 FROM ubuntu AS ubase
 ARG BRANCH=master
-ENV BRANCH=BRANCH
-ENV TZ=America/Los_Angeles
+ENV BRANCH=$BRANCH
+ARG TIMEZONE=America/Los_Angeles
+ENV TZ=$TIMEZONE
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -yqq \
                           git \ 

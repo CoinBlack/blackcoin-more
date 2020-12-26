@@ -8,7 +8,7 @@ Alist="\n
 "
 
 usage="Usage: \n 
-\t option mode: \t \`build.sh -o <architecture> <DockerHub> <HubLab> <GitAccount> <BRANCH> <timezone>\` \n
+\t option mode: \t \`build.sh -o <architecture> <DockerHub> <HubLab> <GitAccount> <BRANCH> <TIMEZONE>\` \n
 \t interactive: \t \`build.sh -i\` \n 
 \t \t \t help: \t \`build.sh -h\` \n 
 \n Architectures: ${Alist} \n
@@ -19,7 +19,7 @@ h2="<DockerHub> \t \t Enter your Docker Hub Account name."
 h3="<HubLab> \t \t \t Enter \"github\" or \"gitlab\"."
 h4="<GitAccount> \t Enter the git account name. (eg. \"CoinBlack\" on GitHub, or \"blackcoin\" on GitLab)"
 h5="<BRANCH> \t \t \t Enter the BRANCH name. (eg. master)"
-h6="<timezone> \t \t Enter your timezone. (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)"
+h6="<TIMEZONE> \t \t Enter your timezone. (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)"
 
 help=" \n
 \t The defaults in interactive mode, written in for option mode: \n
@@ -55,11 +55,11 @@ if [[ $1 == -i ]]; then
 	read -p "Github or Gitlab? ($defaultHubLab): " HubLab
 	read -p "What is your GitAccount name? ($defaultRepo): " GitAccount
 	read -p "What BRANCH/version? ($defaultBranch): " BRANCH
-	read -p "What is your timezone? (${defaultTimezone}): " timezone
+	read -p "What is your TIMEZONE? (${defaultTimezone}): " TIMEZONE
 	echo "Architecture: ${architecture}"
 	echo "DockerHub Account: ${DockerHub}"
 	echo "Git Account: ${HubLab}.com/${GitAccount} ${BRANCH}"
-	echo "Timezone: ${timezone}"
+	echo "Timezone: ${TIMEZONE}"
 else
 	echo "Option Mode!"
 	echo "Architecture: $2"
@@ -146,11 +146,11 @@ else
 	BRANCH=${BRANCH:-${defaultBranch}}
 	[[ ${BRANCH} != ${defaultBranch} ]] && 	sed -i "s|ENV BRANCH=v2.13.2.7|ENV BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|v2.13.2.7|${BRANCH}|" $0
 
-	# timezone
+	# TIMEZONE
 
-	timezone=${timezone:-${defaultTimezone}}
-	[[ ${timezone} != ${defaultTimezone} ]] &&	sed -i "s|America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.ubase && \
-		sed -i "s|America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.ubuntu && sed -i "s|America/Los_Angeles|${timezone}|" $0
+	TIMEZONE=${TIMEZONE:-${defaultTimezone}}
+	[[ ${TIMEZONE} != ${defaultTimezone} ]] &&	sed -i "s|America/Los_Angeles|${TIMEZONE}|" ${BASE_DIR}/Dockerfile.ubase && \
+		sed -i "s|America/Los_Angeles|${TIMEZONE}|" ${BASE_DIR}/Dockerfile.ubuntu && sed -i "s|America/Los_Angeles|${TIMEZONE}|" $0
 
 
 	# build ubase-base
