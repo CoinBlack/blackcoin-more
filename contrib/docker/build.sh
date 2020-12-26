@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR=$(dirname $(realpath $0 ))
+[[ -z `echo $PWD | grep jenkins_home ]] && BASE_DIR=$(dirname $(realpath $0 )) || BASE_DIR="~/jenkins"
 Alist="\n
 \t \t \t \t aarch64-linux-gnu \t (eg. Raspi4 with Ubuntu) \n
 \t \t \t \t arm-linux-gnueabihf \t (eg. Other Raspi) \n
@@ -173,7 +173,7 @@ else
 	minimal="minimal-${architecture}"
 	docker run -itd --network=host --name ${ubase} ${ubase} bash
 	docker cp ${ubase}:${architecture}/parts ${architecture}/parts
-	cd ${architecture}
+	cd ${BASE_DIR}/${architecture}
 	tar -C parts -c . | docker import - ${minimal}
 	docker container rm -f ${ubase}
 	docker tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest
