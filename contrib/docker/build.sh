@@ -166,7 +166,9 @@ else
 	ubuntu="ubuntu-${architecture}"
 	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubuntu}"
 	docker build -t ${ubuntu} - --network=host < ${Dockerfile}
-	docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest
+	[[ ${branch} == master ]] && \
+	docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest && docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${branch} || \
+	docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${branch}
 
 	# build minimal
 	minimal="minimal-${architecture}"
@@ -175,7 +177,9 @@ else
 	cd ${BASE_DIR}/${architecture}
 	tar -C parts -c . | docker import - ${minimal}
 	docker container rm -f ${ubase}
-	docker tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest
+	[[ ${branch} == master ]] && \
+	docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest && docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${branch} || \
+	docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${branch}
 fi
 ;;
 *)
