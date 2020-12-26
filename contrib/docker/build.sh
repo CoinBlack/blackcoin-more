@@ -104,7 +104,7 @@ else
 			;;
 		esac
 	else
-		wget -qO ${BASE_DIR}/depends-${architecture}.tar.xz https://admin.blackcoin.nl/static/depends-${architecture}.tar.xz 
+		/usr/bin/wget -qO ${BASE_DIR}/depends-${architecture}.tar.xz https://admin.blackcoin.nl/static/depends-${architecture}.tar.xz 
 
 		case $architecture in
 			aarch64-linux-gnu)
