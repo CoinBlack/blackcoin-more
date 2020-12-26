@@ -171,7 +171,7 @@ else
 	# build minimal
 	minimal="minimal-${architecture}"
 	docker run -itd --network=host --name ${ubase} ${ubase} bash
-	docker cp ${ubase}:${architecture}/parts ${architecture}/parts
+	docker cp ${ubase}:${architecture}/parts ${BASE_DIR}/${architecture}/parts
 	cd ${BASE_DIR}/${architecture}
 	tar -C parts -c . | docker import - ${minimal}
 	docker container rm -f ${ubase}
