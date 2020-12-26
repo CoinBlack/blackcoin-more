@@ -108,16 +108,19 @@ else
 
 		case $architecture in
 			aarch64-linux-gnu)
+				platform="linux/arm64, linux/arm/v8"
 				checkSUM=`echo "f6f1b099d876db90396d0d56eb5b3f366f14c90e077524e2b10bfdaaa1aa5805 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
 				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 			arm-linux-gnueabihf)
+				platform="linux/arm/v7"
 				checkSUM=`echo "339c1159adcccecb45155b316f1f5772009b92acb8cfed29464dd7f09775fb79 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
 				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
 			;;
 			x86_64-linux-gnu)
+				platform="linux/amd64"
 				checkSUM=`echo "eed063b26f4c4e0fa35dc085fe09bafd4251cffa76cdabb26bf43077da03b84e ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
 				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
 					|| exit 1
@@ -127,6 +130,7 @@ else
 		Dependencies SHA256SUM GOOD!
 		"
 	fi
+
 
 	# DockerHub Account
 
@@ -160,21 +164,22 @@ else
 	# build ubase
 	ubase="ubase-${architecture}"
 	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubase}"
-	docker build ${BASE_DIR}/${architecture} -t ${ubase} --network=host -f ${Dockerfile}
+	docker buildx ${BASE_DIR}/${architecture} --platform ${platform} -t ${ubase} --network=host -f ${Dockerfile}
 
 	# build ubuntu
 	ubuntu="ubuntu-${architecture}"
 	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubuntu}"
-	docker build -t ${ubuntu} - --network=host < ${Dockerfile}
+	docker buildx -t ${ubuntu} - --platform ${platform} --network=host < ${Dockerfile}
 	[[ ${BRANCH} != master ]] && docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH} || \
 		(docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest; docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH})
 
 	# build minimal
 	minimal="minimal-${architecture}"
+	rm -fr ${ubase}:${architecture}/parts
 	docker run -itd --network=host --name ${ubase} ${ubase} bash
 	docker cp ${ubase}:${architecture}/parts ${BASE_DIR}/${architecture}/parts
 	cd ${BASE_DIR}/${architecture}
-	tar -C parts -c . | docker import - ${minimal}
+	tar -C parts -c . | docker import --platform ${platform} - ${minimal}
 	docker container rm -f ${ubase}
 	[[ ${BRANCH} != master ]] && docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH} || \
 		(docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest; docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH})
