@@ -142,3 +142,4 @@ contrib/devtools/split-debug.sh
 osx_volname
 dist/
 *.background.tiff
+.Trash*
