@@ -61,11 +61,13 @@ if [[ $1 == -i ]]; then
 	echo "Git Account: ${HubLab}.com/${GitAccount} ${BRANCH}"
 	echo "Timezone: ${TIMEZONE}"
 else
-	echo "Option Mode!"
-	echo "Architecture: $2"
-	echo "DockerHub Account: $3"
-	echo "Git Account: https://${4}.com/${5} ${6}"
-	echo "Timezone: ${7}"
+	echo -e "
+	Option Mode! \n
+	Architecture: $2
+	DockerHub Account: $3
+	Git Account: https://${4}.com/${5} ${6}
+	Timezone: ${7}
+	"
 fi
 
 # Architecture
@@ -82,24 +84,21 @@ else
 
 	# Download Dependencies
 
-	if [[ -f ${BASE_DIR}/depends-${architecture}.tar.xz ]]; then
+	if [[ -f ${BASE_DIR}/depends-${architecture}.tar.xz && -f ${BASE_DIR}/${architecture}/${architecture}/bin/fc-cache ]]; then
 		echo "Dependencies exist! Checking sha256sum!";
 
 		case $architecture in
 			aarch64-linux-gnu)
 				checkSUM=`echo "f6f1b099d876db90396d0d56eb5b3f366f14c90e077524e2b10bfdaaa1aa5805 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
-					|| exit 1					
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK!" || exit 1					
 			;;
 			arm-linux-gnueabihf)
 				checkSUM=`echo "339c1159adcccecb45155b316f1f5772009b92acb8cfed29464dd7f09775fb79 ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
-					|| exit 1
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK!" || exit 1					
 			;;
 			x86_64-linux-gnu)
 				checkSUM=`echo "eed063b26f4c4e0fa35dc085fe09bafd4251cffa76cdabb26bf43077da03b84e ${BASE_DIR}/depends-${architecture}.tar.xz" | sha256sum --check | awk '{print $2}' 2> /dev/null`
-				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK! You will need sudo to untar the dependencies." && sudo tar xJf ${BASE_DIR}/depends-${architecture}.tar.xz -C ${BASE_DIR}/\
-					|| exit 1
+				[[ "${checkSUM}" == "OK" ]] && 	echo "The sha256sum is OK!" || exit 1					
 			;;
 		esac
 	else
@@ -140,49 +139,44 @@ else
 	# Git Account
 
 	HubLab=${HubLab:-${defaultHubLab}}
-	[[ $HubLab != $defaultHubLab ]] && sed -i "s|github|${HubLab}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|github|${HubLab}|" $0
+	[[ $HubLab != $defaultHubLab ]] && sed -i "s|github|${HubLab}|" $0
 
 	GitAccount=${GitAccount:-${defaultRepo}}
-	[[ ${GitAccount} != ${defaultRepo} ]] && sed -i "s|CoinBlack|$GitAccount|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|CoinBlack|$GitAccount|" $0
+	[[ ${GitAccount} != ${defaultRepo} ]] && sed -i "s|CoinBlack|$GitAccount|" $0
 
 	# BRANCH
 
 	BRANCH=${BRANCH:-${defaultBranch}}
-	[[ ${BRANCH} != ${defaultBranch} ]] && 	sed -i "s|ENV BRANCH=v2.13.2.7|ENV BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubase && sed -i "s|v2.13.2.7|${BRANCH}|" $0
+	[[ ${BRANCH} != ${defaultBranch} ]] && sed -i "s|v2.13.2.7|${BRANCH}|" $0
 
 	# TIMEZONE
 
 	TIMEZONE=${TIMEZONE:-${defaultTimezone}}
-	[[ ${TIMEZONE} != ${defaultTimezone} ]] &&	sed -i "s|America/Los_Angeles|${TIMEZONE}|" ${BASE_DIR}/Dockerfile.ubase && \
-		sed -i "s|America/Los_Angeles|${TIMEZONE}|" ${BASE_DIR}/Dockerfile.ubuntu && sed -i "s|America/Los_Angeles|${TIMEZONE}|" $0
-
-
-	# build ubase-base
-	Dockerfile="${BASE_DIR}/Dockerfile.ubase-base"
-	docker build -t ubase-base --build-arg BRANCH=${BRANCH} --network=host - < ${Dockerfile} 
+	[[ ${TIMEZONE} != ${defaultTimezone} ]] && sed -i "s|America/Los_Angeles|${TIMEZONE}|" $0
 
 	# build ubase
 	ubase="ubase-${architecture}"
 	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubase}"
-	docker buildx ${BASE_DIR}/${architecture} --platform ${platform} -t ${ubase} --network=host -f ${Dockerfile}
+	docker build --network=host ${BASE_DIR}/${architecture} -t ${ubase} --build-arg BRANCH=${BRANCH} --build-arg TIMEZONE=${TZ} -f ${Dockerfile}
 
 	# build ubuntu
 	ubuntu="ubuntu-${architecture}"
 	Dockerfile="${BASE_DIR}/${architecture}/Dockerfile.${ubuntu}"
-	docker buildx -t ${ubuntu} - --platform ${platform} --network=host < ${Dockerfile}
-	[[ ${BRANCH} != master ]] && docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH} || \
-		(docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest; docker image tag ${ubuntu} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH})
+	docker build --network=host -t ${ubuntu}:${BRANCH} - < ${Dockerfile}
+	[[ ${BRANCH} != master ]] || docker image tag ${ubuntu}:${BRANCH} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:latest && \
+		docker image tag ${ubuntu}:${BRANCH} ${DockerHub}/blackcoin-more-ubuntu-${architecture}:${BRANCH}
 
 	# build minimal
 	minimal="minimal-${architecture}"
-	rm -fr ${ubase}:${architecture}/parts
+	rm -fr ${BASE_DIR}/${architecture}/parts
 	docker run -itd --network=host --name ${ubase} ${ubase} bash
-	docker cp ${ubase}:${architecture}/parts ${BASE_DIR}/${architecture}/parts
+	docker cp ${ubase}:/${architecture}/parts ${BASE_DIR}/${architecture}/parts
 	cd ${BASE_DIR}/${architecture}
-	tar -C parts -c . | docker import --platform ${platform} - ${minimal}
+	tar -C parts -c . | docker import - ${minimal}:${BRANCH}
 	docker container rm -f ${ubase}
-	[[ ${BRANCH} != master ]] && docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH} || \
-		(docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest; docker image tag ${minimal} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH})
+	[[ ${BRANCH} != master ]] || docker image tag ${minimal}:${BRANCH} ${DockerHub}/blackcoin-more-minimal-${architecture}:latest && \
+		docker image tag ${minimal}:${BRANCH} ${DockerHub}/blackcoin-more-minimal-${architecture}:${BRANCH}
+
 fi
 ;;
 *)

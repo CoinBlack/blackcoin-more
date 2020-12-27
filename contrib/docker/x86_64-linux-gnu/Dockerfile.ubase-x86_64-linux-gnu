@@ -1,4 +1,54 @@
-FROM ubase-base AS ubase-x86_64-linux-gnu
+FROM ubuntu AS ubase-base-x86_64-linux-gnu
+ARG BRANCH
+ENV BRANCH=$BRANCH
+ARG TIMEZONE
+ENV TIMEZONE=$TZ
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get update && apt-get install -yqq \
+                          git \ 
+                          make \
+                          file \
+                          autoconf \
+                          automake \ 
+                          libtool \
+                          libevent-dev \
+                          build-essential \
+                          autotools-dev \
+                          pkg-config \
+                          bsdmainutils \
+                          python3 \
+                          libevent-dev \
+                          libboost-all-dev \
+                          libminiupnpc-dev \
+                          libzmq3-dev \
+                          libssl-dev \
+                          gperf \
+                          wget \
+# blk commandline utility 
+                          jq \
+                          bc \ 
+# cross compile arm
+                          g++-arm-linux-gnueabihf  \ 
+                          binutils-arm-linux-gnueabihf \ 
+# cross compile aarch64
+                          g++-aarch64-linux-gnu  \ 
+                          binutils-aarch64-linux-gnu \ 
+# cross compile macOS
+                          curl  \ 
+                          librsvg2-bin  \ 
+                          libtiff-tools  \ 
+                          bsdmainutils  \ 
+                          cmake  \ 
+                          imagemagick  \ 
+                          libcap-dev  \ 
+                          libz-dev  \ 
+                          libbz2-dev  \ 
+                          python3-setuptools  \ 
+                          libtinfo5 
+
+FROM ubase-base-x86_64-linux-gnu AS ubase-x86_64-linux-gnu
+
+RUN git clone -b $BRANCH https://github.com/CoinBlack/blackcoin-more.git
 
 COPY x86_64-linux-gnu ./x86_64-linux-gnu
 WORKDIR /blackcoin-more
