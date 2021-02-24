@@ -1,4 +1,10 @@
 # Changelog
+## v2.13.2.8 (2021-02-24)
+- Immediately ban clients operating on forked chains older than nMaxReorganizationDepth
+- Fixed IsDust() policy to allow atomic swaps
+- Updated fixed seeds for mainnet and testnet
+- Updated dependencies for MacOS
+
 ## v2.13.2.7 (2020-11-24)
 - Dust mitigation in mempool (by JJ12880 from Radium Core) 
 - Compile on MacOS Catalina
