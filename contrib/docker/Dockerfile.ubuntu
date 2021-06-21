@@ -1,4 +1,4 @@
-FROM danielclough/blackcoin-more-ubase-aarch64:v2.13.2.8 as build
+FROM blackcoinnl/blackcoin-more-ubase-aarch64:v2.13.2.8 as build
 RUN echo "Building Ubuntu Package"
 #
 # Collect dependencies
