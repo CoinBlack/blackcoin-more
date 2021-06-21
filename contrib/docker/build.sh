@@ -51,11 +51,11 @@ if [ ${X11} != ${defaultX11} ]; then
 fi
 
 # change branch for multi-stage build
-defaultUbase=blackcoinnl/blackcoin-more-ubase-aarch64:v2.13.2.8
+defaultUbase=blackcoinnl/blackcoin-more-ubase-x86_64:v2.13.2.8
 ubase="${DockerHub}/blackcoin-more-ubase-${SYSTYPE}:${BRANCH}"
 if [ ${defaultUbase} != ${ubase} ]; then
 	sed -i "s|FROM danielclough/blackcoin-more-ubase-aarch64:${BRANCH} as build|FROM ${ubase} as build|" ${BASE_DIR}/Dockerfile.ubuntu
-	sed -i "s|defaultUbase=blackcoinnl/blackcoin-more-ubase-aarch64:v2.13.2.8|defaultUbase=${ubase}|" $0
+	sed -i "s|defaultUbase=blackcoinnl/blackcoin-more-ubase-x86_64:v2.13.2.8|defaultUbase=${ubase}|" $0
 fi
 
 # timezone
@@ -83,19 +83,15 @@ ubuntu="${DockerHub}/blackcoin-more-ubuntu-${SYSTYPE}:${BRANCH}"
 # build
 # ubase (base using ubuntu)
 docker build -t ${ubase} - --network=host < ${BASE_DIR}/Dockerfile.ubase
-docker run -itd  --network=host --name ubase ${ubase} bash
 # ubuntu (package with full ubuntu distro)
 if [ ${X11} != ${defaultX11} ]; then
 	docker build -t ${ubuntu} - --network=host < ${BASE_DIR}/Dockerfile.ubuntu
 	docker image push ${ubuntu}
 fi
 # minimal (only package binaries and scripts)
+docker run -itd  --network=host --name ubase ${ubase} bash
 docker cp ubase:/parts ${moreBuilder}
 cd ${moreBuilder}
 tar -C parts -c . | docker import - ${minimal}
 docker image push ${minimal}
-
-
-# cleanup
-docker container rm -f ubase
-docker image rm -f ${ubase}
+docker container stop ubase
