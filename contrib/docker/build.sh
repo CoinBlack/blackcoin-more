@@ -2,6 +2,7 @@
 
 BASE_DIR=$(dirname $(realpath $0 ))
 moreBuilder=${BASE_DIR}/moreBuilder
+rm -fr ${moreBuilder}/*
 
 defaultSysType=x86_64
 SYSTYPE=`lscpu | head -1 | tr -s ' ' | cut -d ' ' -f2`

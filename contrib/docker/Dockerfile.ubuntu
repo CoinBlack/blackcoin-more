@@ -1,4 +1,4 @@
-FROM blackcoinnl/blackcoin-more-ubase-x86_64:master as build
+FROM blackcoinnl/blackcoin-more-base-x86_64:master as build
 RUN echo "Building Ubuntu Package"
 #
 # Collect dependencies
