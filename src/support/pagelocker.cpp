@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "support/pagelocker.h"
+#include <support/pagelocker.h>
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include <config/bitcoin-config.h>
 #endif
 
 #ifdef WIN32
@@ -17,7 +17,7 @@
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
-#include <windows.h>
+#include <compat.h>
 // This is used to attempt to keep keying material out of swap
 // Note that VirtualLock does not provide this as a guarantee on Windows,
 // but, in practice, memory that has been VirtualLock'd almost never gets written to
@@ -28,7 +28,7 @@
 #include <unistd.h> // for sysconf
 #endif
 
-LockedPageManager* LockedPageManager::_instance = NULL;
+LockedPageManager* LockedPageManager::_instance = nullptr;
 boost::once_flag LockedPageManager::init_flag = BOOST_ONCE_INIT;
 
 /** Determine system page size in bytes */

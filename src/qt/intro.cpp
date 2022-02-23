@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include <config/bitcoin-config.h>
 #endif
 
 #include "intro.h"
@@ -23,9 +23,9 @@
 
 static const uint64_t GB_BYTES = 1000000000LL;
 /* Minimum free space (in GB) needed for data directory */
-static const uint64_t BLOCK_CHAIN_SIZE = 5;
+static const uint64_t BLOCK_CHAIN_SIZE = 15;
 /* Minimum free space (in GB) needed for data directory when pruned; Does not include prune target */
-static const uint64_t CHAIN_STATE_SIZE = 2;
+static const uint64_t CHAIN_STATE_SIZE = 15;
 /* Total required space (in GB) depending on user choice (prune, not prune) */
 static uint64_t requiredSpace;
 

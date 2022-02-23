@@ -10,7 +10,7 @@
 #define BITCOIN_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include <config/bitcoin-config.h>
 #endif
 
 #include "amount.h"
@@ -95,9 +95,9 @@ static const unsigned int BLOCK_STALLING_TIMEOUT = 2;
 static const unsigned int MAX_HEADERS_RESULTS = 2000;
 /** Maximum depth of blocks we're willing to serve as compact blocks to peers
  *  when requested. For older blocks, a regular BLOCK response will be sent. */
-static const int MAX_CMPCTBLOCK_DEPTH = 5;
+// static const int MAX_CMPCTBLOCK_DEPTH = 5; - BIP152 is disabled
 /** Maximum depth of blocks we're willing to respond to GETBLOCKTXN requests for. */
-static const int MAX_BLOCKTXN_DEPTH = 10;
+// static const int MAX_BLOCKTXN_DEPTH = 10; - BIP152 is disabled
 /** Size of the "block download window": how far ahead of our current height do we fetch?
  *  Larger windows tolerate larger download speed differences between peer, but increase the potential
  *  degree of disordering of blocks on disk (which make reindexing and in the future perhaps pruning

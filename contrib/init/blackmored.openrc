@@ -1,0 +1,93 @@
+#!/sbin/openrc-run
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/blackcoin/.blackcoin" ]; then
+	BLACKMORED_DEFAULT_DATADIR="/var/lib/blackcoin/.blackcoin"
+else
+	BLACKMORED_DEFAULT_DATADIR="/var/lib/blackmored"
+fi
+
+BLACKMORED_CONFIGFILE=${BLACKMORED_CONFIGFILE:-/etc/blackcoin/blackcoin.conf}
+BLACKMORED_PIDDIR=${BLACKMORED_PIDDIR:-/var/run/blackmored}
+BLACKMORED_PIDFILE=${BLACKMORED_PIDFILE:-${BLACKMORED_PIDDIR}/blackmored.pid}
+BLACKMORED_DATADIR=${BLACKMORED_DATADIR:-${BLACKMORED_DEFAULT_DATADIR}}
+BLACKMORED_USER=${BLACKMORED_USER:-${BITCOIN_USER:-blackcoin}}
+BLACKMORED_GROUP=${BLACKMORED_GROUP:-blackcoin}
+BLACKMORED_BIN=${BLACKMORED_BIN:-/usr/bin/blackmored}
+BLACKMORED_NICE=${BLACKMORED_NICE:-${NICELEVEL:-0}}
+BLACKMORED_OPTS="${BLACKMORED_OPTS:-${BITCOIN_OPTS}}"
+
+name="Blackcoin More Daemon"
+description="Blackcoin cryptocurrency P2P network daemon"
+
+command="/usr/bin/blackmored"
+command_args="-pid=\"${BLACKMORED_PIDFILE}\" \
+		-conf=\"${BLACKMORED_CONFIGFILE}\" \
+		-datadir=\"${BLACKMORED_DATADIR}\" \
+		-daemon \
+		${BLACKMORED_OPTS}"
+
+required_files="${BLACKMORED_CONFIGFILE}"
+start_stop_daemon_args="-u ${BLACKMORED_USER} \
+			-N ${BLACKMORED_NICE} -w 2000"
+pidfile="${BLACKMORED_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${BLACKMORED_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${BLACKMORED_USER}:${BLACKMORED_GROUP}" \
+	"${BLACKMORED_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${BLACKMORED_USER}:${BLACKMORED_GROUP}" \
+	"${BLACKMORED_PIDDIR}"
+
+	checkpath -f \
+	-o "${BLACKMORED_USER}:${BLACKMORED_GROUP}" \
+	-m 0660 \
+	"${BLACKMORED_CONFIGFILE}"
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if grep -qs '^rpcuser=' "${BLACKMORED_CONFIGFILE}" && \
+		! grep -qs '^rpcpassword=' "${BLACKMORED_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run blackmored."
+		eerror "The setting must appear in ${BLACKMORED_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Blackcoin Alert\"" \
+			"team@blackcoin.org"
+		eerror ""
+		return 1
+	fi
+}

@@ -9,15 +9,17 @@
 #ifndef BLACKCOIN_POS_H
 #define BLACKCOIN_POS_H
 
-#include "pos.h"
-#include "txdb.h"
-#include "main.h"
-#include "arith_uint256.h"
-#include "consensus/validation.h"
-#include "hash.h"
-#include "timedata.h"
-#include "chainparams.h"
-#include "script/sign.h"
+#include <chain.h>
+#include <primitives/transaction.h>
+#include <consensus/validation.h>
+#include <txdb.h>
+#include <main.h>
+#include <arith_uint256.h>
+#include <hash.h>
+#include <timedata.h>
+#include <chainparams.h>
+#include <script/sign.h>
+#include <consensus/consensus.h>
 #include <stdint.h>
 
 using namespace std;
