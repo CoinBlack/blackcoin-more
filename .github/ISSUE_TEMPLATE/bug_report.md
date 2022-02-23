@@ -9,7 +9,7 @@ assignees: ''
 
 <!-- This issue tracker is only for technical issues related to Blackcoin More.
 
-General bitcoin questions and/or support requests are best directed to the Blackcoin Discord server at https://discord.gg/hjNUgWD
+General blackcoin questions and/or support requests are best directed to the Blackcoin Discord server at https://discord.gg/hjNUgWD
 
 If the node is "stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardware is stable by running memtest and observe CPU temperature with a load-test tool such as linpack before creating an issue! -->
 
