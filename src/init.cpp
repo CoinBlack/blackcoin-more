@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include <config/bitcoin-config.h>
 #endif
 
 #include "init.h"
@@ -30,7 +30,6 @@
 #include "script/standard.h"
 #include "script/sigcache.h"
 #include "scheduler.h"
-#include "timedata.h"
 #include "txdb.h"
 #include "txmempool.h"
 #include "torcontrol.h"
@@ -62,6 +61,10 @@
 
 #if ENABLE_ZMQ
 #include "zmq/zmqnotificationinterface.h"
+#endif
+
+#ifdef USE_SSE2
+#include <crypto/scrypt.h>
 #endif
 
 using namespace std;
@@ -187,7 +190,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("bitcoin-shutoff");
+    RenameThread("blackmore-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -600,7 +603,7 @@ void CleanupBlockRevFiles()
 void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("bitcoin-loadblk");
+    RenameThread("blackmore-loadblk");
     CImportingNow imp;
 
     // -reindex
@@ -788,7 +791,7 @@ void InitLogging()
     fLogIPs = GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf(PACKAGE_NAME " version %s\n", FormatFullVersion());
+    LogPrintf("Blackcoin More version %s\n", FormatFullVersion());
 }
 
 /** Initialize bitcoin.
@@ -1105,7 +1108,8 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     int64_t nStart;
 
 #if defined(USE_SSE2)
-    scrypt_detect_sse2();
+    std::string sse2detect = scrypt_detect_sse2();
+    LogPrintf("%s\n", sse2detect);
 #endif
 
     // ********************************************************* Step 5: verify wallet database integrity
@@ -1326,6 +1330,7 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
                 pblocktree = new CBlockTreeDB(nBlockTreeDBCache, false, fReindex);
                 pcoinsdbview = new CCoinsViewDB(nCoinDBCache, false, fReindex || fReindexChainState);
+
                 pcoinscatcher = new CCoinsViewErrorCatcher(pcoinsdbview);
                 pcoinsTip = new CCoinsViewCache(pcoinscatcher);
 
