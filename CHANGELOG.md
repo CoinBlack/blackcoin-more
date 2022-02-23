@@ -1,7 +1,7 @@
-# Changelog# Changelog
+# Changelog
 ## v2.13.2.9 (2022-02-24)
-- Update leveldb, which should resolve the "missing UTXO" staking issue
-- Update dependencies and ported build system from Bitcoin Core 0.20+
+- Updated leveldb, which should resolve the "missing UTXO" staking issue
+- Updated dependencies and ported build system from Bitcoin Core 0.20+
 - Updated crypto and added CRC32 for ARM64
 - Updated univalue to v1.0.3
 - Updated to Qt v5.12.11
