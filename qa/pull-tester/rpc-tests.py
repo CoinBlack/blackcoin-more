@@ -76,9 +76,9 @@ for arg in sys.argv[1:]:
 
 #Set env vars
 if "BITCOIND" not in os.environ:
-    os.environ["BITCOIND"] = BUILDDIR + '/src/bitcoind' + EXEEXT
+    os.environ["BLACKMORED"] = BUILDDIR + '/src/blackmored' + EXEEXT
 if "BITCOINCLI" not in os.environ:
-    os.environ["BITCOINCLI"] = BUILDDIR + '/src/bitcoin-cli' + EXEEXT
+    os.environ["BLACKMORECLI"] = BUILDDIR + '/src/blackmore-cli' + EXEEXT
 
 if EXEEXT == ".exe" and "-win" not in opts:
     # https://github.com/bitcoin/bitcoin/commit/d52802551752140cf41f0d9a225a43e84404d3e9

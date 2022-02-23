@@ -1247,7 +1247,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         // LogPrintf("tx_out value %d, minimum value %d dust count %d", txout.nValue, min_dust, dust_tx_count);
         if (txout.nValue < min_dust)
             dust_tx_count = dust_tx_count + 1;
-        if (dust_tx_count > 10)
+        if (dust_tx_count > 2)
             return state.DoS(0, false, REJECT_DUST, "too many dust vouts");
 
     }

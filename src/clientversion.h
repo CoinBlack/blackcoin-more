@@ -6,7 +6,7 @@
 #define BITCOIN_CLIENTVERSION_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include <config/bitcoin-config.h>
 #else
 
 /**
@@ -17,7 +17,7 @@
 #define CLIENT_VERSION_MAJOR 2
 #define CLIENT_VERSION_MINOR 13
 #define CLIENT_VERSION_REVISION 2
-#define CLIENT_VERSION_BUILD 8
+#define CLIENT_VERSION_BUILD 9
 
 //! Set to true for release, false for prerelease or test build
 #define CLIENT_VERSION_IS_RELEASE true
@@ -26,7 +26,7 @@
  * Copyright year (2009-this)
  * Todo: update this when changing our copyright comments in the source
  */
-#define COPYRIGHT_YEAR 2021
+#define COPYRIGHT_YEAR 2022
 
 #endif //HAVE_CONFIG_H
 
