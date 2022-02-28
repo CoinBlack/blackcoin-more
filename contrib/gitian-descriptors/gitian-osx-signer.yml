@@ -1,5 +1,5 @@
 ---
-name: "bitcoin-dmg-signer"
+name: "blackcoin-more-dmg-signer"
 distro: "ubuntu"
 suites:
 - "focal"
@@ -42,9 +42,9 @@ script: |
   export PATH="$HOME/.local/bin":$PATH
   cd ..
 
-  UNSIGNED_TARBALL=bitcoin-osx-unsigned.tar.gz
-  UNSIGNED_APP=dist/Bitcoin-Qt.app
-  SIGNED=bitcoin-osx-signed.dmg
+  UNSIGNED_TARBALL=blackcoin-more-osx-unsigned.tar.gz
+  UNSIGNED_APP=dist/Blackmore-Qt.app
+  SIGNED=blackcoin-more-osx-signed.dmg
 
   tar -xf ${UNSIGNED_TARBALL}
   OSX_VOLNAME="$(cat osx_volname)"

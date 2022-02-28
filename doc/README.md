@@ -3,7 +3,7 @@ Blackcoin More
 
 Setup
 ---------------------
-Blackcoin More is experimental Blackcoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Blackcoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+Blackcoin More is a Blackcoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Blackcoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
 To download Blackcoin More, visit [blackcoinmore.org](https://blackcoinmore.org).
 
@@ -24,7 +24,7 @@ Unpack the files into a directory, and then run blackmore-qt.exe.
 
 ### OS X
 
-Drag Blackcoin-More to your applications folder, and then run Blackcoin-More.
+Drag Blackcoin-More.app to your applications folder, and then run Blackcoin-More.
 
 ### Need Help?
 
