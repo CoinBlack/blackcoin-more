@@ -24,7 +24,7 @@ class WalletTest(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.extra_args = [[
-            "-acceptnonstdtxn=1",
+            "-acceptnonstdtxn=1", "-walletrejectlongchains=0"
         ]] * self.num_nodes
         self.setup_clean_chain = True
         self.supports_cli = False
@@ -552,7 +552,7 @@ class WalletTest(BitcoinTestFramework):
             self.log.info("Test " + m)
             self.stop_nodes()
             # set lower ancestor limit for later
-            self.start_node(0, [m, "-limitancestorcount=" + str(chainlimit)])
+            self.start_node(0, [m, "-walletrejectlongchains=0", "-limitancestorcount=" + str(chainlimit)])
             self.start_node(1, [m, "-limitancestorcount=" + str(chainlimit)])
             self.start_node(2, [m, "-limitancestorcount=" + str(chainlimit)])
             if m == '-reindex':
