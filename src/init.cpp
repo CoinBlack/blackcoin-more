@@ -485,6 +485,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageGroup(_("Staking options:"));
     strUsage += HelpMessageOpt("-staking=<n>", strprintf(_("Enable staking functionality (0-1, default: %u)"), 1));
     strUsage += HelpMessageOpt("-reservebalance=<amount>", _("Keep the specified amount of coins available for spending at all times (default: 0)"));
+    strUsage += HelpMessageOpt("-donatetodevfund=<n>", strprintf(_("Donate the specified percentage of staking rewards to the dev fund (default: %u)"), DEFAULT_DONATION_PERCENTAGE));
 #endif
 
     return strUsage;
@@ -1248,6 +1249,12 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
             return false;
         }
     }
+
+    nDonationPercentage = GetArg("-donatetodevfund", DEFAULT_DONATION_PERCENTAGE);
+    if (nDonationPercentage < 0)
+        nDonationPercentage = 0;
+    else if (nDonationPercentage > 95)
+        nDonationPercentage = 95;
 #endif
 
     BOOST_FOREACH(const std::string& strDest, mapMultiArgs["-seednode"])

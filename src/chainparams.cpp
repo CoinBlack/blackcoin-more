@@ -3,8 +3,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "base58.h"
 #include "chainparams.h"
 #include "consensus/merkle.h"
+#include "dstencode.h"
 
 #include "tinyformat.h"
 #include "util.h"
@@ -167,6 +169,9 @@ public:
                                 //   (the tx=... number in the SetBestChain debug.log lines)
                     3500.0      // * estimated number of transactions per day after checkpoint
         };
+
+        // A vector of p2sh addresses
+        vDevFundAddress = { "BBXBrYnrhbDyo44eRxeUPVjqPpNk9bBg8b" };
     }
 };
 static CMainParams mainParams;
@@ -248,6 +253,9 @@ public:
             179080,
             2.0
         };
+
+        // A vector of p2sh addresses
+        vDevFundAddress = { "mwAokTUtjKt2yjrpY3tFJH8BTC9VvcZg7F" };
 
     }
 };
@@ -358,4 +366,17 @@ void SelectParams(const std::string& network)
 void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)
 {
     regTestParams.UpdateBIP9Parameters(d, nStartTime, nTimeout);
+}
+
+// Blackcoin: Donations to dev fund 
+std::string CChainParams::GetDevFundAddress() const
+{
+    return vDevFundAddress[0];
+}
+
+CScript CChainParams::GetDevRewardScript() const
+{
+    CTxDestination dest = DecodeDestination(GetDevFundAddress());
+    CScript scriptPubKey = GetScriptForDestination(dest);
+    return scriptPubKey;
 }

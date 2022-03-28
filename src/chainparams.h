@@ -77,6 +77,8 @@ public:
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
     const CCheckpointData& Checkpoints() const { return checkpointData; }
     int LastPOWBlock() const { return consensus.nLastPOWBlock; }
+    std::string GetDevFundAddress() const;
+    CScript GetDevRewardScript() const;
 protected:
     CChainParams() {}
 
@@ -96,6 +98,7 @@ protected:
     bool fMineBlocksOnDemand;
     bool fTestnetToBeDeprecatedFieldRPC;
     CCheckpointData checkpointData;
+    std::vector<std::string> vDevFundAddress;
 };
 
 /**

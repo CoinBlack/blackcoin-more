@@ -36,6 +36,7 @@ extern CWallet* pwalletMain;
 extern CFeeRate payTxFee;
 extern CAmount nReserveBalance;
 extern CAmount nMinimumInputValue;
+extern unsigned int nDonationPercentage;
 extern unsigned int nTxConfirmTarget;
 extern bool bSpendZeroConfChange;
 extern bool fSendFreeTransactions;
@@ -776,6 +777,7 @@ public:
     CAmount GetWatchOnlyBalance() const;
     CAmount GetUnconfirmedWatchOnlyBalance() const;
     CAmount GetImmatureWatchOnlyBalance() const;
+    unsigned int GetDonationPercentage() const;
 
     /**
      * Insert additional inputs into the transaction by
