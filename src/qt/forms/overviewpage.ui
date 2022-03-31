@@ -318,19 +318,25 @@
              </widget>
             </item>
             <item row="7" column="0">
-            <widget class="QLabel" name="labelDonationsText">
-              <property name="text">
-              <string>Donations:</string>
+             <widget class="QLabel" name="labelDonationsText">
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
               </property>
-            </widget>
+              <property name="text">
+               <string>Donations:</string>
+              </property>
+             </widget>
             </item>
             <item row="7" column="1">
-            <widget class="QLabel" name="labelDonations">
+             <widget class="QLabel" name="labelDonations">
               <property name="font">
-              <font>
+               <font>
+                <pointsize>11</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
-              </font>
+               </font>
               </property>
               <property name="cursor">
                <cursorShape>IBeamCursor</cursorShape>
@@ -345,9 +351,9 @@
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="textInteractionFlags">
-              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+               <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
               </property>
-            </widget>
+             </widget>
             </item>
             <item row="0" column="2">
              <widget class="QLabel" name="labelWatchonly">
