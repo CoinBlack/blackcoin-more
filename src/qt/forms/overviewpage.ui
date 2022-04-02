@@ -319,11 +319,6 @@
             </item>
             <item row="7" column="0">
              <widget class="QLabel" name="labelDonationsText">
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Donations:</string>
               </property>
@@ -331,11 +326,6 @@
             </item>
             <item row="7" column="1">
              <widget class="QLabel" name="labelDonations">
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
               <property name="cursor">
                <cursorShape>IBeamCursor</cursorShape>
               </property>
