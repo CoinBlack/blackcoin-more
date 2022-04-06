@@ -1239,16 +1239,16 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     AssertLockHeld(cs_main);
     if (pfMissingInputs)
         *pfMissingInputs = false;
+
+    // Blackcoin: Limit dust
     int dust_tx_count = 0;
     CAmount min_dust = 100000;
-
-    BOOST_FOREACH (const CTxOut& txout, tx.vout) {
-        // LogPrintf("tx_out value %d, minimum value %d dust count %d", txout.nValue, min_dust, dust_tx_count);
+    BOOST_FOREACH(const CTxOut& txout, tx.vout) {
+        // LogPrintf("tx_out value: %d, minimum value: %d, dust count: %d", txout.nValue, min_dust, dust_tx_count);
         if (txout.nValue < min_dust)
-            dust_tx_count = dust_tx_count + 1;
-        if (dust_tx_count > 2)
-            return state.DoS(0, false, REJECT_DUST, "too many dust vouts");
-
+            dust_tx_count++;
+        if (dust_tx_count > 10)
+            return state.DoS(0, false, REJECT_INVALID, "too many dust vouts");
     }
 
     if (!CheckTransaction(tx, state))
