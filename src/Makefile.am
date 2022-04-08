@@ -80,9 +80,6 @@ endif
 
 .PHONY: FORCE check-symbols check-security
 # bitcoin core #
-
-# Disable BIP152
-# blockencodings.h
 BITCOIN_CORE_H = \
   addrdb.h \
   addrman.h \
@@ -90,6 +87,7 @@ BITCOIN_CORE_H = \
   arith_uint256.h \
   base58.h \
   bloom.h \
+  blockencodings.h \
   cashaddr.h \
   cashaddrenc.h \
   chain.h \
@@ -203,12 +201,11 @@ libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 # libbitcoin_common or libbitcoin_util libraries, instead.
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-# Disable BIP152
-# blockencodings.cpp
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
   addrdb.cpp \
   bloom.cpp \
+  blockencodings.cpp \
   chain.cpp \
   checkpoints.cpp \
   httprpc.cpp \

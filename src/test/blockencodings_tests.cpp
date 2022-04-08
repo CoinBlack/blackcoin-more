@@ -25,10 +25,12 @@ static CBlock BuildBlockTestCase() {
     tx.vin[0].scriptSig.resize(10);
     tx.vout.resize(1);
     tx.vout[0].nValue = 42;
+    tx.nTime = 1649194574;
 
     block.vtx.resize(3);
     block.vtx[0] = tx;
     block.nVersion = 42;
+    block.nTime = tx.nTime;
     block.hashPrevBlock = GetRandHash();
     block.nBits = 0x207fffff;
 
@@ -108,6 +110,7 @@ class TestHeaderAndShortIDs {
 public:
     CBlockHeader header;
     uint64_t nonce;
+    std::vector<unsigned char> vchBlockSig;
     std::vector<uint64_t> shorttxids;
     std::vector<PrefilledTransaction> prefilledtxn;
 
@@ -133,6 +136,7 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(header);
         READWRITE(nonce);
+        READWRITE(vchBlockSig);
         size_t shorttxids_size = shorttxids.size();
         READWRITE(VARINT(shorttxids_size));
         shorttxids.resize(shorttxids_size);
