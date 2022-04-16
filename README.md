@@ -41,8 +41,7 @@ The best place to get started is to join the Development channel on Gitter: http
 Testing
 -------
 
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
+Testing and code review might be the bottleneck for development. Please help out by testing
 other people's pull requests, and remember this is a security-critical project where any mistake might cost people
 lots of money.
 
