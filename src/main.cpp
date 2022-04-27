@@ -2457,9 +2457,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     }
 
     // BIP16 is always active
-    bool fStrictPayToScriptHash = true;
-
-    unsigned int flags = fStrictPayToScriptHash ? SCRIPT_VERIFY_P2SH : SCRIPT_VERIFY_NONE;
+    unsigned int flags = SCRIPT_VERIFY_P2SH;
 
     // BIP66 is always active
     flags |= SCRIPT_VERIFY_DERSIG;
