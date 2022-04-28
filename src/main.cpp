@@ -2397,9 +2397,6 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return true;
     }
 
-    // Set proof-of-stake hash modifier
-    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
-
     // Check difficulty
     if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
          return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
@@ -2588,6 +2585,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                        nActualStakeReward, blockReward),
                                        REJECT_INVALID, "bad-cs-amount");
     }
+
+    // Set proof-of-stake hash modifier
+    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
 
     if (!control.Wait())
         return state.DoS(100, false);
