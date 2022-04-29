@@ -1243,7 +1243,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
     const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= 2 && !chainparams.GetConsensus().IsProtocolV3_1(tx.nTime)) {
+    if (fRequireStandard && tx.nVersion >= 2 && !chainparams.GetConsensus().IsProtocolV3_1(tx.nTime ? tx.nTime : GetAdjustedTime())) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version2-tx");
     }
 
@@ -1259,7 +1259,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         return state.DoS(0, false, REJECT_NONSTANDARD, "non-final");
 
     // For the same reasons as in the case with non-final transactions
-    if (tx.nTime > FutureDrift(GetAdjustedTime())) {
+    if ((tx.nTime ? tx.nTime : GetAdjustedTime()) > FutureDrift(GetAdjustedTime())) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "time-too-new");
     }
 
@@ -1343,6 +1343,11 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
 
         CAmount nValueOut = tx.GetValueOut();
         CAmount nFees = nValueIn-nValueOut;
+
+        // Blackcoin: Minimum fee check
+        if (chainparams.GetConsensus().IsProtocolV3_1(tx.nTime ? tx.nTime : GetAdjustedTime()) && nFees < GetMinFee(tx, tx.nTime ? tx.nTime : GetAdjustedTime()))
+            return state.Invalid(false, REJECT_INSUFFICIENTFEE, "fee is below minimum");
+
         // nModifiedFees includes any fee deltas from PrioritiseTransaction
         CAmount nModifiedFees = nFees;
         double nPriorityDummy = 0;
@@ -1991,7 +1996,8 @@ int GetSpendHeight(const CCoinsViewCache& inputs)
 }
 
 namespace Consensus {
-bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight)
+struct Params;
+bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, const Consensus::Params& params, unsigned int nTimeTx)
 {
         // This doesn't trigger the DoS code on purpose; if it did, it would make it easier
         // for an attacker to attempt to split the network.
@@ -2008,17 +2014,16 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
             // If prev is coinbase or coinstake, check that it's matured
             if (coins->IsCoinBase() || coins->IsCoinStake()) {
-                     if (nSpendHeight - coins->nHeight < Params().nCoinbaseMaturity)
-                             return state.Invalid(
-                                    error("CheckInputs(): tried to spend %s at depth %d", coins->IsCoinBase() ? "coinbase" : "coinstake", nSpendHeight - coins->nHeight),
-                                    REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
+                if (nSpendHeight - coins->nHeight < (params.IsProtocolV3_1(nTimeTx) ? params.nCoinbaseMaturity : Params().nCoinbaseMaturity))
+                    return state.Invalid(
+                        error("CheckInputs(): tried to spend %s at depth %d", coins->IsCoinBase() ? "coinbase" : "coinstake", nSpendHeight - coins->nHeight),
+                        REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
             }
 
-
             // Check transaction timestamp
-            if (coins->nTime > tx.nTime)
-                    return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
-                                REJECT_INVALID, "bad-txns-time-earlier-than-input");
+            if (coins->nTime > (tx.nTime ? tx.nTime : GetAdjustedTime()))
+                return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
+                            REJECT_INVALID, "bad-txns-time-earlier-than-input");
 
             // Check for negative or overflow input values
             nValueIn += coins->vout[prevout.n].nValue;
@@ -2029,20 +2034,25 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
         if (!tx.IsCoinStake())
         {
-                    if (nValueIn < tx.GetValueOut())
-                        return state.DoS(100, error("CheckInputs(): %s value in (%s) < value out (%s)",
-                                                    tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
-                                         REJECT_INVALID, "bad-txns-in-belowout");
+            if (nValueIn < tx.GetValueOut())
+                return state.DoS(100, error("CheckInputs(): %s value in (%s) < value out (%s)",
+                                            tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
+                                    REJECT_INVALID, "bad-txns-in-belowout");
 
-                    // Tally transaction fees
-                    CAmount nTxFee = nValueIn - tx.GetValueOut();
-                    if (nTxFee < 0)
-                        return state.DoS(100, error("CheckInputs(): %s nTxFee < 0", tx.GetHash().ToString()),
-                                         REJECT_INVALID, "bad-txns-fee-negative");
-                    nFees += nTxFee;
-                    if (!MoneyRange(nFees))
-                        return state.DoS(100, error("CheckInputs(): nFees out of range"),
-                                         REJECT_INVALID, "bad-txns-fee-outofrange");
+            // Tally transaction fees
+            CAmount nTxFee = nValueIn - tx.GetValueOut();
+            if (nTxFee < 0)
+                return state.DoS(100, error("CheckInputs(): %s nTxFee < 0", tx.GetHash().ToString()),
+                                    REJECT_INVALID, "bad-txns-fee-negative");
+            nFees += nTxFee;
+            if (!MoneyRange(nFees))
+                return state.DoS(100, error("CheckInputs(): nFees out of range"),
+                                    REJECT_INVALID, "bad-txns-fee-outofrange");
+
+            // Blackcoin: Minimum fee check
+            if (params.IsProtocolV3_1(nTimeTx) && nFees < GetMinFee(tx, nTimeTx))
+                return state.DoS(100, error("CheckInputs(): nFees below minimum"),
+                                    REJECT_INVALID, "bad-txns-fee-not-enough");
         }
     return true;
 }
@@ -2052,7 +2062,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
 {
     if (!tx.IsCoinBase())
     {
-        if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs)))
+        if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs), Params().GetConsensus(), tx.nTime ? tx.nTime : GetAdjustedTime()))
             return false;
 
         if (pvChecks)
@@ -2403,7 +2413,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                         REJECT_INVALID, "bad-diffbits");
 
     // Check proof-of-stake
-    if (block.IsProofOfStake() && chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, block.vtx[1], block.nBits, state)) {
+    if (block.IsProofOfStake() && chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, block.vtx[1], block.nBits, state, block.vtx[1].nTime ? block.vtx[1].nTime : block.nTime)) {
         LogPrintf("ConnectBlock(): WARNING: %s: check proof-of-stake failed for block %s\n", __func__, block.GetHash().ToString());
         return false; // do not error here as we expect this during initial block download
     }
@@ -3315,7 +3325,7 @@ static CBlockIndex* AddToBlockIndex(const CBlockHeader& block)
 bool ReceivedBlockTransactions(const CBlock &block, CValidationState& state, CBlockIndex *pindexNew, const CDiskBlockPos& pos)
 {
     if (block.IsProofOfStake())
-            pindexNew->SetProofOfStake();
+        pindexNew->SetProofOfStake();
     pindexNew->nTx = block.vtx.size();
     pindexNew->nChainTx = 0;
     pindexNew->nFile = pos.nFile;
@@ -3550,11 +3560,11 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             return state.DoS(100, false, REJECT_INVALID, "bad-cb-multiple", false, "more than one coinbase");
 
     // Check coinbase timestamp
-    if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime))
+    if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime ? (int64_t)block.vtx[0].nTime : block.GetBlockTime()))
             return state.DoS(50, false, REJECT_INVALID, "bad-cb-time", false, "coinbase timestamp is too early");
 
     // Check coinstake timestamp
-    if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
+    if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime ? (int64_t)block.vtx[1].nTime : block.GetBlockTime()))
             return state.DoS(50, false, REJECT_INVALID, "bad-cs-time", false, "coinstake timestamp violation");
 
     if (block.IsProofOfStake()) {
@@ -3583,7 +3593,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
 
         // check transaction timestamp
         if (block.GetBlockTime() < (int64_t)tx.nTime)
-           return state.DoS(100, false, REJECT_INVALID, "bad-tx-time", false, "block timestamp earlier than transaction timestamp");
+            return state.DoS(100, false, REJECT_INVALID, "bad-tx-time", false, "block timestamp earlier than transaction timestamp");
     }
 
     unsigned int nSigOps = 0;
@@ -3699,7 +3709,7 @@ bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams
 
     CValidationState state;
     // verify hash target and signature of coinstake tx
-    if (!CheckProofOfStake(mapBlockIndex[pblock->hashPrevBlock], pblock->vtx[1], pblock->nBits, state))
+    if (!CheckProofOfStake(mapBlockIndex[pblock->hashPrevBlock], pblock->vtx[1], pblock->nBits, state, pblock->vtx[1].nTime ? pblock->vtx[1].nTime : pblock->nTime))
         return error("CheckStake() : proof-of-stake checking failed");
 
     //// debug print
@@ -3761,7 +3771,12 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
             {
                 // make sure coinstake would meet timestamp protocol
                 // as it would be the same as the block timestamp
-                txCoinBase.nTime = block.nTime = txCoinStake.nTime;
+                if (txCoinBase.nVersion < 2)
+                    txCoinBase.nTime = block.nTime = txCoinStake.nTime;
+                else {
+                    block.nTime = txCoinStake.nTime;
+                    txCoinBase.nTime = txCoinStake.nTime = 0;
+                }
                 block.vtx[0] = txCoinBase;
 
                 // we have to make sure that we have no future timestamps in
@@ -3782,6 +3797,30 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     }
 
     return false;
+}
+
+// Blackcoin: GetMinFee
+CAmount GetMinFee(const CTransaction& tx, unsigned int nTimeTx)
+{
+    size_t nBytes = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
+    return GetMinFee(nBytes, nTimeTx);
+}
+
+CAmount GetMinFee(size_t nBytes, uint32_t nTime)
+{
+    CAmount nMinFee;
+
+    if (Params().GetConsensus().IsProtocolV3_1(nTime))
+        nMinFee = (1 + (CAmount)nBytes / 1000) * MIN_TX_FEE_PER_KB;
+    else {
+        nMinFee = ::minRelayTxFee.GetFee(nBytes);
+        if (nMinFee < DEFAULT_TRANSACTION_FEE)
+    	    nMinFee = DEFAULT_TRANSACTION_FEE;
+    }
+
+    if (!MoneyRange(nMinFee))
+        nMinFee = MAX_MONEY;
+    return nMinFee;
 }
 
 static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex=NULL, bool fProofOfStake=true)

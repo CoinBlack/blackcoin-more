@@ -64,7 +64,7 @@ int64_t FutureDrift(int64_t nTime)
 
 bool IsStandardTx(const CTransaction& tx, std::string& reason)
 {
-    if (tx.nVersion > CTransaction::MAX_STANDARD_VERSION || tx.nVersion < 1) {
+    if ((!Params().GetConsensus().IsProtocolV3_1(tx.nTime) && (tx.nVersion > CTransaction::MAX_STANDARD_VERSION-1)) || tx.nVersion < 1) {
         reason = "version";
         return false;
     }

@@ -118,7 +118,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, uin
 }
 
 // Check kernel hash target and coinstake signature
-bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, CValidationState &state)
+bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, CValidationState& state, unsigned int nTimeTx)
 {
     if (!tx.IsCoinStake())
         return error("CheckProofOfStake() : called on non-coinstake %s", tx.GetHash().ToString());
@@ -149,7 +149,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
         return state.DoS(100, error("CheckProofOfStake() : stake prevout is not mature, expecting %i and only matured to %i", Params().GetConsensus().nCoinbaseMaturity, pindexPrev->nHeight + 1 - mapBlockIndex[hashBlock]->nHeight));
     }
 
-    if (!CheckStakeKernelHash(pindexPrev, nBits, txPrev.nTime, txPrev.vout[txin.prevout.n].nValue, txin.prevout, tx.nTime, fDebug))
+    if (!CheckStakeKernelHash(pindexPrev, nBits, (txPrev.nTime ? txPrev.nTime : pblockindex->GetBlockTime()), txPrev.vout[txin.prevout.n].nValue, txin.prevout, nTimeTx, fDebug))
        return state.DoS(1, error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s", tx.GetHash().ToString())); // may occur during initial download or if behind on block chain sync
 
     return true;
@@ -196,7 +196,7 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
             return false;
         }
 
-        return CheckStakeKernelHash(pindexPrev, nBits, txPrev.nTime, txPrev.vout[prevout.n].nValue, prevout, nTime);
+        return CheckStakeKernelHash(pindexPrev, nBits, (txPrev.nTime ? txPrev.nTime : pblockindex->GetBlockTime()), txPrev.vout[prevout.n].nValue, prevout, nTime);
     } else {
         //found in cache
         const CStakeCache& stake = it->second;
@@ -234,6 +234,6 @@ void CacheKernel(std::map<COutPoint, CStakeCache>& cache, const COutPoint& prevo
         return;
     }
 
-    CStakeCache c(txPrev.nTime, txPrev.vout[prevout.n].nValue);
+    CStakeCache c((txPrev.nTime ? txPrev.nTime : pblockindex->GetBlockTime()), txPrev.vout[prevout.n].nValue);
     cache.insert({prevout, c});
 }

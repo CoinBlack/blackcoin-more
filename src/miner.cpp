@@ -151,7 +151,6 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
 
     // Create coinbase transaction.
     CMutableTransaction coinbaseTx;
-    coinbaseTx.nTime = pblock->nTime;
     coinbaseTx.vin.resize(1);
     coinbaseTx.vin[0].prevout.SetNull();
     coinbaseTx.vout.resize(1);

@@ -370,6 +370,7 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
     UniValue sendTo = params[1].get_obj();
 
     CMutableTransaction rawTx;
+    rawTx.nVersion = GetArg("-txversion", CTransaction::CURRENT_VERSION);
 
     if (params.size() > 2 && !params[2].isNull()) {
         int64_t nLockTime = params[2].get_int64();
@@ -377,8 +378,6 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, locktime out of range");
         rawTx.nLockTime = nLockTime;
     }
-    
-    rawTx.nTime = GetAdjustedTime();
 
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& input = inputs[idx];
