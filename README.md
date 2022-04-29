@@ -36,7 +36,7 @@ Change log can be found in [CHANGELOG.md](CHANGELOG.md).
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The best place to get started is to join the Development channel on Gitter: https://gitter.im/Blackcoin_Hub/Development
+The best place to get started is to join Blackcoin Discord: https://discord.gg/hjNUgWD
 
 Testing
 -------
