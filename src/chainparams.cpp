@@ -219,7 +219,7 @@ public:
         nDefaultPort = 25714;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100001");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000302f630a91c2ec0230");
 
         nPruneAfterHeight = 1000;
 
