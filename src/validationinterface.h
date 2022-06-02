@@ -6,7 +6,10 @@
 #ifndef BITCOIN_VALIDATIONINTERFACE_H
 #define BITCOIN_VALIDATIONINTERFACE_H
 
+#include <boost/bind/bind.hpp>
 #include <boost/signals2/signal.hpp>
+
+using namespace boost::placeholders;
 
 class CBlock;
 class CBlockIndex;
