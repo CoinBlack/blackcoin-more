@@ -3325,7 +3325,7 @@ static CBlockIndex* AddToBlockIndex(const CBlockHeader& block)
 bool ReceivedBlockTransactions(const CBlock &block, CValidationState& state, CBlockIndex *pindexNew, const CDiskBlockPos& pos)
 {
     if (block.IsProofOfStake())
-        pindexNew->SetProofOfStake();
+    pindexNew->SetProofOfStake();
     pindexNew->nTx = block.vtx.size();
     pindexNew->nChainTx = 0;
     pindexNew->nFile = pos.nFile;
