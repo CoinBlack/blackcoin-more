@@ -5,7 +5,7 @@ Below are some notes on how to build Blackcoin More for Windows.
 
 The options known to work for building Blackcoin More on Windows are:
 
-* On Linux, using the [Mingw-w64](https://mingw-w64.org/doku.php) cross compiler tool chain. Ubuntu Bionic 18.04 is required
+* On Linux, using the [Mingw-w64](https://mingw-w64.org/doku.php) cross compiler tool chain. Ubuntu Focal 20.04 is required
 and is the platform used to build the Blackcoin More Windows release binaries.
 * On Windows, using [Windows
 Subsystem for Linux (WSL)](https://docs.microsoft.com/windows/wsl/about) and the Mingw-w64 cross compiler tool chain.
@@ -38,10 +38,10 @@ To install WSL on Windows 10 with Fall Creators Update installed (version >= 162
   * Enable 'Windows Subsystem for Linux'
   * Click 'OK' and restart if necessary
 2. Install Ubuntu
-  * Open Microsoft Store and search for "Ubuntu 18.04" or use [this link](https://www.microsoft.com/store/productId/9N9TNGVNDL3Q)
+  * Open Microsoft Store and search for "Ubuntu 20.04" or use [this link](https://www.microsoft.com/store/productId/9N9TNGVNDL3Q)
   * Click Install
 3. Complete Installation
-  * Open a cmd prompt and type "Ubuntu1804"
+  * Open a cmd prompt and type "Ubuntu2004"
   * Create a new UNIX user account (this is a separate account from your Windows account)
 
 After the bash shell is active, you can follow the instructions below, starting
@@ -59,7 +59,7 @@ First, install the general dependencies:
 
     sudo apt update
     sudo apt upgrade
-    sudo apt install build-essential libtool autotools-dev automake pkg-config bsdmainutils curl git
+    sudo apt install build-essential libtool autotools-dev automake cmake pkg-config bsdmainutils curl git
 
 A host toolchain (`build-essential`) is necessary because some dependency
 packages need to build host utilities that are used in the build process.
@@ -72,7 +72,7 @@ If you want to build the windows installer with `make deploy` you need [NSIS](ht
 
 Acquire the source in the usual way:
 
-    https://gitlab.com/blackcoin/blackcoin-more.git
+    git clone https://gitlab.com/blackcoin/blackcoin-more.git
     cd blackcoin-more
 
 ## Building for 64-bit Windows
@@ -81,9 +81,26 @@ The first step is to install the mingw-w64 cross-compilation tool chain:
 
     sudo apt install g++-mingw-w64-x86-64
 
-Ubuntu Bionic 18.04 <sup>[1](#footnote1)</sup>:
+Next, set the default `mingw32 g++` compiler option to POSIX<sup>[1](#footnote1)</sup>:
 
-    sudo update-alternatives --config x86_64-w64-mingw32-g++ # Set the default mingw32 g++ compiler option to posix.
+```
+sudo update-alternatives --config x86_64-w64-mingw32-g++
+```
+
+After running the above command, you should see output similar to that below.
+Choose the option that ends with `posix`.
+
+```
+There are 2 choices for the alternative x86_64-w64-mingw32-g++ (providing /usr/bin/x86_64-w64-mingw32-g++).
+
+  Selection    Path                                   Priority   Status
+------------------------------------------------------------
+  0            /usr/bin/x86_64-w64-mingw32-g++-win32   60        auto mode
+* 1            /usr/bin/x86_64-w64-mingw32-g++-posix   30        manual mode
+  2            /usr/bin/x86_64-w64-mingw32-g++-win32   60        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number:
+```
 
 Once the toolchain is installed the build steps are common:
 
@@ -105,7 +122,7 @@ Build using:
     cd ..
     ./autogen.sh
     CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/
-    make
+    make # use "-j N" for N parallel jobs
     sudo bash -c "echo 1 > /proc/sys/fs/binfmt_misc/status" # Enable WSL support for Win32 applications.
 
 ## Depends system

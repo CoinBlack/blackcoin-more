@@ -5,6 +5,7 @@ dnl file COPYING or http://www.opensource.org/licenses/mit-license.php.
 AC_DEFUN([BITCOIN_FIND_BDB62],[
   AC_ARG_VAR(BDB_CFLAGS, [C compiler flags for BerkeleyDB, bypasses autodetection])
   AC_ARG_VAR(BDB_LIBS, [Linker flags for BerkeleyDB, bypasses autodetection])
+
   if test "x$use_bdb" = "xno"; then
     use_bdb=no
   elif test "x$BDB_CFLAGS" = "x"; then
@@ -13,7 +14,7 @@ AC_DEFUN([BITCOIN_FIND_BDB62],[
     bdbpath=X
     bdb62path=X
     bdbdirlist=
-    for _vn in 6.2 62 6 5 5.3 ''; do
+    for _vn in 4.8 48 4 5 5.3 62 6.2''; do
       for _pfx in b lib ''; do
         bdbdirlist="$bdbdirlist ${_pfx}db${_vn}"
       done
@@ -23,8 +24,8 @@ AC_DEFUN([BITCOIN_FIND_BDB62],[
       AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
         #include <${searchpath}db_cxx.h>
       ]],[[
-        #if !((DB_VERSION_MAJOR == 6 && DB_VERSION_MINOR >= 2) || DB_VERSION_MAJOR < 6 || DB_VERSION_MAJOR > 6)
-          #error "failed to find bdb 6.2+"
+        #if !((DB_VERSION_MAJOR == 4 && DB_VERSION_MINOR >= 8) || DB_VERSION_MAJOR > 4)
+          #error "failed to find bdb 4.8+"
         #endif
       ]])],[
         if test "x$bdbpath" = "xX"; then
@@ -57,7 +58,7 @@ AC_DEFUN([BITCOIN_FIND_BDB62],[
       ])
       use_bdb=yes
     else
-      BITCOIN_SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdb48path}],db_cxx)
+      BITCOIN_SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdb62path}],db_cxx)
       bdbpath="${bdb62path}"
       use_bdb=yes
     fi
@@ -65,11 +66,12 @@ AC_DEFUN([BITCOIN_FIND_BDB62],[
     BDB_CPPFLAGS=${BDB_CFLAGS}
   fi
   AC_SUBST(BDB_CPPFLAGS)
+
   if test "x$use_bdb" = "xno"; then
     use_bdb=no
   elif test "x$BDB_LIBS" = "x"; then
     # TODO: Ideally this could find the library version and make sure it matches the headers being used
-    for searchlib in db_cxx db_cxx-6.2 db_cxx-5.3 db6_cxx db5_cxx; do
+    for searchlib in db_cxx-6.2 db_cxx db6_cxx; do
       AC_CHECK_LIB([$searchlib],[main],[
         BDB_LIBS="-l${searchlib}"
         break

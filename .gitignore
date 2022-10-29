@@ -2,17 +2,17 @@
 
 *.exe
 *.pdb
-src/bitcoin
-src/bitcoind
-src/bitcoin-cli
-src/bitcoin-gui
-src/bitcoin-node
-src/bitcoin-tx
-src/bitcoin-util
-src/bitcoin-wallet
+src/blackmore
+src/blackmored
+src/blackmore-cli
+src/blackmore-gui
+src/blackmore-node
+src/blackmore-tx
+src/blackmore-util
+src/blackmore-wallet
 src/test/fuzz/fuzz
-src/test/test_bitcoin
-src/qt/test/test_bitcoin-qt
+src/test/test_blackmore
+src/qt/test/test_blackmore-qt
 
 # autoreconf
 Makefile.in
@@ -51,11 +51,11 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
-src/qt/bitcoin-qt.config
-src/qt/bitcoin-qt.creator
-src/qt/bitcoin-qt.creator.user
-src/qt/bitcoin-qt.files
-src/qt/bitcoin-qt.includes
+src/qt/blackmore-qt.config
+src/qt/blackmore-qt.creator
+src/qt/blackmore-qt.creator.user
+src/qt/blackmore-qt.files
+src/qt/blackmore-qt.includes
 
 .deps
 .dirstamp
@@ -93,8 +93,8 @@ src/qt/bitcoin-qt.includes
 *.qm
 Makefile
 !depends/Makefile
-src/qt/bitcoin-qt
-Bitcoin-Qt.app
+src/qt/blackmore-qt
+Blackmore-Qt.app
 background.tiff*
 
 # Qt Creator
@@ -102,7 +102,8 @@ Makefile.am.user
 
 # Unit-tests
 Makefile.test
-bitcoin-qt_test
+blackmore-qt_test
+src/test/buildenv.py
 
 # Resources cpp
 qrc_*.cpp
@@ -140,8 +141,8 @@ test/.mypy_cache/
 libbitcoinconsensus.pc
 contrib/devtools/split-debug.sh
 
-# Output from running db4 installation
-db4/
+# Output from running db62 installation
+db62/
 
 # clang-check
 *.plist
@@ -152,34 +153,6 @@ dist/
 
 /guix-build-*
 
-# Blackcoin More
-src/blackmore
-src/blackmored
-src/blackmore-cli
-src/blackmore-tx
-src/test/test_blackmore
-src/qt/blackmore-qt_test
-src/qt/test/test_blackmore-qt
-qa/pull-tester/run-bitcoind-for-test.sh
-qa/pull-tester/tests_config.py
-
-
-#Visual Studio
+# Visual Studio
 .vscode/*
 .vs/*
-
-# Output from running db6 installation
-db6/
-
-# Unit-tests
-
-src/test/buildenv.py
-
-# Compilation and Qt preprocessor part
-src/qt/blackmore-qt
-Blackmore-Qt.app
-src/qt/blackmore-qt.config
-src/qt/blackmore-qt.creator
-src/qt/blackmore-qt.creator.user
-src/qt/blackmore-qt.files
-src/qt/blackmore-qt.includes

@@ -1,11 +1,11 @@
 # It is not recommended to modify this file in-place, because it will
 # be overwritten during package upgrades. If you want to add further
 # options or overwrite existing ones then use
-# $ systemctl edit blackmored.service
+# $ systemctl edit bitcoind.service
 # See "man systemd.service" for details.
 
 # Note that almost all daemon options could be specified in
-# /etc/blackcoin/blackcoin.conf, but keep in mind those explicitly
+# /etc/bitcoin/bitcoin.conf, but keep in mind those explicitly
 # specified as arguments in ExecStart= will override those in the
 # config file.
 
@@ -20,12 +20,12 @@ Wants=network-online.target
 [Service]
 ExecStart=/usr/bin/blackmored -daemonwait \
                             -pid=/run/blackmored/blackmored.pid \
-                            -conf=/etc/blackcoin/blackcoin.conf \
+                            -conf=/etc/blackmore/blackmore.conf \
                             -datadir=/var/lib/blackmored
 
 # Make sure the config directory is readable by the service user
 PermissionsStartOnly=true
-ExecStartPre=/bin/chgrp blackcoin /etc/blackcoin
+ExecStartPre=/bin/chgrp blackcoin /etc/blackmore
 
 # Process management
 ####################
@@ -47,8 +47,8 @@ Group=blackcoin
 RuntimeDirectory=blackmored
 RuntimeDirectoryMode=0710
 
-# /etc/blackcoin
-ConfigurationDirectory=blackcoin
+# /etc/blackmore
+ConfigurationDirectory=blackmore
 ConfigurationDirectoryMode=0710
 
 # /var/lib/blackmored

@@ -1,4 +1,11 @@
 # Changelog
+
+## 22.x.0 (?)
+- ?
+
+## 13.2.0 (?)
+- ?
+
 ## v2.13.2.9 (2022-02-24)
 - Updated leveldb, which should resolve the "missing UTXO" staking issue
 - Updated dependencies and ported build system from Bitcoin Core 0.20+
@@ -59,7 +66,6 @@
 - Disabled BIP 152
 
 ## v2.13.2.1 (2018-12-03)
-
 - Updated to Bitcoin Core 0.13.2
 - Some small fixes and updates from Bitcoin Core 0.14.x branch
 - Fixed testnet and regtest
@@ -77,7 +83,6 @@
 - Proof-of-stake related code optimized and refactored
 
 ## v2.12.1.1 (2018-10-01)
-
 - Rebranded to Blackcoin More
 - Some small fixes and updates from Bitcoin Core 0.13.x branch
 - Added use available balance button in send coins dialog (backport of Core's PR11316)

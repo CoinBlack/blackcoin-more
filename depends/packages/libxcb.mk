@@ -3,7 +3,7 @@ $(package)_version=1.14
 $(package)_download_path=https://xcb.freedesktop.org/dist
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
 $(package)_sha256_hash=2c7fcddd1da34d9b238c9caeda20d3bd7486456fc50b3cc6567185dbd5b0ad02
-$(package)_dependencies=xcb_proto libXau xproto
+$(package)_dependencies=xcb_proto libXau
 
 define $(package)_set_vars
 $(package)_config_opts=--disable-static
@@ -27,13 +27,8 @@ define $(package)_preprocess_cmds
   sed "s/pthread-stubs//" -i configure
 endef
 
-# Don't install xcb headers to the default path in order to work around a qt
-# build issue: https://bugreports.qt.io/browse/QTBUG-34748
-# When using qt's internal libxcb, it may end up finding the real headers in
-# depends staging. Use a non-default path to avoid that.
-
 define $(package)_config_cmds
-  $($(package)_autoconf) --includedir=$(host_prefix)/include/xcb-shared
+  $($(package)_autoconf)
 endef
 
 define $(package)_build_cmds
@@ -45,5 +40,5 @@ define $(package)_stage_cmds
 endef
 
 define $(package)_postprocess_cmds
-  rm -rf share/man share/doc
+  rm -rf share lib/*.la
 endef

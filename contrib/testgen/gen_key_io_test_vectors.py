@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2012-2018 The Bitcoin Core developers
+# Copyright (c) 2012-2020 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -13,19 +13,18 @@ Usage:
 # Released under MIT License
 import os
 from itertools import islice
-from base58 import b58encode_chk, b58decode_chk, b58chars, convertbits, CHARSET, Encoding
+from base58 import b58encode_chk, b58decode_chk, b58chars
 import random
+from segwit_addr import bech32_encode, decode_segwit_address, convertbits, CHARSET, Encoding
 
 # key types
-PUBKEY_ADDRESS = 48
+PUBKEY_ADDRESS = 0
 SCRIPT_ADDRESS = 5
-SCRIPT_ADDRESS2 = 50
 PUBKEY_ADDRESS_TEST = 111
 SCRIPT_ADDRESS_TEST = 196
-SCRIPT_ADDRESS_TEST2 = 58
 PUBKEY_ADDRESS_REGTEST = 111
 SCRIPT_ADDRESS_REGTEST = 196
-PRIVKEY = 176
+PRIVKEY = 128
 PRIVKEY_TEST = 239
 PRIVKEY_REGTEST = 239
 
@@ -55,10 +54,8 @@ templates = [
   #                                  None = N/A
   ((PUBKEY_ADDRESS,),         20, (),   (False, 'main',    None,  None), pubkey_prefix, pubkey_suffix),
   ((SCRIPT_ADDRESS,),         20, (),   (False, 'main',    None,  None), script_prefix, script_suffix),
-  ((SCRIPT_ADDRESS2,),        20, (),   (False, 'main',    None,  None), script_prefix, script_suffix),
   ((PUBKEY_ADDRESS_TEST,),    20, (),   (False, 'test',    None,  None), pubkey_prefix, pubkey_suffix),
   ((SCRIPT_ADDRESS_TEST,),    20, (),   (False, 'test',    None,  None), script_prefix, script_suffix),
-  ((SCRIPT_ADDRESS_TEST2,),   20, (),   (False, 'test',    None,  None), script_prefix, script_suffix),
   ((PUBKEY_ADDRESS_TEST,),    20, (),   (False, 'signet',  None,  None), pubkey_prefix, pubkey_suffix),
   ((SCRIPT_ADDRESS_TEST,),    20, (),   (False, 'signet',  None,  None), script_prefix, script_suffix),
   ((PUBKEY_ADDRESS_REGTEST,), 20, (),   (False, 'regtest', None,  None), pubkey_prefix, pubkey_suffix),
@@ -75,43 +72,65 @@ templates = [
 # templates for valid bech32 sequences
 bech32_templates = [
   # hrp, version, witprog_size, metadata, encoding, output_prefix
-  ('ltc',    0, 20, (False, 'main',    None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('ltc',    0, 32, (False, 'main',    None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('ltc',    1, 32, (False, 'main',    None, True), Encoding.BECH32M, p2tr_prefix),
-  ('ltc',    2,  2, (False, 'main',    None, True), Encoding.BECH32M, (OP_2, 2)),
-  ('tltc',    0, 20, (False, 'test',    None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('tltc',    0, 32, (False, 'test',    None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('tltc',    1, 32, (False, 'test',    None, True), Encoding.BECH32M, p2tr_prefix),
-  ('tltc',    3, 16, (False, 'test',    None, True), Encoding.BECH32M, (OP_3, 16)),
-  ('tltc',    0, 20, (False, 'signet',  None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('tltc',    0, 32, (False, 'signet',  None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('tltc',    1, 32, (False, 'signet',  None, True), Encoding.BECH32M, p2tr_prefix),
-  ('tltc',    3, 32, (False, 'signet',  None, True), Encoding.BECH32M, (OP_3, 32)),
-  ('rltc',  0, 20, (False, 'regtest', None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('rltc',  0, 32, (False, 'regtest', None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('rltc',  1, 32, (False, 'regtest', None, True), Encoding.BECH32M, p2tr_prefix),
-  ('rltc', 16, 40, (False, 'regtest', None, True), Encoding.BECH32M, (OP_16, 40))
+  ('bc',    0, 20, (False, 'main',    None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('bc',    0, 32, (False, 'main',    None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('bc',    1, 32, (False, 'main',    None, True), Encoding.BECH32M, p2tr_prefix),
+  ('bc',    2,  2, (False, 'main',    None, True), Encoding.BECH32M, (OP_2, 2)),
+  ('tb',    0, 20, (False, 'test',    None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('tb',    0, 32, (False, 'test',    None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('tb',    1, 32, (False, 'test',    None, True), Encoding.BECH32M, p2tr_prefix),
+  ('tb',    3, 16, (False, 'test',    None, True), Encoding.BECH32M, (OP_3, 16)),
+  ('tb',    0, 20, (False, 'signet',  None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('tb',    0, 32, (False, 'signet',  None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('tb',    1, 32, (False, 'signet',  None, True), Encoding.BECH32M, p2tr_prefix),
+  ('tb',    3, 32, (False, 'signet',  None, True), Encoding.BECH32M, (OP_3, 32)),
+  ('bcrt',  0, 20, (False, 'regtest', None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('bcrt',  0, 32, (False, 'regtest', None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('bcrt',  1, 32, (False, 'regtest', None, True), Encoding.BECH32M, p2tr_prefix),
+  ('bcrt', 16, 40, (False, 'regtest', None, True), Encoding.BECH32M, (OP_16, 40))
 ]
 # templates for invalid bech32 sequences
 bech32_ng_templates = [
   # hrp, version, witprog_size, encoding, invalid_bech32, invalid_checksum, invalid_char
   ('tc',    0, 20, Encoding.BECH32,  False, False, False),
   ('bt',    1, 32, Encoding.BECH32M, False, False, False),
-  ('tltc',   17, 32, Encoding.BECH32M, False, False, False),
-  ('rltc',  3,  1, Encoding.BECH32M, False, False, False),
-  ('ltc',   15, 41, Encoding.BECH32M, False, False, False),
-  ('tltc',    0, 16, Encoding.BECH32,  False, False, False),
-  ('rltc',  0, 32, Encoding.BECH32,  True,  False, False),
-  ('ltc',    0, 16, Encoding.BECH32,  True,  False, False),
-  ('tltc',    0, 32, Encoding.BECH32,  False, True,  False),
-  ('rltc',  0, 20, Encoding.BECH32,  False, False, True),
-  ('ltc',    0, 20, Encoding.BECH32M, False, False, False),
-  ('tltc',    0, 32, Encoding.BECH32M, False, False, False),
-  ('rltc',  0, 20, Encoding.BECH32M, False, False, False),
-  ('ltc',    1, 32, Encoding.BECH32,  False, False, False),
-  ('tltc',    2, 16, Encoding.BECH32,  False, False, False),
-  ('rltc', 16, 20, Encoding.BECH32,  False, False, False),
+  ('tb',   17, 32, Encoding.BECH32M, False, False, False),
+  ('bcrt',  3,  1, Encoding.BECH32M, False, False, False),
+  ('bc',   15, 41, Encoding.BECH32M, False, False, False),
+  ('tb',    0, 16, Encoding.BECH32,  False, False, False),
+  ('bcrt',  0, 32, Encoding.BECH32,  True,  False, False),
+  ('bc',    0, 16, Encoding.BECH32,  True,  False, False),
+  ('tb',    0, 32, Encoding.BECH32,  False, True,  False),
+  ('bcrt',  0, 20, Encoding.BECH32,  False, False, True),
+  ('bc',    0, 20, Encoding.BECH32M, False, False, False),
+  ('tb',    0, 32, Encoding.BECH32M, False, False, False),
+  ('bcrt',  0, 20, Encoding.BECH32M, False, False, False),
+  ('bc',    1, 32, Encoding.BECH32,  False, False, False),
+  ('tb',    2, 16, Encoding.BECH32,  False, False, False),
+  ('bcrt', 16, 20, Encoding.BECH32,  False, False, False),
 ]
+
+def is_valid(v):
+    '''Check vector v for validity'''
+    if len(set(v) - set(b58chars)) > 0:
+        return is_valid_bech32(v)
+    result = b58decode_chk(v)
+    if result is None:
+        return is_valid_bech32(v)
+    for template in templates:
+        prefix = bytearray(template[0])
+        suffix = bytearray(template[2])
+        if result.startswith(prefix) and result.endswith(suffix):
+            if (len(result) - len(prefix) - len(suffix)) == template[1]:
+                return True
+    return is_valid_bech32(v)
+
+def is_valid_bech32(v):
+    '''Check vector v for bech32 validity'''
+    for hrp in ['bc', 'tb', 'bcrt']:
+        if decode_segwit_address(hrp, v) != (None, None):
+            return True
+    return False
 
 def gen_valid_base58_vector(template):
     '''Generate valid base58 vector'''
@@ -122,6 +141,28 @@ def gen_valid_base58_vector(template):
     dst_suffix = bytearray(template[5])
     rv = b58encode_chk(prefix + payload + suffix)
     return rv, dst_prefix + payload + dst_suffix
+
+def gen_valid_bech32_vector(template):
+    '''Generate valid bech32 vector'''
+    hrp = template[0]
+    witver = template[1]
+    witprog = bytearray(os.urandom(template[2]))
+    encoding = template[4]
+    dst_prefix = bytearray(template[5])
+    rv = bech32_encode(encoding, hrp, [witver] + convertbits(witprog, 8, 5))
+    return rv, dst_prefix + witprog
+
+def gen_valid_vectors():
+    '''Generate valid test vectors'''
+    glist = [gen_valid_base58_vector, gen_valid_bech32_vector]
+    tlist = [templates, bech32_templates]
+    while True:
+        for template, valid_vector_generator in [(t, g) for g, l in zip(glist, tlist) for t in l]:
+            rv, payload = valid_vector_generator(template)
+            assert is_valid(rv)
+            metadata = {x: y for x, y in zip(metadata_keys,template[3]) if y is not None}
+            hexrepr = payload.hex()
+            yield (rv, hexrepr, metadata)
 
 def gen_invalid_base58_vector(template):
     '''Generate possibly invalid vector'''
@@ -168,6 +209,17 @@ def gen_invalid_bech32_vector(template):
     witprog = bytearray(os.urandom(template[2]))
     encoding = template[3]
 
+    if no_data:
+        rv = bech32_encode(encoding, hrp, [])
+    else:
+        data = [witver] + convertbits(witprog, 8, 5)
+        if template[4] and not no_data:
+            if template[2] % 5 in {2, 4}:
+                data[-1] |= 1
+            else:
+                data.append(0)
+        rv = bech32_encode(encoding, hrp, data)
+
     if template[5]:
         i = len(rv) - random.randrange(1, 7)
         rv = rv[:i] + random.choice(CHARSET.replace(rv[i], '')) + rv[i + 1:]
@@ -183,6 +235,32 @@ def gen_invalid_bech32_vector(template):
 def randbool(p = 0.5):
     '''Return True with P(p)'''
     return random.random() < p
+
+def gen_invalid_vectors():
+    '''Generate invalid test vectors'''
+    # start with some manual edge-cases
+    yield "",
+    yield "x",
+    glist = [gen_invalid_base58_vector, gen_invalid_bech32_vector]
+    tlist = [templates, bech32_ng_templates]
+    while True:
+        for template, invalid_vector_generator in [(t, g) for g, l in zip(glist, tlist) for t in l]:
+            val = invalid_vector_generator(template)
+            if not is_valid(val):
+                yield val,
+
+if __name__ == '__main__':
+    import sys
+    import json
+    iters = {'valid':gen_valid_vectors, 'invalid':gen_invalid_vectors}
+    try:
+        uiter = iters[sys.argv[1]]
+    except IndexError:
+        uiter = gen_valid_vectors
+    try:
+        count = int(sys.argv[2])
+    except IndexError:
+        count = 0
 
     data = list(islice(uiter(), count))
     json.dump(data, sys.stdout, sort_keys=True, indent=4)

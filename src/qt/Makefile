@@ -7,3 +7,5 @@ check: FORCE
 	$(MAKE) -C .. test_blackmore_qt_check
 blackmore-qt blackmore-qt.exe: FORCE
 	 $(MAKE) -C .. blackmore_qt
+apk: FORCE
+	$(MAKE) -C .. blackmore_qt_apk

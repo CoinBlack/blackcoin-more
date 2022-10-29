@@ -3,7 +3,8 @@
 The file `keys.txt` contains fingerprints of the public keys of builders and
 active developers.
 
-The associated keys are mainly used to sign git commits
+The associated keys are mainly used to sign git commits or the build results
+of Guix builds.
 
 The most recent version of each pgp key can be found on most pgp key servers.
 
@@ -19,5 +20,8 @@ To fetch keys of builders and active developers, feed the list of fingerprints
 of the primary keys into gpg:
 
 ```sh
-while read fingerprint keyholder_name; do gpg --keyserver hkps://keys.openpgp.org --recv-keys ${fingerprint}; done < ./keys.txt
+while read fingerprint keyholder_name; do gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys ${fingerprint}; done < ./keys.txt
 ```
+
+Add your key to the list if you provided Guix attestations for two major or
+minor releases of Bitcoin Core.

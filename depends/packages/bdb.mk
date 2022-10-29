@@ -4,6 +4,7 @@ $(package)_download_path=https://gentoo.osuosl.org/distfiles/
 $(package)_file_name=db-$($(package)_version).tar.gz
 $(package)_sha256_hash=99ccd944ffcccc88c0f404b4f3d8cb10747e1e3dfe9ec566f518725f986ca2fd
 $(package)_build_subdir=build_unix
+$(package)_patches=clang_cxx_11.patch
 
 define $(package)_set_vars
 $(package)_config_opts=--disable-shared --enable-cxx --disable-replication --enable-option-checking

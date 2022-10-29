@@ -15,8 +15,8 @@ assignees: ''
 
 #### Useful skills:
 
-<!-- (For example, “C++11 std::thread”, “Qt5 GUI and async GUI design” or “basic understanding of Blackcoin staking and the Blackcoin More RPC interface”.) -->
+<!-- (For example, “C++11 std::thread”, “Qt5 GUI and async GUI design” or “basic understanding of Blackcoin and the Blackcoin More RPC interface”.) -->
 
 #### Want to work on this issue?
 
-For guidance on contributing, please read [CONTRIBUTING.md](https://gitlab.com/blackcoin/blackcoin-more/blob/master/CONTRIBUTING.md) before opening your pull request.
+For guidance on contributing, please read [CONTRIBUTING.md](https://gitlab.com/blackcoin/blackcoin-more/-/blob/master/CONTRIBUTING.md) before opening your pull request.

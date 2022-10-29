@@ -13,10 +13,7 @@ class URITests : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void uriTestsBase58();
-    void uriTestsCashAddr();
-    void uriTestFormatURI();
-    void uriTestScheme();
+    void uriTests();
 };
 
 #endif // BITCOIN_QT_TEST_URITESTS_H

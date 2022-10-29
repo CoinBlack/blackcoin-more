@@ -1,113 +1,228 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2009-2020 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "addrdb.h"
+#include <addrdb.h>
 
-#include "addrman.h"
-#include "chainparams.h"
-#include "clientversion.h"
-#include "hash.h"
-#include "random.h"
-#include "streams.h"
-#include "tinyformat.h"
-#include "util.h"
+#include <addrman.h>
+#include <chainparams.h>
+#include <clientversion.h>
+#include <cstdint>
+#include <hash.h>
+#include <logging/timer.h>
+#include <netbase.h>
+#include <random.h>
+#include <streams.h>
+#include <tinyformat.h>
+#include <univalue.h>
+#include <util/settings.h>
+#include <util/system.h>
 
-#include <boost/filesystem.hpp>
-
-CBanDB::CBanDB()
+CBanEntry::CBanEntry(const UniValue& json)
+    : nVersion(json["version"].get_int()), nCreateTime(json["ban_created"].get_int64()),
+      nBanUntil(json["banned_until"].get_int64())
 {
-    pathBanlist = GetDataDir() / "banlist.dat";
 }
 
-bool CBanDB::Write(const banmap_t& banSet)
+UniValue CBanEntry::ToJson() const
 {
-    // Generate random temporary filename
-    unsigned short randv = 0;
-    GetRandBytes((unsigned char*)&randv, sizeof(randv));
-    std::string tmpfn = strprintf("banlist.dat.%04x", randv);
+    UniValue json(UniValue::VOBJ);
+    json.pushKV("version", nVersion);
+    json.pushKV("ban_created", nCreateTime);
+    json.pushKV("banned_until", nBanUntil);
+    return json;
+}
 
-    // serialize banlist, checksum data up to that point, then append csum
-    CDataStream ssBanlist(SER_DISK, CLIENT_VERSION);
-    ssBanlist << FLATDATA(Params().MessageStart());
-    ssBanlist << banSet;
-    uint256 hash = Hash(ssBanlist.begin(), ssBanlist.end());
-    ssBanlist << hash;
+namespace {
 
-    // open temp output file, and associate with CAutoFile
-    boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
-    FILE *file = fopen(pathTmp.string().c_str(), "wb");
-    CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
-    if (fileout.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathTmp.string());
+static const char* BANMAN_JSON_ADDR_KEY = "address";
 
+/**
+ * Convert a `banmap_t` object to a JSON array.
+ * @param[in] bans Bans list to convert.
+ * @return a JSON array, similar to the one returned by the `listbanned` RPC. Suitable for
+ * passing to `BanMapFromJson()`.
+ */
+UniValue BanMapToJson(const banmap_t& bans)
+{
+    UniValue bans_json(UniValue::VARR);
+    for (const auto& it : bans) {
+        const auto& address = it.first;
+        const auto& ban_entry = it.second;
+        UniValue j = ban_entry.ToJson();
+        j.pushKV(BANMAN_JSON_ADDR_KEY, address.ToString());
+        bans_json.push_back(j);
+    }
+    return bans_json;
+}
+
+/**
+ * Convert a JSON array to a `banmap_t` object.
+ * @param[in] bans_json JSON to convert, must be as returned by `BanMapToJson()`.
+ * @param[out] bans Bans list to create from the JSON.
+ * @throws std::runtime_error if the JSON does not have the expected fields or they contain
+ * unparsable values.
+ */
+void BanMapFromJson(const UniValue& bans_json, banmap_t& bans)
+{
+    for (const auto& ban_entry_json : bans_json.getValues()) {
+        CSubNet subnet;
+        const auto& subnet_str = ban_entry_json[BANMAN_JSON_ADDR_KEY].get_str();
+        if (!LookupSubNet(subnet_str, subnet)) {
+            throw std::runtime_error(
+                strprintf("Cannot parse banned address or subnet: %s", subnet_str));
+        }
+        bans.insert_or_assign(subnet, CBanEntry{ban_entry_json});
+    }
+}
+
+template <typename Stream, typename Data>
+bool SerializeDB(Stream& stream, const Data& data)
+{
     // Write and commit header, data
     try {
-        fileout << ssBanlist;
-    }
-    catch (const std::exception& e) {
+        CHashWriter hasher(stream.GetType(), stream.GetVersion());
+        stream << Params().MessageStart() << data;
+        hasher << Params().MessageStart() << data;
+        stream << hasher.GetHash();
+    } catch (const std::exception& e) {
         return error("%s: Serialize or I/O error - %s", __func__, e.what());
     }
-    FileCommit(fileout.Get());
-    fileout.fclose();
-
-    // replace existing banlist.dat, if any, with new banlist.dat.XXXX
-    if (!RenameOver(pathTmp, pathBanlist))
-        return error("%s: Rename-into-place failed", __func__);
 
     return true;
 }
 
-bool CBanDB::Read(banmap_t& banSet)
+template <typename Data>
+bool SerializeFileDB(const std::string& prefix, const fs::path& path, const Data& data, int version)
 {
-    // open input file, and associate with CAutoFile
-    FILE *file = fopen(pathBanlist.string().c_str(), "rb");
-    CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
-    if (filein.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathBanlist.string());
+    // Generate random temporary filename
+    uint16_t randv = 0;
+    GetRandBytes((unsigned char*)&randv, sizeof(randv));
+    std::string tmpfn = strprintf("%s.%04x", prefix, randv);
 
-    // use file size to size memory buffer
-    uint64_t fileSize = boost::filesystem::file_size(pathBanlist);
-    uint64_t dataSize = 0;
-    // Don't try to resize to a negative number if file is small
-    if (fileSize >= sizeof(uint256))
-        dataSize = fileSize - sizeof(uint256);
-    std::vector<unsigned char> vchData;
-    vchData.resize(dataSize);
-    uint256 hashIn;
-
-    // read data and checksum from file
-    try {
-        filein.read((char *)&vchData[0], dataSize);
-        filein >> hashIn;
+    // open temp output file, and associate with CAutoFile
+    fs::path pathTmp = gArgs.GetDataDirNet() / tmpfn;
+    FILE *file = fsbridge::fopen(pathTmp, "wb");
+    CAutoFile fileout(file, SER_DISK, version);
+    if (fileout.IsNull()) {
+        fileout.fclose();
+        remove(pathTmp);
+        return error("%s: Failed to open file %s", __func__, pathTmp.string());
     }
-    catch (const std::exception& e) {
-        return error("%s: Deserialize or I/O error - %s", __func__, e.what());
+
+    // Serialize
+    if (!SerializeDB(fileout, data)) {
+        fileout.fclose();
+        remove(pathTmp);
+        return false;
     }
-    filein.fclose();
+    if (!FileCommit(fileout.Get())) {
+        fileout.fclose();
+        remove(pathTmp);
+        return error("%s: Failed to flush file %s", __func__, pathTmp.string());
+    }
+    fileout.fclose();
 
-    CDataStream ssBanlist(vchData, SER_DISK, CLIENT_VERSION);
+    // replace existing file, if any, with new file
+    if (!RenameOver(pathTmp, path)) {
+        remove(pathTmp);
+        return error("%s: Rename-into-place failed", __func__);
+    }
 
-    // verify stored checksum matches input data
-    uint256 hashTmp = Hash(ssBanlist.begin(), ssBanlist.end());
-    if (hashIn != hashTmp)
-        return error("%s: Checksum mismatch, data corrupted", __func__);
+    return true;
+}
 
-    unsigned char pchMsgTmp[4];
+template <typename Stream, typename Data>
+bool DeserializeDB(Stream& stream, Data& data, bool fCheckSum = true)
+{
     try {
+        CHashVerifier<Stream> verifier(&stream);
         // de-serialize file header (network specific magic number) and ..
-        ssBanlist >> FLATDATA(pchMsgTmp);
-
+        unsigned char pchMsgTmp[4];
+        verifier >> pchMsgTmp;
         // ... verify the network matches ours
         if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp)))
             return error("%s: Invalid network magic number", __func__);
 
-        // de-serialize address data into one CAddrMan object
-        ssBanlist >> banSet;
+        // de-serialize data
+        verifier >> data;
+
+        // verify checksum
+        if (fCheckSum) {
+            uint256 hashTmp;
+            stream >> hashTmp;
+            if (hashTmp != verifier.GetHash()) {
+                return error("%s: Checksum mismatch, data corrupted", __func__);
+            }
+        }
     }
     catch (const std::exception& e) {
         return error("%s: Deserialize or I/O error - %s", __func__, e.what());
+    }
+
+    return true;
+}
+
+template <typename Data>
+bool DeserializeFileDB(const fs::path& path, Data& data, int version)
+{
+    // open input file, and associate with CAutoFile
+    FILE* file = fsbridge::fopen(path, "rb");
+    CAutoFile filein(file, SER_DISK, version);
+    if (filein.IsNull()) {
+        LogPrintf("Missing or invalid file %s\n", path.string());
+        return false;
+    }
+    return DeserializeDB(filein, data);
+}
+} // namespace
+
+CBanDB::CBanDB(fs::path ban_list_path)
+    : m_banlist_dat(ban_list_path.string() + ".dat"),
+      m_banlist_json(ban_list_path.string() + ".json")
+{
+}
+
+bool CBanDB::Write(const banmap_t& banSet)
+{
+    std::vector<std::string> errors;
+    if (util::WriteSettings(m_banlist_json, {{JSON_KEY, BanMapToJson(banSet)}}, errors)) {
+        return true;
+    }
+
+    for (const auto& err : errors) {
+        error("%s", err);
+    }
+    return false;
+}
+
+bool CBanDB::Read(banmap_t& banSet, bool& dirty)
+{
+    // If the JSON banlist does not exist, then try to read the non-upgraded banlist.dat.
+    if (!fs::exists(m_banlist_json)) {
+        // If this succeeds then we need to flush to disk in order to create the JSON banlist.
+        dirty = true;
+        return DeserializeFileDB(m_banlist_dat, banSet, CLIENT_VERSION);
+    }
+
+    dirty = false;
+
+    std::map<std::string, util::SettingsValue> settings;
+    std::vector<std::string> errors;
+
+    if (!util::ReadSettings(m_banlist_json, settings, errors)) {
+        for (const auto& err : errors) {
+            LogPrintf("Cannot load banlist %s: %s\n", m_banlist_json.string(), err);
+        }
+        return false;
+    }
+
+    try {
+        BanMapFromJson(settings[JSON_KEY], banSet);
+    } catch (const std::runtime_error& e) {
+        LogPrintf("Cannot parse banlist %s: %s\n", m_banlist_json.string(), e.what());
+        return false;
     }
 
     return true;
@@ -115,104 +230,44 @@ bool CBanDB::Read(banmap_t& banSet)
 
 CAddrDB::CAddrDB()
 {
-    pathAddr = GetDataDir() / "peers.dat";
+    pathAddr = gArgs.GetDataDirNet() / "peers.dat";
 }
 
 bool CAddrDB::Write(const CAddrMan& addr)
 {
-    // Generate random temporary filename
-    unsigned short randv = 0;
-    GetRandBytes((unsigned char*)&randv, sizeof(randv));
-    std::string tmpfn = strprintf("peers.dat.%04x", randv);
-
-    // serialize addresses, checksum data up to that point, then append csum
-    CDataStream ssPeers(SER_DISK, CLIENT_VERSION);
-    ssPeers << FLATDATA(Params().MessageStart());
-    ssPeers << addr;
-    uint256 hash = Hash(ssPeers.begin(), ssPeers.end());
-    ssPeers << hash;
-
-    // open temp output file, and associate with CAutoFile
-    boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
-    FILE *file = fopen(pathTmp.string().c_str(), "wb");
-    CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
-    if (fileout.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathTmp.string());
-
-    // Write and commit header, data
-    try {
-        fileout << ssPeers;
-    }
-    catch (const std::exception& e) {
-        return error("%s: Serialize or I/O error - %s", __func__, e.what());
-    }
-    FileCommit(fileout.Get());
-    fileout.fclose();
-
-    // replace existing peers.dat, if any, with new peers.dat.XXXX
-    if (!RenameOver(pathTmp, pathAddr))
-        return error("%s: Rename-into-place failed", __func__);
-
-    return true;
+    return SerializeFileDB("peers", pathAddr, addr, CLIENT_VERSION);
 }
 
 bool CAddrDB::Read(CAddrMan& addr)
 {
-    // open input file, and associate with CAutoFile
-    FILE *file = fopen(pathAddr.string().c_str(), "rb");
-    CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
-    if (filein.IsNull())
-        return error("%s: Failed to open file %s", __func__, pathAddr.string());
-
-    // use file size to size memory buffer
-    uint64_t fileSize = boost::filesystem::file_size(pathAddr);
-    uint64_t dataSize = 0;
-    // Don't try to resize to a negative number if file is small
-    if (fileSize >= sizeof(uint256))
-        dataSize = fileSize - sizeof(uint256);
-    std::vector<unsigned char> vchData;
-    vchData.resize(dataSize);
-    uint256 hashIn;
-
-    // read data and checksum from file
-    try {
-        filein.read((char *)&vchData[0], dataSize);
-        filein >> hashIn;
-    }
-    catch (const std::exception& e) {
-        return error("%s: Deserialize or I/O error - %s", __func__, e.what());
-    }
-    filein.fclose();
-
-    CDataStream ssPeers(vchData, SER_DISK, CLIENT_VERSION);
-
-    // verify stored checksum matches input data
-    uint256 hashTmp = Hash(ssPeers.begin(), ssPeers.end());
-    if (hashIn != hashTmp)
-        return error("%s: Checksum mismatch, data corrupted", __func__);
-
-    return Read(addr, ssPeers);
+    return DeserializeFileDB(pathAddr, addr, CLIENT_VERSION);
 }
 
 bool CAddrDB::Read(CAddrMan& addr, CDataStream& ssPeers)
 {
-    unsigned char pchMsgTmp[4];
-    try {
-        // de-serialize file header (network specific magic number) and ..
-        ssPeers >> FLATDATA(pchMsgTmp);
-
-        // ... verify the network matches ours
-        if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp)))
-            return error("%s: Invalid network magic number", __func__);
-
-        // de-serialize address data into one CAddrMan object
-        ssPeers >> addr;
-    }
-    catch (const std::exception& e) {
-        // de-serialization has failed, ensure addrman is left in a clean state
+    bool ret = DeserializeDB(ssPeers, addr, false);
+    if (!ret) {
+        // Ensure addrman is left in a clean state
         addr.Clear();
-        return error("%s: Deserialize or I/O error - %s", __func__, e.what());
+    }
+    return ret;
+}
+
+void DumpAnchors(const fs::path& anchors_db_path, const std::vector<CAddress>& anchors)
+{
+    LOG_TIME_SECONDS(strprintf("Flush %d outbound block-relay-only peer addresses to anchors.dat", anchors.size()));
+    SerializeFileDB("anchors", anchors_db_path, anchors, CLIENT_VERSION | ADDRV2_FORMAT);
+}
+
+std::vector<CAddress> ReadAnchors(const fs::path& anchors_db_path)
+{
+    std::vector<CAddress> anchors;
+    if (DeserializeFileDB(anchors_db_path, anchors, CLIENT_VERSION | ADDRV2_FORMAT)) {
+        LogPrintf("Loaded %i addresses from %s\n", anchors.size(), anchors_db_path.filename());
+    } else {
+        anchors.clear();
     }
 
-    return true;
+    fs::remove(anchors_db_path);
+    return anchors;
 }
