@@ -168,7 +168,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), true);
         CMutableTransaction txCoinStake;
         int64_t nSearchTime = txCoinStake.nTime; // search to current time
-        nSearchTime &= ~Params().GetConsensus().nStakeTimestampMask;
+        nSearchTime &= ~chainparams.GetConsensus().nStakeTimestampMask;
         if (nSearchTime > nLastCoinStakeSearchTime) {
             if (pwallet->CreateCoinStake(pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime /* 1 */ , txCoinStake, nFees)) {
                 if (nSearchTime >= pindexPrev->GetMedianTimePast()+1) {
