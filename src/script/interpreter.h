@@ -339,8 +339,8 @@ bool CheckMinimalPush(const std::vector<unsigned char>& data, opcodetype opcode)
 
 int FindAndDelete(CScript& script, const CScript& b);
 
-bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror = NULL, bool haveHashType = true);
-bool IsDERSignature(const valtype &vchSig, ScriptError* serror = NULL, bool haveHashType = true);
+bool IsLowDERSignature(const valtype &vchSig, ScriptError* serror = nullptr, bool haveHashType = true);
+bool IsDERSignature(const valtype &vchSig, ScriptError* serror = nullptr, bool haveHashType = true);
 bool IsCompressedOrUncompressedPubKey(const valtype &vchPubKey);
 
 #endif // BITCOIN_SCRIPT_INTERPRETER_H

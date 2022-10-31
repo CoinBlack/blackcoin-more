@@ -127,7 +127,7 @@ double GetPoSKernelPS()
     int nStakesHandled = 0, nStakesTime = 0;
 
     CBlockIndex* pindex = pindexBestHeader;
-    CBlockIndex* pindexPrevStake = NULL;
+    CBlockIndex* pindexPrevStake = nullptr;
 
     while (pindex && nStakesHandled < nPoSInterval)
     {

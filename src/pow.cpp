@@ -29,16 +29,16 @@ static arith_uint256 GetTargetLimit(int64_t nTime, const Consensus::Params& para
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const Consensus::Params& params, bool fProofOfStake)
 {
     // Genesis block
-    if (pindexLast == NULL)
+    if (pindexLast == nullptr)
         return UintToArith256(params.powLimit).GetCompact();
 
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
     unsigned int nTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), params, fProofOfStake).GetCompact();
 
-    if (pindexPrev->pprev == NULL)
+    if (pindexPrev->pprev == nullptr)
         return nTargetLimit; // first block
     const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
-    if (pindexPrevPrev->pprev == NULL)
+    if (pindexPrevPrev->pprev == nullptr)
         return nTargetLimit; // second block
 
     // Mindiff for regtest
