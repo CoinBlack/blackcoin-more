@@ -102,6 +102,7 @@ public:
 
     /** Disconnect core signals from GUI client */
     void unsubscribeFromCoreSignals();
+    void stopTimerStakingIcon();
 
     bool isPrivacyModeActivated() const;
 

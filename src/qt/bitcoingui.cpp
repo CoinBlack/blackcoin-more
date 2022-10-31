@@ -246,6 +246,7 @@ BitcoinGUI::~BitcoinGUI()
 {
     // Unsubscribe from notifications from core
     unsubscribeFromCoreSignals();
+    stopTimerStakingIcon();
 
     QSettings settings;
     settings.setValue("MainWindowGeometry", saveGeometry());
@@ -1585,6 +1586,13 @@ void BitcoinGUI::unsubscribeFromCoreSignals()
     // Disconnect signals from client
     m_handler_message_box->disconnect();
     m_handler_question->disconnect();
+}
+
+void BitcoinGUI::stopTimerStakingIcon()
+{
+#ifdef ENABLE_WALLET
+    if (timerStakingIcon) timerStakingIcon->stop();
+#endif // ENABLE_WALLET
 }
 
 bool BitcoinGUI::isPrivacyModeActivated() const
