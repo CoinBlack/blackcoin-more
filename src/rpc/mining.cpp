@@ -474,11 +474,8 @@ static RPCHelpMan getstakinginfo()
                 },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
-
-    NodeContext& node = EnsureAnyNodeContext(request.context);
-
     uint64_t nWeight = 0;
-    uint64_t lastCoinStakeSearchInterval = 0;
+
 #ifdef ENABLE_WALLET
     std::shared_ptr<CWallet> const wallet = GetWalletForJSONRPCRequest(request);
     CWallet* const pwallet = wallet.get();
@@ -487,15 +484,17 @@ static RPCHelpMan getstakinginfo()
     {
         LOCK(pwallet->cs_wallet);
         nWeight = pwallet->GetStakeWeight();
-        lastCoinStakeSearchInterval = pwallet->m_enabled_staking ? nLastCoinStakeSearchInterval : 0;
     }
 #endif
 
-    LOCK(cs_main);
+    NodeContext& node = EnsureAnyNodeContext(request.context);
     const CTxMemPool& mempool = EnsureMemPool(node);
+    ChainstateManager& chainman = EnsureChainman(node);
+    LOCK(cs_main);
+    const CChain& active_chain = chainman.ActiveChain();
 
     uint64_t nNetworkWeight = 1.1429 * GetPoSKernelPS();
-    bool staking = lastCoinStakeSearchInterval && nWeight;
+    bool staking = nLastCoinStakeSearchInterval && nWeight;
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
     int64_t nTargetSpacing = consensusParams.nTargetSpacing;
@@ -506,18 +505,16 @@ static RPCHelpMan getstakinginfo()
     obj.pushKV("enabled", gArgs.GetBoolArg("-staking", DEFAULT_STAKE));
     obj.pushKV("staking", staking);
     obj.pushKV("errors", GetWarnings("statusbar").original);
-
+    obj.pushKV("blocks", active_chain.Height());
     if (BlockAssembler::m_last_block_num_txs) obj.pushKV("currentblocktx", *BlockAssembler::m_last_block_num_txs);
     obj.pushKV("pooledtx", (uint64_t)mempool.size());
-
     obj.pushKV("difficulty", GetDifficulty(GetLastBlockIndex(pindexBestHeader, true)));
-    obj.pushKV("search-interval", lastCoinStakeSearchInterval);
-
+    obj.pushKV("search-interval", (uint64_t)nLastCoinStakeSearchInterval);
     obj.pushKV("weight", (uint64_t)nWeight);
     obj.pushKV("netstakeweight", (uint64_t)nNetworkWeight);
-
     obj.pushKV("expectedtime", nExpectedTime);
-
+    obj.pushKV("chain", Params().NetworkIDString());
+    obj.pushKV("warnings", GetWarnings(false).original);
     return obj;
 },
     };

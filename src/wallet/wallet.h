@@ -643,7 +643,6 @@ public:
     std::atomic<bool> m_wallet_unlock_staking_only{false};
     CAmount m_reserve_balance{DEFAULT_RESERVE_BALANCE};
     unsigned int m_donation_percentage{DEFAULT_DONATION_PERCENTAGE};
-    std::atomic<bool> m_enabled_staking{false};
 
     size_t KeypoolCountExternalKeys() const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     bool TopUpKeyPool(unsigned int kpSize = 0);
