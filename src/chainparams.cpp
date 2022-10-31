@@ -255,7 +255,7 @@ public:
         };
 
         // A vector of p2sh addresses
-        vDevFundAddress = { "mwAokTUtjKt2yjrpY3tFJH8BTC9VvcZg7F" };
+        vDevFundAddress = { "n14L5xqAs7QRzNiTLPNaPeqaF9CRoxzVnU" };
 
     }
 };
