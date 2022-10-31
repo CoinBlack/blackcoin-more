@@ -35,33 +35,39 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
     CAmount nCredit = wtx.credit;
     CAmount nDebit = wtx.debit;
     CAmount nNet = nCredit - nDebit;
-    uint256 hash = wtx.tx->GetHash();
+    uint256 hash = wtx.tx->GetHash(), hashPrev;
     std::map<std::string, std::string> mapValue = wtx.value_map;
 
     // Blackcoin ToDo: Check if the values are shown in a correct way
     if (wtx.is_coinstake)
     {
-        /*
         //
         // Credit
         //
         CAmount nReward = -nDebit;
-        if (wtx.is_coinstake)
+        for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
         {
-            for (unsigned int j = 0; j < wtx.tx->vout.size(); j++)
-                if (wtx.tx->vout[j].scriptPubKey == wtx.tx->vout[1].scriptPubKey)
-                    nReward += wtx.tx->vout[j].nValue;
+            if (wtx.tx->vout[i].scriptPubKey == wtx.tx->vout[1].scriptPubKey)
+                nReward += wtx.tx->vout[i].nValue;
         }
-        */
+
         TransactionRecord sub(hash, nTime, TransactionRecord::Staked, "", -nDebit, wtx.tx->GetValueOut());
         CTxDestination address;
         const CTxOut& txout = wtx.tx->vout[1];
         isminetype mine = wtx.txout_is_mine[1];
+        sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
 
         if (ExtractDestination(txout.scriptPubKey, address) && wtx.txout_address_is_mine[1])
             sub.address = EncodeDestination(address);
 
-        sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
+        for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
+        {
+            if (hashPrev == hash)
+                continue; // last coinstake output
+            sub.credit = nReward;
+            hashPrev = hash;
+        }
+
         parts.append(sub);
     }
     else if (nNet > 0 || wtx.is_coinbase)
