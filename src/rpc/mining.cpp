@@ -504,7 +504,6 @@ static RPCHelpMan getstakinginfo()
 
     obj.pushKV("enabled", gArgs.GetBoolArg("-staking", DEFAULT_STAKE));
     obj.pushKV("staking", staking);
-    obj.pushKV("errors", GetWarnings("statusbar").original);
     obj.pushKV("blocks", active_chain.Height());
     if (BlockAssembler::m_last_block_num_txs) obj.pushKV("currentblocktx", *BlockAssembler::m_last_block_num_txs);
     obj.pushKV("pooledtx", (uint64_t)mempool.size());
