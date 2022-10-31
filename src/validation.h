@@ -123,7 +123,6 @@ extern bool g_parallel_script_checks;
 extern bool fRequireStandard;
 extern bool fCheckBlockIndex;
 extern bool fCheckpointsEnabled;
-extern int64_t nLastCoinStakeSearchInterval;
 
 /** A fee rate smaller than this is considered zero fee (for relaying, mining and transaction creation) */
 extern CFeeRate minRelayTxFee;
