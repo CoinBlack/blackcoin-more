@@ -132,6 +132,7 @@ private:
     GUIUtil::ClickableProgressBar* progressBar = nullptr;
     QProgressDialog* progressDialog = nullptr;
     QLabel *labelStakingIcon = nullptr;
+    QTimer* timerStakingIcon = nullptr;
 
     QMenuBar* appMenuBar = nullptr;
     QToolBar* appToolBar = nullptr;
