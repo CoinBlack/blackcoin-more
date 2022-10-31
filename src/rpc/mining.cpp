@@ -505,6 +505,7 @@ static RPCHelpMan getstakinginfo()
     obj.pushKV("enabled", gArgs.GetBoolArg("-staking", DEFAULT_STAKE));
     obj.pushKV("staking", staking);
     obj.pushKV("blocks", active_chain.Height());
+    if (BlockAssembler::m_last_block_weight) obj.pushKV("currentblockweight", *BlockAssembler::m_last_block_weight);
     if (BlockAssembler::m_last_block_num_txs) obj.pushKV("currentblocktx", *BlockAssembler::m_last_block_num_txs);
     obj.pushKV("pooledtx", (uint64_t)mempool.size());
     obj.pushKV("difficulty", GetDifficulty(GetLastBlockIndex(pindexBestHeader, true)));
