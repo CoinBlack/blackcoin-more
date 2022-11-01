@@ -37,6 +37,28 @@
 #include <QSet>
 #include <QTimer>
 
+static int pollSyncSkip = 30;
+
+class WalletWorker : public QObject
+{
+    Q_OBJECT
+public:
+    WalletModel *walletModel;
+    WalletWorker(WalletModel *_walletModel):
+        walletModel(_walletModel){}
+
+private Q_SLOTS:
+    void updateModel()
+    {
+        if (walletModel && walletModel->node().shutdownRequested())
+            return;
+
+        // Update the model with results of task that take more time to be completed
+        walletModel->checkStakeWeightChanged();
+    }
+};
+
+#include <qt/walletmodel.moc>
 
 WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel& client_model, const PlatformStyle *platformStyle, QObject *parent) :
     QObject(parent),
@@ -49,12 +71,18 @@ WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel
     recentRequestsTableModel(nullptr),
     cachedEncryptionStatus(Unencrypted),
     timer(new QTimer(this)),
-    nWeight(0)
+    nWeight(0),
+    updateStakeWeight(true),
+    worker(0)
 {
     fHaveWatchOnly = m_wallet->haveWatchOnly();
     addressTableModel = new AddressTableModel(this);
     transactionTableModel = new TransactionTableModel(platformStyle, this);
     recentRequestsTableModel = new RecentRequestsTableModel(this);
+
+    worker = new WalletWorker(this);
+    worker->moveToThread(&(t));
+    t.start();
 
     subscribeToCoreSignals();
 }
@@ -71,6 +99,7 @@ void WalletModel::startPollBalance()
     // in the GUIUtil::ExceptionSafeConnect directly.
     connect(timer, &QTimer::timeout, this, &WalletModel::timerTimeout);
     GUIUtil::ExceptionSafeConnect(this, &WalletModel::timerTimeout, this, &WalletModel::pollBalanceChanged);
+    connect(timer, SIGNAL(timeout()), worker, SLOT(updateModel()));
     timer->start(MODEL_UPDATE_DELAY);
 }
 
@@ -91,6 +120,13 @@ void WalletModel::updateStatus()
 
 void WalletModel::pollBalanceChanged()
 {
+    // Get node synchronization information
+    int numBlocks = -1;
+    bool isSyncing = false;
+    pollNum++;
+    if (!m_node.tryGetSyncInfo(numBlocks, isSyncing) || (isSyncing && pollNum < pollSyncSkip))
+        return;
+
     // Avoid recomputing wallet balances unless a TransactionChanged or
     // BlockTip notification was received.
     if (!fForceCheckBalanceChanged && m_cached_last_update_tip == getLastBlockProcessed()) return;
@@ -104,25 +140,37 @@ void WalletModel::pollBalanceChanged()
     if (!m_wallet->tryGetBalances(new_balances, block_hash)) {
         return;
     }
+    pollNum = 0;
 
-    if (fForceCheckBalanceChanged || block_hash != m_cached_last_update_tip) {
+    bool cachedBlockHashChanged = block_hash != m_cached_last_update_tip;
+    if (fForceCheckBalanceChanged || cachedBlockHashChanged) {
         fForceCheckBalanceChanged = false;
 
         // Balance and number of transactions might have changed
         m_cached_last_update_tip = block_hash;
 
-        checkBalanceChanged(new_balances);
-        if(transactionTableModel)
+        bool balanceChanged = checkBalanceChanged(new_balances);
+
+        if (transactionTableModel)
             transactionTableModel->updateConfirmations();
+
+        // The stake weight is used for the staking icon status
+        // Get the stake weight only when not syncing because it is time consuming
+        // Blackcoin ToDo: enable balanceChanged?
+        if (!isSyncing && (balanceChanged || cachedBlockHashChanged)) {
+            updateStakeWeight = true;
+        }
     }
 }
 
-void WalletModel::checkBalanceChanged(const interfaces::WalletBalances& new_balances)
+bool WalletModel::checkBalanceChanged(const interfaces::WalletBalances& new_balances)
 {
     if(new_balances.balanceChanged(m_cached_balances)) {
         m_cached_balances = new_balances;
         Q_EMIT balanceChanged(new_balances);
+        return true;
     }
+    return false;
 }
 
 void WalletModel::updateTransaction()
@@ -549,4 +597,11 @@ bool WalletModel::getWalletUnlockStakingOnly()
 void WalletModel::setWalletUnlockStakingOnly(bool unlock)
 {
     m_wallet->setWalletUnlockStakingOnly(unlock);
+}
+
+void WalletModel::checkStakeWeightChanged()
+{
+    if (updateStakeWeight && m_wallet->tryGetStakeWeight(nWeight)) {
+        updateStakeWeight = false;
+    }
 }

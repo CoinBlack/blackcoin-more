@@ -427,6 +427,21 @@ public:
     unsigned int getDonationPercentage() override { return m_wallet->m_donation_percentage; }
     bool getWalletUnlockStakingOnly() override { return m_wallet->m_wallet_unlock_staking_only; }
     void setWalletUnlockStakingOnly(bool unlock) override { m_wallet->m_wallet_unlock_staking_only = unlock; }
+    bool tryGetStakeWeight(uint64_t& nWeight) override
+    {
+        TRY_LOCK(m_wallet->cs_wallet, locked_wallet);
+        if (!locked_wallet) {
+            return false;
+        }
+
+        nWeight = m_wallet->GetStakeWeight();
+        return true;
+    }
+    uint64_t getStakeWeight() override
+    {
+        LOCK(m_wallet->cs_wallet);
+        return m_wallet->GetStakeWeight();
+    }
     bool isLegacy() override { return m_wallet->IsLegacy(); }
     std::unique_ptr<Handler> handleUnload(UnloadFn fn) override
     {

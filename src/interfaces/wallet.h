@@ -244,6 +244,12 @@ public:
     //! Set wallet unlock for staking only
     virtual void setWalletUnlockStakingOnly(bool unlock) = 0;
 
+    //! Try to get the stake weight
+    virtual bool tryGetStakeWeight(uint64_t& nWeight) = 0;
+
+    //! Get the stake weight
+    virtual uint64_t getStakeWeight() = 0;
+
     //! Return whether is a legacy wallet
     virtual bool isLegacy() = 0;
 
