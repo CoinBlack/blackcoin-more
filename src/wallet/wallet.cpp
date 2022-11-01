@@ -3605,7 +3605,7 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
             && pcoin.outpoint.hash != txNew.vin[0].prevout.hash)
         {
             // Stop adding more inputs if already too many inputs
-            if (txNew.vin.size() >= 100)
+            if (txNew.vin.size() >= 10)
                 break;
             // Stop adding inputs if reached reserve limit
             if (nCredit + pcoin.txout.nValue > nBalance - m_reserve_balance)
