@@ -1,4 +1,15 @@
 # Changelog
+## v13.2.0 (TEST VERSION, 2022-11-01)
+- Changed versioning (backport of Core's PR20223)
+- Testnet hard fork: Removed transaction timestamp
+- Testnet hard fork: Increased transaction fees and set minimum transaction fee of 0.001 BLK
+- Testnet hard fork: Enabled relative timelocks (OP_CHECKSEQUENCEVERIFY, BIP62, 112 and 113)
+- Enabled compact block relay protocol (BIP152)
+- Added an option to donate the specified percentage of staking rewards to the dev fund (20% by default)
+- Set default MAX_OP_RETURN_RELAY to 223
+- Removed `sendfreetransactions` argument
+- Get rid of `AA_EnableHighDpiScaling` warning (backport of Core's PR16254)
+
 ## v2.13.2.9 (2022-02-24)
 - Updated leveldb, which should resolve the "missing UTXO" staking issue
 - Updated dependencies and ported build system from Bitcoin Core 0.20+
