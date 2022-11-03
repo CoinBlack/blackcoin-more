@@ -6,8 +6,8 @@ protobuf_packages = protobuf
 qrencode_packages = qrencode
 
 qt_linux_packages:=qt expat libxcb xcb_proto libXau xproto freetype fontconfig libxkbcommon
-qt_android_packages=qt
 
+qt_android_packages=qt
 qt_darwin_packages=qt
 qt_mingw32_packages=qt
 
