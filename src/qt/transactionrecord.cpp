@@ -17,11 +17,6 @@
  */
 bool TransactionRecord::showTransaction(const interfaces::WalletTx& wtx)
 {
-    // Ensures we show generated coins / mined transactions at depth 1
-    if((wtx.is_coinbase || wtx.is_coinstake) && !wtx.is_in_main_chain)
-    {
-        return false;
-    }
     return true;
 }
 
@@ -38,40 +33,18 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
     uint256 hash = wtx.tx->GetHash(), hashPrev;
     std::map<std::string, std::string> mapValue = wtx.value_map;
 
-    // Blackcoin ToDo: Check if the values are shown in a correct way
-    if (wtx.is_coinstake)
+    if (nNet > 0 || wtx.is_coinbase || wtx.is_coinstake)
     {
         //
         // Credit
         //
         CAmount nReward = -nDebit;
-        for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
+        for(unsigned int j = 0; j < wtx.tx->vout.size(); j++)
         {
-            if (wtx.tx->vout[i].scriptPubKey == wtx.tx->vout[1].scriptPubKey)
-                nReward += wtx.tx->vout[i].nValue;
+            if (wtx.tx->vout[j].scriptPubKey == wtx.tx->vout[1].scriptPubKey)
+                nReward += wtx.tx->vout[j].nValue;
         }
 
-        TransactionRecord sub(hash, nTime, TransactionRecord::Staked, "", -nDebit, wtx.tx->GetValueOut());
-        CTxDestination address;
-        const CTxOut& txout = wtx.tx->vout[1];
-        isminetype mine = wtx.txout_is_mine[1];
-        sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
-
-        if (ExtractDestination(txout.scriptPubKey, address) && wtx.txout_address_is_mine[1])
-            sub.address = EncodeDestination(address);
-
-        for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
-        {
-            if (hashPrev == hash)
-                continue; // last coinstake output
-            sub.credit = nReward;
-            hashPrev = hash;
-        }
-
-        parts.append(sub);
-    }
-    else if (nNet > 0 || wtx.is_coinbase)
-    {
         for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
         {
             const CTxOut& txout = wtx.tx->vout[i];
@@ -98,6 +71,16 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
                 {
                     // Generated
                     sub.type = TransactionRecord::Generated;
+                }
+                if (wtx.is_coinstake)
+                {
+                    // Generated
+                    sub.type = TransactionRecord::Staked;
+
+                	if (hashPrev == hash)
+                		continue; // last coinstake output
+                	sub.credit = nReward;
+                	hashPrev = hash;
                 }
 
                 parts.append(sub);
