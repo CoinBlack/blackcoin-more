@@ -40,4 +40,4 @@ fi
 docker run -itd  --network=host --name base ${base} bash
 docker cp base:/parts ${moreBuilder}
 cd ${moreBuilder}
-tar -C parts -c . | docker import - ${minimal} &&  docker image push ${minimal}
+tar -c . | docker import - ${minimal} &&  docker image push ${minimal}
