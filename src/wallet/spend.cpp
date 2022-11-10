@@ -667,7 +667,7 @@ bool CWallet::CreateTransactionInternal(
     }
 
     // Include the fees for things that aren't inputs, excluding the change output
-    const CAmount not_input_fees = GetMinFee(coin_selection_params.tx_noinputs_size, GetAdjustedTime());
+    const CAmount not_input_fees = coin_selection_params.tx_noinputs_size ? GetMinFee(coin_selection_params.tx_noinputs_size, GetAdjustedTime()) : 0;
     CAmount selection_target = recipients_sum + not_input_fees;
 
     // Get available coins
