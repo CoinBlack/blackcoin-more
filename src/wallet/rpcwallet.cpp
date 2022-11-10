@@ -1869,7 +1869,7 @@ static RPCHelpMan walletpassphrase()
                 {
                     {"passphrase", RPCArg::Type::STR, RPCArg::Optional::NO, "The wallet passphrase"},
                     {"timeout", RPCArg::Type::NUM, RPCArg::Optional::NO, "The time to keep the decryption key in seconds; capped at 100000000 (~3 years)."},
-                    {"staking only", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "Unlock wallet for staking only"},
+                    {"stakingonly", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "Unlock wallet for staking only"},
                 },
                 RPCResult{RPCResult::Type::NONE, "", ""},
                 RPCExamples{
