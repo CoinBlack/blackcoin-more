@@ -184,7 +184,7 @@ $(host_prefix)/.stamp_$(final_build_id): $(native_packages) $(packages)
 	$(AT)mkdir -p $(@D)
 	$(AT)echo copying packages: $^
 	$(AT)echo to: $(@D)
-	$(AT)cd $(@D); $(foreach package,$^, tar xf $($(package)_cached); )
+	$(AT)cd $(@D); $(foreach package,$^, $(build_TAR) xf $($(package)_cached); )
 	$(AT)touch $@
 
 # $PATH is not preserved between ./configure and make by convention. Its
