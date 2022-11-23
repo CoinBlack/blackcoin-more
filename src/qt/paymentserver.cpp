@@ -737,7 +737,7 @@ void PaymentServer::fetchPaymentACK(CWallet* wallet, SendCoinsRecipient recipien
         }
     }
 
-    int length = payment.ByteSize();
+    int length = payment.ByteSizeLong();
     netRequest.setHeader(QNetworkRequest::ContentLengthHeader, length);
     QByteArray serData(length, '\0');
     if (payment.SerializeToArray(serData.data(), length)) {

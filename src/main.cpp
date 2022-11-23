@@ -50,8 +50,8 @@
 #include <atomic>
 #include <sstream>
 
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/math/distributions/poisson.hpp>
@@ -550,8 +550,6 @@ void ProcessBlockAvailability(NodeId nodeid) {
         }
     }
 }
-
-
 
 /** Update tracking information about which blocks a peer is assumed to have. */
 void UpdateBlockAvailability(NodeId nodeid, const uint256 &hash) {
@@ -2327,7 +2325,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("bitcoin-scriptch");
+    RenameThread("blackcoin-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -4970,7 +4968,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                         // chain if they are valid, and no more than the max reorganization depth older
                         // than the best chain we know about.
                         send = mi->second->IsValid(BLOCK_VALID_SCRIPTS) && (pindexBestHeader != NULL) &&
-                            (chainActive.Height() - mi->second->nHeight < Params().GetConsensus().nMaxReorganizationDepth);
+                            (chainActive.Height() - mi->second->nHeight < consensusParams.nMaxReorganizationDepth);
                         if (!send) {
                             LogPrintf("%s: ignoring request from peer=%i for old block that isn't in the main chain\n", __func__, pfrom->GetId());
                         }
@@ -5101,6 +5099,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         LogPrintf("dropmessagestest DROPPING RECV MESSAGE\n");
         return true;
     }
+
 
     if (!(nLocalServices & NODE_BLOOM) &&
               (strCommand == NetMsgType::FILTERLOAD ||
@@ -5286,7 +5285,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             pfrom->PushMessage(NetMsgType::SENDHEADERS);
         }
         if (pfrom->nVersion >= SHORT_IDS_BLOCKS_VERSION) {
-            // Tell our peer we are willing to provide version-1 cmpctblocks
+            // Tell our peer we are willing to provide version 1 cmpctblocks
             // However, we do not request new block announcements using
             // cmpctblock messages.
             // We send this to non-NODE NETWORK peers as well, because
@@ -5376,8 +5375,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         vRecv >> fAnnounceUsingCMPCTBLOCK >> nCMPCTBLOCKVersion;
         if (nCMPCTBLOCKVersion == 1) {
             LOCK(cs_main);
-            // fProvidesHeaderAndIDs is used to "lock in" version of compact
-            // blocks we send.
+            // fProvidesHeaderAndIDs is used to "lock in" version of compact blocks we send
             if (!State(pfrom->GetId())->fProvidesHeaderAndIDs) {
                 State(pfrom->GetId())->fProvidesHeaderAndIDs = true;
             }
@@ -5795,6 +5793,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         }
         FlushStateToDisk(state, FLUSH_STATE_PERIODIC);
     }
+
 
     else if (strCommand == NetMsgType::CMPCTBLOCK && !fImporting && !fReindex) // Ignore blocks received while importing
     {
@@ -6876,7 +6875,7 @@ bool SendMessages(CNode* pto)
                             pto->id, hashToAnnounce.ToString());
                     }
                 }
-            } 
+            }
             pto->vBlockHashesToAnnounce.clear();
         }
 

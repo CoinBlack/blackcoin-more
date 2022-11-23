@@ -59,12 +59,9 @@ AC_PROG_CXX
 dnl By default, libtool for mingw refuses to link static libs into a dll for
 dnl fear of mixing pic/non-pic objects, and import/export complications. Since
 dnl we have those under control, re-enable that functionality.
-dnl Compiler with posix support is needed for cross compile some of c++ 14 features for mingw like threads and mutexes.
 case $host in
   *mingw*)
      lt_cv_deplibs_check_method="pass_all"
-     CC="$CC-posix"
-     CXX="$CXX-posix"
   ;;
 esac
 
@@ -108,7 +105,7 @@ AC_PATH_TOOL(GCOV, gcov)
 AC_PATH_TOOL(LLVM_COV, llvm-cov)
 AC_PATH_PROG(LCOV, lcov)
 dnl Python 3.6 is specified in .python-version and should be used if available, see doc/dependencies.md
-AC_PATH_PROGS([PYTHON], [python3.6 python3.7 python3.8 python3.9, python3.10, python3 python])
+AC_PATH_PROGS([PYTHON], [python3.6 python3.7 python3.8 python3.9 python3 python])
 AC_PATH_PROG(GENHTML, genhtml)
 AC_PATH_PROG([GIT], [git])
 AC_PATH_PROG(CCACHE,ccache)
@@ -143,7 +140,7 @@ AC_ARG_ENABLE([upnp-default],
 AC_ARG_ENABLE(tests,
     AS_HELP_STRING([--disable-tests],[do not compile tests (default is to compile)]),
     [use_tests=$enableval],
-    [use_tests=yes])
+    [use_tests=no])
 
 AC_ARG_ENABLE(gui-tests,
     AS_HELP_STRING([--disable-gui-tests],[do not compile GUI tests (default is to compile if GUI and tests enabled)]),
@@ -153,7 +150,7 @@ AC_ARG_ENABLE(gui-tests,
 AC_ARG_ENABLE(bench,
     AS_HELP_STRING([--disable-bench],[do not compile benchmarks (default is to compile)]),
     [use_bench=$enableval],
-    [use_bench=yes])
+    [use_bench=no])
 
 AC_ARG_WITH([comparison-tool],
     AS_HELP_STRING([--with-comparison-tool],[path to java comparison tool (requires --enable-tests)]),
@@ -178,9 +175,9 @@ AC_ARG_WITH([qrencode],
 
 AC_ARG_ENABLE([hardening],
   [AS_HELP_STRING([--disable-hardening],
-  [do not attempt to harden the resulting executables (default is to harden when possible)])],
+  [do not attempt to harden the resulting executables (default is to harden)])],
   [use_hardening=$enableval],
-  [use_hardening=auto])
+  [use_hardening=yes])
 
 AC_ARG_ENABLE([reduce-exports],
   [AS_HELP_STRING([--enable-reduce-exports],
@@ -210,18 +207,6 @@ AC_ARG_ENABLE([lcov],
   [use_lcov=$enableval],
   [use_lcov=no])
 
-AC_ARG_ENABLE([glibc-back-compat],
-  [AS_HELP_STRING([--enable-glibc-back-compat],
-  [enable backwards compatibility with glibc])],
-  [use_glibc_compat=$enableval],
-  [use_glibc_compat=no])
-
-AC_ARG_ENABLE([threadlocal],
-  [AS_HELP_STRING([--enable-threadlocal],
-  [enable features that depend on the c++ thread_local keyword (currently just thread names in debug logs). (default is to enabled if there is platform support and glibc-back-compat is not enabled)])],
-  [use_thread_local=$enableval],
-  [use_thread_local=auto])
-
 AC_ARG_ENABLE([asm],
   [AS_HELP_STRING([--disable-asm],
   [disable assembly routines (enabled by default)])],
@@ -231,6 +216,12 @@ AC_ARG_ENABLE([asm],
 if test "x$use_asm" = xyes; then
   AC_DEFINE(USE_ASM, 1, [Define this symbol to build in assembly routines])
 fi
+
+AC_ARG_ENABLE([glibc-back-compat],
+  [AS_HELP_STRING([--enable-glibc-back-compat],
+  [enable backwards compatibility with glibc])],
+  [use_glibc_compat=$enableval],
+  [use_glibc_compat=no])
 
 AC_ARG_WITH([system-univalue],
   [AS_HELP_STRING([--with-system-univalue],
@@ -244,6 +235,7 @@ AC_ARG_ENABLE([zmq],
   [use_zmq=$enableval],
   [use_zmq=yes])
 
+dnl needed for BIP-70
 AC_ARG_WITH([protoc-bindir],[AS_HELP_STRING([--with-protoc-bindir=BIN_DIR],[specify protoc bin path])], [protoc_bin_path=$withval], [])
 
 AC_ARG_ENABLE([sse2],
@@ -335,6 +327,10 @@ if test "x$enable_werror" = "xyes"; then
   AX_CHECK_COMPILE_FLAG([-Werror=return-type],[ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=return-type"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Werror=conditional-uninitialized],[ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=conditional-uninitialized"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Werror=sign-compare],[ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=sign-compare"],,[[$CXXFLAG_WERROR]])
+  dnl -Wsuggest-override is broken with GCC before 9.2
+  dnl https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78010
+  AX_CHECK_COMPILE_FLAG([-Werror=suggest-override],[ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=suggest-override"],,[[$CXXFLAG_WERROR]],
+                        [AC_LANG_SOURCE([[struct A { virtual void f(); }; struct B : A { void f() final; };]])])
   AX_CHECK_COMPILE_FLAG([-Werror=unreachable-code-loop-increment],[ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=unreachable-code-loop-increment"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Werror=mismatched-tags], [ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=mismatched-tags"], [], [$CXXFLAG_WERROR])
   AX_CHECK_COMPILE_FLAG([-Werror=implicit-fallthrough], [ERROR_CXXFLAGS="$ERROR_CXXFLAGS -Werror=implicit-fallthrough"], [], [$CXXFLAG_WERROR])
@@ -355,7 +351,7 @@ if test "x$CXXFLAGS_overridden" = "xno"; then
   AX_CHECK_COMPILE_FLAG([-Wswitch],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wswitch"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wthread-safety],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wthread-safety"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wrange-loop-analysis],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wrange-loop-analysis"],,[[$CXXFLAG_WERROR]])
-  dnl X_CHECK_COMPILE_FLAG([-Wredundant-decls],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wredundant-decls"],,[[$CXXFLAG_WERROR]])
+  AX_CHECK_COMPILE_FLAG([-Wredundant-decls],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wredundant-decls"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wunused-variable],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wunused-variable"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wunused-member-function],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wunused-member-function"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wdate-time],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wdate-time"],,[[$CXXFLAG_WERROR]])
@@ -365,6 +361,8 @@ if test "x$CXXFLAGS_overridden" = "xno"; then
   AX_CHECK_COMPILE_FLAG([-Wduplicated-cond],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wduplicated-cond"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wlogical-op],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wlogical-op"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Woverloaded-virtual],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Woverloaded-virtual"],,[[$CXXFLAG_WERROR]])
+  AX_CHECK_COMPILE_FLAG([-Wsuggest-override],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wsuggest-override"],,[[$CXXFLAG_WERROR]],
+                        [AC_LANG_SOURCE([[struct A { virtual void f(); }; struct B : A { void f() final; };]])])
   AX_CHECK_COMPILE_FLAG([-Wunreachable-code-loop-increment],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wunreachable-code-loop-increment"],,[[$CXXFLAG_WERROR]])
   AX_CHECK_COMPILE_FLAG([-Wimplicit-fallthrough], [WARN_CXXFLAGS="$WARN_CXXFLAGS -Wimplicit-fallthrough"], [], [$CXXFLAG_WERROR])
 
@@ -381,9 +379,6 @@ if test "x$CXXFLAGS_overridden" = "xno"; then
   if test x$suppress_external_warnings != xyes ; then
     AX_CHECK_COMPILE_FLAG([-Wdeprecated-copy],[NOWARN_CXXFLAGS="$NOWARN_CXXFLAGS -Wno-deprecated-copy"],,[[$CXXFLAG_WERROR]])
   fi
-  AX_CHECK_COMPILE_FLAG([-Wno-unknown-pragmas],[NOWARN_CXXFLAGS="$NOWARN_CXXFLAGS -Wno-unknown-pragmas"],,[[$CXXFLAG_WERROR]])
-  AX_CHECK_COMPILE_FLAG([-Wno-strict-aliasing],[NOWARN_CXXFLAGS="$NOWARN_CXXFLAGS -Wno-strict-aliasing"],,[[$CXXFLAG_WERROR]])
-  AX_CHECK_COMPILE_FLAG([-Wno-duplicated-branches],[NOWARN_CXXFLAGS="$NOWARN_CXXFLAGS -Wno-duplicated-branches"],,[[$CXXFLAG_WERROR]])
 fi
 
 dnl Don't allow extended (non-ASCII) symbols in identifiers. This is easier for code review.
@@ -480,13 +475,17 @@ AX_CHECK_COMPILE_FLAG([-march=armv8-a+crc+crypto],[[ARM_CRC_CXXFLAGS="-march=arm
 
 TEMP_CXXFLAGS="$CXXFLAGS"
 CXXFLAGS="$CXXFLAGS $ARM_CRC_CXXFLAGS"
-AC_MSG_CHECKING(for ARM CRC32 intrinsics)
+AC_MSG_CHECKING(for AArch64 CRC32 intrinsics)
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
     #include <arm_acle.h>
     #include <arm_neon.h>
   ]],[[
+#ifdef __aarch64__
     __crc32cb(0, 0); __crc32ch(0, 0); __crc32cw(0, 0); __crc32cd(0, 0);
     vmull_p64(0, 0);
+#else
+#error "crc32c library does not support hardware acceleration on 32-bit ARM"
+#endif
   ]])],
  [ AC_MSG_RESULT(yes); enable_arm_crc=yes; ],
  [ AC_MSG_RESULT(no)]
@@ -528,13 +527,8 @@ AC_ARG_WITH([daemon],
   [build_bitcoind=yes])
 
 pkg_openssl=yes
-use_pkgconfig=yes
 case $host in
   *mingw*)
-
-     dnl pkgconfig does more harm than good with MinGW
-     use_pkgconfig=no
-
      TARGET_OS=windows
      AC_CHECK_LIB([kernel32], [GetModuleFileNameA],, AC_MSG_ERROR(libkernel32 missing))
      AC_CHECK_LIB([user32],   [main],, AC_MSG_ERROR(libuser32 missing))
@@ -1191,10 +1185,22 @@ AC_DEFUN([SUPPRESS_WARNINGS],
 BITCOIN_QT_INIT
 
 dnl sets $bitcoin_enable_qt, $bitcoin_enable_qt_test, $bitcoin_enable_qt_dbus
-BITCOIN_QT_CONFIGURE([$use_pkgconfig], [qt5])
+BITCOIN_QT_CONFIGURE([5.9.5])
+
+dnl Keep a copy of the original $QT_INCLUDES and use it when invoking qt's moc
+QT_INCLUDES_UNSUPPRESSED=$QT_INCLUDES
+if test x$suppress_external_warnings != xno ; then
+  QT_INCLUDES=SUPPRESS_WARNINGS($QT_INCLUDES)
+  QT_DBUS_INCLUDES=SUPPRESS_WARNINGS($QT_DBUS_INCLUDES)
+  QT_TEST_INCLUDES=SUPPRESS_WARNINGS($QT_TEST_INCLUDES)
+fi
+
 if test x$enable_wallet != xno; then
     dnl Check for libdb_cxx only if wallet enabled
     BITCOIN_FIND_BDB62
+    if test x$suppress_external_warnings != xno ; then
+      BDB_CPPFLAGS=SUPPRESS_WARNINGS($BDB_CPPFLAGS)
+    fi
 fi
 
 dnl Check for libminiupnpc (optional)
@@ -1238,24 +1244,19 @@ if test x$use_boost = xyes; then
   AX_BOOST_BASE([1.64.0],[],[AC_MSG_ERROR([Boost is not available!])])
   if test x$want_boost = xno; then
     AC_MSG_ERROR([[only libbitcoinconsensus can be built without boost]])
-fi
-AX_BOOST_SYSTEM
-AX_BOOST_FILESYSTEM
-AX_BOOST_PROGRAM_OPTIONS
-AX_BOOST_THREAD
-AX_BOOST_RANDOM
-AX_BOOST_CHRONO
+  fi
+  AX_BOOST_SYSTEM
+  AX_BOOST_FILESYSTEM
+  AX_BOOST_PROGRAM_OPTIONS
+  AX_BOOST_THREAD
+  AX_BOOST_RANDOM
+  AX_BOOST_CHRONO
 
-if test x$suppress_external_warnings != xno; then
-  BOOST_CPPFLAGS=SUPPRESS_WARNINGS($BOOST_CPPFLAGS)
-fi
+  if test x$suppress_external_warnings != xno; then
+    BOOST_CPPFLAGS=SUPPRESS_WARNINGS($BOOST_CPPFLAGS)
+  fi
 
-dnl Boost 1.56 through 1.62 allow using std::atomic instead of its own atomic
-dnl counter implementations. In 1.63 and later the std::atomic approach is default.
-m4_pattern_allow(DBOOST_AC_USE_STD_ATOMIC) dnl otherwise it's treated like a macro
-BOOST_CPPFLAGS="-DBOOST_SP_USE_STD_ATOMIC -DBOOST_AC_USE_STD_ATOMIC $BOOST_CPPFLAGS"
-
-BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB $BOOST_PROGRAM_OPTIONS_LIB $BOOST_THREAD_LIB $BOOST_CHRONO_LIB $BOOST_RANDOM_LIB"
+  BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB $BOOST_PROGRAM_OPTIONS_LIB $BOOST_THREAD_LIB $BOOST_CHRONO_LIB $BOOST_RANDOM_LIB"
 fi
 
 dnl Check for reduced exports
@@ -1408,6 +1409,10 @@ if test x$build_bitcoin_cli$build_bitcoind$bitcoin_enable_qt$use_tests$use_bench
   if test x$TARGET_OS != xwindows; then
     PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads >= 2.0.21],, [AC_MSG_ERROR([libevent_pthreads version 2.0.21 or greater not found.])])
   fi
+
+  if test x$suppress_external_warnings != xno; then
+    EVENT_CFLAGS=SUPPRESS_WARNINGS($EVENT_CFLAGS)
+  fi
 fi
 
 dnl QR Code encoding library check
@@ -1437,11 +1442,10 @@ if test "x$use_zmq" = xyes; then
   esac
 fi
 
-  BITCOIN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], BITCOIN_QT_FAIL(libprotobuf not found)))
-  if test x$use_qr != xno; then
-    BITCOIN_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
-    BITCOIN_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
-  fi
+dnl protobuf check
+
+BITCOIN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], BITCOIN_QT_FAIL(libprotobuf not found)))
+BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
 dnl univalue check
 
@@ -1481,7 +1485,6 @@ AM_CONDITIONAL([EMBEDDED_UNIVALUE],[test x$need_bundled_univalue = xyes])
 AC_SUBST(UNIVALUE_CFLAGS)
 AC_SUBST(UNIVALUE_LIBS)
 
-BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
 AC_MSG_CHECKING([whether to build blackmored])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
@@ -1725,6 +1728,7 @@ AC_SUBST(HAVE_BUILTIN_PREFETCH)
 AC_SUBST(HAVE_MM_PREFETCH)
 AC_SUBST(HAVE_STRONG_GETAUXVAL)
 AC_SUBST(HAVE_WEAK_GETAUXVAL)
+AC_SUBST(ANDROID_ARCH)
 AC_CONFIG_FILES([Makefile src/Makefile doc/man/Makefile share/setup.nsi share/qt/Info.plist src/test/buildenv.py])
 AC_CONFIG_FILES([qa/pull-tester/run-bitcoind-for-test.sh],[chmod +x qa/pull-tester/run-bitcoind-for-test.sh])
 AC_CONFIG_FILES([qa/pull-tester/tests_config.py],[chmod +x qa/pull-tester/tests_config.py])
@@ -1764,16 +1768,6 @@ AC_CONFIG_SUBDIRS([src/secp256k1])
 
 AC_OUTPUT
 
-dnl Taken from https://wiki.debian.org/RpathIssue
-case $host in
-   *-*-linux-gnu)
-     AC_MSG_RESULT([Fixing libtool for -rpath problems.])
-     sed < libtool > libtool-2 \
-     's/^hardcode_libdir_flag_spec.*$'/'hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/'
-     mv libtool-2 libtool
-     chmod 755 libtool
-   ;;
-esac
 
 echo
 echo "Options used to compile and link:"
@@ -1787,13 +1781,14 @@ echo "  with zmq      = $use_zmq"
 echo "  with test     = $use_tests"
 echo "  with bench    = $use_bench"
 echo "  with upnp     = $use_upnp"
-dnl echo "  with natpmp     = $use_natpmp"
 echo "  use asm       = $use_asm"
-dnl echo "  ebpf tracing    = $have_sdt"
-dnl echo "  sanitizers      = $use_sanitizers"
+echo "  enable sse42  = $enable_sse42"
+echo "  enable sse41  = $enable_sse41"
+echo "  enable avx2   = $enable_avx2"
+echo "  enable shani  = $enable_shani"
 echo "  scrypt sse2   = $use_sse2"
+
 echo "  debug enabled = $enable_debug"
-dnl echo "  gprof enabled = $enable_gprof"
 echo "  werror        = $enable_werror"
 echo
 echo "  target os     = $TARGET_OS"

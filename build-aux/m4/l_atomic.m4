@@ -12,6 +12,7 @@ dnl warranty.
 m4_define([_CHECK_ATOMIC_testbody], [[
   #include <atomic>
   #include <cstdint>
+  #include <chrono>
 
   int main() {
     std::atomic<int64_t> a{};

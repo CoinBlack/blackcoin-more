@@ -1,6 +1,6 @@
 package=bdb
 $(package)_version=6.2.38
-$(package)_download_path=https://gentoo.osuosl.org/distfiles/
+$(package)_download_path=https://strawberryperl.com/package/kmx/libs_src/
 $(package)_file_name=db-$($(package)_version).tar.gz
 $(package)_sha256_hash=99ccd944ffcccc88c0f404b4f3d8cb10747e1e3dfe9ec566f518725f986ca2fd
 $(package)_build_subdir=build_unix
@@ -10,12 +10,11 @@ $(package)_config_opts=--disable-shared --enable-cxx --disable-replication --ena
 $(package)_config_opts_mingw32=--enable-mingw
 $(package)_config_opts_linux=--with-pic
 $(package)_config_opts_freebsd=--with-pic
-ifneq ($(build_os),darwin)
-$(package)_config_opts_darwin=--disable-atomicsupport
-endif
-$(package)_config_opts_aarch64=--disable-atomicsupport
+$(package)_config_opts_netbsd=--with-pic
+$(package)_config_opts_openbsd=--with-pic
+$(package)_config_opts_android=--with-pic
 $(package)_cflags+=-Wno-error=implicit-function-declaration
-$(package)_cxxflags=-std=c++17
+$(package)_cxxflags+=-std=c++17
 $(package)_cppflags_mingw32=-DUNICODE -D_UNICODE
 endef
 
