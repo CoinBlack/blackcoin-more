@@ -1,5 +1,5 @@
 # Changelog
-## v13.2.0 (TEST VERSION, 2022-11-01)
+## v13.2.0 (2022-11-24)
 - Changed versioning (backport of Core's PR20223)
 - Testnet hard fork: Removed transaction timestamp
 - Testnet hard fork: Increased transaction fees and set minimum transaction fee of 0.001 BLK
@@ -9,6 +9,7 @@
 - Set default MAX_OP_RETURN_RELAY to 223
 - Removed `sendfreetransactions` argument
 - Get rid of `AA_EnableHighDpiScaling` warning (backport of Core's PR16254)
+- Updated multiple dependencies
 
 ## v2.13.2.9 (2022-02-24)
 - Updated leveldb, which should resolve the "missing UTXO" staking issue
