@@ -27,26 +27,26 @@ fi
 
 # Git Account
 
-defaultHubLab=gitlab
+defaultHubLab=github
 read -p "Github or Gitlab? (default: ${defaultHubLab}): " HubLab
 HubLab=${HubLab:-${defaultHubLab}}
 if [ ${HubLab} != ${defaultHubLab} ]; then
-	sed -i "s|defaultHubLab=gitlab|defaultHubLab=${HubLab}|" $0
-	sed -i "s|HUBLAB=gitlab|HUBLAB=${HubLab}|" ${BASE_DIR}/Dockerfile.ubase
-	sed -i "s|HUBLAB=gitlab|HUBLAB=${HubLab}|" ${BASE_DIR}/Dockerfile.minbase
-	sed -i "s|HUBLAB=gitlab|HUBLAB=${HubLab}|" $0
+	sed -i "s|defaultHubLab=github|defaultHubLab=${HubLab}|" $0
+	sed -i "s|HUBLAB=github|HUBLAB=${HubLab}|" ${BASE_DIR}/Dockerfile.ubase
+	sed -i "s|HUBLAB=github|HUBLAB=${HubLab}|" ${BASE_DIR}/Dockerfile.minbase
+	sed -i "s|HUBLAB=github|HUBLAB=${HubLab}|" $0
 
 
 fi
 
-defaultGitName=blackcoin
+defaultGitName=CoinBlack
 read -p "Git account to use? (default: ${defaultGitName}): " Git
 Git=${Git:-${defaultGitName}}
 if [ ${Git} != ${defaultGitName} ]; then
-	sed -i "s|defaultGitName=blackcoin|defaultGitName=${Git}|" $0
-	sed -i "s|GITNAME=blackcoin|GITNAME=${Git}|" ${BASE_DIR}/Dockerfile.ubase
-	sed -i "s|GITNAME=blackcoin|GITNAME=${Git}|" ${BASE_DIR}/Dockerfile.minbase
-	sed -i "s|GITNAME=blackcoin|GITNAME=${Git}|" $0
+	sed -i "s|defaultGitName=CoinBlack|defaultGitName=${Git}|" $0
+	sed -i "s|GITNAME=CoinBlack|GITNAME=${Git}|" ${BASE_DIR}/Dockerfile.ubase
+	sed -i "s|GITNAME=CoinBlack|GITNAME=${Git}|" ${BASE_DIR}/Dockerfile.minbase
+	sed -i "s|GITNAME=CoinBlack|GITNAME=${Git}|" $0
 fi
 
 # Git Branch
@@ -72,14 +72,14 @@ if [ ${X11} != ${defaultX11} ]; then
 fi
 
 # timezone
-defaultTimezone=America/Los_Angeles
+defaultTimezone=Etc/UTC
 read -p "What is your timezone? (default: ${defaultTimezone}): " timezone
 timezone=${timezone:-${defaultTimezone}}
 if [ ${timezone} != ${defaultTimezone} ]; then
-	sed -i "s|defaultTimezone=America/Los_Angeles|defaultTimezone=${timezone}|" $0
-	sed -i "s|defaultTimezone=America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.ubase
-	sed -i "s|defaultTimezone=America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.minbase
-	sed -i "s|defaultTimezone=America/Los_Angeles|${timezone}|" ${BASE_DIR}/Dockerfile.ubuntu
+	sed -i "s|defaultTimezone=Etc/UTC|defaultTimezone=${timezone}|" $0
+	sed -i "s|defaultTimezone=Etc/UTC|${timezone}|" ${BASE_DIR}/Dockerfile.ubase
+	sed -i "s|defaultTimezone=Etc/UTC|${timezone}|" ${BASE_DIR}/Dockerfile.minbase
+	sed -i "s|defaultTimezone=Etc/UTC|${timezone}|" ${BASE_DIR}/Dockerfile.ubuntu
 fi
 
 

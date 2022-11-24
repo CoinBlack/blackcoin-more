@@ -1,7 +1,7 @@
 FROM ubuntu
-ENV TZ=America/Los_Angeles
-ENV HUBLAB=gitlab
-ENV GITNAME=blackcoin
+ENV TZ=Etc/UTC
+ENV HUBLAB=github
+ENV GITNAME=CoinBlack
 ENV BRANCH=master
 
 ENV DEBIAN_FRONTEND=noninteractive

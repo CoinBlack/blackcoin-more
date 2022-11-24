@@ -4,14 +4,14 @@ BASE_DIR=$(dirname $(realpath $0 ))
 moreBuilder=${BASE_DIR}/moreBuilder
 rm -fr ${moreBuilder}/*
 
-export SYSTYPE=x86_64  
+export SYSTYPE=x86_64
 export DockerHub=blackcoinnl  
-export HUBLAB=github  
-export GITNAME=CoinBlack  
+export HUBLAB=github
+export GITNAME=CoinBlack
 export BRANCH=${GIT_CURRENT_BRANCH}
-sed -i "s|BRANCH=master|BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.minbase
+sed -i "s|BRANCH=master|BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubase
+sed -i "s|BRANCH=master|BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubuntu
 export TZ=Etc/UTC
-X11=yes
 
 echo "${GITHUB_ENV} = GITHUB_ENV"
 echo "DockerHub Account: ${DockerHub}"
@@ -28,13 +28,9 @@ ubuntu="${DockerHub}/blackcoin-more-ubuntu-${SYSTYPE}:${BRANCH}"
 # build
 # ubase (base using ubuntu)
 # ubuntu (package with full ubuntu distro)
-if ! [[ ${X11} =~ [no|n] ]]; then
-	docker build -t ${base} - --network=host < ${BASE_DIR}/Dockerfile.ubase
-	docker build -t ${ubuntu} - --network=host < ${BASE_DIR}/Dockerfile.ubuntu
-	docker image push ${ubuntu}
-else
-	docker build -t ${base} - --network=host < ${BASE_DIR}/Dockerfile.minbase
-fi
+docker build -t ${base} - --network=host < ${BASE_DIR}/Dockerfile.ubase
+docker build -t ${ubuntu} - --network=host < ${BASE_DIR}/Dockerfile.ubuntu
+docker image push ${ubuntu}
 
 # minimal (only package binaries and scripts)
 docker run -itd  --network=host --name base ${base} bash

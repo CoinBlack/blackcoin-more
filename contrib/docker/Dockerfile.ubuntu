@@ -4,7 +4,7 @@ RUN echo "Building Ubuntu Package"
 # Collect dependencies
 #
 FROM ubuntu
-ENV TZ=America/Los_Angeles
+ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
 		apt-get update && \
