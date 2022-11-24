@@ -191,12 +191,10 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
 
         updateStakingIcon();
     }
-    /*
     else
     {
         labelStakingIcon->setVisible(false);
     }
-    */
 #endif // ENABLE_WALLET
 
     // Progress bar and label for blocks download
