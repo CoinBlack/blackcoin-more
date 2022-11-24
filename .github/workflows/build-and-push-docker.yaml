@@ -1,9 +1,9 @@
 
-name: Build and Push Docker - master
+name: Build and Push Docker - Main
 on: [push]
 jobs:
   test:
-    name: Build and Push Docker - master
+    name: Build and Push Docker - Main
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
