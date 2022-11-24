@@ -11,7 +11,7 @@ export GITNAME=CoinBlack
 export BRANCH=${GIT_CURRENT_BRANCH}
 sed -i "s|BRANCH=master|BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.minbase
 export TZ=Etc/UTC
-X11=no
+X11=yes
 
 echo "${GITHUB_ENV} = GITHUB_ENV"
 echo "DockerHub Account: ${DockerHub}"
