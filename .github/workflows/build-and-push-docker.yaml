@@ -1,8 +1,8 @@
-name: Build and Push Docker
+name: Build and Push Docker - Source
 on: [push]
 jobs:
   test:
-    name: Build and Push Docker
+    name: Build and Push Docker - Source
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
