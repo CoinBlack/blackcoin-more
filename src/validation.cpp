@@ -534,17 +534,6 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     std::unique_ptr<CTxMemPoolEntry>& entry = ws.m_entry;
     CAmount& nModifiedFees = ws.m_modified_fees;
 
-    // Blackcoin ToDo: decide whether to enable this additional check or not
-    int dust_tx_count = 0;
-    CAmount min_dust = 100000;
-    for (const CTxOut& txout : tx.vout) {
-        // LogPrintf("tx_out value: %d, minimum value: %d, dust count: %d", txout.nValue, min_dust, dust_tx_count);
-        if (txout.nValue < min_dust)
-            dust_tx_count++;
-        if (dust_tx_count > 10)
-            return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "too-many-dust-vouts");
-    }
-
     if (!CheckTransaction(tx, state)) {
         return false; // state filled in by CheckTransaction
     }
