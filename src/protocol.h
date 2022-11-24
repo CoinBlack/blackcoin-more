@@ -218,7 +218,6 @@ extern const char *SENDHEADERS;
  */
 extern const char *FEEFILTER;
 
-// Disable BIP152
 /**
  * Contains a 1-byte bool and 8-byte LE version number.
  * Indicates that a node is willing to provide blocks via "cmpctblock" messages.
@@ -226,25 +225,25 @@ extern const char *FEEFILTER;
  * "cmpctblock" message rather than an "inv", depending on message contents.
  * @since protocol version 70014 as described by BIP 152
  */
-// extern const char *SENDCMPCT;
+extern const char *SENDCMPCT;
 /**
  * Contains a CBlockHeaderAndShortTxIDs object - providing a header and
  * list of "short txids".
  * @since protocol version 70014 as described by BIP 152
  */
-// extern const char *CMPCTBLOCK;
+extern const char *CMPCTBLOCK;
 /**
  * Contains a BlockTransactionsRequest
  * Peer should respond with "blocktxn" message.
  * @since protocol version 70014 as described by BIP 152
  */
-// extern const char *GETBLOCKTXN;
+extern const char *GETBLOCKTXN;
 /**
  * Contains a BlockTransactions.
  * Sent in response to a "getblocktxn" message.
  * @since protocol version 70014 as described by BIP 152
  */
-// extern const char *BLOCKTXN;
+extern const char *BLOCKTXN;
 };
 
 /* Get a vector of all valid message types (see above) */
@@ -322,10 +321,7 @@ enum GetDataMsg
     MSG_BLOCK,
     // The following can only occur in getdata. Invs always use TX or BLOCK.
     MSG_FILTERED_BLOCK,
-    /*
-    // Disable BIP152
     MSG_CMPCT_BLOCK,
-    */
 };
 
 /** inv message data */

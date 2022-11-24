@@ -1,4 +1,4 @@
-Building Blackcoin
+Building Blackcoin More
 ================
 
 See doc/build-*.md for instructions on building the various

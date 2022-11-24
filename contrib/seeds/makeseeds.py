@@ -1,10 +1,15 @@
-#!/usr/bin/env python
-# Copyright (c) 2013-2015 The Bitcoin Core developers
+#!/usr/bin/env python3
+# Copyright (c) 2013-2020 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
 # Generate seeds.txt from Pieter's DNS seeder
 #
+
+import re
+import sys
+import dns.resolver
+import collections
 
 NSEEDS=512
 

@@ -89,7 +89,7 @@ enum
     // support CHECKSEQUENCEVERIFY opcode
     //
     // See BIP112 for details
-    SCRIPT_VERIFY_CHECKSEQUENCEVERIFY = (1U << 10),
+    SCRIPT_VERIFY_CHECKSEQUENCEVERIFY = (1U << 11),
 
     // Require the argument of OP_IF/NOTIF to be exactly 0x01 or empty vector
     //

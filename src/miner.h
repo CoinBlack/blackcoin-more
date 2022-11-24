@@ -23,8 +23,6 @@ namespace Consensus { struct Params; };
 
 static const bool DEFAULT_PRINTPRIORITY = false;
 
-CAmount GetProofOfWorkReward();
-
 struct CBlockTemplate
 {
     CBlock block;

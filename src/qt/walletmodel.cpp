@@ -119,6 +119,11 @@ CAmount WalletModel::getWatchImmatureBalance() const
     return wallet->GetImmatureWatchOnlyBalance();
 }
 
+unsigned int WalletModel::getDonationPercentage() const
+{
+    return wallet->GetDonationPercentage();
+}
+
 void WalletModel::updateStatus()
 {
     EncryptionStatus newEncryptionStatus = getEncryptionStatus();
@@ -162,6 +167,7 @@ void WalletModel::checkBalanceChanged()
     CAmount newWatchUnconfBalance = 0;
     CAmount newWatchImmatureBalance = 0;
     CAmount newWatchOnlyStake = 0;
+    CAmount newDonationPercentage = getDonationPercentage();
     if (haveWatchOnly())
     {
         newWatchOnlyBalance = getWatchBalance();
@@ -182,7 +188,8 @@ void WalletModel::checkBalanceChanged()
         cachedWatchImmatureBalance = newWatchImmatureBalance;
         cachedWatchOnlyStake = newWatchOnlyStake;
                 Q_EMIT balanceChanged(newBalance, newUnconfirmedBalance, newImmatureBalance, newStake,
-                                    newWatchOnlyBalance, newWatchUnconfBalance, newWatchImmatureBalance, newWatchOnlyStake);
+                                    newWatchOnlyBalance, newWatchUnconfBalance, newWatchImmatureBalance, newWatchOnlyStake,
+                                    newDonationPercentage);
     }
 }
 

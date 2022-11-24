@@ -139,6 +139,7 @@ public:
     CAmount getWatchUnconfirmedBalance() const;
     CAmount getWatchImmatureBalance() const;
     CAmount getWatchStake() const;
+    unsigned int getDonationPercentage() const;
     EncryptionStatus getEncryptionStatus() const;
 
     // Check address for validity
@@ -241,7 +242,8 @@ private:
 Q_SIGNALS:
     // Signal that balance in wallet changed
 	void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& stake,
-                        const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance, const CAmount& watchOnlyStake);
+                        const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance, const CAmount& watchOnlyStake,
+                        const unsigned int& nDonationPercentage);
 
 
     // Encryption status of wallet changed

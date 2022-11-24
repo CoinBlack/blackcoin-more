@@ -212,6 +212,26 @@ public:
 
 struct CMutableTransaction;
 
+/**
+ * Basic transaction serialization format:
+ * - int32_t nVersion
+ * - uint32_t nTime
+ * - std::vector<CTxIn> vin
+ * - std::vector<CTxOut> vout
+ * - uint32_t nLockTime
+ */
+template<typename Stream, typename Operation, typename TxType>
+inline void SerializeTransaction(TxType& tx, Stream& s, Operation ser_action, int nType, int nVersion) {
+    READWRITE(*const_cast<int32_t*>(&tx.nVersion));
+    if (tx.nVersion < 2)
+        READWRITE(*const_cast<uint32_t*>(&tx.nTime));
+    else if (ser_action.ForRead())
+        tx.nTime = 0;
+    READWRITE(*const_cast<std::vector<CTxIn>*>(&tx.vin));
+    READWRITE(*const_cast<std::vector<CTxOut>*>(&tx.vout));
+    READWRITE(*const_cast<uint32_t*>(&tx.nLockTime));
+}
+
 /** The basic transaction that is broadcasted on the network and contained in
  * blocks.  A transaction can contain multiple inputs and outputs.
  */
@@ -238,7 +258,7 @@ public:
     // and bypass the constness. This is safe, as they update the entire
     // structure, including the hash.
     const int32_t nVersion;
-    unsigned int nTime;
+    uint32_t nTime;
     const std::vector<CTxIn> vin;
     const std::vector<CTxOut> vout;
     const uint32_t nLockTime;
@@ -255,14 +275,10 @@ public:
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
-        READWRITE(*const_cast<int32_t*>(&this->nVersion));
-        nVersion = this->nVersion;
-        READWRITE(*const_cast<uint32_t*>(&nTime));
-        READWRITE(*const_cast<std::vector<CTxIn>*>(&vin));
-        READWRITE(*const_cast<std::vector<CTxOut>*>(&vout));
-        READWRITE(*const_cast<uint32_t*>(&nLockTime));
-        if (ser_action.ForRead())
+        SerializeTransaction(*this, s, ser_action, nType, nVersion);
+        if (ser_action.ForRead()) {
             UpdateHash();
+        }
     }
 
     bool IsNull() const {
@@ -330,12 +346,7 @@ struct CMutableTransaction
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
-        READWRITE(this->nVersion);
-        nVersion = this->nVersion;
-        READWRITE(nTime);
-        READWRITE(vin);
-        READWRITE(vout);
-        READWRITE(nLockTime);
+        SerializeTransaction(*this, s, ser_action, nType, nVersion);
     }
 
     /** Compute the hash of this CMutableTransaction. This is computed on the

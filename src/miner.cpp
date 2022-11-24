@@ -77,14 +77,6 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
     return nNewTime - nOldTime;
 }
 
-// miner's coin base reward (POW)
-CAmount GetProofOfWorkReward()
-{
-    CAmount nSubsidy = 10000 * COIN;
-
-    return nSubsidy;
-}
-
 int64_t GetMaxTransactionTime(CBlock* pblock)
     {
         int64_t maxTransactionTime = 0;
@@ -145,8 +137,11 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
     pblock->nTime = GetAdjustedTime();
+    const int64_t nMedianTimePast = pindexPrev->GetPastTimeLimit();
 
-    nLockTimeCutoff = pblock->GetBlockTime();
+    nLockTimeCutoff = (STANDARD_LOCKTIME_VERIFY_FLAGS & LOCKTIME_MEDIAN_TIME_PAST)
+                       ? nMedianTimePast
+                       : pblock->GetBlockTime();
 
     addPriorityTxs(pblock->GetBlockTime(), fProofOfStake);
     addPackageTxs();
@@ -156,7 +151,6 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, in
 
     // Create coinbase transaction.
     CMutableTransaction coinbaseTx;
-    coinbaseTx.nTime = pblock->nTime;
     coinbaseTx.vin.resize(1);
     coinbaseTx.vin[0].prevout.SetNull();
     coinbaseTx.vout.resize(1);

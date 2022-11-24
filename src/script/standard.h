@@ -27,7 +27,7 @@ public:
     CScriptID(const uint160& in) : uint160(in) {}
 };
 
-static const unsigned int MAX_OP_RETURN_RELAY = 15000; //!< bytes (+1 for OP_RETURN, +2 for the pushdata opcodes)
+static const unsigned int MAX_OP_RETURN_RELAY = 223; //!< bytes (+1 for OP_RETURN, +2 for the pushdata opcodes)
 extern bool fAcceptDatacarrier;
 extern unsigned nMaxDatacarrierBytes;
 
@@ -45,7 +45,7 @@ static const unsigned int MANDATORY_SCRIPT_VERIFY_FLAGS = SCRIPT_VERIFY_P2SH |
 														 SCRIPT_VERIFY_LOW_S |
 													 SCRIPT_VERIFY_NULLDUMMY |
 										   SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY |
-															SCRIPT_VERIFY_DERSIG;
+														SCRIPT_VERIFY_DERSIG;
 
 enum txnouttype
 {

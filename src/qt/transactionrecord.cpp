@@ -48,6 +48,15 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         //
         // Credit
         //
+
+        CAmount nReward = -nDebit;
+        if (wtx.IsCoinStake())
+        {
+            for (unsigned int j = 0; j < wtx.vout.size(); j++)
+                if (wtx.vout[j].scriptPubKey == wtx.vout[1].scriptPubKey)
+                    nReward += wtx.vout[j].nValue;
+        }
+
         BOOST_FOREACH(const CTxOut& txout, wtx.vout)
         {
             isminetype mine = wallet->IsMine(txout);
@@ -79,7 +88,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 {
                 	if (hashPrev == hash)
                 		continue; // last coinstake output
-                	sub.credit = nNet > 0 ? nNet : wtx.GetValueOut() - nDebit;
+                	sub.credit = nReward;
                 	hashPrev = hash;
 
                 }

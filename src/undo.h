@@ -29,18 +29,19 @@ public:
     CTxInUndo() : txout(), fCoinBase(false), fCoinStake(false), nHeight(0), nVersion(0), nTime(0) {}
     CTxInUndo(const CTxOut &txoutIn, bool fCoinBaseIn = false, bool fCoinStakeIn = false, unsigned int nHeightIn = 0, int nVersionIn = 0, unsigned int nTimeIn = 0) : txout(txoutIn), fCoinBase(fCoinBaseIn), fCoinStake(fCoinStakeIn), nHeight(nHeightIn), nVersion(nVersionIn), nTime(nTimeIn) { }
     unsigned int GetSerializeSize(int nType, int nVersion) const {
-    	return ::GetSerializeSize(VARINT(nHeight*4+(fCoinBase ? 1 : 0)+(fCoinStake ? 2 : 0)), nType, nVersion) +
+        return ::GetSerializeSize(VARINT(nHeight*4+(fCoinBase ? 1 : 0)+(fCoinStake ? 2 : 0)), nType, nVersion) +
                (nHeight > 0 ? ::GetSerializeSize(VARINT(this->nVersion), nType, nVersion) : 0) +
-			   ::GetSerializeSize(this->nTime, nType, nVersion) +
+               (this->nVersion < 2 ? ::GetSerializeSize(this->nTime, nType, nVersion) : 0) +
                ::GetSerializeSize(CTxOutCompressor(REF(txout)), nType, nVersion);
     }
 
     template<typename Stream>
     void Serialize(Stream &s, int nType, int nVersion) const {
-    	::Serialize(s, VARINT(nHeight*4+(fCoinBase ? 1 : 0)+(fCoinStake ? 2 : 0)), nType, nVersion);
+        ::Serialize(s, VARINT(nHeight*4+(fCoinBase ? 1 : 0)+(fCoinStake ? 2 : 0)), nType, nVersion);
         if (nHeight > 0)
             ::Serialize(s, VARINT(this->nVersion), nType, nVersion);
-        ::Serialize(s, this->nTime, nType, nVersion);
+        if (this->nVersion < 2)
+            ::Serialize(s, this->nTime, nType, nVersion);
         ::Serialize(s, CTxOutCompressor(REF(txout)), nType, nVersion);
     }
 
@@ -53,7 +54,10 @@ public:
         fCoinStake = nCode & 2;
         if (nHeight > 0)
             ::Unserialize(s, VARINT(this->nVersion), nType, nVersion);
-        ::Unserialize(s, this->nTime, nType, nVersion);
+        if (this->nVersion < 2)
+            ::Unserialize(s, this->nTime, nType, nVersion);
+        else
+            this->nTime = 0;
         ::Unserialize(s, REF(CTxOutCompressor(REF(txout))), nType, nVersion);
     }
 };

@@ -1,4 +1,33 @@
 # Changelog
+## v13.2.0 (2022-11-24)
+- Changed versioning (backport of Core's PR20223)
+- Testnet hard fork: Removed transaction timestamp
+- Testnet hard fork: Increased transaction fees and set minimum transaction fee of 0.001 BLK
+- Testnet hard fork: Enabled relative timelocks (OP_CHECKSEQUENCEVERIFY, BIP62, 112 and 113)
+- Enabled compact block relay protocol (BIP152)
+- Added an option to donate the specified percentage of staking rewards to the dev fund (20% by default)
+- Set default MAX_OP_RETURN_RELAY to 223
+- Removed `sendfreetransactions` argument
+- Get rid of `AA_EnableHighDpiScaling` warning (backport of Core's PR16254)
+- Updated multiple dependencies
+
+## v2.13.2.9 (2022-02-24)
+- Updated leveldb, which should resolve the "missing UTXO" staking issue
+- Updated dependencies and ported build system from Bitcoin Core 0.20+
+- Updated crypto and added CRC32 for ARM64
+- Updated univalue to v1.0.3
+- Updated to Qt v5.12.11
+- Updated to OpenSSL v1.1.1m
+- Added "getstakereport" RPC call
+- Added --use-sse2 to enable SSE2
+- Code cleanup (headers, names, etc)
+
+## v2.13.2.8 (2021-02-24)
+- Immediately ban clients operating on forked chains older than nMaxReorganizationDepth
+- Fixed IsDust() policy to allow atomic swaps
+- Updated fixed seeds for mainnet and testnet
+- Updated dependencies for MacOS
+
 ## v2.13.2.7 (2020-11-24)
 - Dust mitigation in mempool (by JJ12880 from Radium Core) 
 - Compile on MacOS Catalina

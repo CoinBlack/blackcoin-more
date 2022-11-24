@@ -194,7 +194,8 @@ public:
         // height
         nSize += ::GetSerializeSize(VARINT(nHeight), nType, nVersion);
         // time
-        nSize += ::GetSerializeSize(nTime, nType, nVersion);
+        if (this->nVersion < 2)
+            nSize += ::GetSerializeSize(nTime, nType, nVersion);
         return nSize;
     }
 
@@ -226,7 +227,8 @@ public:
         // coinbase height
         ::Serialize(s, VARINT(nHeight), nType, nVersion);
         // time
-        ::Serialize(s, nTime, nType, nVersion);
+        if (this->nVersion < 2)
+            ::Serialize(s, nTime, nType, nVersion);
     }
 
     template<typename Stream>
@@ -262,7 +264,10 @@ public:
         // coinbase height
         ::Unserialize(s, VARINT(nHeight), nType, nVersion);
         // time
-        ::Unserialize(s, nTime, nType, nVersion);
+        if (this->nVersion < 2)
+            ::Unserialize(s, nTime, nType, nVersion);
+        else
+            nTime = 0;
         Cleanup();
     }
 

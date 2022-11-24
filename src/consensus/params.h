@@ -6,7 +6,7 @@
 #ifndef BITCOIN_CONSENSUS_PARAMS_H
 #define BITCOIN_CONSENSUS_PARAMS_H
 
-#include "uint256.h"
+#include <uint256.h>
 #include <map>
 #include <string>
 
@@ -15,7 +15,6 @@ namespace Consensus {
 enum DeploymentPos
 {
     DEPLOYMENT_TESTDUMMY,
-    DEPLOYMENT_CSV, // Deployment of BIP68, BIP112, and BIP113.
     // NOTE: Also add new deployments to VersionBitsDeploymentInfo in versionbits.cpp
     MAX_VERSION_BITS_DEPLOYMENTS
 };
@@ -67,14 +66,15 @@ struct Params {
     int64_t nProtocolV1RetargetingFixedTime;
     int64_t nProtocolV2Time;
     int64_t nProtocolV3Time;
+    int64_t nProtocolV3_1Time;
     bool IsProtocolV1RetargetingFixed(int64_t nTime) const { return nTime > nProtocolV1RetargetingFixedTime && nTime != 1395631999; }
     bool IsProtocolV2(int64_t nTime) const { return nTime > nProtocolV2Time && nTime != 1407053678; }
     bool IsProtocolV3(int64_t nTime) const { return nTime > nProtocolV3Time && nTime != 1444028400; }
+    bool IsProtocolV3_1(int64_t nTime) const { return nTime > nProtocolV3_1Time && nTime != 1667779200; }
     unsigned int GetTargetSpacing(int nHeight) { return IsProtocolV2(nHeight) ? 64 : 60; }
     int nLastPOWBlock;
     int nStakeTimestampMask;
     int nCoinbaseMaturity;
-    unsigned int nStakeMinAge;
     uint256 nMinimumChainWork;
 };
 } // namespace Consensus

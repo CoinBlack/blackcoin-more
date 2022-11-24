@@ -11,10 +11,7 @@
 
 #include "addrman.h"
 #include "arith_uint256.h"
-/*
-// Disable BIP152
 #include "blockencodings.h"
-*/
 #include "chainparams.h"
 #include "checkpoints.h"
 #include "checkqueue.h"
@@ -53,8 +50,8 @@
 #include <atomic>
 #include <sstream>
 
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/math/distributions/poisson.hpp>
@@ -226,18 +223,12 @@ namespace {
         uint256 hash;
         CBlockIndex* pindex;                                     //!< Optional.
         bool fValidatedHeaders;                                  //!< Whether this block has validated headers at the time of request.
-        /*
-        // Disable BIP152
         std::unique_ptr<PartiallyDownloadedBlock> partialBlock;  //!< Optional, used for CMPCTBLOCK downloads
-        */
     };
     map<uint256, pair<NodeId, list<QueuedBlock>::iterator> > mapBlocksInFlight;
 
     /** Stack of nodes which we have set to announce using compact blocks */
-    /*
-    // Disable BIP152
     list<NodeId> lNodesAnnouncingHeaderAndIDs;
-    */
 
     /** Number of preferable block download peers. */
     int nPreferredDownload = 0;
@@ -396,13 +387,10 @@ struct CNodeState {
     bool fPreferredDownload;
     //! Whether this peer wants invs or headers (when possible) for block announcements.
     bool fPreferHeaders;
-    /*
-    // Disable BIP152
     //! Whether this peer wants invs or cmpctblocks (when possible) for block announcements.
     bool fPreferHeaderAndIDs;
     //! Whether this peer will send us cmpctblocks if we request them
     bool fProvidesHeaderAndIDs;
-    */
     CNodeHeaders headers;
 
     CNodeState() {
@@ -421,11 +409,8 @@ struct CNodeState {
         nBlocksInFlightValidHeaders = 0;
         fPreferredDownload = false;
         fPreferHeaders = false;
-        /*
-        // Disable BIP152
         fPreferHeaderAndIDs = false;
         fProvidesHeaderAndIDs = false;
-        */
     }
 };
 
@@ -534,13 +519,8 @@ bool MarkBlockAsInFlight(NodeId nodeid, const uint256& hash, const Consensus::Pa
     // Make sure it's not listed somewhere already.
     MarkBlockAsReceived(hash);
 
-    /*
-    // Disable BIP152
     list<QueuedBlock>::iterator it = state->vBlocksInFlight.insert(state->vBlocksInFlight.end(),
             {hash, pindex, pindex != NULL, std::unique_ptr<PartiallyDownloadedBlock>(pit ? new PartiallyDownloadedBlock(&mempool) : NULL)});
-    */
-    list<QueuedBlock>::iterator it = state->vBlocksInFlight.insert(state->vBlocksInFlight.end(),
-            {hash, pindex, pindex != NULL});
     state->nBlocksInFlight++;
     state->nBlocksInFlightValidHeaders += it->fValidatedHeaders;
     if (state->nBlocksInFlight == 1) {
@@ -571,8 +551,6 @@ void ProcessBlockAvailability(NodeId nodeid) {
     }
 }
 
-
-
 /** Update tracking information about which blocks a peer is assumed to have. */
 void UpdateBlockAvailability(NodeId nodeid, const uint256 &hash) {
     CNodeState *state = State(nodeid);
@@ -591,8 +569,6 @@ void UpdateBlockAvailability(NodeId nodeid, const uint256 &hash) {
     }
 }
 
-/*
-// Disable BIP152
 void MaybeSetPeerAsAnnouncingHeaderAndIDs(const CNodeState* nodestate, CNode* pfrom) {
     if (nodestate->fProvidesHeaderAndIDs) {
         for (std::list<NodeId>::iterator it = lNodesAnnouncingHeaderAndIDs.begin(); it != lNodesAnnouncingHeaderAndIDs.end(); it++) {
@@ -618,7 +594,6 @@ void MaybeSetPeerAsAnnouncingHeaderAndIDs(const CNodeState* nodestate, CNode* pf
         lNodesAnnouncingHeaderAndIDs.push_back(pfrom->GetId());
     }
 }
-*/
 
 // Requires cs_main
 bool CanDirectFetch(const Consensus::Params &consensusParams)
@@ -939,7 +914,9 @@ bool CheckFinalTx(const CTransaction &tx, int flags)
     // When the next block is created its previous block will be the current
     // chain tip, so we use that to calculate the median time passed to
     // IsFinalTx() if LOCKTIME_MEDIAN_TIME_PAST is set.
-    const int64_t nBlockTime = GetAdjustedTime();
+    const int64_t nBlockTime = (flags & LOCKTIME_MEDIAN_TIME_PAST)
+                             ? chainActive.Tip()->GetPastTimeLimit()
+                             : GetAdjustedTime();
 
     return IsFinalTx(tx, nBlockHeight, nBlockTime);
 }
@@ -965,11 +942,8 @@ static std::pair<int, int64_t> CalculateSequenceLocks(const CTransaction &tx, in
     // tx.nVersion is signed integer so requires cast to unsigned otherwise
     // we would be doing a signed comparison and half the range of nVersion
     // wouldn't support BIP 68.
-    bool fEnforceBIP68 = false;
-    /*
     bool fEnforceBIP68 = static_cast<uint32_t>(tx.nVersion) >= 2
                       && flags & LOCKTIME_VERIFY_SEQUENCE;
-    */
 
     // Do not enforce sequence numbers as a relative lock time
     // unless we have been instructed to
@@ -1240,16 +1214,16 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     AssertLockHeld(cs_main);
     if (pfMissingInputs)
         *pfMissingInputs = false;
+
+    // Blackcoin: Limit dust
     int dust_tx_count = 0;
     CAmount min_dust = 100000;
-
-    BOOST_FOREACH (const CTxOut& txout, tx.vout) {
-        // LogPrintf("tx_out value %d, minimum value %d dust count %d", txout.nValue, min_dust, dust_tx_count);
+    BOOST_FOREACH(const CTxOut& txout, tx.vout) {
+        // LogPrintf("tx_out value: %d, minimum value: %d, dust count: %d", txout.nValue, min_dust, dust_tx_count);
         if (txout.nValue < min_dust)
-            dust_tx_count = dust_tx_count + 1;
+            dust_tx_count++;
         if (dust_tx_count > 10)
-            return state.DoS(0, false, REJECT_DUST, "too many dust vouts");
-
+            return state.DoS(0, false, REJECT_INVALID, "too many dust vouts");
     }
 
     if (!CheckTransaction(tx, state))
@@ -1267,7 +1241,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
     const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= 2 && VersionBitsTipState(chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV) != THRESHOLD_ACTIVE) {
+    if (fRequireStandard && tx.nVersion >= 2 && !chainparams.GetConsensus().IsProtocolV3_1(tx.nTime ? tx.nTime : GetAdjustedTime())) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version2-tx");
     }
 
@@ -1283,7 +1257,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         return state.DoS(0, false, REJECT_NONSTANDARD, "non-final");
 
     // For the same reasons as in the case with non-final transactions
-    if (tx.nTime > FutureDrift(GetAdjustedTime())) {
+    if ((tx.nTime ? tx.nTime : GetAdjustedTime()) > FutureDrift(GetAdjustedTime())) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "time-too-new");
     }
 
@@ -1367,6 +1341,11 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
 
         CAmount nValueOut = tx.GetValueOut();
         CAmount nFees = nValueIn-nValueOut;
+
+        // Blackcoin: Minimum fee check
+        if (chainparams.GetConsensus().IsProtocolV3_1(tx.nTime ? tx.nTime : GetAdjustedTime()) && nFees < GetMinFee(tx, tx.nTime ? tx.nTime : GetAdjustedTime()))
+            return state.Invalid(false, REJECT_INSUFFICIENTFEE, "fee is below minimum");
+
         // nModifiedFees includes any fee deltas from PrioritiseTransaction
         CAmount nModifiedFees = nFees;
         double nPriorityDummy = 0;
@@ -2015,7 +1994,8 @@ int GetSpendHeight(const CCoinsViewCache& inputs)
 }
 
 namespace Consensus {
-bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight)
+struct Params;
+bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, const Consensus::Params& params, unsigned int nTimeTx)
 {
         // This doesn't trigger the DoS code on purpose; if it did, it would make it easier
         // for an attacker to attempt to split the network.
@@ -2032,17 +2012,16 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
             // If prev is coinbase or coinstake, check that it's matured
             if (coins->IsCoinBase() || coins->IsCoinStake()) {
-                     if (nSpendHeight - coins->nHeight < Params().nCoinbaseMaturity)
-                             return state.Invalid(
-                                    error("CheckInputs(): tried to spend %s at depth %d", coins->IsCoinBase() ? "coinbase" : "coinstake", nSpendHeight - coins->nHeight),
-                                    REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
+                if (nSpendHeight - coins->nHeight < (params.IsProtocolV3_1(nTimeTx) ? params.nCoinbaseMaturity : Params().nCoinbaseMaturity))
+                    return state.Invalid(
+                        error("CheckInputs(): tried to spend %s at depth %d", coins->IsCoinBase() ? "coinbase" : "coinstake", nSpendHeight - coins->nHeight),
+                        REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
             }
 
-
             // Check transaction timestamp
-            if (coins->nTime > tx.nTime)
-                    return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
-                                REJECT_INVALID, "bad-txns-time-earlier-than-input");
+            if (coins->nTime > (tx.nTime ? tx.nTime : GetAdjustedTime()))
+                return state.DoS(100, error("CheckInputs() : transaction timestamp earlier than input transaction"),
+                            REJECT_INVALID, "bad-txns-time-earlier-than-input");
 
             // Check for negative or overflow input values
             nValueIn += coins->vout[prevout.n].nValue;
@@ -2053,20 +2032,25 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
         if (!tx.IsCoinStake())
         {
-                    if (nValueIn < tx.GetValueOut())
-                        return state.DoS(100, error("CheckInputs(): %s value in (%s) < value out (%s)",
-                                                    tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
-                                         REJECT_INVALID, "bad-txns-in-belowout");
+            if (nValueIn < tx.GetValueOut())
+                return state.DoS(100, error("CheckInputs(): %s value in (%s) < value out (%s)",
+                                            tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
+                                    REJECT_INVALID, "bad-txns-in-belowout");
 
-                    // Tally transaction fees
-                    CAmount nTxFee = nValueIn - tx.GetValueOut();
-                    if (nTxFee < 0)
-                        return state.DoS(100, error("CheckInputs(): %s nTxFee < 0", tx.GetHash().ToString()),
-                                         REJECT_INVALID, "bad-txns-fee-negative");
-                    nFees += nTxFee;
-                    if (!MoneyRange(nFees))
-                        return state.DoS(100, error("CheckInputs(): nFees out of range"),
-                                         REJECT_INVALID, "bad-txns-fee-outofrange");
+            // Tally transaction fees
+            CAmount nTxFee = nValueIn - tx.GetValueOut();
+            if (nTxFee < 0)
+                return state.DoS(100, error("CheckInputs(): %s nTxFee < 0", tx.GetHash().ToString()),
+                                    REJECT_INVALID, "bad-txns-fee-negative");
+            nFees += nTxFee;
+            if (!MoneyRange(nFees))
+                return state.DoS(100, error("CheckInputs(): nFees out of range"),
+                                    REJECT_INVALID, "bad-txns-fee-outofrange");
+
+            // Blackcoin: Minimum fee check
+            if (params.IsProtocolV3_1(nTimeTx) && nFees < GetMinFee(tx, nTimeTx))
+                return state.DoS(100, error("CheckInputs(): nFees below minimum"),
+                                    REJECT_INVALID, "bad-txns-fee-not-enough");
         }
     return true;
 }
@@ -2076,7 +2060,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
 {
     if (!tx.IsCoinBase())
     {
-        if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs)))
+        if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs), Params().GetConsensus(), tx.nTime ? tx.nTime : GetAdjustedTime()))
             return false;
 
         if (pvChecks)
@@ -2341,7 +2325,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("bitcoin-scriptch");
+    RenameThread("blackcoin-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -2421,31 +2405,15 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return true;
     }
 
-    // Set proof-of-stake hash modifier
-    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
-
     // Check difficulty
     if (block.nBits != GetNextTargetRequired(pindex->pprev, &block, chainparams.GetConsensus(), block.IsProofOfStake()))
          return state.DoS(100, error("ConnectBlock(): incorrect difficulty"),
                         REJECT_INVALID, "bad-diffbits");
 
     // Check proof-of-stake
-    if (block.IsProofOfStake() && chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
-         const COutPoint &prevout = block.vtx[1].vin[0].prevout;
-         const CCoins *coins = view.AccessCoins(prevout.hash);
-          if (!coins)
-              return state.DoS(100, error("ConnectBlock(): kernel input unavailable"),
-                                REJECT_INVALID, "bad-cs-kernel");
-
-         // Check proof-of-stake min confirmations
-         if (pindex->nHeight - coins->nHeight < chainparams.GetConsensus().nCoinbaseMaturity)
-              return state.DoS(100,
-                  error("ConnectBlock(): tried to stake at depth %d", pindex->nHeight - coins->nHeight),
-                    REJECT_INVALID, "bad-cs-premature");
-
-         if (!CheckStakeKernelHash(pindex->pprev, block.nBits, coins, prevout, block.vtx[1].nTime))
-              return state.DoS(100, error("ConnectBlock(): proof-of-stake hash doesn't match nBits"),
-                                 REJECT_INVALID, "bad-cs-proofhash");
+    if (block.IsProofOfStake() && chainparams.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, block.vtx[1], block.nBits, state, block.vtx[1].nTime ? block.vtx[1].nTime : block.nTime)) {
+        LogPrintf("ConnectBlock(): WARNING: %s: check proof-of-stake failed for block %s\n", __func__, block.GetHash().ToString());
+        return false; // do not error here as we expect this during initial block download
     }
 
     bool fScriptChecks = true;
@@ -2494,9 +2462,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     }
 
     // BIP16 is always active
-    bool fStrictPayToScriptHash = true;
-
-    unsigned int flags = fStrictPayToScriptHash ? SCRIPT_VERIFY_P2SH : SCRIPT_VERIFY_NONE;
+    unsigned int flags = SCRIPT_VERIFY_P2SH;
 
     // BIP66 is always active
     flags |= SCRIPT_VERIFY_DERSIG;
@@ -2511,13 +2477,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
-    /*
-    Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY) using versionbits logic.
+    // Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY)
     int nLockTimeFlags = 0;
-    if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {
+    if (chainparams.GetConsensus().IsProtocolV3_1(block.GetBlockTime())) {
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
+        nLockTimeFlags |= LOCKTIME_VERIFY_SEQUENCE;
     }
-    */
 
     int64_t nTime2 = GetTimeMicros(); nTimeForks += nTime2 - nTime1;
     LogPrint("bench", "    - Fork checks: %.2fms [%.2fs]\n", 0.001 * (nTime2 - nTime1), nTimeForks * 0.000001);
@@ -2550,6 +2515,14 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                 return state.DoS(100, error("ConnectBlock(): inputs missing/spent"),
                                  REJECT_INVALID, "bad-txns-inputs-missingorspent");
 
+            // Check that transaction is BIP68 final
+            // BIP68 lock checks (as opposed to nLockTime checks) must
+            // be in ConnectBlock because they require the UTXO set
+            prevheights.resize(tx.vin.size());
+            for (size_t j = 0; j < tx.vin.size(); j++) {
+                prevheights[j] = view.AccessCoins(tx.vin[j].prevout.hash)->nHeight;
+            }
+
             // Which orphan pool entries must we evict?
             for (size_t j = 0; j < tx.vin.size(); j++) {
                 auto itByPrev = mapOrphanTransactionsByPrev.find(tx.vin[j].prevout);
@@ -2560,12 +2533,16 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                     vOrphanErase.push_back(orphanHash);
                 }
             }
+
+            if (!SequenceLocks(tx, nLockTimeFlags, &prevheights, *pindex)) {
+                return state.DoS(100, error("%s: contains a non-BIP68-final transaction", __func__),
+                                 REJECT_INVALID, "bad-txns-nonfinal");
+            }
         }
 
-        // GetTransactionSigOpCount counts 3 types of sigops:
+        // GetTransactionSigOpCount counts 2 types of sigops:
         // * legacy (always)
         // * p2sh (when P2SH enabled in flags and excludes coinbase)
-        // * witness (when witness enabled in flags and excludes coinbase)
         nSigOpsCount += GetTransactionSigOpCount(tx, view, flags);
         if (nSigOpsCount > MAX_BLOCK_SIGOPS)
             return state.DoS(100, error("ConnectBlock(): too many sigops"),
@@ -2616,6 +2593,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                        nActualStakeReward, blockReward),
                                        REJECT_INVALID, "bad-cs-amount");
     }
+
+    // Set proof-of-stake hash modifier
+    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1].vin[0].prevout.hash : block.GetHash());
 
     if (!control.Wait())
         return state.DoS(100, false);
@@ -3343,7 +3323,7 @@ static CBlockIndex* AddToBlockIndex(const CBlockHeader& block)
 bool ReceivedBlockTransactions(const CBlock &block, CValidationState& state, CBlockIndex *pindexNew, const CDiskBlockPos& pos)
 {
     if (block.IsProofOfStake())
-            pindexNew->SetProofOfStake();
+    pindexNew->SetProofOfStake();
     pindexNew->nTx = block.vtx.size();
     pindexNew->nChainTx = 0;
     pindexNew->nFile = pos.nFile;
@@ -3578,11 +3558,11 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             return state.DoS(100, false, REJECT_INVALID, "bad-cb-multiple", false, "more than one coinbase");
 
     // Check coinbase timestamp
-    if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime))
+    if (block.GetBlockTime() > FutureDrift(block.vtx[0].nTime ? (int64_t)block.vtx[0].nTime : block.GetBlockTime()))
             return state.DoS(50, false, REJECT_INVALID, "bad-cb-time", false, "coinbase timestamp is too early");
 
     // Check coinstake timestamp
-    if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime))
+    if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), block.vtx[1].nTime ? (int64_t)block.vtx[1].nTime : block.GetBlockTime()))
             return state.DoS(50, false, REJECT_INVALID, "bad-cs-time", false, "coinstake timestamp violation");
 
     if (block.IsProofOfStake()) {
@@ -3611,7 +3591,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
 
         // check transaction timestamp
         if (block.GetBlockTime() < (int64_t)tx.nTime)
-           return state.DoS(100, false, REJECT_INVALID, "bad-tx-time", false, "block timestamp earlier than transaction timestamp");
+            return state.DoS(100, false, REJECT_INVALID, "bad-tx-time", false, "block timestamp earlier than transaction timestamp");
     }
 
     unsigned int nSigOps = 0;
@@ -3653,7 +3633,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     int nHeight = pindexPrev->nHeight+1;
 
     if (chainActive.Height() - nHeight >= consensusParams.nMaxReorganizationDepth)
-       return state.DoS(1, error("%s: forked chain older than max reorganization depth (height %d)", __func__, nHeight));
+       return state.DoS(100, error("%s: forked chain older than max reorganization depth (height %d)", __func__, nHeight));
 
     // Preliminary check difficulty in pos-only stage
     if (chainActive.Height() > consensusParams.nLastPOWBlock && nHeight > consensusParams.nLastPOWBlock && block.nBits != GetNextTargetRequired(pindexPrev, &block, consensusParams, true))
@@ -3688,16 +3668,17 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex * const pindexPrev)
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
-
-    /*
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
     // Start enforcing BIP113 (Median Time Past) using versionbits logic.
     int nLockTimeFlags = 0;
-    */
+    if (consensusParams.IsProtocolV3_1(block.GetBlockTime())) {
+        nLockTimeFlags |= LOCKTIME_MEDIAN_TIME_PAST;
+    }
 
-    int64_t nLockTimeCutoff = block.GetBlockTime();
-
+    int64_t nLockTimeCutoff = (nLockTimeFlags & LOCKTIME_MEDIAN_TIME_PAST)
+                              ? pindexPrev->GetPastTimeLimit()
+                              : block.GetBlockTime();
     // Check that all transactions are finalized
     BOOST_FOREACH(const CTransaction& tx, block.vtx) {
         if (!IsFinalTx(tx, nHeight, nLockTimeCutoff)) {
@@ -3726,7 +3707,7 @@ bool CheckStake(CBlock* pblock, CWallet& wallet, const CChainParams& chainparams
 
     CValidationState state;
     // verify hash target and signature of coinstake tx
-    if (!CheckProofOfStake(mapBlockIndex[pblock->hashPrevBlock], pblock->vtx[1], pblock->nBits, state))
+    if (!CheckProofOfStake(mapBlockIndex[pblock->hashPrevBlock], pblock->vtx[1], pblock->nBits, state, pblock->vtx[1].nTime ? pblock->vtx[1].nTime : pblock->nTime))
         return error("CheckStake() : proof-of-stake checking failed");
 
     //// debug print
@@ -3788,7 +3769,12 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
             {
                 // make sure coinstake would meet timestamp protocol
                 // as it would be the same as the block timestamp
-                txCoinBase.nTime = block.nTime = txCoinStake.nTime;
+                if (txCoinBase.nVersion < 2)
+                    txCoinBase.nTime = block.nTime = txCoinStake.nTime;
+                else {
+                    block.nTime = txCoinStake.nTime;
+                    txCoinBase.nTime = txCoinStake.nTime = 0;
+                }
                 block.vtx[0] = txCoinBase;
 
                 // we have to make sure that we have no future timestamps in
@@ -3809,6 +3795,30 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
     }
 
     return false;
+}
+
+// Blackcoin: GetMinFee
+CAmount GetMinFee(const CTransaction& tx, unsigned int nTimeTx)
+{
+    size_t nBytes = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
+    return GetMinFee(nBytes, nTimeTx);
+}
+
+CAmount GetMinFee(size_t nBytes, uint32_t nTime)
+{
+    CAmount nMinFee;
+
+    if (Params().GetConsensus().IsProtocolV3_1(nTime))
+        nMinFee = (1 + (CAmount)nBytes / 1000) * MIN_TX_FEE_PER_KB;
+    else {
+        nMinFee = ::minRelayTxFee.GetFee(nBytes);
+        if (nMinFee < DEFAULT_TRANSACTION_FEE)
+    	    nMinFee = DEFAULT_TRANSACTION_FEE;
+    }
+
+    if (!MoneyRange(nMinFee))
+        nMinFee = MAX_MONEY;
+    return nMinFee;
 }
 
 static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex=NULL, bool fProofOfStake=true)
@@ -4945,11 +4955,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
             boost::this_thread::interruption_point();
             it++;
 
-            /*
-            // Disable BIP152
             if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_CMPCT_BLOCK)
-            */
-            if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK)
             {
                 bool send = false;
                 BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
@@ -4962,7 +4968,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                         // chain if they are valid, and no more than the max reorganization depth older
                         // than the best chain we know about.
                         send = mi->second->IsValid(BLOCK_VALID_SCRIPTS) && (pindexBestHeader != NULL) &&
-                            (chainActive.Height() - mi->second->nHeight < Params().GetConsensus().nMaxReorganizationDepth);
+                            (chainActive.Height() - mi->second->nHeight < consensusParams.nMaxReorganizationDepth);
                         if (!send) {
                             LogPrintf("%s: ignoring request from peer=%i for old block that isn't in the main chain\n", __func__, pfrom->GetId());
                         }
@@ -4989,11 +4995,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                         assert(!"cannot load block from disk");
                     if (inv.type == MSG_BLOCK)
                         pfrom->PushMessage(NetMsgType::BLOCK, block);
-                    /*
-                    // Disable BIP152
                     else if (inv.type == MSG_FILTERED_BLOCK)
-                    */
-                    else // MSG_FILTERED_BLOCK
                     {
                         bool send = false;
                         CMerkleBlock merkleBlock;
@@ -5019,8 +5021,6 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                         // else
                             // no response
                     }
-                    /*
-                    // Disable BIP152
                     else if (inv.type == MSG_CMPCT_BLOCK)
                     {
                         // If a peer is asking for old blocks, we're almost guaranteed
@@ -5033,7 +5033,6 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                         } else
                             pfrom->PushMessage(NetMsgType::BLOCK, block);
                     }
-                    */
 
                     // Trigger the peer node to send a getblocks request for the next batch of inventory
                     if (inv.hash == pfrom->hashContinue)
@@ -5073,11 +5072,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
             // Track requests for our stuff.
             GetMainSignals().Inventory(inv.hash);
 
-            /*
-            // Disable BIP152
             if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_CMPCT_BLOCK)
-            */
-            if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK)
                 break;
         }
     }
@@ -5104,6 +5099,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         LogPrintf("dropmessagestest DROPPING RECV MESSAGE\n");
         return true;
     }
+
 
     if (!(nLocalServices & NODE_BLOOM) &&
               (strCommand == NetMsgType::FILTERLOAD ||
@@ -5158,7 +5154,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             return false;
         }
 
-        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+        if (pfrom->nVersion < (chainparams.GetConsensus().IsProtocolV3_1(GetAdjustedTime()) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION))
         {
             // disconnect from peers older than this proto version
             LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
@@ -5288,10 +5284,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             // nodes)
             pfrom->PushMessage(NetMsgType::SENDHEADERS);
         }
-        /*
-        // Disable BIP152
         if (pfrom->nVersion >= SHORT_IDS_BLOCKS_VERSION) {
-            // Tell our peer we are willing to provide version-1 cmpctblocks
+            // Tell our peer we are willing to provide version 1 cmpctblocks
             // However, we do not request new block announcements using
             // cmpctblock messages.
             // We send this to non-NODE NETWORK peers as well, because
@@ -5300,7 +5294,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             uint64_t nCMPCTBLOCKVersion = 1;
             pfrom->PushMessage(NetMsgType::SENDCMPCT, fAnnounceUsingCMPCTBLOCK, nCMPCTBLOCKVersion);
         }
-        */
     }
 
 
@@ -5375,8 +5368,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         State(pfrom->GetId())->fPreferHeaders = true;
     }
 
-    /*
-    // Disable BIP152
     else if (strCommand == NetMsgType::SENDCMPCT)
     {
         bool fAnnounceUsingCMPCTBLOCK = false;
@@ -5384,8 +5375,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         vRecv >> fAnnounceUsingCMPCTBLOCK >> nCMPCTBLOCKVersion;
         if (nCMPCTBLOCKVersion == 1) {
             LOCK(cs_main);
-            // fProvidesHeaderAndIDs is used to "lock in" version of compact
-            // blocks we send.
+            // fProvidesHeaderAndIDs is used to "lock in" version of compact blocks we send
             if (!State(pfrom->GetId())->fProvidesHeaderAndIDs) {
                 State(pfrom->GetId())->fProvidesHeaderAndIDs = true;
             }
@@ -5396,7 +5386,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             }
         }
     }
-    */
 
 
     else if (strCommand == NetMsgType::INV)
@@ -5444,14 +5433,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     CNodeState *nodestate = State(pfrom->GetId());
                     if (CanDirectFetch(chainparams.GetConsensus()) &&
                         nodestate->nBlocksInFlight < MAX_BLOCKS_IN_TRANSIT_PER_PEER) {
-                        /*
-                        // Disable BIP152
                         if (nodestate->fProvidesHeaderAndIDs)
                             vToFetch.push_back(CInv(MSG_CMPCT_BLOCK, inv.hash));
                         else
                             vToFetch.push_back(inv);
-                        */
-                        vToFetch.push_back(inv);
                         // Mark block as in flight already, even though the actual "getdata" message only goes out
                         // later (within the same cs_main lock, though).
                         MarkBlockAsInFlight(pfrom->GetId(), inv.hash, chainparams.GetConsensus());
@@ -5548,8 +5533,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
     }
 
 
-    /*
-    // Disable BIP152
     else if (strCommand == NetMsgType::GETBLOCKTXN)
     {
         BlockTransactionsRequest req;
@@ -5594,7 +5577,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         }
         pfrom->PushMessage(NetMsgType::BLOCKTXN, resp);
     }
-    */
 
 
     else if (strCommand == NetMsgType::GETHEADERS)
@@ -5812,8 +5794,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         FlushStateToDisk(state, FLUSH_STATE_PERIODIC);
     }
 
-    /*
-    // Disable BIP152
+
     else if (strCommand == NetMsgType::CMPCTBLOCK && !fImporting && !fReindex) // Ignore blocks received while importing
     {
         CBlockHeaderAndShortTxIDs cmpctblock;
@@ -6051,7 +6032,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             }
         }
     }
-    */
 
 
     else if (strCommand == NetMsgType::HEADERS && !fImporting && !fReindex) // Ignore headers received while importing
@@ -6225,8 +6205,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                             pindexLast->GetBlockHash().ToString(), pindexLast->nHeight);
                 }
                 if (vGetData.size() > 0) {
-                    /*
-                    // Disable BIP152
                     if (nodestate->fProvidesHeaderAndIDs && vGetData.size() == 1 && mapBlocksInFlight.size() == 1 && pindexLast->pprev->IsValid(BLOCK_VALID_CHAIN)) {
                         // We seem to be rather well-synced, so it appears pfrom was the first to provide us
                         // with this block! Let's get them to announce using compact blocks in the future.
@@ -6234,7 +6212,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         // In any case, we want to download using a compact block, not a regular one
                         vGetData[0] = CInv(MSG_CMPCT_BLOCK, vGetData[0].hash);
                     }
-                    */
                     pfrom->PushMessage(NetMsgType::GETDATA, vGetData);
                 }
             }
@@ -6792,13 +6769,9 @@ bool SendMessages(CNode* pto)
             // add all to the inv queue.
             LOCK(pto->cs_inventory);
             vector<CBlock> vHeaders;
-            /*
-            // Disable BIP152
             bool fRevertToInv = ((!state.fPreferHeaders &&
                                  (!state.fPreferHeaderAndIDs || pto->vBlockHashesToAnnounce.size() > 1)) ||
                                 pto->vBlockHashesToAnnounce.size() > MAX_BLOCKS_TO_ANNOUNCE);
-            */
-            bool fRevertToInv = (!state.fPreferHeaders || pto->vBlockHashesToAnnounce.size() > MAX_BLOCKS_TO_ANNOUNCE);
             CBlockIndex *pBestIndex = NULL; // last header queued for delivery
             ProcessBlockAvailability(pto->id); // ensure pindexBestKnownBlock is up-to-date
 
@@ -6850,8 +6823,6 @@ bool SendMessages(CNode* pto)
                     }
                 }
             }
-            /*
-            // Disable BIP152
             if (!fRevertToInv && !vHeaders.empty()) {
                 if (vHeaders.size() == 1 && state.fPreferHeaderAndIDs) {
                     // We only send up to 1 block as header-and-ids, as otherwise
@@ -6879,7 +6850,6 @@ bool SendMessages(CNode* pto)
                 } else
                     fRevertToInv = true;
             }
-            */
             if (fRevertToInv) {
                 // If falling back to using an inv, just try to inv the tip.
                 // The last entry in vBlockHashesToAnnounce was our tip at some point
@@ -6905,19 +6875,6 @@ bool SendMessages(CNode* pto)
                             pto->id, hashToAnnounce.ToString());
                     }
                 }
-            // Disable BIP152
-            } else if (!vHeaders.empty()) {
-                if (vHeaders.size() > 1) {
-                    LogPrint("net", "%s: %u headers, range (%s, %s), to peer=%d\n", __func__,
-                            vHeaders.size(),
-                            vHeaders.front().GetHash().ToString(),
-                            vHeaders.back().GetHash().ToString(), pto->id);
-                } else {
-                    LogPrint("net", "%s: sending header %s to peer=%d\n", __func__,
-                            vHeaders.front().GetHash().ToString(), pto->id);
-                }
-                pto->PushMessage(NetMsgType::HEADERS, vHeaders);
-                state.pindexBestHeaderSent = pBestIndex;
             }
             pto->vBlockHashesToAnnounce.clear();
         }

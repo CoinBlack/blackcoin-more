@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// getstakereport RPC by Navcoin
+// Copyright (c) 2017-2019 The Navcoin developers
+
 #include "amount.h"
 #include "chain.h"
 #include "core_io.h"
@@ -10,6 +13,7 @@
 #include "init.h"
 #include "main.h"
 #include "net.h"
+#include "pos.h"
 #include "rpc/server.h"
 #include "timedata.h"
 #include "util.h"
@@ -26,6 +30,7 @@
 using namespace std;
 
 int64_t nWalletUnlockTime;
+int64_t nWalletFirstStakeTime = -1;
 static CCriticalSection cs_nWalletUnlockTime;
 
 static void accountingDeprecationCheck()
@@ -2603,6 +2608,252 @@ UniValue burn(const UniValue& params, bool fHelp)
     return wtx.GetHash().GetHex();
 }
 
+// ///////////////////////////////////////////////////////////////////// ** em52
+//  new rpc added by Remy5
+
+struct StakePeriodRange_T {
+    int64_t Start;
+    int64_t End;
+    int64_t Total;
+    int Count;
+    std::string Name;
+};
+
+typedef std::vector<StakePeriodRange_T> vStakePeriodRange_T;
+
+// Check if we have a Tx that can be counted in staking report
+bool IsTxCountedAsStaked(const CWalletTx* tx)
+{
+    // Make sure we have a lock
+    LOCK(cs_main);
+
+    // orphan block or immature
+    if ((!tx->GetDepthInMainChain()) || (tx->GetBlocksToMaturity() > 0) || !tx->IsInMainChain())
+        return false;
+
+    // abandoned transactions
+    if (tx->isAbandoned())
+        return false;
+
+    // transaction other than POS block
+    return tx->IsCoinStake();
+}
+
+// Get the amount for a staked tx used in staking report
+CAmount GetTxStakeAmount(const CWalletTx* tx)
+{
+    // use the cached amount if available
+    if (tx->fCreditCached  && tx->fDebitCached )
+        return tx->nCreditCached - tx->nDebitCached;
+    // Check for cold staking
+   // else if (tx->vout[1].scriptPubKey.IsColdStaking() || tx->vout[1].scriptPubKey.IsColdStakingv2())
+        //return tx->GetCredit(pwalletMain->IsMine(tx->vout[1])) - tx->GetDebit(pwalletMain->IsMine(tx->vout[1]));
+
+    return tx->GetCredit(ISMINE_SPENDABLE) - tx->GetDebit(ISMINE_SPENDABLE) ;
+}
+
+// Gets timestamp for first stake
+// Returns -1 (Zero) if has not staked yet
+int64_t GetFirstStakeTime()
+{
+    // Check if we already know when
+    if (nWalletFirstStakeTime > 0)
+        return nWalletFirstStakeTime;
+
+    // Need a pointer for the tx
+    const CWalletTx* tx;
+
+    // scan the entire wallet transactions
+    for (auto& it : pwalletMain->wtxOrdered) {
+        tx = it.second.first;
+
+        // Check if we have a useable tx
+        if (IsTxCountedAsStaked(tx)) {
+            nWalletFirstStakeTime = tx->GetTxTime(); // Save it for later use
+            return nWalletFirstStakeTime;
+        }
+    }
+
+    // Did not find the first stake
+    return nWalletFirstStakeTime;
+}
+
+// **em52: Get total coins staked on given period
+// inspired from CWallet::GetStake()
+// Parameter aRange = Vector with given limit date, and result
+// return int =  Number of Wallet's elements analyzed
+int GetsStakeSubTotal(vStakePeriodRange_T& aRange)
+{
+    // Lock cs_main before we try to call GetTxStakeAmount
+    LOCK(cs_main);
+
+    int nElement = 0;
+    int64_t nAmount = 0;
+
+    const CWalletTx* pcoin;
+
+    vStakePeriodRange_T::iterator vIt;
+
+    // scan the entire wallet transactions
+    for (map<uint256, CWalletTx>::const_iterator it = pwalletMain->mapWallet.begin();
+         it != pwalletMain->mapWallet.end();
+         ++it) {
+        pcoin = &(*it).second;
+
+        // Check if we have a useable tx
+        if (!IsTxCountedAsStaked(pcoin))
+            continue;
+
+        nElement++;
+
+        // Get the stake tx amount from pcoin
+        nAmount = GetTxStakeAmount(pcoin);
+
+        // scan the range
+        for (vIt = aRange.begin(); vIt != aRange.end(); vIt++) {
+            if (pcoin->GetTxTime() >= vIt->Start) {
+                if (!vIt->End) { // Manage Special case
+                    vIt->Start = pcoin->GetTxTime();
+                    vIt->Total = nAmount;
+                } else if (pcoin->GetTxTime() <= vIt->End) {
+                    vIt->Count++;
+                    vIt->Total += nAmount;
+                }
+            }
+        }
+    }
+
+    return nElement;
+}
+
+// prepare range for stake report
+vStakePeriodRange_T PrepareRangeForStakeReport()
+{
+    vStakePeriodRange_T aRange;
+    StakePeriodRange_T x;
+
+
+    int64_t n1Hour = 60 * 60;
+    int64_t n1Day = 24 * n1Hour;
+
+    int64_t nToday = GetTime();
+    time_t CurTime = nToday;
+    auto localTime = boost::posix_time::second_clock::local_time();
+    struct tm Loc_MidNight = boost::posix_time::to_tm(localTime);
+
+    Loc_MidNight.tm_hour = 0;
+    Loc_MidNight.tm_min = 0;
+    Loc_MidNight.tm_sec = 0; // set midnight
+
+    x.Start = mktime(&Loc_MidNight);
+    x.End = nToday;
+    x.Count = 0;
+    x.Total = 0;
+
+    // prepare last single 30 day Range
+    for (int i = 0; i < 30; i++) {
+        x.Name = DateTimeStrFormat("%Y-%m-%d %H:%M:%S", x.Start);
+
+        aRange.push_back(x);
+
+        x.End = x.Start - 1;
+        x.Start -= n1Day;
+    }
+
+    // prepare subtotal range of last 24H, 1 week, 30 days, 1 years
+    int GroupDays[5][2] = {{1, 0}, {7, 0}, {30, 0}, {365, 0}, {99999999, 0}};
+    std::string sGroupName[] = {"24H", "7 Days", "30 Days", "365 Days", "All"};
+
+    nToday = GetTime();
+
+    for (int i = 0; i < 5; i++) {
+        x.Start = nToday - GroupDays[i][0] * n1Day;
+        x.End = nToday - GroupDays[i][1] * n1Day;
+        x.Name = "Last " + sGroupName[i];
+
+        aRange.push_back(x);
+    }
+
+    // Special case. not a subtotal, but last stake
+    x.End = 0;
+    x.Start = 0;
+    x.Name = "Latest Stake";
+    aRange.push_back(x);
+
+    return aRange;
+}
+
+
+// getstakereport: return SubTotal of the staked coin in last 24H, 7 days, etc.. of all owns address
+UniValue getstakereport(const UniValue& params, bool fHelp)
+{
+    if ((params.size() > 0) || (fHelp))
+        throw runtime_error(
+            "getstakereport\n"
+            "List last single 30 day stake subtotal and last 24h, 7, 30, 365 day subtotal.\n");
+
+    vStakePeriodRange_T aRange = PrepareRangeForStakeReport();
+
+    LOCK(cs_main);
+
+    // get subtotal calc
+    int64_t nTook = GetTimeMillis();
+    int nItemCounted = GetsStakeSubTotal(aRange);
+
+    UniValue result(UniValue::VOBJ);
+
+    vStakePeriodRange_T::iterator vIt;
+
+    // Span of days to compute average over
+    int nDays = 0;
+
+    // Get the wallet's staking age in days
+    int nWalletDays = 0;
+
+    // Check if we have a stake already
+    if (GetFirstStakeTime() != -1)
+        nWalletDays = (GetTime() - GetFirstStakeTime()) / 86400;
+
+    // report it
+    for (vIt = aRange.begin(); vIt != aRange.end(); vIt++) {
+        // Add it to results
+        result.pushKV(vIt->Name, FormatMoney(vIt->Total).c_str());
+
+        // Get the nDays value
+        nDays = 0;
+        if (vIt->Name == "Last 7 Days")
+            nDays = 7;
+        else if (vIt->Name == "Last 30 Days")
+            nDays = 30;
+        else if (vIt->Name == "Last 365 Days")
+            nDays = 365;
+
+        // Check if we need to add the average
+        if (nDays > 0) {
+            // Check if nDays is larger than the wallet's staking age in days
+            if (nDays > nWalletDays && nWalletDays > 0)
+                nDays = nWalletDays;
+
+            // Add the Average
+            result.pushKV(vIt->Name + " Avg", FormatMoney(vIt->Total / nDays).c_str());
+        }
+    }
+
+    vIt--;
+    result.pushKV("Latest Time",
+        vIt->Start ? DateTimeStrFormat("%Y-%m-%d %H:%M:%S", vIt->Start).c_str() :
+                     "Never");
+
+    // Moved nTook call down here to be more accurate
+    nTook = GetTimeMillis() - nTook;
+
+    // report element counted / time took
+    result.pushKV("Stake counted", nItemCounted);
+    result.pushKV("time took (ms)", nTook);
+
+    return result;
+}
+
 /*
 // ToDo: fix burnwallet
 
@@ -2695,6 +2946,7 @@ static const CRPCCommand commands[] =
     { "wallet",             "getrawchangeaddress",      &getrawchangeaddress,      true  },
     { "wallet",             "getreceivedbyaccount",     &getreceivedbyaccount,     false },
     { "wallet",             "getreceivedbyaddress",     &getreceivedbyaddress,     false },
+    { "wallet",             "getstakereport",           &getstakereport,           false },
     { "wallet",             "gettransaction",           &gettransaction,           false },
     { "wallet",             "getunconfirmedbalance",    &getunconfirmedbalance,    false },
     { "wallet",             "getwalletinfo",            &getwalletinfo,            false },

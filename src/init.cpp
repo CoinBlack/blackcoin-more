@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include <config/bitcoin-config.h>
 #endif
 
 #include "init.h"
@@ -30,7 +30,6 @@
 #include "script/standard.h"
 #include "script/sigcache.h"
 #include "scheduler.h"
-#include "timedata.h"
 #include "txdb.h"
 #include "txmempool.h"
 #include "torcontrol.h"
@@ -53,7 +52,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/function.hpp>
 #include <boost/interprocess/sync/file_lock.hpp>
@@ -64,6 +63,11 @@
 #include "zmq/zmqnotificationinterface.h"
 #endif
 
+#ifdef USE_SSE2
+#include <crypto/scrypt.h>
+#endif
+
+using namespace boost::placeholders;
 using namespace std;
 
 bool fFeeEstimatesInitialized = false;
@@ -139,7 +143,7 @@ bool ShutdownRequested()
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
  * chainstate, while keeping user interface out of the common library, which is shared
- * between bitcoind, and bitcoin-qt and non-server tools.
+ * between blackmored, and blackcoin-qt and non-server tools.
 */
 class CCoinsViewErrorCatcher : public CCoinsViewBacked
 {
@@ -187,7 +191,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("bitcoin-shutoff");
+    RenameThread("blackcoin-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -482,6 +486,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageGroup(_("Staking options:"));
     strUsage += HelpMessageOpt("-staking=<n>", strprintf(_("Enable staking functionality (0-1, default: %u)"), 1));
     strUsage += HelpMessageOpt("-reservebalance=<amount>", _("Keep the specified amount of coins available for spending at all times (default: 0)"));
+    strUsage += HelpMessageOpt("-donatetodevfund=<n>", strprintf(_("Donate the specified percentage of staking rewards to the dev fund (default: %u)"), DEFAULT_DONATION_PERCENTAGE));
 #endif
 
     return strUsage;
@@ -600,7 +605,7 @@ void CleanupBlockRevFiles()
 void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("bitcoin-loadblk");
+    RenameThread("blackcoin-loadblk");
     CImportingNow imp;
 
     // -reindex
@@ -788,7 +793,7 @@ void InitLogging()
     fLogIPs = GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf(PACKAGE_NAME " version %s\n", FormatFullVersion());
+    LogPrintf("Blackcoin More version %s\n", FormatFullVersion());
 }
 
 /** Initialize bitcoin.
@@ -1105,7 +1110,8 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
     int64_t nStart;
 
 #if defined(USE_SSE2)
-    scrypt_detect_sse2();
+    std::string sse2detect = scrypt_detect_sse2();
+    LogPrintf("%s\n", sse2detect);
 #endif
 
     // ********************************************************* Step 5: verify wallet database integrity
@@ -1244,6 +1250,12 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
             return false;
         }
     }
+
+    nDonationPercentage = GetArg("-donatetodevfund", DEFAULT_DONATION_PERCENTAGE);
+    if (nDonationPercentage < 0)
+        nDonationPercentage = 0;
+    else if (nDonationPercentage > 95)
+        nDonationPercentage = 95;
 #endif
 
     BOOST_FOREACH(const std::string& strDest, mapMultiArgs["-seednode"])
@@ -1326,6 +1338,7 @@ bool AppInit2(Config& config, boost::thread_group& threadGroup, CScheduler& sche
 
                 pblocktree = new CBlockTreeDB(nBlockTreeDBCache, false, fReindex);
                 pcoinsdbview = new CCoinsViewDB(nCoinDBCache, false, fReindex || fReindexChainState);
+
                 pcoinscatcher = new CCoinsViewErrorCatcher(pcoinsdbview);
                 pcoinsTip = new CCoinsViewCache(pcoinscatcher);
 

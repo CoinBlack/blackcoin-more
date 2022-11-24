@@ -5,11 +5,11 @@
 #ifndef BITCOIN_TEST_TEST_BITCOIN_H
 #define BITCOIN_TEST_TEST_BITCOIN_H
 
-#include "chainparamsbase.h"
-#include "key.h"
-#include "pubkey.h"
-#include "txdb.h"
-#include "txmempool.h"
+#include <chainparamsbase.h>
+#include <key.h>
+#include <pubkey.h>
+#include <txdb.h>
+#include <txmempool.h>
 
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
@@ -76,7 +76,7 @@ struct TestMemPoolEntryHelper
     TestMemPoolEntryHelper() :
         nFee(0), nTime(0), dPriority(0.0), nHeight(1),
         hadNoDependencies(false), spendsCoinbase(false), sigOpCost(4) { }
-    
+
     CTxMemPoolEntry FromTx(CMutableTransaction &tx, CTxMemPool *pool = NULL);
     CTxMemPoolEntry FromTx(CTransaction &tx, CTxMemPool *pool = NULL);
 

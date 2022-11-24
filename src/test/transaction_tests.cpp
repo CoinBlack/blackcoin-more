@@ -2,23 +2,23 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "data/tx_invalid.json.h"
-#include "data/tx_valid.json.h"
-#include "test/test_bitcoin.h"
+#include <test/data/tx_invalid.json.h>
+#include <test/data/tx_valid.json.h>
+#include <test/test_bitcoin.h>
 
-#include "clientversion.h"
-#include "checkqueue.h"
-#include "consensus/validation.h"
-#include "core_io.h"
-#include "key.h"
-#include "keystore.h"
-#include "main.h" // For CheckTransaction
-#include "policy/policy.h"
-#include "script/script.h"
-#include "script/sign.h"
-#include "script/script_error.h"
-#include "script/standard.h"
-#include "utilstrencodings.h"
+#include <clientversion.h>
+#include <checkqueue.h>
+#include <consensus/validation.h>
+#include <core_io.h>
+#include <key.h>
+#include <keystore.h>
+#include <main.h> // For CheckTransaction
+#include <policy/policy.h>
+#include <script/script.h>
+#include <script/sign.h>
+#include <script/script_error.h>
+#include <script/standard.h>
+#include <utilstrencodings.h>
 
 #include <map>
 #include <string>
@@ -30,8 +30,6 @@
 #include <boost/assign/list_of.hpp>
 
 #include <univalue.h>
-
-using namespace std;
 
 typedef vector<unsigned char> valtype;
 
@@ -63,7 +61,7 @@ unsigned int ParseScriptFlags(string strFlags)
     vector<string> words;
     boost::algorithm::split(words, strFlags, boost::algorithm::is_any_of(","));
 
-    BOOST_FOREACH(string word, words)
+    for(string word: words)
     {
         if (!mapFlagNames.count(word))
             BOOST_ERROR("Bad test: unknown verification flag '" << word << "'");
