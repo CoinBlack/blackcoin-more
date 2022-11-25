@@ -68,8 +68,6 @@ RUN git clone -b $BRANCH https://$HUBLAB.com/$GITNAME/blackcoin-more.git && \
   for i in `ldd /usr/local/bin/blackmored | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
   cp --parents /usr/local/bin/blackmore-cli ./ && \
   for i in `ldd /usr/local/bin/blackmore-cli | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
-  cp --parents /usr/local/bin/blackmore-qt ./ && \
-  for i in `ldd /usr/local/bin/blackmore-qt | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
   cp /usr/bin/bc --parents ./ && \
   for i in `ldd /usr/bin/bc | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
   cp /usr/bin/jq --parents ./ && \
