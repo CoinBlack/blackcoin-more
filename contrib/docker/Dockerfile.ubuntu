@@ -43,5 +43,3 @@ EXPOSE 15714/tcp
 EXPOSE 15715/tcp
 EXPOSE 25714/tcp
 EXPOSE 25715/tcp
-
-ENTRYPOINT blackcoind -testenet -daemon && blackcoin-qt -testenet
