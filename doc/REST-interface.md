@@ -3,8 +3,8 @@ Unauthenticated REST Interface
 
 The REST API can be enabled with the `-rest` option.
 
-The interface runs on the same port as the JSON-RPC interface, by default port 8332 for mainnet, port 18332 for testnet,
-port 38332 for signet, and port 18443 for regtest.
+The interface runs on the same port as the JSON-RPC interface, by default port 15715 for mainnet, port 25715 for testnet,
+and port 35715 for regtest.
 
 REST Interface consistency guarantees
 -------------------------------------
@@ -83,7 +83,7 @@ https://github.com/bitcoin/bips/blob/master/bip-0064.mediawiki
 
 Example:
 ```
-$ curl localhost:18332/rest/getutxos/checkmempool/b2cdfd7b89def827ff8af7cd9bff7627ff72e5e8b0f71210f92ea7a4000c5d75-0.json 2>/dev/null | json_pp
+$ curl localhost:15715/rest/getutxos/checkmempool/b2cdfd7b89def827ff8af7cd9bff7627ff72e5e8b0f71210f92ea7a4000c5d75-0.json 2>/dev/null | json_pp
 {
    "chainHeight" : 325347,
    "chaintipHash" : "00000000fb01a7f3745a717f8caebee056c484e6e0bfe4a9591c235bb70506fb",

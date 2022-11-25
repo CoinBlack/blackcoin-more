@@ -120,7 +120,7 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000348dfccea264e4b8235");
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000038844f1764349c166d5");
         consensus.defaultAssumeValid = uint256S("0x36442d872ca6a66c65caef4d9468b8add290accc8cf7ec386eee50e62721ed3d"); //2400000
 
         /**
@@ -175,6 +175,7 @@ public:
                 {254348, uint256S("0x9bf8d9bd757d3ef23d5906d70567e5f0da93f1e0376588c8d421a95e2421838b")}, // minor network split
                 {319002, uint256S("0x0011494d03b2cdf1ecfc8b0818f1e0ef7ee1d9e9b3d1279c10d35456bc3899ef")}, // hardfork
                 {872456, uint256S("0xe4fd321ced1de06213d2e246b150b4bfd8c4aa0989965dce88f2a58668c64860")}, // hardfork
+                {4232630, uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc")},
             }
         };
 
@@ -184,13 +185,13 @@ public:
 
         chainTxData = ChainTxData{
             // Data from RPC: getchaintxstats 40500 ef16e02c01548b33363f13674e18f794d7525212ed730f966cc420f0b61c5cee
-            /* nTime    */ 1652777360,
-            /* nTxCount */ 13086105,
+            /* nTime    */ 1668631296,
+            /* nTxCount */ 13562393,
             /* dTxRate  */ 0.050
         };
 
         // A vector of p2sh addresses
-        vDevFundAddress = { "BBXBrYnrhbDyo44eRxeUPVjqPpNk9bBg8b" };
+        vDevFundAddress = { "BKDvboD1CzZ5KycP1FRSXRoi7XXhHoQhS1" };
     }
 };
 
@@ -239,7 +240,7 @@ public:
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
-        consensus.nProtocolV3_1Time = 4102437600;
+        consensus.nProtocolV3_1Time = 1667779200;
         consensus.nLastPOWBlock = 0x7fffffff;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
@@ -297,7 +298,7 @@ public:
             /* dTxRate  */ 0.019
         };
         // A vector of p2sh addresses
-        vDevFundAddress = { "mwAokTUtjKt2yjrpY3tFJH8BTC9VvcZg7F" };
+        vDevFundAddress = { "n14L5xqAs7QRzNiTLPNaPeqaF9CRoxzVnU" };
 
     }
 };

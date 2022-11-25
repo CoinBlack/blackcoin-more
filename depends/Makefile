@@ -75,6 +75,9 @@ build_vendor=$(word 2,$(subst -, ,$(build)))
 full_build_os:=$(subst $(build_arch)-$(build_vendor)-,,$(build))
 build_os:=$(findstring linux,$(full_build_os))
 build_os+=$(findstring darwin,$(full_build_os))
+build_os+=$(findstring freebsd,$(full_build_os))
+build_os+=$(findstring netbsd,$(full_build_os))
+build_os+=$(findstring openbsd,$(full_build_os))
 build_os:=$(strip $(build_os))
 ifeq ($(build_os),)
 build_os=$(full_build_os)
@@ -85,6 +88,9 @@ host_vendor=$(word 2,$(subst -, ,$(canonical_host)))
 full_host_os:=$(subst $(host_arch)-$(host_vendor)-,,$(canonical_host))
 host_os:=$(findstring linux,$(full_host_os))
 host_os+=$(findstring darwin,$(full_host_os))
+host_os+=$(findstring freebsd,$(full_host_os))
+host_os+=$(findstring netbsd,$(full_host_os))
+host_os+=$(findstring openbsd,$(full_host_os))
 host_os+=$(findstring mingw32,$(full_host_os))
 
 ifeq (android,$(findstring android,$(full_host_os)))
@@ -115,7 +121,7 @@ include builders/default.mk
 include packages/packages.mk
 
 # Previously, we directly invoked the well-known programs using $(shell ...)
-# to contruct build_id_string. However, that was problematic because:
+# to construct build_id_string. However, that was problematic because:
 #
 # 1. When invoking a shell, GNU Make special-cases exit code 127 (command not
 #    found) by not capturing the output but instead passing it through. This is
@@ -182,7 +188,7 @@ $(host_prefix)/.stamp_$(final_build_id): $(native_packages) $(packages)
 	$(AT)mkdir -p $(@D)
 	$(AT)echo copying packages: $^
 	$(AT)echo to: $(@D)
-	$(AT)cd $(@D); $(foreach package,$^, tar xf $($(package)_cached); )
+	$(AT)cd $(@D); $(foreach package,$^, $(build_TAR) xf $($(package)_cached); )
 	$(AT)touch $@
 
 # $PATH is not preserved between ./configure and make by convention. Its

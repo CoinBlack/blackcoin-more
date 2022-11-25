@@ -47,7 +47,7 @@ fi
 #	ret=$?
 #done
 
-#limit outgoing traffic to and from port 8333. but not when dealing with a host on the local network
+#limit outgoing traffic to and from port 15714. but not when dealing with a host on the local network
 #	(defined by $LOCALNET_V4 and $LOCALNET_V6)
 #	--set-mark marks packages matching these criteria with the number "2" (v4)
 #	--set-mark marks packages matching these criteria with the number "4" (v6)

@@ -263,7 +263,7 @@ int main(int argc, char* argv[])
 
     SetupEnvironment();
 
-    // Connect bitcoind signal handlers
+    // Connect blackmored signal handlers
     noui_connect();
 
     return (AppInit(node, argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);

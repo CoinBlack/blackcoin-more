@@ -65,12 +65,9 @@ AC_PROG_CXX
 dnl By default, libtool for mingw refuses to link static libs into a dll for
 dnl fear of mixing pic/non-pic objects, and import/export complications. Since
 dnl we have those under control, re-enable that functionality.
-dnl Compiler with posix support is needed for cross compile some of c++ 14 features for mingw like threads and mutexes.
 case $host in
   *mingw*)
      lt_cv_deplibs_check_method="pass_all"
-     CC="$CC-posix"
-     CXX="$CXX-posix"
   ;;
 esac
 
@@ -205,7 +202,7 @@ AC_ARG_WITH([qrencode],
 
 AC_ARG_ENABLE([hardening],
   [AS_HELP_STRING([--disable-hardening],
-  [do not attempt to harden the resulting executables (default is to harden when possible)])],
+  [do not attempt to harden the resulting executables (default is to harden)])],
   [use_hardening=$enableval],
   [use_hardening=yes])
 
@@ -264,6 +261,12 @@ AC_ARG_ENABLE([asm],
 if test "x$use_asm" = xyes; then
   AC_DEFINE(USE_ASM, 1, [Define this symbol to build in assembly routines])
 fi
+
+AC_ARG_ENABLE([glibc-back-compat],
+  [AS_HELP_STRING([--enable-glibc-back-compat],
+  [enable backwards compatibility with glibc])],
+  [use_glibc_compat=$enableval],
+  [use_glibc_compat=no])
 
 AC_ARG_WITH([system-univalue],
   [AS_HELP_STRING([--with-system-univalue],
