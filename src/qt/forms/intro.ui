@@ -222,6 +222,9 @@
    </item>
    <item>
     <widget class="QLabel" name="lblExplanation3">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</string>
      </property>
@@ -234,6 +237,9 @@
     <layout class="QHBoxLayout" name="pruneOptLayout">
      <item>
       <widget class="QCheckBox" name="prune">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Limit block chain storage to</string>
        </property>
@@ -244,6 +250,9 @@
      </item>
      <item>
       <widget class="QSpinBox" name="pruneGB">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="suffix">
         <string> GB</string>
        </property>
@@ -251,6 +260,9 @@
      </item>
      <item>
       <widget class="QLabel" name="lblPruneSuffix">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="buddy">
         <cstring>pruneGB</cstring>
        </property>

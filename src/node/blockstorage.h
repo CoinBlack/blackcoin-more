@@ -48,8 +48,6 @@ extern uint64_t nPruneTarget;
 //! Check whether the block associated with this index entry is pruned or not.
 bool IsBlockPruned(const CBlockIndex* pblockindex);
 
-void CleanupBlockRevFiles();
-
 /** Open a block file (blk?????.dat) */
 FILE* OpenBlockFile(const FlatFilePos& pos, bool fReadOnly = false);
 /** Translation to a filesystem path */

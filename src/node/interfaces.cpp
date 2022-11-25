@@ -621,11 +621,6 @@ public:
     }
     CFeeRate relayMinFee() override { return ::minRelayTxFee; }
     CFeeRate relayDustFee() override { return ::dustRelayFee; }
-    bool havePruned() override
-    {
-        LOCK(cs_main);
-        return ::fHavePruned;
-    }
     bool isReadyToBroadcast() override { return !::fImporting && !::fReindex && !isInitialBlockDownload(); }
     bool isInitialBlockDownload() override {
         return chainman().ActiveChainstate().IsInitialBlockDownload();
