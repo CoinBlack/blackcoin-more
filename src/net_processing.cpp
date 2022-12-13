@@ -394,9 +394,8 @@ private:
     /** Send `feefilter` message. */
     void MaybeSendFeefilter(CNode& node, std::chrono::microseconds current_time) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
     
-    /** Process net block. */
+    /** Process net block headers. */
     bool ProcessNetBlockHeaders(CNode* pfrom, const std::vector<CBlockHeader>& block, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex=nullptr);
-    bool ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock, CNode* pfrom);
 
     const CChainParams& m_chainparams;
     CConnman& m_connman;
@@ -1207,21 +1206,6 @@ bool PeerManagerImpl::ProcessNetBlockHeaders(CNode* pfrom, const std::vector<CBl
         return headers.updateState(state, ret);
     }
     return ret;
-}
-
-bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock, CNode* pfrom)
-{
-    // Process the header before processing the block
-    const CBlockIndex *pindex = nullptr;
-    BlockValidationState state;
-    if (!ProcessNetBlockHeaders(pfrom, {*pblock}, state, m_chainparams, &pindex)) {
-        if (state.IsInvalid()) {
-            MaybePunishNodeForBlock(pfrom->GetId(), state, false, strprintf("Peer %d sent us invalid header\n", pfrom->GetId()));
-            return error("ProcessNetBlock() : invalid header received");
-        }
-    }
-
-    return true;
 }
 
 void PeerManagerImpl::AddTxAnnouncement(const CNode& node, const GenTxid& gtxid, std::chrono::microseconds current_time)
@@ -2589,7 +2573,7 @@ void PeerManagerImpl::ProcessGetCFCheckPt(CNode& peer, CDataStream& vRecv)
 void PeerManagerImpl::ProcessBlock(CNode& node, const std::shared_ptr<const CBlock>& block, bool force_processing)
 {
     bool new_block{false};
-    ProcessNetBlock(block, force_processing, &new_block, &node);
+    m_chainman.ProcessNewBlock(m_chainparams, block, force_processing, &new_block);
     if (new_block) {
         node.nLastBlockTime = GetTime();
     } else {
