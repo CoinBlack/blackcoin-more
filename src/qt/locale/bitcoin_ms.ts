@@ -381,7 +381,7 @@
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation>
-            <numerusform />
+            <numerusform>Processed %n blocks of transaction history.</numerusform>
         </translation>
     </message>
     <message>

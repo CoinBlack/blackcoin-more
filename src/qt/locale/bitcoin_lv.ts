@@ -88,7 +88,7 @@
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
-        <translation type="unfinished">Mēģinot saglabāt adrešu sarakstu %1 radās kļūda. Mēģiniet vēlreiz.</translation>
+        <translation type="unfinished">Mēģinot saglabāt adrešu sarakstu %1 radās kļūda. Lūdzu mēģiniet vēlreiz.</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>Jaunā parole vēlreiz</translation>
+        <translation>Ievadiet jauno paroli vēlreiz</translation>
     </message>
     <message>
         <source>Show passphrase</source>
@@ -221,18 +221,18 @@
         <translation type="unfinished">Maciņa šifrēšana neizdevās</translation>
     </message>
     <message>
+        <source>The supplied passphrases do not match.</source>
+        <translation type="unfinished">Ievadītās paroles nav vienādas.</translation>
+    </message>
+    <message>
         <source>Wallet unlock failed</source>
         <translation type="unfinished">Maciņa atslēgšana neizdevās</translation>
     </message>
     <message>
-        <source>Wallet unlock failed</source>
-        <translation>Maciņa atslēgšana neizdevās</translation>
+        <source>Warning: The Caps Lock key is on!</source>
+        <translation type="unfinished">Uzmanību! Caps Lock uz klavietūras ir ieslēgts!</translation>
     </message>
-    <message>
-        <source>Wallet decryption failed</source>
-        <translation>Maciņa atšifrēšana neizdevās</translation>
-    </message>
-    </context>
+</context>
 <context>
     <name>QObject</name>
     <message>
@@ -331,12 +331,20 @@
         <translation type="unfinished">&amp;Par %1</translation>
     </message>
     <message>
+        <source>Show information about %1</source>
+        <translation type="unfinished">Rādīt informāciju par %1</translation>
+    </message>
+    <message>
         <source>About &amp;Qt</source>
         <translation>Par &amp;Qt</translation>
     </message>
     <message>
         <source>Show information about Qt</source>
         <translation>Parādīt informāciju par Qt</translation>
+    </message>
+    <message>
+        <source>Create a new wallet</source>
+        <translation type="unfinished">Izveidot jaunu maciņu</translation>
     </message>
     <message>
         <source>Wallet:</source>
@@ -361,6 +369,10 @@
     <message>
         <source>&amp;Receive</source>
         <translation>&amp;Saņemt</translation>
+    </message>
+    <message>
+        <source>&amp;Options…</source>
+        <translation type="unfinished">&amp;Opcijas...</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -397,6 +409,10 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Ciļņu rīkjosla</translation>
+    </message>
+    <message>
+        <source>Synchronizing with network…</source>
+        <translation type="unfinished">Sinhronizē ar tīklu</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -756,6 +772,10 @@
         <translation>Apstiprināt iestatījumu atiestatīšanu</translation>
     </message>
     <message>
+        <source>Configuration options</source>
+        <translation type="unfinished">Konfigurāciju Opcijas</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation type="unfinished">Kļūda</translation>
     </message>
@@ -801,6 +821,33 @@
     <message>
         <source>Your current total balance</source>
         <translation>Jūsu kopējā tekošā bilance</translation>
+    </message>
+    <message>
+        <source>Spendable:</source>
+        <translation type="unfinished">Iztērējams:</translation>
+    </message>
+    <message>
+        <source>Recent transactions</source>
+        <translation type="unfinished">Nesenās transakcijas</translation>
+    </message>
+    </context>
+<context>
+    <name>PSBTOperationsDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogs</translation>
+    </message>
+    <message>
+        <source>Copy to Clipboard</source>
+        <translation type="unfinished">Nokopēt</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished">Saglabāt...</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Aiztaisīt</translation>
     </message>
     </context>
 <context>
@@ -1253,6 +1300,13 @@
         <translation type="unfinished">Eksportēšana Neizdevās</translation>
     </message>
     </context>
+<context>
+    <name>WalletFrame</name>
+    <message>
+        <source>Create a new wallet</source>
+        <translation type="unfinished">Izveidot jaunu maciņu</translation>
+    </message>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
