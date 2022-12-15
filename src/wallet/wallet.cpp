@@ -3467,7 +3467,6 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
     // Transaction index is required to get to block header
     if (!g_txindex)
         return error("CreateCoinStake : transaction index unavailable");
-    const Consensus::Params& params = Params().GetConsensus();
 
     LOCK2(cs_main, cs_wallet);
     txNew.vin.clear();
