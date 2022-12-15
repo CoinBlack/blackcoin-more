@@ -98,6 +98,8 @@ constexpr CAmount HIGH_MAX_TX_FEE{100 * HIGH_TX_FEE_PER_KB};
 //! Pre-calculated constants for input size estimation in *virtual size*
 static constexpr size_t DUMMY_NESTED_P2WPKH_INPUT_SIZE = 91;
 
+//! -staketimio default, proof-of-stake timeout in ms
+static const unsigned int DEFAULT_STAKETIMIO = 500;
 static const CAmount DEFAULT_RESERVE_BALANCE = 0;
 static const unsigned int DEFAULT_DONATION_PERCENTAGE = 20;
 
