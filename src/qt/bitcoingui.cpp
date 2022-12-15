@@ -35,11 +35,14 @@
 #include <chainparams.h>
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
-#include <miner.h> // DEFAULT_STAKE
 #include <node/ui_interface.h>
 #include <util/system.h>
 #include <util/translation.h>
 #include <validation.h>
+
+#ifdef ENABLE_WALLET
+#include <wallet/wallet.h> // DEFAULT_STAKE
+#endif // ENABLE_WALLET
 
 #include <QAction>
 #include <QApplication>
