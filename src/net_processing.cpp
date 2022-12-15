@@ -1233,6 +1233,16 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
         }
     }
 
+    // Process the header before processing the block
+    const CBlockIndex *pindex = nullptr;
+    BlockValidationState state;
+    if (!ProcessNetBlockHeaders(pfrom, {*pblock}, state, m_chainparams, &pindex)) {
+        if (state.IsInvalid()) {
+            MaybePunishNodeForBlock(pfrom->GetId(), state, false, strprintf("Peer %d sent us invalid header\n", pfrom->GetId()));
+            return error("%s: invalid header received", __func__);
+        }
+    }
+
     if (!m_chainman.ProcessNewBlock(m_chainparams, pblock, fForceProcessing, fNewBlock))
         return error("%s: ProcessNewBlock FAILED", __func__);
 
