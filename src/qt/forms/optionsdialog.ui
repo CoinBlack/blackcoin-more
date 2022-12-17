@@ -131,6 +131,61 @@
         </layout>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_Main_ReserveBalanceLabel">
+         <item>
+          <widget class="QLabel" name="reserveBalanceLabel">
+           <property name="text">
+            <string>Reserve amount that will not be used for staking</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
+           </property>
+           <property name="buddy">
+            <cstring>reserveBalance</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BitcoinAmountField" name="reserveBalance">
+           <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+             <size>
+             <width>80</width>
+             <height>0</height>
+             </size>
+           </property>
+           <property name="maximumSize">
+             <size>
+             <width>1000</width>
+             <height>100</height>
+             </size>
+           </property>
+           <property name="toolTip">
+            <string>Reserve amount that will not be used for staking</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_Main_ReserveBalance">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_Main_DonationsLabel">
          <item>
           <widget class="QLabel" name="donationPercentageLabel">
@@ -1026,6 +1081,11 @@
    <class>QValueComboBox</class>
    <extends>QComboBox</extends>
    <header>qt/qvaluecombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BitcoinAmountField</class>
+   <extends>QSpinBox</extends>
+   <header>qt/bitcoinamountfield.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
