@@ -11,7 +11,7 @@
 
 static const int PROTOCOL_VERSION = 70016;
 
-//! require that version after fork
+//! peercoin: used to communicate with clients that don't know how to send PoS information in headers
 static const int OLD_VERSION = 70015;
 
 //! initial proto version, to be increased after version/verack negotiation
