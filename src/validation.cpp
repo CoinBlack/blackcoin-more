@@ -2707,6 +2707,7 @@ void CChainState::ReceivedBlockTransactions(const CBlock& block, CBlockIndex* pi
     }
 }
 
+#ifdef ENABLE_WALLET
 // Blackcoin
 // peercoin: sign block
 typedef std::vector<unsigned char> valtype;
@@ -2727,6 +2728,7 @@ bool SignBlock(CBlock& block, const CWallet& keystore)
         return false;
     return key.Sign(block.GetHash(), block.vchBlockSig, 0);
 }
+#endif
 
 static bool CheckBlockSignature(const CBlock& block)
 {

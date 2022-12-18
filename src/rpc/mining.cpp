@@ -1159,6 +1159,7 @@ static RPCHelpMan staking()
 
 
     bool fGenerate = request.params[0].isNull() ? gArgs.GetBoolArg("-staking", DEFAULT_STAKE) : request.params[0].get_bool();
+#ifdef ENABLE_WALLET
     if (!request.params[0].isNull()) {
         NodeContext& node = EnsureAnyNodeContext(request.context);
         gArgs.ForceSetArg("-staking", fGenerate ? "1" : "0");
@@ -1170,6 +1171,7 @@ static RPCHelpMan staking()
             StopStaking();
         }
     }
+#endif
 
     UniValue result(UniValue::VOBJ);
     result.pushKV("generate", fGenerate);

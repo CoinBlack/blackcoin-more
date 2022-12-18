@@ -163,6 +163,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // peercoin: if coinstake available add coinstake tx
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime();  // only initialized at startup
 
+#ifdef ENABLE_WALLET
     if (pwallet) { // attempt to find a coinstake
         *pfPoSCancel = true;
         pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), true);
@@ -190,6 +191,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         if (*pfPoSCancel)
             return nullptr; // peercoin: there is no point to continue if we failed to create coinstake
     }
+#endif
 
     pblock->nVersion = g_versionbitscache.ComputeBlockVersion(pindexPrev, chainparams.GetConsensus());
     // -regtest only: allow overriding block.nVersion with
@@ -545,6 +547,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager* chainman,
     return true;
 }
 
+#ifdef ENABLE_WALLET
 void PoSMiner(std::shared_ptr<CWallet> pwallet, ChainstateManager* chainman, CChainState* chainstate, CConnman* connman, CTxMemPool* mempool)
 {
     LogPrintf("PoSMiner started for proof-of-stake\n");
@@ -747,3 +750,4 @@ void StopStaking()
     }
     LogPrintf("ThreadStakeMiner *stop* done!\n");
 }
+#endif

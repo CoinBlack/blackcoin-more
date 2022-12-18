@@ -1458,6 +1458,7 @@ void BitcoinGUI::toggleHidden()
     showNormalIfMinimized(true);
 }
 
+#ifdef ENABLE_WALLET
 void BitcoinGUI::updateStakingIcon()
 {
     if (m_node.shutdownRequested() || !clientModel)
@@ -1520,6 +1521,7 @@ void BitcoinGUI::updateStakingIcon()
             labelStakingIcon->setToolTip(tr("Not staking"));
     }
 }
+#endif
 
 void BitcoinGUI::detectShutdown()
 {

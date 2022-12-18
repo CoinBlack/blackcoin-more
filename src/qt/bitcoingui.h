@@ -322,7 +322,9 @@ public Q_SLOTS:
     /** Simply calls showNormalIfMinimized(true) for use in SLOT() macro */
     void toggleHidden();
 
+#ifdef ENABLE_WALLET
     void updateStakingIcon();
+#endif
 
     /** called by a timer to check if ShutdownRequested() has been set **/
     void detectShutdown();
