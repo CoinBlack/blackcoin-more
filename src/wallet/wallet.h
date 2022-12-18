@@ -107,6 +107,8 @@ static const unsigned int DEFAULT_STAKETIMIO = 500;
 
 static const CAmount DEFAULT_RESERVE_BALANCE = 0;
 static const unsigned int DEFAULT_DONATION_PERCENTAGE = 20;
+static const unsigned int MIN_DONATION_PERCENTAGE = 0;
+static const unsigned int MAX_DONATION_PERCENTAGE = 95;
 
 class CCoinControl;
 class COutput;

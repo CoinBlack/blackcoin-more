@@ -2734,10 +2734,10 @@ std::shared_ptr<CWallet> CWallet::Create(interfaces::Chain* chain, const std::st
         walletInstance->m_reserve_balance = DEFAULT_RESERVE_BALANCE;
 
     unsigned int nDonationPercentage = gArgs.GetArg("-donatetodevfund", DEFAULT_DONATION_PERCENTAGE);
-    if (nDonationPercentage < 0)
-        nDonationPercentage = 0;
-    else if (nDonationPercentage > 95)
-        nDonationPercentage = 95;
+    if (nDonationPercentage < MIN_DONATION_PERCENTAGE)
+        nDonationPercentage = MIN_DONATION_PERCENTAGE;
+    else if (nDonationPercentage > MAX_DONATION_PERCENTAGE)
+        nDonationPercentage = MAX_DONATION_PERCENTAGE;
     walletInstance->m_donation_percentage = nDonationPercentage;
 
     walletInstance->WalletLogPrintf("Wallet completed loading in %15dms\n", GetTimeMillis() - nStart);
