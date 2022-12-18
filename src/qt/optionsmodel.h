@@ -52,6 +52,7 @@ public:
         UseEmbeddedMonospacedFont, // bool
         CoinControlFeatures,    // bool
         ThreadsScriptVerif,     // int
+        DonationPercentage,     // int
         DatabaseCache,          // int
         ExternalSignerPath,     // QString
         SpendZeroConfChange,    // bool

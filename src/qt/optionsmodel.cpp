@@ -20,6 +20,8 @@
 #include <util/string.h>
 #include <validation.h> // For DEFAULT_SCRIPTCHECK_THREADS
 
+#include <wallet/wallet.h> // For DEFAULT_DONATION_PERCENTAGE
+
 #include <QDebug>
 #include <QLatin1Char>
 #include <QSettings>
@@ -100,6 +102,13 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue("nThreadsScriptVerif", DEFAULT_SCRIPTCHECK_THREADS);
     if (!gArgs.SoftSetArg("-par", settings.value("nThreadsScriptVerif").toString().toStdString()))
         addOverriddenOption("-par");
+
+#ifdef ENABLE_WALLET
+    if (!settings.contains("nDonationPercentage"))
+        settings.setValue("nDonationPercentage", DEFAULT_DONATION_PERCENTAGE);
+    if (!gArgs.SoftSetArg("-donatetodevfund", settings.value("nDonationPercentage").toString().toStdString()))
+        addOverriddenOption("-donatetodevfund");
+#endif
 
     if (!settings.contains("strDataDir"))
         settings.setValue("strDataDir", GUIUtil::getDefaultDataDirectory());
@@ -303,6 +312,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return settings.value("bSpendZeroConfChange");
         case ExternalSignerPath:
             return settings.value("external_signer_path");
+        case DonationPercentage:
+            return settings.value("nDonationPercentage");
 #endif
         case DisplayUnit:
             return nDisplayUnit;
@@ -463,6 +474,14 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
+#ifdef ENABLE_WALLET
+        case DonationPercentage:
+            if (settings.value("nDonationPercentage") != value) {
+                settings.setValue("nDonationPercentage", value);
+                setRestartRequired(true);
+            }
+            break;
+#endif
         case Listen:
             if (settings.value("fListen") != value) {
                 settings.setValue("fListen", value);

@@ -19,6 +19,8 @@
 #include <netbase.h>
 #include <txdb.h> // for -dbcache defaults
 
+#include <wallet/wallet.h> // for MIN_DONATION_PERCENTAGE and MAX_DONATION_PERCENTAGE
+
 #include <QDataWidgetMapper>
 #include <QDir>
 #include <QIntValidator>
@@ -41,6 +43,8 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     ui->databaseCache->setMaximum(nMaxDbCache);
     ui->threadsScriptVerif->setMinimum(-GetNumCores());
     ui->threadsScriptVerif->setMaximum(MAX_SCRIPTCHECK_THREADS);
+    ui->donationPercentage->setMinimum(MIN_DONATION_PERCENTAGE);
+    ui->donationPercentage->setMaximum(MAX_DONATION_PERCENTAGE);
 
     /* Network elements init */
 #ifndef USE_UPNP
@@ -194,6 +198,7 @@ void OptionsDialog::setModel(OptionsModel *_model)
     connect(ui->databaseCache, qOverload<int>(&QSpinBox::valueChanged), this, &OptionsDialog::showRestartWarning);
     connect(ui->externalSignerPath, &QLineEdit::textChanged, [this]{ showRestartWarning(); });
     connect(ui->threadsScriptVerif, qOverload<int>(&QSpinBox::valueChanged), this, &OptionsDialog::showRestartWarning);
+    connect(ui->donationPercentage, qOverload<int>(&QSpinBox::valueChanged), this, &OptionsDialog::showRestartWarning);
     /* Wallet */
     connect(ui->spendZeroConfChange, &QCheckBox::clicked, this, &OptionsDialog::showRestartWarning);
     /* Network */
@@ -220,6 +225,7 @@ void OptionsDialog::setMapper()
     /* Main */
     mapper->addMapping(ui->bitcoinAtStartup, OptionsModel::StartAtStartup);
     mapper->addMapping(ui->threadsScriptVerif, OptionsModel::ThreadsScriptVerif);
+    mapper->addMapping(ui->donationPercentage, OptionsModel::DonationPercentage);
     mapper->addMapping(ui->databaseCache, OptionsModel::DatabaseCache);
 
     /* Wallet */
