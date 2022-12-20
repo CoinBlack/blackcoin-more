@@ -961,8 +961,11 @@ CTransactionRef GetTransaction(const CBlockIndex* const block_index, const CTxMe
     return nullptr;
 }
 
-CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
+CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams, bool fProofOfStake)
 {
+    if (fProofOfStake)
+        return GetProofOfStakeSubsidy();
+
     return GetProofOfWorkSubsidy();
 }
 

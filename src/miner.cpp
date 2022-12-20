@@ -152,7 +152,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     if (!pwallet) {
         pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), false);
         coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
-        coinbaseTx.vout[0].nValue = nFees + GetProofOfWorkSubsidy();
+        coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
     }
 
     // Add dummy coinbase tx as first transaction
