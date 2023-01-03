@@ -2624,7 +2624,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
             return;
         }
 
-        if (nVersion < (Params().GetConsensus().IsProtocolV3_1(GetAdjustedTime()) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION)) {
+        if (nVersion < (Params().GetConsensus().IsProtocolV3_1(GetAdjustedTime()) ? OLD_VERSION : MIN_PEER_PROTO_VERSION)) {
             // disconnect from peers older than this proto version
             LogPrint(BCLog::NET, "peer=%d using obsolete version %i; disconnecting\n", pfrom.GetId(), nVersion);
             pfrom.fDisconnect = true;
