@@ -3350,6 +3350,8 @@ void CWallet::CleanCoinStake()
 }
 */
 
+
+// Blackcoin
 uint64_t CWallet::GetStakeWeight() const
 {
     // Choose coins to use
@@ -3376,57 +3378,21 @@ uint64_t CWallet::GetStakeWeight() const
     for (const auto& pcoin : setCoins)
     {
         // In original Blackcoin code there has been additional nCoinbaseMaturity check,
-        // but it appears to be redundant as we already checked it in AvailableCoinsForStaking()
+        // but it appears to be redundant as we already checked it in AvailableCoins()
         nWeight += pcoin.txout.nValue;
     }
 
     return nWeight;
 }
 
-void CWallet::AvailableCoinsForStaking(std::vector<COutput>& vCoins) const
-{
-    AssertLockHeld(cs_main);
-    AssertLockHeld(cs_wallet);
-
-    vCoins.clear();
-
-    std::set<uint256> trusted_parents;
-    for (const auto& entry : mapWallet)
-    {
-        const uint256& wtxid = entry.first;
-        const CWalletTx& wtx = entry.second;
-
-        int nDepth = wtx.GetDepthInMainChain();
-
-        if (nDepth < 1)
-            continue;
-
-        if (nDepth < Params().GetConsensus().nCoinbaseMaturity)
-            continue;
-
-        if (wtx.GetBlocksToMaturity() > 0)
-            continue;
-
-        bool safeTx = IsTrusted(wtx, trusted_parents);
-
-        for (unsigned int i = 0; i < wtx.tx->vout.size(); i++) {
-            isminetype mine = IsMine(wtx.tx->vout[i]);
-            std::unique_ptr<SigningProvider> provider = GetSolvingProvider(wtx.tx->vout[i].scriptPubKey);
-            bool solvable = provider ? IsSolvable(*provider, wtx.tx->vout[i].scriptPubKey) : false;
-            bool spendable = ((mine & ISMINE_SPENDABLE) != ISMINE_NO) || (((mine & ISMINE_WATCH_ONLY) != ISMINE_NO) && solvable);
-            if (!(IsSpent(wtxid, i)) && mine != ISMINE_NO &&
-                !IsLockedCoin(entry.first, i) && (wtx.tx->vout[i].nValue > 0)) {
-                    vCoins.push_back(COutput(&wtx, i, nDepth, spendable, solvable, safeTx));
-                }
-        }
-    }
-}
 
 // Select some coins without random shuffle or best subset approximation
 bool CWallet::SelectCoinsForStaking(CAmount& nTargetValue, std::set<CInputCoin>& setCoinsRet, CAmount& nValueRet) const
 {
     std::vector<COutput> vCoins;
-    AvailableCoinsForStaking(vCoins);
+    CCoinControl coincontrol;
+    coincontrol.m_min_depth = Params().GetConsensus().nCoinbaseMaturity; // only select coins that are mature enough
+    AvailableCoins(vCoins, &coincontrol);
 
     setCoinsRet.clear();
     nValueRet = 0;
@@ -3491,18 +3457,6 @@ bool CWallet::CreateCoinStake(const CWallet* pwallet, unsigned int nBits, int64_
     CAmount nValueIn = 0;
     CAmount nTargetValue = nBalance - m_reserve_balance;
 
-    // Peercoin
-    /*
-    std::vector<COutput> vAvailableCoins;
-    CCoinControl temp;
-    CoinSelectionParams coin_selection_params;
-    AvailableCoins(vAvailableCoins, &temp);
-
-    if (!SelectCoins(vAvailableCoins, nTargetValue, setCoins, nValueIn, temp, coin_selection_params))
-        return false;
-    */
-
-    // Blackcoin
     // Select coins with suitable depth
     if (!SelectCoinsForStaking(nTargetValue, setCoins, nValueIn))
         return false;

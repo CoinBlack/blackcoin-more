@@ -570,6 +570,7 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, ChainstateManager* chainman, CCh
 
         std::vector<COutput> vCoins;
         CCoinControl coincontrol;
+        coincontrol.m_min_depth = Params().GetConsensus().nCoinbaseMaturity; // only select coins that are mature enough
         pwallet->AvailableCoins(vCoins, &coincontrol);
         pos_timio = gArgs.GetArg("-staketimio", DEFAULT_STAKETIMIO) + 30 * sqrt(vCoins.size());
         LogPrintf("Set proof-of-stake timeout: %ums for %u UTXOs\n", pos_timio, vCoins.size());
