@@ -562,7 +562,7 @@ bool VerifySignature(const Coin& coin, const uint256 txFromHash, const CTransact
     if (txin.prevout.hash != txFromHash)
         return false;
 		
-    return VerifyScript(txin.scriptSig, txout.scriptPubKey, NULL, flags, checker);
+    return VerifyScript(txin.scriptSig, txout.scriptPubKey, nullptr, flags, checker);
 }
 
 bool VerifySignature(const CScript& fromPubKey, const uint256 txFromHash, const CTransaction& txTo, unsigned int nIn, unsigned int flags)
@@ -574,7 +574,7 @@ bool VerifySignature(const CScript& fromPubKey, const uint256 txFromHash, const 
     if (txin.prevout.hash != txFromHash)
         return false;
 		
-    return VerifyScript(txin.scriptSig, fromPubKey, NULL, flags, checker);
+    return VerifyScript(txin.scriptSig, fromPubKey, nullptr, flags, checker);
 }
 
 namespace {

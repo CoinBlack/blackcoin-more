@@ -3379,7 +3379,7 @@ bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool 
         return pblock->vchBlockSig.empty();
     }
 
-    return checkLowS ? IsLowDERSignature(pblock->vchBlockSig, NULL, false) : IsDERSignature(pblock->vchBlockSig, NULL, false);
+    return checkLowS ? IsLowDERSignature(pblock->vchBlockSig, nullptr, false) : IsDERSignature(pblock->vchBlockSig, nullptr, false);
 }
 
 CBlockIndex * BlockManager::InsertBlockIndex(const uint256& hash)

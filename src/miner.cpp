@@ -541,7 +541,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager* chainman,
 
     // Process this block the same as if we had received it from another node
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
-    if (!chainman->ProcessNewBlock(Params(), shared_pblock, true, NULL))
+    if (!chainman->ProcessNewBlock(Params(), shared_pblock, true, nullptr))
         return error("ProcessBlockFound(): block not accepted");
 
     return true;

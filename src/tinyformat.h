@@ -508,9 +508,9 @@ class FormatArg
 {
     public:
         FormatArg()
-            : m_value(NULL),
-            m_formatImpl(NULL),
-            m_toIntImpl(NULL)
+            : m_value(nullptr),
+            m_formatImpl(nullptr),
+            m_toIntImpl(nullptr)
         { }
 
         template<typename T>
