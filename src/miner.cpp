@@ -160,25 +160,27 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     pblocktemplate->vTxFees.push_back(-1); // updated at end
     pblocktemplate->vTxSigOpsCost.push_back(-1); // updated at end
 
+#ifdef ENABLE_WALLET
     // peercoin: if coinstake available add coinstake tx
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime();  // only initialized at startup
 
-#ifdef ENABLE_WALLET
     if (pwallet) { // attempt to find a coinstake
         *pfPoSCancel = true;
         pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), true);
         CMutableTransaction txCoinStake;
+        txCoinStake.nTime &= ~chainparams.GetConsensus().nStakeTimestampMask;
+
         int64_t nSearchTime = txCoinStake.nTime; // search to current time
-        nSearchTime &= ~chainparams.GetConsensus().nStakeTimestampMask;
+
         if (nSearchTime > nLastCoinStakeSearchTime) {
-            if (pwallet->CreateCoinStake(pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime /* 1 */ , txCoinStake, nFees)) {
-                if (nSearchTime >= pindexPrev->GetMedianTimePast()+1) {
+            if (pwallet->CreateCoinStake(pwallet, pblock->nBits, 1, txCoinStake, nFees)) {
+                if (txCoinStake.nTime >= pindexPrev->GetMedianTimePast()+1) {
                     // Make the coinbase tx empty in case of proof of stake
                     coinbaseTx.vout[0].SetEmpty();
                     if (coinbaseTx.nVersion < 2) {
-                        pblock->nTime = coinbaseTx.nTime = txCoinStake.nTime = nSearchTime;
+                        pblock->nTime = coinbaseTx.nTime = txCoinStake.nTime;
                     } else {
-                        pblock->nTime = nSearchTime;
+                        pblock->nTime = txCoinStake.nTime;
                         coinbaseTx.nTime = txCoinStake.nTime = 0;
                     }
                     pblock->vtx.push_back(MakeTransactionRef(CTransaction(txCoinStake)));
