@@ -1364,12 +1364,12 @@ void BitcoinGUI::setEncryptionStatus(WalletModel *walletModel)
         labelWalletEncryptionIcon->show();
         if(walletModel->getWalletUnlockStakingOnly())
         {
-            labelWalletEncryptionIcon->setPixmap(QIcon(":/icons/lock_staking").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+            labelWalletEncryptionIcon->setThemedPixmap(QStringLiteral(":/icons/lock_staking"), STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
             labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>unlocked for staking only</b>"));
         }
         else
         {
-            labelWalletEncryptionIcon->setPixmap(QIcon(":/icons/lock_open").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+            labelWalletEncryptionIcon->setThemedPixmap(QStringLiteral(":/icons/lock_open"), STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
             labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>unlocked</b>"));
         }
         encryptWalletAction->setChecked(true);
