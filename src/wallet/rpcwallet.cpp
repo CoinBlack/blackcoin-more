@@ -2373,6 +2373,7 @@ static RPCHelpMan getbalances()
         balances_mine.pushKV("trusted", ValueFromAmount(bal.m_mine_trusted));
         balances_mine.pushKV("untrusted_pending", ValueFromAmount(bal.m_mine_untrusted_pending));
         balances_mine.pushKV("immature", ValueFromAmount(bal.m_mine_immature));
+        balances_mine.pushKV("stake", ValueFromAmount(bal.m_mine_stake));
         if (wallet.IsWalletFlagSet(WALLET_FLAG_AVOID_REUSE)) {
             // If the AVOID_REUSE flag is set, bal has been set to just the un-reused address balance. Get
             // the total balance, and then subtract bal to get the reused address balance.
@@ -2387,6 +2388,7 @@ static RPCHelpMan getbalances()
         balances_watchonly.pushKV("trusted", ValueFromAmount(bal.m_watchonly_trusted));
         balances_watchonly.pushKV("untrusted_pending", ValueFromAmount(bal.m_watchonly_untrusted_pending));
         balances_watchonly.pushKV("immature", ValueFromAmount(bal.m_watchonly_immature));
+        balances_watchonly.pushKV("stake", ValueFromAmount(bal.m_watchonly_stake));
         balances.pushKV("watchonly", balances_watchonly);
     }
     return balances;

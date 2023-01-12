@@ -352,6 +352,8 @@ CWallet::Balance CWallet::GetBalance(const int min_depth, bool avoid_reuse) cons
             }
             ret.m_mine_immature += wtx.GetImmatureCredit();
             ret.m_watchonly_immature += wtx.GetImmatureWatchOnlyCredit();
+            ret.m_mine_stake += wtx.GetStakeCredit();
+            ret.m_watchonly_stake += wtx.GetStakeWatchOnlyCredit();
         }
     }
     return ret;
