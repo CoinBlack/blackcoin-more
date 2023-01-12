@@ -205,7 +205,7 @@ CAmount CWalletTx::GetAvailableCredit(bool fUseCache, const isminefilter& filter
     bool allow_cache = (filter & ISMINE_ALL) && (filter & ISMINE_ALL) != ISMINE_ALL;
 
     // Must wait until coinbase is safely deep enough in the chain before valuing it
-    if (IsImmatureCoinBase())
+    if (IsImmature())
         return 0;
 
     if (fUseCache && allow_cache && m_amounts[AVAILABLE_CREDIT].m_cached[filter]) {
@@ -373,7 +373,7 @@ std::map<CTxDestination, CAmount> CWallet::GetAddressBalances() const
             if (!IsTrusted(wtx, trusted_parents))
                 continue;
 
-            if (wtx.IsImmatureCoinBase())
+            if (wtx.IsImmature())
                 continue;
 
             int nDepth = wtx.GetDepthInMainChain();

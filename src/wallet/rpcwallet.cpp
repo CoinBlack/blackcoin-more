@@ -1328,11 +1328,11 @@ static void ListTransactions(const CWallet& wallet, const CWalletTx& wtx, int nM
                 entry.pushKV("involvesWatchonly", true);
             }
             MaybePushAddress(entry, r.destination);
-            if (wtx.IsCoinBase())
+            if (wtx.IsCoinBase() || wtx.IsCoinStake())
             {
                 if (wtx.GetDepthInMainChain() < 1)
                     entry.pushKV("category", "orphan");
-                else if (wtx.IsImmatureCoinBase())
+                else if (wtx.IsImmature())
                     entry.pushKV("category", "immature");
                 else
                     entry.pushKV("category", "generate");
