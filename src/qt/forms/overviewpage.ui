@@ -385,14 +385,14 @@
             </item>
             <item row="4" column="1">
              <widget class="QLabel" name="labelStake">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
+              <property name="cursor">
+               <cursorShape>IBeamCursor</cursorShape>
+              </property>
+              <property name="toolTip">
+               <string>Your current staking balance</string>
               </property>
               <property name="text">
-               <string>0.000 000 00 BTC</string>
+               <string notr="true">0.00000000 BTC</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -404,14 +404,14 @@
             </item>
             <item row="4" column="2">
              <widget class="QLabel" name="labelWatchStake">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
+              <property name="cursor">
+               <cursorShape>IBeamCursor</cursorShape>
+              </property>
+              <property name="toolTip">
+               <string>Your current staking balance in watch-only addresses</string>
               </property>
               <property name="text">
-               <string>0.000 000 00 BTC</string>
+               <string notr="true">0.00000000 BTC</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
