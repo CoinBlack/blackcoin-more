@@ -3382,6 +3382,17 @@ bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool 
     return checkLowS ? IsLowDERSignature(pblock->vchBlockSig, nullptr, false) : IsDERSignature(pblock->vchBlockSig, nullptr, false);
 }
 
+bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock)
+{
+    // Check block signature encoding
+    bool ret = IsCanonicalBlockSignature(pblock, false);
+
+    // Check block signature encoding (low-s)
+    if (ret) ret = IsCanonicalBlockSignature(pblock, true);
+
+    return ret;
+}
+
 CBlockIndex * BlockManager::InsertBlockIndex(const uint256& hash)
 {
     AssertLockHeld(cs_main);

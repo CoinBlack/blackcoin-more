@@ -1219,18 +1219,10 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
     }
 
     // Check if block signature is canonical
-    if (!IsCanonicalBlockSignature(pblock, false)) {
-        if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_VERSION) {
+    if (!CheckCanonicalBlockSignature(pblock)) {
+        if (pfrom)
             Misbehaving(pfrom->GetId(), 100, "bad block signature encoding");
-            return error("%s: bad block signature encoding", __func__);
-        }
-    }
-
-    if (!IsCanonicalBlockSignature(pblock, true)) {
-        if (pfrom && pfrom->nVersion >= CANONICAL_BLOCK_SIG_LOW_S_VERSION) {
-            Misbehaving(pfrom->GetId(), 100, "bad block signature encoding (low-s)");
-            return error("%s: bad block signature encoding (low-s)", __func__);
-        }
+        return error("%s: bad block signature encoding", __func__);
     }
 
     // Process the header before processing the block

@@ -20,10 +20,6 @@ static const int INIT_PROTO_VERSION = 209;
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION = 70012;
 
-//! reject blocks with non-canonical signatures starting from this version
-static const int CANONICAL_BLOCK_SIG_VERSION = 60016;
-static const int CANONICAL_BLOCK_SIG_LOW_S_VERSION = 60018;
-
 //! BIP 0031, pong message, is enabled for all versions AFTER this one
 static const int BIP0031_VERSION = 60000;
 
