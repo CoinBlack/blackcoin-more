@@ -1181,11 +1181,11 @@ static RPCHelpMan staking()
 
 }
 
-/*
-// Blackcoin ToDo: check and finalize?
-UniValue checkkernel(const JSONRPCRequest& request)
+
+// Blackcoin ToDo: check!
+static RPCHelpMan checkkernel()
 {
-            RPCHelpMan{"checkkernel",
+    return RPCHelpMan{"checkkernel",
                 "\nCheck if one of given inputs is a kernel input at the moment.\n",
                 {
                     {"inputs", RPCArg::Type::ARR, RPCArg::Optional::NO, "The inputs",
@@ -1194,11 +1194,11 @@ UniValue checkkernel(const JSONRPCRequest& request)
                                 {
                                     {"txid", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The transaction id"},
                                     {"vout", RPCArg::Type::NUM, RPCArg::Optional::NO, "The output number"},
-                                    {"sequence", RPCArg::Type::NUM, "depends on the value of the 'locktime' argument", "The sequence number"},
+                            {"sequence", RPCArg::Type::NUM, RPCArg::Optional::OMITTED, "depends on the value of the 'locktime' argument", "The sequence number"},
                                 }},
                         },
                     },
-                    {"createblocktemplate", RPCArg::Type::BOOL, "false", "Create block template?"},
+                    {"createblocktemplate", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "Create block template?"},
                 },
                 RPCResult{
                     RPCResult::Type::OBJ, "", "",
@@ -1218,20 +1218,31 @@ UniValue checkkernel(const JSONRPCRequest& request)
                     HelpExampleCli("checkkernel", "\"[{\\\"txid\\\":\\\"myid\\\",\\\"vout\\\":0}]\" \"false\"")
             + HelpExampleCli("checkkernel", "\"[{\\\"txid\\\":\\\"myid\\\",\\\"vout\\\":0}]\" \"true\"")
                 },
-            }.Check(request);
+        [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
+{
+    NodeContext& node = EnsureAnyNodeContext(request.context);
+    const CTxMemPool& mempool = EnsureMemPool(node);
+    ChainstateManager& chainman = EnsureChainman(node);
+    LOCK(cs_main);
+    const CChain& active_chain = chainman.ActiveChain();
+    CChainState& active_chainstate = chainman.ActiveChainstate();
 
         UniValue inputs = request.params[0].get_array();
         bool fCreateBlockTemplate = request.params.size() > 1 ? request.params[1].get_bool() : false;
 
-        if (g_rpc_node->connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
-            throw JSONRPCError(-9, "Blackcoin is not connected!");
+    if (!Params().IsTestChain()) {
+        const CConnman& connman = EnsureConnman(node);
+        if (connman.GetNodeCount(ConnectionDirection::Both) == 0) {
+            throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, PACKAGE_NAME " is not connected!");
+        }
 
-        if (::ChainstateActive().IsInitialBlockDownload())
-            throw JSONRPCError(-10, "Blackcoin is downloading blocks...");
+        if (active_chainstate.IsInitialBlockDownload()) {
+            throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, PACKAGE_NAME " is in initial sync and waiting for blocks...");
+        }
+    }
 
-        const CTxMemPool& mempool = EnsureMemPool();
         COutPoint kernel;
-        CBlockIndex* pindexPrev = ::ChainActive().Tip();
+        CBlockIndex* pindexPrev = active_chain.Tip();
         unsigned int nBits = GetNextTargetRequired(pindexPrev, Params().GetConsensus(), true);
         int64_t nTime = GetAdjustedTime();
         nTime &= ~Params().GetConsensus().nStakeTimestampMask;
@@ -1255,7 +1266,7 @@ UniValue checkkernel(const JSONRPCRequest& request)
                 throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout must be positive");
 
             COutPoint cInput(uint256S(txid), nOutput);
-            if (CheckKernel(pindexPrev, nBits, nTime, cInput, ::ChainstateActive().CoinsTip()))
+            if (CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip()))
             {
                 kernel = cInput;
                 break;
@@ -1278,7 +1289,6 @@ UniValue checkkernel(const JSONRPCRequest& request)
             return result;
 
 #ifdef ENABLE_WALLET
-        int64_t nFees;
         std::shared_ptr<CWallet> const wallet = GetWalletForJSONRPCRequest(request);
         CWallet* const pwallet = wallet.get();
 	
@@ -1289,7 +1299,9 @@ UniValue checkkernel(const JSONRPCRequest& request)
             pwallet->TopUpKeyPool();
 
         std::unique_ptr<CBlockTemplate> pblocktemplate;
-        pblocktemplate = BlockAssembler(mempool, Params()).CreateNewBlock(CScript(), &nFees, true);
+        bool fPoSCancel = false;
+        int64_t nFees;
+        pblocktemplate = BlockAssembler(active_chainstate, mempool, Params()).CreateNewBlock(CScript(), pwallet, &fPoSCancel, &nFees);
 
         if (!pblocktemplate)
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
@@ -1302,19 +1314,24 @@ UniValue checkkernel(const JSONRPCRequest& request)
         CDataStream ss(SER_DISK, PROTOCOL_VERSION);
         ss << *pblock;
 
-        result.pushKV("blocktemplate", HexStr(ss.begin(), ss.end()));
+        result.pushKV("blocktemplate", HexStr(ss));
         result.pushKV("blocktemplatefees", nFees);
 
-        // Reserve a new key pair from key pool
-        if (!pwallet->CanGetAddresses(true)) {
-            throw JSONRPCError(RPC_WALLET_ERROR, "Error: This wallet has no available keys");
-        }
+        // Blackcoin: the reserved key concept is not used in modern Bitcoin Core
+        /*
+        CPubKey pubkey;
+        if (!pMiningKey->GetReservedKey(pubkey))
+            throw JSONRPCError(RPC_MISC_ERROR, "GetReservedKey failed");
 
-        result.pushKV("blocktemplatesignkey", HexStr(pubkey));
+        result.push_back(Pair("blocktemplatesignkey", HexStr(pubkey)));
+        */
+
 #endif
         return result;
+},
+    };
 }
-*/
+
 
 void RegisterMiningRPCCommands(CRPCTable &t)
 {
@@ -1336,7 +1353,7 @@ static const CRPCCommand commands[] =
     { "util",                &estimatefee,             },
 
     { "staking",             &staking,                 },
-    //{ "staking",             &checkkernel,             },
+    { "staking",             &checkkernel,             },
 
     { "hidden",              &generate,                },
 };
