@@ -111,7 +111,7 @@ static bool AppInit(NodeContext& node, int argc, char* argv[])
 
     util::ThreadSetInternalName("init");
 
-    // If Qt is used, parameters/bitcoin.conf are parsed in qt/bitcoin.cpp's main()
+    // If Qt is used, parameters/blackmore.conf are parsed in qt/bitcoin.cpp's main()
     ArgsManager& args = *Assert(node.args);
     SetupServerArgs(args);
     std::string error;
