@@ -522,7 +522,7 @@ void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned
 // Peercoin & Blackcoin
 static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager* chainman, CChainState* chainstate)
 {
-    LogPrintf("%s\n", pblock->ToString());
+    LogPrintf("%s", pblock->ToString());
 
     // Found a solution
     {
