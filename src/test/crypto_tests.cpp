@@ -684,7 +684,7 @@ static void TestChaCha20Poly1305AEAD(bool must_succeed, unsigned int expected_aa
 
 BOOST_AUTO_TEST_CASE(chacha20_poly1305_aead_testvector)
 {
-    /* test chacha20poly1305@bitcoin AEAD */
+    /* test chacha20poly1305@blackcoin AEAD */
 
     // must fail with no message
     TestChaCha20Poly1305AEAD(false, 0,

@@ -1,6 +1,6 @@
 # TOR SUPPORT IN BITCOIN
 
-It is possible to run Bitcoin Core as a Tor onion service, and connect to such services.
+It is possible to run Blackcoin More as a Tor onion service, and connect to such services.
 
 The following directions assume you have a Tor proxy running on port 9050. Many distributions default to having a SOCKS proxy listening on port 9050, but others may not. In particular, the Tor Browser Bundle defaults to listening on port 9150. See [Tor Project FAQ:TBBSocksPort](https://www.torproject.org/docs/faq.html.en#TBBSocksPort) for how to properly
 configure Tor.
@@ -65,7 +65,7 @@ outgoing connections, but more is possible.
 
 In a typical situation, this suffices to run behind a Tor proxy:
 
-    ./bitcoind -proxy=127.0.0.1:9050
+    ./blackmored -proxy=127.0.0.1:9050
 
 ## 2. Automatically create a Bitcoin Core onion service
 
