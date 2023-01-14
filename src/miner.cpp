@@ -177,12 +177,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
                 if (txCoinStake.nTime >= pindexPrev->GetMedianTimePast()+1) {
                     // Make the coinbase tx empty in case of proof of stake
                     coinbaseTx.vout[0].SetEmpty();
-                    if (coinbaseTx.nVersion < 2) {
-                        pblock->nTime = coinbaseTx.nTime = txCoinStake.nTime;
-                    } else {
-                        pblock->nTime = txCoinStake.nTime;
-                        coinbaseTx.nTime = txCoinStake.nTime = 0;
-                    }
+                    pblock->nTime = coinbaseTx.nTime = txCoinStake.nTime;
                     pblock->vtx.push_back(MakeTransactionRef(CTransaction(txCoinStake)));
                     *pfPoSCancel = false;
                 }
