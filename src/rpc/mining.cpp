@@ -1151,24 +1151,42 @@ static RPCHelpMan staking()
                 }
             },
             RPCExamples{
-                HelpExampleCli("staking", "\"[\\\"all\\\"]\" \"[\\\"http\\\"]\"")
-                + HelpExampleRpc("staking", "[\"all\"], [\"libevent\"]")
+                HelpExampleCli("staking", "true")
+                + HelpExampleRpc("staking", "true")
             },
             [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
+    bool fGenerate;
 
-
-    bool fGenerate = request.params[0].isNull() ? gArgs.GetBoolArg("-staking", DEFAULT_STAKE) : request.params[0].get_bool();
+    // Blackcoin ToDo: cleanup is needed
+    if (request.params[0].isNull())
+        gArgs.GetBoolArg("-staking", DEFAULT_STAKE);
+    else {
+        if (request.params[0].isBool())
+            fGenerate = request.params[0].get_bool();
+        else if (request.params[0].isStr()) {
+            if (request.params[0].get_str() == "true" || request.params[0].get_str() == "1")
+                fGenerate = true;
+            else if (request.params[0].get_str() == "false" || request.params[0].get_str() == "0")
+                fGenerate = false;
+            else 
+                throw JSONRPCError(RPC_TYPE_ERROR, "Parameter must be \"true\" or \"false\"");
+        }
+    }
+            
 #ifdef ENABLE_WALLET
     if (!request.params[0].isNull()) {
         NodeContext& node = EnsureAnyNodeContext(request.context);
         gArgs.ForceSetArg("-staking", fGenerate ? "1" : "0");
 
-        MinePoS(gArgs.GetBoolArg("-staking", DEFAULT_STAKE), GetWallets()[0], node.chainman.get(), &node.chainman->ActiveChainstate(), node.connman.get(), node.mempool.get());
+        if (HasWallets() && GetWallets()[0]) {
+            MinePoS(fGenerate, GetWallets()[0], node.chainman.get(), &node.chainman->ActiveChainstate(), node.connman.get(), node.mempool.get());
 
-        if (!fGenerate) {
-            InterruptStaking();
-            StopStaking();
+            if (!fGenerate) {
+                InterruptStaking();
+                StopStaking();
+                nLastCoinStakeSearchInterval = 0;
+            }
         }
     }
 #endif
@@ -1180,7 +1198,6 @@ static RPCHelpMan staking()
     };
 
 }
-
 
 // Blackcoin ToDo: check!
 static RPCHelpMan checkkernel()
