@@ -80,6 +80,7 @@ WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel
     transactionTableModel = new TransactionTableModel(platformStyle, this);
     recentRequestsTableModel = new RecentRequestsTableModel(this);
 
+    // Start thread
     worker = new WalletWorker(this);
     worker->moveToThread(&(t));
     t.start();
@@ -90,6 +91,18 @@ WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel
 WalletModel::~WalletModel()
 {
     unsubscribeFromCoreSignals();
+
+    // Stop timer
+    if (timer)
+        timer->stop();
+
+    // Quit thread
+    if (t.isRunning()) {
+        if (worker)
+            worker->disconnect(this);
+        t.quit();
+        t.wait();
+    }
 }
 
 void WalletModel::startPollBalance()
