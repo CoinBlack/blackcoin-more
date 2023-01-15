@@ -92,17 +92,7 @@ WalletModel::~WalletModel()
 {
     unsubscribeFromCoreSignals();
 
-    // Stop timer
-    if (timer)
-        timer->stop();
-
-    // Quit thread
-    if (t.isRunning()) {
-        if (worker)
-            worker->disconnect(this);
-        t.quit();
-        t.wait();
-    }
+    join();
 }
 
 void WalletModel::startPollBalance()
@@ -621,5 +611,20 @@ void WalletModel::checkStakeWeightChanged()
 {
     if (updateStakeWeight && m_wallet->tryGetStakeWeight(nWeight)) {
         updateStakeWeight = false;
+    }
+}
+
+void WalletModel::join()
+{
+    // Stop timer
+    if (timer)
+        timer->stop();
+
+    // Quit thread
+    if (t.isRunning()) {
+        if (worker)
+            worker->disconnect(this);
+        t.quit();
+        t.wait();
     }
 }
