@@ -1215,7 +1215,7 @@ static RPCHelpMan checkkernel()
                                 }},
                         },
                     },
-                    {"createblocktemplate", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "Create block template?"},
+                    {"createblocktemplate", RPCArg::Type::BOOL, RPCArg::Default{false}, "Create block template?"},
                 },
                 RPCResult{
                     RPCResult::Type::OBJ, "", "",
