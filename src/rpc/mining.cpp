@@ -502,7 +502,7 @@ static RPCHelpMan getstakinginfo()
 
     UniValue obj(UniValue::VOBJ);
 
-    obj.pushKV("enabled", gArgs.GetBoolArg("-staking", DEFAULT_STAKE));
+    obj.pushKV("enabled", EnableStaking());
     obj.pushKV("staking", staking);
     obj.pushKV("blocks", active_chain.Height());
     if (BlockAssembler::m_last_block_weight) obj.pushKV("currentblockweight", *BlockAssembler::m_last_block_weight);
@@ -1160,7 +1160,7 @@ static RPCHelpMan staking()
 
     // Blackcoin ToDo: cleanup is needed
     if (request.params[0].isNull())
-        gArgs.GetBoolArg("-staking", DEFAULT_STAKE);
+        fGenerate = EnableStaking();
     else {
         if (request.params[0].isBool())
             fGenerate = request.params[0].get_bool();
@@ -1177,7 +1177,6 @@ static RPCHelpMan staking()
 #ifdef ENABLE_WALLET
     if (!request.params[0].isNull()) {
         NodeContext& node = EnsureAnyNodeContext(request.context);
-        gArgs.ForceSetArg("-staking", fGenerate ? "1" : "0");
 
         if (HasWallets() && GetWallets()[0]) {
             MinePoS(fGenerate, GetWallets()[0], node.chainman.get(), &node.chainman->ActiveChainstate(), node.connman.get(), node.mempool.get());
