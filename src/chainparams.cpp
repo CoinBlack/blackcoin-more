@@ -120,7 +120,7 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000038844f1764349c166d5");
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000039c894d4e483a4943d1");
         consensus.defaultAssumeValid = uint256S("0x36442d872ca6a66c65caef4d9468b8add290accc8cf7ec386eee50e62721ed3d"); //2400000
 
         /**
@@ -251,7 +251,7 @@ public:
         pchMessageStart[3] = 0xef;
         nDefaultPort = 25714;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000003085211742a1e74583");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000395ae7599030cbde43");
         consensus.defaultAssumeValid = uint256S("0x00");
 
         nPruneAfterHeight = 1000;
