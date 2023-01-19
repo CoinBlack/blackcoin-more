@@ -1,7 +1,7 @@
 # Changelog
 
-## 22.x.0 (?)
-- ?
+## v22.1.0 ALPHA (2023-01-20)
+- Updated to Bitcoin Core 22.1
 
 ## v13.2.0 (2022-11-24)
 - Changed versioning (backport of Core's PR20223)
@@ -10,7 +10,7 @@
 - Testnet hard fork: Enabled relative timelocks (OP_CHECKSEQUENCEVERIFY, BIP62, 112 and 113)
 - Enabled compact block relay protocol (BIP152)
 - Added an option to donate the specified percentage of staking rewards to the dev fund (20% by default)
-- Set default MAX_OP_RETURN_RELAY to 223
+- Set default `MAX_OP_RETURN_RELAY` to 223
 - Removed `sendfreetransactions` argument
 - Get rid of `AA_EnableHighDpiScaling` warning (backport of Core's PR16254)
 - Updated multiple dependencies
