@@ -293,10 +293,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 ea12999341c1f02442ee9300a1da589a8d40f8f9a44bf4fbbb58b43c6f806c5d
-            /* nTime    */ 1652777744,
-            /* nTxCount */ 2201801,
-            /* dTxRate  */ 0.019
+            // Data from RPC: getchaintxstats 40500 9583676625157dc0405bbd48b9220157eeabb7d9460fa234d31b49ea7014de2f
+            /* nTime    */ 1674153488,
+            /* nTxCount */ 2833624,
+            /* dTxRate  */ 0.029
         };
         // A vector of p2sh addresses
         vDevFundAddress = { "n14L5xqAs7QRzNiTLPNaPeqaF9CRoxzVnU" };
