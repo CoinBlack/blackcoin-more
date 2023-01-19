@@ -1225,17 +1225,30 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
         return error("%s: bad block signature encoding", __func__);
     }
 
+    // Blackcoin ToDo: revert after nodes upgrade to current version
+    // /*
+    // Set nFlags in case of proof of stake block received from an old node
+    std::shared_ptr<CBlock> pblock_mutable = std::const_pointer_cast<CBlock>(pblock);
+    bool fOldClient = pfrom->nVersion <= OLD_VERSION;
+
+    if (fOldClient && pblock_mutable->IsProofOfStake())
+        pblock_mutable->nFlags = CBlockIndex::BLOCK_PROOF_OF_STAKE;
+
+    // Avoid implicit conversions
+    const std::shared_ptr<const CBlock> pblock_const = std::const_pointer_cast<const CBlock>(pblock_mutable);
+    // */
+
     // Process the header before processing the block
     const CBlockIndex *pindex = nullptr;
     BlockValidationState state;
-    if (!ProcessNetBlockHeaders(pfrom, {*pblock}, state, m_chainparams, pfrom->nVersion <= OLD_VERSION, &pindex)) {
+    if (!ProcessNetBlockHeaders(pfrom, {*pblock_const}, state, m_chainparams, fOldClient, &pindex)) {
         if (state.IsInvalid()) {
             MaybePunishNodeForBlock(pfrom->GetId(), state, false, strprintf("Peer %d sent us invalid header\n", pfrom->GetId()));
             return error("%s: invalid header received", __func__);
         }
     }
 
-    if (!m_chainman.ProcessNewBlock(m_chainparams, pblock, fForceProcessing, fNewBlock))
+    if (!m_chainman.ProcessNewBlock(m_chainparams, pblock_const, fForceProcessing, fNewBlock))
         return error("%s: ProcessNewBlock FAILED", __func__);
 
     return true;
