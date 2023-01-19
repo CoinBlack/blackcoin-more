@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// Rolling checkpoint check by Qtum
+// Copyright (c) 2016-2018 The Qtum developers
+
 #include <validation.h>
 
 #include <arith_uint256.h>
@@ -2940,6 +2943,29 @@ CBlockIndex* BlockManager::GetLastCheckpoint(const CCheckpointData& data)
     return nullptr;
 }
 
+// Automatically select a suitable sync-checkpoint 
+const CBlockIndex* BlockManager::AutoSelectSyncCheckpoint(const CBlockIndex *pindexBest)
+{
+    const CBlockIndex *pindex = pindexBest;
+    // Search backward for a block within max span and maturity window
+    int checkpointSpan = Params().GetConsensus().nCoinbaseMaturity;
+    while (pindex->pprev && pindex->nHeight + checkpointSpan > pindexBest->nHeight)
+        pindex = pindex->pprev;
+    return pindex;
+}
+
+// Check against synchronized checkpoint
+bool BlockManager::CheckSyncCheckpoint(int nHeight, const CBlockIndex *pindexBest)
+{
+    const CBlockIndex* pindexSync = nullptr;
+    if (nHeight)
+        pindexSync = AutoSelectSyncCheckpoint(pindexBest);
+
+    if (nHeight && nHeight <= pindexSync->nHeight)
+        return false;
+    return true;
+}
+
 /** Context-dependent validity checks.
  *  By "context", we mean only the previous block headers, but not the UTXO
  *  set; UTXO-related validity checks are done in ConnectBlock().
@@ -2985,6 +3011,11 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
             return state.Invalid(BlockValidationResult::BLOCK_CHECKPOINT, "bad-fork-prior-to-checkpoint");
         }
     }
+
+    // Qtum
+    // Check that the block satisfies synchronized checkpoint
+    if (!blockman.CheckSyncCheckpoint(nHeight, chain.Tip()))
+        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-fork-prior-to-synch-checkpoint", strprintf("%s: forked chain older than synchronized checkpoint (height %d)", __func__, nHeight));
 
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
@@ -3102,6 +3133,17 @@ bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationS
                 return state.Invalid(BlockValidationResult::BLOCK_CACHED_INVALID, "duplicate");
             }
             return true;
+        }
+
+        // Qtum
+        // Check for the checkpoint
+        if (chainstate.m_chain.Tip() && block.hashPrevBlock != chainstate.m_chain.Tip()->GetBlockHash())
+        {
+            // Extra checks to prevent "fill up memory by spamming with bogus blocks"
+            const CBlockIndex* pcheckpoint = AutoSelectSyncCheckpoint(chainstate.m_chain.Tip());
+            int64_t deltaTime = block.GetBlockTime() - pcheckpoint->nTime;
+            if (deltaTime < 0)
+                return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "older-than-checkpoint");
         }
 
         // peercoin: Don't reject in case of old clients. Change our assumption instead.

@@ -1228,6 +1228,20 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
         return error("%s: bad block signature encoding", __func__);
     }
 
+    // Qtum
+    // Check for the checkpoint
+    CBlockIndex* tip = m_chainman.ActiveChain().Tip();
+    if (tip && pblock->hashPrevBlock != tip->GetBlockHash()) {
+        // Extra checks to prevent "fill up memory by spamming with bogus blocks"
+        const CBlockIndex* pcheckpoint = m_chainman.m_blockman.AutoSelectSyncCheckpoint(tip);
+        int64_t deltaTime = pblock->GetBlockTime() - pcheckpoint->nTime;
+        if (deltaTime < 0) {
+            if (pfrom)
+                Misbehaving(pfrom->GetId(), 1, "block with timestamp before last checkpoint");
+            return error("%s: block with timestamp before last checkpoint", __func__);
+        }
+    }
+
     // Blackcoin ToDo: revert after nodes upgrade to current version
     // /*
     // Set nFlags in case of proof of stake block received from an old node

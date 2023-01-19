@@ -3,6 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+// Rolling checkpoint check by Qtum
+// Copyright (c) 2016-2018 The Qtum developers
+
 #ifndef BITCOIN_VALIDATION_H
 #define BITCOIN_VALIDATION_H
 
@@ -483,6 +486,12 @@ public:
 
     //! Returns last CBlockIndex* that is a checkpoint
     CBlockIndex* GetLastCheckpoint(const CCheckpointData& data) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
+
+    //! Returns last CBlockIndex* from the auto selected checkpoint
+    const CBlockIndex* AutoSelectSyncCheckpoint(const CBlockIndex *pindexBest) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
+
+    //! Check against automatically selected checkpoint
+    bool CheckSyncCheckpoint(int nHeight, const CBlockIndex *pindexBest) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
     /**
      * Return the spend height, which is one more than the inputs.GetBestBlock().
