@@ -150,8 +150,6 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "reservebalance", 0, "reserve" },
     { "reservebalance", 1, "amount" },
     { "burn", 0, "amount" },
-    { "burn", 1, "hex_string" },
-    { "burnwallet", 0, "hex_string" },
     { "burnwallet", 1, "force" },
     { "logging", 0, "include" },
     { "logging", 1, "exclude" },
