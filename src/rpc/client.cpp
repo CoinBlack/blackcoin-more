@@ -179,6 +179,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "getnodeaddresses", 0, "count"},
     { "addpeeraddress", 1, "port"},
     { "stop", 0, "wait" },
+    { "staking", 0, "generate"},
 };
 // clang-format on
 

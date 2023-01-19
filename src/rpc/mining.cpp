@@ -1156,24 +1156,8 @@ static RPCHelpMan staking()
             },
             [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
-    bool fGenerate;
+    bool fGenerate = request.params[0].isNull() ? EnableStaking() : request.params[0].get_bool();
 
-    // Blackcoin ToDo: cleanup is needed
-    if (request.params[0].isNull())
-        fGenerate = EnableStaking();
-    else {
-        if (request.params[0].isBool())
-            fGenerate = request.params[0].get_bool();
-        else if (request.params[0].isStr()) {
-            if (request.params[0].get_str() == "true" || request.params[0].get_str() == "1")
-                fGenerate = true;
-            else if (request.params[0].get_str() == "false" || request.params[0].get_str() == "0")
-                fGenerate = false;
-            else 
-                throw JSONRPCError(RPC_TYPE_ERROR, "Parameter must be \"true\" or \"false\"");
-        }
-    }
-            
 #ifdef ENABLE_WALLET
     if (!request.params[0].isNull()) {
         NodeContext& node = EnsureAnyNodeContext(request.context);
