@@ -121,7 +121,7 @@ public:
         consensus.nCoinbaseMaturity = 500;
 
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000039c894d4e483a4943d1");
-        consensus.defaultAssumeValid = uint256S("0x36442d872ca6a66c65caef4d9468b8add290accc8cf7ec386eee50e62721ed3d"); //2400000
+        consensus.defaultAssumeValid = uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc"); // 4232630
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -252,7 +252,7 @@ public:
         nDefaultPort = 25714;
 
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000395ae7599030cbde43");
-        consensus.defaultAssumeValid = uint256S("0x00");
+        consensus.defaultAssumeValid = uint256S("0x9583676625157dc0405bbd48b9220157eeabb7d9460fa234d31b49ea7014de2f"); // 90235
 
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 2;
