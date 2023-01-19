@@ -187,6 +187,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         }
         if (*pfPoSCancel)
             return nullptr; // peercoin: there is no point to continue if we failed to create coinstake
+        pblock->nFlags = CBlockIndex::BLOCK_PROOF_OF_STAKE;
     }
 #endif
 

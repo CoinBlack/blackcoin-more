@@ -351,6 +351,10 @@ bool ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos, const Consensus::P
         return error("ReadBlockFromDisk: Errors in block solution at %s", pos.ToString());
     }
 
+     // Set nFlags in case of proof of stake block
+     if (block.IsProofOfStake())
+        block.nFlags |= CBlockIndex::BLOCK_PROOF_OF_STAKE;
+
     return true;
 }
 
