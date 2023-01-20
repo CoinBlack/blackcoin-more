@@ -1198,13 +1198,16 @@ bool PeerManagerImpl::ProcessNetBlockHeaders(CNode* pfrom, const std::vector<CBl
 {
     const CBlockIndex *pindexFirst = nullptr;
     bool ret = m_chainman.ProcessNewBlockHeaders(block, state, chainparams, fOldClient, ppindex, &pindexFirst);
-    if(gArgs.GetBoolArg("-headerspamfilter", DEFAULT_HEADER_SPAM_FILTER))
+    if (gArgs.GetBoolArg("-headerspamfilter", DEFAULT_HEADER_SPAM_FILTER))
     {
-        LOCK(cs_main);
-        CNodeHeaders& headers = ServiceHeaders(pfrom->GetAddrLocal());
-        const CBlockIndex *pindexLast = ppindex == nullptr ? nullptr : *ppindex;
-        headers.addHeaders(pindexFirst, pindexLast);
-        return headers.updateState(state, ret);
+        if (!m_chainman.ActiveChainstate().IsInitialBlockDownload() || (gArgs.GetBoolArg("-headerspamfilterduringibd", DEFAULT_HEADER_SPAM_FILTER_DURING_IBD) && m_chainman.ActiveChainstate().IsInitialBlockDownload()))
+        {
+            LOCK(cs_main);
+            CNodeHeaders& headers = ServiceHeaders(pfrom->GetAddrLocal());
+            const CBlockIndex *pindexLast = ppindex == nullptr ? nullptr : *ppindex;
+            headers.addHeaders(pindexFirst, pindexLast);
+            return headers.updateState(state, ret);
+        }       
     }
     return ret;
 }

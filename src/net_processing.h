@@ -32,8 +32,11 @@ static const unsigned int DEFAULT_HEADER_SPAM_FILTER_MAX_SIZE = 500;
 /** Default for -headerspamfiltermaxavg, maximum average size of an index occurrence in the header spam filter */
 static const unsigned int DEFAULT_HEADER_SPAM_FILTER_MAX_AVG = 10;
 /** Default for -headerspamfilterignoreport, ignore the port in the ip address when looking for header spam,
- multiple nodes on the same ip will be treated as the one when computing the filter*/
+ multiple nodes on the same ip will be treated as the one when computing the filter */
 static const unsigned int DEFAULT_HEADER_SPAM_FILTER_IGNORE_PORT = true;
+/** Default for -headerspamfilterduringibd, whether to enable header spam filter during initial block
+ download */
+static const unsigned int DEFAULT_HEADER_SPAM_FILTER_DURING_IBD = false;
 
 struct CNodeStateStats {
     int nSyncHeight = -1;
