@@ -184,10 +184,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 ef16e02c01548b33363f13674e18f794d7525212ed730f966cc420f0b61c5cee
+            // Data from RPC: getchaintxstats 40500 ae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc
             /* nTime    */ 1668631296,
             /* nTxCount */ 13562393,
-            /* dTxRate  */ 0.050
+            /* dTxRate  */ 0.030
         };
 
         // A vector of p2sh addresses
