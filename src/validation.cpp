@@ -3374,7 +3374,7 @@ bool TestBlockValidity(BlockValidationState& state,
     return true;
 }
 
-bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool checkLowS)
+bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock, bool checkLowS)
 {
     if (pblock->IsProofOfWork()) {
         return pblock->vchBlockSig.empty();
@@ -3383,7 +3383,7 @@ bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool 
     return checkLowS ? IsLowDERSignature(pblock->vchBlockSig, nullptr, false) : IsDERSignature(pblock->vchBlockSig, nullptr, false);
 }
 
-bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock)
+bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock)
 {
     // Check block signature encoding
     bool ret = IsCanonicalBlockSignature(pblock, false);
