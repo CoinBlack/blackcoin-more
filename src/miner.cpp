@@ -164,7 +164,11 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // peercoin: if coinstake available add coinstake tx
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime();  // only initialized at startup
 
-    if (pwallet) { // attempt to find a coinstake
+    if (pwallet) {
+        // flush orphaned coinstakes
+        pwallet->AbandonOrphanedCoinstakes();
+
+        // attempt to find a coinstake
         *pfPoSCancel = true;
         pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), true);
         CMutableTransaction txCoinStake;
