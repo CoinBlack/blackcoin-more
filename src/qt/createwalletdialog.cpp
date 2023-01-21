@@ -106,6 +106,8 @@ CreateWalletDialog::CreateWalletDialog(QWidget* parent) :
         ui->external_signer_checkbox->setChecked(false);
 #endif
 
+        // Blackcoin ToDo: enable descriptor wallets
+        ui->descriptor_checkbox->setEnabled(false);
 }
 
 CreateWalletDialog::~CreateWalletDialog()
