@@ -132,9 +132,6 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
 
     // Kernel (input 0) must match the stake hash target per coin age (nBits)
     const CTxIn& txin = tx.vin[0];
-
-    // First try finding the previous transaction in database
-    CMutableTransaction txPrev;
     
     Coin coinPrev;
 
