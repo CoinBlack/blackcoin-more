@@ -1,6 +1,11 @@
 # Changelog
 
-## v22.1.0 ALPHA (2023-01-20)
+## v22.1.0-alpha-2 (2023-01-24)
+- Flush orphaned stakes prior to each staking attempt
+- Enabled checkpoints by default
+- Added rolling checkpoints checks
+
+## v22.1.0-alpha-1 (2023-01-20)
 - Updated to Bitcoin Core 22.1
 
 ## v13.2.0 (2022-11-24)
