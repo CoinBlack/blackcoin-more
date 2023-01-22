@@ -6,29 +6,18 @@
 print-%: FORCE
 	@echo '$*'='$($*)'
 
-DIST_SUBDIRS = secp256k1 univalue
+DIST_SUBDIRS = secp256k1
 
-AM_LDFLAGS = $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS) $(GPROF_LDFLAGS) $(SANITIZER_LDFLAGS)
-AM_CXXFLAGS = $(DEBUG_CXXFLAGS) $(HARDENED_CXXFLAGS) $(WARN_CXXFLAGS) $(NOWARN_CXXFLAGS) $(ERROR_CXXFLAGS) $(GPROF_CXXFLAGS) $(SANITIZER_CXXFLAGS)
+AM_LDFLAGS = $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS) $(GPROF_LDFLAGS) $(SANITIZER_LDFLAGS) $(LTO_LDFLAGS)
+AM_CXXFLAGS = $(DEBUG_CXXFLAGS) $(HARDENED_CXXFLAGS) $(WARN_CXXFLAGS) $(NOWARN_CXXFLAGS) $(ERROR_CXXFLAGS) $(GPROF_CXXFLAGS) $(SANITIZER_CXXFLAGS) $(LTO_CXXFLAGS)
 AM_CPPFLAGS = $(DEBUG_CPPFLAGS) $(HARDENED_CPPFLAGS)
 AM_LIBTOOLFLAGS = --preserve-dup-deps
 PTHREAD_FLAGS = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS)
 EXTRA_LIBRARIES =
 
-if EMBEDDED_UNIVALUE
-LIBUNIVALUE = univalue/libunivalue.la
+BITCOIN_INCLUDES=-I$(builddir) -I$(srcdir)/$(MINISKETCH_INCLUDE_DIR_INT) -I$(srcdir)/secp256k1/include -I$(srcdir)/$(UNIVALUE_INCLUDE_DIR_INT) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(SSL_CFLAGS) $(CRYPTO_CFLAGS)
 
-$(LIBUNIVALUE): $(wildcard univalue/lib/*) $(wildcard univalue/include/*)
-	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
-else
-LIBUNIVALUE = $(UNIVALUE_LIBS)
-endif
-
-BITCOIN_INCLUDES=-I$(builddir) -I$(srcdir)/secp256k1/include $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(SSL_CFLAGS) $(CRYPTO_CFLAGS)
-
-BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
-
-LIBBITCOIN_SERVER=libbitcoin_server.a
+LIBBITCOIN_NODE=libbitcoin_node.a
 LIBBITCOIN_COMMON=libbitcoin_common.a
 LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
 LIBBITCOIN_CLI=libbitcoin_cli.a
@@ -57,9 +46,13 @@ if ENABLE_AVX2
 LIBBITCOIN_CRYPTO_AVX2 = crypto/libbitcoin_crypto_avx2.a
 LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_AVX2)
 endif
-if ENABLE_SHANI
-LIBBITCOIN_CRYPTO_SHANI = crypto/libbitcoin_crypto_shani.a
-LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_SHANI)
+if ENABLE_X86_SHANI
+LIBBITCOIN_CRYPTO_X86_SHANI = crypto/libbitcoin_crypto_x86_shani.a
+LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_X86_SHANI)
+endif
+if ENABLE_ARM_SHANI
+LIBBITCOIN_CRYPTO_ARM_SHANI = crypto/libbitcoin_crypto_arm_shani.a
+LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_ARM_SHANI)
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(wildcard secp256k1/include/*)
@@ -72,7 +65,7 @@ EXTRA_LIBRARIES += \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_CONSENSUS) \
-  $(LIBBITCOIN_SERVER) \
+  $(LIBBITCOIN_NODE) \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_IPC) \
   $(LIBBITCOIN_WALLET) \
@@ -80,6 +73,7 @@ EXTRA_LIBRARIES += \
   $(LIBBITCOIN_ZMQ)
 
 lib_LTLIBRARIES = $(LIBBITCOINCONSENSUS)
+noinst_LTLIBRARIES =
 
 bin_PROGRAMS =
 noinst_PROGRAMS =
@@ -117,13 +111,13 @@ endif
 BITCOIN_CORE_H = \
   addrdb.h \
   addrman.h \
+  addrman_impl.h \
   attributes.h \
   banman.h \
   base58.h \
   bech32.h \
   blockencodings.h \
   blockfilter.h \
-  bloom.h \
   chain.h \
   chainparams.h \
   chainparamsbase.h \
@@ -131,6 +125,7 @@ BITCOIN_CORE_H = \
   checkqueue.h \
   clientversion.h \
   coins.h \
+  common/bloom.h \
   compat.h \
   compat/assumptions.h \
   compat/byteswap.h \
@@ -176,7 +171,6 @@ BITCOIN_CORE_H = \
   mapport.h \
   memusage.h \
   merkleblock.h \
-  miner.h \
   net.h \
   net_permissions.h \
   net_processing.h \
@@ -185,9 +179,13 @@ BITCOIN_CORE_H = \
   netbase.h \
   netmessagemaker.h \
   node/blockstorage.h \
+  node/caches.h \
+  node/chainstate.h \
   node/coin.h \
   node/coinstats.h \
   node/context.h \
+  node/miner.h \
+  node/minisketchwrapper.h \
   node/psbt.h \
   node/transaction.h \
   node/ui_interface.h \
@@ -211,12 +209,12 @@ BITCOIN_CORE_H = \
   rpc/blockchain.h \
   rpc/client.h \
   rpc/mining.h \
-  rpc/net.h \
   rpc/protocol.h \
   rpc/rawtransaction_util.h \
   rpc/register.h \
   rpc/request.h \
   rpc/server.h \
+  rpc/server_util.h \
   rpc/util.h \
   scheduler.h \
   script/descriptor.h \
@@ -250,6 +248,7 @@ BITCOIN_CORE_H = \
   util/check.h \
   util/epochguard.h \
   util/error.h \
+  util/fastrange.h \
   util/getuniquepath.h \
   util/golombrice.h \
   util/hash_type.h \
@@ -257,12 +256,15 @@ BITCOIN_CORE_H = \
   util/macros.h \
   util/message.h \
   util/moneystr.h \
+  util/overflow.h \
+  util/overloaded.h \
   util/readwritefile.h \
   util/serfloat.h \
   util/settings.h \
   util/sock.h \
   util/spanparsing.h \
   util/string.h \
+  util/syscall_sandbox.h \
   util/system.h \
   util/thread.h \
   util/threadnames.h \
@@ -270,6 +272,7 @@ BITCOIN_CORE_H = \
   util/tokenpipe.h \
   util/trace.h \
   util/translation.h \
+  util/types.h \
   util/ui_change_type.h \
   util/url.h \
   util/vector.h \
@@ -288,7 +291,8 @@ BITCOIN_CORE_H = \
   wallet/ismine.h \
   wallet/load.h \
   wallet/receive.h \
-  wallet/rpcwallet.h \
+  wallet/rpc/util.h \
+  wallet/rpc/wallet.h \
   wallet/salvage.h \
   wallet/scriptpubkeyman.h \
   wallet/spend.h \
@@ -319,9 +323,9 @@ ipc/capnp/libbitcoin_ipc_a-ipc.$(OBJEXT): $(libbitcoin_ipc_mpgen_input:=.h)
 # Contains code accessing mempool and chain state that is meant to be separated
 # from wallet and gui code (see node/README.md). Shared code should go in
 # libbitcoin_common or libbitcoin_util libraries, instead.
-libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(NATPMP_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_server_a_SOURCES = \
+libbitcoin_node_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(NATPMP_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libbitcoin_node_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_node_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   banman.cpp \
@@ -341,14 +345,17 @@ libbitcoin_server_a_SOURCES = \
   index/txindex.cpp \
   init.cpp \
   mapport.cpp \
-  miner.cpp \
   net.cpp \
   net_processing.cpp \
   node/blockstorage.cpp \
+  node/caches.cpp \
+  node/chainstate.cpp \
   node/coin.cpp \
   node/coinstats.cpp \
   node/context.cpp \
   node/interfaces.cpp \
+  node/miner.cpp \
+  node/minisketchwrapper.cpp \
   node/psbt.cpp \
   node/transaction.cpp \
   node/ui_interface.cpp \
@@ -365,6 +372,7 @@ libbitcoin_server_a_SOURCES = \
   rpc/net.cpp \
   rpc/rawtransaction.cpp \
   rpc/server.cpp \
+  rpc/server_util.cpp \
   script/sigcache.cpp \
   shutdown.cpp \
   signet.cpp \
@@ -380,10 +388,10 @@ libbitcoin_server_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 if ENABLE_WALLET
-libbitcoin_server_a_SOURCES += wallet/init.cpp
+libbitcoin_node_a_SOURCES += wallet/init.cpp
 endif
 if !ENABLE_WALLET
-libbitcoin_server_a_SOURCES += dummywallet.cpp
+libbitcoin_node_a_SOURCES += dummywallet.cpp
 endif
 
 if ENABLE_ZMQ
@@ -412,8 +420,15 @@ libbitcoin_wallet_a_SOURCES = \
   wallet/interfaces.cpp \
   wallet/load.cpp \
   wallet/receive.cpp \
-  wallet/rpcdump.cpp \
-  wallet/rpcwallet.cpp \
+  wallet/rpc/addresses.cpp \
+  wallet/rpc/backup.cpp \
+  wallet/rpc/coins.cpp \
+  wallet/rpc/encrypt.cpp \
+  wallet/rpc/spend.cpp \
+  wallet/rpc/signmessage.cpp \
+  wallet/rpc/transactions.cpp \
+  wallet/rpc/util.cpp \
+  wallet/rpc/wallet.cpp \
   wallet/scriptpubkeyman.cpp \
   wallet/spend.cpp \
   wallet/transaction.cpp \
@@ -437,7 +452,7 @@ libbitcoin_wallet_tool_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
-crypto_libbitcoin_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS) $(SSL_CFLAGS)
+crypto_libbitcoin_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
 crypto_libbitcoin_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -fPIC
 crypto_libbitcoin_crypto_base_a_CFLAGS = $(AM_CXXFLAGS) -fPIC
 crypto_libbitcoin_crypto_base_a_SOURCES = \
@@ -490,19 +505,25 @@ crypto_libbitcoin_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
 crypto_libbitcoin_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
 crypto_libbitcoin_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
 
-crypto_libbitcoin_crypto_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libbitcoin_crypto_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libbitcoin_crypto_shani_a_CXXFLAGS += $(SHANI_CXXFLAGS)
-crypto_libbitcoin_crypto_shani_a_CPPFLAGS += -DENABLE_SHANI
-crypto_libbitcoin_crypto_shani_a_SOURCES = crypto/sha256_shani.cpp
+crypto_libbitcoin_crypto_x86_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitcoin_crypto_x86_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libbitcoin_crypto_x86_shani_a_CXXFLAGS += $(X86_SHANI_CXXFLAGS)
+crypto_libbitcoin_crypto_x86_shani_a_CPPFLAGS += -DENABLE_X86_SHANI
+crypto_libbitcoin_crypto_x86_shani_a_SOURCES = crypto/sha256_x86_shani.cpp
+
+crypto_libbitcoin_crypto_arm_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitcoin_crypto_arm_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libbitcoin_crypto_arm_shani_a_CXXFLAGS += $(ARM_SHANI_CXXFLAGS)
+crypto_libbitcoin_crypto_arm_shani_a_CPPFLAGS += -DENABLE_ARM_SHANI
+crypto_libbitcoin_crypto_arm_shani_a_SOURCES = crypto/sha256_arm_shani.cpp
 
 # consensus: shared between all executables that validate any consensus rules.
 libbitcoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -fPIC
 libbitcoin_consensus_a_SOURCES = \
-  amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
+  consensus/amount.h \
   consensus/merkle.cpp \
   consensus/merkle.h \
   consensus/params.h \
@@ -541,9 +562,9 @@ libbitcoin_common_a_CFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -std=c99
 libbitcoin_common_a_SOURCES = \
   base58.cpp \
   bech32.cpp \
-  bloom.cpp \
   chainparams.cpp \
   coins.cpp \
+  common/bloom.cpp \
   compressor.cpp \
   consensus/merkle.cpp \
   core_read.cpp \
@@ -554,6 +575,7 @@ libbitcoin_common_a_SOURCES = \
   key.cpp \
   key_io.cpp \
   merkleblock.cpp \
+  net_types.cpp \
   netaddress.cpp \
   netbase.cpp \
   net_permissions.cpp \
@@ -575,7 +597,7 @@ libbitcoin_common_a_SOURCES = \
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
-# backward-compatibility objects and their sanity checks are linked.
+# sanity checks are linked.
 libbitcoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_util_a_SOURCES = \
@@ -613,17 +635,13 @@ libbitcoin_util_a_SOURCES = \
   util/spanparsing.cpp \
   util/strencodings.cpp \
   util/string.cpp \
+  util/syscall_sandbox.cpp \
   util/time.cpp \
   util/tokenpipe.cpp \
   $(BITCOIN_CORE_H)
 
 if USE_LIBEVENT
 libbitcoin_util_a_SOURCES += util/url.cpp
-endif
-
-if GLIBC_BACK_COMPAT
-libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
-AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
 # cli: shared between blackmore-cli and blackmore-qt
@@ -649,9 +667,7 @@ blackmore_daemon_sources += bitcoind-res.rc
 endif
 
 blackmore_bin_ldadd = \
-  $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET) \
-  $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
   $(LIBUNIVALUE) \
@@ -663,19 +679,19 @@ blackmore_bin_ldadd = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-blackmore_bin_ldadd += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(NATPMP_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) $(SQLITE_LIBS)
+blackmore_bin_ldadd += $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(NATPMP_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) $(SQLITE_LIBS)
 
 blackmored_SOURCES = $(blackmore_daemon_sources) init/bitcoind.cpp
 blackmored_CPPFLAGS = $(blackmore_bin_cppflags)
 blackmored_CXXFLAGS = $(blackmore_bin_cxxflags)
 blackmored_LDFLAGS = $(blackmore_bin_ldflags)
-blackmored_LDADD = $(LIBBITCOIN_SERVER) $(blackmore_bin_ldadd)
+blackmored_LDADD = $(LIBBITCOIN_NODE) $(blackmore_bin_ldadd)
 
 blackmore_node_SOURCES = $(blackmore_daemon_sources) init/bitcoin-node.cpp
 blackmore_node_CPPFLAGS = $(blackmore_bin_cppflags)
 blackmore_node_CXXFLAGS = $(blackmore_bin_cxxflags)
 blackmore_node_LDFLAGS = $(blackmore_bin_ldflags)
-blackmore_node_LDADD = $(LIBBITCOIN_SERVER) $(blackmore_bin_ldadd) $(LIBBITCOIN_IPC) $(LIBMULTIPROCESS_LIBS)
+blackmore_node_LDADD = $(LIBBITCOIN_NODE) $(blackmore_bin_ldadd) $(LIBBITCOIN_IPC) $(LIBMULTIPROCESS_LIBS)
 
 # blackmore-cli binary #
 blackmore_cli_SOURCES = bitcoin-cli.cpp
@@ -697,7 +713,7 @@ blackmore_cli_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-blackmore_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+blackmore_cli_LDADD += $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # blackmore-tx binary #
@@ -723,15 +739,27 @@ blackmore_tx_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-blackmore_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+blackmore_tx_LDADD += $(CRYPTO_LIBS)
 #
 
 # blackmore-wallet binary #
-blackmore_wallet_SOURCES = bitcoin-wallet.cpp validation.cpp rpc/server.cpp
+blackmore_wallet_SOURCES = bitcoin-wallet.cpp
+blackmore_wallet_SOURCES += init/bitcoin-wallet.cpp
 blackmore_wallet_CPPFLAGS = $(blackmore_bin_cppflags)
 blackmore_wallet_CXXFLAGS = $(blackmore_bin_cxxflags)
 blackmore_wallet_LDFLAGS = $(blackmore_bin_ldflags)
-blackmore_wallet_LDADD = $(LIBBITCOIN_WALLET_TOOL) $(blackmore_bin_ldadd)
+blackmore_wallet_LDADD = \
+  $(LIBBITCOIN_WALLET_TOOL) \
+  $(LIBBITCOIN_WALLET) \
+  $(LIBBITCOIN_COMMON) \
+  $(LIBBITCOIN_UTIL) \
+  $(LIBUNIVALUE) \
+  $(LIBBITCOIN_CONSENSUS) \
+  $(LIBBITCOIN_CRYPTO) \
+  $(LIBSECP256K1) \
+  $(BDB_LIBS) \
+  $(SQLITE_LIBS) \
+  $(CRYPTO_LIBS)
 
 if TARGET_WINDOWS
 blackmore_wallet_SOURCES += bitcoin-wallet-res.rc
@@ -756,7 +784,7 @@ blackmore_util_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-blackmore_util_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+blackmore_util_LDADD += $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #
@@ -764,13 +792,9 @@ if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h
 libbitcoinconsensus_la_SOURCES = support/cleanse.cpp $(crypto_libbitcoin_crypto_base_a_SOURCES) $(libbitcoin_consensus_a_SOURCES)
 
-if GLIBC_BACK_COMPAT
-  libbitcoinconsensus_la_SOURCES += compat/glibc_compat.cpp
-endif
-
 libbitcoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libbitcoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS)
-libbitcoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BITCOIN_INTERNAL $(SSL_CFLAGS)
+libbitcoinconsensus_la_LIBADD = $(LIBSECP256K1)
+libbitcoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BITCOIN_INTERNAL
 libbitcoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
@@ -816,7 +840,6 @@ $(top_srcdir)/$(subdir)/config/bitcoin-config.h.in:  $(am__configure_deps)
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean
-	-$(MAKE) -C univalue clean
 	-rm -f leveldb/*/*.gcda leveldb/*/*.gcno leveldb/helpers/memenv/*.gcda leveldb/helpers/memenv/*.gcno
 	-rm -f config.h
 	-rm -rf test/__pycache__
@@ -827,25 +850,13 @@ clean-local:
 	$(AM_V_GEN) $(WINDRES) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(CPPFLAGS) -DWINDRES_PREPROC -i $< -o $@
 
 check-symbols: $(bin_PROGRAMS)
-if TARGET_DARWIN
-	@echo "Checking macOS dynamic libraries..."
+	@echo "Running symbol and dynamic library checks..."
 	$(AM_V_at) $(PYTHON) $(top_srcdir)/contrib/devtools/symbol-check.py $(bin_PROGRAMS)
-endif
-
-if TARGET_WINDOWS
-	@echo "Checking Windows dynamic libraries..."
-	$(AM_V_at) $(PYTHON) $(top_srcdir)/contrib/devtools/symbol-check.py $(bin_PROGRAMS)
-endif
-
-if TARGET_LINUX
-	@echo "Checking glibc back compat..."
-	$(AM_V_at) CPPFILT='$(CPPFILT)' $(PYTHON) $(top_srcdir)/contrib/devtools/symbol-check.py $(bin_PROGRAMS)
-endif
 
 check-security: $(bin_PROGRAMS)
 if HARDEN
 	@echo "Checking binary security..."
-	$(AM_V_at) READELF=$(READELF) OBJDUMP=$(OBJDUMP) OTOOL=$(OTOOL) $(PYTHON) $(top_srcdir)/contrib/devtools/security-check.py $(bin_PROGRAMS)
+	$(AM_V_at) $(PYTHON) $(top_srcdir)/contrib/devtools/security-check.py $(bin_PROGRAMS)
 endif
 
 libbitcoin_ipc_mpgen_input = \
@@ -857,9 +868,11 @@ EXTRA_DIST += $(libbitcoin_ipc_mpgen_input)
 if BUILD_MULTIPROCESS
 LIBBITCOIN_IPC=libbitcoin_ipc.a
 libbitcoin_ipc_a_SOURCES = \
+  ipc/capnp/context.h \
   ipc/capnp/init-types.h \
   ipc/capnp/protocol.cpp \
   ipc/capnp/protocol.h \
+  ipc/context.h \
   ipc/exception.h \
   ipc/interfaces.cpp \
   ipc/process.cpp \
@@ -881,10 +894,10 @@ nodist_libbitcoin_ipc_a_SOURCES = $(libbitcoin_ipc_mpgen_output)
 CLEANFILES += $(libbitcoin_ipc_mpgen_output)
 endif
 
-if EMBEDDED_LEVELDB
+include Makefile.minisketch.include
+
 include Makefile.crc32c.include
 include Makefile.leveldb.include
-endif
 
 include Makefile.test_util.include
 include Makefile.test_fuzz.include
@@ -904,3 +917,5 @@ endif
 if ENABLE_QT_TESTS
 include Makefile.qttest.include
 endif
+
+include Makefile.univalue.include

@@ -17,6 +17,5 @@ define $(package)_stage_cmds
 endef
 
 define $(package)_postprocess_cmds
-  find -name "*.pyc" -delete && \
-  find -name "*.pyo" -delete
+  rm -rf lib/python*/site-packages/xcbgen/__pycache__
 endef

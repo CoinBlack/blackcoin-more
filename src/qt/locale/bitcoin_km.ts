@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Create a new address</source>
-        <translation>បង្កើតអាស្រយដ្ឋានថ្មី</translation>
+        <translation type="unfinished">បង្កើតអាស្រយដ្ឋានថ្មី</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>ចម្លងអាសយដ្ឋានបច្ចុប្បន្នដែលបានជ្រើសទៅក្ដារតម្រៀបរបស់ប្រព័ន្ធ</translation>
+        <translation type="unfinished">ចម្លងអាសយដ្ឋានបច្ចុប្បន្នដែលបានជ្រើសទៅក្ដារតម្រៀបរបស់ប្រព័ន្ធ</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation>លុប​អាសយដ្ឋានដែល​បានជ្រើស​ពី​បញ្ជី</translation>
+        <translation type="unfinished">លុប​អាសយដ្ឋានដែល​បានជ្រើស​ពី​បញ្ជី</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
@@ -35,15 +35,15 @@
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>នាំចេញទិន្នន័យនៃផ្ទាំងបច្ចុប្បន្នទៅជាឯកសារ</translation>
+        <translation type="unfinished">នាំចេញទិន្នន័យនៃផ្ទាំងបច្ចុប្បន្នទៅជាឯកសារ</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>នាំចេញ</translation>
+        <translation type="unfinished">&amp;នាំចេញ</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>លុប(&amp;D)</translation>
+        <translation type="unfinished">លុប(&amp;D)</translation>
     </message>
     <message>
         <source>Choose the address to send coins to</source>
@@ -109,19 +109,19 @@
     <name>AskPassphraseDialog</name>
     <message>
         <source>Passphrase Dialog</source>
-        <translation>ការហៅឃ្លាសម្ងាត់</translation>
+        <translation type="unfinished">ការហៅឃ្លាសម្ងាត់</translation>
     </message>
     <message>
         <source>Enter passphrase</source>
-        <translation>បញ្ចូលឃ្លាសម្ងាត់</translation>
+        <translation type="unfinished">បញ្ចូលឃ្លាសម្ងាត់</translation>
     </message>
     <message>
         <source>New passphrase</source>
-        <translation>ឃ្លាសម្ងាត់ថ្មី</translation>
+        <translation type="unfinished">ឃ្លាសម្ងាត់ថ្មី</translation>
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>ឃ្លាសម្ងាត់ថ្នីម្ដងទៀត</translation>
+        <translation type="unfinished">ឃ្លាសម្ងាត់ថ្នីម្ដងទៀត</translation>
     </message>
     <message>
         <source>Show passphrase</source>
@@ -211,10 +211,6 @@
 <context>
     <name>BanTableModel</name>
     <message>
-        <source>IP/Netmask</source>
-        <translation>IP/Netmask</translation>
-    </message>
-    <message>
         <source>Banned Until</source>
         <translation type="unfinished">បានហាមឃាត់រហូតដល់</translation>
     </message>
@@ -235,14 +231,14 @@
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
             <numerusform />
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
             <numerusform />
         </translation>
@@ -277,38 +273,153 @@
     </message>
     </context>
 <context>
+    <name>bitcoin-core</name>
+    <message>
+        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
+        <translation type="unfinished">-maxtxfee មានតំម្លៃខ្ពស់ពេក។​ តំម្លៃនេះ អាចគួរត្រូវបានបង់សម្រាប់មួយប្រត្តិបត្តិការ។</translation>
+    </message>
+    <message>
+        <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
+        <translation type="unfinished">ការវាយតម្លៃកំម្រៃមិនជោគជ័យ។  Fallbackfee ត្រូវបានដាក់ឲ្យប្រើលែងកើត។ រងចាំប្លុក ឬក៏ ដាក់ឲ្យប្រើឡើងវិញនូវ  Fallbackfee។</translation>
+    </message>
+    <message>
+        <source>The transaction amount is too small to send after the fee has been deducted</source>
+        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការមានទឹកប្រាក់ទំហំតិចតួច ក្នុងការផ្ញើរចេញទៅ  បន្ទាប់ពីកំរៃត្រូវបានកាត់រួចរាល់</translation>
+    </message>
+    <message>
+        <source>This is the maximum transaction fee you pay (in addition to the normal fee) to prioritize partial spend avoidance over regular coin selection.</source>
+        <translation type="unfinished">នេះជាកម្រៃប្រត្តិបត្តិការតូចបំផុត ដែលអ្នកទូរទាត់ (បន្ថែមទៅលើកម្រៃធម្មតា)​​  ដើម្បីផ្តល់អាទិភាពលើការជៀសវៀងការចំណាយដោយផ្នែក សម្រាប់ការជ្រើសរើសកាក់ដោយទៀងទាត់។</translation>
+    </message>
+    <message>
+        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
+        <translation type="unfinished"> អ្នកនឹងទូរទាត់ កម្រៃប្រត្តិបត្តិការនេះ នៅពេលណាដែល ទឹកប្រាក់នៃការប៉ាន់ស្មាន មិនទាន់មាន។</translation>
+    </message>
+    <message>
+        <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
+        <translation type="unfinished">ប្រវែងខ្សែបណ្តាញសរុប(%i) លើសប្រវែងខ្សែដែលវែងបំផុត (%i)។ កាត់បន្ថយចំនួន ​ឬទំហំនៃ uacomments ។</translation>
+    </message>
+    <message>
+        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
+        <translation type="unfinished">សេចក្តីប្រកាសអាសន្នៈ​ លេខសំម្ងាត់ត្រូវបានស្វែងរកឃើញនៅក្នុងកាបូបអេឡិចត្រូនិច​ {%s} ជាមួយនិងលេខសំម្ងាត់ត្រូវបានដាក់ឲ្យលែងប្រើលែងកើត</translation>
+    </message>
+    <message>
+        <source>%s is set very high!</source>
+        <translation type="unfinished">%s ត្រូវបានកំណត់យ៉ាងខ្ពស់</translation>
+    </message>
+    <message>
+        <source>Cannot write to data directory '%s'; check permissions.</source>
+        <translation type="unfinished">មិនអាចសរសេរទៅកាន់ កន្លែងផ្ទុកទិន្នន័យ​ '%s'; ពិនិត្យមើលការអនុញ្ញាត។</translation>
+    </message>
+    <message>
+        <source>Disk space is too low!</source>
+        <translation type="unfinished">ទំហំឌីស មានកំរិតទាប</translation>
+    </message>
+    <message>
+        <source>Done loading</source>
+        <translation type="unfinished">បានធ្វើរួចរាល់ហើយ កំពុងបង្ហាញ</translation>
+    </message>
+    <message>
+        <source>Error reading from database, shutting down.</source>
+        <translation type="unfinished">បញ្ហា​ក្នុងការទទួលបានទិន្ន័យ​ ពីមូលដ្ឋានទិន្ន័យ ដូច្នេះកំពុងតែបិទ។</translation>
+    </message>
+    <message>
+        <source>Failed to verify database</source>
+        <translation type="unfinished">មិនបានជោគជ័យក្នុងការបញ្ចាក់ មូលដ្ឋានទិន្នន័យ</translation>
+    </message>
+    <message>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">មូលនិធិមិនគ្រប់គ្រាន់</translation>
+    </message>
+    <message>
+        <source>Invalid P2P permission: '%s'</source>
+        <translation type="unfinished">ការអនុញ្ញាត P2P មិនត្រឹមត្រូវៈ​ '%s'</translation>
+    </message>
+    <message>
+        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
+        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់  -%s=&lt;amount&gt;: '%s'</translation>
+    </message>
+    <message>
+        <source>Invalid amount for -discardfee=&lt;amount&gt;: '%s'</source>
+        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់ -discardfee=&lt;amount&gt;: '%s'</translation>
+    </message>
+    <message>
+        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
+        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់ -fallbackfee=&lt;amount&gt; : '%s'</translation>
+    </message>
+    <message>
+        <source>Signing transaction failed</source>
+        <translation type="unfinished">ប្រត្តិបត្តការចូល មិនជោគជ័យ</translation>
+    </message>
+    <message>
+        <source>The transaction amount is too small to pay the fee</source>
+        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការមានទឹកប្រាក់ទំហំតូចពេក សម្រាប់បង់ប្រាក់</translation>
+    </message>
+    <message>
+        <source>The wallet will avoid paying less than the minimum relay fee.</source>
+        <translation type="unfinished">ប្រត្តិបត្តិការមានខ្សែចង្វាក់រងចាំដើម្បីធ្វើការផ្ទៀងផ្ទាត់វែង</translation>
+    </message>
+    <message>
+        <source>This is the minimum transaction fee you pay on every transaction.</source>
+        <translation type="unfinished">នេះជាកម្រៃប្រត្តិបត្តិការតិចបំផុត អ្នកបង់រាល់ពេលធ្វើប្រត្តិបត្តិការម្តងៗ។</translation>
+    </message>
+    <message>
+        <source>This is the transaction fee you will pay if you send a transaction.</source>
+        <translation type="unfinished">នេះជាកម្រៃប្រត្តិបត្តិការ អ្នកនឹងបង់ប្រសិនបើអ្នកធ្វើប្រត្តិបត្តិការម្តង។</translation>
+    </message>
+    <message>
+        <source>Transaction amount too small</source>
+        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការមានទឹកប្រាក់ទំហំតូច</translation>
+    </message>
+    <message>
+        <source>Transaction amounts must not be negative</source>
+        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការ មិនអាចអវិជ្ជមានបានទេ</translation>
+    </message>
+    <message>
+        <source>Transaction has too long of a mempool chain</source>
+        <translation type="unfinished">ប្រត្តិបត្តិការមានខ្សែចង្វាក់រងចាំដើម្បីធ្វើការផ្ទៀងផ្ទាត់វែង</translation>
+    </message>
+    <message>
+        <source>Transaction must have at least one recipient</source>
+        <translation type="unfinished">ប្រត្តិបត្តិការត្រូវមានអ្នកទទួលម្នាក់យ៉ាងតិចបំផុត</translation>
+    </message>
+    <message>
+        <source>Transaction too large</source>
+        <translation type="unfinished">ប្រត្តិបត្តការទឹកប្រាក់ មានទំហំធំ</translation>
+    </message>
+    </context>
+<context>
     <name>BitcoinGUI</name>
     <message>
         <source>&amp;Overview</source>
-        <translation>ទិដ្ឋភាពទូទៅ</translation>
+        <translation type="unfinished">ទិដ្ឋភាពទូទៅ</translation>
     </message>
     <message>
         <source>Show general overview of wallet</source>
-        <translation>បង្ហាញទិដ្ឋភាពទូទៅនៃកាបូបចល័ត</translation>
+        <translation type="unfinished">បង្ហាញទិដ្ឋភាពទូទៅនៃកាបូបចល័ត</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
-        <translation>ប្រតិបត្តិការ</translation>
+        <translation type="unfinished">ប្រតិបត្តិការ</translation>
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation>រកមើលប្រវត្តិប្រតិបត្តិការ</translation>
+        <translation type="unfinished">រកមើលប្រវត្តិប្រតិបត្តិការ</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>ចាកចេញ</translation>
+        <translation type="unfinished">ចាកចេញ</translation>
     </message>
     <message>
         <source>Quit application</source>
-        <translation>បោះបង់កម្មវិធី</translation>
+        <translation type="unfinished">បោះបង់កម្មវិធី</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>អំពី &amp;Qt</translation>
+        <translation type="unfinished">អំពី &amp;Qt</translation>
     </message>
     <message>
         <source>Show information about Qt</source>
-        <translation>បង្ហាញព័ត៍មានអំពី Qt</translation>
+        <translation type="unfinished">បង្ហាញព័ត៍មានអំពី Qt</translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
@@ -333,31 +444,35 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>ផ្ញើកាក់ទៅកាន់ អាសយដ្ឋាន Bitcoin មួយ</translation>
+        <translation type="unfinished">ផ្ញើកាក់ទៅកាន់ អាសយដ្ឋាន Bitcoin មួយ</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation>បម្រុកទុកនូវកាបូបចល័ត ទៅទីតាំងមួយផ្សេងទៀត</translation>
+        <translation type="unfinished">បម្រុកទុកនូវកាបូបចល័ត ទៅទីតាំងមួយផ្សេងទៀត</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation>ផ្លាស់ប្ដូរឃ្លាសម្ងាត់ ដែលបានប្រើសម្រាប់ការអ៊ិនគ្រីបកាបូបចល័ត</translation>
+        <translation type="unfinished">ផ្លាស់ប្ដូរឃ្លាសម្ងាត់ ដែលបានប្រើសម្រាប់ការអ៊ិនគ្រីបកាបូបចល័ត</translation>
     </message>
     <message>
         <source>&amp;Send</source>
-        <translation>&amp;ផ្ងើរ</translation>
+        <translation type="unfinished">&amp;ផ្ងើរ</translation>
     </message>
     <message>
         <source>&amp;Receive</source>
-        <translation>&amp;ទទួល</translation>
+        <translation type="unfinished">&amp;ទទួល</translation>
     </message>
     <message>
-        <source>&amp;Show / Hide</source>
-        <translation>&amp;បង្ហាញ/លាក់បាំង</translation>
+        <source>Encrypt the private keys that belong to your wallet</source>
+        <translation type="unfinished">បំលែងលេខសំម្ងាត់សម្រាប់កាបូបអេឡិចត្រូនិច របស់អ្នកឲ្យទៅជាភាសាកុំព្យូទ័រ </translation>
     </message>
     <message>
-        <source>Show or hide the main Window</source>
-        <translation>បង្ហាញ រឺលាក់ផ្ទាំងវីនដូដើម</translation>
+        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
+        <translation type="unfinished">ចុះហត្ថលេខាលើសារ អាសយដ្ឋានប៊ីតខញរបស់អ្នក ដើម្បីបញ្ចាក់ថាអ្នកជាម្ចាស់</translation>
+    </message>
+    <message>
+        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
+        <translation type="unfinished">ធ្វើការបញ្ចាក់សារ ដើម្បីធានាថាសារទាំំងនោះបានចុះហត្ថលេខា ជាមួយអាសយដ្ខានប៊ីតខញ</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -373,11 +488,46 @@
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>ឯកសារ</translation>
+        <translation type="unfinished">ឯកសារ</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation>ការកំណត់</translation>
+        <translation type="unfinished">ការកំណត់</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;ជំនួយ</translation>
+    </message>
+    <message>
+        <source>Tabs toolbar</source>
+        <translation type="unfinished">ធូបារថេប</translation>
+    </message>
+    <message>
+        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
+        <translation type="unfinished">សំណើរទូរទាត់​(បង្កើតកូដ QR និង ប៊ីតខញ: URLs)</translation>
+    </message>
+    <message>
+        <source>Show the list of used sending addresses and labels</source>
+        <translation type="unfinished">បង្ហាញបញ្ចីរអាសយដ្ឋាន និង ស្លាកសញ្ញាបញ្ចូនបានប្រើប្រាស់</translation>
+    </message>
+    <message>
+        <source>Show the list of used receiving addresses and labels</source>
+        <translation type="unfinished">បង្ហាញបញ្ចីរអាសយដ្ឋាន និង ស្លាកសញ្ញាទទួល បានប្រើប្រាស់</translation>
+    </message>
+    <message>
+        <source>&amp;Command-line options</source>
+        <translation type="unfinished">ជំរើសខំមែនឡាញ(&amp;C)</translation>
+    </message>
+    <message numerus="yes">
+        <source>Processed %n block(s) of transaction history.</source>
+        <translation type="unfinished">
+            <numerusform />
+            <numerusform />
+        </translation>
+    </message>
+    <message>
+        <source>Transactions after this will not yet be visible.</source>
+        <translation type="unfinished">ប្រត្តិបត្តិការបន្ទាប់ពីនេះ នឹងមិនអាចទាន់មើលឃើញនៅឡើយទេ។</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -416,19 +566,19 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>បញ្ហា</translation>
+        <translation type="unfinished">បញ្ហា</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>ក្រើនរំលឹកឲ្យប្រុងប្រយ័ត្ន</translation>
+        <translation type="unfinished">ក្រើនរំលឹកឲ្យប្រុងប្រយ័ត្ន</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>ព័ត៍មាន</translation>
+        <translation type="unfinished">ព័ត៍មាន</translation>
     </message>
     <message>
         <source>Up to date</source>
-        <translation>ទាន់ពេល និង ទាន់សម័យ</translation>
+        <translation type="unfinished">ទាន់ពេល និង ទាន់សម័យ</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction</source>
@@ -470,10 +620,6 @@
         <source>&amp;Window</source>
         <translation type="unfinished">&amp;វិនដូ</translation>
     </message>
-    <message>
-        <source>Minimize</source>
-        <translation type="unfinished">តូច</translation>
-    </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
@@ -484,11 +630,11 @@
     </message>
     <message>
         <source>Sent transaction</source>
-        <translation>បានបញ្ចូនប្រត្តិបត្តិការ</translation>
+        <translation type="unfinished">បានបញ្ចូនប្រត្តិបត្តិការ</translation>
     </message>
     <message>
         <source>Incoming transaction</source>
-        <translation>ប្រត្តិបត្តិការកំពុងមកដល់</translation>
+        <translation type="unfinished">ប្រត្តិបត្តិការកំពុងមកដល់</translation>
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
@@ -504,11 +650,11 @@
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>កាបូបអេឡិចត្រូនិចគឺ&lt;b&gt;ត្រូវបានបំលែងជាកូដ&lt;/b&gt;និងបច្ចុប្បន្ន&lt;b&gt;ត្រូវបានចាក់សោរ&lt;/b&gt;</translation>
+        <translation type="unfinished">កាបូបអេឡិចត្រូនិចគឺ&lt;b&gt;ត្រូវបានបំលែងជាកូដ&lt;/b&gt;និងបច្ចុប្បន្ន&lt;b&gt;ត្រូវបានចាក់សោរ&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
-        <translation>កាបូបអេឡិចត្រនិច&lt;b&gt;ត្រូវបានបំលែងជាកូដ&lt;/b&gt;និងបច្ចុប្បន្ន&lt;b&gt;ត្រូវបានចាក់សោរ&lt;/b&gt;</translation>
+        <translation type="unfinished">កាបូបអេឡិចត្រនិច&lt;b&gt;ត្រូវបានបំលែងជាកូដ&lt;/b&gt;និងបច្ចុប្បន្ន&lt;b&gt;ត្រូវបានចាក់សោរ&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Original message:</source>
@@ -573,6 +719,11 @@
 <context>
     <name>CreateWalletActivity</name>
     <message>
+        <source>Create Wallet</source>
+        <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
+        <translation type="unfinished">បង្កើតកាបូប</translation>
+    </message>
+    <message>
         <source>Create wallet failed</source>
         <translation type="unfinished">បង្កើតកាបូបអេឡិចត្រូនិច មិនជោគជ័យ</translation>
     </message>
@@ -586,6 +737,11 @@
     <message>
         <source>Open wallet warning</source>
         <translation type="unfinished">ក្រើនរំលឹកឲ្យប្រយ័ត្នក្នុងការបើកកាបូបអេឡិចត្រូនិច</translation>
+    </message>
+    <message>
+        <source>Open Wallet</source>
+        <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
+        <translation type="unfinished">បើកកាបូបអេឡិចត្រូនិច</translation>
     </message>
     </context>
 <context>
@@ -642,11 +798,11 @@
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
-        <translation>កែសម្រួលអាសយដ្ឋាន</translation>
+        <translation type="unfinished">កែសម្រួលអាសយដ្ឋាន</translation>
     </message>
     <message>
         <source>&amp;Label</source>
-        <translation>&amp;ស្លាកសញ្ញា</translation>
+        <translation type="unfinished">&amp;ស្លាកសញ្ញា</translation>
     </message>
     <message>
         <source>The label associated with this address list entry</source>
@@ -654,7 +810,7 @@
     </message>
     <message>
         <source>&amp;Address</source>
-        <translation>&amp;អាសយដ្ឋានបញ្ចូនថ្មី</translation>
+        <translation type="unfinished">&amp;អាសយដ្ឋានបញ្ចូនថ្មី</translation>
     </message>
     <message>
         <source>New sending address</source>
@@ -681,19 +837,19 @@
     <name>FreespaceChecker</name>
     <message>
         <source>A new data directory will be created.</source>
-        <translation>ទីតាំងផ្ទុកទិន្នន័យថ្មីមួយនឹងត្រូវបានបង្កើត។</translation>
+        <translation type="unfinished">ទីតាំងផ្ទុកទិន្នន័យថ្មីមួយនឹងត្រូវបានបង្កើត។</translation>
     </message>
     <message>
         <source>name</source>
-        <translation>ឈ្មោះ</translation>
+        <translation type="unfinished">ឈ្មោះ</translation>
     </message>
     <message>
         <source>Path already exists, and is not a directory.</source>
-        <translation>ផ្លូវទៅកាន់ទិន្នន័យមានរួចរាល់​ និង​ មិនមែនជាទីតាំង។</translation>
+        <translation type="unfinished">ផ្លូវទៅកាន់ទិន្នន័យមានរួចរាល់​ និង​ មិនមែនជាទីតាំង។</translation>
     </message>
     <message>
         <source>Cannot create data directory here.</source>
-        <translation>មិនអាចបង្កើតទីតាំងផ្ទុកទិន្នន័យនៅទីនេះ។</translation>
+        <translation type="unfinished">មិនអាចបង្កើតទីតាំងផ្ទុកទិន្នន័យនៅទីនេះ។</translation>
     </message>
 </context>
 <context>
@@ -712,7 +868,26 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>បញ្ហា</translation>
+        <translation type="unfinished">បញ្ហា</translation>
+    </message>
+    <message>
+        <source>Welcome</source>
+        <translation type="unfinished">សូមស្វាគមន៏</translation>
+    </message>
+    <message>
+        <source>Use the default data directory</source>
+        <translation type="unfinished">ប្រើទីតាំងផ្ទុកទិន្នន័យដែលបានកំណត់រួច</translation>
+    </message>
+    <message>
+        <source>Use a custom data directory:</source>
+        <translation type="unfinished">ប្រើទីតាំងផ្ទុកទិន្នន័យ ដែលមានការជ្រើសរើសមួយៈ</translation>
+    </message>
+</context>
+<context>
+    <name>HelpMessageDialog</name>
+    <message>
+        <source>version</source>
+        <translation type="unfinished">ជំនាន់</translation>
     </message>
     <message>
         <source>Welcome</source>
@@ -794,20 +969,25 @@
         <source>URI:</source>
         <translation type="unfinished">URl:</translation>
     </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <extracomment>Tooltip text for button that allows you to paste an address that is in your clipboard.</extracomment>
+        <translation type="unfinished">ថតចម្លងអាសយដ្ឋាណពីក្ដារតម្រៀប</translation>
+    </message>
 </context>
 <context>
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
-        <translation>ជម្រើស</translation>
+        <translation type="unfinished">ជម្រើស</translation>
     </message>
     <message>
         <source>&amp;Main</source>
-        <translation>&amp;សំខាន់</translation>
+        <translation type="unfinished">&amp;សំខាន់</translation>
     </message>
     <message>
         <source>&amp;Reset Options</source>
-        <translation>&amp;ជម្រើសការកែសម្រួលឡើងវិញ</translation>
+        <translation type="unfinished">&amp;ជម្រើសការកែសម្រួលឡើងវិញ</translation>
     </message>
     <message>
         <source>GB</source>
@@ -835,19 +1015,19 @@
     </message>
     <message>
         <source>&amp;Port:</source>
-        <translation>&amp;រុនដោត</translation>
+        <translation type="unfinished">&amp;រុនដោត</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation>&amp;វិនដូ</translation>
+        <translation type="unfinished">&amp;វិនដូ</translation>
     </message>
     <message>
         <source>&amp;Display</source>
-        <translation>&amp;បង្ហាញ</translation>
+        <translation type="unfinished">&amp;បង្ហាញ</translation>
     </message>
     <message>
         <source>Confirm options reset</source>
-        <translation>បញ្ចាក់ជម្រើសការកែសម្រួលឡើងវិញ</translation>
+        <translation type="unfinished">បញ្ចាក់ជម្រើសការកែសម្រួលឡើងវិញ</translation>
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
@@ -855,11 +1035,17 @@
     </message>
     <message>
         <source>Configuration options</source>
+        <extracomment>Window title text of pop-up box that allows opening up of configuration file.</extracomment>
         <translation type="unfinished">ជម្រើសក្នុងការរៀបចំរចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <source>The configuration file is used to specify advanced user options which override GUI settings. Additionally, any command-line options will override this configuration file.</source>
+        <extracomment>Explanatory text about the priority order of instructions considered by client. The order from high to low being: command-line, configuration file, GUI settings.</extracomment>
         <translation type="unfinished">ការរៀបចំរចនាសម្ពន្ធ័ឯកសារ ត្រូវបានប្រើសម្រាប់អ្នកដែលមានបទពិសោធន៏ ក្នុងរៀបចំកែប្រែផ្នែកក្រាហ្វិកខាងមុននៃសុសវែ។ បន្ថែ​មលើនេះទៀត  កាសរសេរបន្ថែមកូដ វានឹងធ្វើឲ្យមានការកែប្រែឯការសារនេះ។</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">ចាកចេញ</translation>
     </message>
     <message>
         <source>Error</source>
@@ -874,11 +1060,11 @@
     <name>OverviewPage</name>
     <message>
         <source>Form</source>
-        <translation>ទម្រង់</translation>
+        <translation type="unfinished">ទម្រង់</translation>
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>ព័ត៏មានបានបង្ហាញអាចហួសសពុលភាព។ កាបូបអេឡិចត្រូនិចរបស់អ្នកធ្វើសមកាលកម្មជាមួយនឹងបណ្តាញប៊ីតខញដោយស្វ័យប្រវត្ត បន្ទាប់ពីមានការតភ្ជាប់ ប៉ុន្តែដំណើរការនេះមិនទាន់បានបញ្ចប់នៅឡើយ។</translation>
+        <translation type="unfinished">ព័ត៏មានបានបង្ហាញអាចហួសសពុលភាព។ កាបូបអេឡិចត្រូនិចរបស់អ្នកធ្វើសមកាលកម្មជាមួយនឹងបណ្តាញប៊ីតខញដោយស្វ័យប្រវត្ត បន្ទាប់ពីមានការតភ្ជាប់ ប៉ុន្តែដំណើរការនេះមិនទាន់បានបញ្ចប់នៅឡើយ។</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -890,7 +1076,7 @@
     </message>
     <message>
         <source>Your current spendable balance</source>
-        <translation>សមតុល្យបច្ចុប្បន្នដែលអាចចាយបាន</translation>
+        <translation type="unfinished">សមតុល្យបច្ចុប្បន្នដែលអាចចាយបាន</translation>
     </message>
     <message>
         <source>Pending:</source>
@@ -898,15 +1084,15 @@
     </message>
     <message>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
-        <translation>សរុបប្រត្តឹបត្តិការដែលមិនទាន់បានបញ្ចាក់ និង រាប់ចំពោះសមតុល្យដែលមានទឹកប្រាក់សម្រាប់សំណាយ</translation>
+        <translation type="unfinished">សរុបប្រត្តឹបត្តិការដែលមិនទាន់បានបញ្ចាក់ និង រាប់ចំពោះសមតុល្យដែលមានទឹកប្រាក់សម្រាប់សំណាយ</translation>
     </message>
     <message>
         <source>Immature:</source>
-        <translation>មិនទាន់មានលក្ខណៈគ្រប់គ្រាន់ៈ</translation>
+        <translation type="unfinished">មិនទាន់មានលក្ខណៈគ្រប់គ្រាន់ៈ</translation>
     </message>
     <message>
         <source>Mined balance that has not yet matured</source>
-        <translation>សមតុល្យរ៉ែដែលបានជីកមិនទាន់មានលក្ខណៈគ្រប់គ្រាន់</translation>
+        <translation type="unfinished">សមតុល្យរ៉ែដែលបានជីកមិនទាន់មានលក្ខណៈគ្រប់គ្រាន់</translation>
     </message>
     <message>
         <source>Balances</source>
@@ -914,11 +1100,11 @@
     </message>
     <message>
         <source>Total:</source>
-        <translation>សរុប</translation>
+        <translation type="unfinished">សរុប</translation>
     </message>
     <message>
         <source>Your current total balance</source>
-        <translation>សរុបបច្ចុប្បន្នភាពសមតុល្យរបស់អ្នក</translation>
+        <translation type="unfinished">សរុបបច្ចុប្បន្នភាពសមតុល្យរបស់អ្នក</translation>
     </message>
     <message>
         <source>Your current balance in watch-only addresses</source>
@@ -1018,6 +1204,11 @@
 <context>
     <name>PeerTableModel</name>
     <message>
+        <source>Direction</source>
+        <extracomment>Title of Peers Table column which indicates the direction the peer connection was initiated from.</extracomment>
+        <translation type="unfinished">ទិសដៅ</translation>
+    </message>
+    <message>
         <source>Sent</source>
         <extracomment>Title of Peers Table column which indicates the total amount of network information we have sent to the peer.</extracomment>
         <translation type="unfinished">បានបញ្ចូន</translation>
@@ -1042,7 +1233,7 @@
         <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
         <translation type="unfinished">បណ្តាញ</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>QRImageWidget</name>
     <message>
@@ -1070,7 +1261,7 @@
     <name>RPCConsole</name>
     <message>
         <source>&amp;Information</source>
-        <translation>ព័ត៍មាន</translation>
+        <translation type="unfinished">ព័ត៍មាន</translation>
     </message>
     <message>
         <source>General</source>
@@ -1078,11 +1269,11 @@
     </message>
     <message>
         <source>Startup time</source>
-        <translation>ពេលវេលាចាប់ផ្តើម</translation>
+        <translation type="unfinished">ពេលវេលាចាប់ផ្តើម</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation>បណ្តាញ</translation>
+        <translation type="unfinished">បណ្តាញ</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1090,7 +1281,7 @@
     </message>
     <message>
         <source>Number of connections</source>
-        <translation>ចំនួនតភ្ជាប់</translation>
+        <translation type="unfinished">ចំនួនតភ្ជាប់</translation>
     </message>
     <message>
         <source>Current number of transactions</source>
@@ -1170,7 +1361,7 @@
     </message>
     <message>
         <source>Last block time</source>
-        <translation>ពេវេលាប្លុកជុងក្រោយ</translation>
+        <translation type="unfinished">ពេវេលាប្លុកជុងក្រោយ</translation>
     </message>
     <message>
         <source>&amp;Network Traffic</source>
@@ -1346,7 +1537,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>បញ្ចូនកាក់</translation>
+        <translation type="unfinished">បញ្ចូនកាក់</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -1378,11 +1569,11 @@
     </message>
     <message>
         <source>Send to multiple recipients at once</source>
-        <translation>បញ្ចូនទៅកាន់អ្នកទទួលច្រើនអ្នកក្នុងពេលតែមួយ</translation>
+        <translation type="unfinished">បញ្ចូនទៅកាន់អ្នកទទួលច្រើនអ្នកក្នុងពេលតែមួយ</translation>
     </message>
     <message>
         <source>Add &amp;Recipient</source>
-        <translation>បន្ថែម &amp;អ្នកទទួល</translation>
+        <translation type="unfinished">បន្ថែម &amp;អ្នកទទួល</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
@@ -1398,23 +1589,19 @@
     </message>
     <message>
         <source>Clear &amp;All</source>
-        <translation>សម្អាត &amp;ទាំងអស់</translation>
+        <translation type="unfinished">សម្អាត &amp;ទាំងអស់</translation>
     </message>
     <message>
         <source>Balance:</source>
-        <translation>សមតុល្យៈ</translation>
+        <translation type="unfinished">សមតុល្យៈ</translation>
     </message>
     <message>
         <source>Confirm the send action</source>
-        <translation>បញ្ចាក់សកម្មភាពបញ្ចូន</translation>
+        <translation type="unfinished">បញ្ចាក់សកម្មភាពបញ្ចូន</translation>
     </message>
     <message>
         <source>S&amp;end</source>
-        <translation>ប&amp;ញ្ជូន</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to send?</source>
-        <translation type="unfinished">តើអ្នកច្បាស់ថាអ្នកចង់បញ្ចូន?</translation>
+        <translation type="unfinished">ប&amp;ញ្ជូន</translation>
     </message>
     <message>
         <source>Save Transaction Data</source>
@@ -1434,6 +1621,7 @@
     </message>
     <message>
         <source>Please, review your transaction.</source>
+        <extracomment>Text to prompt a user to review the details of the transaction they are attempting to send.</extracomment>
         <translation type="unfinished">សូមពិនិត្យប្រត្តិបត្តិការទឹកប្រាក់របស់អ្នកសារឡើងវិញ។</translation>
     </message>
     <message>
@@ -1447,10 +1635,6 @@
     <message>
         <source>Confirm send coins</source>
         <translation type="unfinished">បញ្ចាក់​ ក្នុងការបញ្ចូនកាក់</translation>
-    </message>
-    <message>
-        <source>Confirm transaction proposal</source>
-        <translation type="unfinished">បញ្ចាក់សំណើរប្រត្តិបត្តិការ</translation>
     </message>
     <message>
         <source>Watch-only balance:</source>
@@ -1482,7 +1666,7 @@
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
             <numerusform />
         </translation>
@@ -1496,15 +1680,15 @@
     <name>SendCoinsEntry</name>
     <message>
         <source>A&amp;mount:</source>
-        <translation>ចំ&amp;នួនៈ</translation>
+        <translation type="unfinished">ចំ&amp;នួនៈ</translation>
     </message>
     <message>
         <source>Pay &amp;To:</source>
-        <translation>ទូរទាត់ទៅ&amp;កាន់ៈ</translation>
+        <translation type="unfinished">ទូរទាត់ទៅ&amp;កាន់ៈ</translation>
     </message>
     <message>
         <source>&amp;Label:</source>
-        <translation>&amp;ស្លាក​សញ្ញា:</translation>
+        <translation type="unfinished">&amp;ស្លាក​សញ្ញា:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1516,7 +1700,7 @@
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation>ថតចម្លងអាសយដ្ឋាណពីក្ដារតម្រៀប</translation>
+        <translation type="unfinished">ថតចម្លងអាសយដ្ឋាណពីក្ដារតម្រៀប</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -1552,14 +1736,21 @@
     </message>
 </context>
 <context>
+    <name>SendConfirmationDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">បញ្ចូន</translation>
+    </message>
+    </context>
+<context>
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>Signatures - Sign / Verify a Message</source>
-        <translation>ហត្ថលេខា ចុះហត្ថលេខា ឬ ផ្ទៀងផ្ទាត់សារមួយ</translation>
+        <translation type="unfinished">ហត្ថលេខា ចុះហត្ថលេខា ឬ ផ្ទៀងផ្ទាត់សារមួយ</translation>
     </message>
     <message>
         <source>&amp;Sign Message</source>
-        <translation>&amp;ចុះហត្ថលេខា សារ</translation>
+        <translation type="unfinished">&amp;ចុះហត្ថលេខា សារ</translation>
     </message>
     <message>
         <source>The Bitcoin address to sign the message with</source>
@@ -1571,39 +1762,39 @@
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation>ថតចម្លងអាសយដ្ឋាណពីក្ដារតម្រៀប</translation>
+        <translation type="unfinished">ថតចម្លងអាសយដ្ឋាណពីក្ដារតម្រៀប</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
-        <translation>សូមបញ្ចូលពាក្យដែលអ្នកចង់បញ្ចូលនៅទីនេះ</translation>
+        <translation type="unfinished">សូមបញ្ចូលពាក្យដែលអ្នកចង់បញ្ចូលនៅទីនេះ</translation>
     </message>
     <message>
         <source>Signature</source>
-        <translation>ហត្ថលេខា</translation>
+        <translation type="unfinished">ហត្ថលេខា</translation>
     </message>
     <message>
         <source>Copy the current signature to the system clipboard</source>
-        <translation>ចម្លងហត្ថលេខដែលមានបច្ចុប្បន្នទៅកាន់ប្រព័ន្ធក្តារតមៀប</translation>
+        <translation type="unfinished">ចម្លងហត្ថលេខដែលមានបច្ចុប្បន្នទៅកាន់ប្រព័ន្ធក្តារតមៀប</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>ចុះហត្ថលេខាលើសារនេះដើម្បីបង្ហាញថាលោកអ្នកជាម្ចាស់អាសយដ្ឋានប៊ីតខញ</translation>
+        <translation type="unfinished">ចុះហត្ថលេខាលើសារនេះដើម្បីបង្ហាញថាលោកអ្នកជាម្ចាស់អាសយដ្ឋានប៊ីតខញ</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
-        <translation>ហត្ថលេខា &amp; សារ</translation>
+        <translation type="unfinished">ហត្ថលេខា &amp; សារ</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>
-        <translation>កែសម្រួលឡើងវិញគ្រប់សារហត្ថលេខាទាំងអស់ឡើងវិញ</translation>
+        <translation type="unfinished">កែសម្រួលឡើងវិញគ្រប់សារហត្ថលេខាទាំងអស់ឡើងវិញ</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
-        <translation>សម្អាត &amp;ទាំងអស់</translation>
+        <translation type="unfinished">សម្អាត &amp;ទាំងអស់</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>
-        <translation>&amp;ផ្ទៀងផ្ទាត់សារ</translation>
+        <translation type="unfinished">&amp;ផ្ទៀងផ្ទាត់សារ</translation>
     </message>
     <message>
         <source>The signed message to verify</source>
@@ -1615,15 +1806,15 @@
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>ផ្ទៀងផ្ទាត់សារដើម្បីធានាថាវាត្រូវបានចុះហត្ថលេខាជាមួយនឹងអាសយដ្ឋានប៊ីតខញជាក់លាក់។</translation>
+        <translation type="unfinished">ផ្ទៀងផ្ទាត់សារដើម្បីធានាថាវាត្រូវបានចុះហត្ថលេខាជាមួយនឹងអាសយដ្ឋានប៊ីតខញជាក់លាក់។</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
-        <translation>ផ្ទៀងផ្ទាត់&amp;សារ</translation>
+        <translation type="unfinished">ផ្ទៀងផ្ទាត់&amp;សារ</translation>
     </message>
     <message>
         <source>Reset all verify message fields</source>
-        <translation>កែសម្រួលឡើងវិញគ្រប់សារផ្ទៀងផ្ទាត់ទាំងអស់</translation>
+        <translation type="unfinished">កែសម្រួលឡើងវិញគ្រប់សារផ្ទៀងផ្ទាត់ទាំងអស់</translation>
     </message>
     <message>
         <source>Click "Sign Message" to generate signature</source>
@@ -1676,13 +1867,6 @@
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>abandoned</source>
         <translation type="unfinished">បានបោះបង់ចោល</translation>
@@ -1729,7 +1913,7 @@
     </message>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
             <numerusform />
         </translation>
@@ -1792,13 +1976,6 @@
     <message>
         <source>Label</source>
         <translation type="unfinished">ស្លាក​សញ្ញា</translation>
-    </message>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
     </message>
     <message>
         <source>Unconfirmed</source>
@@ -1982,7 +2159,23 @@ Go to File &gt; Open Wallet to load a wallet.
         <source>Create a new wallet</source>
         <translation type="unfinished">បង្កើតកាបូបចល័តថ្មីមួយ</translation>
     </message>
-</context>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">បញ្ហា</translation>
+    </message>
+    <message>
+        <source>Unable to decode PSBT from clipboard (invalid base64)</source>
+        <translation type="unfinished">មិនអាចបកស្រាយអក្សរសម្ងាត់​PSBT ពី​ក្ដារតម្រៀប (មូដ្ឋាន៦៤ មិនត្រឹមត្រូវ)</translation>
+    </message>
+    <message>
+        <source>Load Transaction Data</source>
+        <translation type="unfinished">ទាញយកទិន្ន័យប្រត្តិបត្តិការ</translation>
+    </message>
+    <message>
+        <source>Partially Signed Transaction (*.psbt)</source>
+        <translation type="unfinished">ប្រត្តិបត្តិការ ដែលបានចុះហត្ថលេខាដោយផ្នែក (*.psbt)</translation>
+    </message>
+    </context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -1995,6 +2188,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <source>Do you want to increase the fee?</source>
+        <extracomment>Asks a user if they would like to manually increase the fee of a transaction that has already been created.</extracomment>
         <translation type="unfinished">តើអ្នកចង់តំឡើងកម្រៃដែរ ឫទេ?</translation>
     </message>
     <message>
@@ -2021,22 +2215,6 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">នាំចេញទិន្នន័យនៃផ្ទាំងបច្ចុប្បន្នទៅជាឯកសារ</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">បញ្ហា</translation>
-    </message>
-    <message>
-        <source>Unable to decode PSBT from clipboard (invalid base64)</source>
-        <translation type="unfinished">មិនអាចបកស្រាយអក្សរសម្ងាត់​PSBT ពី​ក្ដារតម្រៀប (មូដ្ឋាន៦៤ មិនត្រឹមត្រូវ)</translation>
-    </message>
-    <message>
-        <source>Load Transaction Data</source>
-        <translation type="unfinished">ទាញយកទិន្ន័យប្រត្តិបត្តិការ</translation>
-    </message>
-    <message>
-        <source>Partially Signed Transaction (*.psbt)</source>
-        <translation type="unfinished">ប្រត្តិបត្តិការ ដែលបានចុះហត្ថលេខាដោយផ្នែក (*.psbt)</translation>
-    </message>
-    <message>
         <source>Backup Failed</source>
         <translation type="unfinished">ថតចម្លងទុកមិនទទួលបានជោគជ័យ</translation>
     </message>
@@ -2049,123 +2227,4 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">ចាកចេញ</translation>
     </message>
 </context>
-<context>
-    <name>bitcoin-core</name>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation type="unfinished">-maxtxfee មានតំម្លៃខ្ពស់ពេក។​ តំម្លៃនេះ អាចគួរត្រូវបានបង់សម្រាប់មួយប្រត្តិបត្តិការ។</translation>
-    </message>
-    <message>
-        <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
-        <translation type="unfinished">ការវាយតម្លៃកំម្រៃមិនជោគជ័យ។  Fallbackfee ត្រូវបានដាក់ឲ្យប្រើលែងកើត។ រងចាំប្លុក ឬក៏ ដាក់ឲ្យប្រើឡើងវិញនូវ  Fallbackfee។</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការមានទឹកប្រាក់ទំហំតិចតួច ក្នុងការផ្ញើរចេញទៅ  បន្ទាប់ពីកំរៃត្រូវបានកាត់រួចរាល់</translation>
-    </message>
-    <message>
-        <source>This is the maximum transaction fee you pay (in addition to the normal fee) to prioritize partial spend avoidance over regular coin selection.</source>
-        <translation type="unfinished">នេះជាកម្រៃប្រត្តិបត្តិការតូចបំផុត ដែលអ្នកទូរទាត់ (បន្ថែមទៅលើកម្រៃធម្មតា)​​  ដើម្បីផ្តល់អាទិភាពលើការជៀសវៀងការចំណាយដោយផ្នែក សម្រាប់ការជ្រើសរើសកាក់ដោយទៀងទាត់។</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation type="unfinished"> អ្នកនឹងទូរទាត់ កម្រៃប្រត្តិបត្តិការនេះ នៅពេលណាដែល ទឹកប្រាក់នៃការប៉ាន់ស្មាន មិនទាន់មាន។</translation>
-    </message>
-    <message>
-        <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
-        <translation type="unfinished">ប្រវែងខ្សែបណ្តាញសរុប(%i) លើសប្រវែងខ្សែដែលវែងបំផុត (%i)។ កាត់បន្ថយចំនួន ​ឬទំហំនៃ uacomments ។</translation>
-    </message>
-    <message>
-        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
-        <translation type="unfinished">សេចក្តីប្រកាសអាសន្នៈ​ លេខសំម្ងាត់ត្រូវបានស្វែងរកឃើញនៅក្នុងកាបូបអេឡិចត្រូនិច​ {%s} ជាមួយនិងលេខសំម្ងាត់ត្រូវបានដាក់ឲ្យលែងប្រើលែងកើត</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation type="unfinished">%s ត្រូវបានកំណត់យ៉ាងខ្ពស់</translation>
-    </message>
-    <message>
-        <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation type="unfinished">មិនអាចសរសេរទៅកាន់ កន្លែងផ្ទុកទិន្នន័យ​ '%s'; ពិនិត្យមើលការអនុញ្ញាត។</translation>
-    </message>
-    <message>
-        <source>Disk space is too low!</source>
-        <translation type="unfinished">ទំហំឌីស មានកំរិតទាប</translation>
-    </message>
-    <message>
-        <source>Done loading</source>
-        <translation type="unfinished">បានធ្វើរួចរាល់ហើយ កំពុងបង្ហាញ</translation>
-    </message>
-    <message>
-        <source>Error reading from database, shutting down.</source>
-        <translation type="unfinished">បញ្ហា​ក្នុងការទទួលបានទិន្ន័យ​ ពីមូលដ្ឋានទិន្ន័យ ដូច្នេះកំពុងតែបិទ។</translation>
-    </message>
-    <message>
-        <source>Failed to verify database</source>
-        <translation type="unfinished">មិនបានជោគជ័យក្នុងការបញ្ចាក់ មូលដ្ឋានទិន្នន័យ</translation>
-    </message>
-    <message>
-        <source>Insufficient funds</source>
-        <translation type="unfinished">មូលនិធិមិនគ្រប់គ្រាន់</translation>
-    </message>
-    <message>
-        <source>Invalid P2P permission: '%s'</source>
-        <translation type="unfinished">ការអនុញ្ញាត P2P មិនត្រឹមត្រូវៈ​ '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់  -%s=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -discardfee=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់ -discardfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់ -fallbackfee=&lt;amount&gt; : '%s'</translation>
-    </message>
-    <message>
-        <source>Signing transaction failed</source>
-        <translation type="unfinished">ប្រត្តិបត្តការចូល មិនជោគជ័យ</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការមានទឹកប្រាក់ទំហំតូចពេក សម្រាប់បង់ប្រាក់</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation type="unfinished">ប្រត្តិបត្តិការមានខ្សែចង្វាក់រងចាំដើម្បីធ្វើការផ្ទៀងផ្ទាត់វែង</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation type="unfinished">នេះជាកម្រៃប្រត្តិបត្តិការតិចបំផុត អ្នកបង់រាល់ពេលធ្វើប្រត្តិបត្តិការម្តងៗ។</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation type="unfinished">នេះជាកម្រៃប្រត្តិបត្តិការ អ្នកនឹងបង់ប្រសិនបើអ្នកធ្វើប្រត្តិបត្តិការម្តង។</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការមានទឹកប្រាក់ទំហំតូច</translation>
-    </message>
-    <message>
-        <source>Transaction amounts must not be negative</source>
-        <translation type="unfinished">ចំនួនប្រត្តិបត្តិការ មិនអាចអវិជ្ជមានបានទេ</translation>
-    </message>
-    <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">ប្រត្តិបត្តិការមានខ្សែចង្វាក់រងចាំដើម្បីធ្វើការផ្ទៀងផ្ទាត់វែង</translation>
-    </message>
-    <message>
-        <source>Transaction must have at least one recipient</source>
-        <translation type="unfinished">ប្រត្តិបត្តិការត្រូវមានអ្នកទទួលម្នាក់យ៉ាងតិចបំផុត</translation>
-    </message>
-    <message>
-        <source>Transaction too large</source>
-        <translation type="unfinished">ប្រត្តិបត្តការទឹកប្រាក់ មានទំហំធំ</translation>
-    </message>
-    <message>
-        <source>Upgrading txindex database</source>
-        <translation type="unfinished">កំពុងធ្វើឲ្យប្រសើរឡើងមូលដ្ឋានទិន្នន័យ txindex</translation>
-    </message>
-    </context>
 </TS>

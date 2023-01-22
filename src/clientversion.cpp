@@ -1,11 +1,15 @@
-// Copyright (c) 2012-2020 The Bitcoin Core developers
+// Copyright (c) 2012-2021 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <clientversion.h>
+#include <util/translation.h>
 
 #include <tinyformat.h>
 
+#include <sstream>
+#include <string>
+#include <vector>
 
 /**
  * Name of client reported in the 'version' message. Report the same name
@@ -42,8 +46,6 @@ const std::string CLIENT_NAME("Blackcoin More");
     #endif
 #endif
 
-const std::string CLIENT_BUILD(BUILD_DESC BUILD_SUFFIX);
-
 static std::string FormatVersion(int nVersion)
 {
     return strprintf("%d.%d.%d", nVersion / 10000, (nVersion / 100) % 100, nVersion % 100);
@@ -51,6 +53,7 @@ static std::string FormatVersion(int nVersion)
 
 std::string FormatFullVersion()
 {
+    static const std::string CLIENT_BUILD(BUILD_DESC BUILD_SUFFIX);
     return CLIENT_BUILD;
 }
 
@@ -72,4 +75,47 @@ std::string FormatSubVersion(const std::string& name, int nClientVersion, const 
     }
     ss << "/";
     return ss.str();
+}
+
+std::string CopyrightHolders(const std::string& strPrefix)
+{
+    /*
+    const auto copyright_devs = strprintf(_(COPYRIGHT_HOLDERS).translated, COPYRIGHT_HOLDERS_SUBSTITUTION);
+    std::string strCopyrightHolders = strPrefix + copyright_devs;
+
+    // Make sure Bitcoin Core copyright is not removed by accident
+    if (copyright_devs.find("Bitcoin Core") == std::string::npos) {
+        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
+    }
+    */
+
+    std::string strCopyrightHolders =
+        strPrefix + "The Bitcoin Core developers" +
+        "\n" + strPrefix + "The Blackcoin developers" +
+        "\n" + strPrefix + "The Blackcoin More developers";
+    return strCopyrightHolders;
+}
+
+std::string LicenseInfo()
+{
+    const std::string URL_SOURCE_CODE = "<https://gitlab.com/blackcoin/blackcoin-more>";
+
+    return strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers").translated, COPYRIGHT_YEAR) +
+           "\n" +
+           strprintf(_("Copyright (C) 2014-%i The Blackcoin Developers").translated, 2018) +
+           "\n" +
+           strprintf(_("Copyright (C) 2018-%i The Blackcoin More Developers").translated, COPYRIGHT_YEAR) +
+           "\n" +
+           "\n" +
+           strprintf(_("Please contribute if you find %s useful. "
+                       "Visit %s for further information about the software.").translated, PACKAGE_NAME, "<" PACKAGE_URL ">") +
+           "\n" +
+           strprintf(_("The source code is available from %s.").translated, URL_SOURCE_CODE) +
+           "\n" +
+           "\n" +
+           _("This is experimental software.").translated + "\n" +
+           strprintf(_("Distributed under the MIT software license, see the accompanying file %s or %s").translated, "COPYING", "<https://opensource.org/licenses/MIT>") +
+           "\n" +
+           strprintf(_("This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.").translated, "<https://www.openssl.org>") +
+           "\n";
 }

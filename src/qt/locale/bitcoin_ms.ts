@@ -5,23 +5,17 @@
         <source>Right-click to edit address or label</source>
         <translation type="unfinished">Klik-kanan untuk edit alamat ataupun label</translation>
     </message>
-    </context>
-<context>
-    <name>AddressTableModel</name>
-    </context>
-<context>
-    <name>AskPassphraseDialog</name>
     <message>
-        <source>Show passphrase</source>
-        <translation>Show passphrase</translation>
+        <source>Create a new address</source>
+        <translation type="unfinished">Cipta alamat baru</translation>
     </message>
     <message>
         <source>&amp;New</source>
         <translation type="unfinished">&amp;Baru</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Salin alamat terpilih ke dalam sistem papan klip</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -32,8 +26,8 @@
         <translation type="unfinished">&amp;Tutup</translation>
     </message>
     <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Wallet to be encrypted</translation>
+        <source>Delete the currently selected address from the list</source>
+        <translation type="unfinished">Padam alamat semasa yang dipilih dari senaraiyang dipilih dari senarai</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
@@ -41,26 +35,17 @@
 </translation>
     </message>
     <message>
-        <source>Your wallet is now encrypted. </source>
-        <translation>Your wallet is now encrypted. </translation>
-    </message>
-    </context>
-<context>
-    <name>BanTableModel</name>
-    </context>
-<context>
-    <name>BitcoinGUI</name>
-    <message>
-        <source>Create Wallet...</source>
-        <translation>Create Wallet...</translation>
+        <source>Export the data in the current tab to a file</source>
+        <translation type="unfinished">
+Alihkan fail data ke dalam tab semasa</translation>
     </message>
     <message>
-        <source>Create a new wallet</source>
-        <translation>Create a new wallet</translation>
+        <source>&amp;Export</source>
+        <translation type="unfinished">&amp;Eksport</translation>
     </message>
     <message>
-        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</translation>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">&amp;Padam</translation>
     </message>
     <message>
         <source>Choose the address to send coins to</source>
@@ -107,6 +92,9 @@
         <source>Exporting Failed</source>
         <translation type="unfinished">Mengeksport Gagal</translation>
     </message>
+</context>
+<context>
+    <name>AddressTableModel</name>
     <message>
         <source>Address</source>
         <translation type="unfinished">Alamat</translation>
@@ -115,21 +103,24 @@
         <source>(no label)</source>
         <translation type="unfinished">(tiada label)</translation>
     </message>
+</context>
+<context>
+    <name>AskPassphraseDialog</name>
     <message>
-        <source>%1 client</source>
-        <translation>%1 client</translation>
+        <source>Passphrase Dialog</source>
+        <translation type="unfinished">Dialog frasa laluan</translation>
     </message>
     <message>
-        <source>Connecting to peers...</source>
-        <translation>Connecting to peers...</translation>
+        <source>Enter passphrase</source>
+        <translation type="unfinished">memasukkan frasa laluan</translation>
     </message>
     <message>
-        <source>Catching up...</source>
-        <translation>Catching up...</translation>
+        <source>New passphrase</source>
+        <translation type="unfinished">Frasa laluan baru</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation>Show passphrase</translation>
+        <source>Repeat new passphrase</source>
+        <translation type="unfinished">Ulangi frasa laluan baru</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -195,6 +186,9 @@
         <source>Warning: The Caps Lock key is on!</source>
         <translation type="unfinished">Amaran: Kunci Caps Lock buka!</translation>
     </message>
+</context>
+<context>
+    <name>BanTableModel</name>
     <message>
         <source>Banned Until</source>
         <translation type="unfinished">Diharamkan sehingga</translation>
@@ -204,13 +198,13 @@
     <name>QObject</name>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
         </translation>
     </message>
@@ -240,38 +234,37 @@
     </message>
     </context>
 <context>
+    <name>bitcoin-core</name>
+    <message>
+        <source>Done loading</source>
+        <translation type="unfinished">Baca Selesai</translation>
+    </message>
+    </context>
+<context>
     <name>BitcoinGUI</name>
     <message>
-        <source>(un)select all</source>
-        <translation>(un)select all</translation>
+        <source>&amp;Overview</source>
+        <translation type="unfinished">&amp;Gambaran Keseluruhan</translation>
     </message>
     <message>
-        <source>Tree mode</source>
-        <translation>Tree mode</translation>
+        <source>Show general overview of wallet</source>
+        <translation type="unfinished">Tunjuk gambaran keseluruhan umum dompet</translation>
     </message>
     <message>
-        <source>List mode</source>
-        <translation>List mode</translation>
+        <source>&amp;Transactions</source>
+        <translation type="unfinished">&amp;Transaksi</translation>
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation>Menyemak imbas sejarah transaksi</translation>
+        <translation type="unfinished">Menyemak imbas sejarah transaksi</translation>
     </message>
     <message>
-        <source>Received with address</source>
-        <translation>Received with address</translation>
+        <source>E&amp;xit</source>
+        <translation type="unfinished">&amp;Keluar</translation>
     </message>
     <message>
-        <source>Date</source>
-        <translation>Date</translation>
-    </message>
-    <message>
-        <source>Confirmations</source>
-        <translation>Confirmations</translation>
-    </message>
-    <message>
-        <source>Confirmed</source>
-        <translation>Confirmed</translation>
+        <source>Quit application</source>
+        <translation type="unfinished">Berhenti aplikasi</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
@@ -282,12 +275,12 @@
         <translation type="unfinished">Menunjuk informasi mengenai%1</translation>
     </message>
     <message>
-        <source>Copy amount</source>
-        <translation>Copy amount</translation>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Mengenai &amp;Qt</translation>
     </message>
     <message>
-        <source>Copy transaction ID</source>
-        <translation>Copy transaction ID</translation>
+        <source>Show information about Qt</source>
+        <translation type="unfinished">Menunjuk informasi megenai Qt</translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
@@ -304,69 +297,52 @@
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation>Menghantar koin kepada alamat Bitcoin</translation>
+        <translation type="unfinished">Menghantar koin kepada alamat Bitcoin</translation>
     </message>
     <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation>This label turns red if any recipient receives an amount smaller than the current dust threshold.</translation>
+        <source>Backup wallet to another location</source>
+        <translation type="unfinished">Wallet sandaran ke lokasi lain</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Can vary +/- %1 satoshi(s) per input.</translation>
+        <source>Change the passphrase used for wallet encryption</source>
+        <translation type="unfinished">Tukar kata laluan untuk dompet disulitkan</translation>
     </message>
     <message>
         <source>&amp;Send</source>
-        <translation>hantar</translation>
+        <translation type="unfinished">hantar</translation>
     </message>
     <message>
-        <source>Create wallet warning</source>
-        <translation>Create wallet warning</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletDialog</name>
-    <message>
-        <source>Create Wallet</source>
-        <translation>Create Wallet</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <translation>Wallet Name</translation>
+        <source>&amp;Receive</source>
+        <translation type="unfinished">terima</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>sulitkan kata laluan milik peribadi anda</translation>
+        <translation type="unfinished">sulitkan kata laluan milik peribadi anda</translation>
     </message>
     <message>
-        <source>Encrypt Wallet</source>
-        <translation>Encrypt Wallet</translation>
+        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
+        <translation type="unfinished">sahkan mesej bersama alamat bitcoin anda untuk menunjukkan alamat ini anda punya</translation>
     </message>
     <message>
-        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
+        <translation type="unfinished">Sahkan mesej untuk memastikan mereka telah ditandatangani dengan alamat Bitcoin yang ditentukan</translation>
     </message>
     <message>
-        <source>Disable Private Keys</source>
-        <translation>Disable Private Keys</translation>
+        <source>&amp;File</source>
+        <translation type="unfinished">fail</translation>
     </message>
     <message>
-        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</translation>
+        <source>&amp;Settings</source>
+        <translation type="unfinished">tetapan</translation>
     </message>
     <message>
-        <source>Make Blank Wallet</source>
-        <translation>Make Blank Wallet</translation>
+        <source>&amp;Help</source>
+        <translation type="unfinished">tolong</translation>
     </message>
     <message>
-        <source>Create</source>
-        <translation>Create</translation>
-    </message>
-</context>
-<context>
-    <name>EditAddressDialog</name>
-    <message>
-        <source>&amp;Label</source>
-        <translation>&amp;Label</translation>
+        <source>Tabs toolbar</source>
+        <translation type="unfinished">Bar alat tab
+</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -380,25 +356,25 @@
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
-        <translation>
-            <numerusform>Processed %n blocks of transaction history.</numerusform>
+        <translation type="unfinished">
+            <numerusform />
         </translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ralat</translation>
+        <translation type="unfinished">Ralat</translation>
     </message>
     <message>
-        <source>New sending address</source>
-        <translation>New sending address</translation>
+        <source>Warning</source>
+        <translation type="unfinished">Amaran</translation>
     </message>
     <message>
-        <source>Edit receiving address</source>
-        <translation>Edit receiving address</translation>
+        <source>Information</source>
+        <translation type="unfinished">Notis</translation>
     </message>
     <message>
-        <source>Edit sending address</source>
-        <translation>Edit sending address</translation>
+        <source>Up to date</source>
+        <translation type="unfinished">Terkini</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -435,6 +411,11 @@
         <translation type="unfinished">dompet lalai
 </translation>
     </message>
+    <message>
+        <source>Open Wallet</source>
+        <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
+        <translation type="unfinished">Buka Wallet</translation>
+    </message>
     </context>
 <context>
     <name>WalletController</name>
@@ -453,12 +434,12 @@
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <source>Open a wallet</source>
-        <translation>Open a wallet</translation>
+        <source>Edit Address</source>
+        <translation type="unfinished">Alamat</translation>
     </message>
     <message>
-        <source>Close Wallet...</source>
-        <translation>Tutup Wallet...</translation>
+        <source>&amp;Address</source>
+        <translation type="unfinished">Alamat</translation>
     </message>
     </context>
 <context>
@@ -471,8 +452,8 @@
         </translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Show the %1 help message to get a list with possible Bitcoin command-line options</translation>
+        <source>Error</source>
+        <translation type="unfinished">Ralat</translation>
     </message>
     </context>
 <context>
@@ -507,15 +488,16 @@
         <source>(no label)</source>
         <translation type="unfinished">(tiada label)</translation>
     </message>
+    </context>
+<context>
+    <name>SendCoinsDialog</name>
     <message>
-        <source>Date: %1
-</source>
-        <translation>Date: %1
-</translation>
+        <source>Balance:</source>
+        <translation type="unfinished">Baki</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform />
         </translation>
     </message>
@@ -527,16 +509,28 @@
 <context>
     <name>TransactionDesc</name>
     <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
+        <source>matures in %n more block(s)</source>
+        <translation type="unfinished">
             <numerusform />
         </translation>
     </message>
-    <message numerus="yes">
-        <source>matures in %n more block(s)</source>
-        <translation>
-            <numerusform />
-        </translation>
+    </context>
+<context>
+    <name>TransactionTableModel</name>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">(tiada label)</translation>
+    </message>
+    </context>
+<context>
+    <name>TransactionView</name>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Alamat</translation>
+    </message>
+    <message>
+        <source>Exporting Failed</source>
+        <translation type="unfinished">Mengeksport Gagal</translation>
     </message>
     </context>
 <context>
@@ -548,38 +542,10 @@
         </translation>
     </message>
     <message>
-        <source>(no label)</source>
-        <translation type="unfinished">(tiada label)</translation>
+        <source>Error</source>
+        <translation type="unfinished">Ralat</translation>
     </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">Alamat</translation>
-    </message>
-    <message>
-        <source>Exporting Failed</source>
-        <translation type="unfinished">Mengeksport Gagal</translation>
-    </message>
-    <message>
-        <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation>Private key &lt;b&gt;disabled&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
-        <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -598,17 +564,6 @@
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">
 Alihkan fail data ke dalam tab semasa</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished">Ralat</translation>
-    </message>
-    </context>
-<context>
-    <name>HelpMessageDialog</name>
-    <message>
-        <source>Done loading</source>
-        <translation type="unfinished">Baca Selesai</translation>
     </message>
     </context>
 </TS>

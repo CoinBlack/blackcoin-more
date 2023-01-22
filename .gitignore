@@ -83,6 +83,7 @@ src/qt/blackmore-qt.includes
 
 # Only ignore unexpected patches
 *.patch
+!contrib/guix/patches/*.patch
 !depends/patches/**/*.patch
 
 #libtool object files
@@ -95,7 +96,6 @@ Makefile
 !depends/Makefile
 src/qt/blackmore-qt
 Blackmore-Qt.app
-background.tiff*
 
 # Qt Creator
 Makefile.am.user
@@ -103,7 +103,6 @@ Makefile.am.user
 # Unit-tests
 Makefile.test
 blackmore-qt_test
-src/test/buildenv.py
 
 # Resources cpp
 qrc_*.cpp
@@ -149,7 +148,6 @@ db62/
 
 osx_volname
 dist/
-*.background.tiff
 
 /guix-build-*
 

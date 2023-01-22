@@ -18,15 +18,15 @@ fi
 
 RETVAL=0
 
-prog=blackmored
-# you can override the lockfile via BLACKMORED_LOCKFILE in /etc/sysconfig/blackmored
-lockfile=${BLACKMORED_LOCKFILE-/var/lock/subsys/blackmored}
+prog=bitcoind
+# you can override the lockfile via BITCOIND_LOCKFILE in /etc/sysconfig/blackmored
+lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/blackmored}
 
-# blackmored defaults to /usr/bin/blackmored, override with BLACKMORED_BIN
-blackmored=${BLACKMORED_BIN-/usr/bin/blackmored}
+# bitcoind defaults to /usr/bin/blackmored, override with BITCOIND_BIN
+bitcoind=${BITCOIND_BIN-/usr/bin/blackmored}
 
-# blackmored opts default to -disablewallet, override with BLACKMORED_OPTS
-blackmored_opts=${BLACKMORED_OPTS--disablewallet}
+# bitcoind opts default to -disablewallet, override with BITCOIND_OPTS
+bitcoind_opts=${BITCOIND_OPTS--disablewallet}
 
 start() {
     echo -n $"Starting $prog: "

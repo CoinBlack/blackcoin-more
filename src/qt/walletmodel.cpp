@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,7 +21,7 @@
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
 #include <key_io.h>
-#include <miner.h> // nLastCoinStakeSearchInterval
+#include <node/miner.h> // nLastCoinStakeSearchInterval
 #include <node/ui_interface.h>
 #include <psbt.h>
 #include <util/system.h> // for GetBoolArg
@@ -36,6 +36,11 @@
 #include <QMessageBox>
 #include <QSet>
 #include <QTimer>
+#include <QFile>
+
+using wallet::CCoinControl;
+using wallet::CRecipient;
+using wallet::DEFAULT_DISABLE_WALLET;
 
 static int pollSyncSkip = 30;
 
@@ -50,7 +55,7 @@ public:
 private Q_SLOTS:
     void updateModel()
     {
-        if (walletModel && walletModel->node().shutdownRequested())
+        if(walletModel && walletModel->node().shutdownRequested())
             return;
 
         // Update the model with results of task that take more time to be completed
@@ -574,7 +579,7 @@ QString WalletModel::getDisplayName() const
 
 bool WalletModel::isMultiwallet()
 {
-    return m_node.walletClient().getWallets().size() > 1;
+    return m_node.walletLoader().getWallets().size() > 1;
 }
 
 void WalletModel::refresh(bool pk_hash_only)
