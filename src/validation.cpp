@@ -1701,9 +1701,6 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
         }
     }
 
-    // Set proof-of-stake hash modifier
-    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1]->vin[0].prevout.hash : block.GetHash());
-
     if (!control.Wait()) {
         LogPrintf("ERROR: %s: CheckQueue failed\n", __func__);
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "block-validation-failed");
@@ -1711,6 +1708,9 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
 
     int64_t nTime4 = GetTimeMicros(); nTimeVerify += nTime4 - nTime2;
     LogPrint(BCLog::BENCH, "    - Verify %u txins: %.2fms (%.3fms/txin) [%.2fs (%.2fms/blk)]\n", nInputs - 1, MILLI * (nTime4 - nTime2), nInputs <= 1 ? 0 : MILLI * (nTime4 - nTime2) / (nInputs-1), nTimeVerify * MICRO, nTimeVerify * MILLI / nBlocksTotal);
+
+    // Set proof-of-stake hash modifier
+    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1]->vin[0].prevout.hash : block.GetHash());
 
     if (fJustCheck)
         return true;
@@ -3416,7 +3416,7 @@ bool TestBlockValidity(BlockValidationState& state,
     return true;
 }
 
-bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool checkLowS)
+bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock, bool checkLowS)
 {
     if (pblock->IsProofOfWork()) {
         return pblock->vchBlockSig.empty();
@@ -3425,7 +3425,7 @@ bool IsCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock, bool 
     return checkLowS ? IsLowDERSignature(pblock->vchBlockSig, nullptr, false) : IsDERSignature(pblock->vchBlockSig, nullptr, false);
 }
 
-bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock> pblock)
+bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock)
 {
     // Check block signature encoding
     bool ret = IsCanonicalBlockSignature(pblock, false);
