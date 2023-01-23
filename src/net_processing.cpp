@@ -51,7 +51,6 @@
 using node::ReadBlockFromDisk;
 using node::ReadRawBlockFromDisk;
 using node::fImporting;
-using node::fPruneMode;
 using node::fReindex;
 
 /** How long to cache transactions in mapRelay for normal relay */
@@ -1206,7 +1205,7 @@ void PeerManagerImpl::FindNextBlocksToDownload(NodeId nodeid, unsigned int count
         // Iterate over those blocks in vToFetch (in forward direction), adding the ones that
         // are not yet downloaded and not in flight to vBlocks. In the meantime, update
         // pindexLastCommonBlock as long as all ancestors are already downloaded, or if it's
-        // already part of our chain (and therefore don't need it even if pruned).
+        // already part of our chain.
         for (const CBlockIndex* pindex : vToFetch) {
             if (!pindex->IsValid(BLOCK_VALID_TREE)) {
                 // We consider the chain that this peer is on invalid.
@@ -2075,8 +2074,7 @@ void PeerManagerImpl::ProcessGetBlockData(CNode& pfrom, Peer& peer, const CInv& 
         pfrom.fDisconnect = true;
         return;
     }
-    // Pruned nodes may have deleted the block, so check whether
-    // it's available before trying to send.
+    // Check whether the block is available before trying to send.
     if (!(pindex->nStatus & BLOCK_HAVE_DATA)) {
         return;
     }
@@ -3760,7 +3758,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
             return;
 
         if (pindex->nChainWork <= m_chainman.ActiveChain().Tip()->nChainWork || // We know something better
-                pindex->nTx != 0) { // We had this block at some point, but pruned it
+                pindex->nTx != 0) { // We had this block at some point
             if (fAlreadyInFlight) {
                 // We requested this block for some reason, but our mempool will probably be useless
                 // so we just grab the block via normal getdata

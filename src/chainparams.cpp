@@ -135,7 +135,6 @@ public:
         nDefaultPort = 15714;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 15;
-        m_assumed_chain_state_size = 5;
 
         genesis = CreateGenesisBlock(1393221600, 164482, 0x1e0fffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -256,7 +255,6 @@ public:
 
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 2;
-        m_assumed_chain_state_size = 2;
 
         genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -326,7 +324,6 @@ public:
             consensus.defaultAssumeValid = uint256S("0x00000112852484b5fe3451572368f93cfd2723279af3464e478aee35115256ef"); // 78788
             */
             m_assumed_blockchain_size = 1;
-            m_assumed_chain_state_size = 0;
             chainTxData = ChainTxData{
                 // Data from RPC: getchaintxstats 4096 000000187d4440e5bff91488b700a140441e089a8aaea707414982460edbfe54
                 /* nTime    */ 0,
@@ -343,7 +340,6 @@ public:
             consensus.nMinimumChainWork = uint256{};
             consensus.defaultAssumeValid = uint256{};
             m_assumed_blockchain_size = 0;
-            m_assumed_chain_state_size = 0;
             chainTxData = ChainTxData{
                 0,
                 0,
@@ -478,7 +474,6 @@ public:
         nDefaultPort = 35714;
         nPruneAfterHeight = args.GetBoolArg("-fastprune", false) ? 100 : 1000;
         m_assumed_blockchain_size = 0;
-        m_assumed_chain_state_size = 0;
 
         UpdateActivationParametersFromArgs(args);
 

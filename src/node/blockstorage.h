@@ -44,13 +44,6 @@ static const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
 
 extern std::atomic_bool fImporting;
 extern std::atomic_bool fReindex;
-/** Pruning-related variables and constants */
-/** True if any block files have ever been pruned. */
-extern bool fHavePruned;
-/** True if we're running in -prune mode. */
-extern bool fPruneMode;
-/** Number of MiB of block files that we're trying to stay below. */
-extern uint64_t nPruneTarget;
 
 typedef std::unordered_map<uint256, CBlockIndex*, BlockHasher> BlockMap;
 
@@ -79,11 +72,6 @@ private:
     RecursiveMutex cs_LastBlockFile;
     std::vector<CBlockFileInfo> m_blockfile_info;
     int m_last_blockfile = 0;
-    /** Global flag to indicate we should check to see if there are
-     *  block/undo files that should be deleted.  Set on startup
-     *  or if we allocate more file space when we're in prune mode
-     */
-    bool m_check_for_pruning = false;
 
     /** Dirty block index entries. */
     std::set<CBlockIndex*> m_dirty_blockindex;
@@ -96,7 +84,6 @@ public:
 
     /**
      * All pairs A->B, where A (or one of its ancestors) misses transactions, but B has transactions.
-     * Pruned nodes may have entries where B is missing data.
      */
     std::multimap<CBlockIndex*, CBlockIndex*> m_blocks_unlinked;
 
@@ -151,11 +138,6 @@ public:
         Unload();
     }
 };
-
-//! Check whether the block associated with this index entry is pruned or not.
-bool IsBlockPruned(const CBlockIndex* pblockindex) EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
-
-void CleanupBlockRevFiles();
 
 /** Open a block file (blk?????.dat) */
 FILE* OpenBlockFile(const FlatFilePos& pos, bool fReadOnly = false);

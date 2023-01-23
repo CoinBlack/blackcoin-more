@@ -77,11 +77,8 @@ using node::ReadBlockFromDisk;
 using node::SnapshotMetadata;
 using node::UNDOFILE_CHUNK_SIZE;
 using node::UndoReadFromDisk;
-using node::fHavePruned;
 using node::fImporting;
-using node::fPruneMode;
 using node::fReindex;
-using node::nPruneTarget;
 
 #define MICRO 0.000001
 #define MILLI 0.001
@@ -4020,7 +4017,6 @@ void UnloadBlockIndex(CTxMemPool* mempool, ChainstateManager& chainman)
     for (int b = 0; b < VERSIONBITS_NUM_BITS; b++) {
         warningcache[b].clear();
     }
-    fHavePruned = false;
 }
 
 bool ChainstateManager::LoadBlockIndex()
@@ -4305,8 +4301,7 @@ void CChainState::CheckBlockIndex()
 
                 // If this block sorts at least as good as the current tip and
                 // is valid and we have all data for its parents, it must be in
-                // setBlockIndexCandidates.  m_chain.Tip() must also be there
-                // even if some data has been pruned.
+                // setBlockIndexCandidates. m_chain.Tip() must also be there.
                 //
                 // Don't perform this check for the background chainstate since
                 // its setBlockIndexCandidates shouldn't have some entries (i.e. those past the
