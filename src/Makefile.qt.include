@@ -330,7 +330,7 @@ if TARGET_WINDOWS
 endif
 blackmore_qt_ldadd = qt/libbitcoinqt.a $(LIBBITCOIN_NODE)
 if ENABLE_WALLET
-blackmore_qt_ldadd += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET) $(LIBBITCOIN_SERVER)
+blackmore_qt_ldadd += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET) $(LIBBITCOIN_NODE)
 endif
 if ENABLE_ZMQ
 blackmore_qt_ldadd += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
