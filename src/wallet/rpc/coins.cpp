@@ -59,8 +59,8 @@ static CAmount GetReceived(const CWallet& wallet, const UniValue& params, bool b
         int depth{wallet.GetTxDepthInMainChain(wtx)};
         if (depth < min_depth
             // Coinbase with less than 1 confirmation is no longer in the main chain
-            || (wtx.IsCoinBase() && (depth < 1 || !include_coinbase))
-            || (wallet.IsTxImmatureCoinBase(wtx) && !include_immature_coinbase))
+            || ((wtx.IsCoinBase() || wtx.IsCoinStake()) && (depth < 1 || !include_coinbase))
+            || (wallet.IsTxImmature(wtx) && !include_immature_coinbase))
         {
             continue;
         }

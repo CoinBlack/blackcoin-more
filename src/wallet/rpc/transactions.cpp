@@ -101,8 +101,8 @@ static UniValue ListReceived(const CWallet& wallet, const UniValue& params, cons
             continue;
 
         // Coinbase with less than 1 confirmation is no longer in the main chain
-        if ((wtx.IsCoinBase() && (nDepth < 1 || !include_coinbase))
-            || (wallet.IsTxImmatureCoinBase(wtx) && !include_immature_coinbase))
+        if (((wtx.IsCoinBase() || wtx.IsCoinStake()) && (nDepth < 1 || !include_coinbase))
+            || (wallet.IsTxImmature(wtx) && !include_immature_coinbase))
         {
             continue;
         }
