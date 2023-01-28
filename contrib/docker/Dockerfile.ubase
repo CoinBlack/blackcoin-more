@@ -60,10 +60,8 @@ RUN git clone -b $BRANCH https://$HUBLAB.com/$GITNAME/blackcoin-more.git && \
   cp /blackcoin-more/src/blackmored /usr/local/bin/ && \
   cp /blackcoin-more/src/blackmore-cli /usr/local/bin/ && \
   cp /blackcoin-more/src/qt/blackmore-qt /usr/local/bin/ && \
-  cp /blackcoin-more/contrib/blk /usr/local/bin/ && \
   mkdir /parts  && \
   cd  /parts  && \
-  cp --parents /usr/local/bin/blk ./ && \
   cp --parents /usr/local/bin/blackmored ./ && \
   for i in `ldd /usr/local/bin/blackmored | grep -v linux-vdso.so.1 | awk {' if ( $3 == "") print $1; else print $3 '}`; do cp --parents $i ./; done && \
   cp --parents /usr/local/bin/blackmore-cli ./ && \
