@@ -9,8 +9,8 @@ export DockerHub=blackcoinnl
 export HUBLAB=github
 export GITNAME=CoinBlack
 export BRANCH=${GIT_CURRENT_BRANCH}
-sed -i "s|BRANCH=master|BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubase
-sed -i "s|BRANCH=master|BRANCH=${BRANCH}|" ${BASE_DIR}/Dockerfile.ubuntu
+sed -i "master|${BRANCH}|" ${BASE_DIR}/Dockerfile.ubase
+sed -i "master|${BRANCH}|" ${BASE_DIR}/Dockerfile.ubuntu
 export TZ=Etc/UTC
 
 echo "${GITHUB_ENV} = GITHUB_ENV"
