@@ -46,7 +46,7 @@ pkg install autoconf automake boost-libs git gmake libevent libtool pkgconf
 ### 2. Clone Blackcoin More Repo
 Now that `git` and all the required dependencies are installed, let's clone the Blackcoin More repository to a directory. All build scripts and commands will run from this directory.
 ``` bash
-git clone https://gitlab.com/blackcoin/blackcoin-more.git
+git clone https://github.com/CoinBlack/blackcoin-more.git
 ```
 
 ### 3. Install Optional Dependencies
