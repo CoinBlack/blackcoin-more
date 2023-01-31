@@ -70,6 +70,7 @@ std::vector<CTxDestination> GetAllDestinationsForKey(const CPubKey& key)
 {
     PKHash keyid(key);
     CTxDestination p2pkh{keyid};
+    /*
     if (key.IsCompressed()) {
         CTxDestination segwit = WitnessV0KeyHash(keyid);
         CTxDestination p2sh = ScriptHash(GetScriptForDestination(segwit));
@@ -77,6 +78,10 @@ std::vector<CTxDestination> GetAllDestinationsForKey(const CPubKey& key)
     } else {
         return Vector(std::move(p2pkh));
     }
+    */
+
+    // Blackcoin: only P2PKH is supported for now
+    return Vector(std::move(p2pkh));
 }
 
 CTxDestination AddAndGetDestinationForScript(FillableSigningProvider& keystore, const CScript& script, OutputType type)

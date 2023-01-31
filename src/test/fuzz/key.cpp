@@ -108,7 +108,12 @@ FUZZ_TARGET_INIT(key, initialize_key)
         assert(pubkey.IsValid());
         assert(pubkey.IsFullyValid());
         assert(HexToPubKey(HexStr(pubkey)) == pubkey);
+        /*
         assert(GetAllDestinationsForKey(pubkey).size() == 3);
+        */
+
+        // Blackcoin: only P2PKH is supported for now
+        assert(GetAllDestinationsForKey(pubkey).size() == 1);
     }
 
     {
