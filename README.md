@@ -1,5 +1,6 @@
 Blackcoin More
 =====================================
+[![build](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml/badge.svg?branch=23.x)](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml)
 
 https://blackcoinmore.org
 
