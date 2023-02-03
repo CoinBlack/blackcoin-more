@@ -639,7 +639,6 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
                 if (ShutdownRequested()|| !EnableStaking())
                     return;
                 while (connman == nullptr) {UninterruptibleSleep(1s);}
-                LogPrintf("Staker thread sleeps while IBD at %d\n", m_node.chainman->ActiveChain().Tip()->nHeight);
                 if (strMintWarning != strMintSyncMessage) {
                     strMintWarning = strMintSyncMessage;
                     uiInterface.NotifyAlertChanged();
