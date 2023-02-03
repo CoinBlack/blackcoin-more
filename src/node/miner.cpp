@@ -653,7 +653,7 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
             {
                 if (ShutdownRequested() || !EnableStaking())
                     return;
-                LogPrintf("Minter thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), m_node.chainman->ActiveChain().Tip()));
+                LogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), m_node.chainman->ActiveChain().Tip()));
                 if (strMintWarning != strMintSyncMessage) {
                     strMintWarning = strMintSyncMessage;
                     uiInterface.NotifyAlertChanged();
