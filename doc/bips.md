@@ -74,6 +74,7 @@ BIPs disabled in Blackcoin More (up-to-date up to **v23.1.0**):
 * [`BIP 143`](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki)
 * [`BIP 144`](https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki)
 * [`BIP 145`](https://github.com/bitcoin/bips/blob/master/bip-0145.mediawiki)
+* [`BIP 159`](https://github.com/bitcoin/bips/blob/master/bip-0159.mediawiki)
 * [`BIP 340`](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)
   [`341`](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki)
   [`342`](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)
