@@ -1672,8 +1672,12 @@ std::optional<std::string> PeerManagerImpl::FetchBlock(NodeId peer_id, const CBl
     // Ensure this peer exists and hasn't been disconnected
     CNodeState* state = State(peer_id);
     if (state == nullptr) return "Peer does not exist";
+
+    /*
+    // Blackcoin: Do not ignore pre-segwit peers for now
     // Ignore pre-segwit peers
     if (!state->fHaveWitness) return "Pre-SegWit peer";
+    */
 
     // Mark block as in-flight unless it already is (for this peer).
     // If a block was already in-flight for a different peer, its BLOCKTXN
@@ -1682,7 +1686,12 @@ std::optional<std::string> PeerManagerImpl::FetchBlock(NodeId peer_id, const CBl
 
     // Construct message to request the block
     const uint256& hash{block_index.GetBlockHash()};
+
+    /*
+    // Blackcoin: Do not send witness flag for now
     std::vector<CInv> invs{CInv(MSG_BLOCK | MSG_WITNESS_FLAG, hash)};
+    */
+    std::vector<CInv> invs{CInv(MSG_BLOCK, hash)};
 
     // Send block request message to the peer
     bool success = m_connman.ForNode(peer_id, [this, &invs](CNode* node) {
