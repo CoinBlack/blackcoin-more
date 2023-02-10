@@ -827,12 +827,13 @@ class PrefilledTransaction:
 
 # This is what we send on the wire, in a cmpctblock message.
 class P2PHeaderAndShortIDs:
-    __slots__ = ("header", "nonce", "prefilled_txn", "prefilled_txn_length",
+    __slots__ = ("header", "nonce", "vchBlockSig", "prefilled_txn", "prefilled_txn_length",
                  "shortids", "shortids_length")
 
     def __init__(self):
         self.header = CBlockHeader()
         self.nonce = 0
+        self.vchBlockSig = b""
         self.shortids_length = 0
         self.shortids = []
         self.prefilled_txn_length = 0
@@ -841,6 +842,7 @@ class P2PHeaderAndShortIDs:
     def deserialize(self, f):
         self.header.deserialize(f)
         self.nonce = struct.unpack("<Q", f.read(8))[0]
+        self.vchBlockSig = deser_string(f)
         self.shortids_length = deser_compact_size(f)
         for _ in range(self.shortids_length):
             # shortids are defined to be 6 bytes in the spec, so append
@@ -854,6 +856,7 @@ class P2PHeaderAndShortIDs:
         r = b""
         r += self.header.serialize()
         r += struct.pack("<Q", self.nonce)
+        r += ser_string(self.vchBlockSig)
         r += ser_compact_size(self.shortids_length)
         for x in self.shortids:
             # We only want the first 6 bytes
@@ -865,7 +868,7 @@ class P2PHeaderAndShortIDs:
         return r
 
     def __repr__(self):
-        return "P2PHeaderAndShortIDs(header=%s, nonce=%d, shortids_length=%d, shortids=%s, prefilled_txn_length=%d, prefilledtxn=%s" % (repr(self.header), self.nonce, self.shortids_length, repr(self.shortids), self.prefilled_txn_length, repr(self.prefilled_txn))
+        return "P2PHeaderAndShortIDs(header=%s, nonce=%d, vchBlockSig=%s, shortids_length=%d, shortids=%s, prefilled_txn_length=%d, prefilledtxn=%s" % (repr(self.header), self.nonce, repr(self.vchBlockSig), self.shortids_length, repr(self.shortids), self.prefilled_txn_length, repr(self.prefilled_txn))
 
 
 # P2P version of the above that will use witness serialization (for compact
@@ -885,11 +888,12 @@ def calculate_shortid(k0, k1, tx_hash):
 # This version gets rid of the array lengths, and reinterprets the differential
 # encoding into indices that can be used for lookup.
 class HeaderAndShortIDs:
-    __slots__ = ("header", "nonce", "prefilled_txn", "shortids", "use_witness")
+    __slots__ = ("header", "nonce", "vchBlockSig", "prefilled_txn", "shortids", "use_witness")
 
     def __init__(self, p2pheaders_and_shortids = None):
         self.header = CBlockHeader()
         self.nonce = 0
+        self.vchBlockSig = b""
         self.shortids = []
         self.prefilled_txn = []
         self.use_witness = False
@@ -897,6 +901,7 @@ class HeaderAndShortIDs:
         if p2pheaders_and_shortids is not None:
             self.header = p2pheaders_and_shortids.header
             self.nonce = p2pheaders_and_shortids.nonce
+            self.vchBlockSig = p2pheaders_and_shortids.vchBlockSig
             self.shortids = p2pheaders_and_shortids.shortids
             last_index = -1
             for x in p2pheaders_and_shortids.prefilled_txn:
@@ -910,6 +915,7 @@ class HeaderAndShortIDs:
             ret = P2PHeaderAndShortIDs()
         ret.header = self.header
         ret.nonce = self.nonce
+        ret.vchBlockSig = self.vchBlockSig
         ret.shortids_length = len(self.shortids)
         ret.shortids = self.shortids
         ret.prefilled_txn_length = len(self.prefilled_txn)
@@ -934,6 +940,7 @@ class HeaderAndShortIDs:
             prefill_list = [0]
         self.header = CBlockHeader(block)
         self.nonce = nonce
+        self.vchBlockSig = vchBlockSig
         self.prefilled_txn = [ PrefilledTransaction(i, block.vtx[i]) for i in prefill_list ]
         self.shortids = []
         self.use_witness = use_witness
@@ -946,7 +953,7 @@ class HeaderAndShortIDs:
                 self.shortids.append(calculate_shortid(k0, k1, tx_hash))
 
     def __repr__(self):
-        return "HeaderAndShortIDs(header=%s, nonce=%d, shortids=%s, prefilledtxn=%s" % (repr(self.header), self.nonce, repr(self.shortids), repr(self.prefilled_txn))
+        return "HeaderAndShortIDs(header=%s, nonce=%d, vchBlockSig=%s, shortids=%s, prefilledtxn=%s" % (repr(self.header), self.nonce, repr(self.vchBlockSig), repr(self.shortids), repr(self.prefilled_txn))
 
 
 class BlockTransactionsRequest:
