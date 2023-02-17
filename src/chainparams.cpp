@@ -463,7 +463,7 @@ public:
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
         consensus.nProtocolV3_1Time = 4102437600;
-        consensus.nLastPOWBlock = 50;
+        consensus.nLastPOWBlock = 0x7fffffff;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
@@ -497,16 +497,7 @@ public:
             }
         };
 
-        m_assumeutxo_data = MapAssumeutxo{
-            {
-                110,
-                {AssumeutxoHash{uint256S("0x1ebbf5850204c0bdb15bf030f47c7fe91d45c44c712697e4509ba67adb01c618")}, 110},
-            },
-            {
-                200,
-                {AssumeutxoHash{uint256S("0x51c8d11d8b5c1de51543c579736e786aa2736206d1e11e627568029ce092cf62")}, 200},
-            },
-        };
+        m_assumeutxo_data = MapAssumeutxo{};
 
         chainTxData = ChainTxData{
             0,
@@ -522,7 +513,7 @@ public:
 
         bech32_hrp = "blrt";
 
-        vDevFundAddress = { "BBXBrYnrhbDyo44eRxeUPVjqPpNk9bBg8b" };
+        vDevFundAddress = {};
     }
 
     /**
