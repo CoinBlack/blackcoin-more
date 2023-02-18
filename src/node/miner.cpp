@@ -150,65 +150,16 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         return nullptr;
     }
     CBlock* const pblock = &pblocktemplate->block; // pointer for convenience
-    pblock->nTime = GetAdjustedTime();
-
-    LOCK2(cs_main, m_mempool.cs);
-    CBlockIndex* pindexPrev = m_chainstate.m_chain.Tip();
-    assert(pindexPrev != nullptr);
-    nHeight = pindexPrev->nHeight + 1;
-
-    // Create coinbase transaction.
-    CMutableTransaction coinbaseTx;
-    coinbaseTx.vin.resize(1);
-    coinbaseTx.vin[0].prevout.SetNull();
-    coinbaseTx.vout.resize(1);
-
-    // Proof-of-work block
-    if (!pwallet) {
-        pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), false);
-        coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
-        coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
-    }
 
     // Add dummy coinbase tx as first transaction
     pblock->vtx.emplace_back();
     pblocktemplate->vTxFees.push_back(-1); // updated at end
     pblocktemplate->vTxSigOpsCost.push_back(-1); // updated at end
 
-#ifdef ENABLE_WALLET
-    // peercoin: if coinstake available add coinstake tx
-    static int64_t nLastCoinStakeSearchTime = GetAdjustedTime();  // only initialized at startup
-
-    if (pwallet) {
-        // flush orphaned coinstakes
-        pwallet->AbandonOrphanedCoinstakes();
-
-        // attempt to find a coinstake
-        *pfPoSCancel = true;
-        pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), true);
-        CMutableTransaction txCoinStake;
-        txCoinStake.nTime &= ~chainparams.GetConsensus().nStakeTimestampMask;
-
-        int64_t nSearchTime = txCoinStake.nTime; // search to current time
-
-        if (nSearchTime > nLastCoinStakeSearchTime) {
-            if (pwallet->CreateCoinStake(*m_node->chainman, pwallet, pblock->nBits, 1, txCoinStake, nFees)) {
-                if (txCoinStake.nTime >= pindexPrev->GetMedianTimePast()+1) {
-                    // Make the coinbase tx empty in case of proof of stake
-                    coinbaseTx.vout[0].SetEmpty();
-                    pblock->nTime = coinbaseTx.nTime = txCoinStake.nTime;
-                    pblock->vtx.push_back(MakeTransactionRef(CTransaction(txCoinStake)));
-                    *pfPoSCancel = false;
-                }
-            }
-            nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
-            nLastCoinStakeSearchTime = nSearchTime;
-        }
-        if (*pfPoSCancel)
-            return nullptr; // peercoin: there is no point to continue if we failed to create coinstake
-        pblock->nFlags = CBlockIndex::BLOCK_PROOF_OF_STAKE;
-    }
-#endif
+    LOCK2(cs_main, m_mempool.cs);
+    CBlockIndex* pindexPrev = m_chainstate.m_chain.Tip();
+    assert(pindexPrev != nullptr);
+    nHeight = pindexPrev->nHeight + 1;
 
     pblock->nVersion = g_versionbitscache.ComputeBlockVersion(pindexPrev, chainparams.GetConsensus());
     // -regtest only: allow overriding block.nVersion with
@@ -216,6 +167,8 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     if (chainparams.MineBlocksOnDemand()) {
         pblock->nVersion = gArgs.GetIntArg("-blockversion", pblock->nVersion);
     }
+
+    pblock->nTime = GetAdjustedTime();
 
     const int64_t nMedianTimePast = pindexPrev->GetMedianTimePast();
 
@@ -242,6 +195,55 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
 
     m_last_block_num_txs = nBlockTx;
     m_last_block_weight = nBlockWeight;
+
+    // Create coinbase transaction.
+    CMutableTransaction coinbaseTx;
+    coinbaseTx.vin.resize(1);
+    coinbaseTx.vin[0].prevout.SetNull();
+    coinbaseTx.vout.resize(1);
+
+    // Proof-of-work block
+    if (!pwallet) {
+        pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), false);
+        coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
+        coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
+    }
+
+    // Proof-of-stake block
+#ifdef ENABLE_WALLET
+    // peercoin: if coinstake available add coinstake tx
+    static int64_t nLastCoinStakeSearchTime = GetAdjustedTime();  // only initialized at startup
+
+    if (pwallet) {
+        // flush orphaned coinstakes
+        pwallet->AbandonOrphanedCoinstakes();
+
+        // attempt to find a coinstake
+        *pfPoSCancel = true;
+        pblock->nBits = GetNextTargetRequired(pindexPrev, chainparams.GetConsensus(), true);
+        CMutableTransaction txCoinStake;
+        txCoinStake.nTime &= ~chainparams.GetConsensus().nStakeTimestampMask;
+
+        int64_t nSearchTime = txCoinStake.nTime; // search to current time
+
+        if (nSearchTime > nLastCoinStakeSearchTime) {
+            if (pwallet->CreateCoinStake(*m_node->chainman, pwallet, pblock->nBits, 1, txCoinStake, nFees)) {
+                if (txCoinStake.nTime >= pindexPrev->GetMedianTimePast()+1) {
+                    // Make the coinbase tx empty in case of proof of stake
+                    coinbaseTx.vout[0].SetEmpty();
+                    pblock->nTime = coinbaseTx.nTime = txCoinStake.nTime;
+                    pblock->vtx.insert(pblock->vtx.begin() + 1, MakeTransactionRef(CTransaction(txCoinStake)));
+                    *pfPoSCancel = false;
+                }
+            }
+            nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
+            nLastCoinStakeSearchTime = nSearchTime;
+        }
+        if (*pfPoSCancel)
+            return nullptr; // peercoin: there is no point to continue if we failed to create coinstake
+        pblock->nFlags = CBlockIndex::BLOCK_PROOF_OF_STAKE;
+    }
+#endif
 
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
