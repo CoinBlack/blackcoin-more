@@ -3149,8 +3149,14 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
 
     if (block.IsProofOfStake()) {
         // Coinbase output must be empty if proof-of-stake block
-        if (block.vtx[0]->vout.size() != 1 || !block.vtx[0]->vout[0].IsEmpty())
-            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-not-empty", "coinbase output not empty for proof-of-stake block");
+        int commitpos = GetWitnessCommitmentIndex(block);
+        if (commitpos == NO_WITNESS_COMMITMENT) {
+            if (block.vtx[0]->vout.size() != 1 || !block.vtx[0]->vout[0].IsEmpty())
+                return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-not-empty", "coinbase output not empty for proof-of-stake block");
+        } else {
+            if (block.vtx[0]->vout.size() != 2 || !block.vtx[0]->vout[0].IsEmpty() || block.vtx[0]->vout[1].nValue)
+                return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-not-empty", "coinbase output not empty for proof-of-stake block");
+        }
 
         // Second transaction must be coinstake, the rest must not be
         if (block.vtx.size() < 2 || !block.vtx[1]->IsCoinStake())
