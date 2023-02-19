@@ -761,6 +761,7 @@ static const CRPCCommand commands[] =
     { "wallet",             &lockunspent,                    },
     { "wallet",             &newkeypool,                     },
     { "wallet",             &rescanblockchain,               },
+    { "wallet",             &reservebalance,                 },
     { "wallet",             &send,                           },
     { "wallet",             &sendmany,                       },
     { "wallet",             &sendtoaddress,                  },
