@@ -90,6 +90,64 @@ static RPCHelpMan getstakinginfo()
     };
 }
 
+static RPCHelpMan reservebalance()
+{
+    return RPCHelpMan{"reservebalance",
+            "\nSet reserve amount not participating in network protection."
+            "\nIf no parameters provided current setting is printed.\n",
+            {
+                {"reserve", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED,"is true or false to turn balance reserve on or off."},
+                {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::OMITTED, "is a real and rounded to cent."},
+            },
+            RPCResult{
+                RPCResult::Type::OBJ, "", "",
+                {
+                    {RPCResult::Type::BOOL, "reserve", "Balance reserve on or off"},
+                    {RPCResult::Type::STR_AMOUNT, "amount", "Amount reserve rounded to cent"}
+                }
+            },
+             RPCExamples{
+            "\nSet reserve balance to 100\n"
+            + HelpExampleCli("reservebalance", "true 100") +
+            "\nSet reserve balance to 0\n"
+            + HelpExampleCli("reservebalance", "false") +
+            "\nGet reserve balance\n"
+            + HelpExampleCli("reservebalance", "")			},
+        [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
+{
+
+    std::shared_ptr<CWallet> const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!pwallet) return NullUniValue;
+
+    if (request.params.size() > 0)
+    {
+        bool fReserve = request.params[0].get_bool();
+        if (fReserve)
+        {
+            if (request.params.size() == 1)
+                throw std::runtime_error("must provide amount to reserve balance.\n");
+            int64_t nAmount = AmountFromValue(request.params[1]);
+            nAmount = (nAmount / CENT) * CENT;  // round to cent
+            if (nAmount < 0)
+                throw std::runtime_error("amount cannot be negative.\n");
+            pwallet->m_reserve_balance = nAmount;
+        }
+        else
+        {
+            if (request.params.size() > 1)
+                throw std::runtime_error("cannot specify amount to turn off reserve.\n");
+            pwallet->m_reserve_balance = 0;
+        }
+    }
+
+    UniValue result(UniValue::VOBJ);
+    result.pushKV("reserve", (pwallet->m_reserve_balance > 0));
+    result.pushKV("amount", ValueFromAmount(pwallet->m_reserve_balance));
+    return result;
+},
+    };
+}
+
 Span<const CRPCCommand> GetStakingRPCCommands()
 {
 // clang-format off
@@ -97,6 +155,7 @@ static const CRPCCommand commands[] =
 { //  category              actor (function)
   //  ------------------    ------------------------
     { "staking",            &getstakinginfo,                 },
+    { "staking",            &reservebalance,                 },
 };
 // clang-format on
     return commands;
