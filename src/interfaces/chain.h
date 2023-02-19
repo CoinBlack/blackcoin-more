@@ -30,6 +30,8 @@ namespace node {
 struct NodeContext;
 } // namespace node
 
+class ChainstateManager;
+class CTxMemPool;
 class CBlockIndex;
 class CCoinsViewCache;
 namespace interfaces {
@@ -95,6 +97,12 @@ class Chain
 {
 public:
     virtual ~Chain() {}
+
+    //! Get chain state manager
+    virtual ChainstateManager& chainman() = 0;
+
+    //! Get mempool
+    virtual const CTxMemPool& mempool() = 0;
 
     //! Get current chain height, not including genesis block (returns 0 if
     //! chain only contains genesis block, nullopt if chain does not contain
@@ -267,6 +275,12 @@ public:
 
     //! Check if Taproot has activated
     virtual bool isTaprootActive() const = 0;
+
+#ifdef ENABLE_WALLET
+    //! Get staking RPC commands.
+    virtual Span<const CRPCCommand> getStakingRPCCommands() = 0;
+#endif
+
 };
 
 //! Interface to let node manage chain clients (wallets, or maybe tools for

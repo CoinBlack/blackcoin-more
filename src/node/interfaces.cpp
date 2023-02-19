@@ -56,6 +56,10 @@
 
 #include <boost/signals2/signal.hpp>
 
+#ifdef ENABLE_WALLET
+#include <wallet/rpc/staking.h>
+#endif
+
 using interfaces::BlockTip;
 using interfaces::Chain;
 using interfaces::FoundBlock;
@@ -475,10 +479,12 @@ public:
 
 class ChainImpl : public Chain
 {
-private:
-    ChainstateManager& chainman() { return *Assert(m_node.chainman); }
 public:
     explicit ChainImpl(NodeContext& node) : m_node(node) {}
+
+    ChainstateManager& chainman() { return *Assert(m_node.chainman); }
+    const CTxMemPool& mempool() override { return *Assert(m_node.mempool); }
+
     std::optional<int> getHeight() override
     {
         LOCK(::cs_main);
@@ -722,6 +728,13 @@ public:
         const CBlockIndex* tip = Assert(m_node.chainman)->ActiveChain().Tip();
         return DeploymentActiveAfter(tip, Params().GetConsensus(), Consensus::DEPLOYMENT_TAPROOT);
     }
+
+#ifdef ENABLE_WALLET
+    Span<const CRPCCommand> getStakingRPCCommands() override
+    {
+        return wallet::GetStakingRPCCommands();
+    }
+#endif
 
     NodeContext& m_node;
 };

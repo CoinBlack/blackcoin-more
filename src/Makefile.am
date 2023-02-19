@@ -291,6 +291,7 @@ BITCOIN_CORE_H = \
   wallet/ismine.h \
   wallet/load.h \
   wallet/receive.h \
+  wallet/rpc/staking.h \
   wallet/rpc/util.h \
   wallet/rpc/wallet.h \
   wallet/salvage.h \
@@ -388,7 +389,8 @@ libbitcoin_node_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 if ENABLE_WALLET
-libbitcoin_node_a_SOURCES += wallet/init.cpp
+libbitcoin_node_a_SOURCES += wallet/init.cpp \
+  wallet/rpc/staking.cpp
 endif
 if !ENABLE_WALLET
 libbitcoin_node_a_SOURCES += dummywallet.cpp
