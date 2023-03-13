@@ -748,13 +748,16 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
 void static ThreadStakeMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
 {
     LogPrintf("ThreadStakeMiner started\n");
-    try {
-        PoSMiner(pwallet, m_node);
-    }
-    catch (std::exception& e) {
-        PrintExceptionContinue(&e, "ThreadStakeMiner()");
-    } catch (...) {
-        PrintExceptionContinue(nullptr, "ThreadStakeMiner()");
+    while (true) {
+        try {
+            PoSMiner(pwallet, m_node);
+            break;
+        }
+        catch (std::exception& e) {
+            PrintExceptionContinue(&e, "ThreadStakeMiner()");
+        } catch (...) {
+            PrintExceptionContinue(nullptr, "ThreadStakeMiner()");
+        }
     }
     LogPrintf("ThreadStakeMiner stopped\n");
 }
