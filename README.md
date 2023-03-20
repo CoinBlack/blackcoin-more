@@ -81,3 +81,6 @@ The release branch for Blackcoin More 13.2.x. It is intended to contain stable a
 
 ### 22.x
 The release branch for Blackcoin More 22.x. Contains functional but experimental code.
+
+### 23.x
+The release branch for Blackcoin More 23.x. Contains functional but highly experimental code.
