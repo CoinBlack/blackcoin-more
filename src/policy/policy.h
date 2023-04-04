@@ -45,6 +45,8 @@ static constexpr unsigned int MAX_STANDARD_TAPSCRIPT_STACK_ITEM_SIZE{80};
 static constexpr unsigned int MAX_STANDARD_P2WSH_SCRIPT_SIZE{3600};
 /** The maximum size of a standard ScriptSig */
 static constexpr unsigned int MAX_STANDARD_SCRIPTSIG_SIZE{1650};
+/** The maximum size in bytes of witness input stack items */
+static const unsigned int MAX_STANDARD_WITNESS_SIZE{100000};
 /** Min feerate for defining dust.
  * Changing the dust limit changes which transactions are
  * standard and should be done with care and ideally rarely. It makes sense to
