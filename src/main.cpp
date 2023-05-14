@@ -3819,7 +3819,7 @@ CAmount GetMinFee(size_t nBytes, uint32_t nTime)
     CAmount nMinFee;
 
     if (Params().GetConsensus().IsProtocolV3_1(nTime))
-        nMinFee = (1 + (CAmount)nBytes / 1000) * MIN_TX_FEE_PER_KB;
+        nMinFee = (nBytes <= 100) ? MIN_TX_FEE : (CAmount)(nBytes * (TX_FEE_PER_KB / 1000));
     else {
         nMinFee = ::minRelayTxFee.GetFee(nBytes);
         if (nMinFee < DEFAULT_TRANSACTION_FEE)
