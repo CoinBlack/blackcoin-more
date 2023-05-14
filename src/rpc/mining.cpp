@@ -973,6 +973,13 @@ static RPCHelpMan submitblock()
         }
     }
 
+    // Blackcoin: check block before submitting
+    BlockValidationState state;
+    CChainState& active_chainstate = chainman.ActiveChainstate();
+    if (!CheckBlock(block, state, Params().GetConsensus(), active_chainstate, true, true, false)) {
+        throw JSONRPCError(-100, "Block failed CheckBlock() function");
+    }
+
     {
         LOCK(cs_main);
         const CBlockIndex* pindex = chainman.m_blockman.LookupBlockIndex(block.hashPrevBlock);
