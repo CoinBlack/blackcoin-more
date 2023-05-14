@@ -105,7 +105,4 @@ public:
 /** Process network block received from a given node */
 bool ProcessNetBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock, CNode* pfrom, CConnman& connman);
 
-/** Default for -headerspamfiltermaxsize, maximum size of the list of indexes in the header spam filter */
-unsigned int GetDefaultHeaderSpamFilterMaxSize();
-
 #endif // BITCOIN_NET_PROCESSING_H

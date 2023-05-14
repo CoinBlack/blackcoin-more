@@ -704,7 +704,7 @@ public:
         maxSize(0),
         maxAvg(0)
     {
-        maxSize = gArgs.GetIntArg("-headerspamfiltermaxsize", GetDefaultHeaderSpamFilterMaxSize());
+        maxSize = gArgs.GetIntArg("-headerspamfiltermaxsize", DEFAULT_HEADER_SPAM_FILTER_MAX_SIZE);
         maxAvg = gArgs.GetIntArg("-headerspamfiltermaxavg", DEFAULT_HEADER_SPAM_FILTER_MAX_AVG);
     }
 
@@ -5266,9 +5266,4 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
         MaybeSendFeefilter(*pto, current_time);
     } // release cs_main
     return true;
-}
-
-unsigned int GetDefaultHeaderSpamFilterMaxSize()
-{
-    return Params().GetConsensus().nCoinbaseMaturity;
 }
