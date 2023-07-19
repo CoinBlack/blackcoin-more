@@ -1062,7 +1062,7 @@ static RPCHelpMan estimatefee()
 
     UniValue result(UniValue::VOBJ);
     UniValue errors(UniValue::VARR);
-    CFeeRate feeRate = CFeeRate(MIN_TX_FEE_PER_KB);
+    CFeeRate feeRate = CFeeRate(TX_FEE_PER_KB);
     if (feeRate != CFeeRate(0)) {
         CFeeRate min_relay_feerate{::minRelayTxFee};
         feeRate = std::max({feeRate, min_relay_feerate});

@@ -654,6 +654,11 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     TxValidationState& state = ws.m_state;
     std::unique_ptr<CTxMemPoolEntry>& entry = ws.m_entry;
 
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    int64_t nTimeTx = (int64_t)tx.nTime;
+    if (!nTimeTx && tx.nVersion >= TX_MAX_STANDARD_VERSION)
+        nTimeTx = GetAdjustedTime();
+
     if (!CheckTransaction(tx, state)) {
         return false; // state filled in by CheckTransaction
     }
@@ -669,7 +674,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     // Don't relay version 2 transactions until CSV is active, and we can be
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
-    if (fRequireStandard && tx.nVersion >= 2 && !Params().GetConsensus().IsProtocolV3_1(tx.nTime ? tx.nTime : GetAdjustedTime()))
+    if (fRequireStandard && tx.nVersion >= TX_MAX_STANDARD_VERSION && !Params().GetConsensus().IsProtocolV3_1(nTimeTx))
 		return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "premature-version2-tx");
 
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)
@@ -691,7 +696,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "non-final");
 
     // For the same reasons as in the case with non-final transactions
-    if ((tx.nTime ? tx.nTime : GetAdjustedTime()) > FutureDrift(m_active_chainstate, GetAdjustedTime())) {
+    if (nTimeTx > FutureDrift(m_active_chainstate, GetAdjustedTime())) {
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "time-too-new");
     }
 
@@ -760,12 +765,12 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "non-BIP68-final");
 
     // The mempool holds txs for the next block, so pass height+1 to CheckTxInputs
-    if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees, tx.nTime ? tx.nTime : GetAdjustedTime())) {
+    if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees)) {
         return false; // state filled in by CheckTxInputs
     }
 
     // Blackcoin: Minimum fee check
-    if (Params().GetConsensus().IsProtocolV3_1(tx.nTime ? tx.nTime : GetAdjustedTime()) && ws.m_base_fees < GetMinFee(tx, tx.nTime ? tx.nTime : GetAdjustedTime()))
+    if (Params().GetConsensus().IsProtocolV3_1(nTimeTx) && ws.m_base_fees < GetMinFee(tx, nTimeTx))
         return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-fee-not-enough");
 
     // Check for non-standard pay-to-script-hash in inputs
@@ -1927,7 +1932,7 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
         {
             CAmount txfee = 0;
             TxValidationState tx_state;
-            if (!Consensus::CheckTxInputs(tx, tx_state, view, pindex->nHeight, txfee, tx.nTime ? tx.nTime : block.nTime)) {
+            if (!Consensus::CheckTxInputs(tx, tx_state, view, pindex->nHeight, txfee)) {
                 // Any transaction validation failure in ConnectBlock is a block consensus failure
                 state.Invalid(BlockValidationResult::BLOCK_CONSENSUS,
                             tx_state.GetRejectReason(), tx_state.GetDebugMessage());

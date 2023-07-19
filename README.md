@@ -74,3 +74,24 @@ Translations are periodically pulled from Transifex and merged into the git repo
 
 **Important**: We do not accept translation changes as GitHub pull requests because the next
 pull from Transifex would automatically overwrite them again.
+
+Branches
+-------
+
+### develop
+The develop branch is typically used by developers as the main branch for integrating new features and changes into the codebase.
+Pull requests should always be made to this branch (except for critical fixes), and might possibly break the code.
+The develop branch is considered an unstable branch, as it is constantly updated with new code, and it may contain bugs or unfinished features. It is not guaranteed to work properly on any system.
+
+### master
+The master branch gets latest updates from the stable branch.
+However, it may contain experimental features and should be used with caution.
+
+### 13.2
+The release branch for Blackcoin More 13.2.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
+
+### 22.x
+The release branch for Blackcoin More 22.x. Contains functional but experimental code.
+
+### 23.x
+The release branch for Blackcoin More 23.x. Contains functional but highly experimental code.

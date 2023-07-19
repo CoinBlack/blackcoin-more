@@ -8,6 +8,11 @@
 ## v22.1.0-alpha-1 (2023-01-20)
 - Updated to Bitcoin Core 22.1
 
+## v13.2.1 (2023-07-04)
+- Reduced the minimum fee after a fork
+- Fixed a bug in the derivation of TxTime that could potentially lead to unplanned hard forks
+- Fixed a segfault issue occurring during the initial sync
+
 ## v13.2.0 (2022-11-24)
 - Changed versioning (backport of Core's PR20223)
 - Testnet hard fork: Removed transaction timestamp

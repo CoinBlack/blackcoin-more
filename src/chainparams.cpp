@@ -120,7 +120,7 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000039c894d4e483a4943d1");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000003d0c8be7da303f59236");
         consensus.defaultAssumeValid = uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc"); // 4232630
 
         /**
@@ -148,7 +148,7 @@ public:
         // release ASAP to avoid it where possible.
         vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted at dns.blackcoin.nl
         vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted at vps.blackcoin.nl
-        vSeeds.emplace_back("ghost.blackcoin.nl"); // Michel van Kessel static node
+        vSeeds.emplace_back("swap.blackcoin.nl"); // swapservice static node
         vSeeds.emplace_back("node.blackcoin.nl");  // payBLK static node
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
@@ -250,7 +250,7 @@ public:
         pchMessageStart[3] = 0xef;
         nDefaultPort = 25714;
 
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000395ae7599030cbde43");
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000003aaf405e01eda716e7");
         consensus.defaultAssumeValid = uint256S("0x9583676625157dc0405bbd48b9220157eeabb7d9460fa234d31b49ea7014de2f"); // 90235
 
         nPruneAfterHeight = 1000;
