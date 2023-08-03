@@ -444,8 +444,7 @@ public:
     const bool m_permit_bare_multisig;
     const std::optional<unsigned> m_max_datacarrier_bytes;
     const bool m_require_standard;
-    // Blackcoin
-    // const bool m_full_rbf;
+    const bool m_persist_v1_dat;
 
     const Limits m_limits;
 
