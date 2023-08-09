@@ -20,7 +20,6 @@
 
 void initialize_block()
 {
-    static const ECCVerifyHandle verify_handle;
     SelectParams(CBaseChainParams::REGTEST);
 
     static const auto testing_setup = MakeNoLogFileContext<const TestingSetup>();

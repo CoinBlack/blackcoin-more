@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,15 +7,16 @@
 #endif
 
 #include <chainparams.h>
-#include <fs.h>
 #include <qt/intro.h>
 #include <qt/forms/ui_intro.h>
+#include <util/fs.h>
 
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 
 #include <interfaces/node.h>
+#include <util/fs_helpers.h>
 #include <util/system.h>
 #include <validation.h>
 
@@ -112,8 +113,6 @@ void FreespaceChecker::check()
 Intro::Intro(QWidget *parent, int64_t blockchain_size_gb) :
     QDialog(parent, GUIUtil::dialog_flags),
     ui(new Ui::Intro),
-    thread(nullptr),
-    signalled(false),
     m_blockchain_size_gb(blockchain_size_gb)
 {
     ui->setupUi(this);
@@ -183,7 +182,7 @@ bool Intro::showIfNeeded(bool& did_show_intro)
         }
 
         /* If current default data directory does not exist, let the user choose one */
-        Intro intro(0, Params().AssumedBlockchainSize());
+        Intro intro(nullptr, Params().AssumedBlockchainSize());
         intro.setDataDirectory(dataDir);
         intro.setWindowIcon(QIcon(":icons/bitcoin"));
         did_show_intro = true;
@@ -250,12 +249,12 @@ void Intro::setStatus(int status, const QString &message, quint64 bytesAvailable
 
 void Intro::UpdateFreeSpaceLabel()
 {
-    QString freeString = tr("%1 GB of space available").arg(m_bytes_available / GB_BYTES);
+    QString freeString = tr("%n GB of space available", "", m_bytes_available / GB_BYTES);
     if (m_bytes_available < m_required_space_gb * GB_BYTES) {
-        freeString += " " + tr("(of %1 GB needed)").arg(m_required_space_gb);
+        freeString += " " + tr("(of %n GB needed)", "", m_required_space_gb);
         ui->freeSpace->setStyleSheet("QLabel { color: #800000 }");
     } else if (m_bytes_available / GB_BYTES - m_required_space_gb < 10) {
-        freeString += " " + tr("(%1 GB needed for full chain)").arg(m_required_space_gb);
+        freeString += " " + tr("(%n GB needed for full chain)", "", m_required_space_gb);
         ui->freeSpace->setStyleSheet("QLabel { color: #999900 }");
     } else {
         ui->freeSpace->setStyleSheet("");
@@ -272,7 +271,7 @@ void Intro::on_dataDirectory_textChanged(const QString &dataDirStr)
 
 void Intro::on_ellipsisButton_clicked()
 {
-    QString dir = QDir::toNativeSeparators(QFileDialog::getExistingDirectory(nullptr, "Choose data directory", ui->dataDirectory->text()));
+    QString dir = QDir::toNativeSeparators(QFileDialog::getExistingDirectory(nullptr, tr("Choose data directory"), ui->dataDirectory->text()));
     if(!dir.isEmpty())
         ui->dataDirectory->setText(dir);
 }

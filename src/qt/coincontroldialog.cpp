@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,13 +16,12 @@
 #include <qt/platformstyle.h>
 #include <qt/walletmodel.h>
 
-#include <wallet/coincontrol.h>
 #include <interfaces/node.h>
 #include <key_io.h>
 #include <policy/policy.h>
+#include <wallet/coincontrol.h>
+#include <wallet/coinselection.h>
 #include <wallet/wallet.h>
-
-#include <consensus/tx_verify.h>
 
 #include <QApplication>
 #include <QCheckBox>
@@ -33,10 +32,7 @@
 #include <QSettings>
 #include <QTreeWidget>
 
-#include <timedata.h> // for GetAdjustedTime()
-
 using wallet::CCoinControl;
-using wallet::MIN_CHANGE;
 
 QList<CAmount> CoinControlDialog::payAmounts;
 bool CoinControlDialog::fSubtractFeeFromAmount = false;
@@ -481,7 +477,7 @@ void CoinControlDialog::updateLabels(CCoinControl& m_coin_control, WalletModel *
                 nBytes -= 34;
 
         // Fee
-        nPayFee = GetMinFee(nBytes, GetAdjustedTime());
+        nPayFee = model->wallet().getMinimumFee(nBytes, m_coin_control, GetAdjustedTimeSeconds());
 
         if (nPayAmount > 0)
         {
@@ -489,11 +485,10 @@ void CoinControlDialog::updateLabels(CCoinControl& m_coin_control, WalletModel *
             if (!CoinControlDialog::fSubtractFeeFromAmount)
                 nChange -= nPayFee;
 
-            // Never create dust outputs; if we would, just add the dust to the fee.
-            if (nChange > 0 && nChange < MIN_CHANGE)
-            {
+            if (nChange > 0) {
                 // Assumes a p2pkh script size
                 CTxOut txout(nChange, CScript() << std::vector<unsigned char>(24, 0));
+                // Never create dust outputs; if we would, just add the dust to the fee.
                 if (IsDust(txout, model->node().getDustRelayFee()))
                 {
                     nPayFee += nChange;
@@ -512,7 +507,7 @@ void CoinControlDialog::updateLabels(CCoinControl& m_coin_control, WalletModel *
     }
 
     // actually update labels
-    int nDisplayUnit = BitcoinUnits::BTC;
+    BitcoinUnit nDisplayUnit = BitcoinUnit::BTC;
     if (model && model->getOptionsModel())
         nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
 
@@ -593,9 +588,9 @@ void CoinControlDialog::updateView()
     ui->treeWidget->setEnabled(false); // performance, otherwise updateLabels would be called for every checked checkbox
     ui->treeWidget->setAlternatingRowColors(!treeMode);
     QFlags<Qt::ItemFlag> flgCheckbox = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
-    QFlags<Qt::ItemFlag> flgTristate = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsTristate;
+    QFlags<Qt::ItemFlag> flgTristate = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsAutoTristate;
 
-    int nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
+    BitcoinUnit nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
 
     for (const auto& coins : model->wallet().listCoins()) {
         CCoinControlWidgetItem* itemWalletAddress{nullptr};

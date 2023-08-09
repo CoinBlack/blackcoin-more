@@ -54,8 +54,25 @@
         <translation type="unfinished">ਸਿੱਕੇ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਪਤਾ ਚੁਣੋ</translation>
     </message>
     <message>
+        <source>C&amp;hoose</source>
+        <translation type="unfinished">ਚੁਣੋ </translation>
+    </message>
+    <message>
+        <source>Sending addresses</source>
+        <translation type="unfinished">ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲੇ ਪਤੇ </translation>
+    </message>
+    <message>
+        <source>Receiving addresses</source>
+        <translation type="unfinished">ਆਉਣ ਵਾਲੇ ਪਤੇ </translation>
+    </message>
+    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">ਇਹ ਭੁਗਤਾਨ ਭੇਜਣ ਲਈ ਤੁਹਾਡੇ ਬਿਟਕੋਇਨ ਪਤੇ ਹਨ। ਸਿੱਕੇ ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਹਮੇਸ਼ਾਂ ਰਕਮ ਅਤੇ ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲੇ ਪਤੇ ਦੀ ਜਾਂਚ ਕਰੋ।</translation>
+    </message>
+    <message>
+        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type 'legacy'.</source>
+        <translation type="unfinished">ਏਹ ਤੁਹਾਡੇ ਰਕਮ ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲੇ ਬਿਟਕਾਅਨ ਪਤੇ ਹਨ। ਪ੍ਰਾਪਤੀ ਟੈਬ ਤੇ ਨਵੇਂ ਪਤੇ ਦਰਜ ਕਰਨ ਲਈ "ਨਵਾਂ ਪ੍ਰਾਪਤੀ ਪਤਾ ਦਰਜ ਕਰੋ" ਬਟਨ ਤੇ ਟੈਪ ਕਰੋ। ਜੁੜਨ ਲਈ "ਲੈਗਸੀ" ਪ੍ਰਕਾਰ ਦੇ ਹੀ ਪਤੇ ਦਰਜ ਕੀਤੇ ਜਾਂ ਸਕਦੇ ਹਨ। </translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -79,6 +96,11 @@
         <translation type="unfinished">ਕਾਮੇ ਨਾਲ ਵੱਖ ਕੀਤੀ ਫਾਈਲ</translation>
     </message>
     <message>
+        <source>There was an error trying to save the address list to %1. Please try again.</source>
+        <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
+        <translation type="unfinished"> %1 ਤੇ ਪਤੇ ਦੀ ਲਿਸਟ ਸੇਵ ਕਰਨੀ ਅਸਫਲ ਹੋਈ। ਫੇਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ। </translation>
+    </message>
+    <message>
         <source>Exporting Failed</source>
         <translation type="unfinished">ਨਿਰਯਾਤ ਅਸਫਲ ਰਿਹਾ</translation>
     </message>
@@ -93,7 +115,11 @@
         <source>Address</source>
         <translation type="unfinished">ਪਤਾ</translation>
     </message>
-    </context>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">ਕੋਈ ਲੇਬਲ ਨਹੀਂ </translation>
+    </message>
+</context>
 <context>
     <name>AskPassphraseDialog</name>
     <message>
@@ -119,6 +145,10 @@
     <message>
         <source>Encrypt wallet</source>
         <translation type="unfinished">ਵਾਲਿਟ ਐਨਕ੍ਰਿਪਟ ਕਰੋ</translation>
+    </message>
+    <message>
+        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <translation type="unfinished">ਏਸ ਕਾਰੇ ਲਈ ਤੁਹਾਡਾ ਵੱਲੇਟ ਖੋਲਣ ਵਾਸਤੇ ਵੱਲੇਟ ਪਾਸ ਲੱਗੇਗਾ </translation>
     </message>
     <message>
         <source>Unlock wallet</source>
@@ -234,17 +264,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
-    <message>
-        <source>Settings file could not be read</source>
-        <translation type="unfinished">ਸੈਟਿੰਗ ਫਾਈਲ ਨੂੰ ਪੜ੍ਹਨ ਵਿੱਚ ਅਸਫਲ</translation>
-    </message>
-    <message>
-        <source>Settings file could not be written</source>
-        <translation type="unfinished">ਸੈਟਿੰਗ ਫਾਈਲ ਲਿਖਣ ਵਿੱਚ ਅਸਫਲ</translation>
-    </message>
-    </context>
-<context>
     <name>BitcoinGUI</name>
     <message>
         <source>&amp;Overview</source>
@@ -327,7 +346,35 @@
     </message>
     </context>
 <context>
+    <name>CoinControlDialog</name>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">ਕੋਈ ਲੇਬਲ ਨਹੀਂ </translation>
+    </message>
+    </context>
+<context>
     <name>Intro</name>
+    <message numerus="yes">
+        <source>%n GB of space available</source>
+        <translation type="unfinished">
+            <numerusform />
+            <numerusform />
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>(of %n GB needed)</source>
+        <translation type="unfinished">
+            <numerusform />
+            <numerusform />
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>(%n GB needed for full chain)</source>
+        <translation type="unfinished">
+            <numerusform />
+            <numerusform />
+        </translation>
+    </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
@@ -358,6 +405,10 @@
         <source>Label</source>
         <translation type="unfinished">ਲੇਬਲ</translation>
     </message>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">ਕੋਈ ਲੇਬਲ ਨਹੀਂ </translation>
+    </message>
     </context>
 <context>
     <name>SendCoinsDialog</name>
@@ -368,7 +419,11 @@
             <numerusform />
         </translation>
     </message>
-    </context>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">ਕੋਈ ਲੇਬਲ ਨਹੀਂ </translation>
+    </message>
+</context>
 <context>
     <name>TransactionDesc</name>
     <message numerus="yes">
@@ -384,6 +439,10 @@
     <message>
         <source>Label</source>
         <translation type="unfinished">ਲੇਬਲ</translation>
+    </message>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">ਕੋਈ ਲੇਬਲ ਨਹੀਂ </translation>
     </message>
     </context>
 <context>
@@ -424,4 +483,15 @@
         <translation type="unfinished">ਮੌਜੂਦਾ ਟੈਬ ਵਿੱਚ ਡੇਟਾ ਨੂੰ ਫਾਈਲ ਵਿੱਚ ਐਕਸਪੋਰਟ ਕਰੋ</translation>
     </message>
     </context>
+<context>
+    <name>bitcoin-core</name>
+    <message>
+        <source>Settings file could not be read</source>
+        <translation type="unfinished">ਸੈਟਿੰਗ ਫਾਈਲ ਨੂੰ ਪੜ੍ਹਨ ਵਿੱਚ ਅਸਫਲ</translation>
+    </message>
+    <message>
+        <source>Settings file could not be written</source>
+        <translation type="unfinished">ਸੈਟਿੰਗ ਫਾਈਲ ਲਿਖਣ ਵਿੱਚ ਅਸਫਲ</translation>
+    </message>
+</context>
 </TS>

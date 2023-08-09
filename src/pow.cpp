@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -82,6 +82,14 @@ unsigned int CalculateNextTargetRequired(const CBlockIndex* pindexLast, int64_t 
         bnNew = bnTargetLimit;
 
     return bnNew.GetCompact();
+}
+
+// Check that on difficulty adjustments, the new difficulty does not increase
+// or decrease beyond the permitted limits.
+bool PermittedDifficultyTransition(const Consensus::Params& params, int64_t height, uint32_t old_nbits, uint32_t new_nbits)
+{
+    // Blackcoin: skip this check as we are using different difficulty adjustment algo
+    return true;
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)

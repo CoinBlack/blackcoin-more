@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020 The Bitcoin Core developers
+// Copyright (c) 2016-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,9 +7,15 @@
 
 #include <primitives/block.h>
 
+#include <functional>
 
 class CTxMemPool;
+class BlockValidationState;
+class Chainstate;
 class ChainstateManager;
+namespace Consensus {
+struct Params;
+};
 
 // Transaction compression schemes for compact block relay can be introduced by writing
 // an actual formatter here.
@@ -106,7 +112,7 @@ public:
     // Dummy for deserialization
     CBlockHeaderAndShortTxIDs() {}
 
-    CBlockHeaderAndShortTxIDs(const CBlock& block, bool fUseWTXID);
+    CBlockHeaderAndShortTxIDs(const CBlock& block);
 
     uint64_t GetShortID(const uint256& txhash) const;
 
@@ -132,6 +138,11 @@ protected:
     const ChainstateManager* chainman;
 public:
     CBlockHeader header;
+
+    // Can be overridden for testing
+    using CheckBlockFn = std::function<bool(const CBlock&, BlockValidationState&, const Consensus::Params&, Chainstate& chainstate, bool, bool, bool)>;
+    CheckBlockFn m_check_block_mock{nullptr};
+
     std::vector<unsigned char> vchBlockSig;
     explicit PartiallyDownloadedBlock(CTxMemPool* poolIn, ChainstateManager* _chainman) : pool(poolIn), chainman(_chainman) {}
 

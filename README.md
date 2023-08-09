@@ -12,9 +12,12 @@ Blackcoin is a decentralised digital currency with near-instant transaction spee
 What is Blackcoin More?
 ----------------
 
-Blackcoin More is the name of open source software which enables use of the Blackcoin protocol. 
+Blackcoin More is the name of open source software which enables use of the Blackcoin protocol.
+It connects to the Blackcoin peer-to-peer network to download and fully
+validate blocks and transactions. It also includes a wallet and graphical user
+interface, which can be optionally built.
 
-For more information, as well as an immediately useable, binary version of
+For more information, as well as an immediately usable, binary version of
 the Blackcoin More software, see https://blackcoinmore.org.
 
 License

@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2009-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -82,6 +82,7 @@ enum class BlockValidationResult {
     BLOCK_HEADER_SPAM,       //!< reject block header from the spam filter
     BLOCK_HEADER_REJECT,     //!< reject only the block header, but not ban the node
     BLOCK_HEADER_SYNC,       //!< reject the block header due to synchronization problems, used to punish the node less
+    BLOCK_HEADER_LOW_WORK    //!< the block header may be on a too-little-work chain
 };
 
 

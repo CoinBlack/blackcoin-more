@@ -26,30 +26,7 @@ make install # optional
 
 This will build blackmore-qt as well, if the dependencies are met.
 
-Dependencies
----------------------
-
-These dependencies are required:
-
- Library     | Purpose          | Description
- ------------|------------------|----------------------
- libboost    | Utility          | Library for threading, data structures, etc
- libevent    | Networking       | OS independent asynchronous networking
-
-Optional dependencies:
-
- Library     | Purpose          | Description
- ------------|------------------|----------------------
- miniupnpc   | UPnP Support     | Firewall-jumping support
- libnatpmp   | NAT-PMP Support  | Firewall-jumping support
- libdb6.2    | Berkeley DB      | Wallet storage (only needed when legacy wallet enabled)
- qt          | GUI              | GUI toolkit (only needed when GUI enabled)
- libqrencode | QR codes in GUI  | QR code generation (only needed when GUI enabled)
- libzmq3     | ZMQ notification | ZMQ notifications (requires ZMQ version >= 4.0.0)
- sqlite3     | SQLite DB        | Wallet storage (only needed when descriptor wallet enabled)
- systemtap   | Tracing (USDT)   | Statically defined tracepoints
-
-For the versions used, see [dependencies.md](dependencies.md)
+See [dependencies.md](dependencies.md) for a complete overview.
 
 Memory Requirements
 --------------------
@@ -95,7 +72,7 @@ executables, which are based on BerkeleyDB 6.2. If you do not care about wallet 
 
 To build Blackcoin More without wallet, see [*Disable-wallet mode*](#disable-wallet-mode)
 
-Optional port mapping libraries (see: `--with-miniupnpc`, `--enable-upnp-default`, and `--with-natpmp`, `--enable-natpmp-default`):
+Optional port mapping libraries (see: `--with-miniupnpc` and `--with-natpmp`):
 
     sudo apt install libminiupnpc-dev libnatpmp-dev
 
@@ -156,7 +133,7 @@ pass `--with-incompatible-bdb` to configure. Otherwise, you can build Berkeley D
 
 To build Blackcoin More without wallet, see [*Disable-wallet mode*](#disable-wallet-mode)
 
-Optional port mapping libraries (see: `--with-miniupnpc`, `--enable-upnp-default`, and `--with-natpmp`, `--enable-natpmp-default`):
+Optional port mapping libraries (see: `--with-miniupnpc` and `--with-natpmp`):
 
     sudo dnf install miniupnpc-devel libnatpmp-devel
 
@@ -170,7 +147,7 @@ User-Space, Statically Defined Tracing (USDT) dependencies:
 
 GUI dependencies:
 
-If you want to build bitcoin-qt, make sure that the required packages for Qt development
+If you want to build blackmore-qt, make sure that the required packages for Qt development
 are installed. Qt 5 is necessary to build the GUI.
 To build without GUI pass `--without-gui`.
 
@@ -186,7 +163,7 @@ libqrencode (optional) can be installed with:
 
     sudo dnf install qrencode-devel
 
-Once these are installed, they will be found by configure and a bitcoin-qt executable will be
+Once these are installed, they will be found by configure and a blackmore-qt executable will be
 built by default.
 
 Notes
@@ -199,61 +176,36 @@ miniupnpc
 
 [miniupnpc](https://miniupnp.tuxfamily.org) may be used for UPnP port mapping.  It can be downloaded from [here](
 https://miniupnp.tuxfamily.org/files/).  UPnP support is compiled in and
-turned off by default.  See the configure options for UPnP behavior desired:
-
-    --without-miniupnpc      No UPnP support, miniupnp not required
-    --disable-upnp-default   (the default) UPnP support turned off by default at runtime
-    --enable-upnp-default    UPnP support turned on by default at runtime
+turned off by default.
 
 libnatpmp
 ---------
 
 [libnatpmp](https://miniupnp.tuxfamily.org/libnatpmp.html) may be used for NAT-PMP port mapping. It can be downloaded
 from [here](https://miniupnp.tuxfamily.org/files/). NAT-PMP support is compiled in and
-turned off by default. See the configure options for NAT-PMP behavior desired:
-
-    --without-natpmp          No NAT-PMP support, libnatpmp not required
-    --disable-natpmp-default  (the default) NAT-PMP support turned off by default at runtime
-    --enable-natpmp-default   NAT-PMP support turned on by default at runtime
+turned off by default.
 
 Berkeley DB
 -----------
 
 The legacy wallet uses Berkeley DB. To ensure backwards compatibility it is
-recommended to use Berkeley DB 6.2. If you have to build it yourself, you can
-use [the installation script included in contrib/](/contrib/install_db6.sh)
-like so:
-
+recommended to use Berkeley DB 6.2. If you have to build it yourself, and don't
+want to use any other libraries built in depends, you can do:
 ```bash
-BITCOIN_ROOT=$(pwd)
+make -C depends NO_BOOST=1 NO_LIBEVENT=1 NO_QT=1 NO_SQLITE=1 NO_NATPMP=1 NO_UPNP=1 NO_ZMQ=1 NO_USDT=1
+...
+to: /path/to/blackmore/depends/x86_64-pc-linux-gnu
+```
+and configure using the following:
+```bash
+export BDB_PREFIX="/path/to/blackmore/depends/x86_64-pc-linux-gnu"
 
-# Pick some path to install BDB to, here we create a directory within the blackcoin directory
-BDB_PREFIX="${BITCOIN_ROOT}/build"
-mkdir -p $BDB_PREFIX
-
-# Fetch the source and verify that it is not tampered with
-wget 'http://download.oracle.com/berkeley-db/db-6.2.38.tar.gz'
-echo 'a4c88b51523684ed0dc8abeacf1f0aa53249c8a057e3cd581dca0159a03cb1c3  db-6.2.38.tar.gz' | sha256sum -c
-# -> db-6.2.38.tar.gz: OK
-tar -xzvf db-6.2.38.tar.gz
-
-# Build the library and install to our prefix
-cd db-6.2.38/build_unix/
-#  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
-../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
-make install
-
-# Configure Blackcoin More to use our own-built instance of BDB
-cd $BITCOIN_ROOT
-./autogen.sh
-./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
+./configure \
+    BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-6.2" \
+    BDB_CFLAGS="-I${BDB_PREFIX}/include"
 ```
 
-from the root of the repository.
-
-Otherwise, you can build Bitcoin Core from self-compiled [depends](/depends/README.md).
-
-**Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](#disable-wallet-mode)).
+**Note**: You only need Berkeley DB if the legacy wallet is enabled (see [*Disable-wallet mode*](#disable-wallet-mode)).
 
 Security
 --------
@@ -303,12 +255,12 @@ Hardening enables the following features:
 
 Disable-wallet mode
 --------------------
-When the intention is to run only a P2P node without a wallet, Blackcoin More may be compiled in
-disable-wallet mode with:
+When the intention is to only run a P2P node, without a wallet, Blackcoin More can
+be compiled in disable-wallet mode with:
 
     ./configure --disable-wallet
 
-In this case there is no dependency on Berkeley DB 6.2 and SQLite.
+In this case there is no dependency on SQLite or Berkeley DB.
 
 Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
 
@@ -321,42 +273,14 @@ A list of additional configure flags can be displayed with:
 
 Setup and Build Example: Arch Linux
 -----------------------------------
-This example lists the steps necessary to setup and build a command line only, non-wallet distribution of the latest changes on Arch Linux:
+This example lists the steps necessary to setup and build a command line only distribution of the latest changes on Arch Linux:
 
-    pacman -S git base-devel boost libevent python
+    pacman --sync --needed autoconf automake boost gcc git libevent libtool make pkgconf python sqlite
     git clone https://github.com/CoinBlack/blackcoin-more.git
     cd blackcoin-more/
     ./autogen.sh
-    ./configure --disable-wallet --without-gui --without-miniupnpc
+    ./configure
     make check
+    ./src/blackmored
 
-Note:
-Enabling wallet support requires either compiling against a Berkeley DB newer than 6.2 (package `db`) using `--with-incompatible-bdb`,
-or building and depending on a local version of Berkeley DB 6.2. The readily available Arch Linux packages are currently built using
-`--with-incompatible-bdb` according to the [PKGBUILD](https://github.com/archlinux/svntogit-community/blob/packages/bitcoin/trunk/PKGBUILD).
-As mentioned above, when maintaining portability of the wallet between the standard Blackcoin More distributions and independently built
-node software is desired, Berkeley DB 6.2 must be used.
-
-
-ARM Cross-compilation
--------------------
-These steps can be performed on, for example, an Ubuntu VM. The depends system
-will also work on other Linux distributions, however the commands for
-installing the toolchain will be different.
-
-Make sure you install the build requirements mentioned above.
-Then, install the toolchain and curl:
-
-    sudo apt-get install g++-arm-linux-gnueabihf curl
-
-To build executables for ARM:
-
-    cd depends
-    make HOST=arm-linux-gnueabihf NO_QT=1
-    cd ..
-    ./autogen.sh
-    CONFIG_SITE=$PWD/depends/arm-linux-gnueabihf/share/config.site ./configure --enable-reduce-exports LDFLAGS=-static-libstdc++
-    make
-
-
-For further documentation on the depends system see [README.md](../depends/README.md) in the depends directory.
+If you intend to work with legacy Berkeley DB wallets, see [Berkeley DB](#berkeley-db) section.

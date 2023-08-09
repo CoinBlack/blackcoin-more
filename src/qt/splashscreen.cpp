@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -28,7 +28,7 @@
 
 
 SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
-    : QWidget(), curAlignment(0)
+    : QWidget()
 {
     // set reference point, paddings
     int paddingRight            = 15;
@@ -47,9 +47,9 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     QString copyrightTextBitcoin     = QChar(0xA9)+QString(" %1-%2 ").arg(2009).arg(COPYRIGHT_YEAR) + QString("The Bitcoin Core developers");
     QString copyrightTextBlackcoin   = QChar(0xA9)+QString(" %1-%2 ").arg(2014).arg(2018) + QString("The Blackcoin developers");
     QString copyrightTextBlackmore   = QChar(0xA9)+QString(" %1-%2 ").arg(2018).arg(COPYRIGHT_YEAR) + QString("The Blackcoin More developers");
-    // QString copyrightText   = QChar(0xA9)+QString(" %1-%2 ").arg(2009).arg(COPYRIGHT_YEAR) + QString::fromStdString(CopyrightHolders());
 
-    QString titleAddText    = networkStyle->getTitleAddText();
+    // QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2009, COPYRIGHT_YEAR)).c_str());
+    const QString& titleAddText    = networkStyle->getTitleAddText();
 
     QString font            = QApplication::font().toString();
 
@@ -165,16 +165,6 @@ bool SplashScreen::eventFilter(QObject * obj, QEvent * ev) {
         }
     }
     return QObject::eventFilter(obj, ev);
-}
-
-void SplashScreen::finish()
-{
-    /* If the window is minimized, hide() will be ignored. */
-    /* Make sure we de-minimize the splashscreen window before hiding */
-    if (isMinimized())
-        showNormal();
-    hide();
-    deleteLater(); // No more need for this
 }
 
 static void InitMessage(SplashScreen *splash, const std::string &message)

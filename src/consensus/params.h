@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2009-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,11 @@
 
 #include <consensus/consensus.h>
 #include <uint256.h>
+
+#include <chrono>
 #include <limits>
+#include <map>
+#include <vector>
 
 namespace Consensus {
 
@@ -36,11 +40,11 @@ constexpr bool ValidDeployment(DeploymentPos dep) { return dep < MAX_VERSION_BIT
  */
 struct BIP9Deployment {
     /** Bit position to select the particular bit in nVersion. */
-    int bit;
+    int bit{28};
     /** Start MedianTime for version bits miner confirmation. Can be a date in the past */
-    int64_t nStartTime;
+    int64_t nStartTime{NEVER_ACTIVE};
     /** Timeout/expiry MedianTime for the deployment attempt. */
-    int64_t nTimeout;
+    int64_t nTimeout{NEVER_ACTIVE};
     /** If lock in occurs, delay activation until at least this block
      *  height.  Note that activation will only occur on a retarget
      *  boundary.
@@ -68,6 +72,20 @@ struct BIP9Deployment {
 struct Params {
     uint256 hashGenesisBlock;
     int nMaxReorganizationDepth;
+    /**
+     * Hashes of blocks that
+     * - are known to be consensus valid, and
+     * - buried in the chain, and
+     * - fail if the default script verify flags are applied.
+     */
+    std::map<uint256, uint32_t> script_flag_exceptions;
+    /** Block height and hash at which BIP34 becomes active */
+    int BIP34Height;
+    uint256 BIP34Hash;
+    /** Block height at which BIP65 becomes active */
+    int BIP65Height;
+    /** Block height at which BIP66 becomes active */
+    int BIP66Height;
     /** Block height at which CSV (BIP68, BIP112 and BIP113) becomes active */
     int CSVHeight;
     /** Block height at which Segwit (BIP141, BIP143 and BIP147) becomes active.
@@ -95,6 +113,10 @@ struct Params {
     bool fPoSNoRetargeting;
     int64_t nTargetSpacing;
     int64_t nTargetTimespan;
+    std::chrono::seconds TargetSpacing() const
+    {
+        return std::chrono::seconds{nTargetSpacing};
+    }
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
     int64_t nProtocolV1RetargetingFixedTime;
     int64_t nProtocolV2Time;

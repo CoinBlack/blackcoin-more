@@ -12,6 +12,7 @@
 #include <primitives/transaction.h>
 #include <script/interpreter.h>
 #include <validation.h>
+#include <util/check.h>
 #include <util/moneystr.h>
 
 bool IsFinalTx(const CTransaction &tx, int nBlockHeight, int64_t nBlockTime)
@@ -75,7 +76,7 @@ std::pair<int, int64_t> CalculateSequenceLocks(const CTransaction &tx, int flags
         int nCoinHeight = prevHeights[txinIndex];
 
         if (txin.nSequence & CTxIn::SEQUENCE_LOCKTIME_TYPE_FLAG) {
-            int64_t nCoinTime = block.GetAncestor(std::max(nCoinHeight-1, 0))->GetMedianTimePast();
+            const int64_t nCoinTime{Assert(block.GetAncestor(std::max(nCoinHeight - 1, 0)))->GetMedianTimePast()};
             // NOTE: Subtract 1 to maintain nLockTime semantics
             // BIP 68 relative lock times have the semantics of calculating
             // the first block or time at which the transaction would be
@@ -176,7 +177,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
     // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
     int64_t nTimeTx = tx.nTime;
     if (!nTimeTx && tx.nVersion >= TX_MAX_STANDARD_VERSION)
-        nTimeTx = GetAdjustedTime();
+        nTimeTx = GetAdjustedTimeSeconds();
 
     CAmount nValueIn = 0;
     for (unsigned int i = 0; i < tx.vin.size(); ++i) {
@@ -239,7 +240,7 @@ CAmount GetMinFee(size_t nBytes, uint32_t nTime)
     if (Params().GetConsensus().IsProtocolV3_1(nTime))
         nMinFee = (nBytes <= 100) ? MIN_TX_FEE : (CAmount)(nBytes * (TX_FEE_PER_KB / 1000));
     else {
-        nMinFee = ::minRelayTxFee.GetFee(nBytes);
+        nMinFee = 0;
         if (nMinFee < DEFAULT_MIN_RELAY_TX_FEE)
             nMinFee = DEFAULT_MIN_RELAY_TX_FEE;
     }

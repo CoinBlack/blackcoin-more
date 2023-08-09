@@ -70,7 +70,7 @@ NOTE: When using the systemd .service file, the creation of the aforementioned
 directories and the setting of their permissions is automatically handled by
 systemd. Directories are given a permission of 710, giving the blackcoin group
 access to files under it _if_ the files themselves give permission to the
-blackcoin group to do so (e.g. when `-sysperms` is specified). This does not allow
+blackcoin group to do so. This does not allow
 for the listing of files under the directory.
 
 NOTE: It is not currently possible to override `datadir` in
@@ -79,7 +79,7 @@ files out-of-the-box. This is because the command line options specified in the
 init files take precedence over the configurations in
 `/etc/blackcoin/blackmore.conf`. However, some init systems have their own
 configuration mechanisms that would allow for overriding the command line
-options specified in the init files (e.g. setting `BLACKMORED_DATADIR` for
+options specified in the init files (e.g. setting `BITCOIND_DATADIR` for
 OpenRC).
 
 ### macOS

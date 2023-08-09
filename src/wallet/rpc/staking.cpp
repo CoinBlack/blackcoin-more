@@ -5,9 +5,11 @@
 #include <rpc/util.h>
 #include <rpc/blockchain.h>
 #include <rpc/server.h>
+#include <rpc/server_util.h>
 #include <wallet/rpc/util.h>
 #include <wallet/rpc/staking.h>
 #include <wallet/wallet.h>
+#include <node/context.h>
 #include <node/miner.h>
 #include <warnings.h>
 
@@ -55,18 +57,17 @@ static RPCHelpMan getstakinginfo()
 
     const CTxMemPool& mempool = pwallet->chain().mempool();
     ChainstateManager& chainman = pwallet->chain().chainman();
-
     LOCK(cs_main);
     const CChain& active_chain = chainman.ActiveChain();
 
-    uint64_t nNetworkWeight = 1.1429 * GetPoSKernelPS();
+    UniValue obj(UniValue::VOBJ);
+
+    uint64_t nNetworkWeight = 1.1429 * GetPoSKernelPS(chainman);
     bool staking = nLastCoinStakeSearchInterval && nWeight;
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
     int64_t nTargetSpacing = consensusParams.nTargetSpacing;
     uint64_t nExpectedTime = staking ? 1.0455 * nTargetSpacing * nNetworkWeight / nWeight : 0;
-
-    UniValue obj(UniValue::VOBJ);
 
     obj.pushKV("enabled", node::EnableStaking());
     obj.pushKV("staking", staking);
@@ -76,7 +77,7 @@ static RPCHelpMan getstakinginfo()
     if (BlockAssembler::m_last_block_num_txs) obj.pushKV("currentblocktx", *BlockAssembler::m_last_block_num_txs);
     obj.pushKV("pooledtx", (uint64_t)mempool.size());
 
-    obj.pushKV("difficulty", GetDifficulty(GetLastBlockIndex(pindexBestHeader, true)));
+    obj.pushKV("difficulty", GetDifficulty(GetLastBlockIndex(chainman.m_best_header, true)));
 
     obj.pushKV("search-interval", (uint64_t)nLastCoinStakeSearchInterval);
     obj.pushKV("weight", (uint64_t)nWeight);

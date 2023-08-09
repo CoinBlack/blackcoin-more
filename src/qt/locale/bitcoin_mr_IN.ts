@@ -318,6 +318,27 @@
 <context>
     <name>Intro</name>
     <message numerus="yes">
+        <source>%n GB of space available</source>
+        <translation type="unfinished">
+            <numerusform />
+            <numerusform />
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>(of %n GB needed)</source>
+        <translation type="unfinished">
+            <numerusform>(of %n GB needed)</numerusform>
+            <numerusform>(of %n GB needed)</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>(%n GB needed for full chain)</source>
+        <translation type="unfinished">
+            <numerusform>(%n GB needed for full chain)</numerusform>
+            <numerusform>(%n GB needed for full chain)</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
@@ -411,4 +432,15 @@
         <translation type="unfinished">सध्याच्या टॅबमधील डेटा एका फाईलमध्ये एक्स्पोर्ट करा</translation>
     </message>
     </context>
+<context>
+    <name>bitcoin-core</name>
+    <message>
+        <source>Settings file could not be read</source>
+        <translation type="unfinished">सेटिंग्ज फाइल वाचता आली नाही</translation>
+    </message>
+    <message>
+        <source>Settings file could not be written</source>
+        <translation type="unfinished">सेटिंग्ज फाइल लिहिता आली नाही</translation>
+    </message>
+</context>
 </TS>

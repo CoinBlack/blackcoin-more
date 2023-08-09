@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2009-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_POLICY_FEES_H
@@ -7,13 +7,16 @@
 
 #include <consensus/amount.h>
 #include <policy/feerate.h>
-#include <uint256.h>
 #include <random.h>
 #include <sync.h>
+#include <threadsafety.h>
+#include <uint256.h>
+#include <util/fs.h>
 
 #include <array>
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -31,14 +34,15 @@ private:
 
 public:
     /** Create new FeeFilterRounder */
-    explicit FeeFilterRounder(const CFeeRate& minIncrementalFee);
+    explicit FeeFilterRounder(const CFeeRate& min_incremental_fee);
 
-    /** Quantize a minimum fee for privacy purpose before broadcast. Not thread-safe due to use of FastRandomContext */
-    CAmount round(CAmount currentMinFee);
+    /** Quantize a minimum fee for privacy purpose before broadcast. */
+    CAmount round(CAmount currentMinFee) EXCLUSIVE_LOCKS_REQUIRED(!m_insecure_rand_mutex);
 
 private:
-    std::set<double> feeset;
-    FastRandomContext insecure_rand;
+    const std::set<double> m_fee_set;
+    Mutex m_insecure_rand_mutex;
+    FastRandomContext insecure_rand GUARDED_BY(m_insecure_rand_mutex);
 };
 
 #endif // BITCOIN_POLICY_FEES_H

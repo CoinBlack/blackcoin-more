@@ -9,6 +9,7 @@ src/blackmore-gui
 src/blackmore-node
 src/blackmore-tx
 src/blackmore-util
+src/blackmore-chainstate
 src/blackmore-wallet
 src/test/fuzz/fuzz
 src/test/test_blackmore
@@ -43,8 +44,6 @@ src/obj
 share/setup.nsi
 share/qt/Info.plist
 
-src/univalue/gen
-
 src/qt/*.moc
 src/qt/moc_*.cpp
 src/qt/forms/ui_*.h
@@ -76,7 +75,6 @@ src/qt/blackmore-qt.includes
 *.log
 *.trs
 *.dmg
-*.iso
 
 *.json.h
 *.raw.h
@@ -151,6 +149,9 @@ dist/
 
 /guix-build-*
 
+/ci/scratch/
+
 # Visual Studio
 .vscode/*
 .vs/*
+

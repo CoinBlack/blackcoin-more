@@ -228,14 +228,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 <context>
     <name>QObject</name>
     <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
-        <translation type="unfinished">Kamalian: Wala ang tinukoy na direktoryo ng datos "%1".</translation>
-    </message>
-    <message>
-        <source>Error: Cannot parse configuration file: %1.</source>
-        <translation type="unfinished">Kamalian: Hindi ma-parse ang configuration file: %1.</translation>
-    </message>
-    <message>
         <source>Error: %1</source>
         <translation type="unfinished">Kamalian: %1</translation>
     </message>
@@ -312,353 +304,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         </translation>
     </message>
     </context>
-<context>
-    <name>bitcoin-core</name>
-    <message>
-        <source>The %s developers</source>
-        <translation type="unfinished">Ang mga %s developers</translation>
-    </message>
-    <message>
-        <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation type="unfinished">-maxtxfee ay nakatakda nang napakataas! Ang mga bayad na ganito kalaki ay maaaring bayaran sa isang solong transaksyon.</translation>
-    </message>
-    <message>
-        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation type="unfinished">Hindi makakuha ng lock sa direktoryo ng data %s. Malamang na tumatakbo ang %s.</translation>
-    </message>
-    <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
-        <translation type="unfinished">Naipamahagi sa ilalim ng lisensya ng MIT software, tingnan ang kasamang file %s o %s</translation>
-    </message>
-    <message>
-        <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation type="unfinished">Error sa pagbabasa %s! Nabasa nang tama ang lahat ng mga key, ngunit ang data ng transaksyon o mga entry sa address book ay maaaring nawawala o hindi tama.</translation>
-    </message>
-    <message>
-        <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
-        <translation type="unfinished">Kamalian: Nabigo ang pakikinig sa mga papasok na koneksyon (ang listen ay nagbalik ng error %s)</translation>
-    </message>
-    <message>
-        <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
-        <translation type="unfinished">Nabigo ang pagtatantya ng bayad. Hindi pinagana ang Fallbackfee. Maghintay ng ilang mga block o paganahin -fallbackfee.</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation type="unfinished">Hindi wastong halaga para sa -maxtxfee=&lt;amount&gt;: '%s' (dapat hindi bababa sa minrelay fee na %s upang maiwasan ang mga natigil na mga transaksyon)</translation>
-    </message>
-    <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation type="unfinished">Mangyaring suriin na ang petsa at oras ng iyong computer ay tama! Kung mali ang iyong orasan, ang %s ay hindi gagana nang maayos.</translation>
-    </message>
-    <message>
-        <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
-        <translation type="unfinished">Mangyaring tumulong kung natagpuan mo ang %s kapaki-pakinabang. Bisitahin ang %s para sa karagdagang impormasyon tungkol sa software.</translation>
-    </message>
-    <message>
-        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
-        <translation type="unfinished">Na-configure ang prune mas mababa sa minimum na %d MiB. Mangyaring gumamit ng mas mataas na numero.</translation>
-    </message>
-    <message>
-        <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>
-        <translation type="unfinished">Prune: ang huling pag-synchronize ng walet ay lampas sa pruned data. Kailangan mong mag-reindex (i-download muli ang buong blockchain sa kaso ng pruned node)</translation>
-    </message>
-    <message>
-        <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
-        <translation type="unfinished">Ang block database ay naglalaman ng isang block na tila nagmula sa hinaharap. Maaaring ito ay dahil sa petsa at oras ng iyong computer na nakatakda nang hindi wasto. Muling itayo ang database ng block kung sigurado ka na tama ang petsa at oras ng iyong computer</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation type="unfinished">Ang halaga ng transaksyon ay masyadong maliit na maipadala matapos na maibawas ang bayad</translation>
-    </message>
-    <message>
-        <source>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</source>
-        <translation type="unfinished">Ang error na ito ay maaaring lumabas kung ang wallet na ito ay hindi na i-shutdown na mabuti at last loaded gamit ang  build na may mas pinabagong bersyon ng Berkeley DB. Kung magkagayon, pakiusap ay gamitin ang software na ginamit na huli ng wallet na ito.</translation>
-    </message>
-    <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation type="unfinished">Ito ay isang pre-release test build - gamitin sa iyong sariling peligro - huwag gumamit para sa mga aplikasyon ng pagmimina o pangangalakal</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
-        <translation type="unfinished">Ito ang bayad sa transaksyon na maaari mong iwaksi kung ang sukli ay mas maliit kaysa sa dust sa antas na ito</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
-        <translation type="unfinished">Ito ang bayad sa transaksyon na maaari mong bayaran kapag hindi magagamit ang pagtantya sa bayad.</translation>
-    </message>
-    <message>
-        <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
-        <translation type="unfinished">Ang kabuuang haba ng string ng bersyon ng network (%i) ay lumampas sa maximum na haba (%i). Bawasan ang bilang o laki ng mga uacomment.</translation>
-    </message>
-    <message>
-        <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
-        <translation type="unfinished">Hindi ma-replay ang mga blocks. Kailangan mong muling itayo ang database gamit ang -reindex-chainstate.</translation>
-    </message>
-    <message>
-        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
-        <translation type="unfinished">Babala: Napansin ang mga private key sa walet { %s} na may mga hindi pinaganang private key</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation type="unfinished">Babala: Mukhang hindi kami ganap na sumasang-ayon sa aming mga peers! Maaaring kailanganin mong mag-upgrade, o ang ibang mga node ay maaaring kailanganing mag-upgrade.</translation>
-    </message>
-    <message>
-        <source>You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain</source>
-        <translation type="unfinished">Kailangan mong muling itayo ang database gamit ang -reindex upang bumalik sa unpruned mode. I-do-download muli nito ang buong blockchain</translation>
-    </message>
-    <message>
-        <source>%s is set very high!</source>
-        <translation type="unfinished">Ang %s ay nakatakda ng napakataas!</translation>
-    </message>
-    <message>
-        <source>-maxmempool must be at least %d MB</source>
-        <translation type="unfinished">ang -maxmempool ay dapat hindi bababa sa %d MB</translation>
-    </message>
-    <message>
-        <source>Cannot resolve -%s address: '%s'</source>
-        <translation type="unfinished">Hindi malutas - %s address: ' %s'</translation>
-    </message>
-    <message>
-        <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation type="unfinished">Hindi makapagsulat sa direktoryo ng data '%s'; suriin ang mga pahintulot.</translation>
-    </message>
-    <message>
-        <source>Config setting for %s only applied on %s network when in [%s] section.</source>
-        <translation type="unfinished">Ang config setting para sa %s ay inilalapat lamang sa %s network kapag sa [%s] na seksyon.</translation>
-    </message>
-    <message>
-        <source>Corrupted block database detected</source>
-        <translation type="unfinished">Sirang block database ay napansin</translation>
-    </message>
-    <message>
-        <source>Do you want to rebuild the block database now?</source>
-        <translation type="unfinished">Nais mo bang muling itayo ang block database?</translation>
-    </message>
-    <message>
-        <source>Done loading</source>
-        <translation type="unfinished">Tapos na ang pag-lo-load</translation>
-    </message>
-    <message>
-        <source>Error initializing block database</source>
-        <translation type="unfinished">Kamalian sa pagsisimula ng block database</translation>
-    </message>
-    <message>
-        <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Kamalian sa pagsisimula ng wallet database environment %s!</translation>
-    </message>
-    <message>
-        <source>Error loading %s</source>
-        <translation type="unfinished">Kamalian sa pag-lo-load %s</translation>
-    </message>
-    <message>
-        <source>Error loading %s: Private keys can only be disabled during creation</source>
-        <translation type="unfinished">Kamalian sa pag-lo-load %s: Ang private key ay maaaring hindi paganahin sa panahon ng paglikha lamang</translation>
-    </message>
-    <message>
-        <source>Error loading %s: Wallet corrupted</source>
-        <translation type="unfinished">Kamalian sa pag-lo-load %s: Nasira ang walet</translation>
-    </message>
-    <message>
-        <source>Error loading %s: Wallet requires newer version of %s</source>
-        <translation type="unfinished">Kamalian sa pag-lo-load %s: Ang walet ay nangangailangan ng mas bagong bersyon ng %s</translation>
-    </message>
-    <message>
-        <source>Error loading block database</source>
-        <translation type="unfinished">Kamalian sa pag-lo-load ng block database</translation>
-    </message>
-    <message>
-        <source>Error opening block database</source>
-        <translation type="unfinished">Kamalian sa pagbukas ng block database</translation>
-    </message>
-    <message>
-        <source>Error reading from database, shutting down.</source>
-        <translation type="unfinished">Kamalian sa pagbabasa mula sa database, nag-shu-shut down.</translation>
-    </message>
-    <message>
-        <source>Error upgrading chainstate database</source>
-        <translation type="unfinished">Kamalian sa pag-u-upgrade ng chainstate database</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is low for %s</source>
-        <translation type="unfinished">Kamalian: Ang disk space ay mababa para sa %s</translation>
-    </message>
-    <message>
-        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
-        <translation type="unfinished">Nabigong makinig sa anumang port. Gamitin ang -listen=0 kung nais mo ito.</translation>
-    </message>
-    <message>
-        <source>Failed to rescan the wallet during initialization</source>
-        <translation type="unfinished">Nabigong i-rescan ang walet sa initialization</translation>
-    </message>
-    <message>
-        <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
-        <translation type="unfinished">Hindi tamang o walang nahanap na genesis block. Maling datadir para sa network?</translation>
-    </message>
-    <message>
-        <source>Insufficient funds</source>
-        <translation type="unfinished">Hindi sapat na pondo</translation>
-    </message>
-    <message>
-        <source>Invalid -onion address or hostname: '%s'</source>
-        <translation type="unfinished">Hindi wastong -onion address o hostname: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid -proxy address or hostname: '%s'</source>
-        <translation type="unfinished">Hindi wastong -proxy address o hostname: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Hindi wastong halaga para sa -%s=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -discardfee=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Hindi wastong halaga para sa -discardfee=&lt;amount&gt;:'%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Hindi wastong halaga para sa -fallbackfee=&lt;amount&gt;: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation type="unfinished">Hindi wastong halaga para sa -paytxfee=&lt;amount&gt;:'%s' (dapat hindi mas mababa sa %s)</translation>
-    </message>
-    <message>
-        <source>Invalid netmask specified in -whitelist: '%s'</source>
-        <translation type="unfinished">Hindi wastong netmask na tinukoy sa -whitelist: '%s'</translation>
-    </message>
-    <message>
-        <source>Need to specify a port with -whitebind: '%s'</source>
-        <translation type="unfinished">Kailangang tukuyin ang port na may -whitebind: '%s'</translation>
-    </message>
-    <message>
-        <source>Not enough file descriptors available.</source>
-        <translation type="unfinished">Hindi sapat ang mga file descriptors na magagamit.</translation>
-    </message>
-    <message>
-        <source>Prune cannot be configured with a negative value.</source>
-        <translation type="unfinished">Hindi ma-configure ang prune na may negatibong halaga.</translation>
-    </message>
-    <message>
-        <source>Prune mode is incompatible with -txindex.</source>
-        <translation type="unfinished">Ang prune mode ay hindi katugma sa -txindex.</translation>
-    </message>
-    <message>
-        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
-        <translation type="unfinished">Pagbabawas ng -maxconnections mula sa %d hanggang %d, dahil sa mga limitasyon ng systema.</translation>
-    </message>
-    <message>
-        <source>Section [%s] is not recognized.</source>
-        <translation type="unfinished">Ang seksyon [%s] ay hindi kinikilala.</translation>
-    </message>
-    <message>
-        <source>Signing transaction failed</source>
-        <translation type="unfinished">Nabigo ang pagpirma ng transaksyon</translation>
-    </message>
-    <message>
-        <source>Specified -walletdir "%s" does not exist</source>
-        <translation type="unfinished">Ang tinukoy na -walletdir "%s" ay hindi umiiral</translation>
-    </message>
-    <message>
-        <source>Specified -walletdir "%s" is a relative path</source>
-        <translation type="unfinished">Ang tinukoy na -walletdir "%s" ay isang relative path</translation>
-    </message>
-    <message>
-        <source>Specified -walletdir "%s" is not a directory</source>
-        <translation type="unfinished">Ang tinukoy na -walletdir "%s" ay hindi isang direktoryo</translation>
-    </message>
-    <message>
-        <source>Specified blocks directory "%s" does not exist.</source>
-        <translation type="unfinished">Ang tinukoy na direktoryo ng mga block "%s" ay hindi umiiral.</translation>
-    </message>
-    <message>
-        <source>The source code is available from %s.</source>
-        <translation type="unfinished">Ang source code ay magagamit mula sa %s.</translation>
-    </message>
-    <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation type="unfinished">Ang halaga ng transaksyon ay masyadong maliit upang mabayaran ang bayad</translation>
-    </message>
-    <message>
-        <source>The wallet will avoid paying less than the minimum relay fee.</source>
-        <translation type="unfinished">Iiwasan ng walet na magbayad ng mas mababa kaysa sa minimum na bayad sa relay.</translation>
-    </message>
-    <message>
-        <source>This is experimental software.</source>
-        <translation type="unfinished">Ito ay pang-eksperimentong software.</translation>
-    </message>
-    <message>
-        <source>This is the minimum transaction fee you pay on every transaction.</source>
-        <translation type="unfinished">Ito ang pinakamababang bayad sa transaksyon na babayaran mo sa bawat transaksyon.</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you will pay if you send a transaction.</source>
-        <translation type="unfinished">Ito ang bayad sa transaksyon na babayaran mo kung magpapadala ka ng transaksyon.</translation>
-    </message>
-    <message>
-        <source>Transaction amount too small</source>
-        <translation type="unfinished">Masyadong maliit ang halaga ng transaksyon</translation>
-    </message>
-    <message>
-        <source>Transaction amounts must not be negative</source>
-        <translation type="unfinished">Ang mga halaga ng transaksyon ay hindi dapat negative</translation>
-    </message>
-    <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">Ang transaksyon ay may masyadong mahabang chain ng mempool</translation>
-    </message>
-    <message>
-        <source>Transaction must have at least one recipient</source>
-        <translation type="unfinished">Ang transaksyon ay dapat mayroong kahit isang tatanggap</translation>
-    </message>
-    <message>
-        <source>Transaction too large</source>
-        <translation type="unfinished">Masyadong malaki ang transaksyon</translation>
-    </message>
-    <message>
-        <source>Unable to bind to %s on this computer (bind returned error %s)</source>
-        <translation type="unfinished">Hindi ma-bind sa %s sa computer na ito (ang bind ay nagbalik ng error %s)</translation>
-    </message>
-    <message>
-        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation type="unfinished">Hindi ma-bind sa %s sa computer na ito. Malamang na tumatakbo na ang %s.</translation>
-    </message>
-    <message>
-        <source>Unable to create the PID file '%s': %s</source>
-        <translation type="unfinished">Hindi makagawa ng PID file '%s': %s</translation>
-    </message>
-    <message>
-        <source>Unable to generate initial keys</source>
-        <translation type="unfinished">Hindi makagawa ng paunang mga key</translation>
-    </message>
-    <message>
-        <source>Unable to generate keys</source>
-        <translation type="unfinished">Hindi makagawa ng keys</translation>
-    </message>
-    <message>
-        <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation type="unfinished">Hindi masimulan ang HTTP server. Tingnan ang debug log para sa detalye.</translation>
-    </message>
-    <message>
-        <source>Unknown network specified in -onlynet: '%s'</source>
-        <translation type="unfinished">Hindi kilalang network na tinukoy sa -onlynet: '%s'</translation>
-    </message>
-    <message>
-        <source>Unsupported logging category %s=%s.</source>
-        <translation type="unfinished">Hindi suportadong logging category %s=%s.</translation>
-    </message>
-    <message>
-        <source>Upgrading UTXO database</source>
-        <translation type="unfinished">Nag-u-upgrade ng UTXO database</translation>
-    </message>
-    <message>
-        <source>User Agent comment (%s) contains unsafe characters.</source>
-        <translation type="unfinished">Ang komento ng User Agent (%s) ay naglalaman ng hindi ligtas na mga character.</translation>
-    </message>
-    <message>
-        <source>Wallet needed to be rewritten: restart %s to complete</source>
-        <translation type="unfinished">Kinakailangan na muling maisulat ang walet: i-restart ang %s upang makumpleto</translation>
-    </message>
-</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -864,6 +509,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>No wallets available</source>
         <translation type="unfinished">Walang magagamit na mga walet</translation>
+    </message>
+    <message>
+        <source>Wallet Name</source>
+        <extracomment>Label of the input field where the name of the wallet is entered.</extracomment>
+        <translation type="unfinished">Pangalan ng Pitaka</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1250,6 +900,27 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 </context>
 <context>
     <name>Intro</name>
+    <message numerus="yes">
+        <source>%n GB of space available</source>
+        <translation type="unfinished">
+            <numerusform />
+            <numerusform />
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>(of %n GB needed)</source>
+        <translation type="unfinished">
+            <numerusform>(of %n GB needed)</numerusform>
+            <numerusform>(of %n GB needed)</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>(%n GB needed for full chain)</source>
+        <translation type="unfinished">
+            <numerusform>(%n GB needed for full chain)</numerusform>
+            <numerusform>(%n GB needed for full chain)</numerusform>
+        </translation>
+    </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
         <translation type="unfinished">Kahit na %1 GB na datos ay maiimbak sa direktoryong ito, ito ay lalaki sa pagtagal.</translation>
@@ -1293,10 +964,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
         <translation type="unfinished">Dahil ngayon lang nilunsad ang programang ito, maaari mong piliin kung saan maiinbak ng %1 ang data nito.</translation>
-    </message>
-    <message>
-        <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
-        <translation type="unfinished">Pagkatapos mong mag-click ng OK, %1 ay magsisimulang mag-download at mag-proseso ng buong blockchain (%2GB) magmula sa pinakaunang transaksyon sa %3 nuong ang %4 ay paunang nilunsad.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
@@ -1551,10 +1218,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Kung magpapakita ng mga tampok ng kontrol ng coin o hindi</translation>
     </message>
     <message>
-        <source>Options set in this dialog are overridden by the command line or in the configuration file:</source>
-        <translation type="unfinished">Ang mga nakatakdang opyson sa dialog na ito ay ma-o-override ng command line o sa configuration file:</translation>
-    </message>
-    <message>
         <source>&amp;OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -1568,14 +1231,17 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Confirm options reset</source>
+        <extracomment>Window title text of pop-up window shown when the user has chosen to reset options.</extracomment>
         <translation type="unfinished">Kumpirmahin ang pag-reset ng mga opsyon</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
+        <extracomment>Text explaining that the settings changed will not come into effect until the client is restarted.</extracomment>
         <translation type="unfinished">Kailangan i-restart ang kliyente upang ma-activate ang mga pagbabago.</translation>
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
+        <extracomment>Text asking the user to confirm if they would like to proceed with a client shutdown.</extracomment>
         <translation type="unfinished">Ang kliyente ay papatayin. Nais mo bang magpatuloy?</translation>
     </message>
     <message>
@@ -2175,7 +1841,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Wallet:</source>
-        <translation type="unfinished">Walet:</translation>
+        <translation type="unfinished">Pitaka:</translation>
     </message>
     <message>
         <source>Copy &amp;URI</source>
@@ -2198,7 +1864,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>RecentRequestsTableModel</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Petsa</translation>
+        <translation type="unfinished">Datiles</translation>
     </message>
     <message>
         <source>Message</source>
@@ -2253,7 +1919,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>After Fee:</source>
-        <translation type="unfinished">Pagkatapos ng Bayad:</translation>
+        <translation type="unfinished">Bayad sa pagtapusan:</translation>
     </message>
     <message>
         <source>Change:</source>
@@ -2444,10 +2110,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>A fee higher than %1 is considered an absurdly high fee.</source>
         <translation type="unfinished">Ang bayad na mas mataas sa %1 ay itinuturing na napakataas na bayad.</translation>
     </message>
-    <message>
-        <source>Payment request expired.</source>
-        <translation type="unfinished">Ang hiling ng bayad ay nag-expire na.</translation>
-    </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
@@ -2523,14 +2185,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Mensahe:</translation>
     </message>
     <message>
-        <source>This is an unauthenticated payment request.</source>
-        <translation type="unfinished">Ito ay isang unauthenticated na hiling ng bayad.</translation>
-    </message>
-    <message>
-        <source>This is an authenticated payment request.</source>
-        <translation type="unfinished">Ito ay isang authenticated na hiling ng bayad.</translation>
-    </message>
-    <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation type="unfinished">Mag-enter ng label para sa address na ito upang idagdag ito sa listahan ng mga gamit na address.</translation>
     </message>
@@ -2538,11 +2192,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
         <translation type="unfinished">Mensahe na nakalakip sa bitcoin: URI na kung saan maiimbak kasama ang transaksyon para sa iyong sanggunian. Tandaan: Ang mensaheng ito ay hindi ipapadala sa network ng Bitcoin.</translation>
     </message>
-    <message>
-        <source>Pay To:</source>
-        <translation type="unfinished">Magbayad Sa:</translation>
-    </message>
-    </context>
+</context>
 <context>
     <name>SendConfirmationDialog</name>
     <message>
@@ -2689,30 +2339,22 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>TransactionDesc</name>
     <message>
         <source>conflicted with a transaction with %1 confirmations</source>
+        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>
         <translation type="unfinished">sumalungat sa isang transaksyon na may %1 pagkumpirma</translation>
     </message>
     <message>
-        <source>0/unconfirmed, %1</source>
-        <translation type="unfinished">0/hindi nakumpirma, %1</translation>
-    </message>
-    <message>
-        <source>in memory pool</source>
-        <translation type="unfinished">nasa memory pool</translation>
-    </message>
-    <message>
-        <source>not in memory pool</source>
-        <translation type="unfinished">wala sa memory pool</translation>
-    </message>
-    <message>
         <source>abandoned</source>
+        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an abandoned transaction.</extracomment>
         <translation type="unfinished">inabandona</translation>
     </message>
     <message>
         <source>%1/unconfirmed</source>
+        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in at least one block, but less than 6 blocks.</extracomment>
         <translation type="unfinished">%1/hindi nakumpirma</translation>
     </message>
     <message>
         <source>%1 confirmations</source>
+        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in 6 or more blocks.</extracomment>
         <translation type="unfinished">%1 pagkumpirma</translation>
     </message>
     <message>
@@ -2721,7 +2363,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Petsa</translation>
+        <translation type="unfinished">Datiles</translation>
     </message>
     <message>
         <source>Source</source>
@@ -2846,7 +2488,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>TransactionTableModel</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Petsa</translation>
+        <translation type="unfinished">Datiles</translation>
     </message>
     <message>
         <source>Type</source>
@@ -3005,7 +2647,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Petsa</translation>
+        <translation type="unfinished">Datiles</translation>
     </message>
     <message>
         <source>Type</source>
@@ -3013,7 +2655,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Exporting Failed</source>
-        <translation type="unfinished">Nabigo ang Pag-export</translation>
+        <translation type="unfinished">Nabigo ang pag-exporte</translation>
     </message>
     <message>
         <source>There was an error trying to save the transaction history to %1.</source>
@@ -3040,7 +2682,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>WalletFrame</name>
     <message>
         <source>Create a new wallet</source>
-        <translation type="unfinished">Gumawa ng Bagong Pitaka</translation>
+        <translation type="unfinished">Gumawa ng baong pitaka</translation>
     </message>
     <message>
         <source>Error</source>
@@ -3107,11 +2749,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished">I-export</translation>
+        <translation type="unfinished">I-exporte</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation type="unfinished">Angkatin ang datos sa kasalukuyang tab sa talaksan</translation>
+        <translation type="unfinished">I-exporte yung datos sa kasalukuyang tab doon sa pila</translation>
     </message>
     <message>
         <source>Backup Wallet</source>
@@ -3138,4 +2780,315 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Kanselahin</translation>
     </message>
 </context>
+<context>
+    <name>bitcoin-core</name>
+    <message>
+        <source>The %s developers</source>
+        <translation type="unfinished">Ang mga %s developers</translation>
+    </message>
+    <message>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
+        <translation type="unfinished">Hindi makakuha ng lock sa direktoryo ng data %s. Malamang na tumatakbo ang %s.</translation>
+    </message>
+    <message>
+        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
+        <translation type="unfinished">Naipamahagi sa ilalim ng lisensya ng MIT software, tingnan ang kasamang file %s o %s</translation>
+    </message>
+    <message>
+        <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
+        <translation type="unfinished">Error sa pagbabasa %s! Nabasa nang tama ang lahat ng mga key, ngunit ang data ng transaksyon o mga entry sa address book ay maaaring nawawala o hindi tama.</translation>
+    </message>
+    <message>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
+        <translation type="unfinished">Mangyaring suriin na ang petsa at oras ng iyong computer ay tama! Kung mali ang iyong orasan, ang %s ay hindi gagana nang maayos.</translation>
+    </message>
+    <message>
+        <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
+        <translation type="unfinished">Mangyaring tumulong kung natagpuan mo ang %s kapaki-pakinabang. Bisitahin ang %s para sa karagdagang impormasyon tungkol sa software.</translation>
+    </message>
+    <message>
+        <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
+        <translation type="unfinished">Na-configure ang prune mas mababa sa minimum na %d MiB. Mangyaring gumamit ng mas mataas na numero.</translation>
+    </message>
+    <message>
+        <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>
+        <translation type="unfinished">Prune: ang huling pag-synchronize ng walet ay lampas sa pruned data. Kailangan mong mag-reindex (i-download muli ang buong blockchain sa kaso ng pruned node)</translation>
+    </message>
+    <message>
+        <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
+        <translation type="unfinished">Ang block database ay naglalaman ng isang block na tila nagmula sa hinaharap. Maaaring ito ay dahil sa petsa at oras ng iyong computer na nakatakda nang hindi wasto. Muling itayo ang database ng block kung sigurado ka na tama ang petsa at oras ng iyong computer</translation>
+    </message>
+    <message>
+        <source>The transaction amount is too small to send after the fee has been deducted</source>
+        <translation type="unfinished">Ang halaga ng transaksyon ay masyadong maliit na maipadala matapos na maibawas ang bayad</translation>
+    </message>
+    <message>
+        <source>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</source>
+        <translation type="unfinished">Ang error na ito ay maaaring lumabas kung ang wallet na ito ay hindi na i-shutdown na mabuti at last loaded gamit ang  build na may mas pinabagong bersyon ng Berkeley DB. Kung magkagayon, pakiusap ay gamitin ang software na ginamit na huli ng wallet na ito.</translation>
+    </message>
+    <message>
+        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <translation type="unfinished">Ito ay isang pre-release test build - gamitin sa iyong sariling peligro - huwag gumamit para sa mga aplikasyon ng pagmimina o pangangalakal</translation>
+    </message>
+    <message>
+        <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
+        <translation type="unfinished">Ito ang bayad sa transaksyon na maaari mong iwaksi kung ang sukli ay mas maliit kaysa sa dust sa antas na ito</translation>
+    </message>
+    <message>
+        <source>This is the transaction fee you may pay when fee estimates are not available.</source>
+        <translation type="unfinished">Ito ang bayad sa transaksyon na maaari mong bayaran kapag hindi magagamit ang pagtantya sa bayad.</translation>
+    </message>
+    <message>
+        <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
+        <translation type="unfinished">Ang kabuuang haba ng string ng bersyon ng network (%i) ay lumampas sa maximum na haba (%i). Bawasan ang bilang o laki ng mga uacomment.</translation>
+    </message>
+    <message>
+        <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
+        <translation type="unfinished">Hindi ma-replay ang mga blocks. Kailangan mong muling itayo ang database gamit ang -reindex-chainstate.</translation>
+    </message>
+    <message>
+        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
+        <translation type="unfinished">Babala: Napansin ang mga private key sa walet { %s} na may mga hindi pinaganang private key</translation>
+    </message>
+    <message>
+        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
+        <translation type="unfinished">Babala: Mukhang hindi kami ganap na sumasang-ayon sa aming mga peers! Maaaring kailanganin mong mag-upgrade, o ang ibang mga node ay maaaring kailanganing mag-upgrade.</translation>
+    </message>
+    <message>
+        <source>You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain</source>
+        <translation type="unfinished">Kailangan mong muling itayo ang database gamit ang -reindex upang bumalik sa unpruned mode. I-do-download muli nito ang buong blockchain</translation>
+    </message>
+    <message>
+        <source>%s is set very high!</source>
+        <translation type="unfinished">Ang %s ay nakatakda ng napakataas!</translation>
+    </message>
+    <message>
+        <source>-maxmempool must be at least %d MB</source>
+        <translation type="unfinished">ang -maxmempool ay dapat hindi bababa sa %d MB</translation>
+    </message>
+    <message>
+        <source>Cannot resolve -%s address: '%s'</source>
+        <translation type="unfinished">Hindi malutas - %s address: ' %s'</translation>
+    </message>
+    <message>
+        <source>Cannot write to data directory '%s'; check permissions.</source>
+        <translation type="unfinished">Hindi makapagsulat sa direktoryo ng data '%s'; suriin ang mga pahintulot.</translation>
+    </message>
+    <message>
+        <source>Config setting for %s only applied on %s network when in [%s] section.</source>
+        <translation type="unfinished">Ang config setting para sa %s ay inilalapat lamang sa %s network kapag sa [%s] na seksyon.</translation>
+    </message>
+    <message>
+        <source>Corrupted block database detected</source>
+        <translation type="unfinished">Sirang block database ay napansin</translation>
+    </message>
+    <message>
+        <source>Do you want to rebuild the block database now?</source>
+        <translation type="unfinished">Nais mo bang muling itayo ang block database?</translation>
+    </message>
+    <message>
+        <source>Done loading</source>
+        <translation type="unfinished">Tapos na ang pag-lo-load</translation>
+    </message>
+    <message>
+        <source>Error initializing block database</source>
+        <translation type="unfinished">Kamalian sa pagsisimula ng block database</translation>
+    </message>
+    <message>
+        <source>Error initializing wallet database environment %s!</source>
+        <translation type="unfinished">Kamalian sa pagsisimula ng wallet database environment %s!</translation>
+    </message>
+    <message>
+        <source>Error loading %s</source>
+        <translation type="unfinished">Kamalian sa pag-lo-load %s</translation>
+    </message>
+    <message>
+        <source>Error loading %s: Private keys can only be disabled during creation</source>
+        <translation type="unfinished">Kamalian sa pag-lo-load %s: Ang private key ay maaaring hindi paganahin sa panahon ng paglikha lamang</translation>
+    </message>
+    <message>
+        <source>Error loading %s: Wallet corrupted</source>
+        <translation type="unfinished">Kamalian sa pag-lo-load %s: Nasira ang walet</translation>
+    </message>
+    <message>
+        <source>Error loading %s: Wallet requires newer version of %s</source>
+        <translation type="unfinished">Kamalian sa pag-lo-load %s: Ang walet ay nangangailangan ng mas bagong bersyon ng %s</translation>
+    </message>
+    <message>
+        <source>Error loading block database</source>
+        <translation type="unfinished">Kamalian sa pag-lo-load ng block database</translation>
+    </message>
+    <message>
+        <source>Error opening block database</source>
+        <translation type="unfinished">Kamalian sa pagbukas ng block database</translation>
+    </message>
+    <message>
+        <source>Error reading from database, shutting down.</source>
+        <translation type="unfinished">Kamalian sa pagbabasa mula sa database, nag-shu-shut down.</translation>
+    </message>
+    <message>
+        <source>Error: Disk space is low for %s</source>
+        <translation type="unfinished">Kamalian: Ang disk space ay mababa para sa %s</translation>
+    </message>
+    <message>
+        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
+        <translation type="unfinished">Nabigong makinig sa anumang port. Gamitin ang -listen=0 kung nais mo ito.</translation>
+    </message>
+    <message>
+        <source>Failed to rescan the wallet during initialization</source>
+        <translation type="unfinished">Nabigong i-rescan ang walet sa initialization</translation>
+    </message>
+    <message>
+        <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
+        <translation type="unfinished">Hindi tamang o walang nahanap na genesis block. Maling datadir para sa network?</translation>
+    </message>
+    <message>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">Hindi sapat na pondo</translation>
+    </message>
+    <message>
+        <source>Invalid -onion address or hostname: '%s'</source>
+        <translation type="unfinished">Hindi wastong -onion address o hostname: '%s'</translation>
+    </message>
+    <message>
+        <source>Invalid -proxy address or hostname: '%s'</source>
+        <translation type="unfinished">Hindi wastong -proxy address o hostname: '%s'</translation>
+    </message>
+    <message>
+        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
+        <translation type="unfinished">Hindi wastong halaga para sa -%s=&lt;amount&gt;: '%s'</translation>
+    </message>
+    <message>
+        <source>Invalid netmask specified in -whitelist: '%s'</source>
+        <translation type="unfinished">Hindi wastong netmask na tinukoy sa -whitelist: '%s'</translation>
+    </message>
+    <message>
+        <source>Need to specify a port with -whitebind: '%s'</source>
+        <translation type="unfinished">Kailangang tukuyin ang port na may -whitebind: '%s'</translation>
+    </message>
+    <message>
+        <source>Not enough file descriptors available.</source>
+        <translation type="unfinished">Hindi sapat ang mga file descriptors na magagamit.</translation>
+    </message>
+    <message>
+        <source>Prune cannot be configured with a negative value.</source>
+        <translation type="unfinished">Hindi ma-configure ang prune na may negatibong halaga.</translation>
+    </message>
+    <message>
+        <source>Prune mode is incompatible with -txindex.</source>
+        <translation type="unfinished">Ang prune mode ay hindi katugma sa -txindex.</translation>
+    </message>
+    <message>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Pagbabawas ng -maxconnections mula sa %d hanggang %d, dahil sa mga limitasyon ng systema.</translation>
+    </message>
+    <message>
+        <source>Section [%s] is not recognized.</source>
+        <translation type="unfinished">Ang seksyon [%s] ay hindi kinikilala.</translation>
+    </message>
+    <message>
+        <source>Signing transaction failed</source>
+        <translation type="unfinished">Nabigo ang pagpirma ng transaksyon</translation>
+    </message>
+    <message>
+        <source>Specified -walletdir "%s" does not exist</source>
+        <translation type="unfinished">Ang tinukoy na -walletdir "%s" ay hindi umiiral</translation>
+    </message>
+    <message>
+        <source>Specified -walletdir "%s" is a relative path</source>
+        <translation type="unfinished">Ang tinukoy na -walletdir "%s" ay isang relative path</translation>
+    </message>
+    <message>
+        <source>Specified -walletdir "%s" is not a directory</source>
+        <translation type="unfinished">Ang tinukoy na -walletdir "%s" ay hindi isang direktoryo</translation>
+    </message>
+    <message>
+        <source>Specified blocks directory "%s" does not exist.</source>
+        <translation type="unfinished">Ang tinukoy na direktoryo ng mga block "%s" ay hindi umiiral.</translation>
+    </message>
+    <message>
+        <source>The source code is available from %s.</source>
+        <translation type="unfinished">Ang source code ay magagamit mula sa %s.</translation>
+    </message>
+    <message>
+        <source>The transaction amount is too small to pay the fee</source>
+        <translation type="unfinished">Ang halaga ng transaksyon ay masyadong maliit upang mabayaran ang bayad</translation>
+    </message>
+    <message>
+        <source>The wallet will avoid paying less than the minimum relay fee.</source>
+        <translation type="unfinished">Iiwasan ng walet na magbayad ng mas mababa kaysa sa minimum na bayad sa relay.</translation>
+    </message>
+    <message>
+        <source>This is experimental software.</source>
+        <translation type="unfinished">Ito ay pang-eksperimentong software.</translation>
+    </message>
+    <message>
+        <source>This is the minimum transaction fee you pay on every transaction.</source>
+        <translation type="unfinished">Ito ang pinakamababang bayad sa transaksyon na babayaran mo sa bawat transaksyon.</translation>
+    </message>
+    <message>
+        <source>This is the transaction fee you will pay if you send a transaction.</source>
+        <translation type="unfinished">Ito ang bayad sa transaksyon na babayaran mo kung magpapadala ka ng transaksyon.</translation>
+    </message>
+    <message>
+        <source>Transaction amount too small</source>
+        <translation type="unfinished">Masyadong maliit ang halaga ng transaksyon</translation>
+    </message>
+    <message>
+        <source>Transaction amounts must not be negative</source>
+        <translation type="unfinished">Ang mga halaga ng transaksyon ay hindi dapat negative</translation>
+    </message>
+    <message>
+        <source>Transaction has too long of a mempool chain</source>
+        <translation type="unfinished">Ang transaksyon ay may masyadong mahabang chain ng mempool</translation>
+    </message>
+    <message>
+        <source>Transaction must have at least one recipient</source>
+        <translation type="unfinished">Ang transaksyon ay dapat mayroong kahit isang tatanggap</translation>
+    </message>
+    <message>
+        <source>Transaction too large</source>
+        <translation type="unfinished">Masyadong malaki ang transaksyon</translation>
+    </message>
+    <message>
+        <source>Unable to bind to %s on this computer (bind returned error %s)</source>
+        <translation type="unfinished">Hindi ma-bind sa %s sa computer na ito (ang bind ay nagbalik ng error %s)</translation>
+    </message>
+    <message>
+        <source>Unable to bind to %s on this computer. %s is probably already running.</source>
+        <translation type="unfinished">Hindi ma-bind sa %s sa computer na ito. Malamang na tumatakbo na ang %s.</translation>
+    </message>
+    <message>
+        <source>Unable to create the PID file '%s': %s</source>
+        <translation type="unfinished">Hindi makagawa ng PID file '%s': %s</translation>
+    </message>
+    <message>
+        <source>Unable to generate initial keys</source>
+        <translation type="unfinished">Hindi makagawa ng paunang mga key</translation>
+    </message>
+    <message>
+        <source>Unable to generate keys</source>
+        <translation type="unfinished">Hindi makagawa ng keys</translation>
+    </message>
+    <message>
+        <source>Unable to start HTTP server. See debug log for details.</source>
+        <translation type="unfinished">Hindi masimulan ang HTTP server. Tingnan ang debug log para sa detalye.</translation>
+    </message>
+    <message>
+        <source>Unknown network specified in -onlynet: '%s'</source>
+        <translation type="unfinished">Hindi kilalang network na tinukoy sa -onlynet: '%s'</translation>
+    </message>
+    <message>
+        <source>Unsupported logging category %s=%s.</source>
+        <translation type="unfinished">Hindi suportadong logging category %s=%s.</translation>
+    </message>
+    <message>
+        <source>User Agent comment (%s) contains unsafe characters.</source>
+        <translation type="unfinished">Ang komento ng User Agent (%s) ay naglalaman ng hindi ligtas na mga character.</translation>
+    </message>
+    <message>
+        <source>Wallet needed to be rewritten: restart %s to complete</source>
+        <translation type="unfinished">Kinakailangan na muling maisulat ang walet: i-restart ang %s upang makumpleto</translation>
+    </message>
+    </context>
 </TS>

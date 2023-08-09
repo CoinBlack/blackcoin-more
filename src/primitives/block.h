@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2009-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,6 +9,7 @@
 #include <primitives/transaction.h>
 #include <serialize.h>
 #include <uint256.h>
+#include <util/time.h>
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -39,6 +40,7 @@ public:
     SERIALIZE_METHODS(CBlockHeader, obj)
     {
         READWRITE(obj.nVersion, obj.hashPrevBlock, obj.hashMerkleRoot, obj.nTime, obj.nBits, obj.nNonce);
+
         // peercoin: do not serialize nFlags when computing hash
         if (!(s.GetType() & SER_GETHASH) && s.GetType() & SER_POSMARKER)
             READWRITE(obj.nFlags);
@@ -63,6 +65,11 @@ public:
     uint256 GetHash() const;
 
     uint256 GetPoWHash() const;
+
+    NodeSeconds Time() const
+    {
+        return NodeSeconds{std::chrono::seconds{nTime}};
+    }
 
     int64_t GetBlockTime() const
     {
@@ -146,7 +153,7 @@ struct CBlockLocator
 
     CBlockLocator() {}
 
-    explicit CBlockLocator(const std::vector<uint256>& vHaveIn) : vHave(vHaveIn) {}
+    explicit CBlockLocator(std::vector<uint256>&& have) : vHave(std::move(have)) {}
 
     SERIALIZE_METHODS(CBlockLocator, obj)
     {

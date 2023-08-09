@@ -6,6 +6,8 @@
 
 #include <consensus/params.h>
 
+#include <string_view>
+
 const struct VBDeploymentInfo VersionBitsDeploymentInfo[Consensus::MAX_VERSION_BITS_DEPLOYMENTS] = {
     {
         /*.name =*/ "testdummy",
@@ -29,4 +31,17 @@ std::string DeploymentName(Consensus::BuriedDeployment dep)
         return "csv";
     } // no default case, so the compiler can warn about missing cases
     return "";
+}
+
+std::optional<Consensus::BuriedDeployment> GetBuriedDeployment(const std::string_view name)
+{
+    /*
+    if (name == "segwit") {
+        return Consensus::BuriedDeployment::DEPLOYMENT_SEGWIT;
+    }
+    */
+    if (name == "csv") {
+        return Consensus::BuriedDeployment::DEPLOYMENT_CSV;
+    }
+    return std::nullopt;
 }

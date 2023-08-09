@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@
 #include <qt/transactiontablemodel.h>
 #include <qt/walletmodel.h>
 
-#include <node/ui_interface.h>
+#include <node/interface_ui.h>
 
 #include <chrono>
 #include <optional>
@@ -414,9 +414,6 @@ void TransactionView::abandonTx()
 
     // Abandon the wallet transaction over the walletModel
     model->wallet().abandonTransaction(hash);
-
-    // Update the table
-    model->getTransactionTableModel()->updateTransaction(hashQStr, CT_UPDATED, false);
 }
 
 void TransactionView::copyAddress()
@@ -504,6 +501,7 @@ void TransactionView::showDetails()
     {
         TransactionDescDialog *dlg = new TransactionDescDialog(selection.at(0));
         dlg->setAttribute(Qt::WA_DeleteOnClose);
+        m_opened_dialogs.append(dlg);
         dlg->show();
     }
 }
@@ -520,7 +518,7 @@ void TransactionView::openThirdPartyTxUrl(QString url)
 QWidget *TransactionView::createDateRangeWidget()
 {
     dateRangeWidget = new QFrame();
-    dateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    dateRangeWidget->setFrameStyle(static_cast<int>(QFrame::Panel) | static_cast<int>(QFrame::Raised));
     dateRangeWidget->setContentsMargins(1,1,1,1);
     QHBoxLayout *layout = new QHBoxLayout(dateRangeWidget);
     layout->setContentsMargins(0,0,0,0);
@@ -610,6 +608,11 @@ bool TransactionView::eventFilter(QObject *obj, QEvent *event)
              return true;
         }
     }
+    if (event->type() == QEvent::EnabledChange) {
+        if (!isEnabled()) {
+            closeOpenedDialogs();
+        }
+    }
     return QWidget::eventFilter(obj, event);
 }
 
@@ -618,4 +621,13 @@ void TransactionView::updateWatchOnlyColumn(bool fHaveWatchOnly)
 {
     watchOnlyWidget->setVisible(fHaveWatchOnly);
     transactionView->setColumnHidden(TransactionTableModel::Watchonly, !fHaveWatchOnly);
+}
+
+void TransactionView::closeOpenedDialogs()
+{
+    // close all dialogs opened from this view
+    for (QDialog* dlg : m_opened_dialogs) {
+        dlg->close();
+    }
+    m_opened_dialogs.clear();
 }
