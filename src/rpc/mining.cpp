@@ -1057,6 +1057,9 @@ static RPCHelpMan submitheader()
     };
 }
 
+// Blackcoin: staking RPC
+// Blackcoin ToDo: avoid segfault when running `staking false`
+/*
 static RPCHelpMan staking()
 {
     return RPCHelpMan{"staking",
@@ -1105,8 +1108,10 @@ static RPCHelpMan staking()
 },
     };
 }
+*/
 
-// Blackcoin ToDo
+// Blackcoin: checkkernel RPC
+// Blackcoin ToDo: check and fix if needed
 /*
 static RPCHelpMan checkkernel()
 {
@@ -1270,8 +1275,8 @@ void RegisterMiningRPCCommands(CRPCTable& t)
         {"hidden", &generateblock},
         {"hidden", &generate},
 
-        {"staking", &staking},
         /*
+        {"staking", &staking},
         {"staking", &checkkernel},
         */
     };

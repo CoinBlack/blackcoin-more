@@ -176,7 +176,9 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "reservebalance", 0, "reserve" },
     { "reservebalance", 1, "amount" },
     { "burn", 0, "amount" },
+    /*
     { "burnwallet", 1, "force" },
+    */
     { "logging", 0, "include" },
     { "logging", 1, "exclude" },
     { "disconnectnode", 1, "nodeid" },
@@ -207,7 +209,9 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "addpeeraddress", 1, "port"},
     { "addpeeraddress", 2, "tried"},
     { "stop", 0, "wait" },
+    /*
     { "staking", 0, "generate"},
+    */
 };
 // clang-format on
 

@@ -246,6 +246,8 @@ RPCHelpMan burn()
 }
 
 // Blackcoin: burnwallet RPC
+// Blackcoin ToDo: fix fee calculation
+/*
 RPCHelpMan burnwallet()
 {
     return RPCHelpMan{"burnwallet",
@@ -311,19 +313,19 @@ RPCHelpMan burnwallet()
     std::shuffle(recipients.begin(), recipients.end(), FastRandomContext());
 
     // Send
-    // Blackcoin ToDo: fix fee calculation
     constexpr int RANDOM_CHANGE_POSITION = -1;
     auto res = CreateTransaction(*pwallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
     if (!res) {
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
     }
     const CTransactionRef& tx = res->tx;
-    pwallet->CommitTransaction(tx, std::move(mapValue), {} /* orderForm */);
+    pwallet->CommitTransaction(tx, std::move(mapValue), {});
 
     return tx->GetHash().GetHex();
 },
     };
 }
+*/
 
 RPCHelpMan sendtoaddress()
 {
