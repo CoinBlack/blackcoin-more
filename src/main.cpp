@@ -3817,13 +3817,16 @@ CAmount GetMinFee(const CTransaction& tx, unsigned int nTimeTx)
 CAmount GetMinFee(size_t nBytes, uint32_t nTime)
 {
     CAmount nMinFee;
+    CFeeRate nMinFeeRate;
 
     if (Params().GetConsensus().IsProtocolV3_1(nTime))
-        nMinFee = (nBytes <= 100) ? MIN_TX_FEE : (CAmount)(nBytes * (TX_FEE_PER_KB / 1000));
+    {
+        nMinFeeRate = CFeeRate(TX_FEE_PER_KB);
+        nMinFee = (nBytes <= 100) ? MIN_TX_FEE : nMinFeeRate.GetFee(nBytes);
+    }
     else {
-        nMinFee = ::minRelayTxFee.GetFee(nBytes);
-        if (nMinFee < DEFAULT_TRANSACTION_FEE)
-    	    nMinFee = DEFAULT_TRANSACTION_FEE;
+        nMinFeeRate = CFeeRate(DEFAULT_MIN_RELAY_TX_FEE);
+        nMinFee = nMinFeeRate.GetFee(nBytes);
     }
 
     if (!MoneyRange(nMinFee))
