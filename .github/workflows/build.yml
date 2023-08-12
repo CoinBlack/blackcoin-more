@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - 23.x
+      - 25.x
     paths-ignore:
       - '**/*.md'
   pull_request:
