@@ -729,8 +729,8 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
                 }
                 LogPrintf("PoSMiner: proof-of-stake block found %s\n", pblock->GetHash().ToString());
                 ProcessBlockFound(pblock, m_node);
-                // Rest for ~3 minutes after successful block to preserve close quick
-                if (!connman->interruptNet.sleep_for(std::chrono::seconds(60 + GetRand(4))))
+                // Rest for ~16 seconds after successful block to preserve close quick
+                if (!connman->interruptNet.sleep_for(std::chrono::seconds(16 + GetRand(4))))
                     return;
             }
             if (!connman->interruptNet.sleep_for(std::chrono::milliseconds(pos_timio)))
