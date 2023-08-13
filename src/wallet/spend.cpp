@@ -1090,7 +1090,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
     if (nBytes == -1) {
         return util::Error{_("Missing solving data for estimating transaction size")};
     }
-    CAmount fee_needed = GetMinFee(nBytes, current_time);
+    CAmount fee_needed = std::max(coin_selection_params.m_effective_feerate.GetFee(nBytes), GetMinFee(nBytes, current_time));
     const CAmount output_value = CalculateOutputValue(txNew);
     Assume(recipients_sum + change_amount == output_value);
     CAmount current_fee = result.GetSelectedValue() - output_value;
@@ -1104,6 +1104,15 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
     if (nChangePosInOut != -1 && fee_needed < current_fee) {
         auto& change = txNew.vout.at(nChangePosInOut);
         change.nValue += current_fee - fee_needed;
+        current_fee = result.GetSelectedValue() - CalculateOutputValue(txNew);
+        if (fee_needed != current_fee) {
+            return util::Error{Untranslated(STR_INTERNAL_BUG("Change adjustment: Fee needed != fee paid"))};
+        }
+    }
+    // Blackcoin: and if we don't pay enough fees, reduce the change
+    else if (nChangePosInOut != -1 && fee_needed > current_fee) {
+        auto& change = txNew.vout.at(nChangePosInOut);
+        change.nValue -= fee_needed - current_fee;
         current_fee = result.GetSelectedValue() - CalculateOutputValue(txNew);
         if (fee_needed != current_fee) {
             return util::Error{Untranslated(STR_INTERNAL_BUG("Change adjustment: Fee needed != fee paid"))};
