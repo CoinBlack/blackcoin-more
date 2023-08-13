@@ -709,7 +709,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     // Don't relay version 2 transactions until CSV is active, and we can be
     // sure that such transactions will be mined (unless we're on
     // -testnet/-regtest).
-    if (Params().RequireStandard() && tx.nVersion >= TX_MAX_STANDARD_VERSION && !Params().GetConsensus().IsProtocolV3_1(nTimeTx))
+    if (m_pool.m_require_standard && tx.nVersion >= TX_MAX_STANDARD_VERSION && !Params().GetConsensus().IsProtocolV3_1(nTimeTx))
 		return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "premature-version2-tx");
 
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)
