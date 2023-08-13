@@ -123,9 +123,6 @@ bool AbortNode(BlockValidationState& state, const std::string& strMessage, const
 /** Guess verification progress (as a fraction between 0.0=genesis and 1.0=current tip). */
 double GuessVerificationProgress(const ChainTxData& data, const CBlockIndex* pindex);
 
-/** Prune block files up to a given height */
-void PruneBlockFilesManual(Chainstate& active_chainstate, int nManualPruneHeight);
-
 /**
 * Validation result for a single transaction mempool acceptance.
 */

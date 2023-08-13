@@ -22,7 +22,10 @@ protected:
 private:
     const std::unique_ptr<DB> m_db;
 
+    /*
+    // Blackcoin
     bool AllowPrune() const override { return false; }
+    */
 
 protected:
     bool CustomAppend(const interfaces::BlockInfo& block) override;

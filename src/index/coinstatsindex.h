@@ -40,7 +40,10 @@ private:
 
     bool ReverseBlock(const CBlock& block, const CBlockIndex* pindex);
 
+    /*
+    // Blackcoin
     bool AllowPrune() const override { return true; }
+    */
 
 protected:
     bool CustomInit(const std::optional<interfaces::BlockKey>& block) override;

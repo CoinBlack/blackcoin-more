@@ -4292,6 +4292,19 @@ bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock)
     return ret;
 }
 
+// Blackcoin
+/* This function is called from the RPC code for pruneblockchain */
+/*
+void PruneBlockFilesManual(Chainstate& active_chainstate, int nManualPruneHeight)
+{
+    BlockValidationState state;
+    if (!active_chainstate.FlushStateToDisk(
+            state, FlushStateMode::NONE, nManualPruneHeight)) {
+        LogPrintf("%s: failed to flush state (%s)\n", __func__, state.ToString());
+    }
+}
+*/
+
 void Chainstate::LoadMempool(const fs::path& load_path, FopenFn mockable_fopen_function)
 {
     if (!m_mempool) return;

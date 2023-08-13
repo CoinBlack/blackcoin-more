@@ -92,7 +92,10 @@ private:
     /// Loop over disconnected blocks and call CustomRewind.
     bool Rewind(const CBlockIndex* current_tip, const CBlockIndex* new_tip);
 
+    /*
+    // Blackcoin
     virtual bool AllowPrune() const = 0;
+    */
 
 protected:
     std::unique_ptr<interfaces::Chain> m_chain;
