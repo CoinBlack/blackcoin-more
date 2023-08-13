@@ -668,8 +668,11 @@ private:
 
     CTxMemPool::Limits m_limits;
 
+    // Blackcoin
     /** Whether the transaction(s) would replace any mempool transactions. If so, RBF rules apply. */
+    /*
     bool m_rbf{false};
+    */
 };
 
 bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
