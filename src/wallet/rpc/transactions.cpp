@@ -314,6 +314,17 @@ static void ListTransactions(const CWallet& wallet, const CWalletTx& wtx, int nM
 
     CachedTxGetAmounts(wallet, wtx, listReceived, listSent, nFee, filter_ismine, include_change);
 
+    // Check if the coinstake transaction is mined by the wallet
+    if (wtx.IsCoinStake() && listSent.size() > 0 && listReceived.size() > 0) {
+        // Condense all of the coinstake inputs and outputs into one output and compute its value
+        CAmount amount = CachedTxGetCredit(wallet, wtx, filter_ismine) - CachedTxGetDebit(wallet, wtx, filter_ismine);
+        COutputEntry output = *listReceived.begin();
+        output.amount = amount;
+        listReceived.clear();
+        listSent.clear();
+        listReceived.push_back(output);
+    }
+
     bool involvesWatchonly = CachedTxIsFromMe(wallet, wtx, ISMINE_WATCH_ONLY);
 
     // Sent
@@ -763,9 +774,9 @@ RPCHelpMan gettransaction()
         entry.pushKV("amount", ValueFromAmount(nNet));
     }
     else {
-    entry.pushKV("amount", ValueFromAmount(nNet - nFee));
-    if (CachedTxIsFromMe(*pwallet, wtx, filter))
-        entry.pushKV("fee", ValueFromAmount(nFee));
+        entry.pushKV("amount", ValueFromAmount(nNet - nFee));
+        if (CachedTxIsFromMe(*pwallet, wtx, filter))
+            entry.pushKV("fee", ValueFromAmount(nFee));
     }
 
     WalletTxToJSON(*pwallet, wtx, entry);
