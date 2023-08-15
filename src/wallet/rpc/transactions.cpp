@@ -759,9 +759,14 @@ RPCHelpMan gettransaction()
     CAmount nNet = nCredit - nDebit;
     CAmount nFee = (CachedTxIsFromMe(*pwallet, wtx, filter) ? wtx.tx->GetValueOut() - nDebit : 0);
 
+    if (wtx.IsCoinStake()) {
+        entry.pushKV("amount", ValueFromAmount(nNet));
+    }
+    else {
     entry.pushKV("amount", ValueFromAmount(nNet - nFee));
     if (CachedTxIsFromMe(*pwallet, wtx, filter))
         entry.pushKV("fee", ValueFromAmount(nFee));
+    }
 
     WalletTxToJSON(*pwallet, wtx, entry);
 
