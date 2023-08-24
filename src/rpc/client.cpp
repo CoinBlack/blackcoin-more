@@ -173,6 +173,8 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "getmempoolancestors", 1, "verbose" },
     { "getmempooldescendants", 1, "verbose" },
     { "gettxspendingprevout", 0, "outputs" },
+    { "optimizeutxoset", 1, "amount" },
+    { "optimizeutxoset", 2, "transmit" },
     { "reservebalance", 0, "reserve" },
     { "reservebalance", 1, "amount" },
     { "burn", 0, "amount" },

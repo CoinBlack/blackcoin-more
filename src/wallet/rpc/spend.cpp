@@ -9,6 +9,7 @@
 #include <policy/policy.h>
 #include <rpc/rawtransaction_util.h>
 #include <rpc/util.h>
+#include <timedata.h>
 #include <util/translation.h>
 #include <util/vector.h>
 #include <wallet/coincontrol.h>
@@ -320,6 +321,99 @@ RPCHelpMan burnwallet()
     pwallet->CommitTransaction(tx, std::move(mapValue), {});
 
     return tx->GetHash().GetHex();
+},
+    };
+}
+
+// Peercoin
+RPCHelpMan optimizeutxoset()
+{
+    return RPCHelpMan{"optimizeutxoset",
+                "\nOptimize the UTXO set in order to maximize the PoS yield. This is only valid for continuous minting. The accumulated coinage will be reset!" +
+        HELP_REQUIRING_PASSPHRASE,
+                {
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The peercoin address to recieve all the new UTXOs. If not provided, new UTOXs will be assigned to the address of the input UTXOs."},
+                    {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The " + CURRENCY_UNIT + " amount to set the value of new UTXOs, i.e. make new UTXOs with value of 110. If amount is not provided, hardcoded value will be used."},
+                    {"transmit", RPCArg::Type::BOOL, RPCArg::Default{false}, "If true, transmit transaction after generating it."},
+                },
+                {
+                    RPCResult{"if transmit is not set or set to false",
+                        RPCResult::Type::OBJ, "", "",
+                        {
+                            {RPCResult::Type::STR_HEX, "tx", "The transaction hex."}
+                        },
+                    },
+                    RPCResult{"if transmit is set to true",
+                        RPCResult::Type::OBJ, "", "",
+                        {
+                            {RPCResult::Type::STR_HEX, "txid", "The transaction id."}
+                        },
+                    },
+                },
+                RPCExamples{
+                    "\nTrigger UTXO optimization and assign all the new UTXOs to some peercoin address with user defined UTXO value\n"
+                    + HelpExampleCli("optimizeutxoset", EXAMPLE_ADDRESS[0] + " 110")
+               },
+        [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
+{
+    std::shared_ptr<CWallet> const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!pwallet) return UniValue::VNULL;
+
+    // Make sure the results are valid at least up to the most recent block
+    // the user could have gotten from another RPC command prior to now
+    pwallet->BlockUntilSyncedToCurrentChain();
+
+    LOCK(pwallet->cs_wallet);
+
+    EnsureWalletIsUnlocked(*pwallet);
+
+    const auto bal = GetBalance(*pwallet);
+    CAmount curBalance = bal.m_mine_trusted;
+
+    if (curBalance == 0)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "No available coins to optimize");
+
+    LogPrintf("Optimizing outputs %d satoshis\n", curBalance);
+
+    CCoinControl coin_control;
+    mapValue_t mapValue;
+    const std::string address = request.params[0].get_str();
+    std::vector<CRecipient> recipients;
+    const bool transmit{request.params[2].isNull() ? false : request.params[2].get_bool()};
+
+    CTxDestination dest = DecodeDestination(address);
+    if (!IsValidDestination(dest)) {
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Blackcoin address: ") + address);
+    }
+
+    CScript script_pub_key = GetScriptForDestination(dest);
+    CAmount amount = AmountFromValue(request.params[1]);
+    CAmount remaining = curBalance;
+
+    CRecipient recipient = {script_pub_key, amount, false};
+    CAmount fee = GetMinFee(2000 + remaining / amount * 40, GetAdjustedTimeSeconds()); // very approximate
+    while (remaining > amount + fee) {
+        recipients.push_back(recipient);
+        remaining -= amount;
+    }
+
+    // Send
+    constexpr int RANDOM_CHANGE_POSITION = -1;
+    auto res = CreateTransaction(*pwallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
+    if (!res) {
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
+    }
+    const CTransactionRef& tx = res->tx;
+
+    UniValue entry(UniValue::VOBJ);
+    if (transmit) {
+        pwallet->CommitTransaction(tx, std::move(mapValue), {} /* orderForm */);
+        entry.pushKV("txid", tx->GetHash().GetHex());
+    }
+    else {
+        entry.pushKV("tx", EncodeHexTx(*tx));
+    }
+    return entry;
 },
     };
 }
