@@ -335,6 +335,7 @@ RPCHelpMan optimizeutxoset()
                     {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The peercoin address to recieve all the new UTXOs. If not provided, new UTOXs will be assigned to the address of the input UTXOs."},
                     {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The " + CURRENCY_UNIT + " amount to set the value of new UTXOs, i.e. make new UTXOs with value of 110. If amount is not provided, hardcoded value will be used."},
                     {"transmit", RPCArg::Type::BOOL, RPCArg::Default{false}, "If true, transmit transaction after generating it."},
+                    {"fromAddress", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "The blackcoin address to split coins from. If not provided, all available coins will be used."},
                 },
                 {
                     RPCResult{"if transmit is not set or set to false",
@@ -367,19 +368,40 @@ RPCHelpMan optimizeutxoset()
 
     EnsureWalletIsUnlocked(*pwallet);
 
-    const auto bal = GetBalance(*pwallet);
-    CAmount curBalance = bal.m_mine_trusted;
-
-    if (curBalance == 0)
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "No available coins to optimize");
-
-    LogPrintf("Optimizing outputs %d satoshis\n", curBalance);
-
+    CAmount availableCoins = 0;
     CCoinControl coin_control;
     mapValue_t mapValue;
     const std::string address = request.params[0].get_str();
+    CAmount amount = AmountFromValue(request.params[1]);
     std::vector<CRecipient> recipients;
     const bool transmit{request.params[2].isNull() ? false : request.params[2].get_bool()};
+
+    if (request.params[3].isNull() == false) {
+        std::vector<COutput> vAvailableCoins;
+        auto available_coins = AvailableCoins(*pwallet, &coin_control);
+        std::vector<COutput> coins = available_coins.All();
+        CTxDestination tmpAddress, fromAddress, toAddress;
+        fromAddress = DecodeDestination(request.params[3].get_str());
+        toAddress = DecodeDestination(address);
+        for (const COutput& out : coins) {
+            ExtractDestination(out.txout.scriptPubKey, tmpAddress);
+            if (tmpAddress == fromAddress) {
+                if (toAddress == tmpAddress && out.txout.nValue == amount)
+                    continue;
+                coin_control.Select(out.outpoint);
+                availableCoins += out.txout.nValue;
+            }
+        }
+        coin_control.m_allow_other_inputs = false;
+    } else {
+        const auto bal = GetBalance(*pwallet);
+        availableCoins = bal.m_mine_trusted;
+    }
+
+    if (availableCoins == 0)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "No available coins to optimize");
+
+    LogPrintf("optimizing outputs %d satoshis\n", availableCoins);
 
     CTxDestination dest = DecodeDestination(address);
     if (!IsValidDestination(dest)) {
@@ -387,11 +409,10 @@ RPCHelpMan optimizeutxoset()
     }
 
     CScript script_pub_key = GetScriptForDestination(dest);
-    CAmount amount = AmountFromValue(request.params[1]);
-    CAmount remaining = curBalance;
+    CAmount remaining = availableCoins;
 
     CRecipient recipient = {script_pub_key, amount, false};
-    CAmount fee = GetMinFee(2000 + remaining / amount * 40, GetAdjustedTimeSeconds()); // very approximate
+    CAmount fee = GetMinFee(2000 + remaining / amount * 60, GetAdjustedTimeSeconds()); // very approximate
     while (remaining > amount + fee) {
         recipients.push_back(recipient);
         remaining -= amount;
