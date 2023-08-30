@@ -202,6 +202,9 @@ struct entry_time {};
 struct ancestor_score {};
 struct index_by_wtxid {};
 
+// Blackcoin
+// class CBlockPolicyEstimator;
+
 /**
  * Information about a mempool transaction.
  */
@@ -312,6 +315,8 @@ class CTxMemPool
 protected:
     const int m_check_ratio; //!< Value n means that 1 times in n we check.
     std::atomic<unsigned int> nTransactionsUpdated{0}; //!< Used by getblocktemplate to trigger CreateNewBlock() invocation
+    // Blackcoin
+    // CBlockPolicyEstimator* const minerPolicyEstimator;
 
     uint64_t totalTxSize GUARDED_BY(cs){0};      //!< sum of all mempool tx's virtual sizes. Differs from serialized tx size since witness data is discounted. Defined in BIP 141.
     CAmount m_total_fee GUARDED_BY(cs){0};       //!< sum of all mempool tx's fees (NOT modified fee)
@@ -451,11 +456,15 @@ public:
 
     const int64_t m_max_size_bytes;
     const std::chrono::seconds m_expiry;
+    // Blackcoin
+    // const CFeeRate m_incremental_relay_feerate;
     const CFeeRate m_min_relay_feerate;
     const CFeeRate m_dust_relay_feerate;
     const bool m_permit_bare_multisig;
     const std::optional<unsigned> m_max_datacarrier_bytes;
     const bool m_require_standard;
+    // Blackcoin
+    // const bool m_full_rbf;
 
     const Limits m_limits;
 
@@ -601,7 +610,6 @@ public:
      *  Assumes that setDescendants includes all in-mempool descendants of anything
      *  already in it.  */
     void CalculateDescendants(txiter it, setEntries& setDescendants) const EXCLUSIVE_LOCKS_REQUIRED(cs);
-
 
     /** The minimum fee to get into the mempool, which may itself not be enough
      *  for larger-sized transactions.
