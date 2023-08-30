@@ -918,10 +918,10 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         if (!ancestors) return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "too-long-mempool-chain", error_message);
     }
 
-    /*
-    // Blackcoin
     ws.m_ancestors = *ancestors;
 
+    // Blackcoin
+    /*
     // A transaction that spends outputs that would be replaced by it is invalid. Now
     // that we have the set of all ancestors we can detect this
     // pathological case by making sure ws.m_conflicts and ws.m_ancestors don't
