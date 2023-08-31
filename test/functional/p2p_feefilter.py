@@ -54,7 +54,6 @@ class FeeFilterTest(BitcoinTestFramework):
         # grant noban permission to all peers to speed up tx relay / mempool sync
         self.extra_args = [[
             "-minrelaytxfee=0.00000100",
-            "-mintxfee=0.00000100",
             "-whitelist=noban@127.0.0.1",
         ]] * self.num_nodes
 
