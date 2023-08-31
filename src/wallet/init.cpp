@@ -12,6 +12,7 @@
 #include <node/interface_ui.h>
 #include <node/miner.h>
 #include <outputtype.h>
+#include <primitives/transaction.h>
 #include <univalue.h>
 #include <util/check.h>
 #include <util/moneystr.h>
@@ -63,6 +64,8 @@ void WalletInit::AddWalletOptions(ArgsManager& argsman) const
         CURRENCY_UNIT, FormatMoney(DEFAULT_TRANSACTION_MAXFEE)), ArgsManager::ALLOW_ANY, OptionsCategory::DEBUG_TEST);
     argsman.AddArg("-paytxfee=<amt>", strprintf("Fee rate (in %s/kvB) to add to transactions you send (default: %s)",
                                                             CURRENCY_UNIT, FormatMoney(CFeeRate{DEFAULT_PAY_TX_FEE}.GetFeePerK())), ArgsManager::ALLOW_ANY, OptionsCategory::WALLET);
+    argsman.AddArg("-txversion=<n>", strprintf("Set transaction version to <n> (default: %u)", std::to_string(CTransaction::CURRENT_VERSION)), ArgsManager::ALLOW_ANY, OptionsCategory::WALLET);
+
 #ifdef ENABLE_EXTERNAL_SIGNER
     argsman.AddArg("-signer=<cmd>", "External signing tool, see doc/external-signer.md", ArgsManager::ALLOW_ANY, OptionsCategory::WALLET);
 #endif
