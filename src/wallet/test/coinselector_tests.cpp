@@ -146,9 +146,7 @@ inline std::vector<OutputGroup>& KnapsackGroupOutputs(const CoinsResult& availab
         rand,
         /*change_output_size=*/ 0,
         /*change_spend_size=*/ 0,
-        /*min_change_target=*/ CENT,
         /*effective_feerate=*/ CFeeRate(0),
-        /*long_term_feerate=*/ CFeeRate(0),
         /*discard_feerate=*/ CFeeRate(0),
         /*tx_noinputs_size=*/ 0,
         /*avoid_partial=*/ false,
@@ -281,6 +279,8 @@ BOOST_AUTO_TEST_CASE(bnb_search_test)
         rand,
         /*change_output_size=*/ 31,
         /*change_spend_size=*/ 68,
+        /*effective_feerate=*/ CFeeRate(3000),
+        /*discard_feerate=*/ CFeeRate(1000),
         /*tx_noinputs_size=*/ 0,
         /*avoid_partial=*/ false,
     };
@@ -345,7 +345,6 @@ BOOST_AUTO_TEST_CASE(bnb_search_test)
 
         // single coin should be selected when effective fee > long term fee
         coin_selection_params_bnb.m_effective_feerate = CFeeRate(5000);
-        coin_selection_params_bnb.m_long_term_feerate = CFeeRate(3000);
 
         add_coin(available_coins, *wallet, 10 * CENT, coin_selection_params_bnb.m_effective_feerate, 6 * 24, false, 0, true);
         add_coin(available_coins, *wallet, 9 * CENT, coin_selection_params_bnb.m_effective_feerate, 6 * 24, false, 0, true);
@@ -360,7 +359,6 @@ BOOST_AUTO_TEST_CASE(bnb_search_test)
 
         // more coins should be selected when effective fee < long term fee
         coin_selection_params_bnb.m_effective_feerate = CFeeRate(3000);
-        coin_selection_params_bnb.m_long_term_feerate = CFeeRate(5000);
 
         add_coin(available_coins, *wallet, 10 * CENT, coin_selection_params_bnb.m_effective_feerate, 6 * 24, false, 0, true);
         add_coin(available_coins, *wallet, 9 * CENT, coin_selection_params_bnb.m_effective_feerate, 6 * 24, false, 0, true);
@@ -375,7 +373,6 @@ BOOST_AUTO_TEST_CASE(bnb_search_test)
 
         // pre selected coin should be selected even if disadvantageous
         coin_selection_params_bnb.m_effective_feerate = CFeeRate(5000);
-        coin_selection_params_bnb.m_long_term_feerate = CFeeRate(3000);
 
         add_coin(available_coins, *wallet, 10 * CENT, coin_selection_params_bnb.m_effective_feerate, 6 * 24, false, 0, true);
         add_coin(available_coins, *wallet, 9 * CENT, coin_selection_params_bnb.m_effective_feerate, 6 * 24, false, 0, true);
@@ -768,6 +765,8 @@ BOOST_AUTO_TEST_CASE(SelectCoins_test)
             rand,
             /*change_output_size=*/ 34,
             /*change_spend_size=*/ 148,
+            /*effective_feerate=*/ CFeeRate(0),
+            /*discard_feerate=*/ CFeeRate(0),
             /*tx_noinputs_size=*/ 0,
             /*avoid_partial=*/ false,
         };
@@ -948,6 +947,8 @@ BOOST_AUTO_TEST_CASE(check_max_weight)
         rand,
         /*change_output_size=*/34,
         /*change_spend_size=*/68,
+        /*effective_feerate=*/CFeeRate(0),
+        /*discard_feerate=*/CFeeRate(0),
         /*tx_noinputs_size=*/10 + 34, // static header size + output size
         /*avoid_partial=*/false,
     };
@@ -1057,9 +1058,7 @@ BOOST_AUTO_TEST_CASE(SelectCoins_effective_value_test)
         rand,
         /*change_output_size=*/34,
         /*change_spend_size=*/148,
-        /*min_change_target=*/1000,
         /*effective_feerate=*/CFeeRate(3000),
-        /*long_term_feerate=*/CFeeRate(1000),
         /*discard_feerate=*/CFeeRate(1000),
         /*tx_noinputs_size=*/0,
         /*avoid_partial=*/false,
@@ -1101,7 +1100,11 @@ BOOST_FIXTURE_TEST_CASE(wallet_coinsresult_test, BasicTestingSetup)
         const auto& coins = available_coins.All();
         for (int i = 0; i < 2; i++) {
             outs_to_remove.emplace(coins[i].outpoint);
+        }
+        available_coins.Erase(outs_to_remove);
+
         // Check that the elements were actually removed.
+        const auto& updated_coins = available_coins.All();
         for (const auto& out: outs_to_remove) {
             auto it = std::find_if(updated_coins.begin(), updated_coins.end(), [&out](const COutput &coin) {
                 return coin.outpoint == out;

@@ -57,6 +57,7 @@ constexpr long SHARED_TX_OFFSET{3};
 BOOST_AUTO_TEST_CASE(SimpleRoundTripTest)
 {
     CTxMemPool& pool = *Assert(m_node.mempool);
+    ChainstateManager& chainman = *Assert(m_node.chainman);
     TestMemPoolEntryHelper entry;
     CBlock block(BuildBlockTestCase());
 
@@ -74,7 +75,7 @@ BOOST_AUTO_TEST_CASE(SimpleRoundTripTest)
         CBlockHeaderAndShortTxIDs shortIDs2;
         stream >> shortIDs2;
 
-        PartiallyDownloadedBlock partialBlock(&pool);
+        PartiallyDownloadedBlock partialBlock(&pool, &chainman);
         BOOST_CHECK(partialBlock.InitData(shortIDs2, extra_txn) == READ_STATUS_OK);
         BOOST_CHECK( partialBlock.IsTxAvailable(0));
         BOOST_CHECK(!partialBlock.IsTxAvailable(1));
@@ -140,6 +141,7 @@ public:
 BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
 {
     CTxMemPool& pool = *Assert(m_node.mempool);
+    ChainstateManager& chainman = *Assert(m_node.chainman);
     TestMemPoolEntryHelper entry;
     CBlock block(BuildBlockTestCase());
 
@@ -164,7 +166,7 @@ BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
         CBlockHeaderAndShortTxIDs shortIDs2;
         stream >> shortIDs2;
 
-        PartiallyDownloadedBlock partialBlock(&pool);
+        PartiallyDownloadedBlock partialBlock(&pool, &chainman);
         BOOST_CHECK(partialBlock.InitData(shortIDs2, extra_txn) == READ_STATUS_OK);
         BOOST_CHECK(!partialBlock.IsTxAvailable(0));
         BOOST_CHECK( partialBlock.IsTxAvailable(1));
@@ -210,6 +212,7 @@ BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
 BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
 {
     CTxMemPool& pool = *Assert(m_node.mempool);
+    ChainstateManager& chainman = *Assert(m_node.chainman);
     TestMemPoolEntryHelper entry;
     CBlock block(BuildBlockTestCase());
 
@@ -234,7 +237,7 @@ BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
         CBlockHeaderAndShortTxIDs shortIDs2;
         stream >> shortIDs2;
 
-        PartiallyDownloadedBlock partialBlock(&pool);
+        PartiallyDownloadedBlock partialBlock(&pool, &chainman);
         BOOST_CHECK(partialBlock.InitData(shortIDs2, extra_txn) == READ_STATUS_OK);
         BOOST_CHECK( partialBlock.IsTxAvailable(0));
         BOOST_CHECK( partialBlock.IsTxAvailable(1));
@@ -261,6 +264,7 @@ BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
 BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)
 {
     CTxMemPool& pool = *Assert(m_node.mempool);
+    ChainstateManager& chainman = *Assert(m_node.chainman);
     CMutableTransaction coinbase;
     coinbase.vin.resize(1);
     coinbase.vin[0].scriptSig.resize(10);
@@ -289,7 +293,7 @@ BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)
         CBlockHeaderAndShortTxIDs shortIDs2;
         stream >> shortIDs2;
 
-        PartiallyDownloadedBlock partialBlock(&pool);
+        PartiallyDownloadedBlock partialBlock(&pool, &chainman);
         BOOST_CHECK(partialBlock.InitData(shortIDs2, extra_txn) == READ_STATUS_OK);
         BOOST_CHECK(partialBlock.IsTxAvailable(0));
 

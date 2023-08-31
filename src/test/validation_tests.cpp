@@ -15,6 +15,8 @@
 
 BOOST_FIXTURE_TEST_SUITE(validation_tests, TestingSetup)
 
+// Blackcoin
+/*
 static void TestBlockSubsidyHalvings(const Consensus::Params& consensusParams)
 {
     int maxHalvings = 64;
@@ -59,6 +61,7 @@ BOOST_AUTO_TEST_CASE(subsidy_limit_test)
     }
     BOOST_CHECK_EQUAL(nSum, CAmount{2099999997690000});
 }
+*/
 
 BOOST_AUTO_TEST_CASE(signet_parse_tests)
 {

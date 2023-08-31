@@ -101,7 +101,7 @@ std::shared_ptr<CBlock> MinerTestingSetup::FinalizeBlock(std::shared_ptr<CBlock>
     // submit block header, so that miner can get the block height from the
     // global state and the node has the topology of the chain
     BlockValidationState ignored;
-    BOOST_CHECK(Assert(m_node.chainman)->ProcessNewBlockHeaders({pblock->GetBlockHeader()}, true, ignored));
+    BOOST_CHECK(Assert(m_node.chainman)->ProcessNewBlockHeaders({pblock->GetBlockHeader()}, true, ignored, false));
 
     return pblock;
 }
@@ -257,7 +257,7 @@ BOOST_AUTO_TEST_CASE(mempool_locks_reorg)
         }
 
         // Mature the inputs of the txs
-        for (int j = COINBASE_MATURITY; j > 0; --j) {
+        for (int j = Params().GetConsensus().nCoinbaseMaturity; j > 0; --j) {
             last_mined = GoodBlock(last_mined->GetHash());
             BOOST_REQUIRE(ProcessBlock(last_mined));
         }
@@ -268,7 +268,7 @@ BOOST_AUTO_TEST_CASE(mempool_locks_reorg)
         std::vector<std::shared_ptr<const CBlock>> reorg;
         last_mined = GoodBlock(split_hash);
         reorg.push_back(last_mined);
-        for (size_t j = COINBASE_MATURITY + txs.size() + 1; j > 0; --j) {
+        for (size_t j = Params().GetConsensus().nCoinbaseMaturity + txs.size() + 1; j > 0; --j) {
             last_mined = GoodBlock(last_mined->GetHash());
             reorg.push_back(last_mined);
         }

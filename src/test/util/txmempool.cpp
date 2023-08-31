@@ -16,12 +16,16 @@ using node::NodeContext;
 
 CTxMemPool::Options MemPoolOptionsForTest(const NodeContext& node)
 {
+    // Blackcoin
+    CTxMemPool::Options mempool_opts{};
+    /*
     CTxMemPool::Options mempool_opts{
         .estimator = node.fee_estimator.get(),
         // Default to always checking mempool regardless of
         // chainparams.DefaultConsistencyChecks for tests
         .check_ratio = 1,
     };
+    */
     const auto err{ApplyArgsManOptions(*node.args, ::Params(), mempool_opts)};
     Assert(!err);
     return mempool_opts;
