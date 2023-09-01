@@ -767,7 +767,7 @@ void static ThreadStakeMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_no
 // peercoin: stake minter
 void MinePoS(bool fGenerate, std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
 {
-    if (!pwallet->GetKeyPoolSize()) {
+    if (!WITH_LOCK(pwallet->cs_wallet, return pwallet->GetKeyPoolSize())) {
         LogPrintf("Error: Keypool is empty, please make sure the wallet contains keys and call keypoolrefill before restarting the mining thread\n");
         fEnableStaking = false;
         return;
