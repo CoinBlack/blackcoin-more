@@ -495,9 +495,9 @@ public:
             consensus.vDeployments[deployment_pos].min_activation_height = version_bits_params.min_activation_height;
         }
 
-        genesis = CreateGenesisBlock(1393221600, 216178, 0x207fffff, 1, 0);
+        genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x562924fd4f697dbb0092775159d1f2b4c3c0d2fb86635c6417cf3f6fe602a69e"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
         assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
@@ -505,13 +505,13 @@ public:
         vSeeds.emplace_back("dummySeed.invalid.");
 
         fDefaultConsistencyChecks = true;
-        fRequireStandard = true;
+        fRequireStandard = false;
         m_is_test_chain = true;
         m_is_mockable_chain = true;
 
         checkpointData = {
             {
-                {0, uint256S("0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")},
+                {0, uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")},
             }
         };
 
