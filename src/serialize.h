@@ -117,14 +117,7 @@ template<typename Stream> inline uint64_t ser_readdata64(Stream &s)
     return le64toh(obj);
 }
 
-
-/////////////////////////////////////////////////////////////////
-//
-// Templates for serializing to anything that looks like a stream,
-// i.e. anything that supports .read(Span<std::byte>) and .write(Span<const std::byte>)
-//
-
-class CSizeComputer;
+class SizeComputer;
 
 enum
 {
@@ -326,7 +319,7 @@ constexpr inline unsigned int GetSizeOfCompactSize(uint64_t nSize)
     else                         return sizeof(unsigned char) + sizeof(uint64_t);
 }
 
-inline void WriteCompactSize(CSizeComputer& os, uint64_t nSize);
+inline void WriteCompactSize(SizeComputer& os, uint64_t nSize);
 
 template<typename Stream>
 void WriteCompactSize(Stream& os, uint64_t nSize)
@@ -452,7 +445,7 @@ inline unsigned int GetSizeOfVarInt(I n)
 }
 
 template<typename I>
-inline void WriteVarInt(CSizeComputer& os, I n);
+inline void WriteVarInt(SizeComputer& os, I n);
 
 template<typename Stream, VarIntMode Mode, typename I>
 void WriteVarInt(Stream& os, I n)
@@ -1072,23 +1065,21 @@ struct ActionUnserialize {
 /* ::GetSerializeSize implementations
  *
  * Computing the serialized size of objects is done through a special stream
- * object of type CSizeComputer, which only records the number of bytes written
+ * object of type SizeComputer, which only records the number of bytes written
  * to it.
  *
  * If your Serialize or SerializationOp method has non-trivial overhead for
  * serialization, it may be worthwhile to implement a specialized version for
- * CSizeComputer, which uses the s.seek() method to record bytes that would
+ * SizeComputer, which uses the s.seek() method to record bytes that would
  * be written instead.
  */
-class CSizeComputer
+class SizeComputer
 {
 protected:
     size_t nSize{0};
 
-    const int nType;
-    const int nVersion;
 public:
-    explicit CSizeComputer(int nTypeIn, int nVersionIn) : nSize(0), nType(nTypeIn), nVersion(nVersionIn) {}
+    SizeComputer() {}
 
     void write(Span<const std::byte> src)
     {
@@ -1102,7 +1093,7 @@ public:
     }
 
     template<typename T>
-    CSizeComputer& operator<<(const T& obj)
+    SizeComputer& operator<<(const T& obj)
     {
         ::Serialize(*this, obj);
         return (*this);
@@ -1112,39 +1103,26 @@ public:
         return nSize;
     }
 
-    int GetType() const { return nType; }
-    int GetVersion() const { return nVersion; }
+    // Blackcoin: dummy values
+    int GetType() const { return 0; }
+    int GetVersion() const { return 0; }
 };
 
 template<typename I>
-inline void WriteVarInt(CSizeComputer &s, I n)
+inline void WriteVarInt(SizeComputer &s, I n)
 {
     s.seek(GetSizeOfVarInt<I>(n));
 }
 
-inline void WriteCompactSize(CSizeComputer &s, uint64_t nSize)
+inline void WriteCompactSize(SizeComputer &s, uint64_t nSize)
 {
     s.seek(GetSizeOfCompactSize(nSize));
 }
 
 template <typename T>
-size_t GetSerializeSize(const T& t, int nVersion)
+size_t GetSerializeSize(const T& t)
 {
-    return (CSizeComputer(0, nVersion) << t).size();
-}
-
-template <typename T>
-size_t GetSerializeSize(const T& t, int nType, int nVersion)
-{
-    return (CSizeComputer(nType, nVersion) << t).size();
-}
-
-template <typename... T>
-size_t GetSerializeSizeMany(int nVersion, const T&... t)
-{
-    CSizeComputer sc(0, nVersion);
-    SerializeMany(sc, t...);
-    return sc.size();
+    return (SizeComputer() << t).size();
 }
 
 /** Wrapper that overrides the GetParams() function of a stream (and hides GetVersion/GetType). */
@@ -1164,8 +1142,15 @@ public:
     bool eof() const { return m_substream.eof(); }
     size_t size() const { return m_substream.size(); }
     const Params& GetParams() const { return m_params; }
+
+    // Blackcoin: do not deprecate GetVersion() and GetType()
+    /*
     int GetVersion() = delete; // Deprecated with Params usage
     int GetType() = delete;    // Deprecated with Params usage
+    */
+
+    int GetVersion() const { return m_substream.GetVersion(); }
+    int GetType() const { return m_substream.GetType(); }
 };
 
 /** Wrapper that serializes objects with the specified parameters. */

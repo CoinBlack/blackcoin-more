@@ -245,12 +245,12 @@ std::string ConsumeScalarRPCArgument(FuzzedDataProvider& fuzzed_data_provider)
         },
         [&] {
             // hex encoded block
-            std::optional<CBlock> opt_block = ConsumeDeserializable<CBlock>(fuzzed_data_provider);
+            std::optional<CBlock> opt_block = ConsumeDeserializable<CBlock>(fuzzed_data_provider, TX_WITH_WITNESS);
             if (!opt_block) {
                 return;
             }
             CDataStream data_stream{SER_NETWORK, PROTOCOL_VERSION};
-            data_stream << *opt_block;
+            data_stream << TX_WITH_WITNESS(*opt_block);
             r = HexStr(data_stream);
         },
         [&] {
@@ -265,12 +265,13 @@ std::string ConsumeScalarRPCArgument(FuzzedDataProvider& fuzzed_data_provider)
         },
         [&] {
             // hex encoded tx
-            std::optional<CMutableTransaction> opt_tx = ConsumeDeserializable<CMutableTransaction>(fuzzed_data_provider);
+            std::optional<CMutableTransaction> opt_tx = ConsumeDeserializable<CMutableTransaction>(fuzzed_data_provider, TX_WITH_WITNESS);
             if (!opt_tx) {
                 return;
             }
-            CDataStream data_stream{SER_NETWORK, fuzzed_data_provider.ConsumeBool() ? PROTOCOL_VERSION : (PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS)};
-            data_stream << *opt_tx;
+            DataStream data_stream;
+            auto allow_witness = (fuzzed_data_provider.ConsumeBool() ? TX_WITH_WITNESS : TX_NO_WITNESS);
+            data_stream << allow_witness(*opt_tx);
             r = HexStr(data_stream);
         },
         [&] {

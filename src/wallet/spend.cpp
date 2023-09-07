@@ -145,7 +145,7 @@ TxSize CalculateMaximumSignedTxSize(const CTransaction &tx, const CWallet *walle
         weight += 4 * WITNESS_SCALE_FACTOR;
 
     // Add the size of the transaction outputs.
-    for (const auto& txo : tx.vout) weight += GetSerializeSize(txo, PROTOCOL_VERSION) * WITNESS_SCALE_FACTOR;
+    for (const auto& txo : tx.vout) weight += GetSerializeSize(txo) * WITNESS_SCALE_FACTOR;
 
     // Add the size of the transaction inputs as if they were signed.
     for (uint32_t i = 0; i < txouts.size(); i++) {
@@ -992,7 +992,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
         CHECK_NONFATAL(IsValidDestination(dest) != scriptChange.empty());
     }
     CTxOut change_prototype_txout(0, scriptChange);
-    coin_selection_params.change_output_size = GetSerializeSize(change_prototype_txout, PROTOCOL_VERSION);
+    coin_selection_params.change_output_size = GetSerializeSize(change_prototype_txout);
 
     // Get size of spending the change output
     int change_spend_size = CalculateMaximumSignedInputSize(change_prototype_txout, &wallet, /*coin_control=*/nullptr);
@@ -1044,7 +1044,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
         CTxOut txout(recipient.nAmount, GetScriptForDestination(recipient.dest));
 
         // Include the fee cost for outputs.
-        coin_selection_params.tx_noinputs_size += ::GetSerializeSize(txout, PROTOCOL_VERSION);
+        coin_selection_params.tx_noinputs_size += ::GetSerializeSize(txout);
 
         if (IsDust(txout, wallet.chain().relayDustFee())) {
             return util::Error{_("Transaction amount too small")};

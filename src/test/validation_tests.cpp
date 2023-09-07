@@ -254,7 +254,7 @@ BOOST_AUTO_TEST_CASE(block_malleation)
             block.vtx.push_back(MakeTransactionRef(mtx));
             block.hashMerkleRoot = block.vtx.back()->GetHash();
             assert(block.vtx.back()->IsCoinBase());
-            assert(GetSerializeSize(block.vtx.back(), PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) == 64);
+            assert(GetSerializeSize(TX_NO_WITNESS(block.vtx.back())) == 64);
         }
         BOOST_CHECK(is_not_mutated(block, /*check_witness_root=*/false));
     }
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(block_malleation)
             hasher.write(Span(reinterpret_cast<const std::byte*>(tx2.GetHash().data()), 32));
             assert(hasher.GetHash() == tx3.GetHash());
             // Verify that tx3 is 64 bytes in size (without witness).
-            assert(GetSerializeSize(tx3, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) == 64);
+            assert(GetSerializeSize(TX_NO_WITNESS(tx3)) == 64);
         }
 
         CBlock block;

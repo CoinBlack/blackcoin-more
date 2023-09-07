@@ -128,8 +128,8 @@ BOOST_AUTO_TEST_CASE(siphash)
     // and the test would be affected by default tx version bumps if not fixed.
     // Blackcoin: use tx.nVersion=2 to avoid mutating tx.nTime
     tx.nVersion = 2;
-    ss << tx;
-    BOOST_CHECK_EQUAL(SipHashUint256(1, 2, ss.GetHash()), 0xade131195b255c8ULL);
+    ss << TX_WITH_WITNESS(tx);
+    BOOST_CHECK_EQUAL(SipHashUint256(1, 2, ss.GetHash()), 0x79751e980c2a0a35ULL);
 
     // Check consistency between CSipHasher and SipHashUint256[Extra].
     FastRandomContext ctx;

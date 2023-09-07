@@ -42,7 +42,7 @@ bool LoadMempool(CTxMemPool& pool, const fs::path& load_path, Chainstate& active
 {
     if (load_path.empty()) return false;
 
-    CAutoFile file{opts.mockable_fopen_function(load_path, "rb"), CLIENT_VERSION};
+    AutoFile file{opts.mockable_fopen_function(load_path, "rb")};
     if (file.IsNull()) {
         LogPrintf("Failed to open mempool file from disk. Continuing anyway.\n");
         return false;
@@ -70,12 +70,12 @@ bool LoadMempool(CTxMemPool& pool, const fs::path& load_path, Chainstate& active
         uint64_t total_txns_to_load;
         file >> total_txns_to_load;
         uint64_t txns_tried = 0;
-        LogInfo("Loading %u mempool transactions from disk...\n", total_txns_to_load);
+        LogPrintf("Loading %u mempool transactions from disk...\n", total_txns_to_load);
         int next_tenth_to_report = 0;
         while (txns_tried < total_txns_to_load) {
             const int percentage_done(100.0 * txns_tried / total_txns_to_load);
             if (next_tenth_to_report < percentage_done / 10) {
-                LogInfo("Progress loading mempool transactions from disk: %d%% (tried %u, %u remaining)\n",
+                LogPrintf("Progress loading mempool transactions from disk: %d%% (tried %u, %u remaining)\n",
                         percentage_done, txns_tried, total_txns_to_load - txns_tried);
                 next_tenth_to_report = percentage_done / 10;
             }
@@ -84,7 +84,7 @@ bool LoadMempool(CTxMemPool& pool, const fs::path& load_path, Chainstate& active
             CTransactionRef tx;
             int64_t nTime;
             int64_t nFeeDelta;
-            file >> tx;
+            file >> TX_WITH_WITNESS(tx);
             file >> nTime;
             file >> nFeeDelta;
 
@@ -168,7 +168,7 @@ bool DumpMempool(const CTxMemPool& pool, const fs::path& dump_path, FopenFn mock
 
     auto mid = SteadyClock::now();
 
-    CAutoFile file{mockable_fopen_function(dump_path + ".new", "wb"), CLIENT_VERSION};
+    AutoFile file{mockable_fopen_function(dump_path + ".new", "wb")};
     if (file.IsNull()) {
         return false;
     }
@@ -186,7 +186,7 @@ bool DumpMempool(const CTxMemPool& pool, const fs::path& dump_path, FopenFn mock
 
         file << (uint64_t)vinfo.size();
         for (const auto& i : vinfo) {
-            file << *(i.tx);
+            file << TX_WITH_WITNESS(*(i.tx));
             file << int64_t{count_seconds(i.m_time)};
             file << int64_t{i.nFeeDelta};
             mapDeltas.erase(i.tx->GetHash());

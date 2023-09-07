@@ -25,7 +25,7 @@ static void DeserializeBlockTest(benchmark::Bench& bench)
 
     bench.unit("block").run([&] {
         CBlock block;
-        stream >> block;
+        stream >> TX_WITH_WITNESS(block);
         bool rewound = stream.Rewind(benchmark::data::block413567.size());
         assert(rewound);
     });
@@ -44,7 +44,7 @@ static void DeserializeAndCheckBlockTest(benchmark::Bench& bench)
 
     bench.unit("block").run([&] {
         CBlock block; // Note that CBlock caches its checked state, so we need to recreate it here
-        stream >> block;
+        stream >> TX_WITH_WITNESS(block);
         bool rewound = stream.Rewind(benchmark::data::block413567.size());
         assert(rewound);
 

@@ -43,7 +43,7 @@ CAmount GetDustThreshold(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
     if (txout.scriptPubKey.IsUnspendable())
         return 0;
 
-    size_t nSize = GetSerializeSize(txout, SER_DISK);
+    size_t nSize = GetSerializeSize(txout);
     int witnessversion = 0;
     std::vector<unsigned char> witnessprogram;
 
