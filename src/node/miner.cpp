@@ -587,6 +587,18 @@ static bool ProcessBlockFound(const CBlock* pblock, NodeContext& m_node)
 #ifdef ENABLE_WALLET
 void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
 {
+    std::string strMintMessage = _("Info: Staking suspended due to locked wallet").translated;
+    std::string strMintSyncMessage = _("Info: Staking suspended while synchronizing wallet").translated;
+    std::string strMintDisabledMessage = _("Info: Staking disabled by 'nostaking' option").translated;
+    std::string strMintBlockMessage = _("Info: Staking suspended due to block creation failure").translated;
+    std::string strMintEmpty = "";
+    if (!gArgs.GetBoolArg("-staking", DEFAULT_STAKE))
+    {
+        strMintWarning = strMintDisabledMessage;
+        LogPrintf("proof-of-stake miner disabled\n");
+        return;
+    }
+
     CConnman* connman = m_node.connman.get();
     LogPrintf("PoSMiner started for proof-of-stake\n");
     util::ThreadRename("blackcoin-stake-miner");
@@ -612,18 +624,6 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
         LogPrintf("Set proof-of-stake timeout: %ums for %u UTXOs\n", pos_timio, vCoins.size());
     }
 
-    std::string strMintMessage = _("Info: Staking suspended due to locked wallet").translated;
-    std::string strMintSyncMessage = _("Info: Staking suspended while synchronizing wallet").translated;
-    std::string strMintDisabledMessage = _("Info: Staking disabled by 'nostaking' option").translated;
-    std::string strMintBlockMessage = _("Info: Staking suspended due to block creation failure").translated;
-    std::string strMintEmpty = "";
-    if (!gArgs.GetBoolArg("-staking", DEFAULT_STAKE))
-    {
-        strMintWarning = strMintDisabledMessage;
-        LogPrintf("proof-of-stake miner disabled\n");
-        return;
-    }
-
     try {
         bool fNeedToClear = false;
         while (EnableStaking()) {
@@ -631,11 +631,6 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
                 return;
             while (pwallet->IsLocked()) {
                 if (ShutdownRequested() || !EnableStaking())
-                    return;
-                if (strMintWarning != strMintMessage) {
-                    strMintWarning = strMintMessage;
-                    uiInterface.NotifyAlertChanged();
-                }
                 fNeedToClear = true;
                 if (!connman->interruptNet.sleep_for(std::chrono::seconds(5)))
                     return;
