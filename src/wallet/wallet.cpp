@@ -4018,6 +4018,10 @@ bool CWallet::CreateCoinStake(ChainstateManager& chainman, const CWallet* pwalle
     CScript scriptPubKeyKernel, scriptPubKeyOut;
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
+        if (!g_txindex) {
+            return error("tx index not available!");
+        }
+
         uint256 blockHash;
         CTransactionRef tx;
         if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
@@ -4078,6 +4082,10 @@ bool CWallet::CreateCoinStake(ChainstateManager& chainman, const CWallet* pwalle
 
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
+        if (!g_txindex) {
+            return error("tx index not available!");
+        }
+
         uint256 blockHash;
         CTransactionRef tx;
         if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
