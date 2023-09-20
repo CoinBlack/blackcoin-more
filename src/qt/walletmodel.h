@@ -154,7 +154,6 @@ public:
     bool isMultiwallet() const;
 
     uint64_t getStakeWeight();
-    uint64_t getLastCoinStakeSearchInterval();
 
     void refresh(bool pk_hash_only = false);
 

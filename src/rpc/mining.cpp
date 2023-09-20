@@ -1096,7 +1096,7 @@ static RPCHelpMan staking()
             if (!fGenerate) {
                 node::InterruptStaking();
                 node::StopStaking();
-                nLastCoinStakeSearchInterval = 0;
+                pwallet->m_last_coin_stake_search_interval = 0;
             }
         }
     }

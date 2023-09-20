@@ -48,7 +48,6 @@ using wallet::COutput;
 using wallet::CCoinControl;
 using wallet::ReserveDestination;
 
-int64_t nLastCoinStakeSearchInterval = 0;
 std::thread m_minter_thread;
 
 namespace node {
@@ -245,7 +244,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
                     *pfPoSCancel = false;
                 }
             }
-            nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
+            pwallet->m_last_coin_stake_search_interval = nSearchTime - nLastCoinStakeSearchTime;
             nLastCoinStakeSearchTime = nSearchTime;
         }
         if (*pfPoSCancel)

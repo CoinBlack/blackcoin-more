@@ -28,8 +28,6 @@ class CBlockIndex;
 class CChainParams;
 class CScript;
 
-extern int64_t nLastCoinStakeSearchInterval;
-
 namespace Consensus { struct Params; };
 
 namespace node {

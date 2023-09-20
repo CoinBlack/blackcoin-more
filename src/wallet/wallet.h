@@ -666,6 +666,7 @@ public:
     // serves to disable the trivial sendmoney when OS account compromised
     // provides no real security
     std::atomic<bool> m_wallet_unlock_staking_only{false};
+    int64_t m_last_coin_stake_search_interval{0};
     CAmount m_reserve_balance{DEFAULT_RESERVE_BALANCE};
     unsigned int m_donation_percentage{DEFAULT_DONATION_PERCENTAGE};
 

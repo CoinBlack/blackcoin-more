@@ -485,6 +485,7 @@ public:
         RemoveWallet(m_context, m_wallet, /*load_on_start=*/false);
     }
     unsigned int getDonationPercentage() override { return m_wallet->m_donation_percentage; }
+    int64_t getLastCoinStakeSearchInterval() override { return m_wallet->m_last_coin_stake_search_interval; }
     bool getWalletUnlockStakingOnly() override { return m_wallet->m_wallet_unlock_staking_only; }
     void setWalletUnlockStakingOnly(bool unlock) override { m_wallet->m_wallet_unlock_staking_only = unlock; }
     bool tryGetStakeWeight(uint64_t& nWeight) override

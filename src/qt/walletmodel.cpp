@@ -22,7 +22,6 @@
 #include <interfaces/node.h>
 #include <key_io.h>
 #include <node/interface_ui.h>
-#include <node/miner.h> // nLastCoinStakeSearchInterval
 #include <psbt.h>
 #include <util/system.h> // for GetBoolArg
 #include <util/translation.h>
@@ -614,11 +613,6 @@ CAmount WalletModel::getAvailableBalance(const CCoinControl* control)
 uint64_t WalletModel::getStakeWeight()
 {
     return nWeight;
-}
-
-uint64_t WalletModel::getLastCoinStakeSearchInterval()
-{
-    return nLastCoinStakeSearchInterval;
 }
 
 bool WalletModel::getWalletUnlockStakingOnly()
