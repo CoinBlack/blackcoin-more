@@ -68,6 +68,8 @@ static void CoinSelection(benchmark::Bench& bench)
         rand,
         /*change_output_size=*/ 34,
         /*change_spend_size=*/ 148,
+        /*effective_feerate=*/ CFeeRate(0),
+        /*discard_feerate=*/ CFeeRate(0),
         /*tx_noinputs_size=*/ 0,
         /*avoid_partial=*/ false,
     };
