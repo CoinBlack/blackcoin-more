@@ -13,4 +13,4 @@
 [2a02:c207:2041:3853::1]:25714
 
 # Onion nodes
-gcf5kl6mpben4jjl72yu53h7ek3c7k7i6oasuqpkzmsyxk3qaxr7fsid.onion:25714
+tzpgz5hg5d2xxipzgy6fuwhkcxun2at3z37bc53k3krerwo4dhwk4xad.onion:25714
