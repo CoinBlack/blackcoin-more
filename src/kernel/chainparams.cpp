@@ -125,7 +125,7 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000003d0c8be7da303f59236");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000003f8e26041f58e2553f9"); //4672084
         consensus.defaultAssumeValid = uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc"); // 4232630
 
         /**
@@ -138,7 +138,7 @@ public:
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x05;
         nDefaultPort = 15714;
-        m_assumed_blockchain_size = 15;
+        m_assumed_blockchain_size = 20;
 
         genesis = CreateGenesisBlock(1393221600, 164482, 0x1e0fffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -178,7 +178,7 @@ public:
                 { 254348, uint256S("0x9bf8d9bd757d3ef23d5906d70567e5f0da93f1e0376588c8d421a95e2421838b")}, // minor network split
                 { 319002, uint256S("0x0011494d03b2cdf1ecfc8b0818f1e0ef7ee1d9e9b3d1279c10d35456bc3899ef")}, // hardfork
                 { 872456, uint256S("0xe4fd321ced1de06213d2e246b150b4bfd8c4aa0989965dce88f2a58668c64860")}, // hardfork
-                {4232630, uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc")},
+                {4232630, uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc")}, // Devfund
             }
         };
 
@@ -187,10 +187,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 ae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc
-            .nTime    = 1668631296,
-            .nTxCount = 13562393,
-            .dTxRate  = 0.030,
+            // Data from RPC: getchaintxstats 40500 bfcda2c7d9301e96c2d5a5c0bfdc373b3f2acf0121bda6259a50bda9a1d6d846
+            .nTime    = 1698137504,
+            .nTxCount = 14448831,
+            .dTxRate  = 0.03011670425305156,
         };
 
         // A vector of p2sh addresses
@@ -247,15 +247,15 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000003aaf405e01eda716e7");
-        consensus.defaultAssumeValid = uint256S("0x9583676625157dc0405bbd48b9220157eeabb7d9460fa234d31b49ea7014de2f"); // 90235
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000429a2e25a9df5acc41"); // 1601588
+        consensus.defaultAssumeValid = uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39"); // 1415393
 
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
         pchMessageStart[2] = 0xc0;
         pchMessageStart[3] = 0xef;
         nDefaultPort = 25714;
-        m_assumed_blockchain_size = 2;
+        m_assumed_blockchain_size = 5;
 
         genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -283,14 +283,14 @@ public:
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_test), std::end(chainparams_seed_test));
 
         fDefaultConsistencyChecks = false;
-        fRequireStandard = false;
+        fRequireStandard = true;
         m_is_test_chain = true;
         m_is_mockable_chain = false;
 
         checkpointData = {
             {
-                {  90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8")},
-                {1415393, uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39")},
+                {  90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8")}, // initial checkpoint
+                {1415393, uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39")}, // remove tx timestamp
             }
         };
 
@@ -299,10 +299,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 9583676625157dc0405bbd48b9220157eeabb7d9460fa234d31b49ea7014de2f
-            .nTime    = 1674153488,
-            .nTxCount = 2833624,
-            .dTxRate  = 0.029,
+            // Data from RPC: getchaintxstats 40500 fe0e780eafef658dda6c7b4dfab83781624fd76c702ccee7cccebecb8c77f189
+            .nTime    = 1698139248,
+            .nTxCount = 3222151,
+            .dTxRate  = 0.02976566447700859,
         };
 
         // A vector of p2sh addresses
