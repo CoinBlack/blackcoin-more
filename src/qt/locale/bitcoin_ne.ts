@@ -210,6 +210,16 @@
         <source>Enter a Bitcoin address (e.g. %1)</source>
         <translation type="unfinished">कृपया बिटकोइन ठेगाना प्रवेश गर्नुहोस् (उदाहरण %1)</translation>
     </message>
+    <message>
+        <source>Inbound</source>
+        <extracomment>An inbound connection from a peer. An inbound connection is a connection initiated by a peer.</extracomment>
+        <translation type="unfinished">भित्री</translation>
+    </message>
+    <message>
+        <source>Outbound</source>
+        <extracomment>An outbound connection to a peer. An outbound connection is a connection initiated by us.</extracomment>
+        <translation type="unfinished">आउटबाउन्ड</translation>
+    </message>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
@@ -452,31 +462,32 @@
     </message>
     </context>
 <context>
+    <name>EditAddressDialog</name>
+    <message>
+        <source>Edit Address</source>
+        <translation type="unfinished">ठेगाना जाँच गर्नुहोस्</translation>
+    </message>
+    <message>
+        <source>&amp;Address</source>
+        <translation type="unfinished">&amp;ठेगाना </translation>
+    </message>
+    <message>
+        <source>Could not unlock wallet.</source>
+        <translation type="unfinished">वालेट अनलक गर्न सकेन</translation>
+    </message>
+    </context>
+<context>
+    <name>FreespaceChecker</name>
+    <message>
+        <source>name</source>
+        <translation type="unfinished">नाम</translation>
+    </message>
+    </context>
+<context>
     <name>Intro</name>
     <message>
         <source>Bitcoin</source>
         <translation type="unfinished">बिटकोइन</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n GB of space available</source>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>(of %n GB needed)</source>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>(%n GB needed for full chain)</source>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
     </message>
     <message numerus="yes">
         <source>%n GB of space available</source>
@@ -528,7 +539,7 @@
     </message>
     <message>
         <source>Unknown…</source>
-        <translation type="unfinished">थाहा नभाको...</translation>
+        <translation type="unfinished">थाहा नभाको</translation>
     </message>
     <message>
         <source>calculating…</source>
@@ -613,6 +624,22 @@
         <translation type="unfinished">ब्यालेन्सहरु</translation>
     </message>
     <message>
+        <source>Total:</source>
+        <translation type="unfinished">सम्पूर्ण:</translation>
+    </message>
+    <message>
+        <source>Your current total balance</source>
+        <translation type="unfinished">तपाईंको हालको सम्पूर्ण ब्यालेन्स</translation>
+    </message>
+    <message>
+        <source>Spendable:</source>
+        <translation type="unfinished">खर्च उपलब्ध:</translation>
+    </message>
+    <message>
+        <source>Recent transactions</source>
+        <translation type="unfinished">भर्खरको ट्राजेक्शनहरू</translation>
+    </message>
+    <message>
         <source>Mined balance in watch-only addresses that has not yet matured</source>
         <translation type="unfinished">अहिलेसम्म परिपक्व नभएको खनन गरिएको, हेर्ने-मात्र ठेगानामा रहेको ब्यालेन्स</translation>
     </message>
@@ -629,7 +656,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">बन्द गर्नुहोस्</translation>
+        <translation type="unfinished">बन्द गर्नुहोस् </translation>
     </message>
     </context>
 <context>
@@ -644,9 +671,33 @@
         <extracomment>Title of Peers Table column which contains the IP/Onion/I2P address of the connected peer.</extracomment>
         <translation type="unfinished">ठेगाना</translation>
     </message>
-    </context>
+    <message>
+        <source>Type</source>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <translation type="unfinished">टाइप गर्नुहोस्</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
+        <translation type="unfinished">नेटवर्क</translation>
+    </message>
+    <message>
+        <source>Inbound</source>
+        <extracomment>An Inbound Connection from a Peer.</extracomment>
+        <translation type="unfinished">भित्री</translation>
+    </message>
+    <message>
+        <source>Outbound</source>
+        <extracomment>An Outbound Connection to a Peer.</extracomment>
+        <translation type="unfinished">आउटबाउन्ड</translation>
+    </message>
+</context>
 <context>
     <name>RPCConsole</name>
+    <message>
+        <source>Network</source>
+        <translation type="unfinished">नेटवर्क</translation>
+    </message>
     <message>
         <source>User Agent</source>
         <translation type="unfinished">प्रयोगकर्ता एजेन्ट</translation>
@@ -654,6 +705,13 @@
     <message>
         <source>Ping Time</source>
         <translation type="unfinished">पिङ समय</translation>
+    </message>
+    </context>
+<context>
+    <name>ReceiveCoinsDialog</name>
+    <message>
+        <source>Could not unlock wallet.</source>
+        <translation type="unfinished">वालेट अनलक गर्न सकेन</translation>
     </message>
     </context>
 <context>
@@ -732,6 +790,10 @@
         <source>Date</source>
         <translation type="unfinished">मिति</translation>
     </message>
+    <message>
+        <source>unknown</source>
+        <translation type="unfinished">थाहा नभयेको</translation>
+    </message>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
@@ -749,6 +811,10 @@
     <message>
         <source>Date</source>
         <translation type="unfinished">मिति</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">टाइप गर्नुहोस्</translation>
     </message>
     <message>
         <source>Label</source>
@@ -769,6 +835,10 @@
     <message>
         <source>Date</source>
         <translation type="unfinished">मिति</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">टाइप गर्नुहोस्</translation>
     </message>
     <message>
         <source>Label</source>

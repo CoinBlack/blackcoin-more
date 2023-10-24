@@ -50,6 +50,10 @@
         <translation type="unfinished">Coin gönderilecek adresi seçiniz</translation>
     </message>
     <message>
+        <source>Choose the address to receive coins with</source>
+        <translation type="unfinished">Coinleri alacak adresi seçin</translation>
+    </message>
+    <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">S&amp;eç</translation>
     </message>
@@ -63,8 +67,7 @@
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Bunlar Bitcoinleriniz için gönderici adreslerinizdir.
-Gönderim yapmadan önce her zaman tutarı ve alıcı adresi kontrol ediniz.</translation>
+        <translation type="unfinished">Bunlar ödemeleri gönderdiğiniz Bitcoin adreslerinizdir. Para göndermeden önce her zaman tutarı ve alıcı adresi kontrol ediniz.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
@@ -3823,6 +3826,10 @@ Cüzdan kilidini aç.</translation>
     <message>
         <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
         <translation type="unfinished">Budama, en düşük değer olan %d MiB'den düşük olarak ayarlanmıştır. Lütfen daha yüksek bir sayı kullanınız.</translation>
+    </message>
+    <message>
+        <source>Prune mode is incompatible with -reindex-chainstate. Use full -reindex instead.</source>
+        <translation type="unfinished">Prune modu -reindex-chainstate ile uyumlu değil. Bunun yerine tam -reindex kullanın.</translation>
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>
