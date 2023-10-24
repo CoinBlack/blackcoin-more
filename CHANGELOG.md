@@ -1,5 +1,12 @@
 # Changelog
 
+## v25.1.0-alpha-1 (2023-10-24)
+- Updated to Bitcoin Core 25.1
+- Removed OpenSSL
+- Implemented maximum witness size policy (Peercoin RFC-0027)
+- Added optimizeutxoset RPC method to simplify splitting coins for efficient staking (Peercoin PR #711)
+- Added a GUI warning if unable to stake
+
 ## v22.1.0-alpha-2 (2023-01-24)
 - Flush orphaned stakes prior to each staking attempt
 - Enabled checkpoints by default
