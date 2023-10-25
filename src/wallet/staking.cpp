@@ -328,12 +328,33 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 {
                     // convert to pay to public key type
                     CKey key;
-                    if (wallet.GetLegacyScriptPubKeyMan()->GetKey(CKeyID(uint160(vSolutions[0])), key))
-                    {
-                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for kernel type=%s\n", GetTxnOutputType(whichType));
-                        break;  // unable to find corresponding public key
+                    if (wallet.IsLegacy()) {
+                        auto scriptPubKeyMan = wallet.GetLegacyScriptPubKeyMan();
+                        if (!scriptPubKeyMan) {
+                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get scriptpubkeyman for kernel type=%s\n", GetTxnOutputType(whichType));
+                            break;  // unable to find corresponding public key
+                        }
+                        if (!scriptPubKeyMan->GetKey(CKeyID(uint160(vSolutions[0])), key))
+                        {
+                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for kernel type=%s\n", GetTxnOutputType(whichType));
+                            break;  // unable to find corresponding public key
+                        }
+                        scriptPubKeyOut << ToByteVector(key.GetPubKey()) << OP_CHECKSIG;
                     }
-                    scriptPubKeyOut << ToByteVector(key.GetPubKey()) << OP_CHECKSIG;
+                    else {
+                        std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(scriptPubKeyKernel);
+                        if (!provider) {
+                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get signing provider for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
+                            break;
+                        }
+                        CKeyID ckey = CKeyID(uint160(vSolutions[0]));
+                        CPubKey pkey;
+                        if (!provider.get()->GetPubKey(ckey, pkey)) {
+                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
+                            break;
+                        }
+                        scriptPubKeyOut << ToByteVector(pkey) << OP_CHECKSIG;
+                    }
                 }
                 else
                     scriptPubKeyOut = scriptPubKeyKernel;
@@ -447,11 +468,28 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
         // Sign
         int nIn = 0;
-        for(const std::pair<const CWalletTx*, unsigned int> &pcoin : vwtxPrev)
+        SignatureData empty;
+
+        if (wallet.IsLegacy()) {
+            for (const std::pair<const CWalletTx*, unsigned int> &pcoin : vwtxPrev)
+            {
+                if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin.first->tx, txNew, nIn++, SIGHASH_ALL, empty))
+                    return error("CreateCoinStake : failed to sign coinstake");
+            }
+        }
+        else
         {
-            SignatureData empty;
-            if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin.first->tx, txNew, nIn++, SIGHASH_ALL, empty))
-                return error("CreateCoinStake : failed to sign coinstake");
+            // Fetch previous transactions (inputs):
+            std::map<COutPoint, Coin> coins;
+            for (const CTxIn& txin : txNew.vin) {
+                coins[txin.prevout]; // Create empty map entry keyed by prevout.
+            }
+            wallet.chain().findCoins(coins);
+            // Script verification errors
+            std::map<int, bilingual_str> input_errors;
+            int nTime = txNew.nTime;
+            bool complete = wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
+            txNew.nTime = nTime;
         }
 
         // Limit size
