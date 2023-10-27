@@ -427,9 +427,9 @@ public:
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 50;
-        consensus.CSVHeight = std::numeric_limits<int>::max();
+        consensus.CSVHeight = 1;
         consensus.SegwitHeight = std::numeric_limits<int>::max();
-        consensus.MinBIP9WarningHeight = std::numeric_limits<int>::max();
+        consensus.MinBIP9WarningHeight = 0;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
