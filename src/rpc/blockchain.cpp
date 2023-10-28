@@ -1697,7 +1697,7 @@ static RPCHelpMan getblockstats()
 {
     return RPCHelpMan{"getblockstats",
                 "\nCompute per block statistics for a given window. All amounts are in satoshis.\n"
-                "It won't work for some heights with pruning.\n",
+                "Block subsidy won't be shown correctly for proof-of-stake blocks with dynamic reward (before PoSv3).\n",
                 {
                     {"hash_or_height", RPCArg::Type::NUM, RPCArg::Optional::NO, "The block hash or height of the target block",
                      RPCArgOptions{
