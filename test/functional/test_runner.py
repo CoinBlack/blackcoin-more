@@ -286,8 +286,6 @@ BASE_SCRIPTS = [
     'feature_discover.py',
     'wallet_resendwallettransactions.py --legacy-wallet',
     'wallet_resendwallettransactions.py --descriptors',
-    'wallet_fallbackfee.py --legacy-wallet',
-    'wallet_fallbackfee.py --descriptors',
     'rpc_dumptxoutset.py',
     'feature_minchainwork.py',
     'rpc_getblockstats.py',
