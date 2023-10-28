@@ -613,9 +613,12 @@ void PoSMiner(std::shared_ptr<CWallet> pwallet, NodeContext& m_node)
     unsigned int pos_timio;
     {
         LOCK2(pwallet->cs_wallet, cs_main);
-        bilingual_str dest_err;
-        if (!reservedest.GetReservedDestination(true))
-            throw std::runtime_error("Error: Keypool ran out, please call keypoolrefill first");
+        auto op_dest = reservedest.GetReservedDestination(true);
+
+        if (!op_dest)
+            throw std::runtime_error("Error: Keypool ran out, please call keypoolrefill first.");
+
+        dest = *op_dest;
 
         std::vector<std::pair<const CWalletTx*, unsigned int> > vCoins;
         CCoinControl coincontrol;
