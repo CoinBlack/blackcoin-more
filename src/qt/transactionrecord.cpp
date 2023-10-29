@@ -34,7 +34,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
     CAmount nCredit = wtx.credit;
     CAmount nDebit = wtx.debit;
     CAmount nNet = nCredit - nDebit;
-    uint256 hash = wtx.tx->GetHash(), hashPrev;
+    uint256 hash = wtx.tx->GetHash();
     std::map<std::string, std::string> mapValue = wtx.value_map;
 
     if (nNet > 0 || wtx.is_coinbase || wtx.is_coinstake)
@@ -42,13 +42,6 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
         //
         // Credit
         //
-        CAmount nReward = -nDebit;
-        for(unsigned int j = 0; j < wtx.tx->vout.size(); j++)
-        {
-            if (wtx.tx->vout[j].scriptPubKey == wtx.tx->vout[1].scriptPubKey)
-                nReward += wtx.tx->vout[j].nValue;
-        }
-
         for(unsigned int i = 0; i < wtx.tx->vout.size(); i++)
         {
             const CTxOut& txout = wtx.tx->vout[i];
@@ -56,8 +49,16 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
             if(mine)
             {
                 TransactionRecord sub(hash, nTime);
-                sub.idx = i; // vout index
-                sub.credit = txout.nValue;
+                if (wtx.is_coinstake) // Combine into single output for coinstake
+                {
+                    sub.idx = 1; // vout index
+                    sub.credit = nNet;
+                }
+                else
+                {
+                    sub.idx = i; // vout index
+                    sub.credit = txout.nValue;
+                }
                 sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
                 if (wtx.txout_address_is_mine[i])
                 {
@@ -76,18 +77,16 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
                     // Generated
                     sub.type = TransactionRecord::Generated;
                 }
-                if (wtx.is_coinstake)
+                else if (wtx.is_coinstake)
                 {
-                    // Generated
+                    // Staked
                     sub.type = TransactionRecord::Staked;
-
-                	if (hashPrev == hash)
-                		continue; // last coinstake output
-                	sub.credit = nReward;
-                	hashPrev = hash;
                 }
 
                 parts.append(sub);
+
+                if (wtx.is_coinstake)
+                    break; // Single output for coinstake
             }
         }
     }
