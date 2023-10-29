@@ -71,7 +71,7 @@ static RPCHelpMan getstakinginfo()
     int64_t nTargetSpacing = consensusParams.nTargetSpacing;
     uint64_t nExpectedTime = staking ? 1.0455 * nTargetSpacing * nNetworkWeight / nWeight : 0;
 
-    obj.pushKV("enabled", node::CanStake());
+    obj.pushKV("enabled", pwallet->m_enabled_staking.load());
     obj.pushKV("staking", staking);
 
     obj.pushKV("blocks", active_chain.Height());
@@ -89,6 +89,50 @@ static RPCHelpMan getstakinginfo()
     obj.pushKV("chain", Params().NetworkIDString());
     obj.pushKV("warnings", GetWarnings(false).original);
     return obj;
+},
+    };
+}
+
+static RPCHelpMan staking()
+{
+    return RPCHelpMan{"staking",
+            "Gets or sets the current staking configuration.\n"
+            "When called without an argument, returns the current status of staking.\n"
+            "When called with an argument, enables or disables staking.\n",
+            {
+                {"generate", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "To enable or disable staking."},
+
+            },
+            RPCResult{
+                RPCResult::Type::OBJ, "", "",
+                {
+                    {RPCResult::Type::BOOL, "staking", "if staking is active or not. false: inactive, true: active"},
+                }
+            },
+            RPCExamples{
+                HelpExampleCli("staking", "true")
+                + HelpExampleRpc("staking", "true")
+            },
+            [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
+{
+    std::shared_ptr<CWallet> const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!pwallet) return NullUniValue;
+
+    if (request.params.size() > 0)
+    {
+        if (request.params[0].get_bool() && node::CanStake())
+        {
+            if (!pwallet->m_enabled_staking)
+                StartStake(*pwallet);
+        }
+        else {
+            StopStake(*pwallet);
+        }
+    }
+
+    UniValue result(UniValue::VOBJ);
+    result.pushKV("staking", pwallet->m_enabled_staking.load());
+    return result;
 },
     };
 }
@@ -118,7 +162,6 @@ static RPCHelpMan reservebalance()
             + HelpExampleCli("reservebalance", "")			},
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
-
     std::shared_ptr<CWallet> const pwallet = GetWalletForJSONRPCRequest(request);
     if (!pwallet) return NullUniValue;
 
@@ -159,6 +202,7 @@ static const CRPCCommand commands[] =
   //  ------------------    ------------------------
     { "staking",            &getstakinginfo,                 },
     { "staking",            &reservebalance,                 },
+    { "staking",            &staking,                        },
 };
 // clang-format on
     return commands;

@@ -1562,19 +1562,22 @@ void BitcoinGUI::updateStakingIcon()
     else
     {
         labelStakingIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/staking_off").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-
-        if (m_node.getNodeCount(ConnectionDirection::Both) == 0)
-            labelStakingIcon->setToolTip(tr("Not staking because wallet is offline"));
-        else if (m_node.isInitialBlockDownload())
-            labelStakingIcon->setToolTip(tr("Not staking because wallet is syncing"));
-        else if (!walletModel->wallet().hasPrivateKeys())
-            labelStakingIcon->setToolTip(tr("Not staking because private keys are disabled"));
-        else if (!nWeight)
-            labelStakingIcon->setToolTip(tr("Not staking because you don't have mature coins"));
-		else if (walletModel->wallet().isLocked())
-            labelStakingIcon->setToolTip(tr("Not staking because wallet is locked"));
+        if (walletModel->wallet().getEnabledStaking()) {
+            if (m_node.getNodeCount(ConnectionDirection::Both) == 0)
+                labelStakingIcon->setToolTip(tr("Not staking because wallet is offline"));
+            else if (m_node.isInitialBlockDownload())
+                labelStakingIcon->setToolTip(tr("Not staking because wallet is syncing"));
+            else if (!walletModel->wallet().hasPrivateKeys())
+                labelStakingIcon->setToolTip(tr("Not staking because private keys are disabled"));
+            else if (!nWeight)
+                labelStakingIcon->setToolTip(tr("Not staking because you don't have mature coins"));
+            else if (walletModel->wallet().isLocked())
+                labelStakingIcon->setToolTip(tr("Not staking because wallet is locked"));
+            else
+                labelStakingIcon->setToolTip(tr("Not staking"));
+        }
         else
-            labelStakingIcon->setToolTip(tr("Not staking"));
+            labelStakingIcon->setToolTip(tr("Not staking because staking is disabled"));
     }
 }
 #endif

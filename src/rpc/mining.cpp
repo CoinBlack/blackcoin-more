@@ -1057,59 +1057,6 @@ static RPCHelpMan submitheader()
     };
 }
 
-// Blackcoin: staking RPC
-// Blackcoin ToDo: avoid segfault when running `staking false`
-/*
-static RPCHelpMan staking()
-{
-    return RPCHelpMan{"staking",
-            "Gets or sets the current staking configuration.\n"
-            "When called without an argument, returns the current status of staking.\n"
-            "When called with an argument, enables or disables staking.\n",
-            {
-                {"generate", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "To enable or disable staking."},
-
-            },
-            RPCResult{
-                RPCResult::Type::OBJ, "", "",
-                {
-                    {RPCResult::Type::BOOL, "staking", "if staking is active or not. false: inactive, true: active"},
-                }
-            },
-            RPCExamples{
-                HelpExampleCli("staking", "true")
-                + HelpExampleRpc("staking", "true")
-            },
-            [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
-{
-    bool fGenerate = request.params[0].isNull() ? node::CanStake() : request.params[0].get_bool();
-
-#ifdef ENABLE_WALLET
-    if (!request.params[0].isNull()) {
-        NodeContext& node = EnsureAnyNodeContext(request.context);
-
-        if (node.wallet_loader->getWallets().size()) {
-            std::shared_ptr<CWallet> tempWallet;
-            tempWallet = std::shared_ptr<CWallet>(node.wallet_loader->getWallets()[0]->wallet());
-            node::MinePoS(fGenerate, tempWallet, node);
-
-            if (!fGenerate) {
-                node::InterruptStaking();
-                node::StopStaking();
-                pwallet->m_last_coin_stake_search_interval = 0;
-            }
-        }
-    }
-#endif
-
-    UniValue result(UniValue::VOBJ);
-    result.pushKV("generate", fGenerate);
-    return result;
-},
-    };
-}
-*/
-
 // Blackcoin: checkkernel RPC
 // Blackcoin ToDo: check and fix if needed
 /*
@@ -1276,7 +1223,6 @@ void RegisterMiningRPCCommands(CRPCTable& t)
         {"hidden", &generate},
 
         /*
-        {"staking", &staking},
         {"staking", &checkkernel},
         */
     };
