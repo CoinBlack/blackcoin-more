@@ -790,6 +790,17 @@ public:
         const CBlockIndex* tip = Assert(m_node.chainman)->ActiveChain().Tip();
         return DeploymentActiveAfter(tip, *m_node.chainman, Consensus::DEPLOYMENT_TAPROOT);
     }
+    CBlockIndex* getTip() const override
+    {
+        LOCK(::cs_main);
+        CBlockIndex* tip = Assert(m_node.chainman)->ActiveChain().Tip();
+        return tip;
+    }
+    CCoinsViewCache& getCoinsTip() override
+    {
+        LOCK(::cs_main);
+        return chainman().ActiveChainstate().CoinsTip();
+    }
     size_t getNodeCount(ConnectionDirection flags) override
     {
         return Assert(m_node.connman) ? m_node.connman->GetNodeCount(flags) : 0;
@@ -806,7 +817,10 @@ public:
     {
         StopStake(wallet);
     }
-
+    uint64_t getStakeWeight(const wallet::CWallet& wallet) override
+    {
+        return GetStakeWeight(wallet);
+    }
     Span<const CRPCCommand> getStakingRPCCommands() override
     {
         return wallet::GetStakingRPCCommands();

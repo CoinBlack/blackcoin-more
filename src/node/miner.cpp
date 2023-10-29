@@ -237,7 +237,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         int64_t nSearchTime = txCoinStake.nTime; // search to current time
 
         if (nSearchTime > nLastCoinStakeSearchTime) {
-            if (pwallet->CreateCoinStake(m_chainstate.m_chainman, pwallet, pblock->nBits, 1, txCoinStake, nFees)) {
+            if (wallet::CreateCoinStake(*pwallet, pblock->nBits, 1, txCoinStake, nFees)) {
                 if (txCoinStake.nTime >= pindexPrev->GetMedianTimePast()+1) {
                     // Make the coinbase tx empty in case of proof of stake
                     coinbaseTx.vout[0].SetEmpty();

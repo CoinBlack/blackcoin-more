@@ -88,11 +88,6 @@ CoinsResult AvailableCoins(const CWallet& wallet,
                            std::optional<CFeeRate> feerate = std::nullopt,
                            const CoinFilterParams& params = {}) EXCLUSIVE_LOCKS_REQUIRED(wallet.cs_wallet);
 
-void AvailableCoinsForStaking(const CWallet& wallet,
-                           std::vector<std::pair<const CWalletTx*, unsigned int> >& vCoins,
-                           const CCoinControl* coinControl = nullptr,
-                           const CoinFilterParams& params = {}) EXCLUSIVE_LOCKS_REQUIRED(wallet.cs_wallet);
-
 /**
  * Wrapper function for AvailableCoins which skips the `feerate` and `CoinFilterParams::only_spendable` parameters. Use this function
  * to list all available coins (e.g. listunspent RPC) while not intending to fund a transaction.

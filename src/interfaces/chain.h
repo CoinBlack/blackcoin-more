@@ -34,6 +34,8 @@ struct NodeContext;
 } // namespace node
 class ChainstateManager;
 class CTxMemPool;
+class CBlockIndex;
+class CCoinsViewCache;
 
 #ifdef ENABLE_WALLET
 namespace wallet {
@@ -324,6 +326,12 @@ public:
     //! accessible across processes.
     virtual node::NodeContext* context() { return nullptr; }
 
+    //! Get chain tip
+    virtual CBlockIndex* getTip() const = 0;
+
+    //! Get coins tip.
+    virtual CCoinsViewCache& getCoinsTip() = 0;
+
     //! Get number of connections.
     virtual size_t getNodeCount(ConnectionDirection flags) = 0;
 
@@ -333,6 +341,9 @@ public:
 
     //! Stop staking.
     virtual void stopStake(wallet::CWallet& wallet) = 0;
+
+    //! Get stake weight.
+    virtual uint64_t getStakeWeight(const wallet::CWallet& wallet) = 0;
 
     //! Get staking RPC commands.
     virtual Span<const CRPCCommand> getStakingRPCCommands() = 0;
