@@ -223,9 +223,6 @@ void Interrupt(NodeContext& node)
     InterruptREST();
     InterruptTorControl();
     InterruptMapPort();
-#ifdef ENABLE_WALLET
-    node::InterruptStaking();
-#endif
     if (node.connman)
         node.connman->Interrupt();
     if (g_txindex) {
@@ -250,6 +247,16 @@ void Shutdown(NodeContext& node)
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
     util::ThreadRename("shutoff");
+
+#ifdef ENABLE_WALLET
+    if (node.wallet_loader && node.wallet_loader->context()) {
+        // Force stop the stakers before any other components
+        for (const std::shared_ptr<wallet::CWallet>& pwallet : GetWallets(*node.wallet_loader->context())) {
+            pwallet->StopStake();
+        }
+    }
+#endif
+
     if (node.mempool) node.mempool->AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -260,9 +267,6 @@ void Shutdown(NodeContext& node)
         client->flush();
     }
     StopMapPort();
-#ifdef ENABLE_WALLET
-    node::StopStaking();
-#endif
 
     // Because these depend on each-other, we make sure that neither can be
     // using the other before destroying them.
@@ -1872,14 +1876,6 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
 
 #if HAVE_SYSTEM
     StartupNotify(args);
-#endif
-
-#ifdef ENABLE_WALLET
-    if (node.wallet_loader->getWallets().size()) {
-        bool fGenerate = gArgs.GetBoolArg("-staking", node::DEFAULT_STAKE);
-        walletTmp = std::shared_ptr<CWallet>(node.wallet_loader->getWallets()[0]->wallet());
-        node::MinePoS(fGenerate, walletTmp, node);
-    }
 #endif
 
     return true;

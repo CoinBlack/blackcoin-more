@@ -418,6 +418,9 @@ public:
 
     ~CWallet()
     {
+        // Stop stake
+        StopStake();
+
         // Should not have slots connected at this point.
         assert(NotifyUnload.empty());
     }
@@ -669,6 +672,8 @@ public:
     int64_t m_last_coin_stake_search_interval{0};
     CAmount m_reserve_balance{DEFAULT_RESERVE_BALANCE};
     unsigned int m_donation_percentage{DEFAULT_DONATION_PERCENTAGE};
+    std::atomic<bool> m_enabled_staking{false};
+    std::atomic<bool> m_stop_staking_thread{false};
 
     /** Number of pre-generated keys/scripts by each spkm (part of the look-ahead process, used to detect payments) */
     int64_t m_keypool_size{DEFAULT_KEYPOOL_SIZE};
@@ -991,6 +996,18 @@ public:
     //! Adds the ScriptPubKeyMans given in MigrationData to this wallet, removes LegacyScriptPubKeyMan,
     //! and where needed, moves tx and address book entries to watchonly_wallet or solvable_wallet
     bool ApplyMigrationData(MigrationData& data, bilingual_str& error) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
+
+    /* Start staking */
+    void StartStake();
+
+    /* Stop staking */
+    void StopStake();
+
+    /* Is staking closing */
+    bool IsStakeClosing();
+
+    /* Staking thread */
+    std::vector<std::thread>* stakingThread = nullptr;
 
     //! Whether the (external) signer performs R-value signature grinding
     bool CanGrindR() const;

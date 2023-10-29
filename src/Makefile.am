@@ -338,6 +338,7 @@ BITCOIN_CORE_H = \
   wallet/salvage.h \
   wallet/scriptpubkeyman.h \
   wallet/spend.h \
+  wallet/staking.h \
   wallet/sqlite.h \
   wallet/transaction.h \
   wallet/types.h \
@@ -451,7 +452,8 @@ libbitcoin_node_a_SOURCES = \
 
 if ENABLE_WALLET
 libbitcoin_node_a_SOURCES += wallet/init.cpp \
-  wallet/rpc/staking.cpp
+  wallet/rpc/staking.cpp \
+  wallet/staking.cpp
 libbitcoin_node_a_CPPFLAGS += $(BDB_CPPFLAGS)
 endif
 if !ENABLE_WALLET

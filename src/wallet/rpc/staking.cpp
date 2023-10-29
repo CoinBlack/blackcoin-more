@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2023 The Blackcoin developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-lice
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <rpc/util.h>
 #include <rpc/blockchain.h>
@@ -54,7 +54,7 @@ static RPCHelpMan getstakinginfo()
     {
         LOCK(pwallet->cs_wallet);
         nWeight = pwallet->GetStakeWeight();
-        lastCoinStakeSearchInterval = pwallet->m_last_coin_stake_search_interval;
+        lastCoinStakeSearchInterval = pwallet->m_enabled_staking ? pwallet->m_last_coin_stake_search_interval : 0;
     }
 
     const CTxMemPool& mempool = pwallet->chain().mempool();
@@ -71,7 +71,7 @@ static RPCHelpMan getstakinginfo()
     int64_t nTargetSpacing = consensusParams.nTargetSpacing;
     uint64_t nExpectedTime = staking ? 1.0455 * nTargetSpacing * nNetworkWeight / nWeight : 0;
 
-    obj.pushKV("enabled", node::EnableStaking());
+    obj.pushKV("enabled", node::CanStake());
     obj.pushKV("staking", staking);
 
     obj.pushKV("blocks", active_chain.Height());

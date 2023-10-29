@@ -6,6 +6,9 @@
 // PoSMiner by Peercoin
 // Copyright (c) 2020-2022 The Peercoin developers
 
+// Staking start/stop algos by Qtum
+// Copyright (c) 2016-2023 The Qtum developers
+
 #ifndef BITCOIN_NODE_MINER_H
 #define BITCOIN_NODE_MINER_H
 
@@ -14,6 +17,9 @@
 #include <txmempool.h>
 #include <node/context.h>
 #include <wallet/wallet.h>
+#ifdef ENABLE_WALLET
+#include <wallet/staking.h>
+#endif
 
 #include <memory>
 #include <optional>
@@ -178,7 +184,7 @@ public:
     explicit BlockAssembler(Chainstate& chainstate, const CTxMemPool* mempool, const Options& options);
 
     /** Construct a new block template with coinbase to scriptPubKeyIn */
-    std::unique_ptr<CBlockTemplate> CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet = nullptr, bool* pfPoSCancel = nullptr, NodeContext* m_node = nullptr, int64_t* pFees = 0);
+    std::unique_ptr<CBlockTemplate> CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet = nullptr, bool* pfPoSCancel = nullptr, int64_t* pFees = 0);
 
     inline static std::optional<int64_t> m_last_block_num_txs{};
     inline static std::optional<int64_t> m_last_block_weight{};
@@ -217,11 +223,13 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
 /** Modify the extranonce in a block */
 void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
 
+#ifdef ENABLE_WALLET
+/** Check if staking is enabled */
+bool CanStake();
+
 /** Mine proof-of-stake blocks */
-void MinePoS(bool fGenerate, std::shared_ptr<CWallet> pwallet, NodeContext& m_node);
-bool EnableStaking();
-void InterruptStaking();
-void StopStaking();
+void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::vector<std::thread>*& stakingThread);
+#endif
 
 /** Update an old GenerateCoinbaseCommitment from CreateNewBlock after the block txs have changed */
 void RegenerateCommitments(CBlock& block, ChainstateManager& chainman);

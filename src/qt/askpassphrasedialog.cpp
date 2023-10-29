@@ -12,6 +12,7 @@
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 #include <qt/walletmodel.h>
+#include <node/miner.h>
 
 #include <support/allocators/secure.h>
 
@@ -176,6 +177,11 @@ void AskPassphraseDialog::accept()
                                              "passphrase to avoid this issue in the future."));
                 }
             } else {
+                if (UnlockStaking == mode) {
+                    // Start the staking if enabled on the machine
+                    bool staking = node::CanStake();
+                    model->wallet().setEnabledStaking(staking);
+                }
                 model->setWalletUnlockStakingOnly(ui->stakingCheckBox->isChecked());
                 QDialog::accept(); // Success
             }

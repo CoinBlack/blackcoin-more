@@ -3389,6 +3389,9 @@ void CWallet::postInitProcess()
 
     // Update wallet transactions with current mempool transactions.
     WITH_LOCK(cs_wallet, chain().requestMempoolTransactions(*this));
+
+    // Start mine proof-of-stake blocks in the background
+    StartStake();
 }
 
 bool CWallet::BackupWallet(const std::string& strDest) const
@@ -4698,4 +4701,21 @@ util::Result<MigrationResult> MigrateLegacyToDescriptor(const std::string& walle
     }
     return res;
 }
+
+void CWallet::StartStake() {
+    if (HaveChain()) {
+        chain().startStake(*this);
+    }
+}
+
+void CWallet::StopStake() {
+    if (HaveChain()) {
+        chain().stopStake(*this);
+    }
+}
+
+bool CWallet::IsStakeClosing() {
+    return chain().shutdownRequested() || m_stop_staking_thread;
+}
+
 } // namespace wallet

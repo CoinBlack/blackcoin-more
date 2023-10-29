@@ -61,6 +61,8 @@
 
 #ifdef ENABLE_WALLET
 #include <wallet/rpc/staking.h>
+#include <wallet/staking.h>
+#include <node/miner.h>
 #endif
 
 using interfaces::BlockTip;
@@ -788,8 +790,23 @@ public:
         const CBlockIndex* tip = Assert(m_node.chainman)->ActiveChain().Tip();
         return DeploymentActiveAfter(tip, *m_node.chainman, Consensus::DEPLOYMENT_TAPROOT);
     }
+    size_t getNodeCount(ConnectionDirection flags) override
+    {
+        return Assert(m_node.connman) ? m_node.connman->GetNodeCount(flags) : 0;
+    }
 
 #ifdef ENABLE_WALLET
+    void startStake(wallet::CWallet& wallet) override
+    {
+        if (node::CanStake()) {
+            StartStake(wallet);
+        }
+    }
+    void stopStake(wallet::CWallet& wallet) override
+    {
+        StopStake(wallet);
+    }
+
     Span<const CRPCCommand> getStakingRPCCommands() override
     {
         return wallet::GetStakingRPCCommands();

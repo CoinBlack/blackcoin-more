@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2023 The Blackcoin developers
 // Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-li
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BLACKCOIN_WALLET_RPC_STAKING_H
 #define BLACKCOIN_WALLET_RPC_STAKING_H

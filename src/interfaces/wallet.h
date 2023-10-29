@@ -263,6 +263,12 @@ public:
     //! Set wallet unlock for staking only
     virtual void setWalletUnlockStakingOnly(bool unlock) = 0;
 
+    //! Set wallet enabled for staking
+    virtual void setEnabledStaking(bool enabled) = 0;
+
+    //! Get wallet enabled for staking
+    virtual bool getEnabledStaking() = 0;
+
     //! Try to get the stake weight
     virtual bool tryGetStakeWeight(uint64_t& nWeight) = 0;
 

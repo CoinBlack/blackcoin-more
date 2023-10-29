@@ -8,6 +8,7 @@
 #include <blockfilter.h>
 #include <primitives/transaction.h> // For CTransactionRef
 #include <util/settings.h>          // For util::SettingsValue
+#include <netbase.h>                // For ConnectionDirection
 
 #include <functional>
 #include <memory>
@@ -33,6 +34,12 @@ struct NodeContext;
 } // namespace node
 class ChainstateManager;
 class CTxMemPool;
+
+#ifdef ENABLE_WALLET
+namespace wallet {
+class CWallet;
+} // namespace wallet
+#endif
 
 namespace interfaces {
 
@@ -310,17 +317,26 @@ public:
     //! Check if Taproot has activated
     virtual bool isTaprootActive() const = 0;
 
-#ifdef ENABLE_WALLET
-    //! Get staking RPC commands.
-    virtual Span<const CRPCCommand> getStakingRPCCommands() = 0;
-#endif
-
     //! Return true if an assumed-valid chain is in use.
     virtual bool hasAssumedValidChain() = 0;
 
     //! Get internal node context. Useful for testing, but not
     //! accessible across processes.
     virtual node::NodeContext* context() { return nullptr; }
+
+    //! Get number of connections.
+    virtual size_t getNodeCount(ConnectionDirection flags) = 0;
+
+#ifdef ENABLE_WALLET
+    //! Start staking.
+    virtual void startStake(wallet::CWallet& wallet) = 0;
+
+    //! Stop staking.
+    virtual void stopStake(wallet::CWallet& wallet) = 0;
+
+    //! Get staking RPC commands.
+    virtual Span<const CRPCCommand> getStakingRPCCommands() = 0;
+#endif
 };
 
 //! Interface to let node manage chain clients (wallets, or maybe tools for

@@ -146,11 +146,11 @@ static bool GenerateBlock(ChainstateManager& chainman, CBlock& block, uint64_t& 
     return true;
 }
 
-static UniValue generateBlocks(ChainstateManager& chainman, const CTxMemPool& mempool, const CScript& coinbase_script, int nGenerate, uint64_t nMaxTries, NodeContext* m_node)
+static UniValue generateBlocks(ChainstateManager& chainman, const CTxMemPool& mempool, const CScript& coinbase_script, int nGenerate, uint64_t nMaxTries)
 {
     UniValue blockHashes(UniValue::VARR);
     while (nGenerate > 0 && !ShutdownRequested()) {
-        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler{chainman.ActiveChainstate(), &mempool}.CreateNewBlock(coinbase_script, nullptr, nullptr, m_node));
+        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler{chainman.ActiveChainstate(), &mempool}.CreateNewBlock(coinbase_script, nullptr, nullptr));
         if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
 
@@ -234,7 +234,7 @@ static RPCHelpMan generatetodescriptor()
     const CTxMemPool& mempool = EnsureMemPool(node);
     ChainstateManager& chainman = EnsureChainman(node);
 
-    return generateBlocks(chainman, mempool, coinbase_script, num_blocks, max_tries, &node);
+    return generateBlocks(chainman, mempool, coinbase_script, num_blocks, max_tries);
 },
     };
 }
@@ -282,7 +282,7 @@ static RPCHelpMan generatetoaddress()
 
     CScript coinbase_script = GetScriptForDestination(destination);
 
-    return generateBlocks(chainman, mempool, coinbase_script, num_blocks, max_tries, &node);
+    return generateBlocks(chainman, mempool, coinbase_script, num_blocks, max_tries);
 },
     };
 }
@@ -765,7 +765,7 @@ static RPCHelpMan getblocktemplate()
 
         // Create new block
         CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = BlockAssembler{active_chainstate, &mempool}.CreateNewBlock(scriptDummy, nullptr, nullptr, &node);
+        pblocktemplate = BlockAssembler{active_chainstate, &mempool}.CreateNewBlock(scriptDummy, nullptr, nullptr);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
 
@@ -1082,7 +1082,7 @@ static RPCHelpMan staking()
             },
             [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
-    bool fGenerate = request.params[0].isNull() ? node::EnableStaking() : request.params[0].get_bool();
+    bool fGenerate = request.params[0].isNull() ? node::CanStake() : request.params[0].get_bool();
 
 #ifdef ENABLE_WALLET
     if (!request.params[0].isNull()) {
@@ -1231,7 +1231,7 @@ static RPCHelpMan checkkernel()
         std::unique_ptr<CBlockTemplate> pblocktemplate;
         bool fPoSCancel = false;
         int64_t nFees;
-        pblocktemplate = BlockAssembler{active_chainstate, &mempool}.CreateNewBlock(CScript(), pwallet, &fPoSCancel, &node, &nFees);
+        pblocktemplate = BlockAssembler{active_chainstate, &mempool}.CreateNewBlock(CScript(), pwallet, &fPoSCancel, &nFees);
 
         if (!pblocktemplate)
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
