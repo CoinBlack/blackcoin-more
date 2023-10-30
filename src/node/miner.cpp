@@ -624,18 +624,6 @@ bool CanStake() {
 // peercoin
 void PoSMiner(wallet::CWallet *pwallet)
 {
-    std::string strMintMessage = _("Info: Staking suspended due to locked wallet").translated;
-    std::string strMintSyncMessage = _("Info: Staking suspended while synchronizing wallet").translated;
-    std::string strMintDisabledMessage = _("Info: Staking disabled by 'nostaking' option").translated;
-    std::string strMintBlockMessage = _("Info: Staking suspended due to block creation failure").translated;
-    std::string strMintEmpty = "";
-    if (!CanStake())
-    {
-        strMintWarning = strMintDisabledMessage;
-        pwallet->WalletLogPrintf("PoSMiner disabled\n");
-        return;
-    }
-
     pwallet->WalletLogPrintf("PoSMiner started for proof-of-stake\n");
     util::ThreadRename(strprintf("blackcoin-stake-miner-%s", pwallet->GetName()));
 
@@ -666,11 +654,11 @@ void PoSMiner(wallet::CWallet *pwallet)
     try {
         bool fNeedToClear = false;
         while (CanStake()) {
-            if (pwallet->IsStakeClosing())
+            if (pwallet->IsStakeClosing() || !CanStake())
                 return;
             while (pwallet->IsLocked()) {
                 if (pwallet->IsStakeClosing() || !CanStake())
-                fNeedToClear = true;
+                    fNeedToClear = true;
                 if (!SleepStaker(pwallet, 5000))
                     return;
             }
@@ -681,10 +669,6 @@ void PoSMiner(wallet::CWallet *pwallet)
                 while (pwallet->chain().getNodeCount(ConnectionDirection::Both) == 0 || pwallet->chain().chainman().ActiveChainstate().IsInitialBlockDownload()) {
                     if (pwallet->IsStakeClosing() || !CanStake())
                         return;
-                    if (strMintWarning != strMintSyncMessage) {
-                        strMintWarning = strMintSyncMessage;
-                        uiInterface.NotifyAlertChanged();
-                    }
                     fNeedToClear = true;
                     if (!SleepStaker(pwallet, 10000))
                         return;
@@ -696,17 +680,11 @@ void PoSMiner(wallet::CWallet *pwallet)
                 if (pwallet->IsStakeClosing() || !CanStake())
                     return;
                 pwallet->WalletLogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().chainman().ActiveChain().Tip()));
-                if (strMintWarning != strMintSyncMessage) {
-                    strMintWarning = strMintSyncMessage;
-                    uiInterface.NotifyAlertChanged();
-                }
                 fNeedToClear = true;
                 if (!SleepStaker(pwallet, 10000))
                     return;
             }
             if (fNeedToClear) {
-                strMintWarning = strMintEmpty;
-                uiInterface.NotifyAlertChanged();
                 fNeedToClear = false;
             }
 
@@ -739,8 +717,6 @@ void PoSMiner(wallet::CWallet *pwallet)
                         return;
                     continue;
                 }
-                strMintWarning = strMintBlockMessage;
-                uiInterface.NotifyAlertChanged();
                 pwallet->WalletLogPrintf("Error in PoSMiner: Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
                 if (!SleepStaker(pwallet, 10000))
                    return;
