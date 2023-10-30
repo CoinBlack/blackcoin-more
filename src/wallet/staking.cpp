@@ -21,13 +21,18 @@ void StakeCoins(CWallet& wallet, bool fStake) {
 }
 
 void StartStake(CWallet& wallet) {
-    if (!WITH_LOCK(wallet.cs_wallet, return wallet.GetKeyPoolSize())) {
-        wallet.WalletLogPrintf("Error: Keypool is empty, please make sure the wallet contains keys and call keypoolrefill before restarting the staking thread\n");
+    if (wallet.IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS)) {
+        wallet.WalletLogPrintf("Wallet can't contain any private keys - staking disabled\n");
         wallet.m_enabled_staking = false;
     }
-    else if (wallet.IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS)) {
+    else if (wallet.IsWalletFlagSet(WALLET_FLAG_BLANK_WALLET)) {
+        wallet.WalletLogPrintf("Wallet is blank - staking disabled\n");
         wallet.m_enabled_staking = false;
-    }  
+    }
+    else if (!WITH_LOCK(wallet.cs_wallet, return wallet.GetKeyPoolSize())) {
+        wallet.WalletLogPrintf("Error: Keypool is empty, please make sure the wallet contains keys, call keypoolrefill and restart the staking thread\n");
+        wallet.m_enabled_staking = false;
+    }
     else {
         wallet.m_enabled_staking = true;
     }
