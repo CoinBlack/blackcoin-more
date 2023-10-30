@@ -629,15 +629,15 @@ void PoSMiner(wallet::CWallet *pwallet)
     std::string strMintDisabledMessage = _("Info: Staking disabled by 'nostaking' option").translated;
     std::string strMintBlockMessage = _("Info: Staking suspended due to block creation failure").translated;
     std::string strMintEmpty = "";
-    if (!gArgs.GetBoolArg("-staking", DEFAULT_STAKE))
+    if (!CanStake())
     {
         strMintWarning = strMintDisabledMessage;
-        LogPrintf("proof-of-stake miner disabled\n");
+        pwallet->WalletLogPrintf("PoSMiner disabled\n");
         return;
     }
 
-    LogPrintf("PoSMiner started for proof-of-stake\n");
-    util::ThreadRename("blackcoin-stake-miner");
+    pwallet->WalletLogPrintf("PoSMiner started for proof-of-stake\n");
+    util::ThreadRename(strprintf("blackcoin-stake-miner-%s", pwallet->GetName()));
 
     unsigned int nExtraNonce = 0;
 
@@ -660,7 +660,7 @@ void PoSMiner(wallet::CWallet *pwallet)
         CCoinControl coincontrol;
         AvailableCoinsForStaking(*pwallet, vCoins, &coincontrol);
         pos_timio = gArgs.GetIntArg("-staketimio", DEFAULT_STAKETIMIO) + 30 * sqrt(vCoins.size());
-        LogPrintf("Set proof-of-stake timeout: %ums for %u UTXOs\n", pos_timio, vCoins.size());
+        pwallet->WalletLogPrintf("Set proof-of-stake timeout: %ums for %u UTXOs\n", pos_timio, vCoins.size());
     }
 
     try {
@@ -695,7 +695,7 @@ void PoSMiner(wallet::CWallet *pwallet)
             {
                 if (pwallet->IsStakeClosing() || !CanStake())
                     return;
-                LogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().chainman().ActiveChain().Tip()));
+                pwallet->WalletLogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().chainman().ActiveChain().Tip()));
                 if (strMintWarning != strMintSyncMessage) {
                     strMintWarning = strMintSyncMessage;
                     uiInterface.NotifyAlertChanged();
@@ -726,7 +726,7 @@ void PoSMiner(wallet::CWallet *pwallet)
                 }
                 catch (const std::runtime_error &e)
                 {
-                    LogPrintf("PoSMiner runtime error: %s\n", e.what());
+                    pwallet->WalletLogPrintf("PoSMiner runtime error: %s\n", e.what());
                     continue;
                 }
             }
@@ -741,7 +741,7 @@ void PoSMiner(wallet::CWallet *pwallet)
                 }
                 strMintWarning = strMintBlockMessage;
                 uiInterface.NotifyAlertChanged();
-                LogPrintf("Error in PoSMiner: Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
+                pwallet->WalletLogPrintf("Error in PoSMiner: Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
                 if (!SleepStaker(pwallet, 10000))
                    return;
 
@@ -757,11 +757,11 @@ void PoSMiner(wallet::CWallet *pwallet)
                     LOCK2(pwallet->cs_wallet, cs_main);
                     if (!SignBlock(*pblock, *pwallet))
                     {
-                        LogPrintf("PoSMiner: failed to sign PoS block");
+                        pwallet->WalletLogPrintf("PoSMiner: failed to sign PoS block");
                         continue;
                     }
                 }
-                LogPrintf("PoSMiner: proof-of-stake block found %s\n", pblock->GetHash().ToString());
+                pwallet->WalletLogPrintf("PoSMiner: proof-of-stake block found %s\n", pblock->GetHash().ToString());
                 ProcessBlockFound(pblock, pwallet->chain().chainman());
                 // Rest for ~16 seconds after successful block to preserve close quick
                 uint64_t stakerRestTime = (16 + GetRand(4)) * 1000;
@@ -776,7 +776,7 @@ void PoSMiner(wallet::CWallet *pwallet)
     }
     catch (const std::runtime_error &e)
     {
-        LogPrintf("PoSMiner: runtime error: %s\n", e.what());
+        pwallet->WalletLogPrintf("PoSMiner: runtime error: %s\n", e.what());
         return;
     }
 }
