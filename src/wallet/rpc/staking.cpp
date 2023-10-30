@@ -118,10 +118,16 @@ static RPCHelpMan staking()
     std::shared_ptr<CWallet> const pwallet = GetWalletForJSONRPCRequest(request);
     if (!pwallet) return NullUniValue;
 
+    std::string error = "";
     if (request.params.size() > 0)
     {
         if (request.params[0].get_bool() && node::CanStake())
         {
+            if (pwallet->IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS)) {
+                error = "The wallet can't contain any private keys";
+            } else if (pwallet->IsWalletFlagSet(WALLET_FLAG_BLANK_WALLET)) {
+                error = "The wallet is blank";
+            }
             if (!pwallet->m_enabled_staking)
                 StartStake(*pwallet);
         }
@@ -132,6 +138,9 @@ static RPCHelpMan staking()
 
     UniValue result(UniValue::VOBJ);
     result.pushKV("staking", pwallet->m_enabled_staking.load());
+    if (!error.empty()) {
+        result.pushKV("error", error);
+    }
     return result;
 },
     };
