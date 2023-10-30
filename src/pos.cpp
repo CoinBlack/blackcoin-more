@@ -6,8 +6,6 @@
 // Stake cache by Qtum
 // Copyright (c) 2016-2018 The Qtum developers
 
-#include <boost/assign/list_of.hpp>
-
 #include <pos.h>
 #include <txdb.h>
 #include <chain.h>

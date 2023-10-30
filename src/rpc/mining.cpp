@@ -39,7 +39,6 @@
 #include <validationinterface.h>
 #include <warnings.h>
 
-#include <timedata.h>
 #include <wallet/rpc/util.h>
 #include <wallet/wallet.h>
 #include <wallet/walletdb.h>
