@@ -1002,8 +1002,8 @@ public:
     /* Is staking closing */
     bool IsStakeClosing();
 
-    /* Staking thread */
-    std::vector<std::thread>* stakingThread = nullptr;
+    /* Staking thread group */
+    std::unique_ptr<std::vector<std::thread>> threadStakeMinerGroup;
 
     //! Whether the (external) signer performs R-value signature grinding
     bool CanGrindR() const;

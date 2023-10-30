@@ -228,7 +228,7 @@ void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned
 bool CanStake();
 
 /** Mine proof-of-stake blocks */
-void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::vector<std::thread>*& stakingThread);
+void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::unique_ptr<std::vector<std::thread>>& threadStakeMinerGroup);
 #endif
 
 /** Update an old GenerateCoinbaseCommitment from CreateNewBlock after the block txs have changed */

@@ -800,20 +800,18 @@ void static ThreadStakeMiner(wallet::CWallet *pwallet)
 }
 
 // qtum
-void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::vector<std::thread>*& stakingThread)
+void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::unique_ptr<std::vector<std::thread>>& threadStakeMinerGroup)
 {
-    if (stakingThread != nullptr) {
-        // Join all threads
-        for (auto& thread : *stakingThread)
-            thread.join();
-
-        delete stakingThread;
-        stakingThread = nullptr;
+    // If threadStakeMinerGroup is initialized join all threads and clear the vector
+    if (threadStakeMinerGroup) {
+        for (std::thread& thread : *threadStakeMinerGroup)
+            if (thread.joinable()) thread.join();
+        threadStakeMinerGroup->clear();
     }
 
     if (fStake) {
-        stakingThread = new std::vector<std::thread>;
-        stakingThread->emplace_back(std::thread(&ThreadStakeMiner, pwallet));
+        threadStakeMinerGroup = std::make_unique<std::vector<std::thread>>();
+        threadStakeMinerGroup->emplace_back(std::thread(&ThreadStakeMiner, pwallet));
     }
 }
 #endif

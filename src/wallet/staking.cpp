@@ -17,7 +17,7 @@ static int64_t GetStakeCombineThreshold() { return 500 * COIN; }
 static int64_t GetStakeSplitThreshold() { return 2 * GetStakeCombineThreshold(); }
 
 void StakeCoins(CWallet& wallet, bool fStake) {
-    node::StakeCoins(fStake, &wallet, wallet.stakingThread);
+    node::StakeCoins(fStake, &wallet, wallet.threadStakeMinerGroup);
 }
 
 void StartStake(CWallet& wallet) {
@@ -35,7 +35,7 @@ void StartStake(CWallet& wallet) {
 }
 
 void StopStake(CWallet& wallet) {
-    if (!wallet.stakingThread) {
+    if (!wallet.threadStakeMinerGroup) {
         if (wallet.m_enabled_staking)
             wallet.m_enabled_staking = false;
     }
@@ -43,7 +43,7 @@ void StopStake(CWallet& wallet) {
         wallet.m_stop_staking_thread = true;
         wallet.m_enabled_staking = false;
         StakeCoins(wallet, false);
-        wallet.stakingThread = 0;
+        wallet.threadStakeMinerGroup = 0;
         wallet.m_stop_staking_thread = false;
     }
 }
