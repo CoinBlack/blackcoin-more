@@ -4122,7 +4122,7 @@ bool CWallet::CreateCoinStake(ChainstateManager& chainman, const CWallet* pwalle
     if (nReward < 0)
         return false;
 
-    bool isDevFundEnabled = m_donation_percentage > 0 ? true : false;
+    bool isDevFundEnabled = (m_donation_percentage > 0 && !Params().GetDevFundAddress().empty()) ? true : false;
     CAmount nDevCredit = 0;
     CAmount nMinerCredit = 0;
 

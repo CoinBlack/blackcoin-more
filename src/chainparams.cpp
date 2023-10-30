@@ -123,7 +123,7 @@ void SelectParams(const std::string& network)
 // Blackcoin: Donations to dev fund 
 std::string CChainParams::GetDevFundAddress() const
 {
-    return vDevFundAddress[0];
+    return !vDevFundAddress.empty() ? vDevFundAddress[0] : "";
 }
 
 CScript CChainParams::GetDevRewardScript() const
