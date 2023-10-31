@@ -812,6 +812,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     backupWalletAction->setEnabled(enabled);
     changePassphraseAction->setEnabled(enabled);
     unlockWalletAction->setEnabled(enabled);
+    lockWalletAction->setEnabled(enabled);
     signMessageAction->setEnabled(enabled);
     verifyMessageAction->setEnabled(enabled);
     usedSendingAddressesAction->setEnabled(enabled);

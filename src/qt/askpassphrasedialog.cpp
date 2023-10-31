@@ -54,9 +54,8 @@ AskPassphraseDialog::AskPassphraseDialog(Mode _mode, QWidget *parent, SecureStri
         case UnlockStaking:
             ui->stakingCheckBox->setChecked(true);
             ui->stakingCheckBox->show();
+            [[fallthrough]];
         case Unlock: // Ask passphrase
-            ui->stakingCheckBox->setChecked(false);
-            ui->stakingCheckBox->show();
             ui->warningLabel->setText(tr("This operation needs your wallet passphrase to unlock the wallet."));
             ui->passLabel2->hide();
             ui->passEdit2->hide();
@@ -177,12 +176,12 @@ void AskPassphraseDialog::accept()
                                              "passphrase to avoid this issue in the future."));
                 }
             } else {
+                model->setWalletUnlockStakingOnly(ui->stakingCheckBox->isChecked());
                 if (UnlockStaking == mode) {
                     // Start the staking if enabled on the machine
                     bool staking = node::CanStake();
                     model->wallet().setEnabledStaking(staking);
                 }
-                model->setWalletUnlockStakingOnly(ui->stakingCheckBox->isChecked());
                 QDialog::accept(); // Success
             }
         } catch (const std::runtime_error& e) {
