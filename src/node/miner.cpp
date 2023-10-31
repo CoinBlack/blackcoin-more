@@ -652,13 +652,10 @@ void PoSMiner(wallet::CWallet *pwallet)
     }
 
     try {
-        bool fNeedToClear = false;
-        while (CanStake()) {
-            if (pwallet->IsStakeClosing() || !CanStake())
-                return;
-            while (pwallet->IsLocked()) {
-                if (pwallet->IsStakeClosing() || !CanStake())
-                    fNeedToClear = true;
+        while (true)
+        {
+            while (pwallet->IsLocked() || !pwallet->m_enabled_staking || fReindex || pwallet->chain().chainman().m_blockman.m_importing) {
+                pwallet->m_last_coin_stake_search_interval = 0;
                 if (!SleepStaker(pwallet, 5000))
                     return;
             }
@@ -666,32 +663,24 @@ void PoSMiner(wallet::CWallet *pwallet)
             // Busy-wait for the network to come online so we don't waste time mining
             // on an obsolete chain. In regtest mode we expect to fly solo.
             if (!Params().MineBlocksOnDemand()) {
-                while (pwallet->chain().getNodeCount(ConnectionDirection::Both) == 0 || pwallet->chain().chainman().ActiveChainstate().IsInitialBlockDownload()) {
-                    if (pwallet->IsStakeClosing() || !CanStake())
-                        return;
-                    fNeedToClear = true;
+                while (pwallet->chain().getNodeCount(ConnectionDirection::Both) == 0 || pwallet->chain().isInitialBlockDownload()) {
+                    pwallet->m_last_coin_stake_search_interval = 0;
                     if (!SleepStaker(pwallet, 10000))
                         return;
                 }
             }
 
-            while (GuessVerificationProgress(Params().TxData(), pwallet->chain().chainman().ActiveChain().Tip()) < 0.996)
-            {
-                if (pwallet->IsStakeClosing() || !CanStake())
-                    return;
-                pwallet->WalletLogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().chainman().ActiveChain().Tip()));
-                fNeedToClear = true;
+            while (GuessVerificationProgress(Params().TxData(), pwallet->chain().getTip()) < 0.996) {
+                pwallet->m_last_coin_stake_search_interval = 0;
+                pwallet->WalletLogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().getTip()));
                 if (!SleepStaker(pwallet, 10000))
                     return;
-            }
-            if (fNeedToClear) {
-                fNeedToClear = false;
             }
 
             //
             // Create new block
             //
-            CBlockIndex* pindexPrev = pwallet->chain().chainman().ActiveChain().Tip();
+            CBlockIndex* pindexPrev = pwallet->chain().getTip();
             bool fPoSCancel = false;
             CScript scriptPubKey = GetScriptForDestination(dest);
             CBlock *pblock;
