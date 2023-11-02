@@ -292,6 +292,8 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     CAmount nCredit = 0;
     bool fKernelFound = false;
     CScript scriptPubKeyKernel, scriptPubKeyOut;
+    bool bMinterKey = false;
+
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
         if (!g_txindex) {
@@ -319,7 +321,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 scriptPubKeyKernel = pcoin.first->tx->vout[pcoin.second].scriptPubKey;
                 TxoutType whichType = Solver(scriptPubKeyKernel, vSolutions);
 
-                if (whichType != TxoutType::PUBKEY && whichType != TxoutType::PUBKEYHASH && whichType != TxoutType::WITNESS_V0_KEYHASH)
+                if (whichType != TxoutType::PUBKEY && whichType != TxoutType::PUBKEYHASH && whichType != TxoutType::WITNESS_V0_KEYHASH && whichType != TxoutType::WITNESS_V1_TAPROOT)
                 {
                     LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%s\n", GetTxnOutputType(whichType));
                     break;  // only support pay to public key and pay to address and pay to witness keyhash
@@ -356,13 +358,48 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                         scriptPubKeyOut << ToByteVector(pkey) << OP_CHECKSIG;
                     }
                 }
-                else
+                else if (whichType == TxoutType::PUBKEY)
                     scriptPubKeyOut = scriptPubKeyKernel;
+                else if (whichType == TxoutType::WITNESS_V1_TAPROOT) {
+                    // prepare reserve destination in case we need to use it for handling non legacy inputs
+                    CTxDestination dest;
+                    ReserveDestination reservedest(&wallet, OutputType::LEGACY);
+                    auto op_dest = reservedest.GetReservedDestination(true);
+                    if (!op_dest) {
+                        LogPrintf("Error: Keypool ran out, please call keypoolrefill first.\n");
+                        break;
+                    }
+                    dest = *op_dest;
+                    std::vector<valtype> vSolutionsTmp;
+                    CScript scriptPubKeyTmp = GetScriptForDestination(dest);
+                    Solver(scriptPubKeyTmp, vSolutionsTmp);
+                    std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(scriptPubKeyTmp);
+                    if (!provider) {
+                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get signing provider for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
+                        break;
+                    }
+                    CKeyID ckey = CKeyID(uint160(vSolutionsTmp[0]));
+                    CPubKey pkey;
+                    if (!provider.get()->GetPubKey(ckey, pkey)) {
+                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
+                        break;
+                    }
+                    scriptPubKeyOut << ToByteVector(pkey) << OP_CHECKSIG;
+                    bMinterKey = true;
+                }
 
                 txNew.nTime -= n;
                 txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
                 nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
                 vwtxPrev.push_back(pcoin);
+
+                if (bMinterKey) {
+                    // extra output for minter key
+                    txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
+                    // redefine scriptPubKeyOut to send output to input address
+                    scriptPubKeyOut = scriptPubKeyKernel;
+                }
+    
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
                 LogPrint(BCLog::COINSTAKE, "CreateCoinStake : added kernel type=%d\n", (int)whichType);
                 fKernelFound = true;
@@ -433,7 +470,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     // Split stake
     if (nCredit >= GetStakeSplitThreshold())
-        txNew.vout.push_back(CTxOut(0, txNew.vout[1].scriptPubKey));
+        txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
 
     if (isDevFundEnabled)
         txNew.vout.push_back(CTxOut(0, Params().GetDevRewardScript()));
@@ -443,27 +480,27 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         // Set output amount
         if (isDevFundEnabled)
         {
-            if (txNew.vout.size() == 4)
+            if (txNew.vout.size() == 4 + bMinterKey)
             {
-                txNew.vout[1].nValue = (nCredit / 2 / CENT) * CENT;
-                txNew.vout[2].nValue = nCredit - txNew.vout[1].nValue;
-                txNew.vout[3].nValue = nDevCredit;
+                txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
+                txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
+                txNew.vout[3 + bMinterKey].nValue = nDevCredit;
             }
             else
             {
-                txNew.vout[1].nValue = nCredit;
-                txNew.vout[2].nValue = nDevCredit;
+                txNew.vout[1 + bMinterKey].nValue = nCredit;
+                txNew.vout[2 + bMinterKey].nValue = nDevCredit;
             }
         }
         else
         {
-            if (txNew.vout.size() == 3)
+            if (txNew.vout.size() == 3 + bMinterKey)
             {
-                txNew.vout[1].nValue = (nCredit / 2 / CENT) * CENT;
-                txNew.vout[2].nValue = nCredit - txNew.vout[1].nValue;
+                txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
+                txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
             }
             else
-                txNew.vout[1].nValue = nCredit;
+                txNew.vout[1 + bMinterKey].nValue = nCredit;
         }
 
         // Sign
@@ -488,7 +525,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
             // Script verification errors
             std::map<int, bilingual_str> input_errors;
             int nTime = txNew.nTime;
-            bool complete = wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
+            wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
             txNew.nTime = nTime;
         }
 
