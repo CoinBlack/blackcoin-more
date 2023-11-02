@@ -187,7 +187,7 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     frameBlocksLayout->addStretch();
 	
 #ifdef ENABLE_WALLET
-	if (gArgs.GetBoolArg("-staking", node::DEFAULT_STAKE))
+	if (node::CanStake())
     {
         QTimer *timerStakingIcon = new QTimer(labelStakingIcon);
         connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(updateStakingIcon()));
