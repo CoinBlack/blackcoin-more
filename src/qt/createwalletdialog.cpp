@@ -110,7 +110,6 @@ CreateWalletDialog::CreateWalletDialog(QWidget* parent) :
         ui->blank_wallet_checkbox->setEnabled(true);
 
         // Blackcoin ToDo: enable descriptor wallets
-        ui->descriptor_checkbox->setChecked(false);
         ui->descriptor_checkbox->setEnabled(false);
 }
 
