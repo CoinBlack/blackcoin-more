@@ -722,7 +722,7 @@ void PoSMiner(wallet::CWallet *pwallet)
                     LOCK2(pwallet->cs_wallet, cs_main);
                     if (!SignBlock(*pblock, *pwallet))
                     {
-                        pwallet->WalletLogPrintf("PoSMiner: failed to sign PoS block");
+                        pwallet->WalletLogPrintf("PoSMiner: failed to sign PoS block\n");
                         continue;
                     }
                 }
