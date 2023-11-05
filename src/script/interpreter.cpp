@@ -1606,6 +1606,10 @@ uint256 SignatureHash(const CScript& scriptCode, const T& txTo, unsigned int nIn
         HashWriter ss{};
         // Version
         ss << txTo.nVersion;
+        if (txTo.nVersion < 2) {
+            // nTime
+            ss << txTo.nTime;
+        }
         // Input prevouts/nSequence (none/all, depending on flags)
         ss << hashPrevouts;
         ss << hashSequence;
