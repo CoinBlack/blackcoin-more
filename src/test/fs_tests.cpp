@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(fsbridge_fstream)
         std::ifstream file{tmpfile1};
         std::string input_buffer;
         file >> input_buffer;
-        BOOST_CHECK_EQUAL(input_buffer, "bitcointests");
+        BOOST_CHECK_EQUAL(input_buffer, "blackcointests");
     }
     {
         std::ofstream file{tmpfile2, std::ios_base::out | std::ios_base::trunc};

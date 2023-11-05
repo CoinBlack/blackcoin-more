@@ -117,11 +117,11 @@ BOOST_AUTO_TEST_CASE(addrman_ports)
     BOOST_CHECK(addrman->Add({CAddress(addr1, NODE_NONE)}, source));
     BOOST_CHECK_EQUAL(addrman->Size(), 1U);
 
-    CService addr1_port = ResolveService("250.1.1.1", 8334);
+    CService addr1_port = ResolveService("250.1.1.1", 15717);
     BOOST_CHECK(addrman->Add({CAddress(addr1_port, NODE_NONE)}, source));
     BOOST_CHECK_EQUAL(addrman->Size(), 2U);
     auto addr_ret2 = addrman->Select().first;
-    BOOST_CHECK(addr_ret2.ToStringAddrPort() == "250.1.1.1:15714" || addr_ret2.ToStringAddrPort() == "250.1.1.1:8334");
+    BOOST_CHECK(addr_ret2.ToStringAddrPort() == "250.1.1.1:15714" || addr_ret2.ToStringAddrPort() == "250.1.1.1:15717");
 
     // Test: Add same IP but diff port to tried table; this converts the entry with
     // the specified port to tried, but not the other.
@@ -140,13 +140,13 @@ BOOST_AUTO_TEST_CASE(addrman_select)
     CNetAddr source = ResolveIP("252.2.2.2");
 
     // Test: Select from new with 1 addr in new.
-    CService addr1 = ResolveService("250.1.1.1", 8333);
+    CService addr1 = ResolveService("250.1.1.1", 15714);
     BOOST_CHECK(addrman->Add({CAddress(addr1, NODE_NONE)}, source));
     BOOST_CHECK_EQUAL(addrman->Size(), 1U);
 
     bool newOnly = true;
     auto addr_ret1 = addrman->Select(newOnly).first;
-    BOOST_CHECK_EQUAL(addr_ret1.ToStringAddrPort(), "250.1.1.1:8333");
+    BOOST_CHECK_EQUAL(addr_ret1.ToStringAddrPort(), "250.1.1.1:15714");
 
     // Test: move addr to tried, select from new expected nothing returned.
     BOOST_CHECK(addrman->Good(CAddress(addr1, NODE_NONE)));
@@ -970,7 +970,7 @@ BOOST_AUTO_TEST_CASE(addrman_update_address)
     BOOST_CHECK_EQUAL(addrman->Size(), 1U);
 
     // Updating an addrman entry with a different port doesn't change it
-    CAddress addr_diff_port{CAddress(ResolveService("250.1.1.1", 8334), NODE_NONE)};
+    CAddress addr_diff_port{CAddress(ResolveService("250.1.1.1", 15717), NODE_NONE)};
     addr_diff_port.nTime = start_time;
     addrman->Connected(addr_diff_port);
     addrman->SetServices(addr_diff_port, NODE_NETWORK_LIMITED);
@@ -1000,10 +1000,10 @@ BOOST_AUTO_TEST_CASE(addrman_size)
     BOOST_CHECK_EQUAL(addrman->Size(/*net=*/NET_IPV4, /*in_new=*/false), 0U);
 
     // add two ipv4 addresses, one to tried and new
-    const CAddress addr1{ResolveService("250.1.1.1", 8333), NODE_NONE};
+    const CAddress addr1{ResolveService("250.1.1.1", 15714), NODE_NONE};
     BOOST_CHECK(addrman->Add({addr1}, source));
     BOOST_CHECK(addrman->Good(addr1));
-    const CAddress addr2{ResolveService("250.1.1.2", 8333), NODE_NONE};
+    const CAddress addr2{ResolveService("250.1.1.2", 15714), NODE_NONE};
     BOOST_CHECK(addrman->Add({addr2}, source));
 
     BOOST_CHECK_EQUAL(addrman->Size(/*net=*/std::nullopt, /*in_new=*/std::nullopt), 2U);

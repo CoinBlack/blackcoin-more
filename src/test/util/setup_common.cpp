@@ -277,14 +277,14 @@ TestChain100Setup::TestChain100Setup(
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}};
     coinbaseKey.Set(vchKey.begin(), vchKey.end(), true);
 
-    // Generate a 100-block chain:
-    this->mineBlocks(Params().GetConsensus().nCoinbaseMaturity);
-
+    // Blackcoin
+    // Generate a 500-block chain:
+    this->mineBlocks(500);
     {
         LOCK(::cs_main);
         assert(
             m_node.chainman->ActiveChain().Tip()->GetBlockHash().ToString() ==
-            "571d80a9967ae599cec0448b0b0ba1cfb606f584d8069bd7166b86854ba7a191");
+            "0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d");
     }
 }
 
@@ -310,7 +310,8 @@ CBlock TestChain100Setup::CreateBlock(
     for (const CMutableTransaction& tx : txns) {
         block.vtx.push_back(MakeTransactionRef(tx));
     }
-    RegenerateCommitments(block, *Assert(m_node.chainman));
+    // Blackcoin
+    // RegenerateCommitments(block, *Assert(m_node.chainman));
 
     while (!CheckProofOfWork(block.GetHash(), block.nBits, m_node.chainman->GetConsensus())) ++block.nNonce;
 

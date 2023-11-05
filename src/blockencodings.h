@@ -138,12 +138,12 @@ protected:
     const ChainstateManager* chainman;
 public:
     CBlockHeader header;
+    std::vector<unsigned char> vchBlockSig;
 
     // Can be overridden for testing
     using CheckBlockFn = std::function<bool(const CBlock&, BlockValidationState&, const Consensus::Params&, Chainstate& chainstate, bool, bool, bool)>;
     CheckBlockFn m_check_block_mock{nullptr};
 
-    std::vector<unsigned char> vchBlockSig;
     explicit PartiallyDownloadedBlock(CTxMemPool* poolIn, ChainstateManager* _chainman) : pool(poolIn), chainman(_chainman) {}
 
     // extra_txn is a list of extra transactions to look at, in <witness hash, reference> form
