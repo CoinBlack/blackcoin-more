@@ -821,7 +821,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     }
 
     // Blackcoin: Donate to dev fund (or not)
-    if (nDonationPercentage > 0) {
+    if (nDonationPercentage > 0 && !Params().GetDevFundAddress().empty()) {
 
         CAmount nDevCredit = 0;
         CAmount nMinerCredit = 0;
