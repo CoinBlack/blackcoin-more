@@ -1,5 +1,13 @@
 # Changelog
 
+## v25.1.0-alpha-2 (2023-11-24)
+- Fixed a bug with segfault on wallet close when staking is enabled
+- Added full support for descriptor wallets, including staking
+- Added support for staking with multiple wallets simultaneously
+- Removed GUI staking warnings due to incompatibility with multiple staking threads
+- Enabled `staking` RPC call
+- Multiple minor changes to ThreadStakeMiner() algorithm
+
 ## v25.1.0-alpha-1 (2023-10-24)
 - Updated to Bitcoin Core 25.1
 - Removed OpenSSL
