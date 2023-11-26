@@ -482,6 +482,8 @@ bool BlockManager::FindBlockPos(FlatFilePos& pos, unsigned int nAddSize, unsigne
     if (!fKnown) {
         bool out_of_space;
         size_t bytes_allocated = BlockFileSeq().Allocate(pos, nAddSize, out_of_space);
+        // Blackcoin: unused variable intentionally, used for setting out_of_space value
+        static_cast<void>(bytes_allocated);
         if (out_of_space) {
             return AbortNode("Disk space is too low!", _("Disk space is too low!"));
         }

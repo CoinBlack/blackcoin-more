@@ -1069,7 +1069,10 @@ bool MemPoolAccept::Finalize(const ATMPArgs& args, Workspace& ws)
 {
     AssertLockHeld(cs_main);
     AssertLockHeld(m_pool.cs);
+    /*
+    // Blackcoin
     const CTransaction& tx = *ws.m_ptx;
+    */
     const uint256& hash = ws.m_hash;
     TxValidationState& state = ws.m_state;
     const bool bypass_limits = args.m_bypass_limits;

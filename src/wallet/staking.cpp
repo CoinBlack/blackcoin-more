@@ -132,8 +132,6 @@ void AvailableCoinsForStaking(const CWallet& wallet,
             continue;
         }
 
-        bool tx_from_me = CachedTxIsFromMe(wallet, wtx, ISMINE_ALL);
-
         for (unsigned int i = 0; i < wtx.tx->vout.size(); i++) {
             const CTxOut& output = wtx.tx->vout[i];
             const COutPoint outpoint(wtxid, i);
@@ -159,7 +157,6 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 
             std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(output.scriptPubKey);
 
-            int input_bytes = CalculateMaximumSignedInputSize(output, COutPoint(), provider.get(), can_grind_r, coinControl);
             bool solvable = provider ? InferDescriptor(output.scriptPubKey, *provider)->IsSolvable() : false;
             bool spendable = ((mine & ISMINE_SPENDABLE) != ISMINE_NO) || (((mine & ISMINE_WATCH_ONLY) != ISMINE_NO) && (coinControl && coinControl->fAllowWatchOnly && solvable));
 
@@ -480,7 +477,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         // Set output amount
         if (isDevFundEnabled)
         {
-            if (txNew.vout.size() == 4 + bMinterKey)
+            if (txNew.vout.size() == 4u + bMinterKey)
             {
                 txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
                 txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
@@ -494,7 +491,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         }
         else
         {
-            if (txNew.vout.size() == 3 + bMinterKey)
+            if (txNew.vout.size() == 3u + bMinterKey)
             {
                 txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
                 txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
