@@ -40,10 +40,10 @@ void initialize_tx_pool()
     static const auto testing_setup = MakeNoLogFileContext<const TestingSetup>();
     g_setup = testing_setup.get();
 
-    for (int i = 0; i < 2 * COINBASE_MATURITY; ++i) {
+    for (int i = 0; i < 2 * Params().GetConsensus().nCoinbaseMaturity; ++i) {
         CTxIn in = MineBlock(g_setup->m_node, P2WSH_OP_TRUE);
         // Remember the txids to avoid expensive disk access later on
-        auto& outpoints = i < COINBASE_MATURITY ?
+        auto& outpoints = i < Params().GetConsensus().nCoinbaseMaturity ?
                               g_outpoints_coinbase_init_mature :
                               g_outpoints_coinbase_init_immature;
         outpoints.push_back(in.prevout);
@@ -122,7 +122,6 @@ CTxMemPool MakeMempool(FuzzedDataProvider& fuzzed_data_provider, const NodeConte
     CTxMemPool::Options mempool_opts{MemPoolOptionsForTest(node)};
 
     // ...override specific options for this specific fuzz suite
-    mempool_opts.estimator = nullptr;
     mempool_opts.check_ratio = 1;
     mempool_opts.require_standard = fuzzed_data_provider.ConsumeBool();
 
@@ -148,7 +147,7 @@ FUZZ_TARGET_INIT(tx_pool_standard, initialize_tx_pool)
     outpoints_rbf = outpoints_supply;
 
     // The sum of the values of all spendable outpoints
-    constexpr CAmount SUPPLY_TOTAL{COINBASE_MATURITY * 50 * COIN};
+    const CAmount SUPPLY_TOTAL{Params().GetConsensus().nCoinbaseMaturity * 50 * COIN};
 
     SetMempoolConstraints(*node.args, fuzzed_data_provider);
     CTxMemPool tx_pool_{MakeMempool(fuzzed_data_provider, node)};

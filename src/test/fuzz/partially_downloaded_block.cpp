@@ -31,7 +31,7 @@ void initialize_pdb()
 
 PartiallyDownloadedBlock::CheckBlockFn FuzzedCheckBlock(std::optional<BlockValidationResult> result)
 {
-    return [result](const CBlock&, BlockValidationState& state, const Consensus::Params&, bool, bool) {
+    return [result](const CBlock&, BlockValidationState& state, const Consensus::Params&, Chainstate& chainstate, bool, bool, bool) {
         if (result) {
             return state.Invalid(*result);
         }
@@ -53,7 +53,8 @@ FUZZ_TARGET_INIT(partially_downloaded_block, initialize_pdb)
     CBlockHeaderAndShortTxIDs cmpctblock{*block};
 
     CTxMemPool pool{MemPoolOptionsForTest(g_setup->m_node)};
-    PartiallyDownloadedBlock pdb{&pool};
+    ChainstateManager& chainman = *g_setup->m_node.chainman;
+    PartiallyDownloadedBlock pdb{&pool, &chainman};
 
     // Set of available transactions (mempool or extra_txn)
     std::set<uint16_t> available;

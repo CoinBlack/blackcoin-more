@@ -23,7 +23,7 @@ const std::vector<std::shared_ptr<CBlock>>* g_chain;
 void initialize_chain()
 {
     const auto params{CreateChainParams(ArgsManager{}, CBaseChainParams::REGTEST)};
-    static const auto chain{CreateBlockChain(2 * COINBASE_MATURITY, *params)};
+    static const auto chain{CreateBlockChain(2 * Params().GetConsensus().nCoinbaseMaturity, *params)};
     g_chain = &chain;
 }
 
@@ -58,7 +58,7 @@ FUZZ_TARGET_INIT(utxo_snapshot, initialize_chain)
     if (fuzzed_data_provider.ConsumeBool()) {
         for (const auto& block : *g_chain) {
             BlockValidationState dummy;
-            bool processed{chainman.ProcessNewBlockHeaders({*block}, true, dummy)};
+            bool processed{chainman.ProcessNewBlockHeaders({*block}, true, dummy, false)};
             Assert(processed);
             const auto* index{WITH_LOCK(::cs_main, return chainman.m_blockman.LookupBlockIndex(block->GetHash()))};
             Assert(index);

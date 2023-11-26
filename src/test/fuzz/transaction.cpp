@@ -92,7 +92,6 @@ FUZZ_TARGET_INIT(transaction, initialize_transaction)
     (void)GetVirtualTransactionSize(tx);
     (void)IsFinalTx(tx, /* nBlockHeight= */ 1024, /* nBlockTime= */ 1024);
     (void)RecursiveDynamicUsage(tx);
-    (void)SignalsOptInRBF(tx);
 
     CCoinsView coins_view;
     const CCoinsViewCache coins_view_cache(&coins_view);

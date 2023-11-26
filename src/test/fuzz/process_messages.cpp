@@ -27,7 +27,7 @@ void initialize_process_messages()
             /*chain_name=*/CBaseChainParams::REGTEST,
             /*extra_args=*/{"-txreconciliation"});
     g_setup = testing_setup.get();
-    for (int i = 0; i < 2 * COINBASE_MATURITY; i++) {
+    for (int i = 0; i < 2 * Params().GetConsensus().nCoinbaseMaturity; i++) {
         MineBlock(g_setup->m_node, CScript() << OP_TRUE);
     }
     SyncWithValidationInterfaceQueue();

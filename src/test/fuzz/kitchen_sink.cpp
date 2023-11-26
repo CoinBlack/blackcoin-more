@@ -43,8 +43,6 @@ FUZZ_TARGET(kitchen_sink)
     (void)RPCErrorFromTransactionError(transaction_error);
     (void)TransactionErrorString(transaction_error);
 
-    (void)StringForFeeEstimateHorizon(fuzzed_data_provider.PickValueInArray(ALL_FEE_ESTIMATE_HORIZONS));
-
     const OutputType output_type = fuzzed_data_provider.PickValueInArray(OUTPUT_TYPES);
     const std::string& output_type_string = FormatOutputType(output_type);
     const std::optional<OutputType> parsed = ParseOutputType(output_type_string);

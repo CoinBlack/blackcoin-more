@@ -18,6 +18,10 @@
 #include <cassert>
 #include <string>
 
+namespace {
+const BasicTestingSetup* g_setup;
+} // namespace
+
 void initialize_block()
 {
     SelectParams(CBaseChainParams::REGTEST);
