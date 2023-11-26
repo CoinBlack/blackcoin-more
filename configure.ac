@@ -205,7 +205,7 @@ AC_ARG_ENABLE([fuzz-binary],
     AS_HELP_STRING([--enable-fuzz-binary],
     [enable building of fuzz binary (default yes).]),
     [enable_fuzz_binary=$enableval],
-    [enable_fuzz_binary=no])
+    [enable_fuzz_binary=yes])
 
 AC_ARG_WITH([qrencode],
   [AS_HELP_STRING([--with-qrencode],
@@ -215,9 +215,9 @@ AC_ARG_WITH([qrencode],
 
 AC_ARG_ENABLE([hardening],
   [AS_HELP_STRING([--disable-hardening],
-  [do not attempt to harden the resulting executables (default is to harden)])],
+  [do not attempt to harden the resulting executables (default is to harden when possible)])],
   [use_hardening=$enableval],
-  [use_hardening=yes])
+  [use_hardening=auto])
 
 AC_ARG_ENABLE([reduce-exports],
   [AS_HELP_STRING([--enable-reduce-exports],
@@ -335,7 +335,7 @@ AC_ARG_ENABLE([werror],
 AC_ARG_ENABLE([external-signer],
     [AS_HELP_STRING([--enable-external-signer],[compile external signer support (default is auto, requires Boost::Process)])],
     [use_external_signer=$enableval],
-    [use_external_signer=no])
+    [use_external_signer=auto])
 
 AC_ARG_ENABLE([lto],
     [AS_HELP_STRING([--enable-lto],[build using LTO (default is no)])],
