@@ -302,7 +302,7 @@ AC_ARG_ENABLE([sse2],
 AC_ARG_ENABLE(man,
     [AS_HELP_STRING([--disable-man],
                     [do not install man pages (default is to install)])],,
-    enable_man=no)
+    enable_man=yes)
 AM_CONDITIONAL([ENABLE_MAN], [test "$enable_man" != "no"])
 
 dnl Enable debug
