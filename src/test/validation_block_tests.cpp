@@ -89,9 +89,11 @@ std::shared_ptr<CBlock> MinerTestingSetup::Block(const uint256& prev_hash)
 
 std::shared_ptr<CBlock> MinerTestingSetup::FinalizeBlock(std::shared_ptr<CBlock> pblock)
 {
-    const CBlockIndex* prev_block{WITH_LOCK(::cs_main, return m_node.chainman->m_blockman.LookupBlockIndex(pblock->hashPrevBlock))};
+    /*
     // Blackcoin
-    // m_node.chainman->GenerateCoinbaseCommitment(*pblock, prev_block);
+    const CBlockIndex* prev_block{WITH_LOCK(::cs_main, return m_node.chainman->m_blockman.LookupBlockIndex(pblock->hashPrevBlock))};
+    m_node.chainman->GenerateCoinbaseCommitment(*pblock, prev_block);
+    */
 
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 

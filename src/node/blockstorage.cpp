@@ -505,6 +505,8 @@ bool BlockManager::FindUndoPos(BlockValidationState& state, int nFile, FlatFileP
 
     bool out_of_space;
     size_t bytes_allocated = UndoFileSeq().Allocate(pos, nAddSize, out_of_space);
+    // Blackcoin: unused variable intentionally, used for setting out_of_space value
+    static_cast<void>(bytes_allocated);
     if (out_of_space) {
         return AbortNode(state, "Disk space is too low!", _("Disk space is too low!"));
     }
