@@ -102,7 +102,6 @@ void AvailableCoinsForStaking(const CWallet& wallet,
     const int min_depth = std::max(DEFAULT_MIN_DEPTH, Params().GetConsensus().nCoinbaseMaturity);
     const int max_depth = DEFAULT_MAX_DEPTH;
     const bool only_safe = true;
-    const bool can_grind_r = wallet.CanGrindR();
 
     std::set<uint256> trusted_parents;
     for (const auto& entry : wallet.mapWallet)
@@ -168,7 +167,6 @@ void AvailableCoinsForStaking(const CWallet& wallet,
             // this from the redeemScript. If the Output is not spendable, it will be classified
             // as a P2SH (legacy), since we have no way of knowing otherwise without the redeemScript
             CScript script;
-            bool is_from_p2sh{false};
             if (output.scriptPubKey.IsPayToScriptHash() && solvable) {
                 CTxDestination destination;
                 if (!ExtractDestination(output.scriptPubKey, destination))
@@ -176,7 +174,6 @@ void AvailableCoinsForStaking(const CWallet& wallet,
                 const CScriptID& hash = CScriptID(std::get<ScriptHash>(destination));
                 if (!provider->GetCScript(hash, script))
                     continue;
-                is_from_p2sh = true;
             } else {
                 script = output.scriptPubKey;
             }
