@@ -14,15 +14,14 @@
 #include <chain.h>
 #include <chainparams.h>
 #include <coins.h>
+#include <common/args.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
 #include <consensus/merkle.h>
 #include <consensus/tx_verify.h>
 #include <consensus/validation.h>
 #include <deploymentstatus.h>
-#include <net_processing.h>
-#include <node/interface_ui.h>
-#include <node/context.h>
+#include <logging.h>
 #include <policy/feerate.h>
 #include <policy/policy.h>
 #include <pos.h>
@@ -32,17 +31,16 @@
 #include <timedata.h>
 #include <util/exception.h>
 #include <util/moneystr.h>
-#include <util/system.h>
 #include <util/thread.h>
 #include <util/threadnames.h>
+#include <validation.h>
+#include <warnings.h>
 #include <wallet/coincontrol.h>
 #include <wallet/spend.h>
 #include <wallet/wallet.h>
 #ifdef ENABLE_WALLET
 #include <wallet/staking.h>
 #endif
-#include <validation.h>
-#include <warnings.h>
 
 #include <algorithm>
 #include <thread>

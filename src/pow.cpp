@@ -42,7 +42,7 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const Consensu
         return nTargetLimit; // second block
 
     // Mindiff for regtest
-    if (Params().NetworkIDString() == CBaseChainParams::REGTEST) {
+    if (Params().GetChainType() == ChainType::REGTEST) {
         arith_uint256 lowDiff;
         lowDiff.SetCompact(0x207fffff);
         return lowDiff.GetCompact();

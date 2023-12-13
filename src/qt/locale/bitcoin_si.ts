@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">ලිපිනය හෝ නම්පත සංශෝධනයට දකුණු බොත්තම  ඔබන්න</translation>
+        <translation type="unfinished">ලිපිනය හෝ ලේබලය සංස්කරණය කිරීමට දකුණු-ක්ලික් කරන්න</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -56,14 +56,6 @@
     <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">තෝ&amp;රන්න</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">යවන ලිපින</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">ලැබෙන ලිපින</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
@@ -310,14 +302,6 @@
         <translation type="unfinished">&amp;දළ විශ්ලේෂණය</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation type="unfinished">පසුම්බිය පිළිබඳ සාමාන්‍ය දළ විශ්ලේෂණය පෙන්වන්න</translation>
-    </message>
-    <message>
-        <source>&amp;Transactions</source>
-        <translation type="unfinished">&amp;ගනුදෙනු</translation>
-    </message>
-    <message>
         <source>Browse transaction history</source>
         <translation type="unfinished">ගනුදෙනු ඉතිහාසය පිරික්සන්න</translation>
     </message>
@@ -436,10 +420,6 @@
     <message>
         <source>Information</source>
         <translation type="unfinished">තොරතුර</translation>
-    </message>
-    <message>
-        <source>Up to date</source>
-        <translation type="unfinished">යාවත්කාලීනයි</translation>
     </message>
     <message>
         <source>&amp;Sending addresses</source>
@@ -630,14 +610,6 @@
     <message>
         <source>Copy bytes</source>
         <translation type="unfinished">බයිට පිටපත් කරන්න</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished">ඔව්</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished">නැත</translation>
     </message>
     <message>
         <source>(no label)</source>

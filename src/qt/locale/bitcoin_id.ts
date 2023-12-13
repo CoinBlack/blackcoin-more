@@ -34,20 +34,8 @@
         <translation type="unfinished">Pilih alamat tujuan pengiriman koin</translation>
     </message>
     <message>
-        <source>Choose the address to receive coins with</source>
-        <translation type="unfinished">Pilih alamat untuk menerima koin dengan</translation>
-    </message>
-    <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">&amp;Choose</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">Alamat pengirim</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">Alamat penerima</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
@@ -370,16 +358,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <translation type="unfinished">Pulihkan dompet dari file cadangan</translation>
     </message>
     <message>
-        <source>Restore Wallet…</source>
-        <extracomment>Name of the menu item that restores wallet from a backup file.</extracomment>
-        <translation type="unfinished">Pulihkan Dompet…</translation>
-    </message>
-    <message>
-        <source>Restore a wallet from a backup file</source>
-        <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Pulihkan dompet dari file cadangan</translation>
-    </message>
-    <message>
         <source>Close all wallets</source>
         <translation type="unfinished">Tutup semua dompet</translation>
     </message>
@@ -434,10 +412,26 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     </message>
     </context>
 <context>
+    <name>CoinControlDialog</name>
+    <message>
+        <source>Copy change</source>
+        <translation type="unfinished">Salin Perubahan</translation>
+    </message>
+    <message>
+        <source>(%1 locked)</source>
+        <translation type="unfinished">(%1 terkunci)</translation>
+    </message>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">(tidak ada label)</translation>
+    </message>
+    </context>
+<context>
     <name>CreateWalletActivity</name>
     <message>
-        <source>Too many external signers found</source>
-        <translation type="unfinished">Terlalu banyak penanda tangan eksternal ditemukan</translation>
+        <source>Create Wallet</source>
+        <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
+        <translation type="unfinished">Bikin dompet</translation>
     </message>
     <message>
         <source>Too many external signers found</source>
@@ -470,11 +464,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     <message>
         <source>default wallet</source>
         <translation type="unfinished">wallet default</translation>
-    </message>
-    <message>
-        <source>Open Wallet</source>
-        <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
-        <translation type="unfinished">Buka Wallet</translation>
     </message>
     <message>
         <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -512,10 +501,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
 </context>
 <context>
     <name>WalletController</name>
-    <message>
-        <source>Close wallet</source>
-        <translation type="unfinished">Tutup wallet</translation>
-    </message>
     <message>
         <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation type="unfinished">Apakah anda yakin ingin menutup dompet &lt;i&gt;%1&lt;/i&gt;?</translation>
@@ -576,14 +561,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <translation type="unfinished">Buat dompet kosong</translation>
     </message>
     <message>
-        <source>Use descriptors for scriptPubKey management</source>
-        <translation type="unfinished">Pakai deskriptor untuk managemen scriptPubKey</translation>
-    </message>
-    <message>
-        <source>Descriptor Wallet</source>
-        <translation type="unfinished">Dompet Deskriptor</translation>
-    </message>
-    <message>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
         <translation type="unfinished">Gunakan perangkat penandatanganan eksternal seperti dompet perangkat keras. Konfigurasikan skrip penandatangan eksternal di preferensi dompet terlebih dahulu.</translation>
     </message>
@@ -594,10 +571,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     <message>
         <source>Create</source>
         <translation type="unfinished">Membuat</translation>
-    </message>
-    <message>
-        <source>Compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">Dikompilasi tanpa support sqlite (dibutuhkan untuk dompet deskriptor)</translation>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
@@ -983,6 +956,10 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <translation type="unfinished">&amp;Jalur skrip penanda tangan eksternal</translation>
     </message>
     <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished">&amp;Jendela</translation>
+    </message>
+    <message>
         <source>Compiled without external signing support (required for external signing)</source>
         <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Dikompilasi tanpa dukungan penandatanganan eksternal (diperlukan untuk penandatanganan eksternal)</translation>
@@ -997,13 +974,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <translation type="unfinished">Terjadi sebuah kesalahan</translation>
     </message>
     </context>
-<context>
-    <name>OptionsModel</name>
-    <message>
-        <source>Could not read setting "%1", %2.</source>
-        <translation type="unfinished">Tidak dapat membaca setelan "%1", %2.</translation>
-    </message>
-</context>
 <context>
     <name>OptionsModel</name>
     <message>
@@ -1032,6 +1002,11 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <extracomment>Title of Peers Table column which indicates the duration (length of time) since the peer connection started.</extracomment>
         <translation type="unfinished">Umur</translation>
     </message>
+    <message>
+        <source>Address</source>
+        <extracomment>Title of Peers Table column which contains the IP/Onion/I2P address of the connected peer.</extracomment>
+        <translation type="unfinished">Alamat</translation>
+    </message>
     </context>
 <context>
     <name>RPCConsole</name>
@@ -1053,6 +1028,10 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <extracomment>Tooltip text for the Addresses Rate-Limited field in the peer details area, which displays the total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</extracomment>
         <translation type="unfinished">Jumlah total alamat yang diterima dari rekan ini yang dihapus (tidak diproses) karena pembatasan tarif.</translation>
     </message>
+    <message>
+        <source>Last block time</source>
+        <translation type="unfinished">Waktu blok terakhir</translation>
+    </message>
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>
@@ -1071,6 +1050,17 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     <message>
         <source>Bech32m (BIP-350) is an upgrade to Bech32, wallet support is still limited.</source>
         <translation type="unfinished">Bech32m (BIP-350) adalah peningkatan terhadap Bech32, dukungan dompet masih terbatas.</translation>
+    </message>
+    <message>
+        <source>Could not unlock wallet.</source>
+        <translation type="unfinished">Tidak dapat membuka dompet.</translation>
+    </message>
+    </context>
+<context>
+    <name>RecentRequestsTableModel</name>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">(tidak ada label)</translation>
     </message>
     </context>
 <context>
@@ -1099,16 +1089,9 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
             <numerusform>Estimated to begin confirmation within %n block(s).</numerusform>
         </translation>
     </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
     <message>
-        <source>(press q to shutdown and continue later)</source>
-        <translation type="unfinished">(tekan q untuk mematikan dan melanjutkan nanti)</translation>
-    </message>
-    <message>
-        <source>press q to shutdown</source>
-        <translation type="unfinished">tekan q untuk mematikan</translation>
+        <source>(no label)</source>
+        <translation type="unfinished">(tidak ada label)</translation>
     </message>
 </context>
 <context>
@@ -1131,11 +1114,26 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     </message>
     </context>
 <context>
+    <name>TransactionTableModel</name>
+    <message>
+        <source>(no label)</source>
+        <translation type="unfinished">(tidak ada label)</translation>
+    </message>
+    </context>
+<context>
     <name>TransactionView</name>
     <message>
         <source>Comma separated file</source>
         <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
         <translation type="unfinished">File yang dipisahkan koma</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Alamat</translation>
+    </message>
+    <message>
+        <source>Exporting Failed</source>
+        <translation type="unfinished">Gagal Mengekspor</translation>
     </message>
     </context>
 <context>
@@ -1162,6 +1160,10 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">Ekspor data di tab saat ini ke sebuah file</translation>
+    </message>
+    <message>
+        <source>Error loading wallet. Wallet requires blocks to be downloaded, and software does not currently support loading wallets while blocks are being downloaded out of order when using assumeutxo snapshots. Wallet should be able to load successfully after node sync reaches height %s</source>
+        <translation type="unfinished">Eror saat membuka dompet. Dompet memerlukan blok untuk diunduh, dan piranti lunak saat ini tidak mendukung membuka dompet saat blok yang diunduh tidak tersedia saat memakai snapshot utxo yang diasumsikan. Dompet seharusnya dapat berhasil dibuka sesudah sinkronisasi node mencapai ketinggian %s</translation>
     </message>
     </context>
 <context>
@@ -1197,18 +1199,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     <message>
         <source>Wallet created successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future.</source>
         <translation type="unfinished">Dompet berhasil dibuat. Jenis dompet lama tidak digunakan lagi dan dukungan untuk membuat dan membuka dompet lama akan dihapus di masa mendatang.</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -blockfilterindex. Please temporarily disable blockfilterindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">Opsi -reindex-chainstate tidak kompatibel dengan -blockfilterindex. Harap nonaktifkan blockfilterindex sementara saat menggunakan -reindex-chainstate, atau ganti -reindex-chainstate dengan -reindex untuk membangun kembali semua indeks sepenuhnya.</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -coinstatsindex. Please temporarily disable coinstatsindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">Opsi -reindex-chainstate tidak kompatibel dengan -coinstatsindex. Harap nonaktifkan sementara coinstatsindex saat menggunakan -reindex-chainstate, atau ganti -reindex-chainstate dengan -reindex untuk membangun kembali semua indeks sepenuhnya.</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -txindex. Please temporarily disable txindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">Opsi -reindex-chainstate tidak kompatibel dengan -txindex. Harap nonaktifkan sementara txindex saat menggunakan -reindex-chainstate, atau ganti -reindex-chainstate dengan -reindex untuk sepenuhnya membangun kembali semua indeks.</translation>
     </message>
     <message>
         <source>Error: Address book data in wallet cannot be identified to belong to migrated wallets</source>
@@ -1271,10 +1261,6 @@ Please try running the latest software version.
 Dompet mungkin telah dibuat pada versi yang lebih baru.
 Silakan coba jalankan versi perangkat lunak terbaru.
 </translation>
-    </message>
-    <message>
-        <source>Unsupported category-specific logging level -loglevel=%s. Expected -loglevel=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %s. Valid loglevels: %s.</source>
-        <translation type="unfinished">Level logging khusus kategori yang tidak didukung -loglevel=%s. Diharapkan -loglevel=&lt;category&gt;:&lt;loglevel&gt;. Kategori yang valid: %s. Level log yang valid: %s.</translation>
     </message>
     <message>
         <source>
@@ -1367,10 +1353,6 @@ Tidak dapat memulihkan cadangan dompet..</translation>
     <message>
         <source>Unable to unload the wallet before migrating</source>
         <translation type="unfinished">Tidak dapat membongkar dompet sebelum bermigrasi</translation>
-    </message>
-    <message>
-        <source>Unsupported global logging level -loglevel=%s. Valid values: %s.</source>
-        <translation type="unfinished">Level logging global yang tidak didukung -loglevel=%s. Nilai yang valid: %s.</translation>
     </message>
     </context>
 </TS>

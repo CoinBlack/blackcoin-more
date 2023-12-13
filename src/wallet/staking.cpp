@@ -171,7 +171,7 @@ void AvailableCoinsForStaking(const CWallet& wallet,
                 CTxDestination destination;
                 if (!ExtractDestination(output.scriptPubKey, destination))
                     continue;
-                const CScriptID& hash = CScriptID(std::get<ScriptHash>(destination));
+                const CScriptID& hash = ToScriptID(std::get<ScriptHash>(destination));
                 if (!provider->GetCScript(hash, script))
                     continue;
             } else {

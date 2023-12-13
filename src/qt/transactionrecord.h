@@ -69,7 +69,6 @@ public:
         SendToOther,
         RecvWithAddress,
         RecvFromOther,
-        SendToSelf,
         Staked
     };
 

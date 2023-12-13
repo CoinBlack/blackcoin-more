@@ -86,7 +86,7 @@ static RPCHelpMan getstakinginfo()
     obj.pushKV("netstakeweight", (uint64_t)nNetworkWeight);
     obj.pushKV("expectedtime", nExpectedTime);
 
-    obj.pushKV("chain", Params().NetworkIDString());
+    obj.pushKV("chain", chainman.GetParams().GetChainTypeString());
     obj.pushKV("warnings", GetWarnings(false).original);
     return obj;
 },

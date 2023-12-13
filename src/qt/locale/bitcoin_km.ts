@@ -58,14 +58,6 @@
         <translation type="unfinished">ជ្រើសរើស(&amp;h)</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">អាសយដ្ឋានសម្រាប់ផ្ញើ</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">អាសយដ្ឋានសម្រាប់ទទួល</translation>
-    </message>
-    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">ទាំងនេះ​គឺជាអាសយដ្ឋាន Bitcoin របស់អ្នកសម្រាប់ធ្វើការផ្ញើការបង់ប្រាក់។ តែងតែពិនិត្យមើលចំនួនប្រាក់ និងអាសយដ្ឋានដែលទទួល មុនពេលផ្ញើប្រាក់។</translation>
     </message>
@@ -718,10 +710,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">បើកសកម្មភាពបណ្តាញ</translation>
     </message>
     <message>
-        <source>Error: %1</source>
-        <translation type="unfinished">កំហុស៖%1</translation>
-    </message>
-    <message>
         <source>Warning: %1</source>
         <translation type="unfinished">ប្រុងប្រយ័ត្នៈ %1</translation>
     </message>
@@ -824,10 +812,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">តម្លៃសេវា៖</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">ធូលី៖</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation type="unfinished">បន្ទាប់ពីតម្លៃសេវា៖</translation>
     </message>
@@ -908,52 +892,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ចម្លងតម្លៃ</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation type="unfinished">ចម្លងធូលី</translation>
-    </message>
-    <message>
-        <source>Copy change</source>
-        <translation type="unfinished">ចម្លងការផ្លាស់ប្តូរ</translation>
-    </message>
-    <message>
-        <source>(%1 locked)</source>
-        <translation type="unfinished">(%1បានចាក់សោរ)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy address</source>
-        <translation type="unfinished">&amp;ចម្លងអាសយដ្ឋាន</translation>
-    </message>
-    <message>
-        <source>Copy &amp;label</source>
-        <translation type="unfinished">ចម្លង &amp; ស្លាក</translation>
-    </message>
-    <message>
-        <source>Copy &amp;amount</source>
-        <translation type="unfinished">ចម្លង &amp; ចំនួន</translation>
-    </message>
-    <message>
-        <source>Copy transaction &amp;ID and output index</source>
-        <translation type="unfinished">ចម្លងប្រតិបត្តិការ &amp; លេខសម្គាល់ និងសន្ទស្សន៍ទិន្នផល</translation>
-    </message>
-    <message>
-        <source>L&amp;ock unspent</source>
-        <translation type="unfinished">L&amp;ock មិនបានចំណាយ</translation>
-    </message>
-    <message>
-        <source>&amp;Unlock unspent</source>
-        <translation type="unfinished">&amp;ដោះសោដោយមិនបានចំណាយ</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished">បាទ ឬ ចាស</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished">ទេ</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation type="unfinished">ស្លាកសញ្ញានេះបង្ហាញពណ៌ក្រហម ប្រសិនបើអ្នកទទួល ទទួលបានចំនួនមួយតិចជាងចំនួនចាប់ផ្តើមបច្ចុប្បន្ន។</translation>
+        <source>Can vary +/- %1 satoshi(s) per input.</source>
+        <translation type="unfinished">អាច +/- %1 satoshi(s)ច្រើនក្នុងការបញ្ជូលមួយ។</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
@@ -1659,6 +1599,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">PSBT បានរក្សាទុកក្នុងឌីស។</translation>
     </message>
     <message>
+        <source>own address</source>
+        <translation type="unfinished">អាសយដ្ឋានផ្ទាល់ខ្លួន</translation>
+    </message>
+    <message>
         <source>Unable to calculate transaction fee or total transaction amount.</source>
         <translation type="unfinished">មិនអាចគណនាកម្រៃប្រត្តិបត្តិការ ឬ ចំនួនប្រត្តិបត្តិការសរុប។</translation>
     </message>
@@ -2257,10 +2201,6 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">ធាតុចូល...</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">ធូលី៖</translation>
-    </message>
-    <message>
         <source>Choose…</source>
         <translation type="unfinished">ជ្រើសរើស…</translation>
     </message>
@@ -2311,10 +2251,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>Copy fee</source>
         <translation type="unfinished">ចម្លងតម្លៃ</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation type="unfinished">ចម្លងធូលី</translation>
     </message>
     <message>
         <source>Copy change</source>
@@ -2767,10 +2703,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">បានបញ្ចូនទៅកាន់</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation type="unfinished">បង់ប្រាក់ទៅខ្លួនអ្នក</translation>
-    </message>
-    <message>
         <source>Mined</source>
         <translation type="unfinished">បានរុករករ៉ែ</translation>
     </message>
@@ -2836,10 +2768,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>Sent to</source>
         <translation type="unfinished">បានបញ្ចូនទៅកាន់</translation>
-    </message>
-    <message>
-        <source>To yourself</source>
-        <translation type="unfinished">ទៅកាន់ខ្លូនអ្នក</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2995,11 +2923,6 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">នាំចេញទិន្នន័យនៃផ្ទាំងបច្ចុប្បន្នទៅជាឯកសារមួយ</translation>
-    </message>
-    <message>
-        <source>Wallet Data</source>
-        <extracomment>Name of the wallet data file format.</extracomment>
-        <translation type="unfinished">ទិន្នន័យកាបូប</translation>
     </message>
     <message>
         <source>Wallet Data</source>

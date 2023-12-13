@@ -21,7 +21,7 @@ public:
         msg.m_type = std::move(msg_type);
         // Blackcoin ToDo: revert after nodes upgrade to current version
         int32_t serModes = nVersion <= OLD_VERSION ? SER_NETWORK : SER_NETWORK | SER_POSMARKER;
-        CVectorWriter{ serModes, nFlags | nVersion, msg.data, 0, std::forward<Args>(args)... };
+        CVectorWriter{serModes, nFlags | nVersion, msg.data, 0, std::forward<Args>(args)...};
         return msg;
     }
 

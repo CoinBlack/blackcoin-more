@@ -26,8 +26,8 @@ CTxMemPool::Options MemPoolOptionsForTest(const NodeContext& node)
         .check_ratio = 1,
     };
     */
-    const auto err{ApplyArgsManOptions(*node.args, ::Params(), mempool_opts)};
-    Assert(!err);
+    const auto result{ApplyArgsManOptions(*node.args, ::Params(), mempool_opts)};
+    Assert(result);
     return mempool_opts;
 }
 
@@ -38,5 +38,5 @@ CTxMemPoolEntry TestMemPoolEntryHelper::FromTx(const CMutableTransaction& tx) co
 
 CTxMemPoolEntry TestMemPoolEntryHelper::FromTx(const CTransactionRef& tx) const
 {
-    return CTxMemPoolEntry{tx, nFee, TicksSinceEpoch<std::chrono::seconds>(time), nHeight, spendsCoinbase, sigOpCost, lp};
+    return CTxMemPoolEntry{tx, nFee, TicksSinceEpoch<std::chrono::seconds>(time), nHeight, m_sequence, spendsCoinbase, sigOpCost, lp};
 }

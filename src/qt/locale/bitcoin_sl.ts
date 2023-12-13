@@ -58,14 +58,6 @@
         <translation type="unfinished">&amp;Izberi</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">Imenik naslovov za pošiljanje</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">Imenik prejemnih naslovov</translation>
-    </message>
-    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">To so vaši bitcoin-naslovi za pošiljanje. Pred pošiljanjem vedno preverite znesek in prejemnikov naslov.</translation>
     </message>
@@ -261,13 +253,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <source>Runaway exception</source>
         <translation type="unfinished">Pobegla napaka</translation>
     </message>
-    <message>
-        <source>Runaway exception</source>
-        <translation type="unfinished">Pobegla napaka</translation>
-    </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Prišlo je do usodne napake. %1 ne more nadaljevati in se bo zaprl.</translation>
@@ -863,10 +848,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Provizija:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">Prah:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation type="unfinished">Po proviziji:</translation>
     </message>
@@ -955,28 +936,8 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Kopiraj bajte</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation type="unfinished">Kopiraj prah</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation type="unfinished">Kopiraj vračilo</translation>
-    </message>
-    <message>
-        <source>(%1 locked)</source>
-        <translation type="unfinished">(%1 zaklenjeno)</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished">da</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished">ne</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation type="unfinished">Ta oznaka postane rdeča, če kateri od prejemnikov prejme znesek, nižji od trenutne meje prahu.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
@@ -1156,14 +1117,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Ustvari prazno denarnico</translation>
     </message>
     <message>
-        <source>Use descriptors for scriptPubKey management</source>
-        <translation type="unfinished">Uporabi deskriptorje za upravljanje s scriptPubKey</translation>
-    </message>
-    <message>
-        <source>Descriptor Wallet</source>
-        <translation type="unfinished">Denarnica z deskriptorji</translation>
-    </message>
-    <message>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
         <translation type="unfinished">Za podpisovanje uporabite zunanjo napravo, kot je n.pr. hardverska denarnica. Najprej nastavite zunanjega podpisnika v nastavitvah denarnice.</translation>
     </message>
@@ -1174,10 +1127,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     <message>
         <source>Create</source>
         <translation type="unfinished">Ustvari</translation>
-    </message>
-    <message>
-        <source>Compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">Prevedeno brez podpore za SQLite (potrebna za deskriptorske denarnice)</translation>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
@@ -1325,6 +1274,10 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
         <translation type="unfinished">Napaka: Ni mogoče ustvariti mape "%1".</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Napaka</translation>
     </message>
     <message>
         <source>Welcome</source>
@@ -1798,6 +1751,10 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Prekliči</translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation type="unfinished">Napaka</translation>
+    </message>
+    <message>
         <source>The configuration file could not be opened.</source>
         <translation type="unfinished">Konfiguracijske datoteke ni bilo moč odpreti.</translation>
     </message>
@@ -1978,6 +1935,10 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     <message>
         <source> * Sends %1 to %2</source>
         <translation type="unfinished">* Pošlje %1 na %2</translation>
+    </message>
+    <message>
+        <source>own address</source>
+        <translation type="unfinished">lasten naslov</translation>
     </message>
     <message>
         <source>Unable to calculate transaction fee or total transaction amount.</source>
@@ -2902,10 +2863,6 @@ Za več informacij glede uporabe konzole uporabite ukaz %6.
         <translation type="unfinished">Vhodi ...</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">Prah:</translation>
-    </message>
-    <message>
         <source>Choose…</source>
         <translation type="unfinished">Izberi ...</translation>
     </message>
@@ -2966,6 +2923,10 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
         <translation type="unfinished">Kopiraj količino</translation>
     </message>
     <message>
+        <source>Copy amount</source>
+        <translation type="unfinished">Kopiraj znesek</translation>
+    </message>
+    <message>
         <source>Copy fee</source>
         <translation type="unfinished">Kopiraj provizijo</translation>
     </message>
@@ -2976,10 +2937,6 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
     <message>
         <source>Copy bytes</source>
         <translation type="unfinished">Kopiraj bajte</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation type="unfinished">Kopiraj prah</translation>
     </message>
     <message>
         <source>Copy change</source>
@@ -3639,10 +3596,6 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
         <translation type="unfinished">Poslano na </translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation type="unfinished">Plačilo sebi</translation>
-    </message>
-    <message>
         <source>Mined</source>
         <translation type="unfinished">Narudarjeno</translation>
     </message>
@@ -3716,10 +3669,6 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
     <message>
         <source>Sent to</source>
         <translation type="unfinished">Poslano na </translation>
-    </message>
-    <message>
-        <source>To yourself</source>
-        <translation type="unfinished">Sebi</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -3857,6 +3806,10 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>Create a new wallet</source>
         <translation type="unfinished">Ustvari novo denarnico</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Napaka</translation>
     </message>
     <message>
         <source>Unable to decode PSBT from clipboard (invalid base64)</source>
@@ -4019,10 +3972,6 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
         <translation type="unfinished">Distribuirano v okviru programske licence MIT. Podrobnosti so navedene v  priloženi datoteki %s ali %s</translation>
     </message>
     <message>
-        <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation type="unfinished">Napaka pri branju %s! Vsi ključi so bili prebrani pravilno, vendar so lahko vnosi o transakcijah ali vnosi naslovov nepravilni ali manjkajo.</translation>
-    </message>
-    <message>
         <source>Error reading %s! Transaction data may be missing or incorrect. Rescanning wallet.</source>
         <translation type="unfinished">Napaka pri branju %s! Podatki o transakciji morda manjkajo ali pa so napačni. Ponovno prečitavam denarnico.</translation>
     </message>
@@ -4097,10 +4046,6 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation type="unfinished">Baza podatkov blokov vsebuje blok, ki naj bi bil iz prihodnosti. To je lahko posledica napačne nastavitve datuma in časa vašega računalnika. Znova zgradite bazo podatkov samo, če ste prepričani, da sta datum in čas računalnika pravilna.</translation>
-    </message>
-    <message>
-        <source>The block index db contains a legacy 'txindex'. To clear the occupied disk space, run a full -reindex, otherwise ignore this error. This error message will not be displayed again.</source>
-        <translation type="unfinished">Baza kazala blokov vsebuje zastarel 'txindex'. Če želite sprostiti zasedeni prostor na disku, zaženite poln -reindex, sicer pa prezrite to napako. To sporočilo o napaki se ne bo več prikazalo.</translation>
     </message>
     <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
@@ -4189,22 +4134,6 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>Cannot set -peerblockfilters without -blockfilterindex.</source>
         <translation type="unfinished">Nastavitev -peerblockfilters ni veljavna brez nastavitve -blockfilterindex.</translation>
-    </message>
-    <message>
-        <source>The -txindex upgrade started by a previous version cannot be completed. Restart with the previous version or run a full -reindex.</source>
-        <translation type="unfinished">Nadgradnja -txindex je bila začeta s prejšnjo različico programske opreme in je ni mogoče dokončati. Poskusite ponovno s prejšnjo različico ali pa zaženite poln -reindex.</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -blockfilterindex. Please temporarily disable blockfilterindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">Možnost -reindex-chainstate ni združljiva z -blockfilterindex. Prosimo, ali začasno onemogočite blockfilterindex in uporabite -reindex-chainstate ali pa namesto reindex-chainstate uporabite -reindex za popolno ponovno tvorbo vseh kazal.</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -coinstatsindex. Please temporarily disable coinstatsindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">Možnost -reindex-chainstate option ni združljiva z -coinstatsindex. Prosimo, ali začasno onemogočite coinstatsindex in uporabite -reindex-chainstate ali pa namesto reindex-chainstate uporabite -reindex za popolno ponovno tvorbo vseh kazal.</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -txindex. Please temporarily disable txindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">Možnost -reindex-chainstate option ni združljiva s -txindex. Prosimo, ali začasno onemogočite txindex in uporabite -reindex-chainstate ali pa namesto reindex-chainstate uporabite -reindex za popolno ponovno tvorbo vseh kazal.</translation>
     </message>
     <message>
         <source>Cannot provide specific connections and have addrman find outgoing connections at the same time.</source>

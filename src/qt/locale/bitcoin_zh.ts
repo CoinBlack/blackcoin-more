@@ -58,14 +58,6 @@
         <translation type="unfinished">选择(&amp;H)</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">发送地址</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">接收地址</translation>
-    </message>
-    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">这些是你的比特币支付地址。在发送之前，一定要核对金额和接收地址。</translation>
     </message>
@@ -100,6 +92,14 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
         <translation type="unfinished">试图将地址列表保存到 %1时出错，请再试一次。</translation>
+    </message>
+    <message>
+        <source>Sending addresses - %1</source>
+        <translation type="unfinished">付款地址 - %1</translation>
+    </message>
+    <message>
+        <source>Receiving addresses - %1</source>
+        <translation type="unfinished">收款地址 - %1</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -336,229 +336,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
-    <message>
-        <source>Settings file could not be read</source>
-        <translation type="unfinished">无法读取设置文件</translation>
-    </message>
-    <message>
-        <source>Settings file could not be written</source>
-        <translation type="unfinished">无法写入设置文件</translation>
-    </message>
-    <message>
-        <source>Error reading %s! Transaction data may be missing or incorrect. Rescanning wallet.</source>
-        <translation type="unfinished">读取%s出错！交易数据可能丢失或有误。重新扫描钱包中。</translation>
-    </message>
-    <message>
-        <source>Error: Legacy wallets only support the "legacy", "p2sh-segwit", and "bech32" address types</source>
-        <translation type="unfinished">错误: 旧式钱包只支持 "legacy", "p2sh-segwit", 和 "bech32" 这三种地址类型</translation>
-    </message>
-    <message>
-        <source>Invalid or corrupt peers.dat (%s). If you believe this is a bug, please report it to %s. As a workaround, you can move the file (%s) out of the way (rename, move, or delete) to have a new one created on the next start.</source>
-        <translation type="unfinished">无效或损坏的peers.dat (%s)。如果你确信这是一个bug，请反馈到%s。作为变通办法，你可以把现有文件 (%s) 移开(重命名、移动或删除)，这样就可以在下次启动时创建一个新文件了。</translation>
-    </message>
-    <message>
-        <source>Prune mode is incompatible with -reindex-chainstate. Use full -reindex instead.</source>
-        <translation type="unfinished">修剪模式与 -reindex-chainstate 不兼容。请进行一次完整的 -reindex 。</translation>
-    </message>
-    <message>
-        <source>The block index db contains a legacy 'txindex'. To clear the occupied disk space, run a full -reindex, otherwise ignore this error. This error message will not be displayed again.</source>
-        <translation type="unfinished">区块索引数据库含有历史遗留的 'txindex' 。可以运行完整的 -reindex 来清理被占用的磁盘空间；也可以忽略这个错误。这个错误消息将不会再次显示。</translation>
-    </message>
-    <message>
-        <source>Unsupported chainstate database format found. Please restart with -reindex-chainstate. This will rebuild the chainstate database.</source>
-        <translation type="unfinished">找到了不受支持的 chainstate 数据库格式。请使用 -reindex-chainstate 参数重启。这将会重建 chainstate 数据库。</translation>
-    </message>
-    <message>
-        <source>Wallet created successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future.</source>
-        <translation type="unfinished">钱包创建成功。旧式钱包已被弃用，未来将不再支持创建或打开旧式钱包。</translation>
-    </message>
-    <message>
-        <source>Cannot set -forcednsseed to true when setting -dnsseed to false.</source>
-        <translation type="unfinished">在 -dnsseed 被设为 false 时无法将 -forcednsseed 设为 true 。</translation>
-    </message>
-    <message>
-        <source>The -txindex upgrade started by a previous version cannot be completed. Restart with the previous version or run a full -reindex.</source>
-        <translation type="unfinished">无法完成由之前版本启动的 -txindex 升级。请用之前的版本重新启动，或者进行一次完整的 -reindex 。</translation>
-    </message>
-    <message>
-        <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any Bitcoin Core peers connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
-        <translation type="unfinished">%s请求监听端口 %u。这个端口被认为是“坏的”，所以不太可能有Bitcoin Core节点会连接到它。有关详细信息和完整列表，请参见 doc/p2p-bad-ports.md 。</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -blockfilterindex. Please temporarily disable blockfilterindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">-reindex-chainstate 与 -blockfilterindex 不兼容。请在进行 -reindex-chainstate 时临时禁用 blockfilterindex ，或者改用 -reindex （而不是 -reindex-chainstate ）来完整地重建所有索引。</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -coinstatsindex. Please temporarily disable coinstatsindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">-reindex-chainstate 与 -coinstatsindex 不兼容。请在进行  -reindex-chainstate 时临时禁用 coinstatsindex ，或者改用 -reindex （而不是 -reindex-chainstate ）来完整地重建所有索引。</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -txindex. Please temporarily disable txindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">-reindex-chainstate 与 -txindex 不兼容。请在进行 -reindex-chainstate 时临时禁用 txindex ，或者改用 -reindex （而不是 -reindex-chainstate ）来完整地重建所有索引。</translation>
-    </message>
-    <message>
-        <source>Assumed-valid: last wallet synchronisation goes beyond available block data. You need to wait for the background validation chain to download more blocks.</source>
-        <translation type="unfinished">假定有效（assume-valid）: 上次同步钱包时进度越过了现有的区块数据。你需要等待后台验证链下载更多的区块。</translation>
-    </message>
-    <message>
-        <source>Cannot provide specific connections and have addrman find outgoing connections at the same time.</source>
-        <translation type="unfinished">在使用地址管理器(addrman)寻找出站连接时，无法同时提供特定的连接。</translation>
-    </message>
-    <message>
-        <source>Error loading %s: External signer wallet being loaded without external signer support compiled</source>
-        <translation type="unfinished">加载%s时出错: 编译时未启用外部签名器支持，却仍然试图加载外部签名器钱包</translation>
-    </message>
-    <message>
-        <source>Error: Address book data in wallet cannot be identified to belong to migrated wallets</source>
-        <translation type="unfinished">错误：钱包中的地址簿数据无法被识别为属于迁移后的钱包</translation>
-    </message>
-    <message>
-        <source>Error: Duplicate descriptors created during migration. Your wallet may be corrupted.</source>
-        <translation type="unfinished">错误：迁移过程中创建了重复的输出描述符。你的钱包可能已损坏。</translation>
-    </message>
-    <message>
-        <source>Error: Transaction %s in wallet cannot be identified to belong to migrated wallets</source>
-        <translation type="unfinished">错误：钱包中的交易%s无法被识别为属于迁移后的钱包</translation>
-    </message>
-    <message>
-        <source>Error: Unable to produce descriptors for this legacy wallet. Make sure the wallet is unlocked first</source>
-        <translation type="unfinished">错误：无法为这个遗留钱包生成输出描述符。请先确定钱包已被解锁</translation>
-    </message>
-    <message>
-        <source>Failed to rename invalid peers.dat file. Please move or delete it and try again.</source>
-        <translation type="unfinished">无法重命名无效的 peers.dat 文件。 请移动或删除它，然后重试。</translation>
-    </message>
-    <message>
-        <source>Incompatible options: -dnsseed=1 was explicitly specified, but -onlynet forbids connections to IPv4/IPv6</source>
-        <translation type="unfinished">互不兼容的选项：-dnsseed=1 已被显式指定，但 -onlynet 禁止了IPv4/IPv6 连接</translation>
-    </message>
-    <message>
-        <source>Outbound connections restricted to Tor (-onlynet=onion) but the proxy for reaching the Tor network is explicitly forbidden: -onion=0</source>
-        <translation type="unfinished">出站连接被限制为仅使用 Tor (-onlynet=onion)，但是到达 Tor 网络的代理被显式禁止： -onion=0</translation>
-    </message>
-    <message>
-        <source>Outbound connections restricted to Tor (-onlynet=onion) but the proxy for reaching the Tor network is not provided: none of -proxy, -onion or -listenonion is given</source>
-        <translation type="unfinished">出站连接被限制为仅使用 Tor (-onlynet=onion)，但是未提供到达 Tor 网络的代理：没有提供 -proxy=, -onion= 或 -listenonion 参数</translation>
-    </message>
-    <message>
-        <source>Unrecognized descriptor found. Loading wallet %s
-
-The wallet might had been created on a newer version.
-Please try running the latest software version.
-</source>
-        <translation type="unfinished">找到无法识别的输出描述符。加载钱包%s
-
-钱包可能由新版软件创建，
-请尝试运行最新的软件版本。
-</translation>
-    </message>
-    <message>
-        <source>Unsupported category-specific logging level -loglevel=%s. Expected -loglevel=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %s. Valid loglevels: %s.</source>
-        <translation type="unfinished">不支持的类别限定日志等级 -loglevel=%s。预期参数 -loglevel=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %s。有效的类别： %s。</translation>
-    </message>
-    <message>
-        <source>
-Unable to cleanup failed migration</source>
-        <translation type="unfinished">
-无法清理失败的迁移</translation>
-    </message>
-    <message>
-        <source>
-Unable to restore backup of wallet.</source>
-        <translation type="unfinished">
-无法还原钱包备份</translation>
-    </message>
-    <message>
-        <source>Error: Could not add watchonly tx to watchonly wallet</source>
-        <translation type="unfinished">错误：无法添加仅观察交易至仅观察钱包</translation>
-    </message>
-    <message>
-        <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">错误：无法删除仅观察交易</translation>
-    </message>
-    <message>
-        <source>Error: Failed to create new watchonly wallet</source>
-        <translation type="unfinished">错误：创建新仅观察钱包失败</translation>
-    </message>
-    <message>
-        <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">错误：有些仅观察交易无法被删除</translation>
-    </message>
-    <message>
-        <source>Error: This wallet already uses SQLite</source>
-        <translation type="unfinished">错误：此钱包已经在使用SQLite</translation>
-    </message>
-    <message>
-        <source>Error: This wallet is already a descriptor wallet</source>
-        <translation type="unfinished">错误：这个钱包已经是输出描述符钱包</translation>
-    </message>
-    <message>
-        <source>Error: Unable to begin reading all records in the database</source>
-        <translation type="unfinished">错误：无法开始读取这个数据库中的所有记录</translation>
-    </message>
-    <message>
-        <source>Error: Unable to make a backup of your wallet</source>
-        <translation type="unfinished">错误：无法为你的钱包创建备份</translation>
-    </message>
-    <message>
-        <source>Error: Unable to read all records in the database</source>
-        <translation type="unfinished">错误：无法读取这个数据库中的所有记录</translation>
-    </message>
-    <message>
-        <source>Error: Unable to remove watchonly address book data</source>
-        <translation type="unfinished">错误：无法移除仅观察地址簿数据</translation>
-    </message>
-    <message>
-        <source>Input not found or already spent</source>
-        <translation type="unfinished">找不到交易項，或可能已經花掉了</translation>
-    </message>
-    <message>
-        <source>Listening for incoming connections failed (listen returned error %s)</source>
-        <translation type="unfinished">监听外部连接失败 (listen函数返回了错误 %s)</translation>
-    </message>
-    <message>
-        <source>Missing amount</source>
-        <translation type="unfinished">缺少金額</translation>
-    </message>
-    <message>
-        <source>Missing solving data for estimating transaction size</source>
-        <translation type="unfinished">缺少用於估計交易規模的求解數據</translation>
-    </message>
-    <message>
-        <source>No addresses available</source>
-        <translation type="unfinished">沒有可用的地址</translation>
-    </message>
-    <message>
-        <source>Transaction change output index out of range</source>
-        <translation type="unfinished">交易尋找零輸出項超出範圍</translation>
-    </message>
-    <message>
-        <source>Transaction needs a change address, but we can't generate it.</source>
-        <translation type="unfinished">交易需要一个找零地址，但是我们无法生成它。</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory for -maxsigcachesize: '%s' MiB</source>
-        <translation type="unfinished">无法为 -maxsigcachesize: '%s' MiB 分配内存</translation>
-    </message>
-    <message>
-        <source>Unable to find UTXO for external input</source>
-        <translation type="unfinished">无法为外部输入找到UTXO</translation>
-    </message>
-    <message>
-        <source>Unable to parse -maxuploadtarget: '%s'</source>
-        <translation type="unfinished">無法解析-最大上傳目標:'%s'</translation>
-    </message>
-    <message>
-        <source>Unable to unload the wallet before migrating</source>
-        <translation type="unfinished">在迁移前无法卸载钱包</translation>
-    </message>
-    <message>
-        <source>Unsupported global logging level -loglevel=%s. Valid values: %s.</source>
-        <translation type="unfinished">不支持的全局日志等级 -loglevel=%s 。有效的数值：%s 。</translation>
-    </message>
-    </context>
-<context>
     <name>BitcoinGUI</name>
     <message>
         <source>&amp;Minimize</source>
@@ -635,10 +412,6 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">從剪貼簿載入PSBT</translation>
     </message>
     <message>
-        <source>Load PSBT from &amp;clipboard…</source>
-        <translation type="unfinished">從剪貼簿載入PSBT</translation>
-    </message>
-    <message>
         <source>Node window</source>
         <translation type="unfinished">结点窗口</translation>
     </message>
@@ -679,6 +452,14 @@ Unable to restore backup of wallet.</source>
         <source>Restore a wallet from a backup file</source>
         <extracomment>Status tip for Restore Wallet menu item</extracomment>
         <translation type="unfinished">從備份檔案中恢復錢包</translation>
+    </message>
+    <message>
+        <source>Migrate Wallet</source>
+        <translation type="unfinished">迁移钱包</translation>
+    </message>
+    <message>
+        <source>Migrate a wallet</source>
+        <translation type="unfinished">迁移一个钱包</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
@@ -738,12 +519,83 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">預先同步標頭(%1%)</translation>
     </message>
     <message>
+        <source>Error creating wallet</source>
+        <translation type="unfinished">创建钱包时出错</translation>
+    </message>
+    <message>
+        <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
+        <translation type="unfinished">无法创建新钱包，软件编译时未启用SQLite支持（输出描述符钱包需要它）</translation>
+    </message>
+    <message>
         <source>Error: %1</source>
         <translation type="unfinished">错误: %1</translation>
     </message>
-    </context>
+    <message>
+        <source>Warning: %1</source>
+        <translation type="unfinished">警告: %1</translation>
+    </message>
+    <message>
+        <source>Amount: %1
+</source>
+        <translation type="unfinished">金額: %1
+</translation>
+    </message>
+    <message>
+        <source>Type: %1
+</source>
+        <translation type="unfinished">種類: %1
+</translation>
+    </message>
+    <message>
+        <source>Label: %1
+</source>
+        <translation type="unfinished">標記: %1
+</translation>
+    </message>
+    <message>
+        <source>Address: %1
+</source>
+        <translation type="unfinished">地址: %1
+</translation>
+    </message>
+    <message>
+        <source>Incoming transaction</source>
+        <translation type="unfinished">收款交易</translation>
+    </message>
+    <message>
+        <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
+        <translation type="unfinished">產生 HD 金鑰&lt;b&gt;已經啟用&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
+        <translation type="unfinished">HD密钥生成&lt;b&gt;禁用&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
+        <translation type="unfinished">私钥&lt;b&gt;禁用&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
+        <translation type="unfinished">錢包&lt;b&gt;已加密&lt;/b&gt;並且&lt;b&gt;解鎖中&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Original message:</source>
+        <translation type="unfinished">原消息:</translation>
+    </message>
+</context>
+<context>
+    <name>UnitDisplayStatusBarControl</name>
+    <message>
+        <source>Unit to show amounts in. Click to select another unit.</source>
+        <translation type="unfinished">金额单位。单击选择别的单位。</translation>
+    </message>
+</context>
 <context>
     <name>CoinControlDialog</name>
+    <message>
+        <source>Coin Selection</source>
+        <translation type="unfinished">手动选币</translation>
+    </message>
     <message>
         <source>Copy amount</source>
         <translation type="unfinished">复制金额</translation>
@@ -757,12 +609,8 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">复制手续费</translation>
     </message>
     <message>
-        <source>yes</source>
-        <translation type="unfinished">是</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation type="unfinished">当任何一个收款金额小于目前的粉尘金额阈值时，文字会变红色。</translation>
+        <source>(no label)</source>
+        <translation type="unfinished">(无标签)</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -782,7 +630,62 @@ Unable to restore backup of wallet.</source>
     </message>
 </context>
 <context>
+    <name>MigrateWalletActivity</name>
+    <message>
+        <source>Migrate wallet</source>
+        <translation type="unfinished">迁移钱包</translation>
+    </message>
+    <message>
+        <source>Are you sure you wish to migrate the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
+        <translation type="unfinished">您确定想要迁移钱包&lt;i&gt;%1&lt;/i&gt;吗？</translation>
+    </message>
+    <message>
+        <source>Migrating the wallet will convert this wallet to one or more descriptor wallets. A new wallet backup will need to be made.
+If this wallet contains any watchonly scripts, a new wallet will be created which contains those watchonly scripts.
+If this wallet contains any solvable but not watched scripts, a different and new wallet will be created which contains those scripts.
+
+The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the "Restore Wallet" functionality.</source>
+        <translation type="unfinished">迁移钱包将会把这个钱包转换成一个或多个输出描述符钱包。将会需要创建一个新的钱包备份。
+如果这个钱包包含仅观察脚本，将会创建包含那些仅观察脚本的新钱包。
+如果这个钱包包含可解但又未被监视的脚本，将会创建一个不同的钱包以包含那些脚本。
+
+迁移过程开始前将会创建一个钱包备份。备份文件将会被命名为 &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak 然后被保存在该钱包所在目录下。如果迁移过程出错，可以使用“恢复钱包”功能恢复备份。</translation>
+    </message>
+    <message>
+        <source>Migrate Wallet</source>
+        <translation type="unfinished">迁移钱包</translation>
+    </message>
+    <message>
+        <source>Migrating Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
+        <translation type="unfinished">迁移钱包 &lt;b&gt;%1&lt;/b&gt;...</translation>
+    </message>
+    <message>
+        <source>The wallet '%1' was migrated successfully.</source>
+        <translation type="unfinished">已成功迁移钱包 '%1' 。</translation>
+    </message>
+    <message>
+        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">仅观察脚本已被迁移至名为 '%1' 的新钱包中。</translation>
+    </message>
+    <message>
+        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished"> 可解但又未被监视的脚本已被迁移至名为 '%1' 的新钱包中。</translation>
+    </message>
+    <message>
+        <source>Migration failed</source>
+        <translation type="unfinished">迁移失败</translation>
+    </message>
+    <message>
+        <source>Migration Successful</source>
+        <translation type="unfinished">迁移成功</translation>
+    </message>
+</context>
+<context>
     <name>OpenWalletActivity</name>
+    <message>
+        <source>default wallet</source>
+        <translation type="unfinished">默认钱包</translation>
+    </message>
     <message>
         <source>Open Wallet</source>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
@@ -831,20 +734,20 @@ Unable to restore backup of wallet.</source>
 <context>
     <name>CreateWalletDialog</name>
     <message>
+        <source>You are one step away from creating your new wallet!</source>
+        <translation type="unfinished">距离创建您的新钱包只有一步之遥了！</translation>
+    </message>
+    <message>
+        <source>Please provide a name and, if desired, enable any advanced options</source>
+        <translation type="unfinished">请指定一个名字，如果需要的话还可以启用高级选项</translation>
+    </message>
+    <message>
         <source>Advanced Options</source>
         <translation type="unfinished">进阶设定</translation>
     </message>
     <message>
         <source>Disable Private Keys</source>
         <translation type="unfinished">禁用私钥</translation>
-    </message>
-    <message>
-        <source>Use descriptors for scriptPubKey management</source>
-        <translation type="unfinished">使用输出描述符进行scriptPubKey管理</translation>
-    </message>
-    <message>
-        <source>Compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">编译时未启用SQLite支持（输出描述符钱包需要它）</translation>
     </message>
     </context>
 <context>
@@ -943,44 +846,8 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">与%1兼容的脚本文件路径（例如 C:\Downloads\hwi.exe 或者 /Users/you/Downloads/hwi.py ）。注意：恶意软件可以偷币！</translation>
     </message>
     <message>
-        <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
-        <translation type="unfinished">代理服务器 IP 地址 (例如 IPv4: 127.0.0.1 / IPv6: ::1)</translation>
-    </message>
-    <message>
-        <source>Shows if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
-        <translation type="unfinished">显示默认的SOCKS5代理是否被用于在该类型的网络下连接同伴。</translation>
-    </message>
-    <message>
-        <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
-        <translation type="unfinished">窗口被关闭时最小化程序而不是退出。当此选项启用时，只有在菜单中选择“退出”时才会让程序退出。</translation>
-    </message>
-    <message>
         <source>Options set in this dialog are overridden by the command line:</source>
         <translation type="unfinished">这个对话框中的设置已被如下命令行选项覆盖:</translation>
-    </message>
-    <message>
-        <source>Open the %1 configuration file from the working directory.</source>
-        <translation type="unfinished">從工作目錄開啟設定檔 %1。</translation>
-    </message>
-    <message>
-        <source>Open Configuration File</source>
-        <translation type="unfinished">開啟設定檔</translation>
-    </message>
-    <message>
-        <source>Reset all client options to default.</source>
-        <translation type="unfinished">重設所有客戶端軟體選項成預設值。</translation>
-    </message>
-    <message>
-        <source>&amp;Reset Options</source>
-        <translation type="unfinished">重設選項(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Network</source>
-        <translation type="unfinished">网络(&amp;N)</translation>
-    </message>
-    <message>
-        <source>Reverting this setting requires re-downloading the entire blockchain.</source>
-        <translation type="unfinished">警告:还原此设置需要重新下载整个区块链。</translation>
     </message>
     <message>
         <source>Maximum database cache size. A larger cache can contribute to faster sync, after which the benefit is less pronounced for most use cases. Lowering the cache size will reduce memory usage. Unused mempool memory is shared for this cache.</source>
@@ -991,10 +858,6 @@ Unable to restore backup of wallet.</source>
         <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
         <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">设置脚本验证线程的数量。负值则表示你想要保留给系统的核心数量。</translation>
-    </message>
-    <message>
-        <source>(0 = auto, &lt;0 = leave that many cores free)</source>
-        <translation type="unfinished">(0 表示程式自動決定，小於 0 表示保留處理器核心不用的數目)</translation>
     </message>
     <message>
         <source>This allows you or a third party tool to communicate with the node through command-line and JSON-RPC commands.</source>
@@ -1017,10 +880,6 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">默认从金额中减去交易手续费(&amp;F)</translation>
     </message>
     <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation type="unfinished">如果您禁止动用尚未确认的找零资金，则一笔交易的找零资金至少需要有1个确认后才能动用。这同时也会影响账户余额的计算。</translation>
-    </message>
-    <message>
         <source>Enable &amp;PSBT controls</source>
         <extracomment>An options window setting to enable PSBT controls.</extracomment>
         <translation type="unfinished">启用&amp;PSBT控件</translation>
@@ -1029,10 +888,6 @@ Unable to restore backup of wallet.</source>
         <source>Whether to show PSBT controls.</source>
         <extracomment>Tooltip text for options window setting that enables PSBT controls.</extracomment>
         <translation type="unfinished">是否要显示PSBT控件</translation>
-    </message>
-    <message>
-        <source>&amp;External signer script path</source>
-        <translation type="unfinished">外部签名器脚本路径(&amp;E)</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1103,6 +958,22 @@ Unable to restore backup of wallet.</source>
 <context>
     <name>RPCConsole</name>
     <message>
+        <source>The transport layer version: %1</source>
+        <translation type="unfinished">传输层版本: %1</translation>
+    </message>
+    <message>
+        <source>Transport</source>
+        <translation type="unfinished">传输</translation>
+    </message>
+    <message>
+        <source>The BIP324 session ID string in hex, if any.</source>
+        <translation type="unfinished">十六进制格式的BIP324会话ID，如果有的话。</translation>
+    </message>
+    <message>
+        <source>Session ID</source>
+        <translation type="unfinished">会话ID</translation>
+    </message>
+    <message>
         <source>Whether we relay transactions to this peer.</source>
         <translation type="unfinished">是否要将交易转发给这个节点。</translation>
     </message>
@@ -1149,9 +1020,41 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">结点窗口</translation>
     </message>
     <message>
+        <source>detecting: peer could be v1 or v2</source>
+        <extracomment>Explanatory text for "detecting" transport type.</extracomment>
+        <translation type="unfinished">检测中: 节点可能是v1或是v2</translation>
+    </message>
+    <message>
+        <source>v1: unencrypted, plaintext transport protocol</source>
+        <extracomment>Explanatory text for v1 transport type.</extracomment>
+        <translation type="unfinished">v1: 未加密，明文传输协议</translation>
+    </message>
+    <message>
+        <source>v2: BIP324 encrypted transport protocol</source>
+        <extracomment>Explanatory text for v2 transport type.</extracomment>
+        <translation type="unfinished">v2: BIP324加密传输协议</translation>
+    </message>
+    <message>
         <source>&amp;Copy IP/Netmask</source>
         <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer's IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
         <translation type="unfinished">复制IP/网络掩码(&amp;C)</translation>
+    </message>
+    <message>
+        <source>Welcome to the %1 RPC console.
+Use up and down arrows to navigate history, and %2 to clear screen.
+Use %3 and %4 to increase or decrease the font size.
+Type %5 for an overview of available commands.
+For more information on using this console, type %6.
+
+%7WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.%8</source>
+        <extracomment>RPC console welcome message. Placeholders %7 and %8 are style tags for the warning content, and they are not space separated from the rest of the text intentionally.</extracomment>
+        <translation type="unfinished">欢迎来到 %1 RPC 控制台。
+使用上与下箭头以进行历史导航，%2 以清除屏幕。
+使用%3 和 %4 以增加或减小字体大小。
+输入 %5 以显示可用命令的概览。
+查看更多关于此控制台的信息，输入 %6。
+
+%7 警告：骗子们很活跃，他们会让用户在这里输入命令以便偷走用户钱包中的内容。所以请您不要在不完全了解一个命令的后果的情况下使用此控制台。%8</translation>
     </message>
     </context>
 <context>
@@ -1324,7 +1227,11 @@ Unable to restore backup of wallet.</source>
         <comment>Fee-bump PSBT saved</comment>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
-    </context>
+    <message>
+        <source>default wallet</source>
+        <translation type="unfinished">默认钱包</translation>
+    </message>
+</context>
 <context>
     <name>WalletView</name>
     <message>
@@ -1338,6 +1245,10 @@ Unable to restore backup of wallet.</source>
     </context>
 <context>
     <name>bitcoin-core</name>
+    <message>
+        <source>%s failed to validate the -assumeutxo snapshot state. This indicates a hardware problem, or a bug in the software, or a bad software modification that allowed an invalid snapshot to be loaded. As a result of this, the node will shut down and stop using any state that was built on the snapshot, resetting the chain height from %d to %d. On the next restart, the node will resume syncing from %d without using any snapshot data. Please report this incident to %s, including how you obtained the snapshot. The invalid snapshot chainstate will be left on disk in case it is helpful in diagnosing the issue that caused this error.</source>
+        <translation type="unfinished">%s 验证 -assumeutxo 快照状态失败。这表明硬件可能有问题，也可能是软件bug，或者还可能是软件被不当修改、从而让非法快照也能够被加载。因此，将关闭节点并停止使用从这个快照构建出的任何状态，并将链高度从 %d 重置到 %d 。下次启动时，节点将会不使用快照数据从 %d 继续同步。请将这个事件报告给 %s 并在报告中包括您是如何获得这份快照的。无效的链状态快照仍被保存至磁盘上，以供诊断问题的原因。</translation>
+    </message>
     <message>
         <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
         <translation type="unfinished">%s请求监听端口%u。此端口被认为是“坏的”，所以不太可能有其他节点会连接过来。详情以及完整的端口列表请参见 doc/p2p-bad-ports.md 。</translation>
@@ -1355,6 +1266,10 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">读取%s出错！交易数据可能丢失或有误。重新扫描钱包中。</translation>
     </message>
     <message>
+        <source>Error: Legacy wallets only support the "legacy", "p2sh-segwit", and "bech32" address types</source>
+        <translation type="unfinished">错误: 旧式钱包只支持 "legacy", "p2sh-segwit", 和 "bech32" 这三种地址类型</translation>
+    </message>
+    <message>
         <source>Error: Unable to produce descriptors for this legacy wallet. Make sure to provide the wallet's passphrase if it is encrypted.</source>
         <translation type="unfinished">错误: 无法为该旧式钱包生成描述符。如果钱包已被加密，请确保提供的钱包加密密码正确。</translation>
     </message>
@@ -1367,8 +1282,12 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">修剪模式与 -reindex-chainstate 不兼容。请进行一次完整的 -reindex 。</translation>
     </message>
     <message>
-        <source>The block index db contains a legacy 'txindex'. To clear the occupied disk space, run a full -reindex, otherwise ignore this error. This error message will not be displayed again.</source>
-        <translation type="unfinished">区块索引数据库含有历史遗留的 'txindex' 。可以运行完整的 -reindex 来清理被占用的磁盘空间；也可以忽略这个错误。这个错误消息将不会再次显示。</translation>
+        <source>Rename of '%s' -&gt; '%s' failed. You should resolve this by manually moving or deleting the invalid snapshot directory %s, otherwise you will encounter the same error again on the next startup.</source>
+        <translation type="unfinished">重命名 '%s' -&gt; '%s' 失败。您需要手动移走或删除无效的快照目录 %s来解决这个问题，不然的话您就会在下一次启动时遇到相同的错误。</translation>
+    </message>
+    <message>
+        <source>Unsupported category-specific logging level %1$s=%2$s. Expected %1$s=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %3$s. Valid loglevels: %4$s.</source>
+        <translation type="unfinished">不支持的类别限定日志等级 %1$s=%2$s 。 预期参数 %1$s=&lt;category&gt;:&lt;loglevel&gt;。 有效的类别: %3$s 。有效的日志等级: %4$s 。</translation>
     </message>
     <message>
         <source>Unsupported chainstate database format found. Please restart with -reindex-chainstate. This will rebuild the chainstate database.</source>
@@ -1379,32 +1298,16 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">钱包创建成功。旧式钱包已被弃用，未来将不再支持创建或打开旧式钱包。</translation>
     </message>
     <message>
+        <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
+        <translation type="unfinished">钱包加载成功。旧式钱包已被弃用，未来将不再支持创建或打开旧式钱包。可以使用 migratewallet 命令将旧式钱包迁移至输出描述符钱包。</translation>
+    </message>
+    <message>
         <source>Cannot set -forcednsseed to true when setting -dnsseed to false.</source>
         <translation type="unfinished">在 -dnsseed 被设为 false 时无法将 -forcednsseed 设为 true 。</translation>
     </message>
     <message>
-        <source>The -txindex upgrade started by a previous version cannot be completed. Restart with the previous version or run a full -reindex.</source>
-        <translation type="unfinished">无法完成由之前版本启动的 -txindex 升级。请用之前的版本重新启动，或者进行一次完整的 -reindex 。</translation>
-    </message>
-    <message>
-        <source>%s failed to validate the -assumeutxo snapshot state. This indicates a hardware problem, or a bug in the software, or a bad software modification that allowed an invalid snapshot to be loaded. As a result of this, the node will shut down and stop using any state that was built on the snapshot, resetting the chain height from %d to %d. On the next restart, the node will resume syncing from %d without using any snapshot data. Please report this incident to %s, including how you obtained the snapshot. The invalid snapshot chainstate has been left on disk in case it is helpful in diagnosing the issue that caused this error.</source>
-        <translation type="unfinished">%s 验证 -assumeutxo 快照状态失败。这表明硬件可能有问题，也可能是软件bug，或者还可能是软件被不当修改、从而让非法快照也能够被加载。因此，将关闭节点并停止使用从这个快照构建出的任何状态，并将链高度从 %d 重置到 %d 。下次启动时，节点将会不使用快照数据从 %d 继续同步。请将这个事件报告给 %s 并在报告中包括您是如何获得这份快照的。无效的链状态快照仍被保存至磁盘上以供诊断问题的原因。</translation>
-    </message>
-    <message>
         <source>%s is set very high! Fees this large could be paid on a single transaction.</source>
         <translation type="unfinished">%s被设置得很高! 这可是一次交易就有可能付出的手续费。</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -blockfilterindex. Please temporarily disable blockfilterindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">-reindex-chainstate 与 -blockfilterindex 不兼容。请在进行 -reindex-chainstate 时临时禁用 blockfilterindex ，或者改用 -reindex （而不是 -reindex-chainstate ）来完整地重建所有索引。</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -coinstatsindex. Please temporarily disable coinstatsindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">-reindex-chainstate 与 -coinstatsindex 不兼容。请在进行  -reindex-chainstate 时临时禁用 coinstatsindex ，或者改用 -reindex （而不是 -reindex-chainstate ）来完整地重建所有索引。</translation>
-    </message>
-    <message>
-        <source>-reindex-chainstate option is not compatible with -txindex. Please temporarily disable txindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
-        <translation type="unfinished">-reindex-chainstate 与 -txindex 不兼容。请在进行 -reindex-chainstate 时临时禁用 txindex ，或者改用 -reindex （而不是 -reindex-chainstate ）来完整地重建所有索引。</translation>
     </message>
     <message>
         <source>Cannot provide specific connections and have addrman find outgoing connections at the same time.</source>
@@ -1413,6 +1316,10 @@ Unable to restore backup of wallet.</source>
     <message>
         <source>Error loading %s: External signer wallet being loaded without external signer support compiled</source>
         <translation type="unfinished">加载%s时出错: 编译时未启用外部签名器支持，却仍然试图加载外部签名器钱包</translation>
+    </message>
+    <message>
+        <source>Error reading %s! All keys read correctly, but transaction data or address metadata may be missing or incorrect.</source>
+        <translation type="unfinished">读取 %s 时出错! 所有密钥都被正确读取，但交易数据或地址元数据可能缺失或有误。</translation>
     </message>
     <message>
         <source>Error: Address book data in wallet cannot be identified to belong to migrated wallets</source>
@@ -1425,6 +1332,10 @@ Unable to restore backup of wallet.</source>
     <message>
         <source>Error: Transaction %s in wallet cannot be identified to belong to migrated wallets</source>
         <translation type="unfinished">错误：钱包中的交易%s无法被识别为属于迁移后的钱包</translation>
+    </message>
+    <message>
+        <source>Failed to calculate bump fees, because unconfirmed UTXOs depend on enormous cluster of unconfirmed transactions.</source>
+        <translation type="unfinished">计算追加手续费失败，因为未确认UTXO依赖了大量未确认交易的簇集。</translation>
     </message>
     <message>
         <source>Failed to rename invalid peers.dat file. Please move or delete it and try again.</source>
@@ -1501,10 +1412,6 @@ Please try running the latest software version.
 </translation>
     </message>
     <message>
-        <source>Unsupported category-specific logging level -loglevel=%s. Expected -loglevel=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %s. Valid loglevels: %s.</source>
-        <translation type="unfinished">不支持的类别限定日志等级 -loglevel=%s。预期参数 -loglevel=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %s。有效的类别： %s。</translation>
-    </message>
-    <message>
         <source>
 Unable to cleanup failed migration</source>
         <translation type="unfinished">
@@ -1567,6 +1474,10 @@ Unable to restore backup of wallet.</source>
     <message>
         <source>Error: Unable to remove watchonly address book data</source>
         <translation type="unfinished">错误：无法移除仅观察地址簿数据</translation>
+    </message>
+    <message>
+        <source>Failed to start indexes, shutting down..</source>
+        <translation type="unfinished">无法启动索引，关闭中...</translation>
     </message>
     <message>
         <source>Input not found or already spent</source>
@@ -1645,8 +1556,12 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">在迁移前无法卸载钱包</translation>
     </message>
     <message>
-        <source>Unsupported global logging level -loglevel=%s. Valid values: %s.</source>
-        <translation type="unfinished">不支持的全局日志等级 -loglevel=%s 。有效的数值：%s 。</translation>
+        <source>Unsupported global logging level %s=%s. Valid values: %s.</source>
+        <translation type="unfinished">不支持的全局日志等级 %s=%s。有效数值: %s.</translation>
+    </message>
+    <message>
+        <source>acceptstalefeeestimates is not supported on %s chain.</source>
+        <translation type="unfinished">%s链上acceptstalefeeestimates 不受支持。</translation>
     </message>
     <message>
         <source>Settings file could not be read</source>

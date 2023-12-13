@@ -10,13 +10,14 @@
 #include <consensus/merkle.h>
 #include <consensus/params.h>
 #include <hash.h>
-#include <chainparamsbase.h>
+#include <kernel/messagestartchars.h>
 #include <logging.h>
 #include <primitives/block.h>
 #include <primitives/transaction.h>
 #include <script/interpreter.h>
 #include <script/script.h>
 #include <uint256.h>
+#include <util/chaintype.h>
 #include <util/strencodings.h>
 
 #include <algorithm>
@@ -82,7 +83,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
-        strNetworkID = CBaseChainParams::MAIN;
+        m_chain_type = ChainType::MAIN;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 500;
@@ -166,8 +167,6 @@ public:
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_main), std::end(chainparams_seed_main));
 
         fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
-        m_is_test_chain = false;
         m_is_mockable_chain = false;
 
         checkpointData = {
@@ -182,8 +181,8 @@ public:
             }
         };
 
-        m_assumeutxo_data = MapAssumeutxo{
-         // TODO to be specified in a future patch.
+        m_assumeutxo_data = {
+            // TODO to be specified in a future patch.
         };
 
         chainTxData = ChainTxData{
@@ -204,7 +203,7 @@ public:
 class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
-        strNetworkID = CBaseChainParams::TESTNET;
+        m_chain_type = ChainType::TESTNET;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 500;
@@ -283,8 +282,6 @@ public:
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_test), std::end(chainparams_seed_test));
 
         fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
-        m_is_test_chain = true;
         m_is_mockable_chain = false;
 
         checkpointData = {
@@ -294,8 +291,13 @@ public:
             }
         };
 
-        m_assumeutxo_data = MapAssumeutxo{
-            // TODO to be specified in a future patch.
+        m_assumeutxo_data = {
+            {
+                .height = 2'500'000,
+                .hash_serialized = AssumeutxoHash{uint256S("0xf841584909f68e47897952345234e37fcd9128cd818f41ee6c3ca68db8071be7")},
+                .nChainTx = 66484552,
+                .blockhash = uint256S("0x0000000000000093bcb68c03a9a168ae252572d348a2eaeba2cdf9231d73206f")
+            }
         };
 
         chainTxData = ChainTxData{
@@ -356,7 +358,7 @@ public:
             vSeeds = *options.seeds;
         }
 
-        strNetworkID = CBaseChainParams::SIGNET;
+        m_chain_type = ChainType::SIGNET;
         consensus.signet_blocks = true;
         consensus.signet_challenge.assign(bin.begin(), bin.end());
         consensus.BIP34Height = 1;
@@ -388,7 +390,7 @@ public:
         HashWriter h{};
         h << consensus.signet_challenge;
         uint256 hash = h.GetHash();
-        memcpy(pchMessageStart, hash.begin(), 4);
+        std::copy_n(hash.begin(), 4, pchMessageStart.begin());
 
         nDefaultPort = 38333;
 
@@ -399,6 +401,15 @@ public:
 
         vFixedSeeds.clear();
 
+        m_assumeutxo_data = {
+            {
+                .height = 160'000,
+                .hash_serialized = AssumeutxoHash{uint256S("0xfe0a44309b74d6b5883d246cb419c6221bcccf0b308c9b59b7d70783dbdf928a")},
+                .nChainTx = 2289496,
+                .blockhash = uint256S("0x0000003ca3c99aff040f2563c2ad8f8ec88bd0fd6b8f0895cfaf1ef90353a62c")
+            }
+        };
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
@@ -408,8 +419,6 @@ public:
         bech32_hrp = "tb";
 
         fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
-        m_is_test_chain = true;
         m_is_mockable_chain = false;
     }
 };
@@ -423,7 +432,7 @@ class CRegTestParams : public CChainParams
 public:
     explicit CRegTestParams(const RegTestOptions& opts)
     {
-        strNetworkID =  CBaseChainParams::REGTEST;
+        m_chain_type = ChainType::REGTEST;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 50;
@@ -505,8 +514,6 @@ public:
         vSeeds.emplace_back("dummySeed.invalid.");
 
         fDefaultConsistencyChecks = true;
-        fRequireStandard = false;
-        m_is_test_chain = true;
         m_is_mockable_chain = true;
 
         checkpointData = {
@@ -515,7 +522,7 @@ public:
             }
         };
 
-        m_assumeutxo_data = MapAssumeutxo{};
+        m_assumeutxo_data = {};
 
         chainTxData = ChainTxData{
             0,

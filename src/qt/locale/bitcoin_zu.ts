@@ -10,10 +10,6 @@
         <translation type="unfinished">&amp;Kopisha</translation>
     </message>
     <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">Amakheli ukuthola</translation>
-    </message>
-    <message>
         <source>Comma separated file</source>
         <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
         <translation type="unfinished">Ifayela elehlukaniswe ngo khefana.</translation>
@@ -77,13 +73,6 @@
             <numerusform>%n year(s)</numerusform>
             <numerusform>%n year(s)</numerusform>
         </translation>
-    </message>
-    </context>
-<context>
-    <name>bitcoin-core</name>
-    <message>
-        <source>Error: Missing checksum</source>
-        <translation type="unfinished">Iphutha: iChecksum engekho</translation>
     </message>
     </context>
 <context>

@@ -4,13 +4,16 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <chainparams.h>
+#include <coins.h>
 #include <key.h>
 #include <policy/policy.h>
-#include <policy/settings.h>
 #include <script/signingprovider.h>
+#include <span.h>
 #include <test/util/random.h>
-#include <test/util/script.h>
+#include <test/util/setup_common.h>
 #include <test/util/transaction_utils.h>
+#include <util/strencodings.h>
 
 static CFeeRate g_dust{DUST_RELAY_TX_FEE};
 static bool g_bare_multi{DEFAULT_PERMIT_BAREMULTISIG};
@@ -19,7 +22,7 @@ BOOST_FIXTURE_TEST_SUITE(v2_transaction_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE(IsStandard_test)
 {
-    SelectParams(CBaseChainParams::MAIN);
+    SelectParams(ChainType::MAIN);
 
     FillableSigningProvider keystore;
     CCoinsView coinsDummy;

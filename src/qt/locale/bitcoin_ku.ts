@@ -58,12 +58,14 @@
         <translation type="unfinished">H&amp;ilbijêre</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">Navnîşanên şandinê</translation>
+        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">ئەمانە ناونیشانی بیتکۆبیتەکانی تۆنە بۆ ناردنی پارەدانەکان. هەمیشە بڕی و ناونیشانی وەرگرەکان بپشکنە پێش ناردنی دراوەکان.</translation>
     </message>
     <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">Navnîşanên stendinê</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type 'legacy'.</source>
+        <translation type="unfinished">ئەمانە ناونیشانی بیتکۆبیتەکانی تۆنە بۆ وەرگرتنی پارەدانەکان. دوگمەی 'دروستکردنیناونیشانی وەرگرتنی نوێ' لە تابی وەرگرتندا بۆ دروستکردنی ناونیشانی نوێ بەکاربێنە.
+واژووکردن تەنها دەکرێت لەگەڵ ناونیشانەکانی جۆری 'میرات'.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
@@ -286,7 +288,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation type="unfinished">یەکە بۆ نیشاندانی بڕی کرتە بکە بۆ دیاریکردنی یەکەیەکی تر.</translation>
+        <translation type="unfinished">یەکە بۆ نیشاندانی بڕی لەناو. کرتە بکە بۆ دیاریکردنی یەکەیەکی تر.</translation>
     </message>
 </context>
 <context>

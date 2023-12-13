@@ -54,14 +54,6 @@
         <translation type="unfinished">&amp;هەڵبژێرە</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">ناردنی ناونیشانەکان</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">وەرگرتنی ناونیشانەکان</translation>
-    </message>
-    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">ئەمانە ناونیشانی بیتکۆبیتەکانی تۆنە بۆ ناردنی پارەدانەکان. هەمیشە بڕی و ناونیشانی وەرگرەکان بپشکنە پێش ناردنی دراوەکان.</translation>
     </message>
@@ -166,54 +158,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
             <numerusform />
             <numerusform />
         </translation>
-    </message>
-    <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">نیشان دانا ناوه چونه</translation>
-    </message>
-    <message>
-        <source>Encrypt wallet</source>
-        <translation type="unfinished">کیف خو یه پاره رمزه دانینه بر</translation>
-    </message>
-    <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation type="unfinished">او شوله بو ور کرنا کیف پاره گرکه رمزا کیفه وؤ یه پاره بزانی</translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation type="unfinished">به راستی اون هشیارن کا دخازن بو کیف خو یه پاره رمزه دانین</translation>
-    </message>
-    <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">نیشان دانا ناوه چونه</translation>
-    </message>
-    <message>
-        <source>Encrypt wallet</source>
-        <translation type="unfinished">کیف خو یه پاره رمزه دانینه بر</translation>
-    </message>
-    <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation type="unfinished">او شوله بو ور کرنا کیف پاره گرکه رمزا کیفه وؤ یه پاره بزانی</translation>
-    </message>
-    <message>
-        <source>Unlock wallet</source>
-        <translation type="unfinished">Kilîda cizdên veke</translation>
-    </message>
-    <message>
-        <source>Change passphrase</source>
-        <translation type="unfinished">Pêborînê biguherîne</translation>
-    </message>
-    <message>
-        <source>Confirm wallet encryption</source>
-        <translation type="unfinished">Şîfrekirina cizdên bipejirîne</translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation type="unfinished">به راستی اون هشیارن کا دخازن بو کیف خو یه پاره رمزه دانین</translation>
-    </message>
-    <message>
-        <source>Wallet encrypted</source>
-        <translation type="unfinished">Cizdan hate şîfrekirin</translation>
     </message>
     <message>
         <source>Show passphrase</source>
@@ -384,14 +328,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Date</source>
         <translation type="unfinished">رێکەت</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished">بەڵێ</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished">نەخێر</translation>
     </message>
     <message>
         <source>(no label)</source>

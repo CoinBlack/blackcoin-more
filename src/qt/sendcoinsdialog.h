@@ -106,7 +106,6 @@ private Q_SLOTS:
     void coinControlClipboardFee();
     void coinControlClipboardAfterFee();
     void coinControlClipboardBytes();
-    void coinControlClipboardLowOutput();
     void coinControlClipboardChange();
 
 Q_SIGNALS:

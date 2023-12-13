@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE(minfee_tests)
 
 BOOST_AUTO_TEST_CASE(minfee_test)
 {
-    SelectParams(CBaseChainParams::MAIN);
+    SelectParams(ChainType::MAIN);
 
     // Check minimum fees before V3_1 fork
     BOOST_CHECK_EQUAL(GetMinFee(0, 0), 0);

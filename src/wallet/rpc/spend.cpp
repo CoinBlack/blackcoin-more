@@ -9,7 +9,7 @@
 #include <policy/policy.h>
 #include <rpc/rawtransaction_util.h>
 #include <rpc/util.h>
-#include <timedata.h>
+#include <script/script.h>
 #include <util/translation.h>
 #include <util/vector.h>
 #include <wallet/coincontrol.h>
@@ -38,7 +38,6 @@ static void ParseRecipients(const UniValue& address_amounts, const UniValue& sub
         }
         destinations.insert(dest);
 
-        CScript script_pub_key = GetScriptForDestination(dest);
         CAmount amount = AmountFromValue(address_amounts[i++]);
 
         bool subtract_fee = false;
@@ -49,7 +48,7 @@ static void ParseRecipients(const UniValue& address_amounts, const UniValue& sub
             }
         }
 
-        CRecipient recipient = {script_pub_key, amount, subtract_fee};
+        CRecipient recipient = {dest, amount, subtract_fee};
         recipients.push_back(recipient);
     }
 }
@@ -78,7 +77,9 @@ UniValue SendMoneyToScript(CWallet& wallet, const CScript scriptPubKey, CAmount 
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: Wallet unlocked for staking only, unable to create transaction");
 
     std::vector<CRecipient> recipients;
-    CRecipient recipient = {scriptPubKey, nValue, false};
+    CTxDestination dest;
+    ExtractDestination(scriptPubKey, dest);
+    CRecipient recipient = {dest, nValue, false};
     recipients.push_back(recipient);
 
     // Shuffle recipient list
@@ -305,7 +306,9 @@ RPCHelpMan burnwallet()
     }
 
     std::vector<CRecipient> recipients;
-    CRecipient recipient = {scriptPubKey, nAmount, true};
+    CTxDestination dest;
+    ExtractDestination(scriptPubKey, dest);
+    CRecipient recipient = {dest, nAmount, true};
     recipients.push_back(recipient);
 
     // Shuffle recipient list
@@ -417,12 +420,11 @@ RPCHelpMan optimizeutxoset()
     CScript script_pub_key = GetScriptForDestination(dest);
     CAmount remaining = availableCoins;
 
-    CRecipient recipient = {script_pub_key, amount, false};
+    CRecipient recipient = {dest, amount, false};
     CMutableTransaction txTmp;
     const uint32_t nSequence{CTxIn::MAX_SEQUENCE_NONFINAL};
-    std::vector<COutPoint> vPresetInputs;
-    coin_control.ListSelected(vPresetInputs);
-    for (const COutPoint& outpoint : vPresetInputs) {
+    std::vector<COutPoint> preset_inputs = coin_control.ListSelected();
+    for (const COutPoint& outpoint : preset_inputs) {
         txTmp.vin.push_back(CTxIn(outpoint, CScript(), nSequence));
     }
 
@@ -869,7 +871,7 @@ void FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& fee_out,
         for (const UniValue& input : options["input_weights"].get_array().getValues()) {
             uint256 txid = ParseHashO(input, "txid");
 
-            const UniValue& vout_v = find_value(input, "vout");
+            const UniValue& vout_v = input.find_value("vout");
             if (!vout_v.isNum()) {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing vout key");
             }
@@ -878,7 +880,7 @@ void FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& fee_out,
                 throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout cannot be negative");
             }
 
-            const UniValue& weight_v = find_value(input, "weight");
+            const UniValue& weight_v = input.find_value("weight");
             if (!weight_v.isNum()) {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing weight key");
             }
@@ -954,7 +956,7 @@ RPCHelpMan fundrawtransaction()
                 "Only pay-to-pubkey, multisig, and P2SH versions thereof are currently supported for watch-only\n",
                 {
                     {"hexstring", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The hex string of the raw transaction"},
-                    {"options", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED, "for backward compatibility: passing in a true instead of an object will result in {\"includeWatching\":true}",
+                    {"options", RPCArg::Type::OBJ_NAMED_PARAMS, RPCArg::Optional::OMITTED, "For backward compatibility: passing in a true instead of an object will result in {\"includeWatching\":true}",
                         Cat<std::vector<RPCArg>>(
                         {
                             {"add_inputs", RPCArg::Type::BOOL, RPCArg::Default{true}, "For a transaction with existing inputs, automatically include more if they are not enough."},
@@ -1178,12 +1180,13 @@ RPCHelpMan send()
         "\nEXPERIMENTAL warning: this call may be changed in future releases.\n"
         "\nSend a transaction.\n",
         {
-            {"outputs", RPCArg::Type::ARR, RPCArg::Optional::NO, "The outputs (key-value pairs), where none of the keys are duplicated.\n"
-                    "That is, each address can only appear once and there can only be one 'data' object.\n"
+            {"outputs", RPCArg::Type::ARR, RPCArg::Optional::NO, "The outputs specified as key-value pairs.\n"
+                    "Each key may only appear once, i.e. there can only be one 'data' output, and no address may be duplicated.\n"
+                    "At least one output of either type must be specified.\n"
                     "For convenience, a dictionary, which holds the key-value pairs directly, is also accepted.",
                 OutputsDoc(),
                 RPCArgOptions{.skip_type_check = true}},
-            {"options", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED, "",
+            {"options", RPCArg::Type::OBJ_NAMED_PARAMS, RPCArg::Optional::OMITTED, "",
                 Cat<std::vector<RPCArg>>(
                 {
                     {"add_inputs", RPCArg::Type::BOOL, RPCArg::DefaultHint{"false when \"inputs\" are specified, true otherwise"},"Automatically include coins from the wallet to cover the target amount.\n"},
@@ -1196,7 +1199,7 @@ RPCHelpMan send()
                     {"change_address", RPCArg::Type::STR, RPCArg::DefaultHint{"automatic"}, "The blackcoin address to receive the change"},
                     {"change_position", RPCArg::Type::NUM, RPCArg::DefaultHint{"random"}, "The index of the change output"},
                     {"change_type", RPCArg::Type::STR, RPCArg::DefaultHint{"set by -changetype"}, "The output type to use. Only valid if change_address is not specified. Options are \"legacy\", \"p2sh-segwit\", \"bech32\" and \"bech32m\"."},
-                    {"fee_rate", RPCArg::Type::AMOUNT, RPCArg::DefaultHint{"not set, fall back to wallet fee estimation"}, "Specify a fee rate in " + CURRENCY_ATOM + "/vB."},
+                    {"fee_rate", RPCArg::Type::AMOUNT, RPCArg::DefaultHint{"not set, fall back to wallet fee estimation"}, "Specify a fee rate in " + CURRENCY_ATOM + "/vB.", RPCArgOptions{.also_positional = true}},
                     {"include_watching", RPCArg::Type::BOOL, RPCArg::DefaultHint{"true for watch-only wallets, otherwise false"}, "Also select inputs which are watch only.\n"
                                           "Only solvable inputs can be used. Watch-only destinations are solvable if the public key and/or output script was imported,\n"
                                           "e.g. with 'importpubkey' or 'importmulti' with the 'pubkeys' or 'desc' field."},
@@ -1292,11 +1295,11 @@ RPCHelpMan sendall()
                 },
             },
             {
-                "options", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED, "",
+                "options", RPCArg::Type::OBJ_NAMED_PARAMS, RPCArg::Optional::OMITTED, "",
                 Cat<std::vector<RPCArg>>(
                     {
                         {"add_to_wallet", RPCArg::Type::BOOL, RPCArg::Default{true}, "When false, returns the serialized transaction without broadcasting or adding it to the wallet"},
-                        {"fee_rate", RPCArg::Type::AMOUNT, RPCArg::DefaultHint{"not set, fall back to wallet fee estimation"}, "Specify a fee rate in " + CURRENCY_ATOM + "/vB."},
+                        {"fee_rate", RPCArg::Type::AMOUNT, RPCArg::DefaultHint{"not set, fall back to wallet fee estimation"}, "Specify a fee rate in " + CURRENCY_ATOM + "/vB.", RPCArgOptions{.also_positional = true}},
                         {"include_watching", RPCArg::Type::BOOL, RPCArg::DefaultHint{"true for watch-only wallets, otherwise false"}, "Also select inputs which are watch-only.\n"
                                               "Only solvable inputs can be used. Watch-only destinations are solvable if the public key and/or output script was imported,\n"
                                               "e.g. with 'importpubkey' or 'importmulti' with the 'pubkeys' or 'desc' field."},
@@ -1535,6 +1538,7 @@ RPCHelpMan walletprocesspsbt()
                     {
                         {RPCResult::Type::STR, "psbt", "The base64-encoded partially signed transaction"},
                         {RPCResult::Type::BOOL, "complete", "If the transaction has a complete set of signatures"},
+                        {RPCResult::Type::STR_HEX, "hex", /*optional=*/true, "The hex-encoded network transaction if complete"},
                     }
                 },
                 RPCExamples{
@@ -1578,6 +1582,14 @@ RPCHelpMan walletprocesspsbt()
     ssTx << psbtx;
     result.pushKV("psbt", EncodeBase64(ssTx.str()));
     result.pushKV("complete", complete);
+    if (complete) {
+        CMutableTransaction mtx;
+        // Returns true if complete, which we already think it is.
+        CHECK_NONFATAL(FinalizeAndExtractPSBT(psbtx, mtx));
+        CDataStream ssTx_final(SER_NETWORK, PROTOCOL_VERSION);
+        ssTx_final << mtx;
+        result.pushKV("hex", HexStr(ssTx_final));
+    }
 
     return result;
 },
@@ -1608,14 +1620,15 @@ RPCHelpMan walletcreatefundedpsbt()
                             },
                         },
                         },
-                    {"outputs", RPCArg::Type::ARR, RPCArg::Optional::NO, "The outputs (key-value pairs), where none of the keys are duplicated.\n"
-                            "That is, each address can only appear once and there can only be one 'data' object.\n"
+                    {"outputs", RPCArg::Type::ARR, RPCArg::Optional::NO, "The outputs specified as key-value pairs.\n"
+                            "Each key may only appear once, i.e. there can only be one 'data' output, and no address may be duplicated.\n"
+                            "At least one output of either type must be specified.\n"
                             "For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also\n"
                             "accepted as second parameter.",
                         OutputsDoc(),
                         RPCArgOptions{.skip_type_check = true}},
                     {"locktime", RPCArg::Type::NUM, RPCArg::Default{0}, "Raw locktime. Non-0 value also locktime-activates inputs"},
-                    {"options", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED, "",
+                    {"options", RPCArg::Type::OBJ_NAMED_PARAMS, RPCArg::Optional::OMITTED, "",
                         Cat<std::vector<RPCArg>>(
                         {
                             {"add_inputs", RPCArg::Type::BOOL, RPCArg::DefaultHint{"false when \"inputs\" are specified, true otherwise"}, "Automatically include coins from the wallet to cover the target amount.\n"},

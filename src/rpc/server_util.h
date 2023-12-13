@@ -7,6 +7,7 @@
 
 #include <any>
 
+class AddrMan;
 class ArgsManager;
 class CConnman;
 class CTxMemPool;
@@ -28,5 +29,7 @@ ChainstateManager& EnsureChainman(const node::NodeContext& node);
 ChainstateManager& EnsureAnyChainman(const std::any& context);
 CConnman& EnsureConnman(const node::NodeContext& node);
 PeerManager& EnsurePeerman(const node::NodeContext& node);
+AddrMan& EnsureAddrman(const node::NodeContext& node);
+AddrMan& EnsureAnyAddrman(const std::any& context);
 
 #endif // BITCOIN_RPC_SERVER_UTIL_H

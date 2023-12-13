@@ -645,6 +645,13 @@
     </message>
     </context>
 <context>
+    <name>PSBTOperationsDialog</name>
+    <message>
+        <source>own address</source>
+        <translation type="unfinished">inscriptio propria</translation>
+    </message>
+    </context>
+<context>
     <name>PaymentServer</name>
     <message>
         <source>Cannot start bitcoin: click-to-pay handler</source>
@@ -1166,10 +1173,6 @@
         <translation type="unfinished">Missum ad</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation type="unfinished">Pensitatio ad te ipsum</translation>
-    </message>
-    <message>
         <source>Mined</source>
         <translation type="unfinished">Fossa</translation>
     </message>
@@ -1227,10 +1230,6 @@
     <message>
         <source>Sent to</source>
         <translation type="unfinished">Missum ad</translation>
-    </message>
-    <message>
-        <source>To yourself</source>
-        <translation type="unfinished">Ad te ipsum</translation>
     </message>
     <message>
         <source>Mined</source>

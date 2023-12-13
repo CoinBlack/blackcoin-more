@@ -58,14 +58,6 @@
         <translation type="unfinished">&amp;Escoller</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">Enviando enderezos</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">Recibindo enderezos</translation>
-    </message>
-    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">Estas son as túas direccións Bitcoin para enviar pagos. Revisa sempre a cantidade e a dirección receptora antes de enviar moedas.</translation>
     </message>
@@ -637,10 +629,6 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">Taxa:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">po:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation type="unfinished">Despois de taxas:</translation>
     </message>
@@ -721,12 +709,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">(%1 bloqueado)</translation>
     </message>
     <message>
-        <source>yes</source>
-        <translation type="unfinished">si</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished">non</translation>
+        <source>Can vary +/- %1 satoshi(s) per input.</source>
+        <translation type="unfinished">Pode variar +/- %1 satoshi(s) por entrada.</translation>
     </message>
     <message>
         <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
@@ -1160,6 +1144,10 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message>
         <source>Close</source>
         <translation type="unfinished">Pechar</translation>
+    </message>
+    <message>
+        <source>own address</source>
+        <translation type="unfinished">dirección propia</translation>
     </message>
     </context>
 <context>
@@ -1833,10 +1821,6 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">Enviado a</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation type="unfinished">Pago a ti mesmo</translation>
-    </message>
-    <message>
         <source>Mined</source>
         <translation type="unfinished">Minado</translation>
     </message>
@@ -1894,10 +1878,6 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message>
         <source>Sent to</source>
         <translation type="unfinished">Enviado a</translation>
-    </message>
-    <message>
-        <source>To yourself</source>
-        <translation type="unfinished">A ti mesmo</translation>
     </message>
     <message>
         <source>Mined</source>

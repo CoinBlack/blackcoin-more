@@ -58,14 +58,6 @@
         <translation type="unfinished">V&amp;alitse</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">Lähetysosoitteet</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">Vastaanotto-osoitteet</translation>
-    </message>
-    <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">Nämä ovat Bitcoin-osoitteesi maksujen lähettämistä varten. Tarkista aina määrä ja vastaanotto-osoite ennen kolikoiden lähettämistä.</translation>
     </message>
@@ -262,6 +254,10 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
         <translation type="unfinished">Asetustiedosto %1 saattaa olla vioittunut tai virheellinen.</translation>
     </message>
     <message>
+        <source>Runaway exception</source>
+        <translation type="unfinished">Runaway poikkeus</translation>
+    </message>
+    <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Peruuttamaton virhe on tapahtunut. %1 ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
     </message>
@@ -280,6 +276,11 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
         <source>Do you want to reset settings to default values, or to abort without making changes?</source>
         <extracomment>Explanatory text shown on startup when the settings file cannot be read. Prompts user to make a choice between resetting or aborting.</extracomment>
         <translation type="unfinished">Haluatko palauttaa asetukset oletusarvoihin vai keskeyttää tekemättä muutoksia?</translation>
+    </message>
+    <message>
+        <source>A fatal error occurred. Check that settings file is writable, or try running with -nosettings.</source>
+        <extracomment>Explanatory text shown on startup when the settings file could not be written. Prompts user to check that we have the ability to write to the file. Explains that the user has the option of running without a settings file.</extracomment>
+        <translation type="unfinished">Tapahtui kohtalokas virhe. Tarkista, että asetustiedosto on kirjoitettavissa, tai yritä suorittaa ohjelma -nosettings -asetuksilla.</translation>
     </message>
     <message>
         <source>Error: %1</source>
@@ -863,10 +864,6 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
         <translation type="unfinished">Palkkio:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">Tomu:</translation>
-    </message>
-    <message>
         <source>After Fee:</source>
         <translation type="unfinished">Palkkion jälkeen:</translation>
     </message>
@@ -947,28 +944,12 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
         <translation type="unfinished">Kopioi tavut</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation type="unfinished">Kopioi tomu</translation>
-    </message>
-    <message>
         <source>Copy change</source>
         <translation type="unfinished">Kopioi vaihtorahat</translation>
     </message>
     <message>
         <source>(%1 locked)</source>
         <translation type="unfinished">(%1 lukittu)</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished">kyllä</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished">ei</translation>
-    </message>
-    <message>
-        <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
-        <translation type="unfinished">Tämä nimike muuttuu punaiseksi, jos jokin vastaanottajista on saamassa tämänhetkistä tomun rajaa pienemmän summan.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
@@ -1138,12 +1119,8 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
         <translation type="unfinished">Luo tyhjä lompakko</translation>
     </message>
     <message>
-        <source>Use descriptors for scriptPubKey management</source>
-        <translation type="unfinished">Käytä kuvaajia sciptPubKeyn hallinnointiin</translation>
-    </message>
-    <message>
-        <source>Descriptor Wallet</source>
-        <translation type="unfinished">Kuvaajalompakko</translation>
+        <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
+        <translation type="unfinished">Käytä ulkoista allekirjoituslaitetta, kuten laitteistolompakkoa. Määritä ulkoisen allekirjoittajan skripti ensin lompakon asetuksissa.</translation>
     </message>
     <message>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
@@ -1156,10 +1133,6 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
     <message>
         <source>Create</source>
         <translation type="unfinished">Luo</translation>
-    </message>
-    <message>
-        <source>Compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">Koostettu ilman sqlite-tukea (vaaditaan descriptor-lompakoille)</translation>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
@@ -1904,6 +1877,10 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
     <message>
         <source> * Sends %1 to %2</source>
         <translation type="unfinished">*Lähettää %1'n kohteeseen %2</translation>
+    </message>
+    <message>
+        <source>own address</source>
+        <translation type="unfinished">oma osoite</translation>
     </message>
     <message>
         <source>Unable to calculate transaction fee or total transaction amount.</source>
@@ -2694,10 +2671,6 @@ Jos saat tämän virheen, pyydä kauppiasta antamaan BIP21-yhteensopiva URI.</tr
         <translation type="unfinished">Syötteet...</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation type="unfinished">Tomu:</translation>
-    </message>
-    <message>
         <source>Choose…</source>
         <translation type="unfinished">Valitse...</translation>
     </message>
@@ -2760,10 +2733,6 @@ Jos saat tämän virheen, pyydä kauppiasta antamaan BIP21-yhteensopiva URI.</tr
     <message>
         <source>Copy bytes</source>
         <translation type="unfinished">Kopioi tavut</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation type="unfinished">Kopioi tomu</translation>
     </message>
     <message>
         <source>Copy change</source>
@@ -3381,10 +3350,6 @@ Jos saat tämän virheen, pyydä kauppiasta antamaan BIP21-yhteensopiva URI.</tr
         <translation type="unfinished">Lähetetty vastaanottajalle</translation>
     </message>
     <message>
-        <source>Payment to yourself</source>
-        <translation type="unfinished">Maksu itsellesi</translation>
-    </message>
-    <message>
         <source>Mined</source>
         <translation type="unfinished">Louhittu</translation>
     </message>
@@ -3458,10 +3423,6 @@ Jos saat tämän virheen, pyydä kauppiasta antamaan BIP21-yhteensopiva URI.</tr
     <message>
         <source>Sent to</source>
         <translation type="unfinished">Lähetetty vastaanottajalle</translation>
-    </message>
-    <message>
-        <source>To yourself</source>
-        <translation type="unfinished">Itsellesi</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -3717,10 +3678,6 @@ Siirry osioon Tiedosto &gt; Avaa lompakko ladataksesi lompakon.
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation type="unfinished">Jaettu MIT -ohjelmistolisenssin alaisuudessa, katso mukana tuleva %s tiedosto tai %s</translation>
-    </message>
-    <message>
-        <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation type="unfinished">Virhe luettaessa %s! Avaimet luetttiin oikein, mutta rahansiirtotiedot tai osoitekirjan sisältö saattavat olla puutteellisia tai vääriä.</translation>
     </message>
     <message>
         <source>Error: Dumpfile version is not supported. This version of bitcoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>

@@ -1,5 +1,12 @@
 <TS version="2.1" language="th">
 <context>
+    <name>AddressBookPage</name>
+    <message>
+        <source>Create a new address</source>
+        <translation type="unfinished">สร้างแอดเดรสใหม่</translation>
+    </message>
+    </context>
+<context>
     <name>BitcoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
@@ -26,33 +33,6 @@
         <source>Manual</source>
         <extracomment>Peer connection type established manually through one of several methods.</extracomment>
         <translation type="unfinished">คู่มือ</translation>
-    </message>
-    <message>
-        <source>Internal</source>
-        <translation type="unfinished">ภายใน</translation>
-    </message>
-    <message>
-        <source>Inbound</source>
-        <extracomment>An inbound connection from a peer. An inbound connection is a connection initiated by a peer.</extracomment>
-        <translation type="unfinished">ขาเข้า</translation>
-    </message>
-    <message>
-        <source>Outbound</source>
-        <extracomment>An outbound connection to a peer. An outbound connection is a connection initiated by us.</extracomment>
-        <translation type="unfinished">ขาออก</translation>
-    </message>
-    <message>
-        <source>Manual</source>
-        <extracomment>Peer connection type established manually through one of several methods.</extracomment>
-        <translation type="unfinished">คู่มือ</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">ไม่มี</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation type="unfinished">%1 มิลลิวินาที</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
@@ -211,6 +191,21 @@
         <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
         <translation type="unfinished">คลิกเพื่อดูการดำเนินการเพิ่มเติม</translation>
     </message>
+    <message>
+        <source>Show Peers tab</source>
+        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <translation type="unfinished">แสดง Peers แท็ป</translation>
+    </message>
+    <message>
+        <source>Disable network activity</source>
+        <extracomment>A context menu item.</extracomment>
+        <translation type="unfinished">ปิดใช้งาน กิจกรรม เครือข่าย</translation>
+    </message>
+    <message>
+        <source>Enable network activity</source>
+        <extracomment>A context menu item. The network activity was disabled previously.</extracomment>
+        <translation type="unfinished">เปิดใช้งาน กิจกรรม เครือข่าย</translation>
+    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
@@ -230,40 +225,22 @@
         <translation type="unfinished">&amp;ปลดล็อค ที่ไม่ไดใช้</translation>
     </message>
     <message>
-        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
-        <extracomment>Descriptive text of the create wallet progress window which indicates to the user which wallet is currently being created.</extracomment>
-        <translation type="unfinished">กำลังสร้าง วอลเล็ต &lt;b&gt;%1&lt;/b&gt;…</translation>
+        <source>Copy change</source>
+        <translation type="unfinished">คัดลอก change</translation>
     </message>
     <message>
-        <source>Create wallet failed</source>
-        <translation type="unfinished">การสร้าง วอลเล็ต ล้มเหลว</translation>
+        <source>(%1 locked)</source>
+        <translation type="unfinished">(%1 ล็อคแล้ว)</translation>
     </message>
+    </context>
+<context>
+    <name>CreateWalletActivity</name>
     <message>
-        <source>Create wallet warning</source>
-        <translation type="unfinished">คำเตือน การสร้าง วอลเล็ต</translation>
+        <source>Create Wallet</source>
+        <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
+        <translation type="unfinished">สร้าง วอลเล็ต</translation>
     </message>
-    <message>
-        <source>Can't list signers</source>
-        <translation type="unfinished">ไม่สามารถ จัดรายการ ผู้เซ็น</translation>
-    </message>
-    <message>
-        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
-        <extracomment>Descriptive text of the create wallet progress window which indicates to the user which wallet is currently being created.</extracomment>
-        <translation type="unfinished">กำลังสร้าง วอลเล็ต &lt;b&gt;%1&lt;/b&gt;…</translation>
-    </message>
-    <message>
-        <source>Create wallet failed</source>
-        <translation type="unfinished">การสร้าง วอลเล็ต ล้มเหลว</translation>
-    </message>
-    <message>
-        <source>Create wallet warning</source>
-        <translation type="unfinished">คำเตือน การสร้าง วอลเล็ต</translation>
-    </message>
-    <message>
-        <source>Can't list signers</source>
-        <translation type="unfinished">ไม่สามารถ จัดรายการ ผู้เซ็น</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>LoadWalletsActivity</name>
     <message>
@@ -289,12 +266,7 @@
     </message>
     <message>
         <source>default wallet</source>
-        <translation type="unfinished">วอลเล็ต เริ่มต้น</translation>
-    </message>
-    <message>
-        <source>Open Wallet</source>
-        <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
-        <translation type="unfinished">เปิด วอลเล็ต</translation>
+        <translation type="unfinished">กระเป๋าสตางค์เริ่มต้น</translation>
     </message>
     <message>
         <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -333,26 +305,6 @@
 <context>
     <name>WalletController</name>
     <message>
-        <source>Close wallet</source>
-        <translation type="unfinished">ปิด วอลเล็ต</translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished">คุณ แน่ใจ หรือไม่ว่า ต้องการ ปิด วอลเล็ต &lt;i&gt;%1&lt;/i&gt;?</translation>
-    </message>
-    <message>
-        <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
-        <translation type="unfinished">Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled</translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished">คุณ แน่ใจ หรือไม่ว่า ต้องการ ปิด วอลเล็ต &lt;i&gt;%1&lt;/i&gt;?</translation>
-    </message>
-    <message>
-        <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
-        <translation type="unfinished">Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled</translation>
-    </message>
-    <message>
         <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation type="unfinished">คุณ แน่ใจ หรือไม่ว่า ต้องการ ปิด วอลเล็ต &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
@@ -362,7 +314,7 @@
     </message>
     <message>
         <source>Close all wallets</source>
-        <translation type="unfinished">ปิด วอลเล็ต ทั้งหมด</translation>
+        <translation type="unfinished">ปิดกระเป๋าสตางค์ทั้งหมด</translation>
     </message>
     <message>
         <source>Are you sure you wish to close all wallets?</source>
@@ -410,10 +362,6 @@
     <message>
         <source>Make Blank Wallet</source>
         <translation type="unfinished">ทำ วอลเล็ต ให้ว่างเปล่า</translation>
-    </message>
-    <message>
-        <source>Descriptor Wallet</source>
-        <translation type="unfinished">ตัวอธิบาย วอลเล็ต</translation>
     </message>
     <message>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
@@ -673,6 +621,10 @@
         <translation type="unfinished">ผู้ลงนามภายนอก (เช่น ฮาร์ดแวร์วอลเล็ต)</translation>
     </message>
     <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished">&amp;วินโดว์</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation type="unfinished">ข้อผิดพลาด</translation>
     </message>
@@ -765,6 +717,10 @@
         <translation type="unfinished">วินาทีในการ Ping</translation>
     </message>
     <message>
+        <source>Last block time</source>
+        <translation type="unfinished">บล็อกเวลาล่าสุด</translation>
+    </message>
+    <message>
         <source>Debug log file</source>
         <translation type="unfinished">ไฟล์บันทึกการดีบัก</translation>
     </message>
@@ -780,20 +736,19 @@
     </message>
     </context>
 <context>
+    <name>ReceiveCoinsDialog</name>
+    <message>
+        <source>Could not unlock wallet.</source>
+        <translation type="unfinished">ไม่สามารถปลดล็อกวอลเล็ตได้</translation>
+    </message>
+    </context>
+<context>
     <name>ReceiveRequestDialog</name>
     <message>
         <source>Payment information</source>
         <translation type="unfinished">ข้อมูการชำระเงิน</translation>
     </message>
-    <message>
-        <source>(no message)</source>
-        <translation type="unfinished">(ไม่มีข้อความ)</translation>
-    </message>
-    <message>
-        <source>Requested</source>
-        <translation type="unfinished">ร้องขอแล้ว</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -809,28 +764,6 @@
         <source>Please, review your transaction.</source>
         <extracomment>Text to prompt a user to review the details of the transaction they are attempting to send.</extracomment>
         <translation type="unfinished">โปรดตรวจสอบธุรกรรมของคุณ</translation>
-    </message>
-    <message>
-        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Bitcoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
-        <translation type="unfinished">โปรดตรวจสอบธุรกรรมของคุณ คุณสามารถสร้างและส่งธุรกรรมนี้หรือสร้างธุรกรรม Bitcoin ที่ลงชื่อบางส่วน (PSBT) ซึ่งคุณสามารถบันทึกหรือคัดลอกแล้วลงชื่อเข้าใช้ เช่น วอลเล็ต %1 ออฟไลน์, หรือ PSBT-compatible hardware wallet</translation>
-    </message>
-    <message>
-        <source>Please, review your transaction.</source>
-        <extracomment>Text to prompt a user to review the details of the transaction they are attempting to send.</extracomment>
-        <translation type="unfinished">โปรดตรวจสอบธุรกรรมของคุณ</translation>
-    </message>
-    <message>
-        <source>Transaction fee</source>
-        <translation type="unfinished">ค่าธรรมเนียม การทำธุรกรรม</translation>
-    </message>
-    <message>
-        <source>Total Amount</source>
-        <translation type="unfinished">จำนวน ทั้งหมด</translation>
-    </message>
-    <message>
-        <source>Confirm send coins</source>
-        <translation type="unfinished">ยืนยัน คอยน์ ที่ส่ง</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
@@ -849,19 +782,7 @@
         <source>Please check the signature and try again.</source>
         <translation type="unfinished">โปรดตรวจสอบลายเซ็นต์และลองใหม่อีกครั้ง</translation>
     </message>
-    <message>
-        <source>Message signed.</source>
-        <translation type="unfinished">ข้อความ เซ็นแล้ว</translation>
-    </message>
-    <message>
-        <source>Please check the signature and try again.</source>
-        <translation type="unfinished">โปรดตรวจสอบลายเซ็นต์และลองใหม่อีกครั้ง</translation>
-    </message>
-    <message>
-        <source>Message verified.</source>
-        <translation type="unfinished">ข้อความ ตรวจสอบแล้ว</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>TransactionDesc</name>
     <message>
@@ -882,19 +803,7 @@
         <source>Exporting Successful</source>
         <translation type="unfinished">ส่งออกสำเร็จ</translation>
     </message>
-    <message>
-        <source>Exporting Successful</source>
-        <translation type="unfinished">ส่งออกสำเร็จ</translation>
-    </message>
-    <message>
-        <source>Range:</source>
-        <translation type="unfinished">ช่วง:</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="unfinished">ถึง</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -922,9 +831,17 @@
     </message>
     <message>
         <source>default wallet</source>
-        <translation type="unfinished">วอลเล็ต เริ่มต้น</translation>
+        <translation type="unfinished">กระเป๋าสตางค์เริ่มต้น</translation>
     </message>
 </context>
+<context>
+    <name>bitcoin-core</name>
+    <message>
+        <source>Wallet Data</source>
+        <extracomment>Name of the wallet data file format.</extracomment>
+        <translation type="unfinished">ข้อมูล วอลเล็ต</translation>
+    </message>
+    </context>
 <context>
     <name>bitcoin-core</name>
     <message>

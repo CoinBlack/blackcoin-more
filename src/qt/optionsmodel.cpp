@@ -12,14 +12,14 @@
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 
+#include <common/args.h>
 #include <interfaces/node.h>
 #include <mapport.h>
 #include <net.h>
 #include <netbase.h>
-#include <txdb.h>       // for -dbcache defaults
+#include <txdb.h> // for -dbcache defaults
 #include <util/string.h>
-#include <util/system.h>
-#include <validation.h> // For DEFAULT_SCRIPTCHECK_THREADS
+#include <validation.h>    // For DEFAULT_SCRIPTCHECK_THREADS
 #include <wallet/wallet.h> // For DEFAULT_SPEND_ZEROCONF_CHANGE
 
 #include <QDebug>
@@ -62,7 +62,7 @@ static const char* SettingName(OptionsModel::OptionID option)
 }
 
 /** Call node.updateRwSetting() with Bitcoin 22.x workaround. */
-static void UpdateRwSetting(interfaces::Node& node, OptionsModel::OptionID option, const std::string& suffix, const util::SettingsValue& value)
+static void UpdateRwSetting(interfaces::Node& node, OptionsModel::OptionID option, const std::string& suffix, const common::SettingsValue& value)
 {
     if (value.isNum() &&
         (option == OptionsModel::DatabaseCache ||
@@ -400,7 +400,7 @@ QVariant OptionsModel::getOption(OptionID option, const std::string& suffix) con
 bool OptionsModel::setOption(OptionID option, const QVariant& value, const std::string& suffix)
 {
     auto changed = [&] { return value.isValid() && value != getOption(option, suffix); };
-    auto update = [&](const util::SettingsValue& value) { return UpdateRwSetting(node(), option, suffix, value); };
+    auto update = [&](const common::SettingsValue& value) { return UpdateRwSetting(node(), option, suffix, value); };
 
     bool successful = true; /* set to false on parse error */
     QSettings settings;
