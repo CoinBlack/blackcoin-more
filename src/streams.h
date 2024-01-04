@@ -92,24 +92,13 @@ public:
 class CVectorWriter
 {
  public:
-    CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn) : nType(nTypeIn), nVersion{nVersionIn}, vchData{vchDataIn}, nPos{nPosIn}
-    {
-        if(nPos > vchData.size())
-            vchData.resize(nPos);
-    }
-    template <typename... Args>
-    CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn, Args&&... args) : CVectorWriter{nTypeIn, nVersionIn, vchDataIn, nPosIn}
-    {
-        ::SerializeMany(*this, std::forward<Args>(args)...);
-    }
-
 /*
  * @param[in]  nVersionIn Serialization Version (including any flags)
  * @param[in]  vchDataIn  Referenced byte vector to overwrite/append
  * @param[in]  nPosIn Starting position. Vector index where writes should start. The vector will initially
  *                    grow as necessary to max(nPosIn, vec.size()). So to append, use vec.size().
 */
-    CVectorWriter(int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn) : nType(SER_NETWORK), nVersion{nVersionIn}, vchData{vchDataIn}, nPos{nPosIn}
+    CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn) : nType(nTypeIn), nVersion{nVersionIn}, vchData{vchDataIn}, nPos{nPosIn}
     {
         if(nPos > vchData.size())
             vchData.resize(nPos);
@@ -119,7 +108,7 @@ class CVectorWriter
  * @param[in]  args  A list of items to serialize starting at nPosIn.
 */
     template <typename... Args>
-    CVectorWriter(int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn, Args&&... args) : CVectorWriter{SER_NETWORK, nVersionIn, vchDataIn, nPosIn}
+    CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn, Args&&... args) : CVectorWriter{nTypeIn, nVersionIn, vchDataIn, nPosIn}
     {
         ::SerializeMany(*this, std::forward<Args>(args)...);
     }
@@ -591,7 +580,6 @@ class BufferedFile
 {
 private:
     const int nType;
-    const int nVersion;
 
     CAutoFile& m_src;
     uint64_t nSrcPos{0};  //!< how many bytes have been read from source
@@ -640,15 +628,14 @@ private:
     }
 
 public:
-    BufferedFile(CAutoFile& file, uint64_t nBufSize, uint64_t nRewindIn, int nTypeIn, int nVersionIn)
-        : nType(nTypeIn), nVersion(nVersionIn), m_src{file}, nReadLimit{std::numeric_limits<uint64_t>::max()}, nRewind{nRewindIn}, vchBuf(nBufSize, std::byte{0})
+    BufferedFile(CAutoFile& file, uint64_t nBufSize, uint64_t nRewindIn, int nTypeIn)
+        : nType(nTypeIn), m_src{file}, nReadLimit{std::numeric_limits<uint64_t>::max()}, nRewind{nRewindIn}, vchBuf(nBufSize, std::byte{0})
     {
         if (nRewindIn >= nBufSize)
             throw std::ios_base::failure("Rewind limit must be less than buffer size");
     }
 
-    // int GetVersion() const { return m_src.GetVersion(); }
-    int GetVersion() const { return nVersion; }
+    int GetVersion() const { return m_src.GetVersion(); }
     int GetType() const { return nType; }
 
     //! check whether we're at the end of the source file

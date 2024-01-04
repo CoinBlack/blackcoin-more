@@ -51,7 +51,7 @@ FUZZ_TARGET(golomb_rice)
         for (int i = 0; i < n; ++i) {
             elements.insert(ConsumeRandomLengthByteVector(fuzzed_data_provider, 16));
         }
-        CVectorWriter stream{0, golomb_rice_data, 0};
+        CVectorWriter stream{0, 0, golomb_rice_data, 0};
         WriteCompactSize(stream, static_cast<uint32_t>(elements.size()));
         BitStreamWriter<CVectorWriter> bitwriter(stream);
         if (!elements.empty()) {

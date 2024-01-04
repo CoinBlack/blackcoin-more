@@ -74,49 +74,49 @@ BOOST_AUTO_TEST_CASE(streams_vector_writer)
     // point should yield the same results, even if the first test grew the
     // vector.
 
-    CVectorWriter{INIT_PROTO_VERSION, vch, 0, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 0, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{1, 2}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 0, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 0, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{1, 2}}));
     vch.clear();
 
-    CVectorWriter{INIT_PROTO_VERSION, vch, 2, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 2, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 1, 2}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 2, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 2, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 1, 2}}));
     vch.clear();
 
     vch.resize(5, 0);
-    CVectorWriter{INIT_PROTO_VERSION, vch, 2, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 2, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 1, 2, 0}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 2, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 2, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 1, 2, 0}}));
     vch.clear();
 
     vch.resize(4, 0);
-    CVectorWriter{INIT_PROTO_VERSION, vch, 3, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 3, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 0, 1, 2}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 3, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 3, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 0, 1, 2}}));
     vch.clear();
 
     vch.resize(4, 0);
-    CVectorWriter{INIT_PROTO_VERSION, vch, 4, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 4, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 0, 0, 1, 2}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 4, a, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 4, a, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{0, 0, 0, 0, 1, 2}}));
     vch.clear();
 
-    CVectorWriter{INIT_PROTO_VERSION, vch, 0, bytes};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 0, bytes};
     BOOST_CHECK((vch == std::vector<unsigned char>{{3, 4, 5, 6}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 0, bytes};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 0, bytes};
     BOOST_CHECK((vch == std::vector<unsigned char>{{3, 4, 5, 6}}));
     vch.clear();
 
     vch.resize(4, 8);
-    CVectorWriter{INIT_PROTO_VERSION, vch, 2, a, bytes, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 2, a, bytes, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{8, 8, 1, 3, 4, 5, 6, 2}}));
-    CVectorWriter{INIT_PROTO_VERSION, vch, 2, a, bytes, b};
+    CVectorWriter{SER_NETWORK, INIT_PROTO_VERSION, vch, 2, a, bytes, b};
     BOOST_CHECK((vch == std::vector<unsigned char>{{8, 8, 1, 3, 4, 5, 6, 2}}));
     vch.clear();
 }
@@ -260,7 +260,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file)
     // The buffer size (second arg) must be greater than the rewind
     // amount (third arg).
     try {
-        BufferedFile bfbad{file, 25, 25, SER_NETWORK, PROTOCOL_VERSION};
+        BufferedFile bfbad{file, 25, 25, SER_NETWORK};
         BOOST_CHECK(false);
     } catch (const std::exception& e) {
         BOOST_CHECK(strstr(e.what(),
@@ -268,7 +268,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file)
     }
 
     // The buffer is 25 bytes, allow rewinding 10 bytes.
-    BufferedFile bf{file, 25, 10, SER_NETWORK, PROTOCOL_VERSION};
+    BufferedFile bf{file, 25, 10, SER_NETWORK};
     BOOST_CHECK(!bf.eof());
 
     // This member has no functional effect.
@@ -391,7 +391,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file_skip)
     std::rewind(file.Get());
 
     // The buffer is 25 bytes, allow rewinding 10 bytes.
-    BufferedFile bf{file, 25, 10, SER_NETWORK, PROTOCOL_VERSION};
+    BufferedFile bf{file, 25, 10, SER_NETWORK};
 
     uint8_t i;
     // This is like bf >> (7-byte-variable), in that it will cause data
@@ -445,7 +445,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file_rand)
 
         size_t bufSize = InsecureRandRange(300) + 1;
         size_t rewindSize = InsecureRandRange(bufSize);
-        BufferedFile bf{file, bufSize, rewindSize, SER_NETWORK, PROTOCOL_VERSION};
+        BufferedFile bf{file, bufSize, rewindSize, SER_NETWORK};
         size_t currentPos = 0;
         size_t maxPos = 0;
         for (int step = 0; step < 100; ++step) {

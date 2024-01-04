@@ -21,7 +21,7 @@ static void FindByte(benchmark::Bench& bench)
     data[file_size-1] = 1;
     file << data;
     std::rewind(file.Get());
-    BufferedFile bf{file, /*nBufSize=*/file_size + 1, /*nRewindIn=*/file_size, SER_NETWORK, PROTOCOL_VERSION};
+    BufferedFile bf{file, /*nBufSize=*/file_size + 1, /*nRewindIn=*/file_size, SER_NETWORK};
 
     bench.run([&] {
         bf.SetPos(0);

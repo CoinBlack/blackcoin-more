@@ -81,7 +81,7 @@ GCSFilter::GCSFilter(const Params& params, const ElementSet& elements)
     }
     m_F = static_cast<uint64_t>(m_N) * static_cast<uint64_t>(m_params.m_M);
 
-    CVectorWriter stream(GCS_SER_VERSION, m_encoded, 0);
+    CVectorWriter stream(SER_NETWORK, GCS_SER_VERSION, m_encoded, 0);
 
     WriteCompactSize(stream, m_N);
 
