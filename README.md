@@ -29,9 +29,8 @@ information or see https://opensource.org/licenses/MIT.
 Development Process
 -------------------
 
-The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
-regularly from release branches to indicate new official, stable release versions of Bitcoin Core.
+The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested. [Tags](https://github.com/CoinBlack/blackcoin-more/tags) are created
+regularly to indicate new official, stable release versions of Blackcoin More.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md)
 and useful hints for developers can be found in [doc/developer-notes.md](doc/developer-notes.md).
@@ -93,8 +92,8 @@ However, it may contain experimental features and should be used with caution.
 ### 13.2
 The release branch for Blackcoin More 13.2.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
 
-### 22.x
-The release branch for Blackcoin More 22.x. Contains functional but experimental code.
-
 ### 25.x
-The release branch for Blackcoin More 25.x. Contains functional but highly experimental code.
+The release branch for Blackcoin More 25.x. Contains functional but experimental code.
+
+### 26.x
+The release branch for Blackcoin More 26.x. Contains functional but highly experimental code.
