@@ -3588,8 +3588,12 @@ static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& st
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-version", "bad block version");
 
     // Check proof of work hash
-    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams))
-        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
+    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams)) {
+        if (fOldClient)
+            return false;
+        else
+            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
+    }
 
     // Check timestamp
     if (block.GetBlockTime() > FutureDrift(chainstate, GetAdjustedTimeSeconds()))
@@ -3922,7 +3926,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     return true;
 }
 
-bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, CBlockIndex** ppindex, bool min_pow_checked, bool fProofOfStake, bool fOldClient)
+bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, CBlockIndex** ppindex, bool min_pow_checked, bool fOldClient)
 {
     AssertLockHeld(cs_main);
 
@@ -3930,6 +3934,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
     Chainstate& chainstate = ActiveChainstate();
     uint256 hash = block.GetHash();
     BlockMap::iterator miSelf{m_blockman.m_block_index.find(hash)};
+    bool fProofOfStake = block.nFlags & CBlockIndex::BLOCK_PROOF_OF_STAKE;
     bool fSetAsProofOfStake = fProofOfStake;
     if (hash != GetConsensus().hashGenesisBlock) {
         if (miSelf != m_blockman.m_block_index.end()) {
@@ -3957,6 +3962,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
 
         // peercoin: Don't reject in case of old clients. Change our assumption instead.
         // ppcTODO: Maybe add restrictions until when this is allowed? We don't want new clients to pretend to be old clients and try to abuse this.
+        // Blackcoin ToDo: remove fOldClient after the nodes got updated
         if (!CheckBlockHeader(block, state, GetConsensus(), chainstate, !fProofOfStake, fOldClient))
         {
             if (fOldClient)
@@ -4064,7 +4070,7 @@ bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& 
             const CBlockHeader& header = headers[i];
 
             CBlockIndex *pindex = nullptr; // Use a temp pindex instead of ppindex to avoid a const_cast
-            bool accepted{AcceptBlockHeader(header, state, &pindex, min_pow_checked, header.nFlags & CBlockIndex::BLOCK_PROOF_OF_STAKE, old_client)};
+            bool accepted{AcceptBlockHeader(header, state, &pindex, min_pow_checked, old_client)};
             ActiveChainstate().CheckBlockIndex();
 
             if (!accepted) {
@@ -4131,7 +4137,7 @@ bool Chainstate::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockV
     CBlockIndex *pindexDummy = nullptr;
     CBlockIndex *&pindex = ppindex ? *ppindex : pindexDummy;
 
-    bool accepted_header{m_chainman.AcceptBlockHeader(block, state, &pindex, min_pow_checked, block.IsProofOfStake())};
+    bool accepted_header{m_chainman.AcceptBlockHeader(block, state, &pindex, min_pow_checked)};
     CheckBlockIndex();
 
     if (!accepted_header)

@@ -936,7 +936,6 @@ private:
         BlockValidationState& state,
         CBlockIndex** ppindex,
         bool min_pow_checked,
-        bool fProofOfStake,
         bool fOldClient = false) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
     friend Chainstate;
 
