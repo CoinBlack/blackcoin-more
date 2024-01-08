@@ -408,6 +408,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 <context>
     <name>PeerTableModel</name>
     <message>
+        <source>Address</source>
+        <extracomment>Title of Peers Table column which contains the IP/Onion/I2P address of the connected peer.</extracomment>
+        <translation type="unfinished">ঠিকানা</translation>
+    </message>
+    <message>
         <source>Type</source>
         <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
         <translation type="unfinished">টাইপ</translation>
@@ -467,16 +472,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Date</source>
         <translation type="unfinished">তারিখ</translation>
-    </message>
-    </context>
-<context>
-    <name>SendCoinsDialog</name>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
     </message>
     <message>
         <source>Label</source>

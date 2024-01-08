@@ -34,10 +34,6 @@
         <translation type="unfinished">തിരയുന്നതിന് വിലാസമോ ലേബലോ നൽകുക</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation type="unfinished">തിരയുന്നതിന് വിലാസമോ ലേബലോ നൽകുക</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">നിലവിലുള്ള  ടാബിലെ  വിവരങ്ങൾ ഒരു ഫയലിലേക്ക് എക്സ്പോർട്ട് ചെയ്യുക</translation>
     </message>
@@ -449,138 +445,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ഇതിനുശേഷമുള്ള ഇടപാടുകൾ ഇതുവരെ ദൃശ്യമാകില്ല.</translation>
     </message>
     <message>
-        <source>E&amp;xit</source>
-        <translation>പുറത്ത്</translation>
-    </message>
-    <message>
-        <source>Quit application</source>
-        <translation>അപ്ലിക്കേഷൻ ഉപേക്ഷിക്കുക</translation>
-    </message>
-    <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished">&amp; ഏകദേശം%1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">%1 നെക്കുറിച്ചുള്ള വിവരങ്ങൾ കാണിക്കുക</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation>ഏകദേശം&amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Qt സംബന്ധിച്ച വിവരങ്ങൾ കാണിക്കുക</translation>
-    </message>
-    <message>
-        <source>Modify configuration options for %1</source>
-        <translation type="unfinished">%1 നായുള്ള കോൺഫിഗറേഷൻ ഓപ്ഷനുകൾ പരിഷ്‌ക്കരിക്കുക</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation type="unfinished">ഒരു പുതിയ വാലറ്റ് സൃഷ്ടിക്കുക</translation>
-    </message>
-    <message>
-        <source>Wallet:</source>
-        <translation type="unfinished">വാലറ്റ്:</translation>
-    </message>
-    <message>
-        <source>Network activity disabled.</source>
-        <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">നെറ്റ്‌വർക്ക് പ്രവർത്തനം പ്രവർത്തനരഹിതമാക്കി.</translation>
-    </message>
-    <message>
-        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation type="unfinished">പ്രോക്സി ആണ്&lt;b&gt;പ്രവർത്തനക്ഷമമാക്കി&lt;/b&gt;:%1</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>ഒരു ബിറ്റ്കോയിൻ വിലാസത്തിലേക്ക് നാണയങ്ങൾ അയയ്ക്കുക</translation>
-    </message>
-    <message>
-        <source>Backup wallet to another location</source>
-        <translation>മറ്റൊരു സ്ഥലത്തേക്ക് ബാക്കപ്പ് വാലറ്റ്</translation>
-    </message>
-    <message>
-        <source>Change the passphrase used for wallet encryption</source>
-        <translation>വാലറ്റ് എൻ‌ക്രിപ്ഷനായി ഉപയോഗിക്കുന്ന പാസ്‌ഫ്രെയ്‌സ് മാറ്റുക</translation>
-    </message>
-    <message>
-        <source>&amp;Send</source>
-        <translation>&amp;അയയ്‌ക്കുക</translation>
-    </message>
-    <message>
-        <source>&amp;Receive</source>
-        <translation>&amp;സ്വീകരിക്കുക</translation>
-    </message>
-    <message>
-        <source>&amp;Show / Hide</source>
-        <translation>&amp;കാണിക്കുക/ മറയ്ക്കുക</translation>
-    </message>
-    <message>
-        <source>Show or hide the main Window</source>
-        <translation>പ്രധാന വിൻ‌ഡോ കാണിക്കുക അല്ലെങ്കിൽ‌ മറയ്‌ക്കുക</translation>
-    </message>
-    <message>
-        <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>നിങ്ങളുടെ വാലറ്റിന്റെ സ്വകാര്യ കീകൾ എൻ‌ക്രിപ്റ്റ് ചെയ്യുക</translation>
-    </message>
-    <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>നിങ്ങളുടെ ബിറ്റ്കോയിൻ വിലാസങ്ങൾ സ്വന്തമാണെന്ന് തെളിയിക്കാൻ സന്ദേശങ്ങൾ ഒപ്പിടുക</translation>
-    </message>
-    <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>നിർദ്ദിഷ്ട ബിറ്റ്കോയിൻ വിലാസങ്ങളിൽ സന്ദേശങ്ങൾ ഒപ്പിട്ടിട്ടുണ്ടെന്ന് ഉറപ്പാക്കാൻ സ്ഥിരീകരിക്കുക</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation>&amp; ഫയൽ</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation>&amp;ക്രമീകരണങ്ങൾ</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>&amp;സഹായം</translation>
-    </message>
-    <message>
-        <source>Tabs toolbar</source>
-        <translation>ടാബുകളുടെ ടൂൾബാർ</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">പേയ്‌മെന്റുകൾ അഭ്യർത്ഥിക്കുക (QR കോഡുകളും ബിറ്റ്കോയിനും സൃഷ്ടിക്കുന്നു: URI- കൾ)</translation>
-    </message>
-    <message>
-        <source>Show the list of used sending addresses and labels</source>
-        <translation type="unfinished">ഉപയോഗിച്ച അയച്ച വിലാസങ്ങളുടെയും ലേബലുകളുടെയും പട്ടിക കാണിക്കുക</translation>
-    </message>
-    <message>
-        <source>Show the list of used receiving addresses and labels</source>
-        <translation type="unfinished">ഉപയോഗിച്ച സ്വീകരിക്കുന്ന വിലാസങ്ങളുടെയും ലേബലുകളുടെയും പട്ടിക കാണിക്കുക</translation>
-    </message>
-    <message>
-        <source>&amp;Command-line options</source>
-        <translation type="unfinished">&amp;കമാൻഡ്-ലൈൻ ഓപ്ഷനുകൾ</translation>
-    </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>അവസാനം ലഭിച്ച ബ്ലോക്ക് %1 മുമ്പ് സൃഷ്ടിച്ചു.</translation>
-    </message>
-    <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>ഇതിനുശേഷമുള്ള ഇടപാടുകൾ ഇതുവരെ ദൃശ്യമാകില്ല.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation type="unfinished">പിശക് </translation>
     </message>
@@ -595,38 +459,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Up to date</source>
         <translation type="unfinished">കാലികമാണ്</translation>
-    </message>
-    <message>
-        <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">ഭാഗികമായി ഒപ്പിട്ട ബിറ്റ്കോയിൻ ഇടപാട് ലോഡുചെയ്യുക</translation>
-    </message>
-    <message>
-        <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
-        <translation type="unfinished">ക്ലിപ്പ്ബോർഡിൽ നിന്ന് ഭാഗികമായി ഒപ്പിട്ട ബിറ്റ്കോയിൻ ഇടപാട് ലോഡുചെയ്യുക</translation>
-    </message>
-    <message>
-        <source>Node window</source>
-        <translation type="unfinished">നോഡ് വിൻഡോ</translation>
-    </message>
-    <message>
-        <source>Open node debugging and diagnostic console</source>
-        <translation type="unfinished">നോഡ് ഡീബഗ്ഗിംഗും ഡയഗ്നോസ്റ്റിക് കൺസോളും തുറക്കുക</translation>
-    </message>
-    <message>
-        <source>&amp;Sending addresses</source>
-        <translation type="unfinished">&amp;വിലാസങ്ങൾ അയയ്ക്കുന്നു</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses</source>
-        <translation type="unfinished">&amp;വിലാസങ്ങൾ അയയ്ക്കുന്നു</translation>
-    </message>
-    <message>
-        <source>Open a bitcoin: URI</source>
-        <translation type="unfinished">ഒരു ബിറ്റ്കോയിൻ തുറക്കുക: URI</translation>
-    </message>
-    <message>
-        <source>Up to date</source>
-        <translation>കാലികമാണ്</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction</source>

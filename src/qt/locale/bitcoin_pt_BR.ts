@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Create a new address</source>
-        <translation type="unfinished">Criar um novo endereço.</translation>
+        <translation type="unfinished">Criar um novo endereço</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -467,24 +467,8 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
         <translation type="unfinished">&amp;Criptografar Carteira...</translation>
     </message>
     <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Criptografar Carteira...</translation>
-    </message>
-    <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation type="unfinished">Criptografar as chaves privadas que pertencem à sua carteira</translation>
-    </message>
-    <message>
-        <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">Fazer &amp;Backup da Carteira...</translation>
-    </message>
-    <message>
-        <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Mudar frase de segurança...</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">Assinar &amp;mensagem</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
@@ -567,30 +551,6 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
         <translation type="unfinished">Conectando...</translation>
     </message>
     <message>
-        <source>Syncing Headers (%1%)…</source>
-        <translation type="unfinished">Sincronizando cabeçalhos (%1%)...</translation>
-    </message>
-    <message>
-        <source>Synchronizing with network…</source>
-        <translation type="unfinished">Sincronizando com a rede</translation>
-    </message>
-    <message>
-        <source>Indexing blocks on disk…</source>
-        <translation type="unfinished">Indexando blocos no disco...</translation>
-    </message>
-    <message>
-        <source>Processing blocks on disk…</source>
-        <translation type="unfinished">Processando blocos no disco...</translation>
-    </message>
-    <message>
-        <source>Reindexing blocks on disk…</source>
-        <translation type="unfinished">Reindexando blocos no disco...</translation>
-    </message>
-    <message>
-        <source>Connecting to peers…</source>
-        <translation type="unfinished">Conectando...</translation>
-    </message>
-    <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
         <translation type="unfinished">Solicitações de pagamentos (gera códigos QR e bitcoin: URIs)</translation>
     </message>
@@ -622,10 +582,6 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
         <translation type="unfinished">Recuperando o atraso...</translation>
     </message>
     <message>
-        <source>Catching up…</source>
-        <translation type="unfinished">Recuperando o atraso...</translation>
-    </message>
-    <message>
         <source>Last received block was generated %1 ago.</source>
         <translation type="unfinished">Último bloco recebido foi gerado %1 atrás.</translation>
     </message>
@@ -651,7 +607,7 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">Carregar</translation>
+        <translation type="unfinished">Carregar Transação de Bitcoin Parcialmente Assinada</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
@@ -2285,10 +2241,6 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
     <message>
         <source>Services</source>
         <translation type="unfinished">Serviços</translation>
-    </message>
-    <message>
-        <source>Whether the peer requested us to relay transactions.</source>
-        <translation type="unfinished">O nó solicita retransmissão de transações.</translation>
     </message>
     <message>
         <source>Connection Time</source>

@@ -80,13 +80,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
-    <message>
-        <source>Error: Missing checksum</source>
-        <translation type="unfinished">Iphutha: iChecksum engekho</translation>
-    </message>
-    </context>
-<context>
     <name>BitcoinGUI</name>
     <message>
         <source>&amp;Options…</source>

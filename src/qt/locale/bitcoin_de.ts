@@ -265,9 +265,6 @@ Das Signieren ist nur mit Adressen vom Typ 'Legacy' möglich.</translation>
         <source>Runaway exception</source>
         <translation type="unfinished">Ausreisser Ausnahme</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Ein fataler Fehler ist aufgetreten. %1 kann nicht länger sicher fortfahren und wird beendet.</translation>
@@ -366,11 +363,7 @@ Das Signieren ist nur mit Adressen vom Typ 'Legacy' möglich.</translation>
     </message>
     <message>
         <source>%1 m</source>
-        <translation type="unfinished">%1 M</translation>
-    </message>
-    <message>
-        <source>%1 s</source>
-        <translation type="unfinished">%1 S</translation>
+        <translation type="unfinished">%1 min</translation>
     </message>
     <message>
         <source>None</source>
@@ -708,16 +701,6 @@ Das Signieren ist nur mit Adressen vom Typ 'Legacy' möglich.</translation>
     <message>
         <source>Close wallet</source>
         <translation type="unfinished">Wallet schließen</translation>
-    </message>
-    <message>
-        <source>Restore Wallet…</source>
-        <extracomment>Name of the menu item that restores wallet from a backup file.</extracomment>
-        <translation type="unfinished">Wallet wiederherstellen...</translation>
-    </message>
-    <message>
-        <source>Restore a wallet from a backup file</source>
-        <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Wiederherstellen einer Wallet aus einer Sicherungsdatei</translation>
     </message>
     <message>
         <source>Restore Wallet…</source>
@@ -1108,7 +1091,7 @@ Das Signieren ist nur mit Adressen vom Typ 'Legacy' möglich.</translation>
     </message>
     <message>
         <source>Open wallet warning</source>
-        <translation type="unfinished">Warnung beim Wallet erstellen aufgetreten</translation>
+        <translation type="unfinished">Wallet öffnen Warnung</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -2176,7 +2159,7 @@ Wenn Sie diese Fehlermeldung erhalten, sollten Sie den Händler bitten, einen BI
     </message>
     <message>
         <source>&amp;Copy Image</source>
-        <translation type="unfinished">Bild &amp;kopieren</translation>
+        <translation type="unfinished">Grafik &amp;kopieren</translation>
     </message>
     <message>
         <source>Resulting URI too long, try to reduce the text for label / message.</source>
@@ -3050,7 +3033,7 @@ Hinweis: Da die Gebühr auf Basis der Bytes berechnet wird, führt eine Gebühre
     <message>
         <source>Sign on device</source>
         <extracomment>"device" usually means a hardware wallet.</extracomment>
-        <translation type="unfinished">Anmeldung am Gerät</translation>
+        <translation type="unfinished">Gerät anmelden</translation>
     </message>
     <message>
         <source>Connect your hardware wallet first.</source>
@@ -3521,7 +3504,7 @@ Hinweis: Da die Gebühr auf Basis der Bytes berechnet wird, führt eine Gebühre
     </message>
     <message>
         <source>watch-only</source>
-        <translation type="unfinished">Nur beobachten</translation>
+        <translation type="unfinished">beobachtet</translation>
     </message>
     <message>
         <source>label</source>
@@ -3698,7 +3681,7 @@ Hinweis: Da die Gebühr auf Basis der Bytes berechnet wird, führt eine Gebühre
     </message>
     <message>
         <source>watch-only</source>
-        <translation type="unfinished">Nur beobachten</translation>
+        <translation type="unfinished">beobachtet</translation>
     </message>
     <message>
         <source>(n/a)</source>

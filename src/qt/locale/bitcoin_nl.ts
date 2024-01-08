@@ -225,7 +225,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation type="unfinished">Wallet passphrase (wachtwoord) werd succesvol gewijzigd.</translation>
+        <translation type="unfinished">Portemonneewachtwoord is met succes gewijzigd.</translation>
     </message>
     <message>
         <source>Passphrase change failed</source>
@@ -416,7 +416,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Show general overview of wallet</source>
-        <translation type="unfinished">Toon algemeen overzicht van uw wallet</translation>
+        <translation type="unfinished">Toon algemeen overzicht van uw portemonnee</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
@@ -424,7 +424,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation type="unfinished">Blader door transactie geschiedenis </translation>
+        <translation type="unfinished">Blader door transactiegescheidenis</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -463,6 +463,10 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
         <translation type="unfinished">&amp;Minimaliseren</translation>
     </message>
     <message>
+        <source>Wallet:</source>
+        <translation type="unfinished">Portemonnee:</translation>
+    </message>
+    <message>
         <source>Network activity disabled.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">Netwerkactiviteit gestopt.</translation>
@@ -477,11 +481,11 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation type="unfinished">Backup wallet naar een andere locatie</translation>
+        <translation type="unfinished">Backup portemonnee naar een andere locatie</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation type="unfinished">Wijzig het wachtwoord voor de wallet versleuteling</translation>
+        <translation type="unfinished">Wijzig het wachtwoord voor uw portemonneversleuteling</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -497,15 +501,15 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Versleutel wallet...</translation>
+        <translation type="unfinished">&amp;Versleutel Portemonnee...</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation type="unfinished">Versleutel het geheime sleutelmateriaal dat bij uw wallet hoort</translation>
+        <translation type="unfinished">Versleutel de geheime sleutels die bij uw portemonnee horen</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp;Backup wallet...</translation>
+        <translation type="unfinished">&amp;Backup portemonnee...</translation>
     </message>
     <message>
         <source>&amp;Change Passphrase…</source>
@@ -517,7 +521,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Onderteken berichten met uw Bitcoinadressen om te bewijzen dat u deze adressen bezit</translation>
+        <translation type="unfinished">Onderteken berichten met uw Bitcoin adressen om te bewijzen dat u deze adressen bezit</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
@@ -525,7 +529,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Verifiëer handtekeningen om zeker te zijn dat de berichten zijn ondertekend met de gespecificeerde Bitcoinadressen</translation>
+        <translation type="unfinished">Verifiëer handtekeningen om zeker te zijn dat de berichten zijn ondertekend met de gespecificeerde Bitcoin adressen</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -537,15 +541,15 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Close Wallet…</source>
-        <translation type="unfinished">Wallet sluiten...</translation>
+        <translation type="unfinished">Portemonnee Sluiten...</translation>
     </message>
     <message>
         <source>Create Wallet…</source>
-        <translation type="unfinished">Maak wallet...</translation>
+        <translation type="unfinished">Creëer portemonnee...</translation>
     </message>
     <message>
         <source>Close All Wallets…</source>
-        <translation type="unfinished">Sluit alle wallets…</translation>
+        <translation type="unfinished">Sluit Alle Wallets…</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -640,7 +644,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">Laad gedeeltelijk ondertekende Bitcoin transactie</translation>
+        <translation type="unfinished">Laad gedeeltelijk ondertekende Bitcoin-transactie</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
@@ -672,25 +676,15 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Open Wallet</source>
-        <translation type="unfinished">Wallet openen</translation>
+        <translation type="unfinished">Portemonnee Openen</translation>
     </message>
     <message>
         <source>Open a wallet</source>
-        <translation type="unfinished">Open een wallet</translation>
+        <translation type="unfinished">Open een portemonnee</translation>
     </message>
     <message>
         <source>Close wallet</source>
-        <translation type="unfinished">Wallet sluiten</translation>
-    </message>
-    <message>
-        <source>Restore Wallet…</source>
-        <extracomment>Name of the menu item that restores wallet from a backup file.</extracomment>
-        <translation type="unfinished">Wallet herstellen...</translation>
-    </message>
-    <message>
-        <source>Restore a wallet from a backup file</source>
-        <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Herstel een wallet uit een backupbestand</translation>
+        <translation type="unfinished">Portemonnee Sluiten</translation>
     </message>
     <message>
         <source>Restore Wallet…</source>
@@ -704,7 +698,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Close all wallets</source>
-        <translation type="unfinished">Alle wallets sluiten</translation>
+        <translation type="unfinished">Sluit alle portemonnees</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
@@ -720,31 +714,11 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>default wallet</source>
-        <translation type="unfinished">standaard wallet</translation>
+        <translation type="unfinished">standaard portemonnee</translation>
     </message>
     <message>
         <source>No wallets available</source>
-        <translation type="unfinished">Geen wallets beschikbaar</translation>
-    </message>
-    <message>
-        <source>Wallet Data</source>
-        <extracomment>Name of the wallet data file format.</extracomment>
-        <translation type="unfinished">Walletgegevens</translation>
-    </message>
-    <message>
-        <source>Load Wallet Backup</source>
-        <extracomment>The title for Restore Wallet File Windows</extracomment>
-        <translation type="unfinished">Backupwallet laden</translation>
-    </message>
-    <message>
-        <source>Restore Wallet</source>
-        <extracomment>Title of pop-up window shown when the user is attempting to restore a wallet.</extracomment>
-        <translation type="unfinished">Wallet herstellen</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <extracomment>Label of the input field where the name of the wallet is entered.</extracomment>
-        <translation type="unfinished">Walletnaam</translation>
+        <translation type="unfinished">Geen portefeuilles beschikbaar</translation>
     </message>
     <message>
         <source>Wallet Data</source>
@@ -2689,6 +2663,10 @@ Voor meer informatie over het gebruik van deze console, type %6.
     <message>
         <source>Message:</source>
         <translation type="unfinished">Bericht:</translation>
+    </message>
+    <message>
+        <source>Wallet:</source>
+        <translation type="unfinished">Portemonnee:</translation>
     </message>
     <message>
         <source>Copy &amp;URI</source>

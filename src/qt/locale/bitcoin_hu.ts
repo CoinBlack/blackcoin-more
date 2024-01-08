@@ -511,7 +511,7 @@ Aláírni csak régi típusú, egyessel kezdődő címekkel lehet.</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation type="unfinished">A tárcádhoz tartozó privát kulcsok titkosítása</translation>
+        <translation type="unfinished">A tárcához tartozó privát kulcsok titkosítása</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
@@ -1098,7 +1098,7 @@ Aláírni csak régi típusú, egyessel kezdődő címekkel lehet.</translation>
     <message>
         <source>Open Wallet</source>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
-        <translation type="unfinished">Tárca Megnyitása</translation>
+        <translation type="unfinished">Tárca megnyitása</translation>
     </message>
     <message>
         <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -1800,11 +1800,6 @@ Aláírni csak régi típusú, egyessel kezdődő címekkel lehet.</translation>
         <source>Client restart required to activate changes.</source>
         <extracomment>Text explaining that the settings changed will not come into effect until the client is restarted.</extracomment>
         <translation type="unfinished">A változtatások életbe lépéséhez újra kell indítani a klienst.</translation>
-    </message>
-    <message>
-        <source>Current settings will be backed up at "%1".</source>
-        <extracomment>Text explaining to the user that the client's current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location's path.</extracomment>
-        <translation type="unfinished">A jelenlegi beállítások ide kerülnek mentésre: "%1".</translation>
     </message>
     <message>
         <source>Current settings will be backed up at "%1".</source>
@@ -3327,7 +3322,7 @@ Megjegyzés: Mivel a díj bájtonként van kiszámítva, egy "100 satoshi kvB-nk
     </message>
     <message>
         <source>Sign &amp;Message</source>
-        <translation type="unfinished">Üzenet &amp;Aláírása</translation>
+        <translation type="unfinished">Üzenet &amp;aláírása</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>
@@ -3335,7 +3330,7 @@ Megjegyzés: Mivel a díj bájtonként van kiszámítva, egy "100 satoshi kvB-nk
     </message>
     <message>
         <source>Clear &amp;All</source>
-        <translation type="unfinished">Mindent &amp;Töröl</translation>
+        <translation type="unfinished">Mindent &amp;töröl</translation>
     </message>
     <message>
         <source>&amp;Verify Message</source>

@@ -22,6 +22,10 @@
         <translation type="unfinished">&amp;காபி</translation>
     </message>
     <message>
+        <source>C&amp;lose</source>
+        <translation type="unfinished">&amp;மூடு</translation>
+    </message>
+    <message>
         <source>Delete the currently selected address from the list</source>
         <translation type="unfinished">பட்டியலிலிருந்து தற்போது தேர்ந்தெடுக்கப்பட்ட முகவரி நீக்கவும்</translation>
     </message>

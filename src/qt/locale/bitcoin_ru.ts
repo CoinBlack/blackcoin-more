@@ -58,6 +58,10 @@
         <translation type="unfinished">&amp;Выбрать</translation>
     </message>
     <message>
+        <source>Sending addresses</source>
+        <translation type="unfinished">Адреса отправки</translation>
+    </message>
+    <message>
         <source>Receiving addresses</source>
         <translation type="unfinished">Адреса получения</translation>
     </message>
@@ -262,13 +266,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Неуправляемое исключение</translation>
     </message>
     <message>
-        <source>Runaway exception</source>
-        <translation type="unfinished">Неуправляемое исключение</translation>
-    </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
-    <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Произошла критическая ошибка. %1 больше не может продолжать безопасную работу и будет закрыт.
  </translation>
@@ -458,7 +455,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Show general overview of wallet</source>
-        <translation type="unfinished">Показать текущее состояние кошелька</translation>
+        <translation type="unfinished">Отобразить основное окно кошелька</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
@@ -519,15 +516,15 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Отправить средства на биткоин-адрес</translation>
+        <translation type="unfinished">Отправить средства на Биткоин адрес</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation type="unfinished">Создать резервную копию кошелька в другом местеexternal_signer_scriptpubkeyman.cpp</translation>
+        <translation type="unfinished">Создать резервную копию кошелька в другом месте</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation type="unfinished">Изменить парольную фразу, используемую для шифрования кошелька</translation>
+        <translation type="unfinished">Изменить пароль используемый для шифрования кошелька</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -539,11 +536,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Options…</source>
-        <translation type="unfinished">&amp;Параметры…</translation>
+        <translation type="unfinished">&amp;Параметры...</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Зашифровать кошелёк…</translation>
+        <translation type="unfinished">&amp;Зашифровать Кошелёк...</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -551,47 +548,47 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp;Сделать резервную копию кошелька…</translation>
+        <translation type="unfinished">&amp;Создать резервную копию кошелька...</translation>
     </message>
     <message>
         <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Изменить парольную фразу…</translation>
+        <translation type="unfinished">&amp;Изменить пароль...</translation>
     </message>
     <message>
         <source>Sign &amp;message…</source>
-        <translation type="unfinished">Подписать &amp;сообщение…</translation>
+        <translation type="unfinished">Подписать &amp;сообщение...</translation>
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Подписать сообщение биткоин-адресом, чтобы доказать, что вы им владеете</translation>
+        <translation type="unfinished">Подписать сообщения своими Биткоин кошельками, что-бы доказать, что вы ими владеете</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Проверить сообщение…</translation>
+        <translation type="unfinished">&amp;Проверить сообщение</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Проверить подпись сообщения, чтобы убедиться, что оно подписано конкретным биткоин-адресом</translation>
+        <translation type="unfinished">Проверяйте сообщения, чтобы убедиться, что они подписаны конкретными биткоин-адресами</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
-        <translation type="unfinished">&amp;Загрузить PSBT из файла…</translation>
+        <translation type="unfinished">&amp;Загрузить PSBT из файла...</translation>
     </message>
     <message>
         <source>Open &amp;URI…</source>
-        <translation type="unfinished">Открыть &amp;URI…</translation>
+        <translation type="unfinished">О&amp;ткрыть URI...</translation>
     </message>
     <message>
         <source>Close Wallet…</source>
-        <translation type="unfinished">Закрыть кошелёк…</translation>
+        <translation type="unfinished">Закрыть кошелёк...</translation>
     </message>
     <message>
         <source>Create Wallet…</source>
-        <translation type="unfinished">Создать кошелёк…</translation>
+        <translation type="unfinished">Создать кошелёк...</translation>
     </message>
     <message>
         <source>Close All Wallets…</source>
-        <translation type="unfinished">Закрыть все кошельки…</translation>
+        <translation type="unfinished">Закрыть все кошельки...</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -611,23 +608,23 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Syncing Headers (%1%)…</source>
-        <translation type="unfinished">Синхронизация заголовков (%1%)…</translation>
+        <translation type="unfinished">Синхронизация заголовков (%1%)...</translation>
     </message>
     <message>
         <source>Synchronizing with network…</source>
-        <translation type="unfinished">Синхронизация с сетью…</translation>
+        <translation type="unfinished">Синхронизация с сетью...</translation>
     </message>
     <message>
         <source>Indexing blocks on disk…</source>
-        <translation type="unfinished">Индексация блоков на диске…</translation>
+        <translation type="unfinished">Индексация блоков на диске...</translation>
     </message>
     <message>
         <source>Processing blocks on disk…</source>
-        <translation type="unfinished">Обработка блоков на диске…</translation>
+        <translation type="unfinished">Обработка блоков на диске...</translation>
     </message>
     <message>
         <source>Connecting to peers…</source>
-        <translation type="unfinished">Подключение к узлам…</translation>
+        <translation type="unfinished">Подключение к узлам...</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -659,7 +656,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Catching up…</source>
-        <translation type="unfinished">Синхронизация…</translation>
+        <translation type="unfinished">Синхронизация...</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
@@ -745,7 +742,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Показать справку %1 со списком доступных параметров командной строки</translation>
+        <translation type="unfinished">Показать помощь по %1, чтобы получить список доступных параметров командной строки</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -1143,7 +1140,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
         <extracomment>Descriptive text of the open wallet progress window which indicates to the user which wallet is currently being opened.</extracomment>
-        <translation type="unfinished">Открывается кошелёк &lt;b&gt;%1&lt;/b&gt;…</translation>
+        <translation type="unfinished">Открывается кошелёк &lt;b&gt;%1&lt;/b&gt;...</translation>
     </message>
 </context>
 <context>
@@ -1225,7 +1222,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation type="unfinished">Отключить приватные ключи для этого кошелька. В кошельках с отключёнными приватными ключами не сохраняются приватные ключи, в них нельзя создать HD мастер-ключ или импортировать приватные ключи. Это отличный вариант для кошельков для наблюдения за балансом.</translation>
+        <translation type="unfinished">Отключить приватные ключи для этого кошелька. В кошельках с отключёнными приватными ключами не сохраняются приватные ключи, в них нельзя создать HD мастер-ключ или импортировать приватные ключи. Это удобно для наблюдающих кошельков.</translation>
     </message>
     <message>
         <source>Disable Private Keys</source>
@@ -1285,7 +1282,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation type="unfinished">Адрес, связанный с этой записью адресной книги. Если это адрес для отправки, его можно изменить.</translation>
+        <translation type="unfinished">Адрес, связанный с этой записью адресной книги. Он может быть изменён только если это адрес для отправки.</translation>
     </message>
     <message>
         <source>&amp;Address</source>
@@ -1493,7 +1490,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation type="unfinished">Попытка потратить средства, использованные в транзакциях, которые ещё не синхронизированы, будет отклонена сетью.</translation>
+        <translation type="unfinished">Попытка потратить средства, затронутые не видными пока транзакциями, будет отклонена сетью.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1501,11 +1498,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Unknown…</source>
-        <translation type="unfinished">Неизвестно…</translation>
+        <translation type="unfinished">Неизвестно...</translation>
     </message>
     <message>
         <source>calculating…</source>
-        <translation type="unfinished">вычисляется…</translation>
+        <translation type="unfinished">вычисляется...</translation>
     </message>
     <message>
         <source>Last block time</source>
@@ -1537,11 +1534,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Unknown. Syncing Headers (%1, %2%)…</source>
-        <translation type="unfinished">Неизвестно. Синхронизация заголовков (%1, %2%)…</translation>
-    </message>
-    <message>
-        <source>Unknown. Pre-syncing Headers (%1, %2%)…</source>
-        <translation type="unfinished">Неизвестно. Предсинхронизация заголовков (%1, %2%)…</translation>
+        <translation type="unfinished">Неизвестно. Синхронизируются заголовки (%1, %2%)...</translation>
     </message>
     <message>
         <source>Unknown. Pre-syncing Headers (%1, %2%)…</source>
@@ -2475,6 +2468,10 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Службы</translation>
     </message>
     <message>
+        <source>High bandwidth BIP152 compact block relay: %1</source>
+        <translation type="unfinished">Широкополосный ретранслятор компактных блоков BIP152: %1</translation>
+    </message>
+    <message>
         <source>High Bandwidth</source>
         <translation type="unfinished">Широкая полоса</translation>
     </message>
@@ -2687,7 +2684,7 @@ For more information on using this console, type %6.
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">От нас</translation>
+        <translation type="unfinished">Кому</translation>
     </message>
     <message>
         <source>From</source>
@@ -3572,6 +3569,10 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>unknown</source>
         <translation type="unfinished">неизвестно</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished">Кому</translation>
     </message>
     <message>
         <source>own address</source>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copia l'indirizzo attualmente selezionato negli appunti di sistema</translation>
+        <translation type="unfinished">Copia negli appunti del sistema l'indirizzo attualmente selezionato</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation type="unfinished">Rimuovi l'indirizzo attualmente selezionato dall'elenco</translation>
+        <translation type="unfinished">Rimuovi dalla lista l'indirizzo attualmente selezionato</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
-        <translation type="unfinished">IInserisci l'indirizzo o l'etichetta per la ricerca</translation>
+        <translation type="unfinished">Inserisci indirizzo o nominativo da cercare</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
@@ -261,9 +261,6 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <source>Runaway exception</source>
         <translation type="unfinished">Eccezione runaway</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Si è verificato un errore critico. %1 non può più continuare in maniera sicura e verrà chiuso.</translation>
@@ -491,19 +488,19 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Cripta il portafoglio</translation>
+        <translation type="unfinished">&amp;Cifra il portafoglio...</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation type="unfinished">Cifra le chiavi private che appartengono al tuo portamonete</translation>
+        <translation type="unfinished">Cifra le chiavi private che appartengono al tuo portafoglio</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp;Archivia Wallet...</translation>
+        <translation type="unfinished">&amp;Backup Portafoglio...</translation>
     </message>
     <message>
         <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Cambia Frase di sicurezza</translation>
+        <translation type="unfinished">&amp;Cambia Passphrase...</translation>
     </message>
     <message>
         <source>Sign &amp;message…</source>
@@ -630,7 +627,7 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">Carica Transazione Bitcoin Parzialmente Firmata (PSBT)</translation>
+        <translation type="unfinished">Carica Partially Signed Bitcoin Transaction</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>

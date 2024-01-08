@@ -34,10 +34,6 @@
         <translation type="unfinished">လိပ်စာရိုက်ထည့်ပါ</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation type="unfinished">လိပ်စာရိုက်ထည့်ပါ</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">လက်ရှိ tab မှာရှိတဲ့ဒေတာတွေကို ဖိုင်လ်မှာသိမ်းမယ်။</translation>
     </message>
@@ -88,31 +84,7 @@
         <source>Address</source>
         <translation type="unfinished">လိပ်စာ</translation>
     </message>
-    <message>
-        <source>Choose the address to send coins to</source>
-        <translation type="unfinished">လိပ်စာကိုပေးပို့ဖို့လိပ်စာရွေးချယ်ပါ</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation type="unfinished">ဒင်္ဂါးများလက်ခံရယူမည့်လိပ်စာကို​​ရွေးပါ</translation>
-    </message>
-    <message>
-        <source>C&amp;hoose</source>
-        <translation type="unfinished">​ရွေးပါ</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">လိပ်စာပေးပို့နေသည်</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">လိပ်စာလက်ခံရရှိသည်</translation>
-    </message>
-    <message>
-        <source>Exporting Failed</source>
-        <translation type="unfinished">တင်ပို့မှုမအောင်မြင်ပါ</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>

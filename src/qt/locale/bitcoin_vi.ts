@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation type="unfinished">Cụm mật khẩu ví đã được thay đổi thành công.</translation>
+        <translation type="unfinished">Cụm mật khẩu thay đổi thành công.</translation>
     </message>
     <message>
         <source>Passphrase change failed</source>
@@ -279,15 +279,15 @@
     </message>
     <message>
         <source>Show general overview of wallet</source>
-        <translation type="unfinished">Hiển thị tổng quan chung về ví</translation>
+        <translation type="unfinished">Hiển thị tổng quan ví</translation>
     </message>
     <message>
-        <source>&amp;Minimize</source>
-        <translation type="unfinished">&amp;Thu nhỏ</translation>
+        <source>&amp;Transactions</source>
+        <translation type="unfinished">&amp;Các Giao Dịch</translation>
     </message>
     <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Mã hóa ví…</translation>
+        <source>Browse transaction history</source>
+        <translation type="unfinished">Trình duyệt lịch sử giao dịch</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -491,17 +491,16 @@
         <translation type="unfinished">Đóng tất cả ví</translation>
     </message>
     <message>
-        <source>Restore a wallet from a backup file</source>
-        <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Khôi phục ví từ tệp đã sao lưu</translation>
+        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
+        <translation type="unfinished">Hiển thị %1 tin nhắn hỗ trợ để nhận được danh sách Bitcoin command-line khả dụng</translation>
     </message>
     <message>
-        <source>&amp;Mask values</source>
-        <translation type="unfinished">&amp;Giá trị mặt nạ</translation>
+        <source>default wallet</source>
+        <translation type="unfinished">ví mặc định</translation>
     </message>
     <message>
-        <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">Che các giá trị trong tab Tổng quan</translation>
+        <source>No wallets available</source>
+        <translation type="unfinished">Không có ví nào</translation>
     </message>
     <message>
         <source>Load Wallet Backup</source>
@@ -648,34 +647,6 @@
     </message>
 </context>
 <context>
-    <name>RestoreWalletActivity</name>
-    <message>
-        <source>Restore Wallet</source>
-        <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
-        <translation type="unfinished">Khôi phục ví</translation>
-    </message>
-    <message>
-        <source>Restoring Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
-        <extracomment>Descriptive text of the restore wallets progress window which indicates to the user that wallets are currently being restored.</extracomment>
-        <translation type="unfinished">Đang khôi phục ví &lt;b&gt;%1&lt;/b&gt;…</translation>
-    </message>
-    <message>
-        <source>Restore wallet failed</source>
-        <extracomment>Title of message box which is displayed when the wallet could not be restored.</extracomment>
-        <translation type="unfinished">Khôi phục ví thất bại</translation>
-    </message>
-    <message>
-        <source>Restore wallet warning</source>
-        <extracomment>Title of message box which is displayed when the wallet is restored with some warning.</extracomment>
-        <translation type="unfinished">Cảnh báo khối phục ví</translation>
-    </message>
-    <message>
-        <source>Restore wallet message</source>
-        <extracomment>Title of message box which is displayed when the wallet is successfully restored.</extracomment>
-        <translation type="unfinished">Tin nhắn khôi phục ví</translation>
-    </message>
-</context>
-<context>
     <name>WalletController</name>
     <message>
         <source>Close wallet</source>
@@ -685,7 +656,7 @@
         <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation type="unfinished">Bạn có chắc chắn muốn đóng ví không &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>CreateWalletDialog</name>
     <message>

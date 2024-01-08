@@ -50,14 +50,6 @@
         <translation type="unfinished">آدرسی که ارزها را دریافت میکند را انتخاب کنید</translation>
     </message>
     <message>
-        <source>Choose the address to send coins to</source>
-        <translation type="unfinished">آدرس را برای ارسال کوین وارد کنید</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation type="unfinished">آدرس را برای دریافت کوین وارد کنید</translation>
-    </message>
-    <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">و انتخاب</translation>
     </message>
@@ -559,11 +551,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">پیام تایید</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">پیام ها را تأیید کنید تا مطمئن شوید با آدرس های مشخص شده بیت کوین امضا شده اند
- </translation>
-    </message>
-    <message>
         <source>&amp;Load PSBT from file…</source>
         <translation type="unfinished">بارگیری PSBT از پرونده</translation>
     </message>
@@ -1022,10 +1009,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>This label turns red if any recipient receives an amount smaller than the current dust threshold.</source>
         <translation type="unfinished">اگر هر گیرنده مقداری کمتر آستانه فعلی دریافت کند از این لیبل قرمز می‌شود.</translation>
-    </message>
-    <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Can vary +/- %1 satoshi(s) per input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1523,14 +1506,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">شبکه</translation>
     </message>
     <message>
-        <source>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</source>
-        <translation>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</translation>
-    </message>
-    <message>
-        <source>Prune &amp;block storage to</source>
-        <translation>Prune &amp;block storage to</translation>
-    </message>
-    <message>
         <source>GB</source>
         <translation type="unfinished">گیگابایت</translation>
     </message>
@@ -1557,10 +1532,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Enable R&amp;PC server</source>
         <extracomment>An Options window setting to enable the RPC server.</extracomment>
         <translation type="unfinished">سرور R&amp;PC را فعال کنید</translation>
-    </message>
-    <message>
-        <source>(0 = auto, &lt;0 = leave that many cores free)</source>
-        <translation>(0 = auto, &lt;0 = leave that many cores free)</translation>
     </message>
     <message>
         <source>W&amp;allet</source>
@@ -1619,14 +1590,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">درگاه نقشه با استفاده از NA&amp;T-PMP</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
-        <translation type="unfinished">باز کردن خودکار درگاه شبکهٔ بیت‌کوین روی روتر. این پروسه تنها زمانی کار می‌کند که روتر از پروتکل NAT-PMP  پشتیبانی کند و این پروتکل فعال باشد. پورت خارجی میتواند تصادفی باشد </translation>
-    </message>
-    <message>
-        <source>Map port using NA&amp;T-PMP</source>
-        <translation type="unfinished">درگاه نقشه با استفاده از NA&amp;T-PMP</translation>
-    </message>
-    <message>
         <source>Accept connections from outside.</source>
         <translation type="unfinished">پذیرفتن اتصال شدن از بیرون</translation>
     </message>
@@ -1673,14 +1636,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">نمایش نمادک سینی</translation>
     </message>
     <message>
-        <source>Show the icon in the system tray.</source>
-        <translation type="unfinished">نمایش نمادک در سینی سامانه.</translation>
-    </message>
-    <message>
-        <source>&amp;Show tray icon</source>
-        <translation type="unfinished">نمایش نمادک سینی</translation>
-    </message>
-    <message>
         <source>Show only a tray icon after minimizing the window.</source>
         <translation type="unfinished">تنها بعد از کوچک کردن پنجره، tray icon را نشان بده.</translation>
     </message>
@@ -1699,10 +1654,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>User Interface &amp;language:</source>
         <translation type="unfinished">زبان واسط کاربری:</translation>
-    </message>
-    <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>The user interface language can be set here. This setting will take effect after restarting %1.</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
@@ -1745,11 +1696,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>&amp;Cancel</source>
         <translation type="unfinished">لغو</translation>
-    </message>
-    <message>
-        <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
-        <translation type="unfinished">تدوین شده بدون حمایت از امضای خارجی (نیازمند امضای خارجی)</translation>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
@@ -1900,11 +1846,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Mined balance in watch-only addresses that has not yet matured</source>
         <translation type="unfinished">موجودی استخراج شده در آدرس های فقط قابل مشاهده هنوز کامل نشده است</translation>
     </message>
-    <message>
-        <source>Current total balance in watch-only addresses</source>
-        <translation>Current total balance in watch-only addresses</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -2102,10 +2044,6 @@ If you are receiving this error you should request the merchant provide a BIP21 
     <message>
         <source>Blocksdir</source>
         <translation type="unfinished">فولدر بلاکها</translation>
-    </message>
-    <message>
-        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
-        <translation>To specify a non-default location of the blocks directory use the '%1' option.</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -2957,14 +2895,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">تایید کردن ارسال کوین ها</translation>
     </message>
     <message>
-        <source>PSBT copied</source>
-        <translation>PSBT کپی شد</translation>
-    </message>
-    <message>
-        <source>Watch-only balance:</source>
-        <translation>Watch-only balance:</translation>
-    </message>
-    <message>
         <source>The recipient address is not valid. Please recheck.</source>
         <translation type="unfinished">آدرس گیرنده نامعتبر است.لطفا دوباره چک یا بررسی کنید.</translation>
     </message>
@@ -3081,10 +3011,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>&amp;Sign Message</source>
         <translation type="unfinished">&amp;ثبت پیام</translation>
-    </message>
-    <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
     </message>
     <message>
         <source>The Bitcoin address to sign the message with</source>
@@ -3231,12 +3157,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform>برای %n بلوک های بیشتر باز کنید</numerusform>
-        </translation>
-    </message>
     <message>
         <source>abandoned</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an abandoned transaction.</extracomment>
@@ -3347,10 +3267,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">بازرگان</translation>
     </message>
     <message>
-        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</translation>
-    </message>
-    <message>
         <source>Debug information</source>
         <translation type="unfinished">اطلاعات اشکال زدایی
   </translation>
@@ -3408,10 +3324,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>Abandoned</source>
         <translation type="unfinished">رهاشده</translation>
-    </message>
-    <message>
-        <source>Confirming (%1 of %2 recommended confirmations)</source>
-        <translation>Confirming (%1 of %2 recommended confirmations)</translation>
     </message>
     <message>
         <source>Confirmed (%1 confirmations)</source>

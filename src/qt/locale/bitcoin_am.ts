@@ -34,10 +34,6 @@
         <translation type="unfinished">ለመፈለግ አድራሻ ወይም መለያ ያስገቡ</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation type="unfinished">ለመፈለግ አድራሻ ወይም መለያ ያስገቡ</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">በዚህ ማውጫ ውስጥ ያለውን ውሂብ ወደ አንድ ፋይል ቀይረህ አስቀምጥ</translation>
     </message>
@@ -168,6 +164,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">የቢትኮይን ቦርሳዎን ማመስጠር ያረጋግጡ</translation>
     </message>
     <message>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">ማስጠንቀቂያ: የቢትኮይን ቦርሳዎን አመስጥረው የይለፍ-ሐረግዎን ካጡት&lt;b&gt;ቢትኮይኖቾን በሙሉ ያጣሉ&lt;/b&gt;!</translation>
+    </message>
+    <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished">እርግጠኛ ነዎት ቦርሳዎን ማመስጠር ይፈልጋሉ?</translation>
     </message>
@@ -194,6 +194,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Wallet encryption failed</source>
         <translation type="unfinished">የቦርሳ ማመስጠር አልተሳካም</translation>
+    </message>
+    <message>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
+        <translation type="unfinished">የቦርሳ ማመስጠር በውስጣዊ ስህተት ምክንያት አልተሳካም:: ቦርሳዎ አልተመሰጠረም::</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
@@ -327,6 +331,18 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;ስለ %1</translation>
     </message>
     <message>
+        <source>Show information about %1</source>
+        <translation type="unfinished">ስለ %1 መረጃ አሳይ</translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">ስለ &amp;Qt</translation>
+    </message>
+    <message>
+        <source>Show information about Qt</source>
+        <translation type="unfinished">ስለ Qt መረጃ አሳይ</translation>
+    </message>
+    <message>
         <source>Create a new wallet</source>
         <translation type="unfinished">አዲስ ዋሌት ፍጠር</translation>
     </message>
@@ -454,6 +470,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Date</source>
         <translation type="unfinished">ቀን</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation type="unfinished">መጠኑ ገልብጥ</translation>
     </message>
     <message>
         <source>Copy fee</source>
@@ -644,6 +664,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Hide</source>
         <translation type="unfinished">ደብቅ</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation type="unfinished">መጠኑ ገልብጥ</translation>
     </message>
     <message>
         <source>Copy fee</source>

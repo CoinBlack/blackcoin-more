@@ -177,18 +177,6 @@
         <translation type="unfinished">Maciņu nepieciešams šifrēt.</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Ievadiet savu paroli Jūsu maciņam, lūdzu lietojiet vismaz desmit simbolus, astoņus vai vairāk vārdus.</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>Ievadiet veco un jauno paroli Jūsu maciņam</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Maciņu nepieciešams šifrēt.</translation>
-    </message>
-    <message>
         <source>Your wallet is now encrypted. </source>
         <translation type="unfinished">Maciņš tagad šifrēts</translation>
     </message>
@@ -275,19 +263,7 @@
             <numerusform />
         </translation>
     </message>
-    <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation type="unfinished">Ievadītās paroles nav vienādas.</translation>
-    </message>
-    <message>
-        <source>Wallet unlock failed</source>
-        <translation type="unfinished">Maciņa atslēgšana neizdevās</translation>
-    </message>
-    <message>
-        <source>Warning: The Caps Lock key is on!</source>
-        <translation type="unfinished">Uzmanību! Caps Lock uz klavietūras ir ieslēgts!</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -317,10 +293,6 @@
     <message>
         <source>&amp;About %1</source>
         <translation type="unfinished">&amp;Par %1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">Rādīt informāciju par %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -1216,14 +1188,6 @@
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Date</source>
         <translation type="unfinished">Datums</translation>
@@ -1273,10 +1237,6 @@
     </context>
 <context>
     <name>TransactionView</name>
-    <message>
-        <source>Comma separated file (*.csv)</source>
-        <translation>Ar komatiem atdalīts fails (*.csv)</translation>
-    </message>
     <message>
         <source>Confirmed</source>
         <translation type="unfinished">Apstiprināts</translation>

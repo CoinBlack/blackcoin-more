@@ -147,9 +147,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Encrypt wallet</source>
         <translation type="unfinished">&amp;Κρυπτογράφηση πορτοφολιού</translation>
     </message>
-</context>
-<context>
-    <name>TransactionDesc</name>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation type="unfinished">Αυτή η ενέργεια χρειάζεται τη φράση πρόσβασης του πορτοφολιού για να το ξεκλειδώσει.</translation>
@@ -511,7 +508,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως ανήκει μια συγκεκριμένη διεύθυνση Bitcoin</translation>
+        <translation type="unfinished">Ελέγξτε τα μηνύματα για να βεβαιωθείτε ότι υπογράφηκαν με τις καθορισμένες διευθύνσεις Bitcoin</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>

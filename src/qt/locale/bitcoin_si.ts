@@ -310,14 +310,6 @@
         <translation type="unfinished">&amp;දළ විශ්ලේෂණය</translation>
     </message>
     <message>
-        <source>Show general overview of wallet</source>
-        <translation type="unfinished">පසුම්බිය පිළිබඳ සාමාන්‍ය දළ විශ්ලේෂණය පෙන්වන්න</translation>
-    </message>
-    <message>
-        <source>&amp;Transactions</source>
-        <translation type="unfinished">&amp;ගනුදෙනු</translation>
-    </message>
-    <message>
         <source>Browse transaction history</source>
         <translation type="unfinished">ගනුදෙනු ඉතිහාසය පිරික්සන්න</translation>
     </message>
@@ -427,7 +419,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>දෝෂයකි</translation>
+        <translation type="unfinished">දෝෂයකි</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -436,10 +428,6 @@
     <message>
         <source>Information</source>
         <translation type="unfinished">තොරතුර</translation>
-    </message>
-    <message>
-        <source>Up to date</source>
-        <translation type="unfinished">යාවත්කාලීනයි</translation>
     </message>
     <message>
         <source>&amp;Sending addresses</source>
@@ -1095,17 +1083,6 @@
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished">තත්වය</translation>
-    </message>
     <message>
         <source>Status</source>
         <translation type="unfinished">තත්වය</translation>

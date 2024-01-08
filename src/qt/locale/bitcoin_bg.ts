@@ -195,10 +195,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Портфейлът ви е на път да бъде шифрован.</translation>
     </message>
     <message>
-        <source>Your wallet is about to be encrypted. </source>
-        <translation>Портфейлът ви е на път да бъде шифрован.</translation>
-    </message>
-    <message>
         <source>Your wallet is now encrypted. </source>
         <translation type="unfinished">Вашият портфейл сега е криптиран.</translation>
     </message>
@@ -514,24 +510,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Подпиши &amp;съобщение…</translation>
     </message>
     <message>
-        <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp;Бекъп уолет.</translation>
-    </message>
-    <message>
-        <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Промени пасфрейз.</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">Подпиши &amp;съобщение…</translation>
-    </message>
-    <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
         <translation type="unfinished">Пишете съобщения със своя Биткойн адрес за да докажете,че е ваш.</translation>
-    </message>
-    <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Потвърди съобщение…</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
@@ -837,11 +817,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 </translation>
     </message>
     <message>
-        <source>Wallet: %1
-</source>
-        <translation type="unfinished">Портфейл: %1</translation>
-    </message>
-    <message>
         <source>Type: %1
 </source>
         <translation type="unfinished">Тип: %1
@@ -878,18 +853,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
         <translation type="unfinished">Частнен ключ &lt;b&gt;изключен&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
-        <translation type="unfinished">Генерирането на HD ключ е &lt;b&gt;разрешено&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">Генерирането на HD ключ е &lt;b&gt;изключено&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">Частнен ключ&lt;b&gt;изключен&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
@@ -2040,18 +2003,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Портфейл:</translation>
     </message>
     <message>
-        <source>Block chain</source>
-        <translation>Блокчейн</translation>
-    </message>
-    <message>
-        <source>Memory usage</source>
-        <translation type="unfinished">Използвана памет</translation>
-    </message>
-    <message>
-        <source>Wallet: </source>
-        <translation type="unfinished">Портфейл:</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation type="unfinished">Получени</translation>
     </message>
@@ -2161,18 +2112,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>&amp;Copy address</source>
         <extracomment>Context menu action to copy the address of a peer.</extracomment>
         <translation type="unfinished">&amp;Копирай адрес</translation>
-    </message>
-    <message>
-        <source>Executing command without any wallet</source>
-        <translation type="unfinished">Извършване на команда без портфейл</translation>
-    </message>
-    <message>
-        <source>In:</source>
-        <translation type="unfinished">Входящи:</translation>
-    </message>
-    <message>
-        <source>Out:</source>
-        <translation type="unfinished">Изходящи</translation>
     </message>
     <message>
         <source>Executing command without any wallet</source>

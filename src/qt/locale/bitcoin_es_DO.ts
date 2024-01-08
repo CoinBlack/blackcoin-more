@@ -291,14 +291,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">%1 aún no salió de forma segura...</translation>
     </message>
     <message>
-        <source>Error: Cannot parse configuration file: %1.</source>
-        <translation type="unfinished">Error: No se puede analizar el archivo de configuración: %1.</translation>
-    </message>
-    <message>
-        <source>%1 didn't yet exit safely…</source>
-        <translation type="unfinished">%1 aún no salió de forma segura...</translation>
-    </message>
-    <message>
         <source>unknown</source>
         <translation type="unfinished">desconocido</translation>
     </message>
@@ -419,14 +411,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Quit application</source>
         <translation type="unfinished">Quitar aplicación</translation>
-    </message>
-    <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished">&amp;Acerca de %1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">Mostrar información sobre %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -1153,14 +1137,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">La dirección introducida "%1" no es una dirección Bitcoin válida.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">La dirección "%1" ya existe como dirección de recepción con la etiqueta "%2" y, por lo tanto, no se puede agregar como dirección de envío.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">La dirección ingresada "%1" ya está en la libreta de direcciones con la etiqueta "%2".</translation>
-    </message>
-    <message>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">No se pudo desbloquear el monedero.</translation>
     </message>
@@ -1289,17 +1265,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Command-line options</source>
         <translation type="unfinished">Opciones de línea de comandos</translation>
-    </message>
-</context>
-<context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>%1 is shutting down…</source>
-        <translation type="unfinished">%1 se está cerrando...</translation>
-    </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">No apagues el equipo hasta que desaparezca esta ventana.</translation>
     </message>
 </context>
 <context>
@@ -2516,10 +2481,6 @@ Escribe %5 para ver un resumen de los comandos disponibles. Para más informaci�
     <message>
         <source>Message:</source>
         <translation type="unfinished">Mensaje:</translation>
-    </message>
-    <message>
-        <source>Wallet:</source>
-        <translation type="unfinished">Monedero:</translation>
     </message>
     <message>
         <source>Copy &amp;URI</source>

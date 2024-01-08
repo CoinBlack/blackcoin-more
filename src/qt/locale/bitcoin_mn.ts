@@ -297,18 +297,6 @@
         <translation type="unfinished">Хэтэвч үүсгэх…</translation>
     </message>
     <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Баталгаажуулах мэссэж</translation>
-    </message>
-    <message>
-        <source>Close Wallet…</source>
-        <translation type="unfinished">Хэтэвч хаах…</translation>
-    </message>
-    <message>
-        <source>Create Wallet…</source>
-        <translation type="unfinished">Хэтэвч үүсгэх…</translation>
-    </message>
-    <message>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;Файл</translation>
     </message>
@@ -327,13 +315,6 @@
             <numerusform />
         </translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Error</source>
         <translation type="unfinished">Алдаа</translation>
@@ -341,10 +322,6 @@
     <message>
         <source>Warning</source>
         <translation type="unfinished">Анхааруулга</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Анхааруулга</translation>
     </message>
     <message>
         <source>Information</source>
@@ -365,58 +342,6 @@
     <message>
         <source>Error: %1</source>
         <translation type="unfinished">Алдаа: %1</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
-        <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation type="unfinished">Алдаа: %1</translation>
-    </message>
-    <message>
-        <source>Warning: %1</source>
-        <translation type="unfinished">Анхааруулга:%1</translation>
-    </message>
-    <message>
-        <source>Date: %1
-</source>
-        <translation type="unfinished">Огноо%1
-</translation>
-    </message>
-    <message>
-        <source>Amount: %1
-</source>
-        <translation type="unfinished">Дүн: %1
-</translation>
-    </message>
-    <message>
-        <source>Wallet: %1
-</source>
-        <translation type="unfinished">Түрийвч: %1
-</translation>
-    </message>
-    <message>
-        <source>Type: %1
-</source>
-        <translation type="unfinished">Төрөл: %1
-</translation>
-    </message>
-    <message>
-        <source>Label: %1
-</source>
-        <translation type="unfinished">Шошго: %1
-</translation>
-    </message>
-    <message>
-        <source>Address: %1
-</source>
-        <translation type="unfinished">Хаяг: %1
-</translation>
     </message>
     <message>
         <source>Warning: %1</source>
@@ -943,13 +868,6 @@
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>%1/unconfirmed</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in at least one block, but less than 6 blocks.</extracomment>

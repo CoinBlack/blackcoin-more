@@ -370,16 +370,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <translation type="unfinished">Pulihkan dompet dari file cadangan</translation>
     </message>
     <message>
-        <source>Restore Wallet…</source>
-        <extracomment>Name of the menu item that restores wallet from a backup file.</extracomment>
-        <translation type="unfinished">Pulihkan Dompet…</translation>
-    </message>
-    <message>
-        <source>Restore a wallet from a backup file</source>
-        <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Pulihkan dompet dari file cadangan</translation>
-    </message>
-    <message>
         <source>Close all wallets</source>
         <translation type="unfinished">Tutup semua dompet</translation>
     </message>
@@ -413,14 +403,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <extracomment>Title of pop-up window shown when the user is attempting to restore a wallet.</extracomment>
         <translation type="unfinished">Pulihkan Dompet</translation>
     </message>
-    <message>
-        <source>&amp;Hide</source>
-        <translation type="unfinished">Sembunyi</translation>
-    </message>
-    <message>
-        <source>S&amp;how</source>
-        <translation type="unfinished">Tampilkan</translation>
-    </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
@@ -435,10 +417,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     </context>
 <context>
     <name>CreateWalletActivity</name>
-    <message>
-        <source>Too many external signers found</source>
-        <translation type="unfinished">Terlalu banyak penanda tangan eksternal ditemukan</translation>
-    </message>
     <message>
         <source>Too many external signers found</source>
         <translation type="unfinished">Terlalu banyak penanda tangan eksternal ditemukan</translation>
@@ -1005,13 +983,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     </message>
 </context>
 <context>
-    <name>OptionsModel</name>
-    <message>
-        <source>Could not read setting "%1", %2.</source>
-        <translation type="unfinished">Tidak dapat membaca setelan "%1", %2.</translation>
-    </message>
-</context>
-<context>
     <name>OverviewPage</name>
     <message>
         <source>Form</source>
@@ -1100,17 +1071,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         </translation>
     </message>
     </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>(press q to shutdown and continue later)</source>
-        <translation type="unfinished">(tekan q untuk mematikan dan melanjutkan nanti)</translation>
-    </message>
-    <message>
-        <source>press q to shutdown</source>
-        <translation type="unfinished">tekan q untuk mematikan</translation>
-    </message>
-</context>
 <context>
     <name>TransactionDesc</name>
     <message>

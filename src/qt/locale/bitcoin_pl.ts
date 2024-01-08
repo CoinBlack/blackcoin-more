@@ -66,10 +66,40 @@
         <translation type="unfinished">Odbierające adresy</translation>
     </message>
     <message>
+        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Tutaj znajdują się adresy Bitcoin na które wysyłasz płatności. Zawsze sprawdzaj ilość i adres odbiorcy przed wysyłką monet. </translation>
+    </message>
+    <message>
         <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">To są twoje adresy Bitcoin do otrzymywania płatności. Użyj przycisku 'Utwórz nowy adres odbioru' na karcie odbioru, aby utworzyć nowe adresy.
 Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
+    </message>
+    <message>
+        <source>&amp;Copy Address</source>
+        <translation type="unfinished">Kopiuj adres</translation>
+    </message>
+    <message>
+        <source>Copy &amp;Label</source>
+        <translation type="unfinished">Kopiuj etykietę</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished">&amp;Edytuj</translation>
+    </message>
+    <message>
+        <source>Export Address List</source>
+        <translation type="unfinished">Eksportuj listę adresów </translation>
+    </message>
+    <message>
+        <source>Comma separated file</source>
+        <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
+        <translation type="unfinished">Plik *.CSV rozdzielany pzrecinkami</translation>
+    </message>
+    <message>
+        <source>There was an error trying to save the address list to %1. Please try again.</source>
+        <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
+        <translation type="unfinished">Wystąpił błąd podczas próby zapisu listy adresów do %1. Proszę spróbować ponownie.</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -116,6 +146,14 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
     <message>
         <source>Encrypt wallet</source>
         <translation type="unfinished">Zaszyfruj portfel </translation>
+    </message>
+    <message>
+        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <translation type="unfinished">Ta operacja wymaga hasła do portfela aby odblokować portfel. </translation>
+    </message>
+    <message>
+        <source>Unlock wallet</source>
+        <translation type="unfinished">Odblokuj portfel</translation>
     </message>
     <message>
         <source>Change passphrase</source>
@@ -457,7 +495,7 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Zaszyfruj portfel</translation>
+        <translation type="unfinished">Zaszyfruj portf&amp;el...</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -477,7 +515,7 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Podpisz wiadomości swoim adresem aby udowodnić jego posiadanie</translation>
+        <translation type="unfinished">Podpisz wiadomości swoim adresem, aby udowodnić jego posiadanie</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
@@ -3780,7 +3818,7 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     </message>
 </context>
 <context>
-    <name>Intro</name>
+    <name>WalletFrame</name>
     <message>
         <source>No wallet has been loaded.
 Go to File &gt; Open Wallet to load a wallet.
@@ -3922,9 +3960,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <source>The wallet data was successfully saved to %1.</source>
         <translation type="unfinished">Dane portfela zostały poprawnie zapisane w %1.</translation>
     </message>
-    </context>
-<context>
-    <name>OverviewPage</name>
     <message>
         <source>Cancel</source>
         <translation type="unfinished">Anuluj</translation>

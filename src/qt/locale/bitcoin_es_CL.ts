@@ -144,10 +144,6 @@ Usa el boton "Crear nueva direccion de recibimiento" en la pestaña de recibir p
         <translation type="unfinished">Mostrar contraseña</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">Mostrar contraseña</translation>
-    </message>
-    <message>
         <source>Encrypt wallet</source>
         <translation type="unfinished">Encriptar la billetera</translation>
     </message>
@@ -289,14 +285,6 @@ Usa el boton "Crear nueva direccion de recibimiento" en la pestaña de recibir p
         <source>A fatal error occurred. Check that settings file is writable, or try running with -nosettings.</source>
         <extracomment>Explanatory text shown on startup when the settings file could not be written. Prompts user to check that we have the ability to write to the file. Explains that the user has the option of running without a settings file.</extracomment>
         <translation type="unfinished">Un error fatal ha ocurrido. Comprueba que el archivo de configuración soporta escritura, o intenta ejecutar de nuevo el programa con -nosettings</translation>
-    </message>
-    <message>
-        <source>%1 didn't yet exit safely…</source>
-        <translation type="unfinished">%1 aún no salió de forma segura...</translation>
-    </message>
-    <message>
-        <source>Error: Cannot parse configuration file: %1.</source>
-        <translation type="unfinished">Error: No se puede analizar el archivo de configuración: %1.</translation>
     </message>
     <message>
         <source>%1 didn't yet exit safely…</source>
@@ -1198,14 +1186,6 @@ Usa el boton "Crear nueva direccion de recibimiento" en la pestaña de recibir p
         <translation type="unfinished">La dirección ingresada "%1" no es una dirección válida de Bitcoin.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">La dirección "%1" ya existe como dirección de recepción con la etiqueta "%2" y, por lo tanto, no se puede agregar como dirección de envío.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">La dirección ingresada "%1" ya está en la libreta de direcciones con la etiqueta "%2".</translation>
-    </message>
-    <message>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">No se pudo desbloquear la billetera.</translation>
     </message>
@@ -1346,10 +1326,6 @@ Usa el boton "Crear nueva direccion de recibimiento" en la pestaña de recibir p
 </context>
 <context>
     <name>ShutdownWindow</name>
-    <message>
-        <source>%1 is shutting down…</source>
-        <translation type="unfinished">%1 se está cerrando...</translation>
-    </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
         <translation type="unfinished">No apague el equipo hasta que desaparezca esta ventana.</translation>
@@ -1843,18 +1819,6 @@ Usa el boton "Crear nueva direccion de recibimiento" en la pestaña de recibir p
     <message>
         <source>PSBT Operations</source>
         <translation type="unfinished">Operaciones PSBT</translation>
-    </message>
-    <message>
-        <source>Sign Tx</source>
-        <translation type="unfinished">Firmar transacción</translation>
-    </message>
-    <message>
-        <source>Broadcast Tx</source>
-        <translation type="unfinished">Transmitir transacción</translation>
-    </message>
-    <message>
-        <source>Copy to Clipboard</source>
-        <translation type="unfinished">Copiar al portapapeles</translation>
     </message>
     <message>
         <source>Sign Tx</source>
@@ -3193,10 +3157,6 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">&amp;Firmar Mensaje</translation>
     </message>
     <message>
-        <source>Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
-        <translation type="unfinished">Ingresa la dirección del destinatario, el mensaje (recuerda copiar los saltos de línea, espacios, tabulaciones, etc. con exactitud) y la firma a continuación para verificar el mensaje. Ten cuidado de no leer en la firma más de lo que está en el mensaje firmado en sí, para evitar ser víctima de un engaño por ataque de intermediario. Ten en cuenta que esto solo demuestra que el firmante recibe con la dirección; no puede demostrar la condición de remitente de ninguna transacción.</translation>
-    </message>
-    <message>
         <source>The Bitcoin address the message was signed with</source>
         <translation type="unfinished">La dirección Bitcoin con la que se firmó el mensaje</translation>
     </message>
@@ -3290,13 +3250,6 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>conflicted with a transaction with %1 confirmations</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>

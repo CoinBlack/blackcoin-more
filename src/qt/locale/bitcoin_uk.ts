@@ -265,9 +265,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Runaway exception</source>
         <translation type="unfinished">Небажана виняткова ситуація</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Сталася фатальна помилка. %1 більше не може продовжувати безпечно і завершить роботу.</translation>
@@ -542,7 +539,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Шифрувати Гаманець...</translation>
+        <translation type="unfinished">За&amp;шифрувати гаманець…</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -554,23 +551,23 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">Змінити парол&amp;ь...</translation>
+        <translation type="unfinished">Змінити парол&amp;ь…</translation>
     </message>
     <message>
         <source>Sign &amp;message…</source>
-        <translation type="unfinished">&amp;Підписати повідомлення...</translation>
+        <translation type="unfinished">&amp;Підписати повідомлення…</translation>
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Підтвердіть, що Ви є власником повідомлення, підписавши його Вашою біткоїн-адресою</translation>
+        <translation type="unfinished">Підтвердіть, що ви є власником повідомлення підписавши його вашою Bitcoin-адресою</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
-        <translation type="unfinished">П&amp;еревірити повідомлення...</translation>
+        <translation type="unfinished">П&amp;еревірити повідомлення…</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Перевірте повідомлення для впевненості, що воно підписано вказаною біткоїн-адресою</translation>
+        <translation type="unfinished">Перевірте повідомлення для впевненості, що воно підписано вказаною Bitcoin-адресою</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -748,7 +745,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Mask values</source>
-        <translation type="unfinished">При&amp;ховати значення</translation>
+        <translation type="unfinished">&amp;Приховати значення</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
@@ -1204,7 +1201,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Wallet Name</source>
-        <translation type="unfinished">Назва гаманця</translation>
+        <translation type="unfinished">Назва Гаманця</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1212,7 +1209,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation type="unfinished">Зашифрувати гаманець. Гаманець буде зашифрований за допомогою обраного вами пароля.</translation>
+        <translation type="unfinished">Зашифруйте гаманець. Гаманець буде зашифрований за допомогою пароля на ваш вибір.</translation>
     </message>
     <message>
         <source>Encrypt Wallet</source>
@@ -1224,7 +1221,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation type="unfinished">Вимкнути приватні ключі для цього гаманця. Гаманці з вимкнутими приватними ключами не матимуть приватних ключів і не можуть мати набір HD-генератор або імпортовані приватні ключі. Це ідеально підходить для гаманців-для-перегляду.</translation>
+        <translation type="unfinished">Вимкнути приватні ключі для цього гаманця. Гаманці з вимкнутими приватними ключами не матимуть приватних ключів і не можуть мати набір HD або імпортовані приватні ключі. Це ідеально підходить лише для тільки-огляд гаманців.</translation>
     </message>
     <message>
         <source>Disable Private Keys</source>
@@ -1232,7 +1229,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation type="unfinished">Створити пустий гаманець. Пусті гаманці спочатку не мають приватних ключів або скриптів. Пізніше можна імпортувати приватні ключі та адреси або встановити HD-генератор.</translation>
+        <translation type="unfinished">Зробіть порожній гаманець. Порожні гаманці спочатку не мають приватних ключів або сценаріїв. Пізніше можна імпортувати приватні ключі та адреси або встановити HD-насіння.</translation>
     </message>
     <message>
         <source>Make Blank Wallet</source>
@@ -1240,11 +1237,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Use descriptors for scriptPubKey management</source>
-        <translation type="unfinished">Використовувати дескриптори для управління scriptPubKey</translation>
+        <translation type="unfinished">Використовуйте дескриптори для управління scriptPubKey</translation>
     </message>
     <message>
         <source>Descriptor Wallet</source>
-        <translation type="unfinished">Гаманець на основі дескрипторів</translation>
+        <translation type="unfinished">Гаманець на базі дескрипторів</translation>
     </message>
     <message>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
@@ -1304,7 +1301,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">Введена адреса "%1" не є дійсною біткоїн-адресою.</translation>
+        <translation type="unfinished">Введена адреса "%1" не є дійсною Bitcoin адресою.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -1443,7 +1440,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation type="unfinished">Якщо ви вирішили обмежити обсяг збереження блокчейна, історичні дані повинні бути завантажені та оброблені, але потім можуть бути видалені, щоб зберегти потрібний простір диска.</translation>
+        <translation type="unfinished">Якщо ви вирішили обмежити збереження ланцюжка блоків (відсікання), історичні дані повинні бути завантажені та оброблені, але потім можуть бути видалені, щоб зберегти потрібний простір диска.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1488,7 +1485,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation type="unfinished">Нещодавні транзакції ще не відображаються, тому баланс вашого гаманця може бути неточним. Ця інформація буде вірною після того, як ваш гаманець завершить синхронізацію з мережею Біткоїн (дивіться нижче).</translation>
+        <translation type="unfinished">Нещодавні транзакції ще не відображаються, тому баланс вашого гаманця може бути неточним. Ця інформація буде вірною після того, як ваш гаманець завершить синхронізацію з мережею Біткоїн, враховуйте показники нижче.</translation>
     </message>
     <message>
         <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
@@ -1512,11 +1509,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="unfinished">Перебіг синхронізації</translation>
+        <translation type="unfinished">Прогрес</translation>
     </message>
     <message>
         <source>Progress increase per hour</source>
-        <translation type="unfinished">Прогрес синхронізації за годину</translation>
+        <translation type="unfinished">Прогрес за годину</translation>
     </message>
     <message>
         <source>Estimated time left until synced</source>
@@ -1532,11 +1529,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Unknown. Syncing Headers (%1, %2%)…</source>
-        <translation type="unfinished">Невідомо. Триває синхронізація заголовків (%1, %2%)…</translation>
-    </message>
-    <message>
-        <source>Unknown. Pre-syncing Headers (%1, %2%)…</source>
-        <translation type="unfinished">Невідомо. Триває попередня синхронізація заголовків (%1, %2%)…</translation>
+        <translation type="unfinished">Невідомо. Синхронізація заголовків (%1, %2%)…</translation>
     </message>
     <message>
         <source>Unknown. Pre-syncing Headers (%1, %2%)…</source>

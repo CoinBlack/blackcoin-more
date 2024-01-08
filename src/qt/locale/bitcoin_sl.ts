@@ -262,13 +262,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Pobegla napaka</translation>
     </message>
     <message>
-        <source>Runaway exception</source>
-        <translation type="unfinished">Pobegla napaka</translation>
-    </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
-    <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Prišlo je do usodne napake. %1 ne more nadaljevati in se bo zaprl.</translation>
     </message>
@@ -1798,6 +1791,10 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Prekliči</translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation type="unfinished">Napaka</translation>
+    </message>
+    <message>
         <source>The configuration file could not be opened.</source>
         <translation type="unfinished">Konfiguracijske datoteke ni bilo moč odpreti.</translation>
     </message>
@@ -2966,6 +2963,10 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
         <translation type="unfinished">Kopiraj količino</translation>
     </message>
     <message>
+        <source>Copy amount</source>
+        <translation type="unfinished">Kopiraj znesek</translation>
+    </message>
+    <message>
         <source>Copy fee</source>
         <translation type="unfinished">Kopiraj provizijo</translation>
     </message>
@@ -3857,6 +3858,10 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>Create a new wallet</source>
         <translation type="unfinished">Ustvari novo denarnico</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Napaka</translation>
     </message>
     <message>
         <source>Unable to decode PSBT from clipboard (invalid base64)</source>

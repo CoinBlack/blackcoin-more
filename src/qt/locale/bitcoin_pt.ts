@@ -267,7 +267,7 @@ Assinar só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
-        <translation type="unfinished">Ocorreu um erro fatal. %1 não pode continuar em segurança e irá terminar.</translation>
+        <translation type="unfinished">Um erro fatal ocorreu. %1 não pode mais continuar de maneira segura e será terminada.</translation>
     </message>
     <message>
         <source>Internal error</source>

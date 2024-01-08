@@ -211,7 +211,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation type="unfinished">Maayos na nabago ang inyong pitaka.</translation>
+        <translation type="unfinished">Matagumpay na nabago ang passphrase ng walet.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>

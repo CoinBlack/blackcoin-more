@@ -34,10 +34,6 @@
         <translation type="unfinished">پتہ یا لیبل تلاشی کے لئے درج کریں</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation type="unfinished">پتہ یا لیبل تلاشی کے لئے درج کریں</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">موجودہ ڈیٹا کو فائیل میں محفوظ کریں</translation>
     </message>

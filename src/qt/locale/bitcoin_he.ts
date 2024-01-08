@@ -253,9 +253,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Runaway exception</source>
         <translation type="unfinished">חריגת בריחה</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">אירעה שגיאה חמורה, %1 לא יכול להמשיך בבטחון ולכן יופסק.</translation>

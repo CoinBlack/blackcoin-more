@@ -545,13 +545,7 @@ Alihkan fail data ke dalam tab semasa</translation>
     </message>
     </context>
 <context>
-    <name>TransactionTableModel</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-        </translation>
-    </message>
+    <name>WalletFrame</name>
     <message>
         <source>Error</source>
         <translation type="unfinished">Ralat</translation>
@@ -566,7 +560,7 @@ Alihkan fail data ke dalam tab semasa</translation>
     </message>
 </context>
 <context>
-    <name>FreespaceChecker</name>
+    <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
         <translation type="unfinished">&amp;Eksport</translation>

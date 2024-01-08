@@ -217,8 +217,24 @@ Solicitar pagos (genera códigos QR y bitcoin: URI)
         </translation>
     </message>
     <message>
-        <source>Load PSBT from &amp;clipboard…</source>
-        <translation type="unfinished">Cargar PSBT desde el &amp;portapapeles...</translation>
+        <source>Catching up…</source>
+        <translation type="unfinished">Poniéndose al día...</translation>
+    </message>
+    <message>
+        <source>Transactions after this will not yet be visible.</source>
+        <translation type="unfinished">Las transacciones después de esto todavía no serán visibles.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Aviso</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Información </translation>
+    </message>
+    <message>
+        <source>Up to date</source>
+        <translation type="unfinished">Actualizado al dia </translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
@@ -235,14 +251,12 @@ Solicitar pagos (genera códigos QR y bitcoin: URI)
         <translation type="unfinished">Restaurar una billetera desde un archivo de copia de seguridad</translation>
     </message>
     <message>
-        <source>Restore Wallet…</source>
-        <extracomment>Name of the menu item that restores wallet from a backup file.</extracomment>
-        <translation type="unfinished">Restaurar billetera…</translation>
+        <source>default wallet</source>
+        <translation type="unfinished">cartera predeterminada</translation>
     </message>
     <message>
-        <source>Restore a wallet from a backup file</source>
-        <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Restaurar una billetera desde un archivo de copia de seguridad</translation>
+        <source>No wallets available</source>
+        <translation type="unfinished">No hay carteras disponibles</translation>
     </message>
     <message>
         <source>Load Wallet Backup</source>
@@ -396,9 +410,6 @@ Solicitar pagos (genera códigos QR y bitcoin: URI)
         <extracomment>Descriptive text of the restore wallets progress window which indicates to the user that wallets are currently being restored.</extracomment>
         <translation type="unfinished">Restaurando billetera &lt;b&gt;%1&lt;/b&gt;…</translation>
     </message>
-    </context>
-<context>
-    <name>RestoreWalletActivity</name>
     <message>
         <source>Restore wallet failed</source>
         <extracomment>Title of message box which is displayed when the wallet could not be restored.</extracomment>

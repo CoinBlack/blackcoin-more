@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">Adresi veya etiketi düzenlemek için sağ tıklayın.</translation>
+        <translation type="unfinished">Adresi veya etiketi düzenlemek için sağ tıklayın</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -525,62 +525,6 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">Tüm Cüzdanları Kapat...</translation>
     </message>
     <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Cüzdanı Şifrele...</translation>
-    </message>
-    <message>
-        <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>Cüzdanınıza ait özel anahtarları şifreleyin</translation>
-    </message>
-    <message>
-        <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp;Cüzdanı Yedekle...</translation>
-    </message>
-    <message>
-        <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Parolayı Değiştir...</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">&amp;Mesajı imzala...</translation>
-    </message>
-    <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Bitcoin adreslerine sahip olduğunuzu kanıtlamak için mesajlarınızı imzalayın</translation>
-    </message>
-    <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Mesajı doğrula...</translation>
-    </message>
-    <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Belirtilen Bitcoin adresleriyle imzalandıklarından emin olmak için mesajları doğrulayın</translation>
-    </message>
-    <message>
-        <source>&amp;Load PSBT from file…</source>
-        <translation type="unfinished">&amp;PSBT'yi dosyadan yükle...</translation>
-    </message>
-    <message>
-        <source>Load PSBT from clipboard…</source>
-        <translation type="unfinished">PSBT'yi panodan yükle...</translation>
-    </message>
-    <message>
-        <source>Open &amp;URI…</source>
-        <translation type="unfinished">&amp;URI 'ı Aç...</translation>
-    </message>
-    <message>
-        <source>Close Wallet…</source>
-        <translation type="unfinished">Cüzdanı Kapat...</translation>
-    </message>
-    <message>
-        <source>Create Wallet…</source>
-        <translation type="unfinished">Cüzdan Oluştur...</translation>
-    </message>
-    <message>
-        <source>Close All Wallets…</source>
-        <translation type="unfinished">Tüm Cüzdanları Kapat...</translation>
-    </message>
-    <message>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;Dosya</translation>
     </message>
@@ -595,30 +539,6 @@ Cüzdan kilidini aç.</translation>
     <message>
         <source>Tabs toolbar</source>
         <translation type="unfinished">Araç çubuğu sekmeleri</translation>
-    </message>
-    <message>
-        <source>Syncing Headers (%1%)…</source>
-        <translation type="unfinished">Başlıklar senkronize ediliyor (%1%)...</translation>
-    </message>
-    <message>
-        <source>Synchronizing with network…</source>
-        <translation type="unfinished">Ağ ile senkronize ediliyor...</translation>
-    </message>
-    <message>
-        <source>Connecting to peers…</source>
-        <translation type="unfinished">Eşlere Bağlanılıyor...</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Ödeme isteyin (QR kodları ve bitcoin: URI'ler üretir)</translation>
-    </message>
-    <message>
-        <source>Show the list of used sending addresses and labels</source>
-        <translation type="unfinished">Kullanılan gönderim adreslerinin ve etiketlerin listesini göster</translation>
-    </message>
-    <message>
-        <source>Show the list of used receiving addresses and labels</source>
-        <translation type="unfinished">Kullanılan alım adreslerinin ve etiketlerin listesini göster</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)…</source>
@@ -689,34 +609,6 @@ Cüzdan kilidini aç.</translation>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">PSBT'yi &amp;panodan yükle...</translation>
-    </message>
-    <message>
-        <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
-        <translation type="unfinished">Kısmen İmzalanmış Bitcoin işlemini panodan yükle</translation>
-    </message>
-    <message>
-        <source>Node window</source>
-        <translation type="unfinished">Düğüm penceresi</translation>
-    </message>
-    <message>
-        <source>Open node debugging and diagnostic console</source>
-        <translation type="unfinished">Açık düğüm hata ayıklama ve tanılama konsolu</translation>
-    </message>
-    <message>
-        <source>&amp;Sending addresses</source>
-        <translation type="unfinished">&amp; Adresleri gönderme</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses</source>
-        <translation type="unfinished">&amp; Adresler alınıyor</translation>
-    </message>
-    <message>
-        <source>Open a bitcoin: URI</source>
-        <translation type="unfinished">Bitcoin’i aç.</translation>
-    </message>
-    <message>
-        <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">Kısmen İmzalanmış Bitcoin İşlemini Yükle </translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
@@ -839,11 +731,6 @@ Cüzdan kilidini aç.</translation>
         <source>Click for more actions.</source>
         <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
         <translation type="unfinished">daha fazla seçenek için tıklayın.</translation>
-    </message>
-    <message>
-        <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
-        <translation type="unfinished">Eşler sekmesini göster</translation>
     </message>
     <message>
         <source>Disable network activity</source>
@@ -1047,7 +934,7 @@ Cüzdan kilidini aç.</translation>
     </message>
     <message>
         <source>Copy dust</source>
-        <translation type="unfinished">Toz kopyala</translation>
+        <translation type="unfinished">toz kopyala</translation>
     </message>
     <message>
         <source>Copy change</source>
@@ -1251,14 +1138,6 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">Tanımlayıcı Cüzdan </translation>
     </message>
     <message>
-        <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
-        <translation type="unfinished">Donanım cüzdanı gibi harici bir imzalama cihazı kullanın. Önce cüzdan tercihlerinde harici imzalayan komut dosyasını yapılandırın.</translation>
-    </message>
-    <message>
-        <source>External signer</source>
-        <translation type="unfinished">Harici imzalaycı</translation>
-    </message>
-    <message>
         <source>Create</source>
         <translation type="unfinished">Oluştur</translation>
     </message>
@@ -1444,7 +1323,7 @@ Cüzdan kilidini aç.</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">Bu pencere kapanıncaya dek bilgisayarı kapatmayınız.</translation>
+        <translation type="unfinished">Bu pencere kalkıncaya dek bilgisayarı kapatmayınız.</translation>
     </message>
 </context>
 <context>
@@ -1759,11 +1638,6 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">Değişikliklerin uygulanması için istemcinin yeniden başlatılması lazımdır.</translation>
     </message>
     <message>
-        <source>Current settings will be backed up at "%1".</source>
-        <extracomment>Text explaining to the user that the client's current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location's path.</extracomment>
-        <translation type="unfinished">Mevcut ayarlar şu adreste yedeklenecek: "%1".</translation>
-    </message>
-    <message>
         <source>Client will be shut down. Do you want to proceed?</source>
         <extracomment>Text asking the user to confirm if they would like to proceed with a client shutdown.</extracomment>
         <translation type="unfinished">İstemci kapanacaktır. Devam etmek istiyor musunuz?</translation>
@@ -1855,14 +1729,6 @@ Cüzdan kilidini aç.</translation>
     <message>
         <source>Your current total balance</source>
         <translation type="unfinished">Güncel toplam bakiyeniz</translation>
-    </message>
-    <message>
-        <source>Your current balance in watch-only addresses</source>
-        <translation type="unfinished">Sadece izlenen adreslerdeki güncel bakiyeniz</translation>
-    </message>
-    <message>
-        <source>Your current total balance</source>
-        <translation>Güncel toplam bakiyeniz</translation>
     </message>
     <message>
         <source>Your current balance in watch-only addresses</source>
@@ -2435,141 +2301,6 @@ Cüzdan kilidini aç.</translation>
         <source>Never</source>
         <translation type="unfinished">Asla</translation>
     </message>
-    <message>
-        <source>Connection Time</source>
-        <translation type="unfinished">Bağlantı Zamanı</translation>
-    </message>
-    <message>
-        <source>Last Send</source>
-        <translation type="unfinished">Son Gönderme</translation>
-    </message>
-    <message>
-        <source>Last Receive</source>
-        <translation type="unfinished">Son Alma</translation>
-    </message>
-    <message>
-        <source>Ping Time</source>
-        <translation type="unfinished">Ping Süresi</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation type="unfinished">Güncel olarak göze çarpan bir ping'in süresi.</translation>
-    </message>
-    <message>
-        <source>Ping Wait</source>
-        <translation type="unfinished">Ping Beklemesi</translation>
-    </message>
-    <message>
-        <source>Min Ping</source>
-        <translation type="unfinished">En Düşük Ping</translation>
-    </message>
-    <message>
-        <source>Time Offset</source>
-        <translation type="unfinished">Saat Farkı</translation>
-    </message>
-    <message>
-        <source>Last block time</source>
-        <translation>Son blok zamanı</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation>&amp;Aç</translation>
-    </message>
-    <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Konsol</translation>
-    </message>
-    <message>
-        <source>&amp;Network Traffic</source>
-        <translation type="unfinished">&amp;Ağ Trafiği</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation type="unfinished">Toplamlar</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Hata ayıklama günlüğü</translation>
-    </message>
-    <message>
-        <source>Clear console</source>
-        <translation>Konsolu temizle</translation>
-    </message>
-    <message>
-        <source>In:</source>
-        <translation type="unfinished">İçeri:</translation>
-    </message>
-    <message>
-        <source>Out:</source>
-        <translation type="unfinished">Dışarı:</translation>
-    </message>
-    <message>
-        <source>&amp;Disconnect</source>
-        <translation type="unfinished">&amp;Bağlantıyı Kes</translation>
-    </message>
-    <message>
-        <source>1 &amp;hour</source>
-        <translation type="unfinished">1 &amp;saat</translation>
-    </message>
-    <message>
-        <source>1 d&amp;ay</source>
-        <translation type="unfinished">1 g&amp;ün</translation>
-    </message>
-    <message>
-        <source>1 &amp;week</source>
-        <translation type="unfinished">1 &amp;hafta</translation>
-    </message>
-    <message>
-        <source>1 &amp;year</source>
-        <translation type="unfinished">1 &amp;yıl</translation>
-    </message>
-    <message>
-        <source>&amp;Unban</source>
-        <translation type="unfinished">&amp;Yasaklamayı Kaldır</translation>
-    </message>
-    <message>
-        <source>Network activity disabled</source>
-        <translation type="unfinished">Ağ etkinliği devre dışı bırakıldı</translation>
-    </message>
-    <message>
-        <source>Executing command without any wallet</source>
-        <translation type="unfinished">Komut cüzdan olmadan çalıştırılıyor.</translation>
-    </message>
-    <message>
-        <source>Executing command using "%1" wallet</source>
-        <translation type="unfinished">Komut "%1" cüzdanı kullanılarak çalıştırılıyor.</translation>
-    </message>
-    <message>
-        <source>via %1</source>
-        <translation type="unfinished">%1 vasıtasıyla</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished">evet</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished">hayır</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation type="unfinished">Alıcı</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation type="unfinished">Gönderen</translation>
-    </message>
-    <message>
-        <source>Ban for</source>
-        <translation type="unfinished">Yasakla</translation>
-    </message>
-    <message>
-        <source>Never</source>
-        <translation type="unfinished">Asla</translation>
-    </message>
-</context>
-<context>
-    <name>EditAddressDialog</name>
     <message>
         <source>Unknown</source>
         <translation type="unfinished">Bilinmeyen</translation>
@@ -3229,50 +2960,6 @@ Cüzdan kilidini aç.</translation>
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform>Open for %n more block</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Open until %1</source>
-        <translation type="unfinished">%1 değerine dek açık</translation>
-    </message>
-    <message>
-        <source>conflicted with a transaction with %1 confirmations</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>
-        <translation type="unfinished">%1 doğrulamalı bir işlem ile çelişti</translation>
-    </message>
-    <message>
-        <source>0/unconfirmed, in memory pool</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that is in the memory pool.</extracomment>
-        <translation type="unfinished">0/onaylanmamış, bellek havuzunda</translation>
-    </message>
-    <message>
-        <source>0/unconfirmed, not in memory pool</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that is not in the memory pool.</extracomment>
-        <translation type="unfinished">0/doğrulanmadı, bellek havuzunda değil</translation>
-    </message>
-    <message>
-        <source>abandoned</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an abandoned transaction.</extracomment>
-        <translation type="unfinished">terk edilmiş</translation>
-    </message>
-    <message>
-        <source>%1/unconfirmed</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in at least one block, but less than 6 blocks.</extracomment>
-        <translation type="unfinished">%1/doğrulanmadı</translation>
-    </message>
-    <message>
-        <source>%1 confirmations</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in 6 or more blocks.</extracomment>
-        <translation type="unfinished">%1 doğrulama</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished">Durum</translation>
-    </message>
     <message>
         <source>conflicted with a transaction with %1 confirmations</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>

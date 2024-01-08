@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;Izvezite</translation>
+        <translation type="unfinished">&amp;Izvozi</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Izbrišite</translation>
+        <translation type="unfinished">Iz&amp;brišite</translation>
     </message>
     <message>
         <source>Choose the address to send coins to</source>
@@ -446,7 +446,7 @@ Potpisivanje je moguće samo sa 'legacy' adresama. </translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
-        <translation type="unfinished">Promijeni konfiguraciju opcija za %1</translation>
+        <translation type="unfinished">Promijenite postavke za %1</translation>
     </message>
     <message>
         <source>Create a new wallet</source>
@@ -471,7 +471,7 @@ Potpisivanje je moguće samo sa 'legacy' adresama. </translation>
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Pošaljite sredstva na Bitcoin adresu</translation>
+        <translation type="unfinished">Pošaljite novac na Bitcoin adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -487,23 +487,7 @@ Potpisivanje je moguće samo sa 'legacy' adresama. </translation>
     </message>
     <message>
         <source>&amp;Receive</source>
-        <translation type="unfinished">&amp;Primite</translation>
-    </message>
-    <message>
-        <source>&amp;Options…</source>
-        <translation type="unfinished">&amp;Opcije</translation>
-    </message>
-    <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Šifriraj novčanik</translation>
-    </message>
-    <message>
-        <source>&amp;Options…</source>
-        <translation type="unfinished">&amp;Postavke</translation>
-    </message>
-    <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Šifriraj novčanik</translation>
+        <translation type="unfinished">Pri&amp;mite</translation>
     </message>
     <message>
         <source>&amp;Options…</source>
@@ -1870,91 +1854,6 @@ Potpisivanje je moguće samo sa 'legacy' adresama. </translation>
 </context>
 <context>
     <name>PSBTOperationsDialog</name>
-    <message>
-        <source>Sign Tx</source>
-        <translation type="unfinished">Potpiši Tx</translation>
-    </message>
-    <message>
-        <source>Broadcast Tx</source>
-        <translation type="unfinished">Objavi Tx</translation>
-    </message>
-    <message>
-        <source>Copy to Clipboard</source>
-        <translation type="unfinished">Kopiraj u međuspremnik</translation>
-    </message>
-    <message>
-        <source>Save…</source>
-        <translation type="unfinished">Spremi...</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished">Zatvori</translation>
-    </message>
-    <message>
-        <source>Failed to load transaction: %1</source>
-        <translation type="unfinished">Neuspješno dohvaćanje transakcije: %1</translation>
-    </message>
-    <message>
-        <source>Failed to sign transaction: %1</source>
-        <translation type="unfinished">Neuspješno potpisivanje transakcije: %1</translation>
-    </message>
-    <message>
-        <source>Cannot sign inputs while wallet is locked.</source>
-        <translation type="unfinished">Nije moguće potpisati inpute dok je novčanik zaključan.</translation>
-    </message>
-    <message>
-        <source>Could not sign any more inputs.</source>
-        <translation type="unfinished">Nije bilo moguće potpisati više inputa. </translation>
-    </message>
-    <message>
-        <source>Signed %1 inputs, but more signatures are still required.</source>
-        <translation type="unfinished">Potpisano %1 inputa, ali potrebno je još potpisa. </translation>
-    </message>
-    <message>
-        <source>Signed transaction successfully. Transaction is ready to broadcast.</source>
-        <translation type="unfinished">Transakcija uspješno potpisana. Transakcija je spremna za objavu.</translation>
-    </message>
-    <message>
-        <source>Unknown error processing transaction.</source>
-        <translation type="unfinished">Nepoznata greška pri obradi transakcije.</translation>
-    </message>
-    <message>
-        <source>Transaction broadcast successfully! Transaction ID: %1</source>
-        <translation type="unfinished">Uspješna objava transakcije! ID transakcije: %1</translation>
-    </message>
-    <message>
-        <source>Transaction broadcast failed: %1</source>
-        <translation type="unfinished">Neuspješna objava transakcije: %1</translation>
-    </message>
-    <message>
-        <source>PSBT copied to clipboard.</source>
-        <translation type="unfinished">PBST kopiran u meduspremnik.</translation>
-    </message>
-    <message>
-        <source>Save Transaction Data</source>
-        <translation type="unfinished">Spremi podatke transakcije</translation>
-    </message>
-    <message>
-        <source>Partially Signed Transaction (Binary)</source>
-        <extracomment>Expanded name of the binary PSBT file format. See: BIP 174.</extracomment>
-        <translation type="unfinished">Djelomično potpisana transakcija (binarno)</translation>
-    </message>
-    <message>
-        <source>PSBT saved to disk.</source>
-        <translation type="unfinished">PBST spremljen na disk.</translation>
-    </message>
-    <message>
-        <source> * Sends %1 to %2</source>
-        <translation type="unfinished">* Šalje %1 %2</translation>
-    </message>
-    <message>
-        <source>Unable to calculate transaction fee or total transaction amount.</source>
-        <translation type="unfinished">Ne mogu izračunati naknadu za transakciju niti totalni iznos transakcije.</translation>
-    </message>
-    <message>
-        <source>Pays transaction fee: </source>
-        <translation type="unfinished">Plaća naknadu za transakciju:</translation>
-    </message>
     <message>
         <source>Sign Tx</source>
         <translation type="unfinished">Potpiši Tx</translation>

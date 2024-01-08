@@ -249,9 +249,6 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
         <source>Runaway exception</source>
         <translation type="unfinished">Excepció fugitiva</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">S'ha produït un error fatal. %1 ja no pot continuar amb seguretat i sortirà.</translation>
@@ -491,7 +488,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Signa el missatges amb la seva adreça de Bitcoin per provar que les poseeixes</translation>
+        <translation type="unfinished">Signa els missatges amb la seva adreça de Bitcoin per a provar que les posseeixes</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
@@ -499,7 +496,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Verifiqueu els missatges per assegurar-vos que han estat signats amb una adreça Bitcoin específica.</translation>
+        <translation type="unfinished">Verifiqueu els missatges per a assegurar-vos que han estat signats amb una adreça Bitcoin específica.</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>

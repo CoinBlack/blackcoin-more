@@ -2224,7 +2224,7 @@ Ak ste dostali túto chybu mali by ste požiadať obchodníka o URI kompatibiln�
     </message>
     <message>
         <source>Node window</source>
-        <translation type="unfinished">Uzlové okno</translation>
+        <translation type="unfinished">Okno uzlov</translation>
     </message>
     <message>
         <source>Current block height</source>

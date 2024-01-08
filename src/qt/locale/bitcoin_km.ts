@@ -573,7 +573,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation>ប្រត្តិបត្តិការបន្ទាប់ពីនេះ នឹងមិនអាចទាន់មើលឃើញនៅឡើយទេ។</translation>
+        <translation type="unfinished">ប្រត្តិបត្តិការបន្ទាប់ពីនេះ នឹងមិនអាចទាន់មើលឃើញនៅឡើយទេ។</translation>
     </message>
     <message>
         <source>Error</source>
@@ -680,14 +680,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>S&amp;how</source>
         <translation type="unfinished">របៀប(&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Hide</source>
-        <translation type="unfinished">&amp;លាក់</translation>
-    </message>
-    <message>
-        <source>S&amp;how</source>
-        <translation type="unfinished">S&amp;របៀប</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
@@ -918,30 +910,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>(%1 locked)</source>
         <translation type="unfinished">(%1បានចាក់សោរ)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy address</source>
-        <translation type="unfinished">&amp;ចម្លងអាសយដ្ឋាន</translation>
-    </message>
-    <message>
-        <source>Copy &amp;label</source>
-        <translation type="unfinished">ចម្លង &amp; ស្លាក</translation>
-    </message>
-    <message>
-        <source>Copy &amp;amount</source>
-        <translation type="unfinished">ចម្លង &amp; ចំនួន</translation>
-    </message>
-    <message>
-        <source>Copy transaction &amp;ID and output index</source>
-        <translation type="unfinished">ចម្លងប្រតិបត្តិការ &amp; លេខសម្គាល់ និងសន្ទស្សន៍ទិន្នផល</translation>
-    </message>
-    <message>
-        <source>L&amp;ock unspent</source>
-        <translation type="unfinished">L&amp;ock មិនបានចំណាយ</translation>
-    </message>
-    <message>
-        <source>&amp;Unlock unspent</source>
-        <translation type="unfinished">&amp;ដោះសោដោយមិនបានចំណាយ</translation>
     </message>
     <message>
         <source>yes</source>
@@ -1246,25 +1214,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Use a custom data directory:</source>
         <translation type="unfinished">ប្រើទីតាំងផ្ទុកទិន្នន័យ ដែលមានការជ្រើសរើសមួយៈ</translation>
-    </message>
-</context>
-<context>
-    <name>HelpMessageDialog</name>
-    <message>
-        <source>version</source>
-        <translation type="unfinished">ជំនាន់</translation>
-    </message>
-    <message>
-        <source>Welcome</source>
-        <translation>សូមស្វាគមន៏</translation>
-    </message>
-    <message>
-        <source>Use the default data directory</source>
-        <translation>ប្រើទីតាំងផ្ទុកទិន្នន័យដែលបានកំណត់រួច</translation>
-    </message>
-    <message>
-        <source>Use a custom data directory:</source>
-        <translation>ប្រើទីតាំងផ្ទុកទិន្នន័យ ដែលមានការជ្រើសរើសមួយៈ</translation>
     </message>
 </context>
 <context>
@@ -2995,11 +2944,6 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">នាំចេញទិន្នន័យនៃផ្ទាំងបច្ចុប្បន្នទៅជាឯកសារមួយ</translation>
-    </message>
-    <message>
-        <source>Wallet Data</source>
-        <extracomment>Name of the wallet data file format.</extracomment>
-        <translation type="unfinished">ទិន្នន័យកាបូប</translation>
     </message>
     <message>
         <source>Wallet Data</source>

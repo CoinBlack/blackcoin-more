@@ -618,7 +618,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform>トランザクション履歴の %n ブロックを処理しました。</numerusform>
+            <numerusform>%n ブロックの取引履歴を処理しました。</numerusform>
         </translation>
     </message>
     <message>
@@ -1349,7 +1349,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
-            <numerusform>(%n 日経過したバックアップを復元するのに十分です)</numerusform>
+            <numerusform>(%n 日前のバックアップを復元するのに充分です)</numerusform>
         </translation>
     </message>
     <message>

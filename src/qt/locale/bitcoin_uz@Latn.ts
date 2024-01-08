@@ -1207,10 +1207,6 @@ Kirish faqat 'legacy' turidagi manzillar uchun.</translation>
 </context>
 <context>
     <name>Intro</name>
-    <message>
-        <source>Bitcoin</source>
-        <translation type="unfinished">Bitkoin</translation>
-    </message>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">

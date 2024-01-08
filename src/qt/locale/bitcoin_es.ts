@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">Es nuevo</translation>
+        <translation type="unfinished">&amp;Nuevo</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
@@ -105,11 +105,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
         <source>Exporting Failed</source>
         <translation type="unfinished">Error al Exportar!</translation>
     </message>
-    <message>
-        <source>Exporting Failed</source>
-        <translation type="unfinished">La exportación falló</translation>
-    </message>
-    </context>
+</context>
 <context>
     <name>AddressTableModel</name>
     <message>
@@ -313,16 +309,6 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     <message>
         <source>Unroutable</source>
         <translation type="unfinished">No se puede enrutar</translation>
-    </message>
-    <message>
-        <source>Inbound</source>
-        <extracomment>An inbound connection from a peer. An inbound connection is a connection initiated by a peer.</extracomment>
-        <translation type="unfinished">Entrante</translation>
-    </message>
-    <message>
-        <source>Outbound</source>
-        <extracomment>An outbound connection to a peer. An outbound connection is a connection initiated by us.</extracomment>
-        <translation type="unfinished">Saliente</translation>
     </message>
     <message>
         <source>Inbound</source>
@@ -589,8 +575,8 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
         <translation type="unfinished">Conectando con parejas...</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and blackcoin: URIs)</source>
-        <translation type="unfinished">Solicitar abonaciones (generadas por código QR y blackcoin: URI)</translation>
+        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
+        <translation type="unfinished">Solicitar abonaciones (generadas por código QR y bitcoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -707,7 +693,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">Ocultar los valores de la ventana de previsualización</translation>
+        <translation type="unfinished">Esconder los valores de la ventana de previsualización</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -1062,20 +1048,20 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     <name>OpenWalletActivity</name>
     <message>
         <source>Open wallet failed</source>
-        <translation type="unfinished">Fallo al abrir monedero</translation>
+        <translation type="unfinished">Abrir monedero ha fallado</translation>
     </message>
     <message>
         <source>Open wallet warning</source>
-        <translation type="unfinished">Advertencia al abrir monedero</translation>
+        <translation type="unfinished">Advertencia sobre crear monedero</translation>
     </message>
     <message>
         <source>default wallet</source>
-        <translation type="unfinished">monedero predeterminado</translation>
+        <translation type="unfinished">Monedero predeterminado</translation>
     </message>
     <message>
         <source>Open Wallet</source>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
-        <translation type="unfinished">Abrir monedero</translation>
+        <translation type="unfinished">Abrir Monedero</translation>
     </message>
     <message>
         <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -1138,11 +1124,11 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     <name>CreateWalletDialog</name>
     <message>
         <source>Create Wallet</source>
-        <translation type="unfinished">Crear monedero</translation>
+        <translation type="unfinished">Crear Monedero</translation>
     </message>
     <message>
         <source>Wallet Name</source>
-        <translation type="unfinished">Nombre del monedero</translation>
+        <translation type="unfinished">Nombre del Monedero</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1154,15 +1140,11 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Encrypt Wallet</source>
-        <translation type="unfinished">Cifrar monedero</translation>
+        <translation type="unfinished">Cifrar Monedero</translation>
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation type="unfinished">Opciones avanzadas</translation>
-    </message>
-    <message>
-        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation type="unfinished">Deshabilita las claves privadas para este monedero. Los monederos con claves privadas deshabilitadas no tendrán claves privadas y no podrán tener ni una semilla HD ni claves privadas importadas. Esto es ideal para monederos de solo observación.</translation>
+        <translation type="unfinished">Opciones Avanzadas</translation>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
@@ -1170,15 +1152,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Disable Private Keys</source>
-        <translation type="unfinished">Deshabilita las claves privadas</translation>
-    </message>
-    <message>
-        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation type="unfinished">Crear un monedero vacío. Los monederos vacíos no tienen claves privadas ni scripts. Las claves privadas y direcciones pueden importarse después o también establecer una semilla HD.</translation>
-    </message>
-    <message>
-        <source>Make Blank Wallet</source>
-        <translation type="unfinished">Crear monedero vacío</translation>
+        <translation type="unfinished">Deshabilita las Llaves Privadas</translation>
     </message>
     <message>
         <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
@@ -1222,7 +1196,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
-        <translation type="unfinished">Editar dirección</translation>
+        <translation type="unfinished">Editar Dirección</translation>
     </message>
     <message>
         <source>&amp;Label</source>
@@ -1270,7 +1244,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>New key generation failed.</source>
-        <translation type="unfinished">Fallo en la generación de la nueva clave.</translation>
+        <translation type="unfinished">La generación de la nueva clave fallo</translation>
     </message>
 </context>
 <context>
@@ -1462,15 +1436,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished">Ocultar</translation>
-    </message>
-    <message>
-        <source>%1 is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
-        <translation type="unfinished">%1 está actualmente sincronizándose. Descargará cabeceras y bloques de nodos semejantes y los validará hasta alcanzar la cabeza de la cadena de bloques.</translation>
-    </message>
-    <message>
-        <source>%1 is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
-        <translation type="unfinished">%1 está actualmente sincronizándose. Descargará cabeceras y bloques de nodos semejantes y los validará hasta alcanzar la cabeza de la cadena de bloques.</translation>
+        <translation type="unfinished">Ocultar </translation>
     </message>
     <message>
         <source>%1 is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
@@ -1650,10 +1616,6 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     <message>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation type="unfinished">Abrir automáticamente el puerto del cliente Bitcoin en el enrutador. Esta opción solo funciona cuando el enrutado admite UPnP y está activado.</translation>
-    </message>
-    <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Abrir automáticamente el puerto del cliente Bitcoin en el router. Esta opción solo funciona cuando el router admite UPnP y está activado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1977,7 +1939,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Unknown error processing transaction.</source>
-        <translation type="unfinished">Error desconocido al procesar la transacción</translation>
+        <translation type="unfinished">Error desconocido al procesar la transacción.</translation>
     </message>
     <message>
         <source>Transaction broadcast successfully! Transaction ID: %1</source>

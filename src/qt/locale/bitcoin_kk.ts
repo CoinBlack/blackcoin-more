@@ -320,10 +320,6 @@
         <translation type="unfinished">Транзакция тарихын шолу</translation>
     </message>
     <message>
-        <source>Browse transaction history</source>
-        <translation>Транзакция тарихын шолу</translation>
-    </message>
-    <message>
         <source>E&amp;xit</source>
         <translation type="unfinished">Ш&amp;ығу</translation>
     </message>
@@ -543,34 +539,6 @@
         <source>Error: %1</source>
         <translation type="unfinished">Қате: %1</translation>
     </message>
-    <message>
-        <source>Open a wallet</source>
-        <translation type="unfinished">Әмиян ашу</translation>
-    </message>
-    <message>
-        <source>Close wallet</source>
-        <translation type="unfinished">Әмиянды жабу</translation>
-    </message>
-    <message>
-        <source>Close all wallets</source>
-        <translation type="unfinished">Барлық әмиянды жабу</translation>
-    </message>
-    <message>
-        <source>&amp;Window</source>
-        <translation type="unfinished">&amp;Терезе</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
-        <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation type="unfinished">Қате: %1</translation>
-    </message>
     </context>
 <context>
     <name>CoinControlDialog</name>
@@ -752,18 +720,6 @@
         <source>Executing command without any wallet</source>
         <translation type="unfinished">Пәрмен әмиянсыз орындалуда</translation>
     </message>
-    <message>
-        <source>Number of connections</source>
-        <translation>Қосылымдар саны</translation>
-    </message>
-    <message>
-        <source>Decrease font size</source>
-        <translation type="unfinished">Қаріп өлшемін төмендету</translation>
-    </message>
-    <message>
-        <source>Executing command without any wallet</source>
-        <translation type="unfinished">Пәрмен әмиянсыз орындалуда</translation>
-    </message>
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>
@@ -852,13 +808,6 @@
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Date</source>
         <translation type="unfinished">Күні</translation>

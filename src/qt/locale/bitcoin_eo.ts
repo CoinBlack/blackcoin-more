@@ -143,10 +143,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Montri pasfrazon</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">Montri pasfrazon</translation>
-    </message>
-    <message>
         <source>Encrypt wallet</source>
         <translation type="unfinished">Ĉifri la monujon</translation>
     </message>
@@ -244,14 +240,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Neriparebla eraro okazis. %1 ne plu sekure povas daŭri kaj ĝi ĉesiĝos.</translation>
     </message>
-</context>
-<context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">Ne sistemfermu ĝis ĉi tiu fenestro malaperas.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>
