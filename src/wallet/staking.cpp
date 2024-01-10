@@ -320,7 +320,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                     LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%s\n", GetTxnOutputType(whichType));
                     break;  // only support pay to public key and pay to address and pay to witness keyhash
                 }
-                if (whichType == TxoutType::PUBKEYHASH || whichType == TxoutType::WITNESS_V0_KEYHASH) // pay to address type or witness keyhash
+                if (whichType == TxoutType::PUBKEYHASH) // pay to address
                 {
                     // convert to pay to public key type
                     CKey key;
@@ -354,7 +354,8 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 }
                 else if (whichType == TxoutType::PUBKEY)
                     scriptPubKeyOut = scriptPubKeyKernel;
-                else if (whichType == TxoutType::WITNESS_V1_TAPROOT) {
+                else if (whichType == TxoutType::WITNESS_V0_KEYHASH || whichType == TxoutType::WITNESS_V1_TAPROOT) // pay to witness keyhash
+                {
                     // prepare reserve destination in case we need to use it for handling non legacy inputs
                     CTxDestination dest;
                     ReserveDestination reservedest(&wallet, OutputType::LEGACY);
