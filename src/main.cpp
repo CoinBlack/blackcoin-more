@@ -3810,7 +3810,7 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees)
 // Blackcoin: GetMinFee
 CAmount GetMinFee(const CTransaction& tx, unsigned int nTimeTx)
 {
-    size_t nBytes = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
+    size_t nBytes = GetVirtualTransactionSize(tx);
     return GetMinFee(nBytes, nTimeTx);
 }
 
@@ -3832,6 +3832,18 @@ CAmount GetMinFee(size_t nBytes, uint32_t nTime)
     if (!MoneyRange(nMinFee))
         nMinFee = MAX_MONEY;
     return nMinFee;
+}
+
+unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP;
+
+int64_t GetVirtualTransactionSize(int64_t nWeight, int64_t nSigOpCost)
+{
+    return (std::max(nWeight, nSigOpCost * nBytesPerSigOp) + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR;
+}
+
+int64_t GetVirtualTransactionSize(const CTransaction& tx, int64_t nSigOpCost)
+{
+    return GetVirtualTransactionSize(GetTransactionWeight(tx), nSigOpCost);
 }
 
 static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex=NULL, bool fProofOfStake=true)

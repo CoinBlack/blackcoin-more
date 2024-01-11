@@ -490,6 +490,12 @@ bool SignBlock(CBlock& block, CWallet& wallet, int64_t& nFees);
 CAmount GetMinFee(const CTransaction& tx, unsigned int nTimeTx);
 CAmount GetMinFee(size_t nBytes, uint32_t nTime);
 
+/** Compute the virtual transaction size (weight reinterpreted as bytes). */
+int64_t GetVirtualTransactionSize(int64_t nWeight, int64_t nSigOpCost);
+int64_t GetVirtualTransactionSize(const CTransaction& tx, int64_t nSigOpCost = 0);
+
+extern unsigned int nBytesPerSigOp;
+
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
 bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
 

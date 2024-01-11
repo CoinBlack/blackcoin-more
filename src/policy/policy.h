@@ -66,6 +66,4 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason);
      */
 bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs);
 
-extern unsigned int nBytesPerSigOp;
-
 #endif // BITCOIN_POLICY_POLICY_H
