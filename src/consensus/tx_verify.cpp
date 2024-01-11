@@ -229,7 +229,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
 // Blackcoin: GetMinFee
 CAmount GetMinFee(const CTransaction& tx, uint32_t nTimeTx)
 {
-    size_t nBytes = ::GetSerializeSize(tx, PROTOCOL_VERSION);
+    size_t nBytes = GetVirtualTransactionSize(tx);
     return GetMinFee(nBytes, nTimeTx);
 }
 
