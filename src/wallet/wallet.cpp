@@ -3233,6 +3233,9 @@ std::shared_ptr<CWallet> CWallet::Create(WalletContext& context, const std::stri
         walletInstance->CleanCoinStake();
     */
 
+    // Flush orphaned coinstakes
+    walletInstance->AbandonOrphanedCoinstakes();
+
     return walletInstance;
 }
 
