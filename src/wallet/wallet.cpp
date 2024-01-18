@@ -740,24 +740,6 @@ void CWallet::AddToSpends(const COutPoint& outpoint, const uint256& wtxid, Walle
     SyncMetaData(range);
 }
 
-void CWallet::RemoveFromSpends(const COutPoint& outpoint, const uint256& wtxid)
-{
-    std::pair<TxSpends::iterator, TxSpends::iterator> range;
-    range = mapTxSpends.equal_range(outpoint);
-    TxSpends::iterator it = range.first;
-    for (; it != range.second; ++ it)
-    {
-        if (it->second == wtxid)
-        {
-            mapTxSpends.erase(it);
-            break;
-        }
-    }
-    range = mapTxSpends.equal_range(outpoint);
-    if (range.first != range.second)
-        SyncMetaData(range);
-}
-
 void CWallet::AddToSpends(const CWalletTx& wtx, WalletBatch* batch)
 {
     if (wtx.IsCoinBase()) // Coinbases don't spend anything!
@@ -765,17 +747,6 @@ void CWallet::AddToSpends(const CWalletTx& wtx, WalletBatch* batch)
 
     for (const CTxIn& txin : wtx.tx->vin)
         AddToSpends(txin.prevout, wtx.GetHash(), batch);
-}
-
-void CWallet::RemoveFromSpends(const uint256& wtxid)
-{
-    assert (mapWallet.count(wtxid));
-    CWalletTx& thisTx = mapWallet.at(wtxid);
-	if (thisTx.IsCoinBase()) // Coinbases don't spend anything!
-        return;
-
-    for (const CTxIn& txin : thisTx.tx->vin)
-        RemoveFromSpends(txin.prevout, wtxid);
 }
 
 bool CWallet::EncryptWallet(const SecureString& strWalletPassphrase)
@@ -1374,20 +1345,6 @@ void CWallet::MarkConflicted(const uint256& hashBlock, int conflicting_height, c
 
 void CWallet::SyncTransaction(const CTransactionRef& ptx, const SyncTxState& state, bool update_tx, bool rescanning_old_block)
 {
-    /*
-    // TEMP: Blackcoin ToDo: enable/disable!
-    if (confirm.hashBlock.IsNull() && confirm.nIndex == -1)
-    {
-        // wallets need to refund inputs when disconnecting coinstake
-        const CTransaction& tx = *ptx;
-        if (tx.IsCoinStake() && IsFromMe(tx))
-        {
-            DisableTransaction(tx);
-            return;
-        }
-    }
-    */
-
     if (!AddToWalletIfInvolvingMe(ptx, state, update_tx, rescanning_old_block))
         return; // Not one of ours
 
@@ -2630,35 +2587,6 @@ std::vector<CTxDestination> CWallet::ListAddrBookAddresses(const std::optional<A
     return result;
 }
 
-/*
-// TEMP: Blackcoin ToDo: enable/disable!
-// disable transaction (only for coinstake)
-void CWallet::DisableTransaction(const CTransaction &tx)
-{
-    if (!tx.IsCoinStake() || !IsFromMe(tx))
-        return; // only disconnecting coinstake requires marking input unspent
-
-    uint256 hash = tx.GetHash();
-    if (AbandonTransaction(hash))
-    {
-        LOCK(cs_wallet);
-        RemoveFromSpends(hash);
-        for (const CTxIn& txin : tx.vin)
-        {
-            auto it = mapWallet.find(txin.prevout.hash);
-            if (it != mapWallet.end()) {
-                CWalletTx &coin = it->second;
-                coin.MarkDirty();
-                NotifyTransactionChanged(coin.GetHash(), CT_UPDATED);
-            }
-        }
-        CWalletTx& wtx = mapWallet.at(hash);
-        wtx.MarkDirty();
-        NotifyTransactionChanged(hash, CT_DELETED);
-    }
-}
-*/
-
 std::set<std::string> CWallet::ListAddrBookLabels(const std::optional<AddressPurpose> purpose) const
 {
     AssertLockHeld(cs_wallet);
@@ -3225,13 +3153,6 @@ std::shared_ptr<CWallet> CWallet::Create(WalletContext& context, const std::stri
         walletInstance->WalletLogPrintf("mapWallet.size() = %u\n",       walletInstance->mapWallet.size());
         walletInstance->WalletLogPrintf("m_address_book.size() = %u\n",  walletInstance->m_address_book.size());
     }
-
-    /*
-    // TEMP: Blackcoin ToDo: enable/disable!
-    if (!fReindex)
-        // Clean not reverted coinstake transactions
-        walletInstance->CleanCoinStake();
-    */
 
     // Flush orphaned coinstakes
     walletInstance->AbandonOrphanedCoinstakes();
@@ -3904,29 +3825,6 @@ ScriptPubKeyMan* CWallet::AddWalletDescriptor(WalletDescriptor& desc, const Flat
 
     return spk_man;
 }
-
-/*
-// TEMP: Blackcoin ToDo: enable/disable!
-void CWallet::CleanCoinStake()
-{
-    LOCK(cs_wallet);
-    // Search the coinstake transactions and abandon transactions that are not confirmed in the blocks
-    for (std::map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
-    {
-        const CWalletTx* wtx = &(*it).second;
-        if (wtx && wtx->m_confirm.hashBlock.IsNull() && wtx->m_confirm.nIndex <= 0)
-        {
-            // Wallets need to refund inputs when disconnecting coinstake
-            const CTransaction& tx = *(wtx->tx);
-            if (tx.IsCoinStake() && IsFromMe(tx) && !wtx->isAbandoned())
-            {
-                WalletLogPrintf("%s: Revert coinstake tx %s\n", __func__, wtx->GetHash().ToString());
-                DisableTransaction(tx);
-            }
-        }
-    }
-}
-*/
 
 bool CWallet::MigrateToSQLite(bilingual_str& error)
 {
