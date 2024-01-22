@@ -715,9 +715,15 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     if (m_pool.m_require_standard && tx.nVersion >= TX_MAX_STANDARD_VERSION && !Params().GetConsensus().IsProtocolV3_1(nTimeTx))
 		return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "premature-version2-tx");
 
+    // Reject transactions with witness before segregated witness activates (override with -prematurewitness)
+    bool witnessEnabled = DeploymentActiveAfter(m_active_chainstate.m_chain.Tip(), m_active_chainstate.m_chainman, Consensus::DEPLOYMENT_SEGWIT);
+    if (!gArgs.GetBoolArg("-prematurewitness", false) && tx.HasWitness() && !witnessEnabled) {
+        return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "no-witness-yet");
+    }
+
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)
     std::string reason;
-    if (m_pool.m_require_standard && !IsStandardTx(tx, m_pool.m_max_datacarrier_bytes, m_pool.m_permit_bare_multisig, m_pool.m_dust_relay_feerate, reason)) {
+    if (m_pool.m_require_standard && !IsStandardTx(tx, m_pool.m_max_datacarrier_bytes, m_pool.m_permit_bare_multisig, m_pool.m_dust_relay_feerate, reason, witnessEnabled)) {
         return state.Invalid(TxValidationResult::TX_NOT_STANDARD, reason);
     }
 
