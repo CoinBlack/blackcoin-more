@@ -272,7 +272,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         return false;
 
     std::set<std::pair<const CWalletTx*, unsigned int> > setCoins;
-    std::vector<std::pair<const CWalletTx*, unsigned int> > vwtxPrev;
+    std::vector<CTransactionRef> vwtxPrev;
     CAmount nValueIn = 0;
     CAmount nAllowedBalance = nBalance - wallet.m_reserve_balance;
 
@@ -382,7 +382,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 txNew.nTime -= n;
                 txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
                 nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
-                vwtxPrev.push_back(pcoin);
+                vwtxPrev.push_back(tx);
 
                 if (bMinterKey) {
                     // extra output for minter key
@@ -431,7 +431,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
             txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
             nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
-            vwtxPrev.push_back(pcoin);
+            vwtxPrev.push_back(tx);
         }
     }
 
@@ -481,9 +481,8 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     SignatureData empty;
 
     if (wallet.IsLegacy()) {
-        for (const std::pair<const CWalletTx*, unsigned int> &pcoin : vwtxPrev)
-        {
-            if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin.first->tx, txNew, nIn++, SIGHASH_ALL, empty))
+        for (const auto &pcoin : vwtxPrev) {
+            if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty))
                 return error("CreateCoinStake : failed to sign coinstake");
         }
     }
