@@ -241,9 +241,6 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
         <source>Runaway exception</source>
         <translation type="unfinished">Excepció fugitiva</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">S'ha produït un error fatal. %1 ja no pot continuar amb seguretat i sortirà.</translation>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copia l'indirizzo attualmente selezionato negli appunti di sistema</translation>
+        <translation type="unfinished">Copia negli appunti del sistema l'indirizzo attualmente selezionato</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation type="unfinished">Rimuovi l'indirizzo attualmente selezionato dall'elenco</translation>
+        <translation type="unfinished">Rimuovi dalla lista l'indirizzo attualmente selezionato</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
@@ -261,9 +261,6 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <source>Runaway exception</source>
         <translation type="unfinished">Eccezione runaway</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Si è verificato un errore critico. %1 non può più continuare in maniera sicura e verrà chiuso.</translation>

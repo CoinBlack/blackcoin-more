@@ -34,10 +34,6 @@
         <translation type="unfinished">輸入位址或標記以作搜尋</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation type="unfinished">輸入位址或標記以作搜尋</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">把目前分頁的資料匯出至檔案</translation>
     </message>
@@ -141,10 +137,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Repeat new passphrase</source>
         <translation type="unfinished">重複新密碼</translation>
-    </message>
-    <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">顯示密碼</translation>
     </message>
     <message>
         <source>Show passphrase</source>
@@ -1072,54 +1064,6 @@ The migration process will create a backup of the wallet before migrating. This 
         <source>Open Wallet</source>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
         <translation type="unfinished">開啟錢包</translation>
-    </message>
-    <message>
-        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
-        <extracomment>Descriptive text of the open wallet progress window which indicates to the user which wallet is currently being opened.</extracomment>
-        <translation type="unfinished">正在打開錢包&lt;b&gt;%1&lt;/b&gt;...</translation>
-    </message>
-</context>
-<context>
-    <name>RestoreWalletActivity</name>
-    <message>
-        <source>Restore Wallet</source>
-        <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
-        <translation type="unfinished">恢復錢包</translation>
-    </message>
-    <message>
-        <source>Restoring Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
-        <extracomment>Descriptive text of the restore wallets progress window which indicates to the user that wallets are currently being restored.</extracomment>
-        <translation type="unfinished">正在恢復錢包&lt;b&gt;%1&lt;/b&gt;...</translation>
-    </message>
-    <message>
-        <source>Restore wallet failed</source>
-        <extracomment>Title of message box which is displayed when the wallet could not be restored.</extracomment>
-        <translation type="unfinished">恢復錢包失敗</translation>
-    </message>
-    <message>
-        <source>Restore wallet warning</source>
-        <extracomment>Title of message box which is displayed when the wallet is restored with some warning.</extracomment>
-        <translation type="unfinished">恢復錢包警告</translation>
-    </message>
-    <message>
-        <source>Restore wallet message</source>
-        <extracomment>Title of message box which is displayed when the wallet is successfully restored.</extracomment>
-        <translation type="unfinished">恢復錢包訊息</translation>
-    </message>
-</context>
-<context>
-    <name>WalletController</name>
-    <message>
-        <source>Close wallet</source>
-        <translation type="unfinished">卸载钱包</translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished">您确定想要关闭钱包&lt;i&gt;%1&lt;/i&gt;吗？</translation>
-    </message>
-    <message>
-        <source>Close all wallets</source>
-        <translation type="unfinished">关闭所有钱包</translation>
     </message>
     </context>
 <context>

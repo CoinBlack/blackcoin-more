@@ -406,14 +406,6 @@ Registrarse solo es posible utilizando  una direccion tipo "Legal"</translation>
         <translation type="unfinished">Salir de la aplicación</translation>
     </message>
     <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished">&amp;Acerca de %1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">Mostrar información sobre %1</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation type="unfinished">Acerca de &amp;Qt</translation>
     </message>
@@ -1193,14 +1185,6 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">La dirección introducida "%1" no es una dirección Bitcoin válida.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">La dirección "%1" ya existe como dirección de recepción con la etiqueta "%2" y, por lo tanto, no se puede agregar como dirección de envío.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">La dirección ingresada "%1" ya está en la libreta de direcciones con la etiqueta "%2".</translation>
-    </message>
-    <message>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">No se pudo desbloquear la billetera.</translation>
     </message>
@@ -1329,17 +1313,6 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Command-line options</source>
         <translation type="unfinished">Opciones de la línea de órdenes</translation>
-    </message>
-</context>
-<context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>%1 is shutting down…</source>
-        <translation type="unfinished">%1 se está cerrando...</translation>
-    </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">No apagues el equipo hasta que desaparezca esta ventana.</translation>
     </message>
 </context>
 <context>
@@ -2565,10 +2538,6 @@ Escribe %5 para ver un resumen de los comandos disponibles. Para más informaci�
         <translation type="unfinished">Mensaje:</translation>
     </message>
     <message>
-        <source>Wallet:</source>
-        <translation type="unfinished">Monedero:</translation>
-    </message>
-    <message>
         <source>Copy &amp;URI</source>
         <translation type="unfinished">Copiar &amp;URI</translation>
     </message>
@@ -2984,10 +2953,6 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">&amp;Pagar a:</translation>
     </message>
     <message>
-        <source>Pay &amp;To:</source>
-        <translation>&amp;Pagar a:</translation>
-    </message>
-    <message>
         <source>&amp;Label:</source>
         <translation type="unfinished">&amp;Etiqueta:</translation>
     </message>
@@ -3163,54 +3128,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     </context>
 <context>
-    <name>SplashScreen</name>
-    <message>
-        <source>(press q to shutdown and continue later)</source>
-        <translation type="unfinished">(presiona q para apagar y seguir luego)</translation>
-    </message>
-    <message>
-        <source>press q to shutdown</source>
-        <translation type="unfinished">presiona q para apagar </translation>
-    </message>
-</context>
-<context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
-        <source>0/unconfirmed, in memory pool</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that is in the memory pool.</extracomment>
-        <translation type="unfinished">0/sin confirmar, en el pool de memoria</translation>
-    </message>
-    <message>
-        <source>0/unconfirmed, not in memory pool</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that is not in the memory pool.</extracomment>
-        <translation type="unfinished">0/sin confirmar, no está en el pool de memoria</translation>
-    </message>
-    <message>
-        <source>abandoned</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an abandoned transaction.</extracomment>
-        <translation type="unfinished">abandonada</translation>
-    </message>
-    <message>
-        <source>%1/unconfirmed</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in at least one block, but less than 6 blocks.</extracomment>
-        <translation type="unfinished">%1/sin confirmar</translation>
-    </message>
-    <message>
-        <source>%1 confirmations</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in 6 or more blocks.</extracomment>
-        <translation type="unfinished">confirmaciones %1</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished">Estado</translation>
-    </message>
     <message>
         <source>0/unconfirmed, in memory pool</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that is in the memory pool.</extracomment>

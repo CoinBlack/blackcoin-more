@@ -344,13 +344,13 @@ RPCHelpMan optimizeutxoset()
                     RPCResult{"if transmit is not set or set to false",
                         RPCResult::Type::OBJ, "", "",
                         {
-                            {RPCResult::Type::STR_HEX, "tx", "The transaction hex."}
+                            {RPCResult::Type::STR_HEX, "tx", /*optional=*/true, "The transaction hex."}
                         },
                     },
                     RPCResult{"if transmit is set to true",
                         RPCResult::Type::OBJ, "", "",
                         {
-                            {RPCResult::Type::STR_HEX, "txid", "The transaction id."}
+                            {RPCResult::Type::STR_HEX, "txid", /*optional=*/true, "The transaction id."}
                         },
                     },
                 },
@@ -395,18 +395,15 @@ RPCHelpMan optimizeutxoset()
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Blackcoin address: ") + request.params[3].get_str());
         }
 
-        auto available_coins = AvailableCoins(*pwallet, &coin_control);
-        std::vector<COutput> coins = available_coins.All();
-        for (const COutput& out : coins) {
-            ExtractDestination(out.txout.scriptPubKey, tmpAddress);
-            if (tmpAddress == fromAddress) {
-                if (tmpAddress == dest && out.txout.nValue == amount)
-                    continue;
+        std::vector<COutput> vAvailableCoins = AvailableCoins(*pwallet, &coin_control).All();
+        for (const COutput& out : vAvailableCoins) {
+            const CScript& scriptPubKey = out.txout.scriptPubKey;
+            bool fValidAddress = ExtractDestination(scriptPubKey, tmpAddress);
+            if (fValidAddress && (tmpAddress == fromAddress)) {
                 coin_control.Select(out.outpoint);
                 availableCoins += out.txout.nValue;
             }
         }
-
         coin_control.m_allow_other_inputs = false;
     } else {
         const auto bal = GetBalance(*pwallet);

@@ -2,6 +2,30 @@
 <context>
     <name>AddressBookPage</name>
     <message>
+        <source>Right-click to edit address or label</source>
+        <translation type="unfinished">Click-dreapta pentru a edita adresa sau eticheta</translation>
+    </message>
+    <message>
+        <source>Create a new address</source>
+        <translation type="unfinished">Creează o adresă nouă</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nou</translation>
+    </message>
+    <message>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Copiază adresa selectată curent în clipboard</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation type="unfinished">&amp;Copiază</translation>
+    </message>
+    <message>
+        <source>C&amp;lose</source>
+        <translation type="unfinished">Î&amp;nchide</translation>
+    </message>
+    <message>
         <source>Delete the currently selected address from the list</source>
         <translation type="unfinished">Şterge adresa selectată curent din listă</translation>
     </message>
@@ -1086,7 +1110,7 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation type="unfinished">Cel putin %1 GB de date vor fi stocate in acest director, si aceasta valoare va creste in timp.</translation>
+        <translation type="unfinished">Cel putin %1GB de date vor fi stocate in acest director, si aceasta valoare va creste in timp.</translation>
     </message>
     <message>
         <source>Approximately %1 GB of data will be stored in this directory.</source>

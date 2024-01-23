@@ -1076,10 +1076,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Vraćanje ove postavke zahtijeva ponovno preuzimanje cijelog lanca blokova. Brže je prvo preuzeti čitav lanac i kasnije ga obrezati. Onemogućava neke napredne funkcije.</translation>
     </message>
     <message>
-        <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation type="unfinished">Ova početna sihronizacija je veoma zahtjevna,i moze razotkriti hardverske probleme na vašem kompjuteru a niste ih prije primijetili.Svki put kad koristite %1, nastavice download gdje je stao.</translation>
-    </message>
-    <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
         <translation type="unfinished">Ako ste odlučili ograničiti skladištenje lanca blokova (obrezivanje), povijesni podaci i dalje se moraju preuzeti i obraditi, ali će se nakon toga izbrisati kako bi se smanjila upotreba diska.</translation>
     </message>

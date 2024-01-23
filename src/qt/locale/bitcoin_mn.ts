@@ -289,18 +289,6 @@
         <translation type="unfinished">Хэтэвч үүсгэх…</translation>
     </message>
     <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Баталгаажуулах мэссэж</translation>
-    </message>
-    <message>
-        <source>Close Wallet…</source>
-        <translation type="unfinished">Хэтэвч хаах…</translation>
-    </message>
-    <message>
-        <source>Create Wallet…</source>
-        <translation type="unfinished">Хэтэвч үүсгэх…</translation>
-    </message>
-    <message>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;Файл</translation>
     </message>
@@ -319,13 +307,6 @@
             <numerusform />
         </translation>
     </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Error</source>
         <translation type="unfinished">Алдаа</translation>
@@ -333,10 +314,6 @@
     <message>
         <source>Warning</source>
         <translation type="unfinished">Анхааруулга</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Анхааруулга</translation>
     </message>
     <message>
         <source>Information</source>
@@ -935,13 +912,6 @@
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>%1/unconfirmed</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents a transaction confirmed in at least one block, but less than 6 blocks.</extracomment>

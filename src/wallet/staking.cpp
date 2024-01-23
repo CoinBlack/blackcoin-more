@@ -272,7 +272,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         return false;
 
     std::set<std::pair<const CWalletTx*, unsigned int> > setCoins;
-    std::vector<std::pair<const CWalletTx*, unsigned int> > vwtxPrev;
+    std::vector<CTransactionRef> vwtxPrev;
     CAmount nValueIn = 0;
     CAmount nAllowedBalance = nBalance - wallet.m_reserve_balance;
 
@@ -290,10 +290,6 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
-        if (!g_txindex) {
-            return error("tx index not available!");
-        }
-
         uint256 blockHash;
         CTransactionRef tx;
         if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
@@ -320,7 +316,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                     LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%s\n", GetTxnOutputType(whichType));
                     break;  // only support pay to public key and pay to address and pay to witness keyhash
                 }
-                if (whichType == TxoutType::PUBKEYHASH || whichType == TxoutType::WITNESS_V0_KEYHASH) // pay to address type or witness keyhash
+                if (whichType == TxoutType::PUBKEYHASH) // pay to address
                 {
                     // convert to pay to public key type
                     CKey key;
@@ -354,7 +350,8 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 }
                 else if (whichType == TxoutType::PUBKEY)
                     scriptPubKeyOut = scriptPubKeyKernel;
-                else if (whichType == TxoutType::WITNESS_V1_TAPROOT) {
+                else if (whichType == TxoutType::WITNESS_V0_KEYHASH || whichType == TxoutType::WITNESS_V1_TAPROOT) // pay to witness keyhash
+                {
                     // prepare reserve destination in case we need to use it for handling non legacy inputs
                     CTxDestination dest;
                     ReserveDestination reservedest(&wallet, OutputType::LEGACY);
@@ -385,7 +382,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 txNew.nTime -= n;
                 txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
                 nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
-                vwtxPrev.push_back(pcoin);
+                vwtxPrev.push_back(tx);
 
                 if (bMinterKey) {
                     // extra output for minter key
@@ -410,10 +407,6 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
-        if (!g_txindex) {
-            return error("tx index not available!");
-        }
-
         uint256 blockHash;
         CTransactionRef tx;
         if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
@@ -433,12 +426,12 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
             if (nCredit + pcoin.first->tx->vout[pcoin.second].nValue > nBalance - wallet.m_reserve_balance)
                 break;
             // Do not add additional significant input
-            if (pcoin.first->tx->vout[pcoin.second].nValue > GetStakeCombineThreshold())
+            if (pcoin.first->tx->vout[pcoin.second].nValue >= GetStakeCombineThreshold())
                 continue;
 
             txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
             nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
-            vwtxPrev.push_back(pcoin);
+            vwtxPrev.push_back(tx);
         }
     }
 
@@ -469,67 +462,50 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     if (isDevFundEnabled)
         txNew.vout.push_back(CTxOut(0, Params().GetDevRewardScript()));
 
-    while (true)
-    {
-        // Set output amount
+    // Set output amount
+    if (txNew.vout.size() == (isDevFundEnabled ? 4u : 3u) + bMinterKey) {
+        txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
+        txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
         if (isDevFundEnabled)
-        {
-            if (txNew.vout.size() == 4u + bMinterKey)
-            {
-                txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
-                txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
-                txNew.vout[3 + bMinterKey].nValue = nDevCredit;
-            }
-            else
-            {
-                txNew.vout[1 + bMinterKey].nValue = nCredit;
-                txNew.vout[2 + bMinterKey].nValue = nDevCredit;
-            }
-        }
-        else
-        {
-            if (txNew.vout.size() == 3u + bMinterKey)
-            {
-                txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
-                txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
-            }
-            else
-                txNew.vout[1 + bMinterKey].nValue = nCredit;
-        }
-
-        // Sign
-        int nIn = 0;
-        SignatureData empty;
-
-        if (wallet.IsLegacy()) {
-            for (const std::pair<const CWalletTx*, unsigned int> &pcoin : vwtxPrev)
-            {
-                if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin.first->tx, txNew, nIn++, SIGHASH_ALL, empty))
-                    return error("CreateCoinStake : failed to sign coinstake");
-            }
-        }
-        else
-        {
-            // Fetch previous transactions (inputs):
-            std::map<COutPoint, Coin> coins;
-            for (const CTxIn& txin : txNew.vin) {
-                coins[txin.prevout]; // Create empty map entry keyed by prevout.
-            }
-            wallet.chain().findCoins(coins);
-            // Script verification errors
-            std::map<int, bilingual_str> input_errors;
-            int nTime = txNew.nTime;
-            wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
-            txNew.nTime = nTime;
-        }
-
-        // Limit size
-        unsigned int nBytes = ::GetSerializeSize(txNew, PROTOCOL_VERSION);
-        if (nBytes >= 1000000/5)
-            return error("CreateCoinStake : exceeded coinstake size limit");
-
-        break;
+            txNew.vout[3 + bMinterKey].nValue = nDevCredit;
     }
+    else
+    {
+        txNew.vout[1 + bMinterKey].nValue = nCredit;
+        if (isDevFundEnabled)
+            txNew.vout[2 + bMinterKey].nValue = nDevCredit;
+    }
+
+    // Sign
+    int nIn = 0;
+    SignatureData empty;
+
+    if (wallet.IsLegacy()) {
+        for (const auto &pcoin : vwtxPrev) {
+            if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty))
+                return error("CreateCoinStake : failed to sign coinstake");
+        }
+    }
+    else
+    {
+        // Fetch previous transactions (inputs):
+        std::map<COutPoint, Coin> coins;
+        for (const CTxIn& txin : txNew.vin) {
+            coins[txin.prevout]; // Create empty map entry keyed by prevout.
+        }
+        wallet.chain().findCoins(coins);
+        // Script verification errors
+        std::map<int, bilingual_str> input_errors;
+        int nTime = txNew.nTime;
+        wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
+        txNew.nTime = nTime;
+    }
+
+    // Limit size
+    unsigned int nBytes = ::GetSerializeSize(txNew, PROTOCOL_VERSION);
+    if (nBytes >= 1000000/5)
+        return error("CreateCoinStake : exceeded coinstake size limit");
+
     // Successfully generated coinstake
     return true;
 }

@@ -586,7 +586,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager& chainman)
 
 #ifdef ENABLE_WALLET
 // qtum
-bool SleepStaker(wallet::CWallet *pwallet, uint64_t milliseconds) {
+bool SleepStaker(CWallet *pwallet, uint64_t milliseconds) {
     uint64_t seconds = milliseconds / 1000;
     milliseconds %= 1000;
 
@@ -619,8 +619,42 @@ bool CanStake() {
     return canStake;
 }
 
+// peercoin: sign block
+typedef std::vector<unsigned char> valtype;
+bool SignBlock(CBlock& block, const CWallet& keystore)
+{
+    std::vector<valtype> vSolutions;
+    const CTxOut& txout = block.IsProofOfStake() ? block.vtx[1]->vout[1] : block.vtx[0]->vout[0];
+
+    if (Solver(txout.scriptPubKey, vSolutions) != TxoutType::PUBKEY)
+        return false;
+
+    // Sign
+    if (keystore.IsLegacy())
+    {
+        const valtype& vchPubKey = vSolutions[0];
+        CKey key;
+        if (!keystore.GetLegacyScriptPubKeyMan()->GetKey(CKeyID(Hash160(vchPubKey)), key))
+            return false;
+        if (key.GetPubKey() != CPubKey(vchPubKey))
+            return false;
+        return key.Sign(block.GetHash(), block.vchBlockSig, 0);
+    }
+    else
+    {
+        CTxDestination address;
+        CPubKey pubKey(vSolutions[0]);
+        address = PKHash(pubKey);
+        PKHash* pkhash = std::get_if<PKHash>(&address);
+        SigningResult res = keystore.SignBlockHash(block.GetHash(), *pkhash, block.vchBlockSig);
+        if (res == SigningResult::OK)
+            return true;
+        return false;
+    }
+}
+
 // peercoin
-void PoSMiner(wallet::CWallet *pwallet)
+void PoSMiner(CWallet *pwallet)
 {
     pwallet->WalletLogPrintf("PoSMiner started for proof-of-stake\n");
     util::ThreadRename(strprintf("blackcoin-stake-miner-%s", pwallet->GetName()));
@@ -745,7 +779,7 @@ void PoSMiner(wallet::CWallet *pwallet)
 }
 
 // peercoin: stake miner thread
-void static ThreadStakeMiner(wallet::CWallet *pwallet)
+void static ThreadStakeMiner(CWallet *pwallet)
 {
     pwallet->WalletLogPrintf("ThreadStakeMiner started\n");
     while (true) {
@@ -763,7 +797,7 @@ void static ThreadStakeMiner(wallet::CWallet *pwallet)
 }
 
 // qtum
-void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::unique_ptr<std::vector<std::thread>>& threadStakeMinerGroup)
+void StakeCoins(bool fStake, CWallet *pwallet, std::unique_ptr<std::vector<std::thread>>& threadStakeMinerGroup)
 {
     // If threadStakeMinerGroup is initialized join all threads and clear the vector
     if (threadStakeMinerGroup) {

@@ -504,10 +504,6 @@ La signature n'est possible qu'avec les adresses de type "patrimoine".</translat
         <translation type="unfinished">&amp;Recevoir</translation>
     </message>
     <message>
-        <source>&amp;Options…</source>
-        <translation type="unfinished">&amp;Choix</translation>
-    </message>
-    <message>
         <source>&amp;Encrypt Wallet…</source>
         <translation type="unfinished">&amp;Chiffrer le porte-monnaie…</translation>
     </message>
@@ -710,7 +706,7 @@ La signature n'est possible qu'avec les adresses de type "patrimoine".</translat
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Afficher le message d’aide de %1 pour obtenir la liste des options possibles en ligne de commande Bitcoin</translation>
+        <translation type="unfinished">Afficher le message d’aide de %1 pour obtenir la liste des options possibles de ligne de commande Bitcoin</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -3757,7 +3753,7 @@ Note : Les frais étant calculés par octet, un taux de frais de « 100 satoshi
     </message>
 </context>
 <context>
-    <name>CreateWalletDialog</name>
+    <name>WalletFrame</name>
     <message>
         <source>No wallet has been loaded.
 Go to File &gt; Open Wallet to load a wallet.
@@ -3796,7 +3792,7 @@ Accédez à Fichier &gt; Ouvrir un porte-monnaie pour en charger un.
     </message>
 </context>
 <context>
-    <name>EditAddressDialog</name>
+    <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
         <translation type="unfinished">Envoyer des pièces</translation>
@@ -3865,7 +3861,7 @@ Accédez à Fichier &gt; Ouvrir un porte-monnaie pour en charger un.
     </message>
 </context>
 <context>
-    <name>FreespaceChecker</name>
+    <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
         <translation type="unfinished">&amp;Exporter</translation>

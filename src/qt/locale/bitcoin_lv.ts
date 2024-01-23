@@ -169,18 +169,6 @@
         <translation type="unfinished">Maciņu nepieciešams šifrēt.</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Ievadiet savu paroli Jūsu maciņam, lūdzu lietojiet vismaz desmit simbolus, astoņus vai vairāk vārdus.</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>Ievadiet veco un jauno paroli Jūsu maciņam</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Maciņu nepieciešams šifrēt.</translation>
-    </message>
-    <message>
         <source>Your wallet is now encrypted. </source>
         <translation type="unfinished">Maciņš tagad šifrēts</translation>
     </message>
@@ -1192,14 +1180,6 @@
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Date</source>
         <translation type="unfinished">Datums</translation>
@@ -1249,10 +1229,6 @@
     </context>
 <context>
     <name>TransactionView</name>
-    <message>
-        <source>Comma separated file (*.csv)</source>
-        <translation>Ar komatiem atdalīts fails (*.csv)</translation>
-    </message>
     <message>
         <source>Confirmed</source>
         <translation type="unfinished">Apstiprināts</translation>

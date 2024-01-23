@@ -628,10 +628,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">وتحميل PSBT من ملف...</translation>
     </message>
     <message>
-        <source>Load PSBT from clipboard…</source>
-        <translation type="unfinished">حمل PSBT من الحافظة...</translation>
-    </message>
-    <message>
         <source>Open &amp;URI…</source>
         <translation type="unfinished">فتح ورابط...</translation>
     </message>
@@ -814,43 +810,23 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">‫اعرض %1 رسالة المساعدة للحصول على قائمة من خيارات سطر أوامر البتكوين المحتملة‬</translation>
+        <translation type="unfinished">بين اشارة المساعدة %1 للحصول على قائمة من خيارات اوامر البت كوين المحتملة </translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
-        <translation type="unfinished">&amp;إخفاء القيم</translation>
+        <translation type="unfinished">&amp; إخفاء القيم</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">‫إخفاء القيم في علامة التبويب: نظرة عامة‬</translation>
+        <translation type="unfinished">إخفاء القيم في علامة التبويب نظرة عامة</translation>
     </message>
     <message>
         <source>default wallet</source>
-        <translation type="unfinished">‫محفظة افتراضية‬</translation>
+        <translation type="unfinished">المحفظة الإفتراضية</translation>
     </message>
     <message>
         <source>No wallets available</source>
-        <translation type="unfinished">‫لا يوجد محفظة متاحة‬</translation>
-    </message>
-    <message>
-        <source>Wallet Data</source>
-        <extracomment>Name of the wallet data file format.</extracomment>
-        <translation type="unfinished">بيانات المحفظة</translation>
-    </message>
-    <message>
-        <source>Load Wallet Backup</source>
-        <extracomment>The title for Restore Wallet File Windows</extracomment>
-        <translation type="unfinished">‫تحميل النسخة الاحتياطية لمحفظة‬</translation>
-    </message>
-    <message>
-        <source>Restore Wallet</source>
-        <extracomment>Title of pop-up window shown when the user is attempting to restore a wallet.</extracomment>
-        <translation type="unfinished">استعادة المحفظة</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <extracomment>Label of the input field where the name of the wallet is entered.</extracomment>
-        <translation type="unfinished">إسم المحفظة</translation>
+        <translation type="unfinished">المحفظة الرقمية غير متوفرة</translation>
     </message>
     <message>
         <source>Wallet Data</source>

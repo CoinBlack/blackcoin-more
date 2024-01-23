@@ -403,7 +403,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation type="unfinished">Explorar el historial de transacciones</translation>
+        <translation type="unfinished">Explora el historial de transacciónes</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -411,7 +411,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Quit application</source>
-        <translation type="unfinished">Salir de la aplicación</translation>
+        <translation type="unfinished">Salir del programa</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
@@ -419,7 +419,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Show information about %1</source>
-        <translation type="unfinished">Mostrar información sobre %1</translation>
+        <translation type="unfinished">Mostrar Información sobre %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -427,7 +427,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Show information about Qt</source>
-        <translation type="unfinished">Mostrar información sobre Qt</translation>
+        <translation type="unfinished">Mostrar Información sobre Qt</translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
@@ -448,23 +448,23 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     <message>
         <source>Network activity disabled.</source>
         <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">Actividad de red desactivada.</translation>
+        <translation type="unfinished">Actividad de red deshabilitada</translation>
     </message>
     <message>
         <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation type="unfinished">El proxy está &lt;b&gt;activado&lt;/b&gt;: %1</translation>
+        <translation type="unfinished">Proxy &lt;b&gt;habilitado&lt;/b&gt;: %1</translation>
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Enviar monedas a una dirección de Bitcoin</translation>
+        <translation type="unfinished">Enviar monedas a una dirección bitcoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation type="unfinished">Realizar copia de seguridad de la billetera en otra ubicación</translation>
+        <translation type="unfinished">Respaldar billetera en otra ubicación</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation type="unfinished">Cambiar la frase de contraseña utilizada para encriptar la billetera</translation>
+        <translation type="unfinished">Cambiar la contraseña utilizada para la codificación de la billetera</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -500,11 +500,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Firma mensajes con direcciones de Bitcoin para demostrar que te pertenecen</translation>
-    </message>
-    <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Verificar mensaje...</translation>
+        <translation type="unfinished">Firmar un mensaje para provar que usted es dueño de esta dirección</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
@@ -592,7 +588,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Solicitar pagos (genera códigos QR y URI de tipo "bitcoin:")</translation>
+        <translation type="unfinished">Pide pagos (genera codigos QR and bitcoin: URls)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -604,7 +600,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation type="unfinished">&amp;Opciones de línea de comandos</translation>
+        <translation type="unfinished">&amp;Opciones de linea de comando</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -623,15 +619,15 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
-        <translation type="unfinished">El último bloque recibido se generó hace %1.</translation>
+        <translation type="unfinished">El último bloque recibido fue generado hace %1</translation>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation type="unfinished">Las transacciones posteriores aún no estarán visibles.</translation>
+        <translation type="unfinished">Las transacciones posteriores aún no están visibles.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Advertencia</translation>
+        <translation type="unfinished">Atención</translation>
     </message>
     <message>
         <source>Information</source>
@@ -659,7 +655,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Open node debugging and diagnostic console</source>
-        <translation type="unfinished">Abrir consola de depuración y diagnóstico del nodo</translation>
+        <translation type="unfinished">Abrir la consola de depuración y diagnóstico del nodo</translation>
     </message>
     <message>
         <source>&amp;Sending addresses</source>
@@ -709,15 +705,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Mostrar el mensaje de ayuda %1 para obtener una lista de las posibles opciones de línea de comandos de Bitcoin</translation>
-    </message>
-    <message>
-        <source>&amp;Mask values</source>
-        <translation type="unfinished">&amp;Ocultar valores</translation>
-    </message>
-    <message>
-        <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">Ocultar los valores en la pestaña de vista general</translation>
+        <translation type="unfinished">Mostrar el mensaje de ayuda %1 para obtener una lista de los posibles comandos de Bitcoin</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -1195,7 +1183,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <name>CreateWalletDialog</name>
     <message>
         <source>Create Wallet</source>
-        <translation type="unfinished">Crear billetera</translation>
+        <translation type="unfinished">Crear Billetera</translation>
     </message>
     <message>
         <source>You are one step away from creating your new wallet!</source>
@@ -1215,11 +1203,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation type="unfinished">Encriptar la billetera. La billetera se encriptará con una frase de contraseña de tu elección.</translation>
+        <translation type="unfinished">Encriptar la billetera. La billetera será encriptada con una contraseña de tu elección.</translation>
     </message>
     <message>
         <source>Encrypt Wallet</source>
-        <translation type="unfinished">Encriptar billetera</translation>
+        <translation type="unfinished">Encriptar la billetera</translation>
     </message>
     <message>
         <source>Advanced Options</source>
@@ -1235,15 +1223,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation type="unfinished">Crear una billetera en blanco. Las billeteras en blanco inicialmente no tienen claves privadas ni scripts. Las claves privadas y las direcciones se pueden importar, o una semilla HD se puede establecer posteriormente.</translation>
+        <translation type="unfinished">Crea una billetera en blanco. Las billeteras en blanco inicialmente no tienen llaves privadas o texto. Las llaves privadas y las direcciones pueden ser importadas, o se puede establecer una semilla HD, más tarde.</translation>
     </message>
     <message>
         <source>Make Blank Wallet</source>
-        <translation type="unfinished">Crear billetera en blanco</translation>
-    </message>
-    <message>
-        <source>Use descriptors for scriptPubKey management</source>
-        <translation type="unfinished">Usar descriptores para la gestión de scriptPubKey</translation>
+        <translation type="unfinished">Crear billetera vacía</translation>
     </message>
     <message>
         <source>External signer</source>
@@ -1275,7 +1259,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation type="unfinished">La dirección asociada con esta entrada en la lista de direcciones. Solo se puede modificar para las direcciones de envío.</translation>
+        <translation type="unfinished">La dirección asociada con esta entrada en la libreta de direcciones. Solo puede ser modificada para direcciones de envío.</translation>
     </message>
     <message>
         <source>&amp;Address</source>
@@ -1283,7 +1267,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>New sending address</source>
-        <translation type="unfinished">Nueva dirección de envío</translation>
+        <translation type="unfinished">Nueva dirección para enviar</translation>
     </message>
     <message>
         <source>Edit receiving address</source>
@@ -1291,7 +1275,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Edit sending address</source>
-        <translation type="unfinished">Editar dirección de envío</translation>
+        <translation type="unfinished">Editar dirección de envio</translation>
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
@@ -1310,7 +1294,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <name>FreespaceChecker</name>
     <message>
         <source>A new data directory will be created.</source>
-        <translation type="unfinished">Se creará un nuevo directorio de datos.</translation>
+        <translation type="unfinished">Un nuevo directorio de datos será creado.</translation>
     </message>
     <message>
         <source>name</source>
@@ -1322,7 +1306,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Path already exists, and is not a directory.</source>
-        <translation type="unfinished">La ruta ya existe, pero no es un directorio.</translation>
+        <translation type="unfinished">Ruta de acceso existente, pero no es un directorio.</translation>
     </message>
     <message>
         <source>Cannot create data directory here.</source>
@@ -1358,11 +1342,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation type="unfinished">Se almacenará al menos %1 GB de información en este directorio, que aumentará con el tiempo.</translation>
+        <translation type="unfinished">Al menos %1 GB de información será almacenado en este directorio, y seguirá creciendo a través del tiempo.</translation>
     </message>
     <message>
         <source>Approximately %1 GB of data will be stored in this directory.</source>
-        <translation type="unfinished">Se almacenará aproximadamente %1 GB de información en este directorio.</translation>
+        <translation type="unfinished">Aproximadamente %1 GB de información será almacenado en este directorio.</translation>
     </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
@@ -1374,27 +1358,27 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation type="unfinished">%1 descargará y almacenará una copia de la cadena de bloques de Bitcoin.</translation>
+        <translation type="unfinished">%1 descargará y almacenará una copia del blockchain de Bitcoin.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
-        <translation type="unfinished">La billetera también se almacenará en este directorio.</translation>
+        <translation type="unfinished">El monedero también será almacenado en este directorio.</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation type="unfinished">Error: No se puede crear el directorio de datos especificado "%1" .</translation>
+        <translation type="unfinished">Error: El directorio de datos especificado "%1" no pudo ser creado.</translation>
     </message>
     <message>
         <source>Welcome</source>
-        <translation type="unfinished">Te damos la bienvenida</translation>
+        <translation type="unfinished">bienvenido</translation>
     </message>
     <message>
         <source>Welcome to %1.</source>
-        <translation type="unfinished">Te damos la bienvenida a %1.</translation>
+        <translation type="unfinished">Bienvenido a %1.</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
-        <translation type="unfinished">Como es la primera vez que se ejecuta el programa, puedes elegir dónde %1 almacenará los datos.</translation>
+        <translation type="unfinished">Al ser la primera vez que se ejecuta el programa, puede elegir donde %1 almacenará sus datos.</translation>
     </message>
     <message>
         <source>Limit block chain storage to</source>
@@ -1402,15 +1386,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation type="unfinished">Para revertir esta configuración, se debe descargar de nuevo la cadena de bloques completa. Es más rápido descargar la cadena completa y podarla después. Desactiva algunas funciones avanzadas.</translation>
+        <translation type="unfinished">Revertir esta configuración requiere descargar la blockchain completa nuevamente. Es más rápido descargar la cadena completa  y podarla después. Desactiva algunas funciones avanzadas.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation type="unfinished">La sincronización inicial consume muchos recursos y es posible que exponga problemas de hardware en la computadora que anteriormente pasaron desapercibidos. Cada vez que ejecutes %1, seguirá descargando desde el punto en el que quedó.</translation>
-    </message>
-    <message>
-        <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2 GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
-        <translation type="unfinished">Al hacer clic en OK, %1 iniciará el proceso de descarga y procesará la cadena de bloques %4 completa (%2 GB), empezando con la transacción más antigua en %3 cuando %4 se ejecutó inicialmente.</translation>
+        <translation type="unfinished">El primer proceso de sincronización consume muchos recursos, y es posible que puedan ocurrir problemas de hardware que anteriormente no hayas notado. Cada vez que ejecutes %1 automáticamente se reiniciará el proceso de sincronización desde el punto que lo dejaste anteriormente.</translation>
     </message>
     <message>
         <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2 GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
@@ -1418,7 +1398,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation type="unfinished">Si elegiste la opción de limitar el almacenamiento de la cadena de bloques (podado), los datos históricos se deben descargar y procesar de igual manera, pero se eliminarán después para disminuir el uso del disco.</translation>
+        <translation type="unfinished">Si elegiste la opción de limitar el tamaño del blockchain (pruning), de igual manera será descargada y procesada la información histórica, pero será eliminada al finalizar este proceso para disminuir el uso del disco duro.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1426,7 +1406,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Use a custom data directory:</source>
-        <translation type="unfinished">Usar un directorio de datos personalizado:</translation>
+        <translation type="unfinished">usar un directorio de datos personalizado:</translation>
     </message>
 </context>
 <context>
@@ -1437,18 +1417,18 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished">Acerca de %1</translation>
+        <translation type="unfinished">Sobre %1</translation>
     </message>
     <message>
         <source>Command-line options</source>
-        <translation type="unfinished">Opciones de línea de comandos</translation>
+        <translation type="unfinished">opciones de linea de comando</translation>
     </message>
 </context>
 <context>
     <name>ShutdownWindow</name>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">No apagues el equipo hasta que desaparezca esta ventana.</translation>
+        <translation type="unfinished">No apague el equipo hasta que desaparezca esta ventana.</translation>
     </message>
 </context>
 <context>
@@ -1459,11 +1439,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation type="unfinished">Es posible que las transacciones recientes aún no sean visibles y, por lo tanto, el saldo de la billetera podría ser incorrecto. Esta información será correcta una vez que la billetera haya terminado de sincronizarse con la red de Bitcoin, como se detalla abajo.</translation>
+        <translation type="unfinished">Las transacciones recientes aún no pueden ser visibles, y por lo tanto el saldo de su monedero podría ser incorrecto. Esta información será correcta cuando su monedero haya terminado de sincronizarse con la red de bitcoin, como se detalla abajo.</translation>
     </message>
     <message>
         <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation type="unfinished">La red no aceptará si se intenta gastar bitcoins afectados por las transacciones que aún no se muestran.</translation>
+        <translation type="unfinished">La red no aceptará el intentar gastar bitcoins que están afectados por transacciones aún no mostradas.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -3993,7 +3973,7 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
 </context>
 <context>
-    <name>SendConfirmationDialog</name>
+    <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
         <translation type="unfinished">&amp;Exportar</translation>

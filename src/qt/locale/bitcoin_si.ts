@@ -411,7 +411,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>දෝෂයකි</translation>
+        <translation type="unfinished">දෝෂයකි</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -1067,17 +1067,6 @@
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished">තත්වය</translation>
-    </message>
     <message>
         <source>Status</source>
         <translation type="unfinished">තත්වය</translation>

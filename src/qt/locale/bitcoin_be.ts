@@ -125,10 +125,6 @@
         <translation type="unfinished">Паказаць кодавую фразу</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">Паказаць кодавую фразу</translation>
-    </message>
-    <message>
         <source>Encrypt wallet</source>
         <translation type="unfinished">Зашыфраваць гаманец.</translation>
     </message>

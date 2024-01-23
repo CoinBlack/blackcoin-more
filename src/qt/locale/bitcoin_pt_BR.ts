@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Create a new address</source>
-        <translation type="unfinished">Criar um novo endereço.</translation>
+        <translation type="unfinished">Criar um novo endereço</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -459,24 +459,8 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
         <translation type="unfinished">&amp;Criptografar Carteira...</translation>
     </message>
     <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Criptografar Carteira...</translation>
-    </message>
-    <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation type="unfinished">Criptografar as chaves privadas que pertencem à sua carteira</translation>
-    </message>
-    <message>
-        <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">Fazer &amp;Backup da Carteira...</translation>
-    </message>
-    <message>
-        <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Mudar frase de segurança...</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">Assinar &amp;mensagem</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
@@ -584,10 +568,6 @@ Só é possível assinar com endereços do tipo 'legado'.</translation>
     <message>
         <source>%1 behind</source>
         <translation type="unfinished">%1 atrás</translation>
-    </message>
-    <message>
-        <source>Catching up…</source>
-        <translation type="unfinished">Recuperando o atraso...</translation>
     </message>
     <message>
         <source>Catching up…</source>

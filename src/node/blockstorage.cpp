@@ -987,16 +987,6 @@ void ImportBlocks(ChainstateManager& chainman, std::vector<fs::path> vImportFile
             LogPrintf("Reindexing finished\n");
             // To avoid ending up in a situation without genesis block, re-try initializing (no-op if reindexing worked):
             chainman.ActiveChainstate().LoadGenesisBlock();
-
-/*
-// TEMP: Blackcoin ToDo: enable/disable!
-#ifdef ENABLE_WALLET
-            // Clean not reverted coinstake transactions
-            for (const std::shared_ptr<CWallet>& pwallet : GetWallets()) {
-                pwallet->CleanCoinStake();
-            }
-#endif
-*/
         }
 
         // -loadblock=

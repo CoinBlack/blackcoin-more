@@ -2,16 +2,8 @@
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Right-click to edit address or label</translation>
-    </message>
-    <message>
         <source>Create a new address</source>
         <translation type="unfinished">Crea novam inscriptionem</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="unfinished">&amp;Novus</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -102,10 +94,6 @@
     <message>
         <source>Repeat new passphrase</source>
         <translation type="unfinished">Itera novam tesseram</translation>
-    </message>
-    <message>
-        <source>Show passphrase</source>
-        <translation type="unfinished">Ostende tesseram</translation>
     </message>
     <message>
         <source>Show passphrase</source>

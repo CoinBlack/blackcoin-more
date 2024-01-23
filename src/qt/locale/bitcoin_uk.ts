@@ -265,9 +265,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Runaway exception</source>
         <translation type="unfinished">Небажана виняткова ситуація</translation>
     </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Сталася фатальна помилка. %1 більше не може продовжувати безпечно і завершить роботу.</translation>
@@ -756,7 +753,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Mask values</source>
-        <translation type="unfinished">При&amp;ховати значення</translation>
+        <translation type="unfinished">&amp;Приховати значення</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
@@ -1258,7 +1255,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <source>Wallet Name</source>
-        <translation type="unfinished">Назва гаманця</translation>
+        <translation type="unfinished">Назва Гаманця</translation>
     </message>
     <message>
         <source>Wallet</source>

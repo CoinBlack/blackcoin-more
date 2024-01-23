@@ -537,25 +537,7 @@
     </message>
 </context>
 <context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>%1 is shutting down…</source>
-        <translation type="unfinished">%1 กำลังถูกปิดลง…</translation>
-    </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">อย่าปิดเครื่องคอมพิวเตอร์จนกว่าหน้าต่างนี้จะหายไป</translation>
-    </message>
-</context>
-<context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">อย่าปิดเครื่องคอมพิวเตอร์จนกว่าหน้าต่างนี้จะหายไป</translation>
-    </message>
-</context>
-<context>
-    <name>HelpMessageDialog</name>
+    <name>ModalOverlay</name>
     <message>
         <source>Form</source>
         <translation type="unfinished">รูปแบบ</translation>

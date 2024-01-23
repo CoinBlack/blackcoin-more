@@ -139,9 +139,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Encrypt wallet</source>
         <translation type="unfinished">&amp;Κρυπτογράφηση πορτοφολιού</translation>
     </message>
-</context>
-<context>
-    <name>TransactionDesc</name>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation type="unfinished">Αυτή η ενέργεια χρειάζεται τη φράση πρόσβασης του πορτοφολιού για να το ξεκλειδώσει.</translation>

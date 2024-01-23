@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;Izvezite</translation>
+        <translation type="unfinished">&amp;Izvozi</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Izbrišite</translation>
+        <translation type="unfinished">Iz&amp;brišite</translation>
     </message>
     <message>
         <source>Choose the address to send coins to</source>

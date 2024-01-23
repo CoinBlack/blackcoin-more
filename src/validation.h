@@ -356,9 +356,6 @@ static_assert(std::is_nothrow_destructible_v<CScriptCheck>);
 
 /** Functions for validating blocks and updating the block tree */
 
-/** Sign proof-of-stake block */
-bool SignBlock(CBlock& block, const CWallet& keystore);
-
 /** Context-independent validity checks */
 bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensus::Params& consensusParams, Chainstate& chainstate, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
 bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock);
@@ -890,7 +887,6 @@ private:
         BlockValidationState& state,
         CBlockIndex** ppindex,
         bool min_pow_checked,
-        bool fProofOfStake,
         bool fOldClient = false) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
     friend Chainstate;
 

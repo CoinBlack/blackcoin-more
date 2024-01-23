@@ -506,45 +506,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         </translation>
     </message>
     <message>
-        <source>Synchronizing with network…</source>
-        <translation type="unfinished">Sarearekin sinkronizatzen...</translation>
-    </message>
-    <message>
-        <source>Indexing blocks on disk…</source>
-        <translation type="unfinished">Diskoko blokeak indexatzen...</translation>
-    </message>
-    <message>
-        <source>Processing blocks on disk…</source>
-        <translation type="unfinished">Diskoko blokeak prozesatzen...</translation>
-    </message>
-    <message>
-        <source>Reindexing blocks on disk…</source>
-        <translation type="unfinished">Diskoko blokeak berzerrendatzen</translation>
-    </message>
-    <message>
-        <source>Connecting to peers…</source>
-        <translation type="unfinished">Pareekin konektatzen...</translation>
-    </message>
-    <message>
-        <source>Show the list of used sending addresses and labels</source>
-        <translation type="unfinished"> Bidalketa-helbideen eta etiketen zerrenda erakutsi</translation>
-    </message>
-    <message>
-        <source>Show the list of used receiving addresses and labels</source>
-        <translation type="unfinished">Harrera-helbideen eta etiketen zerrenda erakutsi</translation>
-    </message>
-    <message>
-        <source>&amp;Command-line options</source>
-        <translation type="unfinished">&amp;Komando-lerroaren aukerak</translation>
-    </message>
-    <message numerus="yes">
-        <source>Processed %n block(s) of transaction history.</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message>
         <source>%1 behind</source>
         <translation type="unfinished">%1 atzetik</translation>
     </message>
@@ -561,28 +522,12 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Honen ondorengo transakzioak oraindik ez daude ikusgai.</translation>
     </message>
     <message>
-        <source>Catching up…</source>
-        <translation type="unfinished">Harrapatzen...</translation>
-    </message>
-    <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Jasotako azken blokea duela %1 sortu zen.</translation>
-    </message>
-    <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Honen ondorengo transakzioak oraindik ez daude ikusgai.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation type="unfinished">Akatsa</translation>
     </message>
     <message>
         <source>Warning</source>
         <translation type="unfinished">Abisua</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Abisua</translation>
     </message>
     <message>
         <source>Information</source>
@@ -737,18 +682,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message>
         <source>Incoming transaction</source>
         <translation type="unfinished">Sartutako transakzioa</translation>
-    </message>
-    <message>
-        <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
-        <translation type="unfinished">HD gakoaren sorrera &lt;b&gt;gaituta&lt;/b&gt; dago</translation>
-    </message>
-    <message>
-        <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">HD gakoaren sorrera &lt;b&gt;desgaituta&lt;/b&gt; dago</translation>
-    </message>
-    <message>
-        <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">Gako pribatua &lt;b&gt;desgaitua&lt;/b&gt;</translation>
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
@@ -1051,31 +984,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
 </context>
 <context>
     <name>Intro</name>
-    <message>
-        <source>%1 GB of space available</source>
-        <translation type="unfinished">%1 GB-ko espazioa eskuragarri</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n GB of space available</source>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>(of %n GB needed)</source>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>(%n GB needed for full chain)</source>
-        <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
@@ -1282,10 +1190,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Erabiltzaile-interfazearen &amp;hizkuntza:</translation>
     </message>
     <message>
-        <source>User Interface &amp;language:</source>
-        <translation>Erabiltzaile-interfazearen &amp;hizkuntza:</translation>
-    </message>
-    <message>
         <source>&amp;Unit to show amounts in:</source>
         <translation type="unfinished">Zenbatekoa azaltzeko &amp;unitatea:</translation>
     </message>
@@ -1300,10 +1204,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message>
         <source>default</source>
         <translation type="unfinished">lehenetsi</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>lehenetsi</translation>
     </message>
     <message>
         <source>none</source>
@@ -1338,14 +1238,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message>
         <source>Form</source>
         <translation type="unfinished">Inprimakia</translation>
-    </message>
-    <message>
-        <source>Watch-only:</source>
-        <translation type="unfinished">Ikusi-bakarrik:</translation>
-    </message>
-    <message>
-        <source>Available:</source>
-        <translation type="unfinished">Eskuragarri:</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1662,11 +1554,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">Ezin da diruzorroa desblokeatu.</translation>
     </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>zenbatekoaren kopia</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -1987,13 +1875,6 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>abandoned</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an abandoned transaction.</extracomment>

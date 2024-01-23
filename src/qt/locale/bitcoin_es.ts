@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">Es nuevo</translation>
+        <translation type="unfinished">&amp;Nuevo</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
@@ -694,7 +694,7 @@ La firma sólo es posible con direcciones del tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">Ocultar los valores de la ventana de previsualización</translation>
+        <translation type="unfinished">Esconder los valores de la ventana de previsualización</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -1100,12 +1100,12 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>default wallet</source>
-        <translation type="unfinished">monedero predeterminado</translation>
+        <translation type="unfinished">Monedero predeterminado</translation>
     </message>
     <message>
         <source>Open Wallet</source>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
-        <translation type="unfinished">Abrir monedero</translation>
+        <translation type="unfinished">Abrir Monedero</translation>
     </message>
     <message>
         <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -1180,7 +1180,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Wallet Name</source>
-        <translation type="unfinished">Nombre del monedero</translation>
+        <translation type="unfinished">Nombre del Monedero</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1991,7 +1991,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Unknown error processing transaction.</source>
-        <translation type="unfinished">Error desconocido al procesar la transacción</translation>
+        <translation type="unfinished">Error desconocido al procesar la transacción.</translation>
     </message>
     <message>
         <source>Transaction broadcast successfully! Transaction ID: %1</source>

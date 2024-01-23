@@ -238,13 +238,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Неуправляемое исключение</translation>
     </message>
     <message>
-        <source>Runaway exception</source>
-        <translation type="unfinished">Неуправляемое исключение</translation>
-    </message>
-</context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
-    <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished">Произошла критическая ошибка. %1 больше не может продолжать безопасную работу и будет закрыт.
  </translation>
@@ -499,7 +492,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation type="unfinished">Создать резервную копию кошелька в другом местеexternal_signer_scriptpubkeyman.cpp</translation>
+        <translation type="unfinished">Создать резервную копию кошелька в другом месте</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -721,7 +714,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Показать справку %1 со списком доступных параметров командной строки</translation>
+        <translation type="unfinished">Показать помощь по %1, чтобы получить список доступных параметров командной строки</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -2413,6 +2406,10 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Службы</translation>
     </message>
     <message>
+        <source>High bandwidth BIP152 compact block relay: %1</source>
+        <translation type="unfinished">Широкополосный ретранслятор компактных блоков BIP152: %1</translation>
+    </message>
+    <message>
         <source>High Bandwidth</source>
         <translation type="unfinished">Широкая полоса</translation>
     </message>
@@ -3502,6 +3499,10 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>unknown</source>
         <translation type="unfinished">неизвестно</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished">Кому</translation>
     </message>
     <message>
         <source>own address</source>

@@ -580,7 +580,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <message>
         <location line="-852"/>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Request payments (generates QR codes and blackcoin: URIs)</translation>
+        <translation>Request payments (generates QR codes and blackcoin: URIs)</translation>
     </message>
     <message>
         <location line="+65"/>
@@ -653,7 +653,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <message>
         <location line="+26"/>
         <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">Load Partially Signed Blackcoin Transaction</translation>
+        <translation>Load Partially Signed Blackcoin Transaction</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -663,7 +663,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <message>
         <location line="+1"/>
         <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
-        <translation type="unfinished">Load Partially Signed Blackcoin Transaction from clipboard</translation>
+        <translation>Load Partially Signed Blackcoin Transaction from clipboard</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -688,7 +688,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <message>
         <location line="+4"/>
         <source>Open a bitcoin: URI</source>
-        <translation type="unfinished">Open a blackcoin: URI</translation>
+        <translation>Open a blackcoin: URI</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -736,11 +736,6 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <location line="+4"/>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
         <translation>Show the %1 help message to get a list with possible Blackcoin command-line options</translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>default wallet</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -825,7 +820,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <location line="+117"/>
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">
+        <translation>
             <numerusform>%n active connection to Blackcoin network.</numerusform>
             <numerusform>%n active connections to Blackcoin network.</numerusform>
         </translation>
@@ -1418,7 +1413,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <message>
         <location filename="../intro.cpp" line="+30"/>
         <source>Bitcoin</source>
-        <translation type="unfinished">Blackcoin</translation>
+        <translation>Blackcoin</translation>
     </message>
     <message numerus="yes">
         <location line="+162"/>
@@ -1647,12 +1642,7 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location filename="../forms/openuridialog.ui" line="+14"/>
         <source>Open bitcoin URI</source>
-        <translation type="unfinished">Open blackcoin URI</translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>bitcoin:</source>
-        <translation type="unfinished">blackcoin:</translation>
+        <translation>Open blackcoin URI</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -1907,7 +1897,7 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="+7"/>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
-        <translation type="unfinished">Automatically open the Blackcoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</translation>
+        <translation>Automatically open the Blackcoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2046,7 +2036,7 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="+300"/>
         <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor onion services.</source>
-        <translation type="unfinished">Connect to the Blackcoin network through a separate SOCKS5 proxy for Tor onion services.</translation>
+        <translation>Connect to the Blackcoin network through a separate SOCKS5 proxy for Tor onion services.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2448,7 +2438,7 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="+1"/>
         <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation type="unfinished">Cannot start blackcoin: click-to-pay handler</translation>
+        <translation>Cannot start blackcoin: click-to-pay handler</translation>
     </message>
     <message>
         <location line="+48"/>
@@ -2461,7 +2451,7 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="-29"/>
         <source>&apos;bitcoin://&apos; is not a valid URI. Use &apos;bitcoin:&apos; instead.</source>
-        <translation type="unfinished">&apos;blackcoin://&apos; is not a valid URI. Use &apos;blackcoin:&apos; instead.</translation>
+        <translation>&apos;blackcoin://&apos; is not a valid URI. Use &apos;blackcoin:&apos; instead.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2474,7 +2464,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     <message>
         <location line="-10"/>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation type="unfinished">URI cannot be parsed! This can be caused by an invalid Blackcoin address or malformed URI parameters.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
@@ -3947,7 +3937,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     <message>
         <location line="+35"/>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation type="unfinished">When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for blackcoin transactions than the network can process.</translation>
+        <translation>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for blackcoin transactions than the network can process.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4054,7 +4044,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     <message>
         <location line="+1"/>
         <source>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <translation type="unfinished">Creates a Partially Signed Blackcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+        <translation>Creates a Partially Signed Blackcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
     </message>
     <message>
         <location line="+92"/>
@@ -4129,7 +4119,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
         <location line="-31"/>
         <source>Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can only create a PSBT. This string is displayed when private keys are disabled and an external signer is not available.</extracomment>
-        <translation type="unfinished">Please, review your transaction proposal. This will produce a Partially Signed Blackcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+        <translation>Please, review your transaction proposal. This will produce a Partially Signed Blackcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
     </message>
     <message>
         <location line="-6"/>
@@ -4141,7 +4131,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
         <location line="+11"/>
         <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Bitcoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
-        <translation type="unfinished">Please, review your transaction. You can create and send this transaction or create a Partially Signed Blackcoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+        <translation>Please, review your transaction. You can create and send this transaction or create a Partially Signed Blackcoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4328,7 +4318,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     <message>
         <location line="+7"/>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>he fee will be deducted from the amount being sent. The recipient will receive less blackcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
+        <translation>The fee will be deducted from the amount being sent. The recipient will receive less blackcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4704,12 +4694,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
         <location line="+12"/>
         <location line="+54"/>
         <location line="+30"/>
-        <location line="+68"/>
+        <location line="+60"/>
         <source>Credit</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="-162"/>
+        <location line="-154"/>
         <source>matures in %n more block(s)</source>
         <translation>
             <numerusform>matures in %n more block</numerusform>
@@ -4724,12 +4714,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     <message>
         <location line="+60"/>
         <location line="+26"/>
-        <location line="+71"/>
+        <location line="+63"/>
         <source>Debit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-87"/>
+        <location line="-79"/>
         <source>Total debit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5390,7 +5380,7 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <location line="+1"/>
         <source>%s corrupt. Try using the wallet tool bitcoin-wallet to salvage or restoring a backup.</source>
-        <translation type="unfinished">%s corrupt. Try using the wallet tool blackcoin-wallet to salvage or restoring a backup.</translation>
+        <translation>%s corrupt. Try using the wallet tool blackcoin-wallet to salvage or restoring a backup.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -5450,7 +5440,7 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <location line="+2"/>
         <source>Error: Dumpfile version is not supported. This version of bitcoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
-        <translation type="unfinished">Error: Dumpfile version is not supported. This version of blackcoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</translation>
+        <translation>Error: Dumpfile version is not supported. This version of blackcoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</translation>
     </message>
     <message>
         <location line="+6"/>

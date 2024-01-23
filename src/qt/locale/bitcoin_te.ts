@@ -192,14 +192,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ముఖ్యమైనది: మీరు మీ వాలెట్ ఫైల్‌తో చేసిన మునుపటి బ్యాకప్‌లను కొత్తగా రూపొందించిన, గుప్తీకరించిన వాలెట్ ఫైల్‌తో భర్తీ చేయాలి. భద్రతా కారణాల దృష్ట్యా, మీరు క్రొత్త, గుప్తీకరించిన వాలెట్ ఉపయోగించడం ప్రారంభించిన వెంటనే గుప్తీకరించని వాలెట్ ఫైల్ యొక్క మునుపటి బ్యాకప్‌లు నిరుపయోగంగా మారతాయి.</translation>
     </message>
     <message>
-        <source>Your wallet is now encrypted. </source>
-        <translation>mee yokka wallet encryption ayinadi</translation>
-    </message>
-    <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>ముఖ్యమైనది: మీరు మీ వాలెట్ ఫైల్‌తో చేసిన మునుపటి బ్యాకప్‌లను కొత్తగా రూపొందించిన, గుప్తీకరించిన వాలెట్ ఫైల్‌తో భర్తీ చేయాలి. భద్రతా కారణాల దృష్ట్యా, మీరు క్రొత్త, గుప్తీకరించిన వాలెట్ ఉపయోగించడం ప్రారంభించిన వెంటనే గుప్తీకరించని వాలెట్ ఫైల్ యొక్క మునుపటి బ్యాకప్‌లు నిరుపయోగంగా మారతాయి.</translation>
-    </message>
-    <message>
         <source>Wallet encryption failed</source>
         <translation type="unfinished">జోలె సంకేతపరచడం విఫలమయ్యింది</translation>
     </message>
@@ -466,55 +458,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
         <translation type="unfinished">వాలెట్ గుప్తీకరణకు ఉపయోగించే పాస్‌ఫ్రేజ్‌ని మార్చండి</translation>
-    </message>
-    <message>
-        <source>Quit application</source>
-        <translation>అప్లికేషన్ నిష్క్రమణ </translation>
-    </message>
-    <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished">&amp;గురించి %1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">%1 గురించి సమాచారాన్ని చూపించు</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation>గురించి &amp; Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation>Qt గురించి సమాచారాన్ని చూపించు</translation>
-    </message>
-    <message>
-        <source>Modify configuration options for %1</source>
-        <translation type="unfinished">%1 కోసం కాన్ఫిగరేషన్ ఎంపికలను సవరించండి</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation type="unfinished">&lt;div&gt;&lt;/div&gt;</translation>
-    </message>
-    <message>
-        <source>Wallet:</source>
-        <translation type="unfinished">ధనమును తీసుకొనిపోవు సంచి</translation>
-    </message>
-    <message>
-        <source>Network activity disabled.</source>
-        <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">నెట్‌వర్క్ కార్యాచరణ నిలిపివేయబడింది.</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>బిట్‌కాయిన్ చిరునామాకు నాణేలను పంపండి</translation>
-    </message>
-    <message>
-        <source>Backup wallet to another location</source>
-        <translation>మరొక ప్రదేశానికి జోలెను బ్యాకప్ చెయండి</translation>
-    </message>
-    <message>
-        <source>Change the passphrase used for wallet encryption</source>
-        <translation>వాలెట్ గుప్తీకరణకు ఉపయోగించే పాస్‌ఫ్రేజ్‌ని మార్చండి</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -1289,55 +1232,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Bitcoin</source>
         <translation type="unfinished">బిట్కోయిన్</translation>
-    </message>
-    <message>
-        <source>%1 GB of space available</source>
-        <translation type="unfinished">%1 GB స్థలం అందుబాటులో ఉంది</translation>
-    </message>
-    <message>
-        <source>(of %1 GB needed)</source>
-        <translation type="unfinished">(అవసరమైన %1 GB)</translation>
-    </message>
-    <message>
-        <source>(%1 GB needed for full chain)</source>
-        <translation type="unfinished">(పూర్తి గొలుసు కోసం %1 GB అవసరం)</translation>
-    </message>
-    <message>
-        <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation type="unfinished">ఈ డైరెక్టరీలో కనీసం %1 GB డేటా నిల్వ చేయబడుతుంది మరియు ఇది కాలక్రమేణా పెరుగుతుంది.</translation>
-    </message>
-    <message>
-        <source>Approximately %1 GB of data will be stored in this directory.</source>
-        <translation type="unfinished">ఈ డైరెక్టరీలో సుమారు %1 GB డేటా నిల్వ చేయబడుతుంది.</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n GB of space available</source>
-        <translation type="unfinished">
-            <numerusform>%n GB స్థలం అందుబాటులో ఉంది</numerusform>
-            <numerusform>%n GB స్థలం అందుబాటులో ఉంది</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>(of %n GB needed)</source>
-        <translation type="unfinished">
-            <numerusform>(అవసరమైన %n GB)</numerusform>
-            <numerusform>(అవసరమైన %n GB)</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>(%n GB needed for full chain)</source>
-        <translation type="unfinished">
-            <numerusform>(పూర్తి గొలుసు కోసం %n GB అవసరం)</numerusform>
-            <numerusform>(పూర్తి గొలుసు కోసం %n GB అవసరం)</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation type="unfinished">ఈ డైరెక్టరీలో కనీసం %1 GB డేటా నిల్వ చేయబడుతుంది మరియు ఇది కాలక్రమేణా పెరుగుతుంది.</translation>
-    </message>
-    <message>
-        <source>Approximately %1 GB of data will be stored in this directory.</source>
-        <translation type="unfinished">ఈ డైరెక్టరీలో సుమారు %1 GB డేటా నిల్వ చేయబడుతుంది.</translation>
     </message>
     <message numerus="yes">
         <source>%n GB of space available</source>
@@ -2501,13 +2395,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Status</source>
         <translation type="unfinished">స్థితి</translation>

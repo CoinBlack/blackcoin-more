@@ -22,6 +22,10 @@
         <translation type="unfinished">&amp;ڕوونووس</translation>
     </message>
     <message>
+        <source>C&amp;lose</source>
+        <translation type="unfinished">C&amp;داخستن</translation>
+    </message>
+    <message>
         <source>Delete the currently selected address from the list</source>
         <translation type="unfinished">سڕینەوەی ناونیشانی هەڵبژێردراوی ئێستا لە لیستەکە</translation>
     </message>
@@ -52,36 +56,6 @@
     <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">&amp;هەڵبژێرە</translation>
-    </message>
-    <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">ئەمانە ناونیشانی بیتکۆبیتەکانی تۆنە بۆ ناردنی پارەدانەکان. هەمیشە بڕی و ناونیشانی وەرگرەکان بپشکنە پێش ناردنی دراوەکان.</translation>
-    </message>
-    <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">ئەمانە ناونیشانی بیتکۆبیتەکانی تۆنە بۆ وەرگرتنی پارەدانەکان. دوگمەی 'دروستکردنیناونیشانی وەرگرتنی نوێ' لە تابی وەرگرتندا بۆ دروستکردنی ناونیشانی نوێ بەکاربێنە.
-واژووکردن تەنها دەکرێت لەگەڵ ناونیشانەکانی جۆری 'میرات'.</translation>
-    </message>
-    <message>
-        <source>Choose the address to send coins to</source>
-        <translation type="unfinished">ناونیشانەکە هەڵبژێرە بۆ ناردنی دراوەکان بۆ</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation type="unfinished">ناونیشانەکە هەڵبژێرە بۆ وەرگرتنی دراوەکان لەگەڵ</translation>
-    </message>
-    <message>
-        <source>C&amp;hoose</source>
-        <translation type="unfinished">&amp;هەڵبژێرە</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation type="unfinished">ناردنی ناونیشانەکان</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation type="unfinished">وەرگرتنی ناونیشانەکان</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
@@ -203,6 +177,9 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation type="unfinished">گرنگ: هەر پاڵپشتێکی پێشووت دروست کردووە لە فایلی جزدانەکەت دەبێت جێگۆڕکێی پێ بکرێت لەگەڵ فایلی جزدانی نهێنی تازە دروستکراو. لەبەر هۆکاری پاراستن، پاڵپشتەکانی پێشووی فایلی جزدانێکی نهێنی نەکراو بێ سوود دەبن هەر کە دەستت کرد بە بەکارهێنانی جزدانی نوێی کۆدکراو.</translation>
     </message>
+    </context>
+<context>
+    <name>QObject</name>
     <message>
         <source>Amount</source>
         <translation type="unfinished">سەرجەم</translation>
@@ -501,17 +478,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
         <translation type="unfinished">تۆڕ</translation>
     </message>
-    <message>
-        <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
-        <translation type="unfinished">جۆر</translation>
-    </message>
-    <message>
-        <source>Network</source>
-        <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
-        <translation type="unfinished">تۆڕ</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QRImageWidget</name>
     <message>
@@ -620,23 +587,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Remove</source>
         <translation type="unfinished">سڕینەوە</translation>
     </message>
-    <message>
-        <source>Copy URI</source>
-        <translation>Copy URI</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Copy label</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Copy message</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Copy amount</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -747,13 +698,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Status</source>
         <translation type="unfinished">بارودۆخ</translation>

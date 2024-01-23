@@ -565,7 +565,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation>ប្រត្តិបត្តិការបន្ទាប់ពីនេះ នឹងមិនអាចទាន់មើលឃើញនៅឡើយទេ។</translation>
+        <translation type="unfinished">ប្រត្តិបត្តិការបន្ទាប់ពីនេះ នឹងមិនអាចទាន់មើលឃើញនៅឡើយទេ។</translation>
     </message>
     <message>
         <source>Error</source>
@@ -672,14 +672,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>S&amp;how</source>
         <translation type="unfinished">របៀប(&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Hide</source>
-        <translation type="unfinished">&amp;លាក់</translation>
-    </message>
-    <message>
-        <source>S&amp;how</source>
-        <translation type="unfinished">S&amp;របៀប</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
@@ -1186,25 +1178,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Use a custom data directory:</source>
         <translation type="unfinished">ប្រើទីតាំងផ្ទុកទិន្នន័យ ដែលមានការជ្រើសរើសមួយៈ</translation>
-    </message>
-</context>
-<context>
-    <name>HelpMessageDialog</name>
-    <message>
-        <source>version</source>
-        <translation type="unfinished">ជំនាន់</translation>
-    </message>
-    <message>
-        <source>Welcome</source>
-        <translation>សូមស្វាគមន៏</translation>
-    </message>
-    <message>
-        <source>Use the default data directory</source>
-        <translation>ប្រើទីតាំងផ្ទុកទិន្នន័យដែលបានកំណត់រួច</translation>
-    </message>
-    <message>
-        <source>Use a custom data directory:</source>
-        <translation>ប្រើទីតាំងផ្ទុកទិន្នន័យ ដែលមានការជ្រើសរើសមួយៈ</translation>
     </message>
 </context>
 <context>

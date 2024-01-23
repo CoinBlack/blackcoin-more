@@ -696,10 +696,6 @@
         <source>Welcome</source>
         <translation type="unfinished">Croeso</translation>
     </message>
-    <message>
-        <source>Welcome</source>
-        <translation>Croeso</translation>
-    </message>
     </context>
 <context>
     <name>ModalOverlay</name>
@@ -913,16 +909,6 @@
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
-        </translation>
-    </message>
     <message>
         <source>Date</source>
         <translation type="unfinished">Dyddiad</translation>
