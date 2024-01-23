@@ -588,7 +588,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager& chainman)
 
 #ifdef ENABLE_WALLET
 // qtum
-bool SleepStaker(wallet::CWallet *pwallet, uint64_t milliseconds) {
+bool SleepStaker(CWallet *pwallet, uint64_t milliseconds) {
     uint64_t seconds = milliseconds / 1000;
     milliseconds %= 1000;
 
@@ -656,7 +656,7 @@ bool SignBlock(CBlock& block, const CWallet& keystore)
 }
 
 // peercoin
-void PoSMiner(wallet::CWallet *pwallet)
+void PoSMiner(CWallet *pwallet)
 {
     pwallet->WalletLogPrintf("PoSMiner started for proof-of-stake\n");
     util::ThreadRename(strprintf("blackcoin-stake-miner-%s", pwallet->GetName()));
@@ -781,7 +781,7 @@ void PoSMiner(wallet::CWallet *pwallet)
 }
 
 // peercoin: stake miner thread
-void static ThreadStakeMiner(wallet::CWallet *pwallet)
+void static ThreadStakeMiner(CWallet *pwallet)
 {
     pwallet->WalletLogPrintf("ThreadStakeMiner started\n");
     while (true) {
@@ -799,7 +799,7 @@ void static ThreadStakeMiner(wallet::CWallet *pwallet)
 }
 
 // qtum
-void StakeCoins(bool fStake, wallet::CWallet *pwallet, std::unique_ptr<std::vector<std::thread>>& threadStakeMinerGroup)
+void StakeCoins(bool fStake, CWallet *pwallet, std::unique_ptr<std::vector<std::thread>>& threadStakeMinerGroup)
 {
     // If threadStakeMinerGroup is initialized join all threads and clear the vector
     if (threadStakeMinerGroup) {
