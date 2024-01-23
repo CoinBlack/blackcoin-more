@@ -348,9 +348,6 @@ public:
 
 /** Functions for validating blocks and updating the block tree */
 
-/** Sign proof-of-stake block */
-bool SignBlock(CBlock& block, const CWallet& keystore);
-
 /** Context-independent validity checks */
 bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensus::Params& consensusParams, Chainstate& chainstate, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
 bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock);
