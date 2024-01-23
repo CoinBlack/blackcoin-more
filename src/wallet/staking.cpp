@@ -290,10 +290,6 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
-        if (!g_txindex) {
-            return error("tx index not available!");
-        }
-
         uint256 blockHash;
         CTransactionRef tx;
         if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
@@ -411,10 +407,6 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
-        if (!g_txindex) {
-            return error("tx index not available!");
-        }
-
         uint256 blockHash;
         CTransactionRef tx;
         if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
