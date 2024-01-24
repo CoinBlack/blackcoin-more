@@ -1,5 +1,12 @@
 # Changelog
 
+## v25.1.0-alpha-3 (2024-01-24)
+- Set mainnet hard fork date to April 24, 2024
+- Use virtual transaction size in minimum fee calculation
+- Fixed a bug with header syncing between More 25.1 nodes
+- Enabled flushing of orphaned stakes also on wallet start
+- Enabled staking with P2WPKH inputs
+
 ## v25.1.0-alpha-2 (2023-11-24)
 - Fixed a bug with segfault on wallet close when staking is enabled
 - Added full support for descriptor wallets, including staking
