@@ -23,6 +23,10 @@
 ## v22.1.0-alpha-1 (2023-01-20)
 - Updated to Bitcoin Core 22.1
 
+## v13.2.2 (2024-01-24)
+- Set mainnet hard fork date to April 24, 2024
+- Adjusted minimum fee calculations
+
 ## v13.2.1 (2023-07-04)
 - Reduced the minimum fee after a fork
 - Fixed a bug in the derivation of TxTime that could potentially lead to unplanned hard forks
