@@ -89,7 +89,6 @@ BASE_SCRIPTS = [
     # Scripts that are run by default.
     # Longest test should go first, to favor running tests in parallel
     # vv Tests less than 5m vv
-    'feature_fee_estimation.py',
     'feature_taproot.py',
     'feature_block.py',
     # vv Tests less than 2m vv
