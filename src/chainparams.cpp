@@ -117,7 +117,7 @@ public:
         consensus.nCoinbaseMaturity = 500;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000003d0c8be7da303f59236");
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000416ebe78f593ec11fb2"); // block 4791500
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -220,7 +220,7 @@ public:
         nDefaultPort = 25714;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000003aaf405e01eda716e7");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000478d1e3e759bd0f7e2"); // block 1720482  
 
         nPruneAfterHeight = 1000;
 
@@ -229,7 +229,6 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
         assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
 
-        vFixedSeeds.clear();
         vSeeds.clear();
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
@@ -297,7 +296,7 @@ public:
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
-        consensus.nProtocolV3_1Time = 4102437600;
+        consensus.nProtocolV3_1Time = 1713938400;
         consensus.nLastPOWBlock = 1000;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
