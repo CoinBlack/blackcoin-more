@@ -168,10 +168,6 @@ class BlockchainTest(BitcoinTestFramework):
             expected_msg='Error: Invalid name (name@2) for -testactivationheight=name@height.',
         )
         self.nodes[0].assert_start_raises_init_error(
-            extra_args=['-testactivationheight=bip34@-2'],
-            expected_msg='Error: Invalid height value (bip34@-2) for -testactivationheight=name@height.',
-        )
-        self.nodes[0].assert_start_raises_init_error(
             extra_args=['-testactivationheight='],
             expected_msg='Error: Invalid format () for -testactivationheight=name@height.',
         )
@@ -198,9 +194,6 @@ class BlockchainTest(BitcoinTestFramework):
           "hash": blockhash,
           "height": height,
           "deployments": {
-            'bip34': {'type': 'buried', 'active': True, 'height': 2},
-            'bip66': {'type': 'buried', 'active': True, 'height': 3},
-            'bip65': {'type': 'buried', 'active': True, 'height': 4},
             'csv': {'type': 'buried', 'active': True, 'height': 5},
             'segwit': {'type': 'buried', 'active': True, 'height': 6},
             'testdummy': {
@@ -247,9 +240,6 @@ class BlockchainTest(BitcoinTestFramework):
         self.log.info("Test getdeploymentinfo")
         self.stop_node(0)
         self.start_node(0, extra_args=[
-            '-testactivationheight=bip34@2',
-            '-testactivationheight=dersig@3',
-            '-testactivationheight=cltv@4',
             '-testactivationheight=csv@5',
             '-testactivationheight=segwit@6',
         ])

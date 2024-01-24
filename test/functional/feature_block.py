@@ -89,7 +89,6 @@ class FullBlockTest(BitcoinTestFramework):
         self.setup_clean_chain = True
         self.extra_args = [[
             '-acceptnonstdtxn=1',  # This is a consensus block test, we don't care about tx policy
-            '-testactivationheight=bip34@2',
         ]]
 
     def run_test(self):
