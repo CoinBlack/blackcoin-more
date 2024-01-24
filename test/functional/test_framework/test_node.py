@@ -2,7 +2,7 @@
 # Copyright (c) 2017-2022 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Class for bitcoind node under test"""
+"""Class for blackmored node under test"""
 
 import contextlib
 import decimal
@@ -52,7 +52,7 @@ class ErrorMatch(Enum):
 
 
 class TestNode():
-    """A class for representing a bitcoind node under test.
+    """A class for representing a blackmored node under test.
 
     This class contains:
 
@@ -93,7 +93,7 @@ class TestNode():
         self.extra_args = extra_args
         self.version = version
         # Configuration for logging is set as command-line args rather than in the blackmore.conf file.
-        # This means that starting a bitcoind using the temp dir to debug a failed test won't
+        # This means that starting a blackmored using the temp dir to debug a failed test won't
         # spam debug.log.
         self.args = [
             self.binary,
@@ -145,18 +145,18 @@ class TestNode():
     AddressKeyPair = collections.namedtuple('AddressKeyPair', ['address', 'key'])
     PRIV_KEYS = [
             # address , privkey
-            AddressKeyPair('mjTkW3DjgyZck4KbiRusZsqTgaYTxdSz6z', 'cVpF924EspNh8KjYsfhgY96mmxvT6DgdWiTYMtMjuM74hJaU5psW'),
-            AddressKeyPair('msX6jQXvxiNhx3Q62PKeLPrhrqZQdSimTg', 'cUxsWyKyZ9MAQTaAhUQWJmBbSvHMwSmuv59KgxQV7oZQU3PXN3KE'),
-            AddressKeyPair('mnonCMyH9TmAsSj3M59DsbH8H63U3RKoFP', 'cTrh7dkEAeJd6b3MRX9bZK8eRmNqVCMH3LSUkE3dSFDyzjU38QxK'),
-            AddressKeyPair('mqJupas8Dt2uestQDvV2NH3RU8uZh2dqQR', 'cVuKKa7gbehEQvVq717hYcbE9Dqmq7KEBKqWgWrYBa2CKKrhtRim'),
-            AddressKeyPair('msYac7Rvd5ywm6pEmkjyxhbCDKqWsVeYws', 'cQDCBuKcjanpXDpCqacNSjYfxeQj8G6CAtH1Dsk3cXyqLNC4RPuh'),
-            AddressKeyPair('n2rnuUnwLgXqf9kk2kjvVm8R5BZK1yxQBi', 'cQakmfPSLSqKHyMFGwAqKHgWUiofJCagVGhiB4KCainaeCSxeyYq'),
-            AddressKeyPair('myzuPxRwsf3vvGzEuzPfK9Nf2RfwauwYe6', 'cQMpDLJwA8DBe9NcQbdoSb1BhmFxVjWD5gRyrLZCtpuF9Zi3a9RK'),
-            AddressKeyPair('mumwTaMtbxEPUswmLBBN3vM9oGRtGBrys8', 'cSXmRKXVcoouhNNVpcNKFfxsTsToY5pvB9DVsFksF1ENunTzRKsy'),
-            AddressKeyPair('mpV7aGShMkJCZgbW7F6iZgrvuPHjZjH9qg', 'cSoXt6tm3pqy43UMabY6eUTmR3eSUYFtB2iNQDGgb3VUnRsQys2k'),
-            AddressKeyPair('mq4fBNdckGtvY2mijd9am7DRsbRB4KjUkf', 'cN55daf1HotwBAgAKWVgDcoppmUNDtQSfb7XLutTLeAgVc3u8hik'),
-            AddressKeyPair('mpFAHDjX7KregM3rVotdXzQmkbwtbQEnZ6', 'cT7qK7g1wkYEMvKowd2ZrX1E5f6JQ7TM246UfqbCiyF7kZhorpX3'),
-            AddressKeyPair('mzRe8QZMfGi58KyWCse2exxEFry2sfF2Y7', 'cPiRWE8KMjTRxH1MWkPerhfoHFn5iHPWVK5aPqjW8NxmdwenFinJ'),
+            AddressKeyPair('n18ASoXw1NsS1V6haDgbD6HqHuwRtzogdj', 'cQk881xWiWoTLJW4gxcfDAExKRJuP7o47CmcxSyGjdCvuL7ymqgh'),
+            AddressKeyPair('mx9tGnWU8UPtZUQcagEvKXfKjeDPoh5yyv', 'cVnWNMMWVTbPgM2R9voBhvhg1yN2VxHiKqWzSSCy4LRt9z98UjXy'),
+            AddressKeyPair('n3mZzFEY1C5H189FMyYDrNpxXyFTuyRYZk', 'cTXwZr3KjLXQj73fqZoWCEkUaKU2f8NNyp9guzK89agTGVdzK4u5'),
+            AddressKeyPair('msmWBZ1hPuEdX5fdsjxTvAWt7Q1YdYT7Z1', 'cQokzTF4tDr5PrtGRwNFESrzyVrurckeaQ3cRiBR2PE4PcUrUfTP'),
+            AddressKeyPair('msGJLwci2NKw451UfJG1XZBiDQeGhxn6TQ', 'cRdeLf4UvVYSNztVS4THRsEkrh9GRitJ8vTESY952dvx8FUrfb7d'),
+            AddressKeyPair('mshXxc9tEE8sPTN1yYUaHFMYptHJqCzp5t', 'cVmTcwKHNjuLyxGE3cFqGo9g3ZkhS33xTEUMZrxmbx5Jhi6uzNFr'),
+            AddressKeyPair('n2FpUtNKH3bc9j69Pph5LXfAygHJNGt3vY', 'cMiN4gCMCbQxLzUR3AKxwf9NkcRNerkPQR15TF2Mh35kSyc4WuR6'),
+            AddressKeyPair('mnTsxGdyKvCZ5hxkzKSg9pe4qL5H88ZeNV', 'cRiv2Kmf1f8grsJHgM62WTDq6h8e6ZbdM9RyS68k2oK8T2x7Tt5S'),
+            AddressKeyPair('mkSKAXEXFQ5CdwMoySnqj6HcPKjKGGfucF', 'cQdcXeF3p2FcRBcvBATATGpyqKmNt38vnnHqXGm4R4mQDTWkBo8B'),
+            AddressKeyPair('n1MkcJjY4PJfihS6MA6vkzhXfK5dqCqNvW', 'cQaMQVDGAjbZRgk9RLRfdjzxT6dyudBHeAdgStwA52cUUTv8bmRB'),
+            AddressKeyPair('mtpLVGoA9ZkBzG5QV23AJHgxCQPuzKZZjD', 'cUBcvPXN63wvxevXXAKmtpu3FX6XjK3qCRftNr2PA6mPiwV69mei'),
+            AddressKeyPair('mvYBNPDBDQ2AEN3Hyw18255XL5RiXpRAC7', 'cVyBEdwQ5ZpXhE31SfXEuTfcWN58RqEdvAQp53E8164rnmmkvbNd'),
     ]
 
     def get_deterministic_priv_key(self):
@@ -173,7 +173,7 @@ class TestNode():
         raise AssertionError(self._node_msg(msg))
 
     def __del__(self):
-        # Ensure that we don't leave any bitcoind processes lying around after
+        # Ensure that we don't leave any blackmored processes lying around after
         # the test ends
         if self.process and self.cleanup_on_exit:
             # Should only happen on test failure
@@ -195,7 +195,7 @@ class TestNode():
         if extra_args is None:
             extra_args = self.extra_args
 
-        # Add a new stdout and stderr file each time bitcoind is started
+        # Add a new stdout and stderr file each time blackmored is started
         if stderr is None:
             stderr = tempfile.NamedTemporaryFile(dir=self.stderr_dir, delete=False)
         if stdout is None:
@@ -207,7 +207,7 @@ class TestNode():
             cwd = self.cwd
 
         # Delete any existing cookie file -- if such a file exists (eg due to
-        # unclean shutdown), it will get overwritten anyway by bitcoind, and
+        # unclean shutdown), it will get overwritten anyway by blackmored, and
         # potentially interfere with our attempt to authenticate
         delete_cookie_file(self.datadir, self.chain)
 
@@ -217,19 +217,19 @@ class TestNode():
         self.process = subprocess.Popen(self.args + extra_args, env=subp_env, stdout=stdout, stderr=stderr, cwd=cwd, **kwargs)
 
         self.running = True
-        self.log.debug("bitcoind started, waiting for RPC to come up")
+        self.log.debug("blackmored started, waiting for RPC to come up")
 
         if self.start_perf:
             self._start_perf()
 
     def wait_for_rpc_connection(self):
-        """Sets up an RPC connection to the bitcoind process. Returns False if unable to connect."""
+        """Sets up an RPC connection to the blackmored process. Returns False if unable to connect."""
         # Poll at a rate of four times per second
         poll_per_s = 4
         for _ in range(poll_per_s * self.rpc_timeout):
             if self.process.poll() is not None:
                 raise FailedToStartError(self._node_msg(
-                    'bitcoind exited with status {} during initialization'.format(self.process.returncode)))
+                    'blackmored exited with status {} during initialization'.format(self.process.returncode)))
             try:
                 rpc = get_rpc_proxy(
                     rpc_url(self.datadir, self.index, self.chain, self.rpchost),
@@ -283,11 +283,11 @@ class TestNode():
                     pass  # Port not yet open?
                 else:
                     raise  # unknown OS error
-            except ValueError as e:  # cookie file not found and no rpcuser or rpcpassword; bitcoind is still starting
+            except ValueError as e:  # cookie file not found and no rpcuser or rpcpassword; blackmored is still starting
                 if "No RPC credentials" not in str(e):
                     raise
             time.sleep(1.0 / poll_per_s)
-        self._raise_assertion_error("Unable to connect to bitcoind after {}s".format(self.rpc_timeout))
+        self._raise_assertion_error("Unable to connect to blackmored after {}s".format(self.rpc_timeout))
 
     def wait_for_cookie_credentials(self):
         """Ensures auth cookie credentials can be read, e.g. for testing CLI with -rpcwait before RPC connection is up."""
@@ -299,7 +299,7 @@ class TestNode():
                 get_auth_cookie(self.datadir, self.chain)
                 self.log.debug("Cookie credentials successfully retrieved")
                 return
-            except ValueError:  # cookie file not found and no rpcuser or rpcpassword; bitcoind is still starting
+            except ValueError:  # cookie file not found and no rpcuser or rpcpassword; blackmored is still starting
                 pass            # so we continue polling until RPC credentials are retrieved
             time.sleep(1.0 / poll_per_s)
         self._raise_assertion_error("Unable to retrieve cookie credentials after {}s".format(self.rpc_timeout))
@@ -519,7 +519,7 @@ class TestNode():
 
         if not test_success('readelf -S {} | grep .debug_str'.format(shlex.quote(self.binary))):
             self.log.warning(
-                "perf output won't be very useful without debug symbols compiled into bitcoind")
+                "perf output won't be very useful without debug symbols compiled into blackmored")
 
         output_path = tempfile.NamedTemporaryFile(
             dir=self.datadir,
@@ -560,18 +560,18 @@ class TestNode():
     def assert_start_raises_init_error(self, extra_args=None, expected_msg=None, match=ErrorMatch.FULL_TEXT, *args, **kwargs):
         """Attempt to start the node and expect it to raise an error.
 
-        extra_args: extra arguments to pass through to bitcoind
-        expected_msg: regex that stderr should match when bitcoind fails
+        extra_args: extra arguments to pass through to blackmored
+        expected_msg: regex that stderr should match when blackmored fails
 
-        Will throw if bitcoind starts without an error.
-        Will throw if an expected_msg is provided and it does not match bitcoind's stdout."""
+        Will throw if blackmored starts without an error.
+        Will throw if an expected_msg is provided and it does not match blackmored's stdout."""
         assert not self.running
         with tempfile.NamedTemporaryFile(dir=self.stderr_dir, delete=False) as log_stderr, \
              tempfile.NamedTemporaryFile(dir=self.stdout_dir, delete=False) as log_stdout:
             try:
                 self.start(extra_args, stdout=log_stdout, stderr=log_stderr, *args, **kwargs)
                 ret = self.process.wait(timeout=self.rpc_timeout)
-                self.log.debug(self._node_msg(f'bitcoind exited with status {ret} during initialization'))
+                self.log.debug(self._node_msg(f'blackmored exited with status {ret} during initialization'))
                 assert ret != 0  # Exit code must indicate failure
                 self.running = False
                 self.process = None
@@ -595,7 +595,7 @@ class TestNode():
                 self.process.kill()
                 self.running = False
                 self.process = None
-                assert_msg = f'bitcoind should have exited within {self.rpc_timeout}s '
+                assert_msg = f'blackmored should have exited within {self.rpc_timeout}s '
                 if expected_msg is None:
                     assert_msg += "with an error"
                 else:
