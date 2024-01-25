@@ -2,18 +2,18 @@
 
 *.exe
 *.pdb
-src/blackmore
-src/blackmored
-src/blackmore-cli
-src/blackmore-gui
-src/blackmore-node
-src/blackmore-tx
-src/blackmore-util
-src/blackmore-chainstate
-src/blackmore-wallet
+src/bitcoin
+src/bitcoind
+src/bitcoin-cli
+src/bitcoin-gui
+src/bitcoin-node
+src/bitcoin-tx
+src/bitcoin-util
+src/bitcoin-chainstate
+src/bitcoin-wallet
 src/test/fuzz/fuzz
-src/test/test_blackmore
-src/qt/test/test_blackmore-qt
+src/test/test_bitcoin
+src/qt/test/test_bitcoin-qt
 
 # autoreconf
 Makefile.in
@@ -50,11 +50,11 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
-src/qt/blackmore-qt.config
-src/qt/blackmore-qt.creator
-src/qt/blackmore-qt.creator.user
-src/qt/blackmore-qt.files
-src/qt/blackmore-qt.includes
+src/qt/bitcoin-qt.config
+src/qt/bitcoin-qt.creator
+src/qt/bitcoin-qt.creator.user
+src/qt/bitcoin-qt.files
+src/qt/bitcoin-qt.includes
 
 .deps
 .dirstamp
@@ -92,15 +92,15 @@ src/qt/blackmore-qt.includes
 *.qm
 Makefile
 !depends/Makefile
-src/qt/blackmore-qt
-Blackmore-Qt.app
+src/qt/bitcoin-qt
+Bitcoin-Qt.app
 
 # Qt Creator
 Makefile.am.user
 
 # Unit-tests
 Makefile.test
-blackmore-qt_test
+bitcoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -138,8 +138,8 @@ test/.mypy_cache/
 libbitcoinconsensus.pc
 contrib/devtools/split-debug.sh
 
-# Output from running db62 installation
-db62/
+# Output from running db4 installation
+db4/
 
 # clang-check
 *.plist
@@ -151,7 +151,34 @@ dist/
 
 /ci/scratch/
 
-# Visual Studio
-.vscode/*
-.vs/*
+# Blackcoin specifics
 
+#binaries
+src/blackmore
+src/blackmored
+src/blackmore-cli
+src/blackmore-gui
+src/blackmore-node
+src/blackmore-tx
+src/blackmore-util
+src/blackmore-chainstate
+src/blackmore-wallet
+src/test/test_blackmore
+src/qt/test/test_blackmore-qt
+
+# autoreconf
+src/qt/blackmore-qt.config
+src/qt/blackmore-qt.creator
+src/qt/blackmore-qt.creator.user
+src/qt/blackmore-qt.files
+src/qt/blackmore-qt.includes
+
+# Compilation and Qt preprocessor part
+src/qt/blackmore-qt
+Blackmore-Qt.app
+
+# Unit-tests
+blackmore-qt_test
+
+# Output from running db62 installation
+db62/
