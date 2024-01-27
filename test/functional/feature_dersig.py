@@ -48,7 +48,7 @@ class BIP66Test(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
-            f'-whitelist=noban@127.0.0.1',
+            '-whitelist=noban@127.0.0.1',
             '-par=1',  # Use only one script thread to get the exact log msg for testing
         ]]
         self.setup_clean_chain = True
