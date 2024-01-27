@@ -422,6 +422,9 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
             // Stop adding more inputs if already too many inputs
             if (txNew.vin.size() >= 10)
                 break;
+            // Stop adding more inputs if value is already pretty significant
+            if (nCredit >= GetStakeCombineThreshold())
+                break;
             // Stop adding inputs if reached reserve limit
             if (nCredit + pcoin.first->tx->vout[pcoin.second].nValue > nBalance - wallet.m_reserve_balance)
                 break;
