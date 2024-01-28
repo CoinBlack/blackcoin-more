@@ -346,7 +346,7 @@ qt_blackmore_qt_CPPFLAGS = $(blackmore_qt_cppflags)
 qt_blackmore_qt_CXXFLAGS = $(blackmore_qt_cxxflags)
 qt_blackmore_qt_SOURCES = $(blackmore_qt_sources) init/bitcoin-qt.cpp
 qt_blackmore_qt_LDADD = $(blackmore_qt_ldadd)
-qt_blackmore_qt_LDFLAGS = $(blackmore_qt_ldadd)
+qt_blackmore_qt_LDFLAGS = $(blackmore_qt_ldflags)
 qt_blackmore_qt_LIBTOOLFLAGS = $(blackmore_qt_libtoolflags)
 
 blackmore_gui_CPPFLAGS = $(blackmore_qt_cppflags)
