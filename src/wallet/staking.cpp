@@ -419,10 +419,6 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         if (txNew.vout.size() == 2 && ((pcoin.first->tx->vout[pcoin.second].scriptPubKey == scriptPubKeyKernel || pcoin.first->tx->vout[pcoin.second].scriptPubKey == txNew.vout[1].scriptPubKey))
             && pcoin.first->GetHash() != txNew.vin[0].prevout.hash)
         {
-            // Stop adding more inputs in case of LegacyScriptPubKeyMan
-            // Blackcoin ToDo: to be removed!
-            if (wallet.IsLegacy())
-                break;
             // Stop adding more inputs if already too many inputs
             if (txNew.vin.size() >= 10)
                 break;
