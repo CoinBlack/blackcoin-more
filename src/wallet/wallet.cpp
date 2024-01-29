@@ -1955,6 +1955,7 @@ CWallet::ScanResult CWallet::ScanForWalletTransactions(const uint256& start_bloc
 
 void CWallet::AbandonOrphanedCoinstakes()
 {
+	LOCK(cs_wallet);
     for (std::pair<const uint256, CWalletTx>& item : mapWallet) {
         const uint256& wtxid = item.first;
         CWalletTx& wtx = item.second;
