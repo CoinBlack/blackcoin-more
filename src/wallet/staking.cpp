@@ -478,10 +478,10 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     // Sign
     int nIn = 0;
-    SignatureData empty;
 
     if (wallet.IsLegacy()) {
         for (const auto &pcoin : vwtxPrev) {
+            SignatureData empty;
             if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty))
                 return error("CreateCoinStake : failed to sign coinstake");
         }
