@@ -4,9 +4,9 @@
 - Set mainnet hard fork date to April 24, 2024
 - Use virtual transaction size in minimum fee calculation
 - Fixed a bug with header syncing between More 25.1 nodes
+- Fixed windows build
 - Enabled flushing of orphaned stakes also on wallet start
 - Enabled staking with P2WPKH inputs
-- Fixed windows build
 
 ## v25.1.0-alpha-2 (2023-11-24)
 - Fixed a bug with segfault on wallet close when staking is enabled
@@ -20,7 +20,7 @@
 - Updated to Bitcoin Core 25.1
 - Removed OpenSSL
 - Implemented maximum witness size policy (Peercoin RFC-0027)
-- Added optimizeutxoset RPC method to simplify splitting coins for efficient staking (Peercoin PR #711)
+- Added `optimizeutxoset` RPC method to simplify splitting coins for efficient staking (Peercoin PR711)
 - Added a GUI warning if unable to stake
 
 ## v22.1.0-alpha-2 (2023-01-24)
@@ -59,8 +59,8 @@
 - Updated univalue to v1.0.3
 - Updated to Qt v5.12.11
 - Updated to OpenSSL v1.1.1m
-- Added "getstakereport" RPC call
-- Added --use-sse2 to enable SSE2
+- Added `getstakereport` RPC call
+- Added `--use-sse2` to enable SSE2
 - Code cleanup (headers, names, etc)
 
 ## v2.13.2.8 (2021-02-24)
@@ -92,8 +92,8 @@
 
 ## v2.13.2.4 (2019-11-11)
 - Updated fixed seeds
-- Added burn RPC call
-- Set default MAX_OP_RETURN_RELAY to 15000
+- Added `burn` RPC call
+- Set default `MAX_OP_RETURN_RELAY` to 15000
 - Removed unit selector from status bar
 
 ## v2.13.2.3 (2019-04-02)
@@ -101,13 +101,13 @@
 - Some small fixes and refactorings
 - Fixed wrongly displayed balances in GUI and RPC
 - Added header spam filter (fake stake vulnerability fix)
-- Added total balance in RPC call getwalletinfo
+- Added total balance in RPC call `getwalletinfo`
 
 ## v2.13.2.2 (2019-03-13)
 - Updated dependencies
 - Updated fixed seeds
 - Some small fixes and updates
-- Fixed walletpassphrase RPC call (wallet now can be unlocked for staking only)
+- Fixed `walletpassphrase` RPC call (wallet now can be unlocked for staking only)
 - Allowed connections from peers with protocol version 60016
 - Disabled BIP 152
 
@@ -119,8 +119,8 @@
 - Added Qt support for ARMv7
 - Added out-of-sync modal window (backport of Core's PR8371, PR8802, PR8805, PR8906, PR8985, PR9088, PR9461, PR9462)
 - Added support for nested commands and simple value queries in RPC console (backport of Core's PR7783)
-- Added abortrescan RPC call (backport of Core's PR10208)
-- Added reservebalance RPC call
+- Added `abortrescan` RPC call (backport of Core's PR10208)
+- Added `reservebalance` RPC call
 - Removed SegWit
 - Removed replace-by-fee
 - Removed address indexes
@@ -131,7 +131,7 @@
 ## v2.12.1.1 (2018-10-01)
 - Rebranded to Blackcoin More
 - Some small fixes and updates from Bitcoin Core 0.13.x branch
-- Added use available balance button in send coins dialog (backport of Core's PR11316)
+- Added "Use available balance" button in send coins dialog (backport of Core's PR11316)
 - Added a button to open the config file in a text editor (backport of Core's PR9890)
-- Added uptime RPC call (backport of Core's PR10400)
+- Added `uptime` RPC call (backport of Core's PR10400)
 - Removed P2P alert system (backport of Core's PR7692)
