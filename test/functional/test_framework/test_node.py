@@ -126,6 +126,19 @@ class TestNode():
         if self.version_is_at_least(239000):
             self.args.append("-loglevel=trace")
 
+        # Default behavior from global -v2transport flag is added to args to persist it over restarts.
+        # May be overwritten in individual tests, using extra_args.
+        self.default_to_v2 = v2transport
+        if self.version_is_at_least(260000):
+            # 26.0 and later support v2transport
+            if v2transport:
+                self.args.append("-v2transport=1")
+            else:
+                self.args.append("-v2transport=0")
+        else:
+            # v2transport requested but not supported for node
+            assert not v2transport
+
         self.cli = TestNodeCLI(bitcoin_cli, self.datadir_path)
         self.use_cli = use_cli
         self.start_perf = start_perf
@@ -197,6 +210,8 @@ class TestNode():
         """Start the node."""
         if extra_args is None:
             extra_args = self.extra_args
+
+        self.use_v2transport = "-v2transport=1" in extra_args or (self.default_to_v2 and "-v2transport=0" not in extra_args)
 
         # Add a new stdout and stderr file each time blackmored is started
         if stderr is None:
