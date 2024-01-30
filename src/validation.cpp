@@ -4879,6 +4879,10 @@ void ChainstateManager::LoadExternalBlockFile(
                         blkdat >> *pblock;
                         nRewind = blkdat.GetPos();
 
+                        // Set nFlags in case of proof of stake block
+                        if (pblock->IsProofOfStake())
+                            pblock->nFlags |= CBlockIndex::BLOCK_PROOF_OF_STAKE;
+
                         BlockValidationState state;
                         if (AcceptBlock(pblock, state, nullptr, true, dbp, nullptr, true)) {
                             nLoaded++;

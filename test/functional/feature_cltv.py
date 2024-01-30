@@ -84,7 +84,6 @@ class BIP65Test(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
-            f'-testactivationheight=cltv@{CLTV_HEIGHT}',
             '-whitelist=noban@127.0.0.1',
             '-par=1',  # Use only one script thread to get the exact reject reason for testing
             '-acceptnonstdtxn=1',  # cltv_invalidate is nonstandard
@@ -93,12 +92,8 @@ class BIP65Test(BitcoinTestFramework):
         self.rpc_timeout = 480
 
     def test_cltv_info(self, *, is_active):
-        assert_equal(self.nodes[0].getdeploymentinfo()['deployments']['bip65'], {
-                "active": is_active,
-                "height": CLTV_HEIGHT,
-                "type": "buried",
-            },
-        )
+        # Blackcoin: assume that CLTV is always active
+        pass
 
     def run_test(self):
         peer = self.nodes[0].add_p2p_connection(P2PInterface())

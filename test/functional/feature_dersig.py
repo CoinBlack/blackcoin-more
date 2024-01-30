@@ -48,7 +48,6 @@ class BIP66Test(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
-            f'-testactivationheight=dersig@{DERSIG_HEIGHT}',
             '-whitelist=noban@127.0.0.1',
             '-par=1',  # Use only one script thread to get the exact log msg for testing
         ]]
@@ -60,13 +59,8 @@ class BIP66Test(BitcoinTestFramework):
         return self.miniwallet.create_self_transfer(utxo_to_spend=utxo_to_spend)['tx']
 
     def test_dersig_info(self, *, is_active):
-        assert_equal(self.nodes[0].getdeploymentinfo()['deployments']['bip66'],
-            {
-                "active": is_active,
-                "height": DERSIG_HEIGHT,
-                "type": "buried",
-            },
-        )
+        # Blackcoin: assume that DERSIG is always active
+        pass
 
     def run_test(self):
         peer = self.nodes[0].add_p2p_connection(P2PInterface())

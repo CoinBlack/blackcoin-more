@@ -88,7 +88,11 @@ MIN_P2P_VERSION_SUPPORTED = 60001
 # Version 70016 supports wtxid relay
 P2P_VERSION = 70016
 # The services that this test framework offers in its `version` message
-P2P_SERVICES = NODE_NETWORK | NODE_WITNESS
+'''
+# Blackcoin
+# NODE_NETWORK | NODE_WITNESS
+'''
+P2P_SERVICES = NODE_NETWORK
 # The P2P user agent string that this test framework sends in its `version` message
 P2P_SUBVERSION = "/python-p2p-tester:0.0.3/"
 # Value for relay that this test framework sends in its `version` message
@@ -141,9 +145,9 @@ MESSAGEMAP = {
 }
 
 MAGIC_BYTES = {
-    "mainnet": b"\xf9\xbe\xb4\xd9",   # mainnet
-    "testnet3": b"\x0b\x11\x09\x07",  # testnet3
-    "regtest": b"\xfa\xbf\xb5\xda",   # regtest
+    "mainnet": b"\x70\x32\x22\x05",   # mainnet
+    "testnet": b"\xcd\xf2\xc0\xef",   # testnet
+    "regtest": b"\x70\x35\x22\x06",   # regtest
     "signet": b"\x0a\x03\xcf\x40",    # signet
 }
 

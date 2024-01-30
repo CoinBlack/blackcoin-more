@@ -346,7 +346,7 @@ qt_blackmore_qt_CPPFLAGS = $(blackmore_qt_cppflags)
 qt_blackmore_qt_CXXFLAGS = $(blackmore_qt_cxxflags)
 qt_blackmore_qt_SOURCES = $(blackmore_qt_sources) init/bitcoin-qt.cpp
 qt_blackmore_qt_LDADD = $(blackmore_qt_ldadd)
-qt_blackmore_qt_LDFLAGS = $(blackmore_qt_ldadd)
+qt_blackmore_qt_LDFLAGS = $(blackmore_qt_ldflags)
 qt_blackmore_qt_LIBTOOLFLAGS = $(blackmore_qt_libtoolflags)
 
 blackmore_gui_CPPFLAGS = $(blackmore_qt_cppflags)
@@ -402,7 +402,7 @@ QT_BASE_VERSION = $(lastword $(shell $(MOC) --version))
 QT_BASE_PATH = $(shell find ../depends/sources/ -maxdepth 1 -type f -regex ".*qtbase.*$(QT_BASE_VERSION)\.tar.xz")
 QT_BASE_TLD = $(shell tar tf $(QT_BASE_PATH) --exclude='*/*')
 
-bitcoin_qt_apk: FORCE
+blackmore_qt_apk: FORCE
 	mkdir -p $(APK_LIB_DIR)
 	cp $(dir $(lastword $(CC)))../sysroot/usr/lib/$(host_alias)/libc++_shared.so $(APK_LIB_DIR)
 	tar xf $(QT_BASE_PATH) -C qt/android/src/ $(QT_BASE_TLD)src/android/jar/src --strip-components=5
