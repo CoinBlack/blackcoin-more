@@ -144,10 +144,6 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
                 {
                     // Staked
                     sub.type = TransactionRecord::Staked;
-
-                    // Blackcoin: Show only "staking address" because P2PK address is empty since Core 26.0
-                    // For the reasoning behind this change see PR https://github.com/bitcoin/bitcoin/pull/28246
-                    sub.address = "Staking address";
                 }
 
                 parts.append(sub);
