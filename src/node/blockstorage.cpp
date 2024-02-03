@@ -843,7 +843,7 @@ bool BlockManager::ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos) cons
 
     // Check headers for proof-of-work blocks
     if (block.GetHash() != GetConsensus().hashGenesisBlock && block.IsProofOfWork()) {
-        if (!CheckProofOfWork(block.GetHash(), block.nBits, GetConsensus())) {
+        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, GetConsensus())) {
             return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
         }
     }
