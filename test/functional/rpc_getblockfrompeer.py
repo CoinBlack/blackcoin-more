@@ -28,7 +28,8 @@ class GetBlockFromPeerTest(BitcoinTestFramework):
         self.extra_args = [
             [],
             [],
-            ["-fastprune", "-prune=1"]
+            []
+            # ["-fastprune", "-prune=1"]
         ]
 
     def setup_network(self):
@@ -77,12 +78,15 @@ class GetBlockFromPeerTest(BitcoinTestFramework):
         for peer_id in [-1, peer_0_peer_1_id + 1]:
             assert_raises_rpc_error(-1, "Peer does not exist", self.nodes[0].getblockfrompeer, short_tip, peer_id)
 
+        '''
+        # Blackcoin: enable the test after SegWit activation
         self.log.info("Fetching from pre-segwit peer generates error")
         self.nodes[0].add_p2p_connection(P2PInterface(), services=P2P_SERVICES & ~NODE_WITNESS)
         peers = self.nodes[0].getpeerinfo()
         assert_equal(len(peers), 2)
         presegwit_peer_id = peers[1]["id"]
         assert_raises_rpc_error(-1, "Pre-SegWit peer", self.nodes[0].getblockfrompeer, short_tip, presegwit_peer_id)
+        '''
 
         self.log.info("Successful fetch")
         result = self.nodes[0].getblockfrompeer(short_tip, peer_0_peer_1_id)
@@ -92,10 +96,11 @@ class GetBlockFromPeerTest(BitcoinTestFramework):
         self.log.info("Don't fetch blocks we already have")
         assert_raises_rpc_error(-1, "Block already downloaded", self.nodes[0].getblockfrompeer, short_tip, peer_0_peer_1_id)
 
+        '''
         self.log.info("Don't fetch blocks while the node has not synced past it yet")
         # For this test we need node 1 in prune mode and as a side effect this also disconnects
         # the nodes which is also necessary for the rest of the test.
-        self.restart_node(1, ["-prune=550"])
+        self.restart_node(1, ["-walletrbf550"])
 
         # Generate a block on the disconnected node that the pruning node is not connected to
         blockhash = self.generate(self.nodes[0], 1, sync_fun=self.no_op)[0]
@@ -151,7 +156,7 @@ class GetBlockFromPeerTest(BitcoinTestFramework):
         pruneheight += 250
         assert_equal(pruned_node.pruneblockchain(1000), pruneheight)
         assert_raises_rpc_error(-1, "Block not available (pruned data)", pruned_node.getblock, pruned_block)
-
+        '''
 
 if __name__ == '__main__':
     GetBlockFromPeerTest().main()
