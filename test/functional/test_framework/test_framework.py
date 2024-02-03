@@ -46,7 +46,7 @@ TEST_EXIT_PASSED = 0
 TEST_EXIT_FAILED = 1
 TEST_EXIT_SKIPPED = 77
 
-TMPDIR_PREFIX = "bitcoin_func_test_"
+TMPDIR_PREFIX = "blackcoin_func_test_"
 
 
 class SkipTest(Exception):
@@ -231,10 +231,10 @@ class BitcoinTestFramework(metaclass=BitcoinTestMetaClass):
         """Update self.options with the paths of all binaries from environment variables or their default values"""
 
         binaries = {
-            "bitcoind": ("bitcoind", "BITCOIND"),
-            "bitcoin-cli": ("bitcoincli", "BITCOINCLI"),
-            "bitcoin-util": ("bitcoinutil", "BITCOINUTIL"),
-            "bitcoin-wallet": ("bitcoinwallet", "BITCOINWALLET"),
+            "blackmored": ("bitcoind", "BITCOIND"),
+            "blackmore-cli": ("bitcoincli", "BITCOINCLI"),
+            "blackmore-util": ("bitcoinutil", "BITCOINUTIL"),
+            "blackmore-wallet": ("bitcoinwallet", "BITCOINWALLET"),
         }
         for binary, [attribute_name, env_variable_name] in binaries.items():
             default_filename = os.path.join(
