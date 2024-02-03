@@ -4130,7 +4130,7 @@ bool ChainstateManager::AcceptBlock(const std::shared_ptr<const CBlock>& pblock,
     CBlockIndex *pindexDummy = nullptr;
     CBlockIndex *&pindex = ppindex ? *ppindex : pindexDummy;
 
-    bool accepted_header{AcceptBlockHeader(block, state, &pindex, min_pow_checked, block.IsProofOfStake())};
+    bool accepted_header{AcceptBlockHeader(block, state, &pindex, min_pow_checked)};
     CheckBlockIndex();
 
     if (!accepted_header)
