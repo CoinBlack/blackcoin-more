@@ -107,8 +107,6 @@ BASE_SCRIPTS = [
     'rpc_psbt.py --descriptors',
     'wallet_fundrawtransaction.py --legacy-wallet',
     'wallet_fundrawtransaction.py --descriptors',
-    'wallet_bumpfee.py --legacy-wallet',
-    'wallet_bumpfee.py --descriptors',
     'wallet_import_rescan.py --legacy-wallet',
     'wallet_backup.py --legacy-wallet',
     'wallet_backup.py --descriptors',
