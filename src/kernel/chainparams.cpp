@@ -291,12 +291,7 @@ public:
         };
 
         m_assumeutxo_data = {
-            {
-                .height = 2'500'000,
-                .hash_serialized = AssumeutxoHash{uint256S("0xf841584909f68e47897952345234e37fcd9128cd818f41ee6c3ca68db8071be7")},
-                .nChainTx = 66484552,
-                .blockhash = uint256S("0x0000000000000093bcb68c03a9a168ae252572d348a2eaeba2cdf9231d73206f")
-            }
+            // TODO to be specified in a future patch.
         };
 
         chainTxData = ChainTxData{
