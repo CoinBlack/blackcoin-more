@@ -31,20 +31,6 @@ public:
         return Make(0, std::move(msg_type), std::forward<Args>(args)...);
     }
 
-    // Blackcoin ToDo: revert after nodes upgrade to current version
-    /*
-    template <typename... Args>
-    CSerializedNetMsg MakeForSpecificClient(int nClientVersion, std::string msg_type, Args&&... args) const
-    {
-        int nFlags = 0;
-        CSerializedNetMsg msg;
-        msg.m_type = std::move(msg_type);
-        int32_t serModes = nClientVersion <= OLD_VERSION ? SER_NETWORK : SER_NETWORK | SER_POSMARKER;
-        CVectorWriter{ serModes, nFlags | nClientVersion, msg.data, 0, std::forward<Args>(args)... };
-        return msg;
-    }
-    */
-
 private:
     const int nVersion;
 };
