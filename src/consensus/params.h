@@ -79,13 +79,6 @@ struct Params {
      * - fail if the default script verify flags are applied.
      */
     std::map<uint256, uint32_t> script_flag_exceptions;
-    /** Block height and hash at which BIP34 becomes active */
-    int BIP34Height;
-    uint256 BIP34Hash;
-    /** Block height at which BIP65 becomes active */
-    int BIP65Height;
-    /** Block height at which BIP66 becomes active */
-    int BIP66Height;
     /** Block height at which CSV (BIP68, BIP112 and BIP113) becomes active */
     int CSVHeight;
     /** Block height at which Segwit (BIP141, BIP143 and BIP147) becomes active.
