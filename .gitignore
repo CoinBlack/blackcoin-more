@@ -182,3 +182,6 @@ blackmore-qt_test
 
 # Output from running db62 installation
 db62/
+
+# VSCode
+.vscode/*
