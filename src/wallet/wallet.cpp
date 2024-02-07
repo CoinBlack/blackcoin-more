@@ -1953,6 +1953,14 @@ CWallet::ScanResult CWallet::ScanForWalletTransactions(const uint256& start_bloc
 void CWallet::AbandonOrphanedCoinstakes()
 {
 	LOCK(cs_wallet);
+
+    // Blackcoin: m_last_block_processed_height can be < 0
+    // when loading the wallet during a reindex. Do nothing in that
+    // case.
+    if (m_last_block_processed_height < 0) {
+        return;
+    }
+
     for (std::pair<const uint256, CWalletTx>& item : mapWallet) {
         const uint256& wtxid = item.first;
         CWalletTx& wtx = item.second;
