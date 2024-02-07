@@ -163,7 +163,6 @@ void WalletModel::pollBalanceChanged()
 
         // The stake weight is used for the staking icon status
         // Get the stake weight only when not syncing because it is time consuming
-        // Blackcoin ToDo: enable balanceChanged?
         if (!isSyncing && (balanceChanged || cachedBlockHashChanged)) {
             updateStakeWeight = true;
         }
