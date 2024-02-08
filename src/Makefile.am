@@ -244,6 +244,7 @@ BITCOIN_CORE_H = \
   policy/packages.h \
   policy/policy.h \
   policy/settings.h \
+  pos.h \
   pow.h \
   prevector.h \
   primitives/block.h \

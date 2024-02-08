@@ -1145,9 +1145,11 @@ void CTxMemPool::trackPackageRemoved(const CFeeRate& rate) {
 void CTxMemPool::TrimToSize(size_t sizelimit, std::vector<COutPoint>* pvNoSpendsRemaining) {
     AssertLockHeld(cs);
 
-    unsigned nTxnRemoved = 0;
+    /*
     // Blackcoin
-    // CFeeRate maxFeeRateRemoved(0);
+    unsigned nTxnRemoved = 0;
+    CFeeRate maxFeeRateRemoved(0);
+    */
     while (!mapTx.empty() && DynamicMemoryUsage() > sizelimit) {
         indexed_transaction_set::index<descendant_score>::type::iterator it = mapTx.get<descendant_score>().begin();
 
@@ -1156,8 +1158,8 @@ void CTxMemPool::TrimToSize(size_t sizelimit, std::vector<COutPoint>* pvNoSpends
         // to have 0 fee). This way, we don't allow txn to enter mempool with feerate
         // equal to txn which were removed with no block in between.
         CFeeRate removed(it->GetModFeesWithDescendants(), it->GetSizeWithDescendants());
-        // Blackcoin
         /*
+        // Blackcoin
         removed += m_incremental_relay_feerate;
         trackPackageRemoved(removed);
         maxFeeRateRemoved = std::max(maxFeeRateRemoved, removed);
@@ -1165,7 +1167,10 @@ void CTxMemPool::TrimToSize(size_t sizelimit, std::vector<COutPoint>* pvNoSpends
 
         setEntries stage;
         CalculateDescendants(mapTx.project<0>(it), stage);
+        /*
+        // Blackcoin
         nTxnRemoved += stage.size();
+        */
 
         std::vector<CTransaction> txn;
         if (pvNoSpendsRemaining) {
@@ -1184,8 +1189,8 @@ void CTxMemPool::TrimToSize(size_t sizelimit, std::vector<COutPoint>* pvNoSpends
         }
     }
 
-    // Blackcoin
     /*
+    // Blackcoin
     if (maxFeeRateRemoved > CFeeRate(0)) {
         LogPrint(BCLog::MEMPOOL, "Removed %u txn, rolling minimum fee bumped to %s\n", nTxnRemoved, maxFeeRateRemoved.ToString());
     }

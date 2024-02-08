@@ -136,7 +136,7 @@ bash -c "${BASE_ROOT_DIR}/configure --cache-file=config.cache $BITCOIN_CONFIG_AL
 
 make distdir VERSION="$HOST"
 
-cd "${BASE_BUILD_DIR}/bitcoin-$HOST"
+cd "${BASE_BUILD_DIR}/blackcoin-$HOST"
 
 bash -c "./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG" || ( (cat config.log) && false)
 
@@ -180,7 +180,7 @@ if [ "${RUN_TIDY}" = "true" ]; then
   cmake --build /tidy-build --target bitcoin-tidy-tests "$MAKEJOBS"
 
   set -eo pipefail
-  cd "${BASE_BUILD_DIR}/bitcoin-$HOST/src/"
+  cd "${BASE_BUILD_DIR}/blackcoin-$HOST/src/"
   ( run-clang-tidy-"${TIDY_LLVM_V}" -quiet -load="/tidy-build/libbitcoin-tidy.so" "${MAKEJOBS}" ) | grep -C5 "error"
   # Filter out files by regex here, because regex may not be
   # accepted in src/.bear-tidy-config
@@ -188,10 +188,10 @@ if [ "${RUN_TIDY}" = "true" ]; then
   # * qt qrc and moc generated files
   jq 'map(select(.file | test("src/qt/qrc_.*\\.cpp$|/moc_.*\\.cpp$") | not))' ../compile_commands.json > tmp.json
   mv tmp.json ../compile_commands.json
-  cd "${BASE_BUILD_DIR}/bitcoin-$HOST/"
+  cd "${BASE_BUILD_DIR}/blackcoin-$HOST/"
   python3 "/include-what-you-use/iwyu_tool.py" \
            -p . "${MAKEJOBS}" \
-           -- -Xiwyu --cxx17ns -Xiwyu --mapping_file="${BASE_BUILD_DIR}/bitcoin-$HOST/contrib/devtools/iwyu/bitcoin.core.imp" \
+           -- -Xiwyu --cxx17ns -Xiwyu --mapping_file="${BASE_BUILD_DIR}/blackcoin-$HOST/contrib/devtools/iwyu/bitcoin.core.imp" \
            -Xiwyu --max_line_length=160 \
            2>&1 | tee /tmp/iwyu_ci.out
   cd "${BASE_ROOT_DIR}/src"

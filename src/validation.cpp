@@ -105,7 +105,10 @@ const std::vector<std::string> CHECKLEVEL_DOC {
  *  expect to see in regular mainnet reorgs, but not so high that it would
  *  noticeably interfere with the pruning mechanism.
  * */
+/*
+// Blackcoin
 static constexpr int PRUNE_LOCK_BUFFER{10};
+*/
 
 GlobalMutex g_best_block_mutex;
 std::condition_variable g_best_block_cv;

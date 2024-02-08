@@ -1646,7 +1646,6 @@ bool PeerManagerImpl::ProcessNetBlockHeaders(CNode& pfrom, const std::vector<CBl
 bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool force_processing, bool min_pow_checked, bool* new_block, CNode& pfrom)
 {
     PeerRef peer = GetPeerRef(pfrom.GetId());
-    uint256 hash;
     {
         LOCK(cs_main);
 

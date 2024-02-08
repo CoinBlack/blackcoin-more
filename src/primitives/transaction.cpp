@@ -9,6 +9,7 @@
 #include <hash.h>
 #include <script/script.h>
 #include <serialize.h>
+#include <timedata.h>
 #include <tinyformat.h>
 #include <uint256.h>
 #include <util/strencodings.h>
@@ -16,7 +17,6 @@
 
 #include <cassert>
 #include <stdexcept>
-#include <timedata.h>
 
 std::string COutPoint::ToString() const
 {
