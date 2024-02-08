@@ -965,7 +965,6 @@ libbitcoinkernel_la_SOURCES = \
   policy/fees.cpp \
   policy/packages.cpp \
   policy/policy.cpp \
-  policy/rbf.cpp \
   policy/settings.cpp \
   pow.cpp \
   primitives/block.cpp \
@@ -996,7 +995,6 @@ libbitcoinkernel_la_SOURCES = \
   util/getuniquepath.cpp \
   util/hasher.cpp \
   util/moneystr.cpp \
-  util/rbf.cpp \
   util/serfloat.cpp \
   util/signalinterrupt.cpp \
   util/strencodings.cpp \
