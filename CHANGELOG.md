@@ -1,5 +1,11 @@
 # Changelog
 
+## v26.0.0-beta-1 (2024-02-12)
+- Updated to Bitcoin Core 26.0
+- Fixed a bug that prevented adding more inputs in the coinstake transaction for legacy wallets
+- Fixed a bug causing inability to connect to fixed seeds
+- Fixed reindexing
+
 ## v25.1.0-alpha-3 (2024-01-30)
 - Set mainnet hard fork date to April 24, 2024
 - Use virtual transaction size in minimum fee calculation
