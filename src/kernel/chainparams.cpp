@@ -126,7 +126,7 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000416ebe78f593ec11fb2"); // block 4791500 
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000041a727e67853fa7e907"); // block 4815005
         consensus.defaultAssumeValid = uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc"); // block 4232630
 
         /**
@@ -154,7 +154,7 @@ public:
         vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted at dns.blackcoin.nl
         vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted at vps.blackcoin.nl
         vSeeds.emplace_back("swap.blackcoin.nl"); // swapservice static node
-        vSeeds.emplace_back("node.blackcoin.nl");  // payBLK static node
+        vSeeds.emplace_back("dns2.blackcoin.nl");  // Bitcore static node
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
@@ -246,7 +246,7 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000478d1e3e759bd0f7e2"); // block 1720482
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000487dc03a64106b281b"); // block 1743761
         consensus.defaultAssumeValid = uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39"); // block 1415393
 
         pchMessageStart[0] = 0xcd;
