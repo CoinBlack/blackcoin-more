@@ -111,13 +111,13 @@ public:
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
-        consensus.nProtocolV3_1Time = 4102437600;
+        consensus.nProtocolV3_1Time = 1713938400;
         consensus.nLastPOWBlock = 10000;
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000038844f1764349c166d5");
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000416ebe78f593ec11fb2"); // block 4791500
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -138,7 +138,7 @@ public:
 
         vSeeds.push_back(CDNSSeedData("dnsseed.blackcoin.nl", "dnsseed.blackcoin.nl")); //hosted at dns.blackcoin.nl
         vSeeds.push_back(CDNSSeedData("dnsseed2.blackcoin.nl", "dnsseed2.blackcoin.nl")); //hosted at vps.blackcoin.nl
-        vSeeds.push_back(CDNSSeedData("ghost.blackcoin.nl", "ghost.blackcoin.nl")); // Michel van Kessel static node
+        vSeeds.push_back(CDNSSeedData("swap.blackcoin.nl", "swap.blackcoin.nl")); // swapservice static node
         vSeeds.push_back(CDNSSeedData("node.blackcoin.nl ", "node.blackcoin.nl"));  // payBLK static node
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
@@ -164,7 +164,7 @@ public:
                     (254348, uint256S("0x9bf8d9bd757d3ef23d5906d70567e5f0da93f1e0376588c8d421a95e2421838b"))  // minor network split
                     (319002, uint256S("0x0011494d03b2cdf1ecfc8b0818f1e0ef7ee1d9e9b3d1279c10d35456bc3899ef"))  // hardfork
                     (872456, uint256S("0xe4fd321ced1de06213d2e246b150b4bfd8c4aa0989965dce88f2a58668c64860"))  // hardfork
-                    (4232630, uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc")),
+                    (4232630, uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc")), // start devfund
                     1668631296, // * UNIX timestamp of last checkpoint block
                     13562393,    // * total number of transactions between genesis and last checkpoint
                                 //   (the tx=... number in the SetBestChain debug.log lines)
@@ -220,7 +220,7 @@ public:
         nDefaultPort = 25714;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000302f630a91c2ec0230");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000478d1e3e759bd0f7e2"); // block 1720482  
 
         nPruneAfterHeight = 1000;
 
@@ -229,7 +229,6 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
         assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
 
-        vFixedSeeds.clear();
         vSeeds.clear();
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
@@ -249,9 +248,10 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8")),
-            1549558800,
-            179080,
+            (  90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8"))  //initial snapshot
+            (1415393, uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39")), //start devfund
+            1685643568,
+            70100,
             2.0
         };
 
@@ -296,7 +296,7 @@ public:
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
-        consensus.nProtocolV3_1Time = 4102437600;
+        consensus.nProtocolV3_1Time = 1713938400;
         consensus.nLastPOWBlock = 1000;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
@@ -372,7 +372,7 @@ void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime,
 // Blackcoin: Donations to dev fund 
 std::string CChainParams::GetDevFundAddress() const
 {
-    return vDevFundAddress[0];
+    return !vDevFundAddress.empty() ? vDevFundAddress[0] : "";
 }
 
 CScript CChainParams::GetDevRewardScript() const

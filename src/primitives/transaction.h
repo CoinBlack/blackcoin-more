@@ -11,6 +11,10 @@
 #include "serialize.h"
 #include "uint256.h"
 
+static const int SERIALIZE_TRANSACTION_NO_WITNESS = 0x40000000;
+
+static const int WITNESS_SCALE_FACTOR = 4;
+
 /** An outpoint - a combination of a transaction hash and an index n into its vout */
 class COutPoint
 {
@@ -356,5 +360,8 @@ struct CMutableTransaction
 
     uint256 GetNormalizedHash() const;
 };
+
+/** Compute the weight of a transaction, as defined by BIP 141 */
+int64_t GetTransactionWeight(const CTransaction &tx);
 
 #endif // BITCOIN_PRIMITIVES_TRANSACTION_H

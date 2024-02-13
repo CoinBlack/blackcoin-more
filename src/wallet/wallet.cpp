@@ -671,7 +671,7 @@ bool CWallet::SelectCoinsForStaking(CAmount& nTargetValue, std::set<std::pair<co
 
 bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CAmount& nFees, CMutableTransaction& tx, CKey& key)
 {
-    CBlockIndex* pindexPrev = pindexBestHeader;
+    CBlockIndex* pindexPrev = chainActive.Tip();
     arith_uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
 
@@ -821,7 +821,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     }
 
     // Blackcoin: Donate to dev fund (or not)
-    if (nDonationPercentage > 0) {
+    if (nDonationPercentage > 0 && !Params().GetDevFundAddress().empty()) {
 
         CAmount nDevCredit = 0;
         CAmount nMinerCredit = 0;
@@ -2621,7 +2621,7 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend, CWalletTx& wt
             std::vector<COutput> vAvailableCoins;
             AvailableCoins(vAvailableCoins, true, coinControl);
 
-            nFeeRet = Params().GetConsensus().IsProtocolV3_1(txNew.nTime) ? MIN_TX_FEE_PER_KB : 0;
+            nFeeRet = Params().GetConsensus().IsProtocolV3_1(txNew.nTime) ? MIN_TX_FEE : 0;
             // Start with no fee and loop until there is enough fee
             while (true)
             {
