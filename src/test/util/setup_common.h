@@ -188,7 +188,7 @@ std::unique_ptr<T> MakeNoLogFileContext(const ChainType chain_type = ChainType::
     return std::make_unique<T>(chain_type, arguments);
 }
 
-CBlock getBlock13b8a();
+CBlock getBlockfbdc9();
 
 // define an implicit conversion here so that uint256 may be used directly in BOOST_CHECK_*
 std::ostream& operator<<(std::ostream& os, const uint256& num);
