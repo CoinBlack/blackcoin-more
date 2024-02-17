@@ -135,6 +135,9 @@ void AvailableCoinsForStaking(const CWallet& wallet,
             const CTxOut& output = wtx.tx->vout[i];
             const COutPoint outpoint(wtxid, i);
 
+            if (output.nValue < wallet.m_min_staking_amount)
+                continue;
+
             if (output.nValue < params.min_amount || output.nValue > params.max_amount)
                 continue;
 
