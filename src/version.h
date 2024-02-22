@@ -18,7 +18,7 @@ static const int OLD_VERSION = 70015;
 static const int INIT_PROTO_VERSION = 209;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION = 70012;
+static const int MIN_PEER_PROTO_VERSION = 70015;
 
 //! BIP 0031, pong message, is enabled for all versions AFTER this one
 static const int BIP0031_VERSION = 60000;
