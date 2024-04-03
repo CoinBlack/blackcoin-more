@@ -447,7 +447,7 @@
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform>(%n GB needed for full chain)</numerusform>
+            <numerusform />
         </translation>
     </message>
     <message>
