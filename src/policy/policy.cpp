@@ -19,7 +19,6 @@
 #include <script/solver.h>
 #include <serialize.h>
 #include <span.h>
-#include <timedata.h>
 
 #include <algorithm>
 #include <cstddef>
@@ -96,7 +95,7 @@ bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_
 
 bool IsStandardTx(const CTransaction& tx, const std::optional<unsigned>& max_datacarrier_bytes, bool permit_bare_multisig, const CFeeRate& dust_relay_fee, std::string& reason, const bool witnessEnabled)
 {
-    if ((!Params().GetConsensus().IsProtocolV3_1(tx.nTime ? (int64_t)tx.nTime : GetAdjustedTimeSeconds()) && (tx.nVersion > TX_MAX_STANDARD_VERSION-1)) || tx.nVersion > TX_MAX_STANDARD_VERSION || tx.nVersion < 1) {
+    if (tx.nVersion > TX_MAX_STANDARD_VERSION || tx.nVersion < 1) {
         reason = "version";
         return false;
     }
