@@ -56,7 +56,7 @@ static const unsigned int MIN_TX_FEE = 10000;
 /** Minimum fee per kB */
 static const unsigned int TX_FEE_PER_KB = 100000;
 /** Default for -minrelaytxfee, minimum relay fee for transactions */
-static const unsigned int DEFAULT_MIN_RELAY_TX_FEE = 10000;
+static const unsigned int DEFAULT_MIN_RELAY_TX_FEE = 100000;
 //! -maxtxfee default
 static const CAmount DEFAULT_TRANSACTION_MAXFEE = 1 * COIN;
 //! Discourage users to set fees higher than this amount (in satoshis) per kB
