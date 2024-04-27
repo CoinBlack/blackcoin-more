@@ -724,12 +724,6 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     if (tx.IsCoinStake())
         return state.Invalid(TxValidationResult::TX_CONSENSUS, "coinstake");
 
-    // Don't relay version 2 transactions until CSV is active, and we can be
-    // sure that such transactions will be mined (unless we're on
-    // -testnet/-regtest).
-    if (m_pool.m_require_standard && tx.nVersion >= TX_MAX_STANDARD_VERSION && !Params().GetConsensus().IsProtocolV3_1(nTimeTx))
-		return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "premature-version2-tx");
-
     // Reject transactions with witness before segregated witness activates (override with -prematurewitness)
     bool witnessEnabled = DeploymentActiveAfter(m_active_chainstate.m_chain.Tip(), m_active_chainstate.m_chainman, Consensus::DEPLOYMENT_SEGWIT);
     if (!gArgs.GetBoolArg("-prematurewitness", false) && tx.HasWitness() && !witnessEnabled) {
