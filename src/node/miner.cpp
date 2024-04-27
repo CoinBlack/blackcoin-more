@@ -169,17 +169,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     }
 
     pblock->nTime = GetAdjustedTimeSeconds();
-
-    const int64_t nMedianTimePast = pindexPrev->GetMedianTimePast();
-
-    bool enforce_locktime_median_time_past{false};
-    if (chainparams.GetConsensus().IsProtocolV3_1(pblock->nTime)) {
-        enforce_locktime_median_time_past = true;
-    }
-
-    m_lock_time_cutoff = enforce_locktime_median_time_past ?
-                            nMedianTimePast :
-                            pblock->GetBlockTime();
+    m_lock_time_cutoff = pindexPrev->GetMedianTimePast();
 
     // Decide whether to include witness transactions
     // This is only needed in case the witness softfork activation is reverted
