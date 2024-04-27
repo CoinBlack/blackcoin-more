@@ -707,9 +707,9 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     TxValidationState& state = ws.m_state;
     std::unique_ptr<CTxMemPoolEntry>& entry = ws.m_entry;
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = (int64_t)tx.nTime;
-    if (!nTimeTx && tx.nVersion >= TX_MAX_STANDARD_VERSION)
+    if (!nTimeTx && tx.nVersion >= 2)
         nTimeTx = GetAdjustedTimeSeconds();
 
     if (!CheckTransaction(tx, state)) {
