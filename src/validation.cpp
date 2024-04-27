@@ -2135,7 +2135,7 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     }
 
     // Enforce CHECKSEQUENCEVERIFY (BIP112)
-    if (consensusparams.IsProtocolV3_1(block_index.GetBlockTime())) {
+    if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_CSV)) {
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
     }
 
@@ -2274,10 +2274,9 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         }
     }
 
-    // Enforce BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY)
+    // Enforce BIP68 (sequence locks)
     int nLockTimeFlags = 0;
-    // if (DeploymentActiveAt(*pindex, m_chainman, Consensus::DEPLOYMENT_CSV)) {
-    if (params.GetConsensus().IsProtocolV3_1(pindex->GetBlockTime())) {
+    if (DeploymentActiveAt(*pindex, m_chainman, Consensus::DEPLOYMENT_CSV)) {
         nLockTimeFlags |= LOCKTIME_VERIFY_SEQUENCE;
     }
 
@@ -3944,7 +3943,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
 
     // Enforce BIP113 (Median Time Past).
     bool enforce_locktime_median_time_past{false};
-    if (consensusParams.IsProtocolV3_1(block.nTime)) {
+    if (DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_CSV)) {
         assert(pindexPrev != nullptr);
         enforce_locktime_median_time_past = true;
     }

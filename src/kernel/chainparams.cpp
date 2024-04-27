@@ -87,7 +87,7 @@ public:
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 500;
-        consensus.CSVHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
+        consensus.CSVHeight = 4908715;
         consensus.SegwitHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
         consensus.MinBIP9WarningHeight = std::numeric_limits<int>::max(); // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -207,7 +207,7 @@ public:
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 500;
-        consensus.CSVHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
+        consensus.CSVHeight = 1320664;
         consensus.SegwitHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
         consensus.MinBIP9WarningHeight = std::numeric_limits<int>::max(); // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
