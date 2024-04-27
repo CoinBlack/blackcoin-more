@@ -5735,8 +5735,7 @@ void PeerManagerImpl::MaybeSendFeefilter(CNode& pto, Peer& peer, std::chrono::mi
     // transactions to us, regardless of feefilter state.
     if (pto.IsBlockOnlyConn()) return;
 
-    unsigned int min_fee = Params().GetConsensus().IsProtocolV3_1(GetAdjustedTimeSeconds()) ? TX_FEE_PER_KB : DEFAULT_MIN_RELAY_TX_FEE;
-    CAmount currentFilter = CFeeRate(min_fee).GetFeePerK();
+    CAmount currentFilter = CFeeRate(TX_FEE_PER_KB).GetFeePerK();
 
     if (m_chainman.IsInitialBlockDownload()) {
         // Received tx-inv messages are discarded when the active
