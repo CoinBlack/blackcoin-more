@@ -6,7 +6,7 @@ https://blackcoinmore.org
 What is Blackcoin?
 ----------------
 
-Blackcoin is a decentralised digital currency with near-instant transaction speeds and negligible transaction fees built upon Proof of Stake 3.0 (PoSV3, BPoS) as
+Blackcoin is a decentralised digital currency with near-instant transaction speeds and negligible transaction fees built upon Proof of Stake 3.1 (PoSV3, BPoS) as
 introduced by the Blackcoin development team.
 
 For more information about Blackcoin itself, see https://blackcoin.org.
@@ -78,9 +78,6 @@ However, it may contain experimental features and should be used with caution.
 
 ### 13.2
 The release branch for Blackcoin More 13.2.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
-
-### 25.x
-The release branch for Blackcoin More 25.x. Contains functional but experimental code.
 
 ### 26.x
 The release branch for Blackcoin More 26.x. Contains functional but highly experimental code.
