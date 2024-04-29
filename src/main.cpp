@@ -1226,9 +1226,9 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
             return state.DoS(0, false, REJECT_INVALID, "too many dust vouts");
     }
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = (int64_t)tx.nTime;
-    if (!nTimeTx && tx.nVersion >= CTransaction::MAX_STANDARD_VERSION)
+    if (!nTimeTx && tx.nVersion >= 2)
         nTimeTx = GetAdjustedTime();
 
     if (!CheckTransaction(tx, state))
@@ -1999,9 +1999,9 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
     if (!inputs.HaveInputs(tx))
         return state.Invalid(false, 0, "", "Inputs unavailable");
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = tx.nTime;
-    if (!nTimeTx && tx.nVersion >= CTransaction::MAX_STANDARD_VERSION)
+    if (!nTimeTx && tx.nVersion >= 2)
         nTimeTx = GetAdjustedTime();
 
     CAmount nValueIn = 0;
