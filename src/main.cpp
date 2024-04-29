@@ -1242,14 +1242,6 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     if (tx.IsCoinStake())
         return state.DoS(100, false, REJECT_INVALID, "coinstake");
 
-    // Don't relay version 2 transactions until CSV is active, and we can be
-    // sure that such transactions will be mined (unless we're on
-    // -testnet/-regtest).
-    const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= CTransaction::MAX_STANDARD_VERSION && !chainparams.GetConsensus().IsProtocolV3_1(nTimeTx)) {
-        return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version2-tx");
-    }
-
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)
     string reason;
     if (fRequireStandard && !IsStandardTx(tx, reason))
