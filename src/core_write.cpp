@@ -177,7 +177,7 @@ void TxToUniv(const CTransaction& tx, const uint256& block_hash, UniValue& entry
     // Transaction version is actually unsigned in consensus checks, just signed in memory,
     // so cast to unsigned before giving it to the user.
     entry.pushKV("version", static_cast<int64_t>(static_cast<uint32_t>(tx.nVersion)));
-    if (tx.nTime > 0)
+    if (tx.nVersion < 2)
         entry.pushKV("time", (int64_t)tx.nTime);
     entry.pushKV("size", (int)::GetSerializeSize(tx, PROTOCOL_VERSION));
     entry.pushKV("vsize", (GetTransactionWeight(tx) + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR);
