@@ -141,9 +141,8 @@ TxSize CalculateMaximumSignedTxSize(const CTransaction &tx, const CWallet *walle
     if (is_segwit) weight += 2;
 
     // Blackcoin: transaction weight should be increased for v1 transactions because of additional nTime field
-    // We assume that v1 transactions have nTime > 0
-    bool is_old_tx = tx.nTime > 0;
-    if (is_old_tx) weight += 4 * WITNESS_SCALE_FACTOR;
+    if (tx.nVersion < 2)
+        weight += 4 * WITNESS_SCALE_FACTOR;
 
     // Add the size of the transaction outputs.
     for (const auto& txo : tx.vout) weight += GetSerializeSize(txo, PROTOCOL_VERSION) * WITNESS_SCALE_FACTOR;
