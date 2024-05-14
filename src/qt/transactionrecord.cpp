@@ -66,7 +66,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
 
             if (fAllFromMe) {
                 // Change is only really possible if we're the sender
-                // Otherwise, someone just sent bitcoins to a change address, which should be shown
+                // Otherwise, someone just sent blackcoins to a change address, which should be shown
                 if (wtx.txout_is_change[i]) {
                     continue;
                 }
@@ -81,7 +81,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
 
                 if (!std::get_if<CNoDestination>(&wtx.txout_address[i]))
                 {
-                    // Sent to Bitcoin Address
+                    // Sent to Blackcoin Address
                     sub.type = TransactionRecord::SendToAddress;
                     sub.address = EncodeDestination(wtx.txout_address[i]);
                 }
