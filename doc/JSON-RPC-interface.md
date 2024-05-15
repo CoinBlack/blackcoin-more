@@ -128,7 +128,7 @@ RPC interface will be abused.
     Instead, expose it only on the host system's localhost, for example:
     `-p 127.0.0.1:15715:15715`
 
-- **Secure authentication:** By default, Blackcoin More generates unique
+- **Secure authentication:** By default, when no `rpcpassword` is specified, Blackcoin More generates unique
   login credentials each time it restarts and puts them into a file
   readable only by the user that started Blackcoin More, allowing any of
   that user's RPC clients with read access to the file to login

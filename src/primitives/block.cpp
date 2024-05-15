@@ -14,7 +14,7 @@
 uint256 CBlockHeader::GetHash() const
 {
     if (nVersion > 6)
-        return (CHashWriter{PROTOCOL_VERSION} << *this).GetHash();
+        return (HashWriter{} << *this).GetHash();
     return GetPoWHash();
 }
 

@@ -14,7 +14,6 @@
 #include <serialize.h>
 #include <span.h>
 #include <uint256.h>
-#include <version.h>
 
 #include <string>
 #include <vector>
@@ -143,27 +142,6 @@ public:
     {
         ::Serialize(*this, obj);
         return *this;
-    }
-};
-
-// Blackcoin: Keep nType
-class CHashWriter : public HashWriter
-{
-private:
-    const int nType;
-    const int nVersion;
-
-public:
-    CHashWriter(int nVersionIn) : nType(SER_GETHASH), nVersion(nVersionIn) {}
-    CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {}
-
-    int GetType() const { return nType; }
-    int GetVersion() const { return nVersion; }
-
-    template<typename T>
-    CHashWriter& operator<<(const T& obj) {
-        ::Serialize(*this, obj);
-        return (*this);
     }
 };
 

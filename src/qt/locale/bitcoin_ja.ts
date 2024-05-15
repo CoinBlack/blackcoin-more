@@ -271,8 +271,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Internal error</source>
-        <translation type="unfinished">内部エラー
-：あなたの問題ではありません</translation>
+        <translation type="unfinished">内部エラー</translation>
     </message>
     <message>
         <source>An internal error occurred. %1 will attempt to continue safely. This is an unexpected bug which can be reported as described below.</source>
@@ -1108,12 +1107,12 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">ウォレット '%1' の移行が完了しました。</translation>
     </message>
     <message>
-        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">監視専用スクリプトは新しいウォレット '%1' に移行しました。</translation>
+        <source>Watchonly scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">監視専用スクリプトは’%1’という名前の新しいウォレットに移行されました。</translation>
     </message>
     <message>
-        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">解決可能だが監視されないスクリプトは新しいウォレット '%1' に移行しました。</translation>
+        <source>Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">解決可能だが監視されないスクリプトは '%1' という名前の新しいウォレットに移行されました。</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1574,10 +1573,6 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">%1 対応スクリプトのフルパス（例：C:\Downloads\hwi.exe や /Users/you/Downloads/hwi.py）。マルウェアにコインを盗まれないようご注意ください。</translation>
     </message>
     <message>
-        <source>Full path to a %1 compatible script (e.g. C:\Downloads\hwi.exe or /Users/you/Downloads/hwi.py). Beware: malware can steal your coins!</source>
-        <translation type="unfinished">%1 対応スクリプトのフルパス（例：C:\Downloads\hwi.exe や /Users/you/Downloads/hwi.py）。マルウェアにコインを盗まれないようご注意ください。</translation>
-    </message>
-    <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
         <translation type="unfinished">プロキシのIPアドレス (例 IPv4: 127.0.0.1 / IPv6: ::1)</translation>
     </message>
@@ -1804,18 +1799,6 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</source>
         <translation type="unfinished">Tor onion serviceを介してピアに到達するために別のSOCKS&amp;5プロキシを使用する(&amp;5):</translation>
-    </message>
-    <message>
-        <source>Monospaced font in the Overview tab:</source>
-        <translation type="unfinished">概要タブの等幅フォント: </translation>
-    </message>
-    <message>
-        <source>embedded "%1"</source>
-        <translation type="unfinished">埋込み "%1"</translation>
-    </message>
-    <message>
-        <source>closest matching "%1"</source>
-        <translation type="unfinished">最もマッチする  "%1"</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -2055,8 +2038,8 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">PSBTはディスクに保存されました。</translation>
     </message>
     <message>
-        <source> * Sends %1 to %2</source>
-        <translation type="unfinished"> * %1 を %2 へ送金</translation>
+        <source>Sends %1 to %2</source>
+        <translation type="unfinished">%1を%2に送信</translation>
     </message>
     <message>
         <source>own address</source>
@@ -2176,7 +2159,7 @@ BIP70には広範なセキュリティー上の問題があるので、ウォレ
     <message>
         <source>Received</source>
         <extracomment>Title of Peers Table column which indicates the total amount of network information we have received from the peer.</extracomment>
-        <translation type="unfinished">受信</translation>
+        <translation type="unfinished">受信済</translation>
     </message>
     <message>
         <source>Address</source>
@@ -2688,7 +2671,7 @@ For more information on using this console, type %6.
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">外向き</translation>
+        <translation type="unfinished">送金先</translation>
     </message>
     <message>
         <source>From</source>
@@ -2893,7 +2876,7 @@ For more information on using this console, type %6.
     </message>
     <message>
         <source>(no label)</source>
-        <translation type="unfinished">(ラベル無し)</translation>
+        <translation type="unfinished">(ラベルなし)</translation>
     </message>
     <message>
         <source>(no message)</source>
@@ -3109,10 +3092,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">オフラインの %1 ウォレット、あるいはPSBTに対応したハードウェアウォレットで使用するためのPSBT(部分的に署名された取引)を作成します。</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation type="unfinished"> ウォレット '%1' から</translation>
-    </message>
-    <message>
         <source>%1 to '%2'</source>
         <translation type="unfinished">%1 → '%2'</translation>
     </message>
@@ -3168,6 +3147,10 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can only create a PSBT. This string is displayed when private keys are disabled and an external signer is not available.</extracomment>
         <translation type="unfinished">取引の提案を確認してください。これにより、部分的に署名されたBitcoin取引（PSBT）が作成されます。これを保存するかコピーして例えばオフラインの %1 ウォレットやPSBTを扱えるハードウェアウォレットで残りの署名が出来ます。</translation>
+    </message>
+    <message>
+        <source>%1 from wallet '%2'</source>
+        <translation type="unfinished"> ウォレット '%2' の%1</translation>
     </message>
     <message>
         <source>Do you want to create this transaction?</source>
@@ -3280,7 +3263,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>(no label)</source>
-        <translation type="unfinished">(ラベル無し)</translation>
+        <translation type="unfinished">(ラベルなし)</translation>
     </message>
 </context>
 <context>
@@ -3645,8 +3628,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">アウトプット番号</translation>
     </message>
     <message>
-        <source> (Certificate was not verified)</source>
-        <translation type="unfinished"> (証明書は未検証)</translation>
+        <source>%1 (Certificate was not verified)</source>
+        <translation type="unfinished">%1 (証明書は未検証)</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -4517,14 +4500,6 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">エラー: 生成されたscriptpubkeyから宛先を抽出できません</translation>
     </message>
     <message>
-        <source>Error: Could not add watchonly tx to watchonly wallet</source>
-        <translation type="unfinished">エラー:  監視対象取引を監視専用ウォレットに追加できませんでした</translation>
-    </message>
-    <message>
-        <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">エラー:  監視対象取引を削除できませんでした</translation>
-    </message>
-    <message>
         <source>Error: Couldn't create cursor into database</source>
         <translation type="unfinished">エラー: データベースにカーソルを作成できませんでした</translation>
     </message>
@@ -4561,10 +4536,6 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">エラー:  %sアドレスは使えません。</translation>
     </message>
     <message>
-        <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">エラー: 一部の監視対象取引を削除できませんでした</translation>
-    </message>
-    <message>
         <source>Error: This wallet already uses SQLite</source>
         <translation type="unfinished">エラー: このウォレットはすでに SQLite を使用しています</translation>
     </message>
@@ -4589,12 +4560,24 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">エラー: データベース内のすべてのレコードを読み取ることができません</translation>
     </message>
     <message>
+        <source>Error: Unable to read wallet's best block locator record</source>
+        <translation type="unfinished">エラー：ウォレットのベストブロックロケーターレコードを読み込めません</translation>
+    </message>
+    <message>
         <source>Error: Unable to remove watchonly address book data</source>
         <translation type="unfinished">エラー:  監視専用アドレス帳データを削除できません</translation>
     </message>
     <message>
         <source>Error: Unable to write record to new wallet</source>
         <translation type="unfinished">エラー: 新しいウォレットにレコードを書き込めません</translation>
+    </message>
+    <message>
+        <source>Error: Unable to write solvable wallet best block locator record</source>
+        <translation type="unfinished">エラー：解決可能なウォレットのベストブロックロケーターレコードを書き込めません</translation>
+    </message>
+    <message>
+        <source>Error: Unable to write watchonly wallet best block locator record</source>
+        <translation type="unfinished">エラー：監視専用ウォレットのベストブロックロケーターレコードを書き込めません</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -4845,10 +4828,6 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">取引のお釣りのアウトプットインデックスが規定の範囲外です</translation>
     </message>
     <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">取引のメモリープールチェーンが長すぎます</translation>
-    </message>
-    <message>
         <source>Transaction must have at least one recipient</source>
         <translation type="unfinished">取引は最低ひとつの受取先が必要です</translation>
     </message>
@@ -4929,12 +4908,20 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">未サポートのログレベル %s=%s。 正しい値は: %s。</translation>
     </message>
     <message>
+        <source>Wallet file creation failed: %s</source>
+        <translation type="unfinished">ウォレットファイルの作成に失敗しました：%s</translation>
+    </message>
+    <message>
         <source>acceptstalefeeestimates is not supported on %s chain.</source>
         <translation type="unfinished">%s チェーンでは acceptstalefeeestimates はサポートされていません。</translation>
     </message>
     <message>
         <source>Unsupported logging category %s=%s.</source>
         <translation type="unfinished">サポートされていないログカテゴリ %s=%s 。</translation>
+    </message>
+    <message>
+        <source>Error: Could not add watchonly tx %s to watchonly wallet</source>
+        <translation type="unfinished">エラー:  監視対象取引%sを監視専用ウォレットに追加できませんでした</translation>
     </message>
     <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>

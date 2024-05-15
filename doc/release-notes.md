@@ -1,11 +1,8 @@
-26.x Release Notes
-==================
+Bitcoin Core version 27.x is now available from:
 
-Bitcoin Core version 26.x is now available from:
+  <https://bitcoincore.org/bin/bitcoin-core-27.x/>
 
-  <https://bitcoincore.org/bin/bitcoin-core-26.x/>
-
-This release includes new features, various bug fixes and performance
+This release includes various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
@@ -32,40 +29,63 @@ Compatibility
 ==============
 
 Bitcoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 11.0+, and Windows 7 and newer.  Bitcoin
+using the Linux Kernel 3.17+, macOS 11.0+, and Windows 7 and newer. Bitcoin
 Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Bitcoin Core on
+frequently tested on them. It is not recommended to use Bitcoin Core on
 unsupported systems.
 
 Notable changes
 ===============
 
-### Wallet
+### Miniscript
 
-- #28994 wallet: skip BnB when SFFO is enabled
-- #28920 wallet: birth time update during tx scanning
-- #29176 wallet: Fix use-after-free in WalletBatch::EraseRecords
+- #29853 sign: don't assume we are parsing a sane TapMiniscript
 
 ### RPC
 
-- #29003 rpc: fix getrawtransaction segfault
+- #29869 rpc, bugfix: Enforce maximum value for setmocktime
+- #29870 rpc: Reword SighashFromStr error message
+
+### Index
+
+- #29776 Fix #29767, set m_synced = true after Commit()
+
+### Test
+
+- #29892 test: Fix failing univalue float test
+
+### Build
+
+- #29747 depends: fix mingw-w64 Qt DEBUG=1 build
+- #29859 build: Fix false positive CHECK_ATOMIC test
+- #29985 depends: Fix build of Qt for 32-bit platforms with recent glibc
+
+### Doc
+
+- #29934 doc: add LLVM instruction for macOS < 13
 
 ### CI
 
-- #28992 ci: Use Ubuntu 24.04 Noble for asan,tsan,tidy,fuzz
-- #29080 ci: Set HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK to avoid unrelated failures
+- #29856 ci: Bump s390x to ubuntu:24.04
+
+### Misc
+
+- #29691 Change Luke Dashjr seed to dashjr-list-of-p2p-nodes.us
 
 Credits
 =======
 
 Thanks to everyone who directly contributed to this release:
 
-- Andrew Chow
-- furszy
+- Antoine Poinsot
+- dergoegge
+- fanquake
 - Hennadii Stepanov
+- laanwj
+- Luke Dashjr
 - MarcoFalke
-- Martin Zumsande
-- Murch
+- nanlour
+- Sjors Provoost
 
 As well as to everyone that helped with translations on
 [Transifex](https://www.transifex.com/bitcoin/bitcoin/).

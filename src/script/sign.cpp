@@ -295,7 +295,7 @@ struct TapSatisfier: Satisfier<XOnlyPubKey> {
     //! Conversion from a raw xonly public key.
     template <typename I>
     std::optional<XOnlyPubKey> FromPKBytes(I first, I last) const {
-        CHECK_NONFATAL(last - first == 32);
+        if (last - first != 32) return {};
         XOnlyPubKey pubkey;
         std::copy(first, last, pubkey.begin());
         return pubkey;
@@ -379,7 +379,7 @@ static bool SignTaproot(const SigningProvider& provider, const BaseSignatureCrea
             result_stack.emplace_back(std::begin(script), std::end(script)); // Push the script
             result_stack.push_back(*control_blocks.begin()); // Push the smallest control block
             if (smallest_result_stack.size() == 0 ||
-                GetSerializeSize(result_stack, PROTOCOL_VERSION) < GetSerializeSize(smallest_result_stack, PROTOCOL_VERSION)) {
+                GetSerializeSize(result_stack) < GetSerializeSize(smallest_result_stack)) {
                 smallest_result_stack = std::move(result_stack);
             }
         }

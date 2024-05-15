@@ -505,7 +505,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     }
 
     // Limit size
-    unsigned int nBytes = ::GetSerializeSize(txNew, PROTOCOL_VERSION);
+    unsigned int nBytes = ::GetSerializeSize(txNew);
     if (nBytes >= 1000000/5)
         return error("CreateCoinStake : exceeded coinstake size limit");
 

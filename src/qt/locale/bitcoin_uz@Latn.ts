@@ -1821,38 +1821,6 @@ Kirish faqat 'legacy' turidagi manzillar uchun.</translation>
         <translation type="unfinished">Ташқарига:</translation>
     </message>
     <message>
-        <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Очиш</translation>
-    </message>
-    <message>
-        <source>&amp;Console</source>
-        <translation type="unfinished">&amp;Терминал</translation>
-    </message>
-    <message>
-        <source>&amp;Network Traffic</source>
-        <translation type="unfinished">&amp;Тармоқ трафиги</translation>
-    </message>
-    <message>
-        <source>Totals</source>
-        <translation type="unfinished">Жами</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation type="unfinished">Тузатиш журнали файли</translation>
-    </message>
-    <message>
-        <source>Clear console</source>
-        <translation type="unfinished">Терминални тозалаш</translation>
-    </message>
-    <message>
-        <source>In:</source>
-        <translation type="unfinished">Ичига:</translation>
-    </message>
-    <message>
-        <source>Out:</source>
-        <translation type="unfinished">Ташқарига:</translation>
-    </message>
-    <message>
         <source>&amp;Copy address</source>
         <extracomment>Context menu action to copy the address of a peer.</extracomment>
         <translation type="unfinished">&amp;Manzilni nusxalash</translation>

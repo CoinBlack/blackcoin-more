@@ -688,18 +688,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">O&amp;kno</translation>
     </message>
     <message>
-        <source>Zoom</source>
-        <translation type="unfinished">Povečava</translation>
-    </message>
-    <message>
-        <source>Main Window</source>
-        <translation type="unfinished">Glavno okno</translation>
-    </message>
-    <message>
-        <source>%1 client</source>
-        <translation type="unfinished">Odjemalec %1</translation>
-    </message>
-    <message>
         <source>&amp;Hide</source>
         <translation type="unfinished">&amp;Skrij</translation>
     </message>
@@ -1680,18 +1668,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">Uporabi ločen posredniški strežik SOCKS5 za povezavo s soležniki prek storitev onion (Tor):</translation>
     </message>
     <message>
-        <source>Monospaced font in the Overview tab:</source>
-        <translation type="unfinished">Pisava enakomerne širine v zavihku Pregled:</translation>
-    </message>
-    <message>
-        <source>embedded "%1"</source>
-        <translation type="unfinished">vdelan "%1"</translation>
-    </message>
-    <message>
-        <source>closest matching "%1"</source>
-        <translation type="unfinished">najboljše ujemanje "%1"</translation>
-    </message>
-    <message>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;V redu</translation>
     </message>
@@ -1933,8 +1909,8 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation type="unfinished">DPBT shranjena na disk.</translation>
     </message>
     <message>
-        <source> * Sends %1 to %2</source>
-        <translation type="unfinished">* Pošlje %1 na %2</translation>
+        <source>own address</source>
+        <translation type="unfinished">lasten naslov</translation>
     </message>
     <message>
         <source>own address</source>
@@ -2969,10 +2945,6 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
         <translation type="unfinished">Ustvari delno podpisano bitcoin-transakcijo (DPBT, angl. PSBT), ki jo lahko kopirate in potem podpišete n.pr. z nepovezano (offline) %1 denarnico ali pa s hardversko denarnico, ki podpira DPBT.</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation type="unfinished"> iz denarnice '%1'</translation>
-    </message>
-    <message>
         <source>%1 to '%2'</source>
         <translation type="unfinished">%1 v '%2'</translation>
     </message>
@@ -3492,10 +3464,6 @@ Opomba: Ker se provizija izračuna na bajt, bi provizija "100 satoshijev na kvB"
     <message>
         <source>Output index</source>
         <translation type="unfinished">Indeks izhoda</translation>
-    </message>
-    <message>
-        <source> (Certificate was not verified)</source>
-        <translation type="unfinished">(Certifikat ni bil preverjen)</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -4256,14 +4224,6 @@ Obnovitev varnostne kopije denarnice ni bila mogoča.</translation>
         <translation type="unfinished">Napaka pri branju naslednjega zapisa v podatkovni bazi denarnice.</translation>
     </message>
     <message>
-        <source>Error: Could not add watchonly tx to watchonly wallet</source>
-        <translation type="unfinished">Napaka: dodajanje opazovane transakcije v opazovano denarnico je spodletelo</translation>
-    </message>
-    <message>
-        <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">Napaka: brisanje opazovanih transakcij je spodletelo</translation>
-    </message>
-    <message>
         <source>Error: Couldn't create cursor into database</source>
         <translation type="unfinished">Napaka: ne morem ustvariti kurzorja v bazo</translation>
     </message>
@@ -4298,10 +4258,6 @@ Obnovitev varnostne kopije denarnice ni bila mogoča.</translation>
     <message>
         <source>Error: No %s addresses available.</source>
         <translation type="unfinished">Napaka: na voljo ni nobenega naslova '%s'</translation>
-    </message>
-    <message>
-        <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">Napaka: nekaterih opazovanih transakcij ni bilo mogoče izbrisati</translation>
     </message>
     <message>
         <source>Error: This wallet already uses SQLite</source>
@@ -4542,10 +4498,6 @@ Obnovitev varnostne kopije denarnice ni bila mogoča.</translation>
     <message>
         <source>Transaction change output index out of range</source>
         <translation type="unfinished">Indeks izhoda vračila je izven obsega.</translation>
-    </message>
-    <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">Transakcija je del predolge verige nepotrjenih transakcij</translation>
     </message>
     <message>
         <source>Transaction must have at least one recipient</source>

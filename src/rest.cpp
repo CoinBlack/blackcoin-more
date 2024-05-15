@@ -3,6 +3,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#if defined(HAVE_CONFIG_H)
+#include <config/bitcoin-config.h>
+#endif
+
 #include <rest.h>
 
 #include <blockfilter.h>
@@ -26,8 +30,8 @@
 #include <txmempool.h>
 #include <util/any.h>
 #include <util/check.h>
+#include <util/strencodings.h>
 #include <validation.h>
-#include <version.h>
 
 #include <any>
 #include <string>
@@ -239,7 +243,7 @@ static bool rest_headers(const std::any& context,
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        CDataStream ssHeader(SER_NETWORK, PROTOCOL_VERSION);
+        CDataStream ssHeader(SER_NETWORK);
         for (const CBlockIndex *pindex : headers) {
             ssHeader << pindex->GetBlockHeader();
         }
@@ -251,7 +255,7 @@ static bool rest_headers(const std::any& context,
     }
 
     case RESTResponseFormat::HEX: {
-        CDataStream ssHeader(SER_NETWORK, PROTOCOL_VERSION);
+        CDataStream ssHeader(SER_NETWORK);
         for (const CBlockIndex *pindex : headers) {
             ssHeader << pindex->GetBlockHeader();
         }
@@ -264,7 +268,7 @@ static bool rest_headers(const std::any& context,
     case RESTResponseFormat::JSON: {
         UniValue jsonHeaders(UniValue::VARR);
         for (const CBlockIndex *pindex : headers) {
-            jsonHeaders.push_back(blockheaderToJSON(tip, pindex));
+            jsonHeaders.push_back(blockheaderToJSON(*tip, *pindex));
         }
         std::string strJSON = jsonHeaders.write() + "\n";
         req->WriteHeader("Content-Type", "application/json");
@@ -312,8 +316,8 @@ static bool rest_block(const std::any& context,
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-        ssBlock << block;
+        DataStream ssBlock;
+        ssBlock << TX_WITH_WITNESS(block);
         std::string binaryBlock = ssBlock.str();
         req->WriteHeader("Content-Type", "application/octet-stream");
         req->WriteReply(HTTP_OK, binaryBlock);
@@ -321,8 +325,8 @@ static bool rest_block(const std::any& context,
     }
 
     case RESTResponseFormat::HEX: {
-        CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-        ssBlock << block;
+        DataStream ssBlock;
+        ssBlock << TX_WITH_WITNESS(block);
         std::string strHex = HexStr(ssBlock) + "\n";
         req->WriteHeader("Content-Type", "text/plain");
         req->WriteReply(HTTP_OK, strHex);
@@ -330,7 +334,7 @@ static bool rest_block(const std::any& context,
     }
 
     case RESTResponseFormat::JSON: {
-        UniValue objBlock = blockToJSON(chainman.m_blockman, block, tip, pblockindex, tx_verbosity);
+        UniValue objBlock = blockToJSON(chainman.m_blockman, block, *tip, *pblockindex, tx_verbosity);
         std::string strJSON = objBlock.write() + "\n";
         req->WriteHeader("Content-Type", "application/json");
         req->WriteReply(HTTP_OK, strJSON);
@@ -438,7 +442,7 @@ static bool rest_filter_header(const std::any& context, HTTPRequest* req, const 
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        CDataStream ssHeader{SER_NETWORK, PROTOCOL_VERSION};
+        CDataStream ssHeader{SER_NETWORK};
         for (const uint256& header : filter_headers) {
             ssHeader << header;
         }
@@ -449,7 +453,7 @@ static bool rest_filter_header(const std::any& context, HTTPRequest* req, const 
         return true;
     }
     case RESTResponseFormat::HEX: {
-        CDataStream ssHeader{SER_NETWORK, PROTOCOL_VERSION};
+        CDataStream ssHeader{SER_NETWORK};
         for (const uint256& header : filter_headers) {
             ssHeader << header;
         }
@@ -537,7 +541,7 @@ static bool rest_block_filter(const std::any& context, HTTPRequest* req, const s
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        CDataStream ssResp{SER_NETWORK, PROTOCOL_VERSION};
+        CDataStream ssResp{SER_NETWORK};
         ssResp << filter;
 
         std::string binaryResp = ssResp.str();
@@ -546,7 +550,7 @@ static bool rest_block_filter(const std::any& context, HTTPRequest* req, const s
         return true;
     }
     case RESTResponseFormat::HEX: {
-        CDataStream ssResp{SER_NETWORK, PROTOCOL_VERSION};
+        CDataStream ssResp{SER_NETWORK};
         ssResp << filter;
 
         std::string strHex = HexStr(ssResp) + "\n";
@@ -718,8 +722,8 @@ static bool rest_tx(const std::any& context, HTTPRequest* req, const std::string
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-        ssTx << tx;
+        DataStream ssTx;
+        ssTx << TX_WITH_WITNESS(tx);
 
         std::string binaryTx = ssTx.str();
         req->WriteHeader("Content-Type", "application/octet-stream");
@@ -728,8 +732,8 @@ static bool rest_tx(const std::any& context, HTTPRequest* req, const std::string
     }
 
     case RESTResponseFormat::HEX: {
-        CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-        ssTx << tx;
+        DataStream ssTx;
+        ssTx << TX_WITH_WITNESS(tx);
 
         std::string strHex = HexStr(ssTx) + "\n";
         req->WriteHeader("Content-Type", "text/plain");
@@ -785,7 +789,6 @@ static bool rest_getutxos(const std::any& context, HTTPRequest* req, const std::
 
         for (size_t i = (fCheckMemPool) ? 1 : 0; i < uriParts.size(); i++)
         {
-            uint256 txid;
             int32_t nOutput;
             std::string strTxid = uriParts[i].substr(0, uriParts[i].find('-'));
             std::string strOutput = uriParts[i].substr(uriParts[i].find('-')+1);
@@ -793,8 +796,7 @@ static bool rest_getutxos(const std::any& context, HTTPRequest* req, const std::
             if (!ParseInt32(strOutput, &nOutput) || !IsHex(strTxid))
                 return RESTERR(req, HTTP_BAD_REQUEST, "Parse error");
 
-            txid.SetHex(strTxid);
-            vOutPoints.emplace_back(txid, (uint32_t)nOutput);
+            vOutPoints.emplace_back(TxidFromString(strTxid), (uint32_t)nOutput);
         }
 
         if (vOutPoints.size() > 0)
@@ -819,7 +821,7 @@ static bool rest_getutxos(const std::any& context, HTTPRequest* req, const std::
                 if (fInputParsed) //don't allow sending input over URI and HTTP RAW DATA
                     return RESTERR(req, HTTP_BAD_REQUEST, "Combination of URI scheme inputs and raw post data is not allowed");
 
-                CDataStream oss(SER_NETWORK, PROTOCOL_VERSION);
+                CDataStream oss(SER_NETWORK);
                 oss << strRequestMutable;
                 oss >> fCheckMemPool;
                 oss >> vOutPoints;
@@ -892,7 +894,7 @@ static bool rest_getutxos(const std::any& context, HTTPRequest* req, const std::
     case RESTResponseFormat::BINARY: {
         // serialize data
         // use exact same output as mentioned in Bip64
-        CDataStream ssGetUTXOResponse(SER_NETWORK, PROTOCOL_VERSION);
+        CDataStream ssGetUTXOResponse(SER_NETWORK);
         ssGetUTXOResponse << active_height << active_hash << bitmap << outs;
         std::string ssGetUTXOResponseString = ssGetUTXOResponse.str();
 
@@ -902,7 +904,7 @@ static bool rest_getutxos(const std::any& context, HTTPRequest* req, const std::
     }
 
     case RESTResponseFormat::HEX: {
-        CDataStream ssGetUTXOResponse(SER_NETWORK, PROTOCOL_VERSION);
+        CDataStream ssGetUTXOResponse(SER_NETWORK);
         ssGetUTXOResponse << active_height << active_hash << bitmap << outs;
         std::string strHex = HexStr(ssGetUTXOResponse) + "\n";
 
@@ -972,7 +974,7 @@ static bool rest_blockhash_by_height(const std::any& context, HTTPRequest* req,
     }
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        CDataStream ss_blockhash(SER_NETWORK, PROTOCOL_VERSION);
+        CDataStream ss_blockhash(SER_NETWORK);
         ss_blockhash << pblockindex->GetBlockHash();
         req->WriteHeader("Content-Type", "application/octet-stream");
         req->WriteReply(HTTP_OK, ss_blockhash.str());

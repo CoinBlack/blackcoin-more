@@ -94,6 +94,14 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">មានបញ្ហាក្នុងការព្យាយាម រក្សាទុកបញ្ជីអាសយដ្ឋានដល់ %1។ សូមព្យាយាមម្ដងទៀត។</translation>
     </message>
     <message>
+        <source>Sending addresses - %1</source>
+        <translation type="unfinished">កំពុងផ្ញើអាសយដ្ឋាន%1</translation>
+    </message>
+    <message>
+        <source>Receiving addresses - %1</source>
+        <translation type="unfinished">ទទួលអាសយដ្ឋាន - %1</translation>
+    </message>
+    <message>
         <source>Exporting Failed</source>
         <translation type="unfinished">ការនាំចេញបានបរាជ័យ</translation>
     </message>
@@ -630,6 +638,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">បិទកាបូបអេឡិចត្រូនិចទាំងអស់</translation>
     </message>
     <message>
+        <source>Migrate Wallet</source>
+        <translation type="unfinished">កាបូបMigrate</translation>
+    </message>
+    <message>
         <source>No wallets available</source>
         <translation type="unfinished">មិនមានកាបូបអេឡិចត្រូនិច</translation>
     </message>
@@ -655,23 +667,15 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished">វិនដូ(&amp;W)</translation>
-    </message>
-    <message>
-        <source>Main Window</source>
-        <translation type="unfinished">វិនដូចម្បង</translation>
-    </message>
-    <message>
-        <source>%1 client</source>
-        <translation type="unfinished">%1 អតិថិជន</translation>
+        <translation type="unfinished">&amp;វិនដូ</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished">លាក់(&amp;H)</translation>
+        <translation type="unfinished">&amp;លាក់</translation>
     </message>
     <message>
         <source>S&amp;how</source>
-        <translation type="unfinished">របៀប(&amp;S)</translation>
+        <translation type="unfinished">S&amp;របៀប</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
@@ -888,10 +892,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">អាច +/- %1 satoshi(s)ច្រើនក្នុងការបញ្ជូលមួយ។</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation type="unfinished">អាច +/- %1 satoshi(s)ច្រើនក្នុងការបញ្ជូលមួយ។</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation type="unfinished">(គ្មាន​ស្លាក​)</translation>
     </message>
@@ -946,6 +946,13 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">កំពុងទាញកាបូប...</translation>
     </message>
 </context>
+<context>
+    <name>MigrateWalletActivity</name>
+    <message>
+        <source>Migrate Wallet</source>
+        <translation type="unfinished">កាបូបMigrate</translation>
+    </message>
+    </context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -1397,7 +1404,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished">វិនដូ(&amp;W)</translation>
+        <translation type="unfinished">&amp;វិនដូ</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -1852,7 +1859,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <source>Last block time</source>
-        <translation type="unfinished">ពេលវេលាប្លុកចុងក្រោយ</translation>
+        <translation type="unfinished">ពេវេលាប្លុកជុងក្រោយ</translation>
     </message>
     <message>
         <source>&amp;Network Traffic</source>
@@ -2224,10 +2231,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>Copy fee</source>
         <translation type="unfinished">ចម្លងតម្លៃ</translation>
-    </message>
-    <message>
-        <source>Copy change</source>
-        <translation type="unfinished">ចម្លងការផ្លាស់ប្តូរ</translation>
     </message>
     <message>
         <source>Sign on device</source>
@@ -3008,10 +3011,6 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <source>Transaction amounts must not be negative</source>
         <translation type="unfinished">ចំនួនប្រត្តិបត្តិការ មិនអាចអវិជ្ជមានបានទេ</translation>
-    </message>
-    <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">ប្រត្តិបត្តិការមានខ្សែចង្វាក់រងចាំដើម្បីធ្វើការផ្ទៀងផ្ទាត់វែង</translation>
     </message>
     <message>
         <source>Transaction must have at least one recipient</source>

@@ -62,14 +62,6 @@
         <translation type="unfinished">Sao chép &amp;Nhãn</translation>
     </message>
     <message>
-        <source>&amp;Copy Address</source>
-        <translation type="unfinished">&amp;Sao chép địa chỉ</translation>
-    </message>
-    <message>
-        <source>Copy &amp;Label</source>
-        <translation type="unfinished">Sao chép &amp;Nhãn</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Chỉnh sửa</translation>
     </message>
@@ -77,7 +69,15 @@
         <source>Export Address List</source>
         <translation type="unfinished">Xuất danh sách địa chỉ</translation>
     </message>
-    </context>
+    <message>
+        <source>Sending addresses - %1</source>
+        <translation type="unfinished">Địa chỉ gửi%1</translation>
+    </message>
+    <message>
+        <source>Exporting Failed</source>
+        <translation type="unfinished">Quá trình xuất dữ liệu đã thất bại</translation>
+    </message>
+</context>
 <context>
     <name>AddressTableModel</name>
     <message>
@@ -526,6 +526,22 @@
         </translation>
     </message>
     <message>
+        <source>%1 behind</source>
+        <translation type="unfinished">%1 phía sau</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Lỗi</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Thông tin</translation>
+    </message>
+    <message>
+        <source>Up to date</source>
+        <translation type="unfinished">cập nhật</translation>
+    </message>
+    <message>
         <source>Load Partially Signed Bitcoin Transaction</source>
         <translation type="unfinished">Tải một phần giao dịch Bitcoin đã ký</translation>
     </message>
@@ -586,6 +602,14 @@
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
         <translation type="unfinished">Hiển thị %1 tin nhắn hỗ trợ để nhận được danh sách Bitcoin command-line khả dụng</translation>
+    </message>
+    <message>
+        <source>&amp;Mask values</source>
+        <translation type="unfinished">&amp;Giá trị mặt nạ</translation>
+    </message>
+    <message>
+        <source>Mask the values in the Overview tab</source>
+        <translation type="unfinished">Che các giá trị trong tab Tổng quan</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -657,6 +681,10 @@
         <translation type="unfinished">Tiền đồng bộ hóa Headers (%1%)…</translation>
     </message>
     <message>
+        <source>Error creating wallet</source>
+        <translation type="unfinished">Lỗi tạo ví</translation>
+    </message>
+    <message>
         <source>Error: %1</source>
         <translation type="unfinished">Lỗi: %1</translation>
     </message>
@@ -719,6 +747,18 @@
         <translation type="unfinished">Đang tải ví…</translation>
     </message>
 </context>
+<context>
+    <name>OpenWalletActivity</name>
+    <message>
+        <source>default wallet</source>
+        <translation type="unfinished">ví mặc định</translation>
+    </message>
+    <message>
+        <source>Open Wallet</source>
+        <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
+        <translation type="unfinished">Mớ ví</translation>
+    </message>
+    </context>
 <context>
     <name>RestoreWalletActivity</name>
     <message>
@@ -1283,12 +1323,20 @@
         <source>Address</source>
         <translation type="unfinished">Địa chỉ</translation>
     </message>
+    <message>
+        <source>Exporting Failed</source>
+        <translation type="unfinished">Quá trình xuất dữ liệu đã thất bại</translation>
+    </message>
     </context>
 <context>
     <name>WalletFrame</name>
     <message>
         <source>Create a new wallet</source>
         <translation type="unfinished">Tạo một ví mới</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Lỗi</translation>
     </message>
     </context>
 <context>
@@ -1399,20 +1447,8 @@ Không thể khôi phục bản sao lưu của ví.</translation>
         <translation type="unfinished">Lỗi: Không thể trích xuất điểm đến trong mã khóa công khai đã tạo</translation>
     </message>
     <message>
-        <source>Error: Could not add watchonly tx to watchonly wallet</source>
-        <translation type="unfinished">Lỗi: Không thể thêm giao dịch chỉ xem vào ví chỉ xem</translation>
-    </message>
-    <message>
-        <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">Lỗi: Không thể xóa các giao dịch chỉ xem</translation>
-    </message>
-    <message>
         <source>Error: Failed to create new watchonly wallet</source>
         <translation type="unfinished">Lỗi: Tạo ví chỉ xem mới thất bại</translation>
-    </message>
-    <message>
-        <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">Lỗi: Không phải giao dịch chỉ xem nào cũng xóa được</translation>
     </message>
     <message>
         <source>Error: This wallet already uses SQLite</source>

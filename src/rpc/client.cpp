@@ -87,6 +87,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "scanblocks", 2, "start_height" },
     { "scanblocks", 3, "stop_height" },
     { "scanblocks", 5, "options" },
+    { "scanblocks", 5, "filter_false_positives" },
     { "scantxoutset", 1, "scanobjects" },
     { "addmultisigaddress", 0, "nrequired" },
     { "addmultisigaddress", 1, "keys" },
@@ -283,6 +284,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "stop", 0, "wait" },
     { "staking", 0, "generate"},
     { "addnode", 2, "v2transport" },
+    { "addconnection", 2, "v2transport" },
 };
 // clang-format on
 

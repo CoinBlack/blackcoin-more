@@ -2090,14 +2090,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ტრანზაქციის საკომისიოს პარამეტრების დამალვა</translation>
     </message>
     <message>
-        <source>Choose…</source>
-        <translation type="unfinished">აირჩიეთ…</translation>
-    </message>
-    <message>
-        <source>Hide transaction fee settings</source>
-        <translation type="unfinished">ტრანზაქციის საკომისიოს პარამეტრების დამალვა</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation type="unfinished">გ&amp;ასუფთავება</translation>
     </message>

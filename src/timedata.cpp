@@ -33,11 +33,6 @@ int64_t GetTimeOffset()
     return nTimeOffset;
 }
 
-NodeClock::time_point GetAdjustedTime()
-{
-    return NodeClock::now() + std::chrono::seconds{GetTimeOffset()};
-}
-
 #define BITCOIN_TIMEDATA_MAX_SAMPLES 200
 
 static std::set<CNetAddr> g_sources;
@@ -122,5 +117,5 @@ void TestOnlyResetTimeData()
 
 int64_t GetAdjustedTimeSeconds()
 {
-    return TicksSinceEpoch<std::chrono::seconds>(GetAdjustedTime());
+    return TicksSinceEpoch<std::chrono::seconds>(NodeClock::now());
 }

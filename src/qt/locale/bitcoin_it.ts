@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copia negli appunti del sistema l'indirizzo attualmente selezionato</translation>
+        <translation type="unfinished">Copia l'indirizzo attualmente selezionato negli appunti di sistema</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation type="unfinished">Rimuovi dalla lista l'indirizzo attualmente selezionato</translation>
+        <translation type="unfinished">Rimuovi l'indirizzo attualmente selezionato dall'elenco</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
@@ -297,6 +297,14 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
     <message>
         <source>unknown</source>
         <translation type="unfinished">sconosciuto</translation>
+    </message>
+    <message>
+        <source>Default system font "%1"</source>
+        <translation type="unfinished">Font default di sistema "%1"</translation>
+    </message>
+    <message>
+        <source>Custom…</source>
+        <translation type="unfinished">Personalizzato...</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -1059,10 +1067,46 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <translation type="unfinished">Sei sicuro di voler migrare il portafoglio &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
     <message>
+        <source>Migrating the wallet will convert this wallet to one or more descriptor wallets. A new wallet backup will need to be made.
+If this wallet contains any watchonly scripts, a new wallet will be created which contains those watchonly scripts.
+If this wallet contains any solvable but not watched scripts, a different and new wallet will be created which contains those scripts.
+
+The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the "Restore Wallet" functionality.</source>
+        <translation type="unfinished">La migrazione del portafoglio convertirà questo portafoglio in uno o più portafogli descrittori. Dovrà essere eseguito un nuovo backup del portafoglio.
+Se questo portafoglio contiene script di sola lettura, verrà generato un nuovo portafoglio che contiene quegli scripts di sola lettura.
+Se questo portafoglio contiene script risolvibili ma non osservati, verrà creato un portafoglio nuovo differente, per contenere questi script.
+
+Il processo di migrazione creerà un backup del portafoglio prima della migrazione. Questo file di backup verrà chiamato &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak e verrà collocato nella stessa cartella di questo portafoglio. Se la migrazione non andasse a buon fine, il backup può essere ripristinato con la funzionalità "Ripristina Portafoglio".</translation>
+    </message>
+    <message>
         <source>Migrate Wallet</source>
         <translation type="unfinished">Migra Wallet</translation>
     </message>
-    </context>
+    <message>
+        <source>Migrating Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
+        <translation type="unfinished">Migrando il Portafoglio &lt;b&gt;%1&lt;/b&gt;…</translation>
+    </message>
+    <message>
+        <source>The wallet '%1' was migrated successfully.</source>
+        <translation type="unfinished">Portafoglio '%1' migrato con successo.</translation>
+    </message>
+    <message>
+        <source>Watchonly scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Gli script di sola lettura sono stati migrati su un nuovo wallet chiamato '%1'.</translation>
+    </message>
+    <message>
+        <source>Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Gli script risolvibili ma non monitorati sono stati migrati su un nuovo wallet chiamato '%1'.</translation>
+    </message>
+    <message>
+        <source>Migration failed</source>
+        <translation type="unfinished">Migrazione fallita</translation>
+    </message>
+    <message>
+        <source>Migration Successful</source>
+        <translation type="unfinished">Migrazione Riuscita</translation>
+    </message>
+</context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -1144,6 +1188,14 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
     <message>
         <source>Create Wallet</source>
         <translation type="unfinished">Crea Portafoglio</translation>
+    </message>
+    <message>
+        <source>You are one step away from creating your new wallet!</source>
+        <translation type="unfinished">Ti manca un ultimo passo per creare il tuo nuovo portafoglio!</translation>
+    </message>
+    <message>
+        <source>Please provide a name and, if desired, enable any advanced options</source>
+        <translation type="unfinished">Fornisci un nome e, ove desiderato, attiva le opzioni avanzate</translation>
     </message>
     <message>
         <source>Wallet Name</source>
@@ -1525,6 +1577,10 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <translation type="unfinished">Riduci ad icona invece di uscire dall'applicazione quando la finestra viene chiusa. Attivando questa opzione l'applicazione terminerà solo dopo aver selezionato Esci dal menu File.</translation>
     </message>
     <message>
+        <source>Font in the Overview tab: </source>
+        <translation type="unfinished">Font nella scheda Panoramica:</translation>
+    </message>
+    <message>
         <source>Options set in this dialog are overridden by the command line:</source>
         <translation type="unfinished">Le azioni da riga di comando hanno precedenza su quelle impostate da questo pannello:</translation>
     </message>
@@ -1739,14 +1795,6 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
     <message>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</source>
         <translation type="unfinished">Usa un proxy SOCKS&amp;5 separato per raggiungere peers attraverso i Tor onion services.</translation>
-    </message>
-    <message>
-        <source>Monospaced font in the Overview tab:</source>
-        <translation type="unfinished">Font Monospaced nella tab di Overview</translation>
-    </message>
-    <message>
-        <source>closest matching "%1"</source>
-        <translation type="unfinished">corrispondenza più vicina "%1"</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -1986,8 +2034,12 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <translation type="unfinished">PSBT salvata su disco.</translation>
     </message>
     <message>
-        <source> * Sends %1 to %2</source>
-        <translation type="unfinished"> * Invia %1 a %2</translation>
+        <source>Sends %1 to %2</source>
+        <translation type="unfinished">Invia %1 a %2</translation>
+    </message>
+    <message>
+        <source>own address</source>
+        <translation type="unfinished">proprio indirizzo</translation>
     </message>
     <message>
         <source>own address</source>
@@ -2249,6 +2301,22 @@ Se ricevi questo errore, dovresti richiedere al commerciante di fornire un URI c
         <translation type="unfinished">Seleziona un peer per visualizzare informazioni più dettagliate.</translation>
     </message>
     <message>
+        <source>The transport layer version: %1</source>
+        <translation type="unfinished">Versione del livello di trasporto (transport layer): %1</translation>
+    </message>
+    <message>
+        <source>Transport</source>
+        <translation type="unfinished">Trasporto</translation>
+    </message>
+    <message>
+        <source>The BIP324 session ID string in hex, if any.</source>
+        <translation type="unfinished">La stringa dell' ID sessione BIP324 nell'hex, se presente.</translation>
+    </message>
+    <message>
+        <source>Session ID</source>
+        <translation type="unfinished">ID Sessione</translation>
+    </message>
+    <message>
         <source>Version</source>
         <translation type="unfinished">Versione</translation>
     </message>
@@ -2470,6 +2538,21 @@ Se ricevi questo errore, dovresti richiedere al commerciante di fornire un URI c
         <translation type="unfinished">Trova l’indirizzo in uscita: a vita breve, per richiedere indirizzi</translation>
     </message>
     <message>
+        <source>detecting: peer could be v1 or v2</source>
+        <extracomment>Explanatory text for "detecting" transport type.</extracomment>
+        <translation type="unfinished">rilevamento: il peer potrebbe essere v1 o v2</translation>
+    </message>
+    <message>
+        <source>v1: unencrypted, plaintext transport protocol</source>
+        <extracomment>Explanatory text for v1 transport type.</extracomment>
+        <translation type="unfinished">v1: non criptato, protocollo di trasporto testo semplice</translation>
+    </message>
+    <message>
+        <source>v2: BIP324 encrypted transport protocol</source>
+        <extracomment>Explanatory text for v2 transport type.</extracomment>
+        <translation type="unfinished">v2: protocollo di trasporto criptato BIP324 </translation>
+    </message>
+    <message>
         <source>we selected the peer for high bandwidth relay</source>
         <translation type="unfinished">Abbiamo selezionato il peer per il relay a banda larga </translation>
     </message>
@@ -2522,6 +2605,10 @@ Se ricevi questo errore, dovresti richiedere al commerciante di fornire un URI c
     <message>
         <source>Ctrl+I</source>
         <translation type="unfinished">Ctrl+W</translation>
+    </message>
+    <message>
+        <source>Node window - [%1]</source>
+        <translation type="unfinished">Finestra nodi - [%1]</translation>
     </message>
     <message>
         <source>Executing command using "%1" wallet</source>
@@ -2972,10 +3059,6 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation type="unfinished">Crea una Transazione Bitcoin Parzialmente Firmata (PSBT) da utilizzare con ad es. un portafoglio %1 offline o un portafoglio hardware compatibile con PSBT.</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation type="unfinished">dal portafoglio '%1'</translation>
-    </message>
-    <message>
         <source>%1 to %2</source>
         <translation type="unfinished">%1 a %2</translation>
     </message>
@@ -3027,6 +3110,10 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <source>Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can only create a PSBT. This string is displayed when private keys are disabled and an external signer is not available.</extracomment>
         <translation type="unfinished">Per favore, controlla la tua proposta di transazione. Questo produrrà una Partially Signed Bitcoin Transaction (PSBT) che puoi salvare o copiare e quindi firmare con es. un portafoglio %1 offline o un portafoglio hardware compatibile con PSBT.</translation>
+    </message>
+    <message>
+        <source>%1 from wallet '%2'</source>
+        <translation type="unfinished">%1 dal wallet '%2'</translation>
     </message>
     <message>
         <source>Do you want to create this transaction?</source>
@@ -3489,8 +3576,8 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation type="unfinished">Indice di output</translation>
     </message>
     <message>
-        <source> (Certificate was not verified)</source>
-        <translation type="unfinished">(Il certificato non è stato verificato)</translation>
+        <source>%1 (Certificate was not verified)</source>
+        <translation type="unfinished">%1 (Il certificato non è stato verificato)</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -3947,6 +4034,10 @@ Vai su File &gt; Apri Portafoglio per caricare un portafoglio.
         <translation type="unfinished">%s corrotto. Prova a usare la funzione del portafoglio bitcoin-wallet per salvare o recuperare il backup.</translation>
     </message>
     <message>
+        <source>%s failed to validate the -assumeutxo snapshot state. This indicates a hardware problem, or a bug in the software, or a bad software modification that allowed an invalid snapshot to be loaded. As a result of this, the node will shut down and stop using any state that was built on the snapshot, resetting the chain height from %d to %d. On the next restart, the node will resume syncing from %d without using any snapshot data. Please report this incident to %s, including how you obtained the snapshot. The invalid snapshot chainstate will be left on disk in case it is helpful in diagnosing the issue that caused this error.</source>
+        <translation type="unfinished">%s non è riuscito a validare la data dello snapshot -assumeutxo. Ciò indica un errore hardware, o un bug nel software, o una cattiva modifica del software che ha permesso allo snapshot invalido di essere caricato. Di conseguenza, il nodo verrà spento e smetterà di utilizzare qualunque stato costruito sullo snapshot, reimpostando l'altezza della catena da %d a %d. Al prossimo riavvio, il nodo riprenderà la sincronizzazione da %d senza usare alcun dato dello snapshot. Per favore segnala questo incidente a %s, includendo come hai ottenuto lo snapshot. Il chainstate dello snapshot invalido rimarrà sul disco nel caso in cui tornasse utile per indagare  la causa dell'errore.</translation>
+    </message>
+    <message>
         <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
         <translation type="unfinished">%s richiede di ascoltare sulla porta %u. Questa porta è considerata "cattiva" e quindi è improbabile che un peer vi si connetta. Vedere doc/p2p-bad-ports.md per i dettagli e un elenco completo.</translation>
     </message>
@@ -4043,6 +4134,10 @@ Vai su File &gt; Apri Portafoglio per caricare un portafoglio.
         <translation type="unfinished">Epurazione: l'ultima sincronizzazione del portafoglio risulta essere precedente alla eliminazione dei dati per via della modalità epurazione. È necessario eseguire un -reindex (scaricare nuovamente la catena di blocchi in caso di nodo epurato).</translation>
     </message>
     <message>
+        <source>Rename of '%s' -&gt; '%s' failed. You should resolve this by manually moving or deleting the invalid snapshot directory %s, otherwise you will encounter the same error again on the next startup.</source>
+        <translation type="unfinished">Rinomina di '%s'-&gt; '%s' fallita. Potresti risolvere il problema spostando manualmente o eliminando la cartella di snapshot invalida %s, altrimenti potrai incontrare ancora lo stesso errore al prossimo avvio.</translation>
+    </message>
+    <message>
         <source>SQLiteDatabase: Unknown sqlite wallet schema version %d. Only version %d is supported</source>
         <translation type="unfinished">SQLiteDatabase: Versione dello schema del portafoglio sqlite sconosciuta %d. Solo la versione %d è supportata</translation>
     </message>
@@ -4087,12 +4182,20 @@ Vai su File &gt; Apri Portafoglio per caricare un portafoglio.
         <translation type="unfinished">Il formato “%s” del file portafoglio fornito non è riconosciuto. si prega di fornire uno che sia “bdb” o “sqlite”. </translation>
     </message>
     <message>
+        <source>Unsupported category-specific logging level %1$s=%2$s. Expected %1$s=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %3$s. Valid loglevels: %4$s.</source>
+        <translation type="unfinished">Livello di logging specifico per categoria %1$s=%2$s non supportato. Previsto %1$s=&lt;category&gt;:&lt;loglevel&gt;. Categorie valide: %3$s. Livelli di log validi: %4$s.</translation>
+    </message>
+    <message>
         <source>Unsupported chainstate database format found. Please restart with -reindex-chainstate. This will rebuild the chainstate database.</source>
         <translation type="unfinished">Formato del database chainstate non supportato. Riavviare con -reindex-chainstate. In questo modo si ricostruisce il database dello stato della catena.</translation>
     </message>
     <message>
         <source>Wallet created successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future.</source>
         <translation type="unfinished">Portafoglio creato con successo. Il tipo di portafoglio legacy è stato deprecato e il supporto per la creazione e l'apertura di portafogli legacy sarà rimosso in futuro.</translation>
+    </message>
+    <message>
+        <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
+        <translation type="unfinished">Portafoglio caricato con successo. Il portafoglio di tipo legacy è deprecato e verrà rimosso il supporto per creare e aprire portafogli legacy in futuro. I portafogli legacy possono essere migrati a un portafoglio descrittore con migratewallet.</translation>
     </message>
     <message>
         <source>Warning: Dumpfile wallet format "%s" does not match command line specified format "%s".</source>
@@ -4155,6 +4258,10 @@ Vai su File &gt; Apri Portafoglio per caricare un portafoglio.
         <translation type="unfinished">Errore caricando %s: il wallet del dispositivo esterno di firma é stato caricato senza che il supporto del dispositivo esterno di firma sia stato compilato.</translation>
     </message>
     <message>
+        <source>Error reading %s! All keys read correctly, but transaction data or address metadata may be missing or incorrect.</source>
+        <translation type="unfinished">Errore durante la lettura di %s! Tutte le chiavi lette correttamente, ma i dati della transazione o metadati potrebbero essere mancanti o incorretti.</translation>
+    </message>
+    <message>
         <source>Error: Address book data in wallet cannot be identified to belong to migrated wallets</source>
         <translation type="unfinished">Errore: I dati della rubrica nel portafoglio non possono essere identificati come appartenenti a portafogli migrati</translation>
     </message>
@@ -4165,6 +4272,10 @@ Vai su File &gt; Apri Portafoglio per caricare un portafoglio.
     <message>
         <source>Error: Transaction %s in wallet cannot be identified to belong to migrated wallets</source>
         <translation type="unfinished">Errore: La transazione %s nel portafoglio non può essere identificata come appartenente ai portafogli migrati.</translation>
+    </message>
+    <message>
+        <source>Failed to calculate bump fees, because unconfirmed UTXOs depend on enormous cluster of unconfirmed transactions.</source>
+        <translation type="unfinished">Impossibile calcolare il salto di commissioni, poiché gli UTXO non confermati dipendono da una enorme serie di transazioni non confermate.</translation>
     </message>
     <message>
         <source>Failed to rename invalid peers.dat file. Please move or delete it and try again.</source>
@@ -4293,6 +4404,10 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Il dumpfile %s non esiste.</translation>
     </message>
     <message>
+        <source>Error committing db txn for wallet transactions removal</source>
+        <translation type="unfinished">Errore nel completamento della db txn per rimuovere transazioni dal wallet</translation>
+    </message>
+    <message>
         <source>Error creating %s</source>
         <translation type="unfinished">Errore di creazione %s</translation>
     </message>
@@ -4341,16 +4456,12 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Si è verificato un errore leggendo la voce successiva dal database del portafogli elettronico</translation>
     </message>
     <message>
+        <source>Error starting db txn for wallet transactions removal</source>
+        <translation type="unfinished">Errore nell'inizializzazione della db txn per rimuovere transazioni dal wallet</translation>
+    </message>
+    <message>
         <source>Error: Cannot extract destination from the generated scriptpubkey</source>
         <translation type="unfinished">Errore: Impossibile estrarre la destinazione dalla scriptpubkey generata</translation>
-    </message>
-    <message>
-        <source>Error: Could not add watchonly tx to watchonly wallet</source>
-        <translation type="unfinished">Errore: Impossibile aggiungere la transazione in sola consultazione al wallet in sola consultazione</translation>
-    </message>
-    <message>
-        <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">Errore: Non in grado di rimuovere le transazioni di sola lettura</translation>
     </message>
     <message>
         <source>Error: Couldn't create cursor into database</source>
@@ -4389,10 +4500,6 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Errore:  Nessun %s indirizzo disponibile</translation>
     </message>
     <message>
-        <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">Errore: Non è stato possibile cancellare tutte le transazioni in sola consultazione</translation>
-    </message>
-    <message>
         <source>Error: This wallet already uses SQLite</source>
         <translation type="unfinished">Errore: Questo portafoglio utilizza già SQLite</translation>
     </message>
@@ -4417,12 +4524,32 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Errore: Non in grado di leggere tutti i record nel database</translation>
     </message>
     <message>
+        <source>Error: Unable to read wallet's best block locator record</source>
+        <translation type="unfinished">Errore: Impossibile leggere il salvataggio del localizzatore del miglior blocco del wallet</translation>
+    </message>
+    <message>
         <source>Error: Unable to remove watchonly address book data</source>
         <translation type="unfinished">Errore: Impossibile rimuovere i dati della rubrica degli indirizzi in sola consultazione</translation>
     </message>
     <message>
         <source>Error: Unable to write record to new wallet</source>
         <translation type="unfinished">Errore: non è possibile scrivere la voce nel nuovo portafogli elettronico</translation>
+    </message>
+    <message>
+        <source>Error: Unable to write solvable wallet best block locator record</source>
+        <translation type="unfinished">Errore: Impossibile scrivere un localizzatore risolvibile del miglior blocco del wallet</translation>
+    </message>
+    <message>
+        <source>Error: Unable to write watchonly wallet best block locator record</source>
+        <translation type="unfinished">Errore: Impossibile scrivere il localizzatore di sola lettura del miglior blocco del wallet</translation>
+    </message>
+    <message>
+        <source>Error: address book copy failed for wallet %s</source>
+        <translation type="unfinished">Errore: copia rubrica fallita per il wallet %s</translation>
+    </message>
+    <message>
+        <source>Error: database transaction cannot be executed for wallet %s</source>
+        <translation type="unfinished">Errore: la transazione database non può essere eseguita per il portafoglio %s</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -4433,8 +4560,16 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Impossibile ripetere la scansione del portafoglio durante l'inizializzazione</translation>
     </message>
     <message>
+        <source>Failed to start indexes, shutting down..</source>
+        <translation type="unfinished">Impossibile inizializzare gli indici, spegnimento...</translation>
+    </message>
+    <message>
         <source>Failed to verify database</source>
         <translation type="unfinished">Errore nella verifica del database</translation>
+    </message>
+    <message>
+        <source>Failure removing transaction: %s</source>
+        <translation type="unfinished">La rimozione della transazione è fallita: %s</translation>
     </message>
     <message>
         <source>Ignoring duplicate -wallet %s.</source>
@@ -4653,6 +4788,10 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Questo è il costo di transazione che pagherai se invii una transazione.</translation>
     </message>
     <message>
+        <source>Transaction %s does not belong to this wallet</source>
+        <translation type="unfinished">La transazione %s non appartiene a questo portafoglio</translation>
+    </message>
+    <message>
         <source>Transaction amount too small</source>
         <translation type="unfinished">Importo transazione troppo piccolo</translation>
     </message>
@@ -4663,10 +4802,6 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
     <message>
         <source>Transaction change output index out of range</source>
         <translation type="unfinished">La transazione cambia l' indice dell'output fuori dal limite.</translation>
-    </message>
-    <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">La transazione ha una sequenza troppo lunga nella mempool</translation>
     </message>
     <message>
         <source>Transaction must have at least one recipient</source>
@@ -4745,8 +4880,28 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Nuove regole non riconosciute sono state attivate (versionbit %i)</translation>
     </message>
     <message>
+        <source>Unsupported global logging level %s=%s. Valid values: %s.</source>
+        <translation type="unfinished">Livello di logging globale non supportato %s=%s. Regole valide: %s.</translation>
+    </message>
+    <message>
+        <source>Wallet file creation failed: %s</source>
+        <translation type="unfinished">Creazione del file wallet fallita: %s</translation>
+    </message>
+    <message>
+        <source>acceptstalefeeestimates is not supported on %s chain.</source>
+        <translation type="unfinished">acceptstalefeeestimates non è supportato sulla catena %s.</translation>
+    </message>
+    <message>
         <source>Unsupported logging category %s=%s.</source>
         <translation type="unfinished">Categoria di registrazione non supportata %s=%s.</translation>
+    </message>
+    <message>
+        <source>Error: Could not add watchonly tx %s to watchonly wallet</source>
+        <translation type="unfinished">Errore: Non è stato possibile aggiungere la transazione di sola lettura %s al wallet di sola lettura</translation>
+    </message>
+    <message>
+        <source>Error: Could not delete watchonly transactions. </source>
+        <translation type="unfinished">Errore: Non è stato possibile eliminare le transazioni di sola lettura</translation>
     </message>
     <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>

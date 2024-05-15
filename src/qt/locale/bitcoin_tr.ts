@@ -94,6 +94,14 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Adres listesinin %1 konumuna kaydedilmesi sırasında bir hata meydana geldi. Lütfen tekrar deneyin.</translation>
     </message>
     <message>
+        <source>Sending addresses - %1</source>
+        <translation type="unfinished">Adresler gönderiliyor - %1</translation>
+    </message>
+    <message>
+        <source>Receiving addresses - %1</source>
+        <translation type="unfinished">Adresler alınıyor - %1</translation>
+    </message>
+    <message>
         <source>Exporting Failed</source>
         <translation type="unfinished">Dışa Aktarım Başarısız Oldu</translation>
     </message>
@@ -725,6 +733,11 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">daha fazla seçenek için tıklayın.</translation>
     </message>
     <message>
+        <source>Show Peers tab</source>
+        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <translation type="unfinished">Eşler sekmesini göster</translation>
+    </message>
+    <message>
         <source>Disable network activity</source>
         <extracomment>A context menu item.</extracomment>
         <translation type="unfinished">Ağ etkinliğini devre dışı bırak</translation>
@@ -1295,7 +1308,7 @@ Cüzdan kilidini aç.</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">Bu pencere kalkıncaya dek bilgisayarı kapatmayınız.</translation>
+        <translation type="unfinished">Bu pencere kapanıncaya dek bilgisayarı kapatmayınız.</translation>
     </message>
 </context>
 <context>
@@ -1608,6 +1621,11 @@ Cüzdan kilidini aç.</translation>
         <source>Client restart required to activate changes.</source>
         <extracomment>Text explaining that the settings changed will not come into effect until the client is restarted.</extracomment>
         <translation type="unfinished">Değişikliklerin uygulanması için istemcinin yeniden başlatılması lazımdır.</translation>
+    </message>
+    <message>
+        <source>Current settings will be backed up at "%1".</source>
+        <extracomment>Text explaining to the user that the client's current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location's path.</extracomment>
+        <translation type="unfinished">Mevcut ayarlar şu adreste yedeklenecek: "%1".</translation>
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
@@ -3027,10 +3045,6 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">Çıktı indeksi</translation>
     </message>
     <message>
-        <source> (Certificate was not verified)</source>
-        <translation type="unfinished">(Sertifika doğrulanmadı)</translation>
-    </message>
-    <message>
         <source>Merchant</source>
         <translation type="unfinished">Tüccar</translation>
     </message>
@@ -3729,10 +3743,6 @@ Cüzdan yedeği geri yüklenemiyor.</translation>
     <message>
         <source>Transaction change output index out of range</source>
         <translation type="unfinished">İşlem değişikliği çıktı endeksi aralık dışında</translation>
-    </message>
-    <message>
-        <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">İşlem çok uzun bir mempool zincirine sahip</translation>
     </message>
     <message>
         <source>Transaction must have at least one recipient</source>
