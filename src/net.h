@@ -419,7 +419,7 @@ private:
     size_t m_bytes_sent GUARDED_BY(m_send_mutex) {0};
 
 public:
-    V1Transport(const NodeId node_id, int nTypeIn, int nVersionIn) noexcept;
+    V1Transport(const NodeId node_id, int nTypeIn) noexcept;
 
     bool ReceivedMessageComplete() const override EXCLUSIVE_LOCKS_REQUIRED(!m_recv_mutex)
     {
@@ -599,8 +599,6 @@ private:
     std::vector<uint8_t> m_recv_decode_buffer GUARDED_BY(m_recv_mutex);
     /** Deserialization type. */
     const int m_recv_type;
-    /** Deserialization version number. */
-    const int m_recv_version;
     /** Current receiver state. */
     RecvState m_recv_state GUARDED_BY(m_recv_mutex);
 
@@ -649,10 +647,10 @@ public:
      * @param[in] type_in     the serialization type of returned CNetMessages.
      * @param[in] version_in  the serialization version of returned CNetMessages.
      */
-    V2Transport(NodeId nodeid, bool initiating, int type_in, int version_in) noexcept;
+    V2Transport(NodeId nodeid, bool initiating, int type_in) noexcept;
 
     /** Construct a V2 transport with specified keys and garbage (test use only). */
-    V2Transport(NodeId nodeid, bool initiating, int type_in, int version_in, const CKey& key, Span<const std::byte> ent32, std::vector<uint8_t> garbage) noexcept;
+    V2Transport(NodeId nodeid, bool initiating, int type_in, const CKey& key, Span<const std::byte> ent32, std::vector<uint8_t> garbage) noexcept;
 
     // Receive side functions.
     bool ReceivedMessageComplete() const noexcept override EXCLUSIVE_LOCKS_REQUIRED(!m_recv_mutex);

@@ -13,7 +13,7 @@
 
 FUZZ_TARGET(script_flags)
 {
-    CDataStream ds(buffer, SER_NETWORK, INIT_PROTO_VERSION);
+    CDataStream ds(buffer, SER_NETWORK);
     try {
         int nVersion;
         ds >> nVersion;

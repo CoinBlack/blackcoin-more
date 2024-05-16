@@ -394,7 +394,7 @@ static RPCHelpMan generateblock()
     UniValue obj(UniValue::VOBJ);
     obj.pushKV("hash", block_out->GetHash().GetHex());
     if (!process_new_block) {
-        CDataStream block_ser(SER_NETWORK, PROTOCOL_VERSION);
+        CDataStream block_ser(SER_NETWORK);
         block_ser << RPCTxSerParams(*block_out);
         obj.pushKV("hex", HexStr(block_ser));
     }

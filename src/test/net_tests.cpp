@@ -859,13 +859,13 @@ BOOST_AUTO_TEST_CASE(initial_advertise_from_version_message)
 
     const auto msg_version =
         msg_maker.Make(NetMsgType::VERSION, PROTOCOL_VERSION, services, time, services, CAddress::V1_NETWORK(peer_us));
-    CDataStream msg_version_stream{msg_version.data, SER_NETWORK, PROTOCOL_VERSION};
+    CDataStream msg_version_stream{msg_version.data, SER_NETWORK};
 
     m_node.peerman->ProcessMessage(
         peer, NetMsgType::VERSION, msg_version_stream, time_received_dummy, interrupt_dummy);
 
     const auto msg_verack = msg_maker.Make(NetMsgType::VERACK);
-    CDataStream msg_verack_stream{msg_verack.data, SER_NETWORK, PROTOCOL_VERSION};
+    CDataStream msg_verack_stream{msg_verack.data, SER_NETWORK};
 
     // Will set peer.fSuccessfullyConnected to true (necessary in SendMessages()).
     m_node.peerman->ProcessMessage(
@@ -1048,7 +1048,7 @@ class V2TransportTester
 public:
     /** Construct a tester object. test_initiator: whether the tested transport is initiator. */
     V2TransportTester(bool test_initiator) :
-        m_transport(0, test_initiator, SER_NETWORK, INIT_PROTO_VERSION),
+        m_transport(0, test_initiator, SER_NETWORK),
         m_cipher{GenerateRandomTestKey(), MakeByteSpan(InsecureRand256())},
         m_test_initiator(test_initiator) {}
 
@@ -1127,7 +1127,7 @@ public:
     void SendV1Version(const MessageStartChars& magic)
     {
         CMessageHeader hdr(magic, "version", 126 + InsecureRandRange(11));
-        CDataStream ser(SER_NETWORK, CLIENT_VERSION);
+        CDataStream ser(SER_NETWORK);
         ser << hdr;
         m_to_send.insert(m_to_send.end(), UCharCast(ser.data()), UCharCast(ser.data() + ser.size()));
     }

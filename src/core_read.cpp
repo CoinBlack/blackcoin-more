@@ -207,7 +207,7 @@ bool DecodeHexBlockHeader(CBlockHeader& header, const std::string& hex_header)
     if (!IsHex(hex_header)) return false;
 
     const std::vector<unsigned char> header_data{ParseHex(hex_header)};
-    CDataStream ser_header(header_data, SER_NETWORK, PROTOCOL_VERSION);
+    CDataStream ser_header(header_data, SER_NETWORK);
     try {
         ser_header >> header;
     } catch (const std::exception&) {
@@ -222,7 +222,7 @@ bool DecodeHexBlk(CBlock& block, const std::string& strHexBlk)
         return false;
 
     std::vector<unsigned char> blockData(ParseHex(strHexBlk));
-    CDataStream ssBlock(blockData, SER_NETWORK, PROTOCOL_VERSION);
+    CDataStream ssBlock(blockData, SER_NETWORK);
     try {
         ssBlock >> TX_WITH_WITNESS(block);
     }

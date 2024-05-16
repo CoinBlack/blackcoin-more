@@ -28,7 +28,7 @@ void initialize_transaction()
 
 FUZZ_TARGET(transaction, .init = initialize_transaction)
 {
-    CDataStream ds(buffer, SER_NETWORK, INIT_PROTO_VERSION);
+    CDataStream ds(buffer, SER_NETWORK);
     try {
         int nVersion;
         ds >> nVersion;
@@ -46,7 +46,7 @@ FUZZ_TARGET(transaction, .init = initialize_transaction)
         }
     }();
     bool valid_mutable_tx = true;
-    CDataStream ds_mtx(buffer, SER_NETWORK, INIT_PROTO_VERSION);
+    CDataStream ds_mtx(buffer, SER_NETWORK);
     CMutableTransaction mutable_tx;
     try {
         int nVersion;

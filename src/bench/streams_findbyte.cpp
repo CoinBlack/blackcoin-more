@@ -6,7 +6,6 @@
 
 #include <streams.h>
 #include <util/fs.h>
-#include <version.h> // for PROTOCOL_VERSION
 
 #include <cstddef>
 #include <cstdint>

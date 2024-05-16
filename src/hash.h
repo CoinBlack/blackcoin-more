@@ -151,14 +151,11 @@ class CHashWriter : public HashWriter
 {
 private:
     const int nType;
-    const int nVersion;
 
 public:
-    CHashWriter(int nVersionIn) : nType(SER_GETHASH), nVersion(nVersionIn) {}
-    CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {}
+    CHashWriter() : nType(SER_GETHASH) {}
 
     int GetType() const { return nType; }
-    int GetVersion() const { return nVersion; }
 
     template<typename T>
     CHashWriter& operator<<(const T& obj) {

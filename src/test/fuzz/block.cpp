@@ -30,7 +30,7 @@ void initialize_block()
 
 FUZZ_TARGET(block, .init = initialize_block)
 {
-    CDataStream ds(buffer, SER_NETWORK, INIT_PROTO_VERSION);
+    CDataStream ds(buffer, SER_NETWORK);
     CBlock block;
     try {
         int nVersion;

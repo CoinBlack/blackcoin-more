@@ -93,7 +93,7 @@ void DeserializeFromFuzzingInput(FuzzBufferType buffer, T&& obj, const P& params
 template <typename T>
 CDataStream Serialize(const T& obj)
 {
-    CDataStream ds{SER_NETWORK, INIT_PROTO_VERSION};
+    CDataStream ds{SER_NETWORK};
     ds << obj;
     return ds;
 }
@@ -109,7 +109,7 @@ T Deserialize(CDataStream ds)
 template <typename T>
 void DeserializeFromFuzzingInput(FuzzBufferType buffer, T&& obj)
 {
-    CDataStream ds{buffer, SER_NETWORK, INIT_PROTO_VERSION};
+    CDataStream ds{buffer, SER_NETWORK};
     {
         try {
             int version;
