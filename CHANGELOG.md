@@ -1,6 +1,6 @@
 # Changelog
 
-## v26.1.0-beta-1 (2024-XX-XX)
+## v26.1.0-beta-1 (2024-05-24)
 - Updated to Bitcoin Core 26.1
 - Create V2 transactions by default
 - Disconnect from peers older than version 70015
