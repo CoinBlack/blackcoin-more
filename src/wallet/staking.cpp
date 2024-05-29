@@ -133,7 +133,10 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 
         for (unsigned int i = 0; i < wtx.tx->vout.size(); i++) {
             const CTxOut& output = wtx.tx->vout[i];
-            const COutPoint outpoint(wtxid, i);
+            const COutPoint outpoint(Txid::FromUint256(wtxid), i);
+
+            if (output.nValue < wallet.m_min_staking_amount)
+                continue;
 
             if (output.nValue < params.min_amount || output.nValue > params.max_amount)
                 continue;
@@ -505,7 +508,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     }
 
     // Limit size
-    unsigned int nBytes = ::GetSerializeSize(txNew);
+    unsigned int nBytes = ::GetSerializeSize(TX_WITH_WITNESS(txNew));
     if (nBytes >= 1000000/5)
         return error("CreateCoinStake : exceeded coinstake size limit");
 

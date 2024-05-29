@@ -102,6 +102,14 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
         <translation type="unfinished">Adresses de réception – %1</translation>
     </message>
     <message>
+        <source>Sending addresses - %1</source>
+        <translation type="unfinished">Adresses d’envois - %1</translation>
+    </message>
+    <message>
+        <source>Receiving addresses - %1</source>
+        <translation type="unfinished">Adresses de réceptions - %1</translation>
+    </message>
+    <message>
         <source>Exporting Failed</source>
         <translation type="unfinished">Échec d'exportation</translation>
     </message>
@@ -835,6 +843,14 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
     <message>
         <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
         <translation type="unfinished">Impossible de créer un nouveau porte-monnaie. Le logiciel a été compilé sans prise en charge de sqlite (nécessaire pour les porte-monnaie de descripteurs) </translation>
+    </message>
+    <message>
+        <source>Error creating wallet</source>
+        <translation type="unfinished">Erreur lors de la création du portefeuille</translation>
+    </message>
+    <message>
+        <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
+        <translation type="unfinished">Impossible de créer un nouveau portefeuilles, le logiciel a été compilé sans support pour sqlite (nécessaire pour le portefeuille décris) </translation>
     </message>
     <message>
         <source>Error: %1</source>
@@ -4032,6 +4048,10 @@ Accédez à Fichier &gt; Ouvrir un porte-monnaie pour en charger un.
         <translation type="unfinished">%s a échoué à valider l'état instantané -assumeutxo. Cela indique un problème matériel, ou un bug dans le logiciel, ou une mauvaise modification du logiciel qui a permis de charger un instantané invalide. En conséquence, le nœud s'arrêtera et cessera d'utiliser tout état qui a été construit sur l'instantané, réinitialisant la hauteur de la chaîne de %d à %d. Au prochain redémarrage, le nœud reprendra la synchronisation à partir de %d sans utiliser de données d'instantané. Veuillez signaler cet incident à %s, en précisant comment vous avez obtenu l'instantané. L'état de chaîne d'instantané invalide sera conservé sur le disque au cas où il serait utile pour diagnostiquer le problème qui a causé cette erreur.</translation>
     </message>
     <message>
+        <source>%s failed to validate the -assumeutxo snapshot state. This indicates a hardware problem, or a bug in the software, or a bad software modification that allowed an invalid snapshot to be loaded. As a result of this, the node will shut down and stop using any state that was built on the snapshot, resetting the chain height from %d to %d. On the next restart, the node will resume syncing from %d without using any snapshot data. Please report this incident to %s, including how you obtained the snapshot. The invalid snapshot chainstate will be left on disk in case it is helpful in diagnosing the issue that caused this error.</source>
+        <translation type="unfinished">%s a échoué à valider l'état instantané -assumeutxo. Cela indique un problème matériel, ou un bug dans le logiciel, ou une mauvaise modification du logiciel qui a permis de charger un instantané invalide. En conséquence, le nœud s'arrêtera et cessera d'utiliser tout état qui a été construit sur l'instantané, réinitialisant la hauteur de la chaîne de %d à %d. Au prochain redémarrage, le nœud reprendra la synchronisation à partir de %d sans utiliser de données d'instantané. Veuillez signaler cet incident à %s, en précisant comment vous avez obtenu l'instantané. L'état de chaîne d'instantané invalide sera conservé sur le disque au cas où il serait utile pour diagnostiquer le problème qui a causé cette erreur.</translation>
+    </message>
+    <message>
         <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
         <translation type="unfinished">%s demande d'écouter sur le port %u. Ce port est considéré comme "mauvais" et il est donc peu probable qu'un pair s'y connecte. Voir doc/p2p-bad-ports.md pour plus de détails et une liste complète.</translation>
     </message>
@@ -4192,6 +4212,10 @@ Accédez à Fichier &gt; Ouvrir un porte-monnaie pour en charger un.
         <translation type="unfinished">Le porte-monnaie a été créé. Le type de porte-monnaie ancien devient obsolète et la prise en charge de la création et de l’ouverture des porte-monnaie anciens sera supprimée à l’avenir. Les anciens porte-monnaie peuvent être migrés vers un porte-monnaie de descripteurs avec migratewallet.</translation>
     </message>
     <message>
+        <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
+        <translation type="unfinished">Portefeuille chargé avec succès. Le type de portefeuille existant est obsolète et la prise en charge de la création et de l'ouverture de portefeuilles existants sera supprimée à l'avenir. Les anciens portefeuilles peuvent être migrés vers un portefeuille descripteur avec migratewallet.</translation>
+    </message>
+    <message>
         <source>Warning: Dumpfile wallet format "%s" does not match command line specified format "%s".</source>
         <translation type="unfinished">Avertissement : Le format du fichier de vidage de porte-monnaie « %s » ne correspond pas au format « %s » indiqué dans la ligne de commande.</translation>
     </message>
@@ -4266,6 +4290,10 @@ Accédez à Fichier &gt; Ouvrir un porte-monnaie pour en charger un.
     <message>
         <source>Error: Transaction %s in wallet cannot be identified to belong to migrated wallets</source>
         <translation type="unfinished">Erreur : La transaction %s dans le porte-monnaie ne peut pas être identifiée comme appartenant aux porte-monnaie migrés</translation>
+    </message>
+    <message>
+        <source>Failed to calculate bump fees, because unconfirmed UTXOs depend on enormous cluster of unconfirmed transactions.</source>
+        <translation type="unfinished">Échec du calcul des frais de majoration, car les UTXO non confirmés dépendent d'un énorme groupe de transactions non confirmées.</translation>
     </message>
     <message>
         <source>Failed to calculate bump fees, because unconfirmed UTXOs depend on enormous cluster of unconfirmed transactions.</source>

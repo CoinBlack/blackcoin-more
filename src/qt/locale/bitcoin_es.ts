@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nuevo</translation>
+        <translation type="unfinished">&amp;Nueva</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copia la dirección actualmente seleccionada al portapapeles del sistema</translation>
+        <translation type="unfinished">Copiar la dirección seleccionada actualmente al portapapeles del sistema</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -356,6 +356,10 @@ Solo es posible firmar con direcciones de tipo "legacy".</translation>
         <source>None</source>
         <translation type="unfinished">Ninguno</translation>
     </message>
+    <message>
+        <source>N/A</source>
+        <translation type="unfinished">N/D</translation>
+    </message>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
@@ -639,7 +643,7 @@ Solo es posible firmar con direcciones de tipo "legacy".</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
-        <translation type="unfinished">Cargar PSBT desde &amp;portapapeles...</translation>
+        <translation type="unfinished">Cargar TBPF desde &amp;portapapeles...</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
@@ -805,11 +809,11 @@ Solo es posible firmar con direcciones de tipo "legacy".</translation>
     </message>
     <message>
         <source>Error creating wallet</source>
-        <translation type="unfinished">Error al crear billetera</translation>
+        <translation type="unfinished">Error al crear monedero</translation>
     </message>
     <message>
         <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">No se puede crear una nueva billetera, el software se compiló sin soporte sqlite (requerido para billeteras descriptivas)</translation>
+        <translation type="unfinished">No se puede crear un nuevo monedero, ya que el software se compiló sin compatibilidad con sqlite (requerido para monederos basados en descriptores)</translation>
     </message>
     <message>
         <source>Warning: %1</source>
@@ -1027,7 +1031,7 @@ Solo es posible firmar con direcciones de tipo "legacy".</translation>
     <message>
         <source>Create Wallet</source>
         <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
-        <translation type="unfinished">Crear Monedero</translation>
+        <translation type="unfinished">Crear monedero</translation>
     </message>
     <message>
         <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -1207,7 +1211,7 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>You are one step away from creating your new wallet!</source>
-        <translation type="unfinished">Estás a un paso de crear tu nueva billetera.</translation>
+        <translation type="unfinished">Estás a un paso de crear tu nuevo monedero.</translation>
     </message>
     <message>
         <source>Please provide a name and, if desired, enable any advanced options</source>
@@ -1307,15 +1311,15 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">La dirección introducida «%1» no es una dirección Bitcoin válida.</translation>
+        <translation type="unfinished">La dirección introducida "%1" no es una dirección Bitcoin válida.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">La dirección «%1» ya existe como dirección de recepción con la etiqueta «%2» y, por lo tanto, no se puede agregar como dirección de envío.</translation>
+        <translation type="unfinished">La dirección "%1" ya existe como dirección de recepción con la etiqueta "%2" y, por lo tanto, no se puede agregar como dirección de envío.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">La dirección ingresada «%1» ya está en la libreta de direcciones con la etiqueta «%2».</translation>
+        <translation type="unfinished">La dirección ingresada "%1" ya está en la libreta de direcciones con la etiqueta "%2".</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1354,8 +1358,8 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform>%n GB of space available</numerusform>
-            <numerusform>%n GB of space available</numerusform>
+            <numerusform>%n GB de espacio disponible</numerusform>
+            <numerusform>%n GB de espacio disponible</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1426,7 +1430,7 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation type="unfinished">Revertir este parámetro requiere re-descargar la cadena de bloque completa. Es más rápido descargar primero la cadena completa y podarla después. Desactiva algunas características avanzadas.</translation>
+        <translation type="unfinished">Revertir este parámetro requiere volver a descargar la cadena de bloques completa. Es más rápido descargar primero la cadena completa y podarla después. Se desactivan algunas funciones avanzadas.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
@@ -1610,7 +1614,7 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>Open the %1 configuration file from the working directory.</source>
-        <translation type="unfinished">Abrir el %1archivo de configuración  en el directorio de trabajo.</translation>
+        <translation type="unfinished">Abrir el archivo de configuración %1 en el directorio de trabajo.</translation>
     </message>
     <message>
         <source>Open Configuration File</source>
@@ -2042,7 +2046,7 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>Save Transaction Data</source>
-        <translation type="unfinished">Guardar la transacción de datos</translation>
+        <translation type="unfinished">Guardar datos de la transacción</translation>
     </message>
     <message>
         <source>Partially Signed Transaction (Binary)</source>
@@ -2063,7 +2067,7 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>own address</source>
-        <translation type="unfinished">mi dirección</translation>
+        <translation type="unfinished">dirección propia</translation>
     </message>
     <message>
         <source>Unable to calculate transaction fee or total transaction amount.</source>
@@ -2174,7 +2178,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     <message>
         <source>Sent</source>
         <extracomment>Title of Peers Table column which indicates the total amount of network information we have sent to the peer.</extracomment>
-        <translation type="unfinished">Enviar</translation>
+        <translation type="unfinished">Enviado</translation>
     </message>
     <message>
         <source>Received</source>
@@ -2242,6 +2246,10 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
 <context>
     <name>RPCConsole</name>
     <message>
+        <source>N/A</source>
+        <translation type="unfinished">N/D</translation>
+    </message>
+    <message>
         <source>Client version</source>
         <translation type="unfinished">Versión del cliente</translation>
     </message>
@@ -2263,7 +2271,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Blocksdir</source>
-        <translation type="unfinished">Dirección de Bloque</translation>
+        <translation type="unfinished">Directorio de bloques</translation>
     </message>
     <message>
         <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
@@ -2319,7 +2327,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation type="unfinished">Enviado</translation>
     </message>
     <message>
         <source>&amp;Peers</source>
@@ -2327,11 +2335,11 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Banned peers</source>
-        <translation type="unfinished">Parejas bloqueadas</translation>
+        <translation type="unfinished">Pares bloqueados</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information.</source>
-        <translation type="unfinished">Selecciona una pareja para ver la información detallada.</translation>
+        <translation type="unfinished">Selecciona un par para ver la información detallada.</translation>
     </message>
     <message>
         <source>The transport layer version: %1</source>
@@ -2404,7 +2412,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     <message>
         <source>Whether we relay addresses to this peer.</source>
         <extracomment>Tooltip text for the Address Relay field in the peer details area, which displays whether we relay addresses to this peer (Yes/No).</extracomment>
-        <translation type="unfinished">Si retransmitimos las direcciones a este peer.</translation>
+        <translation type="unfinished">Si retransmitimos las direcciones a este par.</translation>
     </message>
     <message>
         <source>Address Relay</source>
@@ -2449,7 +2457,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Decrease font size</source>
-        <translation type="unfinished">Reducir el tamaño de la tipografía</translation>
+        <translation type="unfinished">Reducir el tamaño de la fuente</translation>
     </message>
     <message>
         <source>Increase font size</source>
@@ -2622,7 +2630,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     <message>
         <source>v2: BIP324 encrypted transport protocol</source>
         <extracomment>Explanatory text for v2 transport type.</extracomment>
-        <translation type="unfinished">v2: protocolo de transporte encriptado BIP324</translation>
+        <translation type="unfinished">v2: protocolo de transporte cifrado BIP324</translation>
     </message>
     <message>
         <source>we selected the peer for high bandwidth relay</source>
@@ -2668,7 +2676,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>&amp;Unban</source>
-        <translation type="unfinished">&amp;Permitir</translation>
+        <translation type="unfinished">&amp;Desbloquear</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
@@ -2676,7 +2684,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Executing command without any wallet</source>
-        <translation type="unfinished">Ejecutar instrucción sin ningún monedero</translation>
+        <translation type="unfinished">Ejecutar comando sin monedero</translation>
     </message>
     <message>
         <source>Node window - [%1]</source>
@@ -2757,7 +2765,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation type="unfinished">Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud esté abierta. Nota: el mensaje no se enviará con el pago a través de la red de Bitcoin.</translation>
+        <translation type="unfinished">Mensaje opcional para adjuntar a la solicitud de pago, que se mostrará cuando se abra la solicitud. Nota: Este mensaje no se enviará con el pago a través de la red de Bitcoin.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2765,11 +2773,11 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation type="unfinished">Usa este formulario para solicitar un pago. Todos los campos son &lt;b&gt;opcional&lt;/b&gt;.</translation>
+        <translation type="unfinished">Usa este formulario para solicitar pagos. Todos los campos son &lt;b&gt;opcionales&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation type="unfinished">Un importe opcional para solicitar. Deje esto vacío o en cero para no solicitar una cantidad específica.</translation>
+        <translation type="unfinished">Un importe opcional para solicitar. Déjalo vacío o ingresa cero para no solicitar un importe específico.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address (used by you to identify an invoice).  It is also attached to the payment request.</source>
@@ -2777,7 +2785,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>An optional message that is attached to the payment request and may be displayed to the sender.</source>
-        <translation type="unfinished">Mensaje opcional asociado a la solicitud de pago que podría ser presentado al remitente </translation>
+        <translation type="unfinished">Un mensaje opcional que se adjunta a la solicitud de pago y que puede mostrarse al remitente.</translation>
     </message>
     <message>
         <source>&amp;Create new receiving address</source>
@@ -2805,7 +2813,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>Remove the selected entries from the list</source>
-        <translation type="unfinished">Eliminar los apuntes seleccionados del listado</translation>
+        <translation type="unfinished">Eliminar las entradas seleccionadas de la lista</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2830,10 +2838,6 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     <message>
         <source>Copy &amp;amount</source>
         <translation type="unfinished">Copiar &amp;importe</translation>
-    </message>
-    <message>
-        <source>Base58 (Legacy)</source>
-        <translation type="unfinished">Base58 (Heredado)</translation>
     </message>
     <message>
         <source>Not recommended due to higher fees and less protection against typos.</source>
@@ -2958,7 +2962,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>automatically selected</source>
-        <translation type="unfinished">Seleccionado automaticamente</translation>
+        <translation type="unfinished">Seleccionado automáticamente</translation>
     </message>
     <message>
         <source>Insufficient funds!</source>
@@ -3066,7 +3070,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Confirmation time target:</source>
-        <translation type="unfinished">Objetivo de tiempo de confirmación</translation>
+        <translation type="unfinished">Objetivo de tiempo de confirmación:</translation>
     </message>
     <message>
         <source>Enable Replace-By-Fee</source>
@@ -3170,7 +3174,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Save Transaction Data</source>
-        <translation type="unfinished">Guardar la transacción de datos</translation>
+        <translation type="unfinished">Guardar datos de la transacción</translation>
     </message>
     <message>
         <source>Partially Signed Transaction (Binary)</source>
@@ -3490,7 +3494,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Private key for the entered address is not available.</source>
-        <translation type="unfinished">No se dispone de la clave privada para la dirección introducida.</translation>
+        <translation type="unfinished">La clave privada para la dirección ingresada no está disponible.</translation>
     </message>
     <message>
         <source>Message signing failed.</source>
@@ -3525,7 +3529,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <name>SplashScreen</name>
     <message>
         <source>(press q to shutdown and continue later)</source>
-        <translation type="unfinished">(presione la tecla q para apagar y continuar después)</translation>
+        <translation type="unfinished">(Presionar q para apagar y seguir luego)</translation>
     </message>
     <message>
         <source>press q to shutdown</source>
@@ -3537,7 +3541,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <message>
         <source>conflicted with a transaction with %1 confirmations</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>
-        <translation type="unfinished">Hay un conflicto con una transacción de %1 confirmaciones.</translation>
+        <translation type="unfinished">Hay un conflicto con una transacción con %1 confirmaciones</translation>
     </message>
     <message>
         <source>0/unconfirmed, in memory pool</source>
@@ -3594,7 +3598,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>own address</source>
-        <translation type="unfinished">mi dirección</translation>
+        <translation type="unfinished">dirección propia</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -3704,7 +3708,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <name>TransactionDescDialog</name>
     <message>
         <source>This pane shows a detailed description of the transaction</source>
-        <translation type="unfinished">Esta ventana muestra información detallada sobre la transacción</translation>
+        <translation type="unfinished">Este panel muestra una descripción detallada de la transacción</translation>
     </message>
     <message>
         <source>Details for %1</source>
@@ -3755,19 +3759,19 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Received with</source>
-        <translation type="unfinished">Recibido con</translation>
+        <translation type="unfinished">Recibida con</translation>
     </message>
     <message>
         <source>Received from</source>
-        <translation type="unfinished">Recibido de</translation>
+        <translation type="unfinished">Recibida de</translation>
     </message>
     <message>
         <source>Sent to</source>
-        <translation type="unfinished">Enviado a</translation>
+        <translation type="unfinished">Enviada a</translation>
     </message>
     <message>
         <source>Mined</source>
-        <translation type="unfinished">Minado</translation>
+        <translation type="unfinished">Minada</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -3834,15 +3838,15 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Received with</source>
-        <translation type="unfinished">Recibido con</translation>
+        <translation type="unfinished">Recibida con</translation>
     </message>
     <message>
         <source>Sent to</source>
-        <translation type="unfinished">Enviado a</translation>
+        <translation type="unfinished">Enviada a</translation>
     </message>
     <message>
         <source>Mined</source>
-        <translation type="unfinished">Minado</translation>
+        <translation type="unfinished">Minada</translation>
     </message>
     <message>
         <source>Other</source>
@@ -3874,7 +3878,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Copy transaction &amp;ID</source>
-        <translation type="unfinished">Copiar &amp;ID de la transacción</translation>
+        <translation type="unfinished">Copiar &amp;identificador de transacción</translation>
     </message>
     <message>
         <source>Copy &amp;raw transaction</source>
@@ -3916,7 +3920,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Confirmed</source>
-        <translation type="unfinished">Confirmado</translation>
+        <translation type="unfinished">Confirmada</translation>
     </message>
     <message>
         <source>Watch-only</source>
@@ -3937,6 +3941,10 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <message>
         <source>Address</source>
         <translation type="unfinished">Dirección</translation>
+    </message>
+    <message>
+        <source>ID</source>
+        <translation type="unfinished">Identificador</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -3991,7 +3999,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>PSBT file must be smaller than 100 MiB</source>
-        <translation type="unfinished">El archivo PSBT debe ser más pequeño de 100 MiB</translation>
+        <translation type="unfinished">El archivo TBPF debe ser más pequeño de 100 MiB</translation>
     </message>
     <message>
         <source>Unable to decode PSBT</source>
@@ -4006,11 +4014,11 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Fee bump error</source>
-        <translation type="unfinished">Error de incremento de la comisión</translation>
+        <translation type="unfinished">Error de incremento de comisión</translation>
     </message>
     <message>
         <source>Increasing transaction fee failed</source>
-        <translation type="unfinished">Ha fallado el incremento de la comisión de transacción.</translation>
+        <translation type="unfinished">Fallo al incrementar la comisión de transacción</translation>
     </message>
     <message>
         <source>Do you want to increase the fee?</source>
@@ -4039,11 +4047,11 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Can't draft transaction.</source>
-        <translation type="unfinished">No se pudo preparar la transacción.</translation>
+        <translation type="unfinished">No se puede crear un borrador de la transacción.</translation>
     </message>
     <message>
         <source>PSBT copied</source>
-        <translation type="unfinished">PSBT copiado </translation>
+        <translation type="unfinished">TBPF copiada </translation>
     </message>
     <message>
         <source>Copied to clipboard</source>
@@ -4057,7 +4065,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Can't sign transaction.</source>
-        <translation type="unfinished">No puede firmar la transacción.</translation>
+        <translation type="unfinished">No se puede firmar la transacción.</translation>
     </message>
     <message>
         <source>Could not commit transaction</source>
@@ -4065,7 +4073,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Can't display address</source>
-        <translation type="unfinished">No puede mostrar la dirección</translation>
+        <translation type="unfinished">No se puede mostrar la dirección</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -4084,7 +4092,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Backup Wallet</source>
-        <translation type="unfinished">Respaldar Monedero</translation>
+        <translation type="unfinished">Respaldar monedero</translation>
     </message>
     <message>
         <source>Wallet Data</source>

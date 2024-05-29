@@ -687,7 +687,7 @@ BOOST_AUTO_TEST_CASE(get_local_addr_for_peer_port)
     peer_out.fSuccessfullyConnected = true;
     peer_out.SetAddrLocal(peer_us);
 
-    // Without the fix peer_us:8333 is chosen instead of the proper peer_us:bind_port.
+    // Without the fix peer_us:15714 is chosen instead of the proper peer_us:bind_port.
     auto chosen_local_addr = GetLocalAddrForPeer(peer_out);
     BOOST_REQUIRE(chosen_local_addr);
     const CService expected{peer_us_addr, bind_port};
@@ -708,7 +708,7 @@ BOOST_AUTO_TEST_CASE(get_local_addr_for_peer_port)
     peer_in.fSuccessfullyConnected = true;
     peer_in.SetAddrLocal(peer_us);
 
-    // Without the fix peer_us:8333 is chosen instead of the proper peer_us:peer_us.GetPort().
+    // Without the fix peer_us:15714 is chosen instead of the proper peer_us:peer_us.GetPort().
     chosen_local_addr = GetLocalAddrForPeer(peer_in);
     BOOST_REQUIRE(chosen_local_addr);
     BOOST_CHECK(*chosen_local_addr == peer_us);
@@ -858,13 +858,13 @@ BOOST_AUTO_TEST_CASE(initial_advertise_from_version_message)
 
     const auto msg_version =
         NetMsg::Make(NetMsgType::VERSION, PROTOCOL_VERSION, services, time, services, CAddress::V1_NETWORK(peer_us));
-    DataStream msg_version_stream{msg_version.data};
+    CDataStream msg_version_stream{msg_version.data, SER_NETWORK};
 
     m_node.peerman->ProcessMessage(
         peer, NetMsgType::VERSION, msg_version_stream, time_received_dummy, interrupt_dummy);
 
     const auto msg_verack = NetMsg::Make(NetMsgType::VERACK);
-    DataStream msg_verack_stream{msg_verack.data};
+    CDataStream msg_verack_stream{msg_verack.data, SER_NETWORK};
 
     // Will set peer.fSuccessfullyConnected to true (necessary in SendMessages()).
     m_node.peerman->ProcessMessage(
@@ -924,20 +924,20 @@ BOOST_AUTO_TEST_CASE(advertise_local_address)
     };
     g_reachable_nets.Add(NET_CJDNS);
 
-    CAddress addr_ipv4{Lookup("1.2.3.4", 8333, false).value(), NODE_NONE};
+    CAddress addr_ipv4{Lookup("1.2.3.4", 15714, false).value(), NODE_NONE};
     BOOST_REQUIRE(addr_ipv4.IsValid());
     BOOST_REQUIRE(addr_ipv4.IsIPv4());
 
-    CAddress addr_ipv6{Lookup("1122:3344:5566:7788:9900:aabb:ccdd:eeff", 8333, false).value(), NODE_NONE};
+    CAddress addr_ipv6{Lookup("1122:3344:5566:7788:9900:aabb:ccdd:eeff", 15714, false).value(), NODE_NONE};
     BOOST_REQUIRE(addr_ipv6.IsValid());
     BOOST_REQUIRE(addr_ipv6.IsIPv6());
 
-    CAddress addr_ipv6_tunnel{Lookup("2002:3344:5566:7788:9900:aabb:ccdd:eeff", 8333, false).value(), NODE_NONE};
+    CAddress addr_ipv6_tunnel{Lookup("2002:3344:5566:7788:9900:aabb:ccdd:eeff", 15714, false).value(), NODE_NONE};
     BOOST_REQUIRE(addr_ipv6_tunnel.IsValid());
     BOOST_REQUIRE(addr_ipv6_tunnel.IsIPv6());
     BOOST_REQUIRE(addr_ipv6_tunnel.IsRFC3964());
 
-    CAddress addr_teredo{Lookup("2001:0000:5566:7788:9900:aabb:ccdd:eeff", 8333, false).value(), NODE_NONE};
+    CAddress addr_teredo{Lookup("2001:0000:5566:7788:9900:aabb:ccdd:eeff", 15714, false).value(), NODE_NONE};
     BOOST_REQUIRE(addr_teredo.IsValid());
     BOOST_REQUIRE(addr_teredo.IsIPv6());
     BOOST_REQUIRE(addr_teredo.IsRFC4380());
@@ -952,7 +952,7 @@ BOOST_AUTO_TEST_CASE(advertise_local_address)
     BOOST_REQUIRE(addr_i2p.IsValid());
     BOOST_REQUIRE(addr_i2p.IsI2P());
 
-    CService service_cjdns{Lookup("fc00:3344:5566:7788:9900:aabb:ccdd:eeff", 8333, false).value(), NODE_NONE};
+    CService service_cjdns{Lookup("fc00:3344:5566:7788:9900:aabb:ccdd:eeff", 15714, false).value(), NODE_NONE};
     CAddress addr_cjdns{MaybeFlipIPv6toCJDNS(service_cjdns), NODE_NONE};
     BOOST_REQUIRE(addr_cjdns.IsValid());
     BOOST_REQUIRE(addr_cjdns.IsCJDNS());
@@ -1126,7 +1126,7 @@ public:
     void SendV1Version(const MessageStartChars& magic)
     {
         CMessageHeader hdr(magic, "version", 126 + InsecureRandRange(11));
-        DataStream ser{};
+        CDataStream ser(SER_NETWORK);
         ser << hdr;
         m_to_send.insert(m_to_send.end(), UCharCast(ser.data()), UCharCast(ser.data() + ser.size()));
     }

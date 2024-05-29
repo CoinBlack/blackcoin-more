@@ -92,7 +92,7 @@ void DeserializeFromFuzzingInput(FuzzBufferType buffer, T&& obj, const P& params
 template <typename T>
 DataStream Serialize(const T& obj)
 {
-    DataStream ds{};
+    CDataStream ds{SER_NETWORK};
     ds << obj;
     return ds;
 }
@@ -108,7 +108,7 @@ T Deserialize(DataStream ds)
 template <typename T>
 void DeserializeFromFuzzingInput(FuzzBufferType buffer, T&& obj)
 {
-    DataStream ds{buffer};
+    CDataStream ds{buffer, SER_NETWORK};
     try {
         ds >> obj;
     } catch (const std::ios_base::failure&) {

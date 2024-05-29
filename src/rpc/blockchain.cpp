@@ -108,7 +108,7 @@ double GetPoSKernelPS(ChainstateManager& chainman)
         {
             if (pindexPrevStake)
             {
-                dStakeKernelsTriedAvg += GetDifficulty(pindexPrevStake) * 4294967296.0;
+                dStakeKernelsTriedAvg += GetDifficulty(*pindexPrevStake) * 4294967296.0;
                 nStakesTime += pindexPrevStake->nTime - pindex->nTime;
                 nStakesHandled++;
             }
@@ -769,7 +769,7 @@ static RPCHelpMan getblock()
     const CBlock block{GetBlockChecked(chainman.m_blockman, *pblockindex)};
 
     if (verbosity <= 0) {
-        DataStream ssBlock;
+        CDataStream ssBlock(SER_NETWORK);
         ssBlock << TX_WITH_WITNESS(block);
         std::string strHex = HexStr(ssBlock);
         return strHex;

@@ -528,6 +528,11 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
 
 // Calculates descendants of entry that are not already in setDescendants, and adds to
 // setDescendants. Assumes entryit is already a tx in the mempool and CTxMemPoolEntry::m_children
+// is correct for tx and all descendants.
+// Also assumes that if an entry is in setDescendants already, then all
+// in-mempool descendants of it are already in setDescendants as well, so that we
+// can save time by not iterating over those entries.
+void CTxMemPool::CalculateDescendants(txiter entryit, setEntries& setDescendants) const
 {
     setEntries stage;
     if (setDescendants.count(entryit) == 0) {

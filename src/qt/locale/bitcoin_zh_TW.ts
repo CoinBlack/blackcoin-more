@@ -2583,17 +2583,17 @@ If you are receiving this error you should request the merchant provide a BIP21 
     <message>
         <source>detecting: peer could be v1 or v2</source>
         <extracomment>Explanatory text for "detecting" transport type.</extracomment>
-        <translation type="unfinished">检测中: 节点可能是v1或是v2</translation>
+        <translation type="unfinished">檢測中: 節點可能是v1或是v2</translation>
     </message>
     <message>
         <source>v1: unencrypted, plaintext transport protocol</source>
         <extracomment>Explanatory text for v1 transport type.</extracomment>
-        <translation type="unfinished">v1: 未加密，明文传输协议</translation>
+        <translation type="unfinished">v1: 未加密，明文傳輸協定</translation>
     </message>
     <message>
         <source>v2: BIP324 encrypted transport protocol</source>
         <extracomment>Explanatory text for v2 transport type.</extracomment>
-        <translation type="unfinished">v2: BIP324加密传输协议</translation>
+        <translation type="unfinished">v2: BIP324加密傳輸協議</translation>
     </message>
     <message>
         <source>we selected the peer for high bandwidth relay</source>
@@ -4039,7 +4039,7 @@ Go to File &gt; Open Wallet to load a wallet.
     <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;匯出</translation>
+        <translation type="unfinished">匯出 &amp;E</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
@@ -4135,7 +4135,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <source>Error: Legacy wallets only support the "legacy", "p2sh-segwit", and "bech32" address types</source>
-        <translation type="unfinished">错误: 旧式钱包只支持 "legacy", "p2sh-segwit", 和 "bech32" 这三种地址类型</translation>
+        <translation type="unfinished">錯誤: 舊式錢包只支援 "legacy", "p2sh-segwit", 和 "bech32" 這三種位址類型</translation>
     </message>
     <message>
         <source>Error: Unable to produce descriptors for this legacy wallet. Make sure to provide the wallet's passphrase if it is encrypted.</source>
@@ -4239,7 +4239,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <source>Unsupported category-specific logging level %1$s=%2$s. Expected %1$s=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %3$s. Valid loglevels: %4$s.</source>
-        <translation type="unfinished">不支持的类别限定日志等级 %1$s=%2$s 。 预期参数 %1$s=&lt;category&gt;:&lt;loglevel&gt;。 有效的类别: %3$s 。有效的日志等级: %4$s 。</translation>
+        <translation type="unfinished">不支援的類別限定日誌等級 %1$s=%2$s 。 预期参数 %1$s=&lt;category&gt;:&lt;loglevel&gt;。 有效的類別: %3$s 。有效的日誌等級: %4$s 。</translation>
     </message>
     <message>
         <source>Unsupported chainstate database format found. Please restart with -reindex-chainstate. This will rebuild the chainstate database.</source>
@@ -4255,7 +4255,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
-        <translation type="unfinished">钱包加载成功。旧式钱包已被弃用，未来将不再支持创建或打开旧式钱包。可以使用 migratewallet 命令将旧式钱包迁移至输出描述符钱包。</translation>
+        <translation type="unfinished">錢包加載成功。 舊式錢包已被棄用，未來將不再支援創建或打開舊式錢包。 可以使用 migratewallet 指令將舊式錢包遷移至輸出描述符錢包。</translation>
     </message>
     <message>
         <source>Warning: Dumpfile wallet format "%s" does not match command line specified format "%s".</source>
@@ -4323,7 +4323,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <source>Error reading %s! All keys read correctly, but transaction data or address metadata may be missing or incorrect.</source>
-        <translation type="unfinished">读取 %s 时出错! 所有密钥都被正确读取，但交易数据或地址元数据可能缺失或有误。</translation>
+        <translation type="unfinished">讀取 %s 時出錯! 所有金鑰都被正確讀取，但交易資料或位址元資料可能缺失或有誤。</translation>
     </message>
     <message>
         <source>Error: Address book data in wallet cannot be identified to belong to migrated wallets</source>
@@ -4343,7 +4343,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <source>Failed to calculate bump fees, because unconfirmed UTXOs depend on enormous cluster of unconfirmed transactions.</source>
-        <translation type="unfinished">计算追加手续费失败，因为未确认UTXO依赖了大量未确认交易的簇集。</translation>
+        <translation type="unfinished">計算追加手續費失敗，因為未確認UTXO依賴了大量未確認交易的簇集。</translation>
     </message>
     <message>
         <source>Failed to rename invalid peers.dat file. Please move or delete it and try again.</source>

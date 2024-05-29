@@ -10,6 +10,7 @@
 #include <span.h>
 #include <support/allocators/zeroafterfree.h>
 #include <util/overflow.h>
+#include <node/protocol_version.h> // for INIT_PROTO_VERSION
 
 #include <algorithm>
 #include <assert.h>
@@ -290,9 +291,8 @@ private:
     int nType;
 
 public:
-    explicit CDataStream(int nTypeIn)
-        : nType{nTypeIn} {}
-
+    explicit CDataStream() {}
+    explicit CDataStream(int nTypeIn) : nType{nTypeIn} {}
     explicit CDataStream(Span<const uint8_t> sp, int type) : CDataStream{AsBytes(sp), type} {}
     explicit CDataStream(Span<const value_type> sp, int nTypeIn)
         : DataStream{sp},
@@ -300,7 +300,6 @@ public:
 
     void SetType(int n)          { nType = n; }
     int GetType() const          { return nType; }
-
     template <typename T>
     CDataStream& operator<<(const T& obj)
     {
@@ -502,6 +501,7 @@ private:
 
 public:
     explicit CAutoFile(std::FILE* file, int type, std::vector<std::byte> data_xor = {}) : AutoFile{file, std::move(data_xor)}, nType{type} {}
+    explicit CAutoFile(std::FILE* file, std::vector<std::byte> data_xor = {}) : AutoFile{file, std::move(data_xor)}, nType(SER_GETHASH) {}
     int GetType() const          { return nType; }
 
     template<typename T>

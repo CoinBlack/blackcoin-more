@@ -543,34 +543,6 @@ WalletModel::UnlockContext::~UnlockContext()
     {
         wallet->setWalletLocked(true);
     }
-
-    if(!relock)
-    {
-        wallet->setWalletUnlockStakingOnly(stakingOnly);
-        wallet->updateStatus();
-    }
-
-    // Short-circuit if we are returning a bumped transaction PSBT to clipboard
-    if (retval == QMessageBox::Save) {
-        // "Create Unsigned" clicked
-        PartiallySignedTransaction psbtx(mtx);
-        bool complete = false;
-        const TransactionError err = wallet().fillPSBT(SIGHASH_ALL, /*sign=*/false, /*bip32derivs=*/true, nullptr, psbtx, complete);
-        if (err != TransactionError::OK || complete) {
-            QMessageBox::critical(nullptr, tr("Fee bump error"), tr("Can't draft transaction."));
-            return false;
-        }
-        // Serialize the PSBT
-        DataStream ssTx{};
-        ssTx << psbtx;
-        GUIUtil::setClipboard(EncodeBase64(ssTx.str()).c_str());
-        Q_EMIT message(tr("PSBT copied"), tr("Copied to clipboard", "Fee-bump PSBT saved"), CClientUIInterface::MSG_INFORMATION);
-        return true;
-    }
-
-    assert(!m_wallet->privateKeysDisabled() || wallet().hasExternalSigner());
-
-    return true;
 }
 
 bool WalletModel::displayAddress(std::string sAddress) const

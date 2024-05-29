@@ -27,7 +27,7 @@ void initialize_transaction()
 
 FUZZ_TARGET(transaction, .init = initialize_transaction)
 {
-    DataStream ds{buffer};
+    CDataStream ds(buffer, SER_NETWORK);
     bool valid_tx = true;
     const CTransaction tx = [&] {
         try {
@@ -38,7 +38,7 @@ FUZZ_TARGET(transaction, .init = initialize_transaction)
         }
     }();
     bool valid_mutable_tx = true;
-    DataStream ds_mtx{buffer};
+    CDataStream ds_mtx(buffer, SER_NETWORK);
     CMutableTransaction mutable_tx;
     try {
         ds_mtx >> TX_WITH_WITNESS(mutable_tx);

@@ -142,9 +142,8 @@ TxSize CalculateMaximumSignedTxSize(const CTransaction &tx, const CWallet *walle
     if (is_segwit) weight += 2;
 
     // Blackcoin: transaction weight should be increased for v1 transactions because of additional nTime field
-    // We assume that v1 transactions have nTime > 0
-    bool is_old_tx = tx.nTime > 0;
-    if (is_old_tx) weight += 4 * WITNESS_SCALE_FACTOR;
+    if (tx.nVersion < 2)
+        weight += 4 * WITNESS_SCALE_FACTOR;
 
     // Add the size of the transaction outputs.
     for (const auto& txo : tx.vout) weight += GetSerializeSize(txo) * WITNESS_SCALE_FACTOR;
@@ -676,6 +675,8 @@ util::Result<SelectionResult> ChooseSelectionResult(interfaces::Chain& chain, co
         results.push_back(*knapsack_result);
     } else append_error(knapsack_result);
 
+    // Blackcoin
+    /*
     if (coin_selection_params.m_effective_feerate > CFeeRate{3 * coin_selection_params.m_long_term_feerate}) { // Minimize input set for feerates of at least 3×LTFRE (default: 30 ṩ/vB+)
         if (auto cg_result{CoinGrinder(groups.positive_group, nTargetValue, coin_selection_params.m_min_change_target, max_inputs_weight)}) {
             cg_result->ComputeAndSetWaste(coin_selection_params.min_viable_change, coin_selection_params.m_cost_of_change, coin_selection_params.m_change_fee);
@@ -684,6 +685,7 @@ util::Result<SelectionResult> ChooseSelectionResult(interfaces::Chain& chain, co
             append_error(cg_result);
         }
     }
+    */
 
     if (auto srd_result{SelectCoinsSRD(groups.positive_group, nTargetValue, coin_selection_params.m_change_fee, coin_selection_params.rng_fast, max_inputs_weight)}) {
         results.push_back(*srd_result);
@@ -1004,7 +1006,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
         CHECK_NONFATAL(IsValidDestination(dest) != scriptChange.empty());
     }
     CTxOut change_prototype_txout(0, scriptChange);
-    coin_selection_params.change_output_size = GetSerializeSize(change_prototype_txout, PROTOCOL_VERSION);
+    coin_selection_params.change_output_size = GetSerializeSize(change_prototype_txout);
 
     // Get size of spending the change output
     int change_spend_size = CalculateMaximumSignedInputSize(change_prototype_txout, &wallet, /*coin_control=*/nullptr);
@@ -1201,8 +1203,8 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
         }
     }
     // Blackcoin: and if we don't pay enough fees, reduce the change
-    else if (nChangePosInOut != -1 && fee_needed > current_fee) {
-        auto& change = txNew.vout.at(nChangePosInOut);
+    else if (change_pos && fee_needed > current_fee) {
+        auto& change = txNew.vout.at(*change_pos);
         change.nValue -= fee_needed - current_fee;
         current_fee = result.GetSelectedValue() - CalculateOutputValue(txNew);
         if (fee_needed != current_fee) {

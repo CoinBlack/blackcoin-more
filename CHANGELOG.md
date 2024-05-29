@@ -1,5 +1,16 @@
 # Changelog
 
+## v26.1.0-beta-1 (2024-05-24)
+- Updated to Bitcoin Core 26.1
+- Create V2 transactions by default
+- Disconnect from peers older than version 70015
+- Increased `DUST_RELAY_TX_FEE` and `DEFAULT_MIN_RELAY_TX_FEE` to 100000
+- Eliminated segfault occurring after a power outage
+- Enabled V2 P2P transport by default (backport of Core's PR29347 and 29058)
+- Enabled `checkkernel` RPC call
+- Only delete the PID file if we created it (backport of Core's PR28946)
+- Set minimum UTXO value to be used for staking to 0.1 BLK (can be overridden with `-minstakingamount` parameter)
+
 ## v26.0.0-beta-1 (2024-02-12)
 - Updated to Bitcoin Core 26.0
 - Fixed a bug that prevented adding more inputs in the coinstake transaction for legacy wallets
@@ -36,6 +47,11 @@
 
 ## v22.1.0-alpha-1 (2023-01-20)
 - Updated to Bitcoin Core 22.1
+
+## v13.2.3 (2024-05-18)
+- Create V2 transactions by default
+- Disconnect from peers older than version 70015
+- Increased `DEFAULT_MIN_RELAY_TX_FEE` to 100000
 
 ## v13.2.2 (2024-01-24)
 - Set mainnet hard fork date to April 24, 2024

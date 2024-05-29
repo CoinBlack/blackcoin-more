@@ -162,7 +162,7 @@ private:
     FlatFileSeq BlockFileSeq() const;
     FlatFileSeq UndoFileSeq() const;
 
-    AutoFile OpenUndoFile(const FlatFilePos& pos, bool fReadOnly = false) const;
+    CAutoFile OpenUndoFile(const FlatFilePos& pos, bool fReadOnly = false) const;
 
     bool WriteBlockToDisk(const CBlock& block, FlatFilePos& pos) const;
     bool UndoWriteToDisk(const CBlockUndo& blockundo, FlatFilePos& pos, const uint256& hashBlock) const;
@@ -313,7 +313,7 @@ public:
     const CBlockIndex* GetFirstStoredBlock(const CBlockIndex& start_block LIFETIMEBOUND, const CBlockIndex* lower_block=nullptr) EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
 
     /** Open a block file (blk?????.dat) */
-    AutoFile OpenBlockFile(const FlatFilePos& pos, bool fReadOnly = false) const;
+    CAutoFile OpenBlockFile(const FlatFilePos& pos, bool fReadOnly = false) const;
 
     /** Translation to a filesystem path */
     fs::path GetBlockPosFilename(const FlatFilePos& pos) const;

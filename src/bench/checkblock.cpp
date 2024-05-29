@@ -19,7 +19,7 @@
 
 static void DeserializeBlockTest(benchmark::Bench& bench)
 {
-    DataStream stream(benchmark::data::block413567);
+    CDataStream stream(benchmark::data::block413567, SER_NETWORK);
     std::byte a{0};
     stream.write({&a, 1}); // Prevent compaction
 
@@ -33,7 +33,7 @@ static void DeserializeBlockTest(benchmark::Bench& bench)
 
 static void DeserializeAndCheckBlockTest(benchmark::Bench& bench)
 {
-    DataStream stream(benchmark::data::block413567);
+    CDataStream stream(benchmark::data::block413567, SER_NETWORK);
     std::byte a{0};
     stream.write({&a, 1}); // Prevent compaction
 

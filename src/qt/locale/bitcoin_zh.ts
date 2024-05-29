@@ -1285,6 +1285,20 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
 </context>
 <context>
+    <name>HelpMessageDialog</name>
+    <message>
+        <source>version</source>
+        <translation type="unfinished">版本</translation>
+    </message>
+    </context>
+<context>
+    <name>ShutdownWindow</name>
+    <message>
+        <source>Do not shut down the computer until this window disappears.</source>
+        <translation type="unfinished">在該視窗消失之前，請勿關閉電腦。</translation>
+    </message>
+</context>
+<context>
     <name>ModalOverlay</name>
     <message>
         <source>Form</source>
@@ -2697,6 +2711,13 @@ For more information on using this console, type %6.
         <translation type="unfinished">请求付款到 %1</translation>
     </message>
 </context>
+<context>
+    <name>ReceiveRequestDialog</name>
+    <message>
+        <source>Amount:</source>
+        <translation type="unfinished">金额:</translation>
+    </message>
+    </context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>

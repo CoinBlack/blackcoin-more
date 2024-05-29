@@ -145,6 +145,24 @@ public:
     }
 };
 
+// Blackcoin: Keep nType
+class CHashWriter : public HashWriter
+{
+private:
+    const int nType;
+
+public:
+    CHashWriter() : nType(SER_GETHASH) {}
+
+    int GetType() const { return nType; }
+
+    template<typename T>
+    CHashWriter& operator<<(const T& obj) {
+        ::Serialize(*this, obj);
+        return (*this);
+    }
+};
+
 /** Reads data from an underlying stream, while hashing the read data. */
 template <typename Source>
 class HashVerifier : public HashWriter

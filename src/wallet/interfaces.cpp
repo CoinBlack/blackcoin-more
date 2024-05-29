@@ -24,6 +24,7 @@
 #include <wallet/types.h>
 #include <wallet/load.h>
 #include <wallet/receive.h>
+#include <wallet/rpc/staking.h>
 #include <wallet/rpc/wallet.h>
 #include <wallet/spend.h>
 #include <wallet/wallet.h>
@@ -590,7 +591,7 @@ public:
     {
         std::vector<Span<const CRPCCommand>> commands;
         commands.push_back(GetWalletRPCCommands());
-        commands.push_back(m_context.chain->getStakingRPCCommands());
+        commands.push_back(GetStakingRPCCommands());
         for(size_t i = 0; i < commands.size(); i++) {
             for (const CRPCCommand& command : commands[i]) {
                 m_rpc_commands.emplace_back(command.category, command.name, [this, &command](const JSONRPCRequest& request, UniValue& result, bool last_handler) {

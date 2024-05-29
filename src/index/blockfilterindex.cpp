@@ -135,7 +135,7 @@ bool BlockFilterIndex::CustomCommit(CDBBatch& batch)
     const FlatFilePos& pos = m_next_filter_pos;
 
     // Flush current filter file to disk.
-    AutoFile file{m_filter_fileseq->Open(pos)};
+    CAutoFile file{m_filter_fileseq->Open(pos)};
     if (file.IsNull()) {
         return error("%s: Failed to open filter file %d", __func__, pos.nFile);
     }
@@ -149,7 +149,7 @@ bool BlockFilterIndex::CustomCommit(CDBBatch& batch)
 
 bool BlockFilterIndex::ReadFilterFromDisk(const FlatFilePos& pos, const uint256& hash, BlockFilter& filter) const
 {
-    AutoFile filein{m_filter_fileseq->Open(pos, true)};
+    CAutoFile filein{m_filter_fileseq->Open(pos, true)};
     if (filein.IsNull()) {
         return false;
     }
@@ -205,7 +205,7 @@ size_t BlockFilterIndex::WriteFilterToDisk(FlatFilePos& pos, const BlockFilter& 
         return 0;
     }
 
-    AutoFile fileout{m_filter_fileseq->Open(pos)};
+    CAutoFile fileout{m_filter_fileseq->Open(pos)};
     if (fileout.IsNull()) {
         LogPrintf("%s: Failed to open filter file %d\n", __func__, pos.nFile);
         return 0;

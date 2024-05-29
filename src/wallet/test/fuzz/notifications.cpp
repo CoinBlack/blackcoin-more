@@ -145,18 +145,13 @@ struct FuzzedWallet {
             [&] { /* no op (leave uninitialized) */ });
         coin_control.fAllowWatchOnly = fuzzed_data_provider.ConsumeBool();
         coin_control.m_include_unsafe_inputs = fuzzed_data_provider.ConsumeBool();
-        {
-            auto& r{coin_control.m_signal_bip125_rbf};
-            CallOneOf(
-                fuzzed_data_provider, [&] { r = true; }, [&] { r = false; }, [&] { r = std::nullopt; });
-        }
         coin_control.m_feerate = CFeeRate{
             // A fee of this range should cover all cases
             fuzzed_data_provider.ConsumeIntegralInRange<CAmount>(0, 2 * total_amt),
             tx_size,
         };
         if (fuzzed_data_provider.ConsumeBool()) {
-            *coin_control.m_feerate += GetMinimumFeeRate(*wallet, coin_control, nullptr);
+            *coin_control.m_feerate += GetMinimumFeeRate(*wallet, coin_control, GetAdjustedTimeSeconds());
         }
         coin_control.fOverrideFeeRate = fuzzed_data_provider.ConsumeBool();
         // Add solving data (m_external_provider and SelectExternal)?

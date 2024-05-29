@@ -131,7 +131,7 @@ static UniValue FinishTransaction(const std::shared_ptr<CWallet> pwallet, const 
     bool add_to_wallet{options.exists("add_to_wallet") ? options["add_to_wallet"].get_bool() : true};
     if (psbt_opt_in || !complete || !add_to_wallet) {
         // Serialize the PSBT
-        DataStream ssTx{};
+        CDataStream ssTx(SER_NETWORK);
         ssTx << psbtx;
         result.pushKV("psbt", EncodeBase64(ssTx.str()));
     }
@@ -508,13 +508,13 @@ RPCHelpMan sendtoaddress()
                     },
                 },
                 RPCExamples{
-                    "\nSend 0.1 BTC\n"
+                    "\nSend 0.1 BLK\n"
                     + HelpExampleCli("sendtoaddress", "\"" + EXAMPLE_ADDRESS[0] + "\" 0.1") +
-                    "\nSend 0.1 BTC with a confirmation target of 6 blocks in economical fee estimate mode using positional arguments\n"
-                    + HelpExampleCli("sendtoaddress", "\"" + EXAMPLE_ADDRESS[0] + "\" 0.1 \"donation\" \"sean's outpost\" false true 6 economical") +
-                    "\nSend 0.2 BTC with a confirmation target of 6 blocks in economical fee estimate mode using named arguments\n"
-                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.2 conf_target=6 estimate_mode=\"economical\"") +
-                    "\nSend 0.5 BTC with a fee rate of 25 " + CURRENCY_ATOM + "/vB using named arguments\n"
+                    "\nSend 0.1 BLK using positional arguments\n"
+                    + HelpExampleCli("sendtoaddress", "\"" + EXAMPLE_ADDRESS[0] + "\" 0.1 \"donation\" \"sean's outpost\" false true") +
+                    "\nSend 0.2 BLK using named arguments\n"
+                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.2") +
+                    "\nSend 0.5 BLK with a fee rate of 25 " + CURRENCY_ATOM + "/vB using named arguments\n"
                     + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 fee_rate=25")
                     + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 fee_rate=25 subtractfeefromamount=false avoid_reuse=true comment=\"2 pizzas\" comment_to=\"jeremy\" verbose=true")
                 },
@@ -1597,7 +1597,7 @@ RPCHelpMan walletprocesspsbt()
     }
 
     UniValue result(UniValue::VOBJ);
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << psbtx;
     result.pushKV("psbt", EncodeBase64(ssTx.str()));
     result.pushKV("complete", complete);
@@ -1703,15 +1703,14 @@ RPCHelpMan walletcreatefundedpsbt()
     CMutableTransaction rawTx = ConstructTransaction(request.params[0], request.params[1], request.params[2]);
     UniValue outputs(UniValue::VOBJ);
     outputs = NormalizeOutputs(request.params[1]);
-            std::vector<CRecipient> recipients = CreateRecipients(
-                    ParseOutputs(outputs),
-                    InterpretSubtractFeeFromOutputInstructions(options["subtract_fee_from_outputs"], outputs.getKeys())
-            );
-            CMutableTransaction rawTx = ConstructTransaction(options["inputs"], request.params[0], options["locktime"]);
-            CCoinControl coin_control;
-            // Automatically select coins, unless at least one is manually selected. Can
-            // be overridden by options.add_inputs.
-            coin_control.m_allow_other_inputs = rawTx.vin.size() == 0;
+    std::vector<CRecipient> recipients = CreateRecipients(
+            ParseOutputs(outputs),
+            InterpretSubtractFeeFromOutputInstructions(options["subtractFeeFromOutputs"], outputs.getKeys())
+    );
+    CCoinControl coin_control;
+    // Automatically select coins, unless at least one is manually selected. Can
+    // be overridden by options.add_inputs.
+    coin_control.m_allow_other_inputs = rawTx.vin.size() == 0;
     SetOptionsInputWeights(request.params[0], options);
     // Clear tx.vout since it is not meant to be used now that we are passing outputs directly.
     // This sets us up for a future PR to completely remove tx from the function signature in favor of passing inputs directly
@@ -1730,7 +1729,7 @@ RPCHelpMan walletcreatefundedpsbt()
     }
 
     // Serialize the PSBT
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << psbtx;
 
     UniValue result(UniValue::VOBJ);

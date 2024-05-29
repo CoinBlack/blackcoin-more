@@ -42,6 +42,14 @@
         <translation type="unfinished">I&amp;Export</translation>
     </message>
     <message>
+        <source>Export the data in the current tab to a file</source>
+        <translation type="unfinished">Export me ing data king tab a ini anting metung a file</translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation type="unfinished">I&amp;Export</translation>
+    </message>
+    <message>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Ilako</translation>
     </message>

@@ -23,7 +23,7 @@ struct TestBlockAndIndex {
 
     TestBlockAndIndex()
     {
-        DataStream stream{benchmark::data::block413567};
+        CDataStream stream(benchmark::data::block413567, SER_NETWORK);
         std::byte a{0};
         stream.write({&a, 1}); // Prevent compaction
 

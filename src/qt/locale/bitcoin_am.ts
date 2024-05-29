@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">አድራሻ ወይም መለያ ስም ለማርተዕ ቀኙን ጠቅ ያድርጉ</translation>
+        <translation type="unfinished">አድራሻ ወይም መለያ ስም ለመቀየር ቀኙን ጠቅ ያድርጉ</translation>
     </message>
     <message>
         <source>Create a new address</source>

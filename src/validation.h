@@ -1140,7 +1140,7 @@ public:
      *                                              (only used for reindex)
      * */
     void LoadExternalBlockFile(
-        AutoFile& file_in,
+        CAutoFile& file_in,
         FlatFilePos* dbp = nullptr,
         std::multimap<uint256, FlatFilePos>* blocks_with_unknown_parent = nullptr);
 

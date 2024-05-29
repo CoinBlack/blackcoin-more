@@ -14,6 +14,7 @@
 #include <node/interface_ui.h>
 #include <sync.h>
 #include <tinyformat.h>
+#include <util/time.h>
 #include <util/translation.h>
 #include <warnings.h>
 

@@ -316,7 +316,7 @@ static bool rest_block(const std::any& context,
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        DataStream ssBlock;
+        CDataStream ssBlock(SER_NETWORK);
         ssBlock << TX_WITH_WITNESS(block);
         std::string binaryBlock = ssBlock.str();
         req->WriteHeader("Content-Type", "application/octet-stream");
@@ -325,7 +325,7 @@ static bool rest_block(const std::any& context,
     }
 
     case RESTResponseFormat::HEX: {
-        DataStream ssBlock;
+        CDataStream ssBlock(SER_NETWORK);
         ssBlock << TX_WITH_WITNESS(block);
         std::string strHex = HexStr(ssBlock) + "\n";
         req->WriteHeader("Content-Type", "text/plain");

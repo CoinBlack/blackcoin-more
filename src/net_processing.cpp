@@ -620,7 +620,7 @@ public:
         m_best_block_time = time;
     };
     void UnitTestMisbehaving(NodeId peer_id, int howmuch) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex) { Misbehaving(*Assert(GetPeerRef(peer_id)), howmuch, ""); };
-    void ProcessMessage(CNode& pfrom, const std::string& msg_type, DataStream& vRecv,
+    void ProcessMessage(CNode& pfrom, const std::string& msg_type, CDataStream& vRecv,
                         const std::chrono::microseconds time_received, const std::atomic<bool>& interruptMsgProc) override
         EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex, !m_recent_confirmed_transactions_mutex, !m_most_recent_block_mutex, !m_headers_presync_mutex, g_msgproc_mutex);
     void UpdateLastBlockAnnounceTime(NodeId node, int64_t time_in_seconds) override;
@@ -3665,7 +3665,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
             return;
         }
 
-        if (nVersion < (Params().GetConsensus().IsProtocolV3_1(GetAdjustedTimeSeconds()) ? OLD_VERSION : MIN_PEER_PROTO_VERSION)) {
+        if (nVersion < MIN_PEER_PROTO_VERSION) {
             // disconnect from peers older than this proto version
             LogPrint(BCLog::NET, "peer=%d using obsolete version %i; disconnecting\n", pfrom.GetId(), nVersion);
             pfrom.fDisconnect = true;
@@ -4922,7 +4922,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                     // Might have collided, fall back to getdata now :(
                     std::vector<CInv> invs;
                     invs.push_back(CInv(MSG_BLOCK | GetFetchFlags(*peer), resp.blockhash));
-                    m_connman.PushMessage(&pfrom, msgMaker.Make(NetMsgType::GETDATA, invs));
+                    MakeAndPushMessage(pfrom, NetMsgType::GETDATA, invs);
                 } else {
                     RemoveBlockRequest(resp.blockhash, pfrom.GetId());
                     LogPrint(BCLog::NET, "Peer %d sent us a compact block but it failed to reconstruct, waiting on first download to complete\n", pfrom.GetId());
@@ -5768,8 +5768,7 @@ void PeerManagerImpl::MaybeSendFeefilter(CNode& pto, Peer& peer, std::chrono::mi
     // transactions to us, regardless of feefilter state.
     if (pto.IsBlockOnlyConn()) return;
 
-    unsigned int min_fee = Params().GetConsensus().IsProtocolV3_1(GetAdjustedTimeSeconds()) ? TX_FEE_PER_KB : DEFAULT_MIN_RELAY_TX_FEE;
-    CAmount currentFilter = CFeeRate(min_fee).GetFeePerK();
+    CAmount currentFilter = CFeeRate(TX_FEE_PER_KB).GetFeePerK();
 
     if (m_chainman.IsInitialBlockDownload()) {
         // Received tx-inv messages are discarded when the active

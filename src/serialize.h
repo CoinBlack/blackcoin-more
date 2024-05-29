@@ -117,7 +117,6 @@ template<typename Stream> inline uint64_t ser_readdata64(Stream &s)
     return le64toh_internal(obj);
 }
 
-
 class SizeComputer;
 
 enum
@@ -1081,9 +1080,8 @@ class SizeComputer
 protected:
     size_t nSize{0};
 
-    const int nType;
 public:
-    explicit SizeComputer(int nTypeIn) : nSize(0), nType(nTypeIn) {}
+    SizeComputer() {}
 
     void write(Span<const std::byte> src)
     {
@@ -1107,7 +1105,9 @@ public:
         return nSize;
     }
 
-    int GetType() const { return nType; }
+    // Blackcoin: dummy values
+    int GetType() const { return 0; }
+    int GetVersion() const { return 0; }
 };
 
 template<typename I>
@@ -1122,17 +1122,9 @@ inline void WriteCompactSize(SizeComputer &s, uint64_t nSize)
 }
 
 template <typename T>
-size_t GetSerializeSize(const T& t, int nType = 0)
+size_t GetSerializeSize(const T& t)
 {
-    return (SizeComputer(nType) << t).size();
-}
-
-template <typename... T>
-size_t GetSerializeSizeMany(int nVersion, const T&... t)
-{
-    SizeComputer sc(0);
-    SerializeMany(sc, t...);
-    return sc.size();
+    return (SizeComputer() << t).size();
 }
 
 /** Wrapper that overrides the GetParams() function of a stream (and hides GetVersion/GetType). */
@@ -1152,8 +1144,15 @@ public:
     bool eof() const { return m_substream.eof(); }
     size_t size() const { return m_substream.size(); }
     const Params& GetParams() const { return m_params; }
+
+    // Blackcoin: do not deprecate GetVersion() and GetType()
+    /*
     int GetVersion() = delete; // Deprecated with Params usage
     int GetType() = delete;    // Deprecated with Params usage
+    */
+
+    int GetVersion() const { return m_substream.GetVersion(); }
+    int GetType() const { return m_substream.GetType(); }
 };
 
 /** Wrapper that serializes objects with the specified parameters. */

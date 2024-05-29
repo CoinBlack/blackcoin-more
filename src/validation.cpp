@@ -292,6 +292,18 @@ static void LimitMempoolSize(CTxMemPool& pool, CCoinsViewCache& coins_cache)
         coins_cache.Uncache(removed);
 }
 
+static bool IsCurrentForFeeEstimation(Chainstate& active_chainstate) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
+{
+    AssertLockHeld(cs_main);
+    if (active_chainstate.m_chainman.IsInitialBlockDownload()) {
+        return false;
+    }
+    if (active_chainstate.m_chain.Height() < active_chainstate.m_chainman.m_best_header->nHeight - 1) {
+        return false;
+    }
+    return true;
+}
+
 void Chainstate::MaybeUpdateMempoolForReorg(
     DisconnectedBlockTransactions& disconnectpool,
     bool fAddToMempool)
@@ -713,9 +725,9 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     TxValidationState& state = ws.m_state;
     std::unique_ptr<CTxMemPoolEntry>& entry = ws.m_entry;
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = (int64_t)tx.nTime;
-    if (!nTimeTx && tx.nVersion >= TX_MAX_STANDARD_VERSION)
+    if (!nTimeTx && tx.nVersion >= 2)
         nTimeTx = GetAdjustedTimeSeconds();
 
     if (!CheckTransaction(tx, state)) {
@@ -729,12 +741,6 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     // ppcoin: coinstake is also only valid in a block, not as a loose transaction
     if (tx.IsCoinStake())
         return state.Invalid(TxValidationResult::TX_CONSENSUS, "coinstake");
-
-    // Don't relay version 2 transactions until CSV is active, and we can be
-    // sure that such transactions will be mined (unless we're on
-    // -testnet/-regtest).
-    if (m_pool.m_require_standard && tx.nVersion >= TX_MAX_STANDARD_VERSION && !Params().GetConsensus().IsProtocolV3_1(nTimeTx))
-		return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "premature-version2-tx");
 
     // Reject transactions with witness before segregated witness activates (override with -prematurewitness)
     bool witnessEnabled = DeploymentActiveAfter(m_active_chainstate.m_chain.Tip(), m_active_chainstate.m_chainman, Consensus::DEPLOYMENT_SEGWIT);
@@ -968,7 +974,10 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     }
 
     ws.m_ancestors = *ancestors;
-    if (const auto err_string{SingleV3Checks(ws.m_ptx, ws.m_ancestors, ws.m_conflicts, ws.m_vsize)}) {
+
+    // Blackcoin
+    std::set<Txid> dummy_conflicts;
+    if (const auto err_string{SingleV3Checks(ws.m_ptx, ws.m_ancestors, dummy_conflicts, ws.m_vsize)}) {
         return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "v3-rule-violation", *err_string);
     }
 
@@ -2186,7 +2195,7 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     }
 
     // Enforce CHECKSEQUENCEVERIFY (BIP112)
-    if (consensusparams.IsProtocolV3_1(block_index.GetBlockTime())) {
+    if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_CSV)) {
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
     }
 
@@ -2325,10 +2334,9 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         }
     }
 
-    // Enforce BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY)
+    // Enforce BIP68 (sequence locks)
     int nLockTimeFlags = 0;
-    // if (DeploymentActiveAt(*pindex, m_chainman, Consensus::DEPLOYMENT_CSV)) {
-    if (params.GetConsensus().IsProtocolV3_1(pindex->GetBlockTime())) {
+    if (DeploymentActiveAt(*pindex, m_chainman, Consensus::DEPLOYMENT_CSV)) {
         nLockTimeFlags |= LOCKTIME_VERIFY_SEQUENCE;
     }
 
@@ -2467,7 +2475,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
              Ticks<MillisecondsDouble>(time_verify) / num_blocks_total);
 
     // Set proof-of-stake hash modifier
-    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1]->vin[0].prevout.hash : block.GetHash());
+    pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1]->vin[0].prevout.hash.ToUint256() : block.GetHash());
 
     if (fJustCheck)
         return true;
@@ -3995,7 +4003,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
 
     // Enforce BIP113 (Median Time Past).
     bool enforce_locktime_median_time_past{false};
-    if (consensusParams.IsProtocolV3_1(block.nTime)) {
+    if (DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_CSV)) {
         assert(pindexPrev != nullptr);
         enforce_locktime_median_time_past = true;
     }
@@ -4838,7 +4846,7 @@ bool Chainstate::LoadGenesisBlock()
 }
 
 void ChainstateManager::LoadExternalBlockFile(
-    AutoFile& file_in,
+    CAutoFile& file_in,
     FlatFilePos* dbp,
     std::multimap<uint256, FlatFilePos>* blocks_with_unknown_parent)
 {

@@ -13,6 +13,7 @@
 #include <test/fuzz/fuzz.h>
 #include <util/chaintype.h>
 #include <validation.h>
+#include <test/util/setup_common.h>
 
 #include <cassert>
 #include <string>
@@ -28,7 +29,7 @@ void initialize_block()
 
 FUZZ_TARGET(block, .init = initialize_block)
 {
-    DataStream ds{buffer};
+    CDataStream ds{buffer, SER_NETWORK};
     CBlock block;
     try {
         ds >> TX_WITH_WITNESS(block);

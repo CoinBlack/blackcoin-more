@@ -87,7 +87,7 @@ public:
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 500;
-        consensus.CSVHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
+        consensus.CSVHeight = 4908715;
         consensus.SegwitHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
         consensus.MinBIP9WarningHeight = std::numeric_limits<int>::max(); // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -126,8 +126,8 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000041a727e67853fa7e907"); // block 4815005
-        consensus.defaultAssumeValid = uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc"); // block 4232630
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000042bc911cd05857a5b34"); // block 4939111
+        consensus.defaultAssumeValid = uint256S("0x6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119"); // block 4908715
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -178,6 +178,7 @@ public:
                 { 319002, uint256S("0x0011494d03b2cdf1ecfc8b0818f1e0ef7ee1d9e9b3d1279c10d35456bc3899ef")}, // hardfork
                 { 872456, uint256S("0xe4fd321ced1de06213d2e246b150b4bfd8c4aa0989965dce88f2a58668c64860")}, // hardfork
                 {4232630, uint256S("0xae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc")}, // Devfund
+                {4908715, uint256S("0x6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119")}, // hardfork
             }
         };
 
@@ -186,10 +187,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 bfcda2c7d9301e96c2d5a5c0bfdc373b3f2acf0121bda6259a50bda9a1d6d846
-            .nTime    = 1698137504,
-            .nTxCount = 14448831,
-            .dTxRate  = 0.03011670425305156,
+            // Data from RPC: getchaintxstats 40500 6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119
+            .nTime    = 1713938480,
+            .nTxCount = 15170003,
+            .dTxRate  = 0.02990868924889543,
         };
 
         // A vector of p2sh addresses
@@ -207,7 +208,7 @@ public:
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nMaxReorganizationDepth = 500;
-        consensus.CSVHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
+        consensus.CSVHeight = 1320664;
         consensus.SegwitHeight = std::numeric_limits<int>::max(); // std::numeric_limits<int>::max()
         consensus.MinBIP9WarningHeight = std::numeric_limits<int>::max(); // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -246,7 +247,7 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000487dc03a64106b281b"); // block 1743761
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000004efbeeda43294ccd83"); // block 1867048
         consensus.defaultAssumeValid = uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39"); // block 1415393
 
         pchMessageStart[0] = 0xcd;
@@ -286,7 +287,8 @@ public:
         checkpointData = {
             {
                 {  90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8")}, // initial checkpoint
-                {1415393, uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39")}, // remove tx timestamp
+                {1320664, uint256S("0x64fa6a5414c6797629d34ef150c46486a5e1d49d2bceb87d6da14a501f838afd")}, // hardfork
+                {1415393, uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39")}, // start devfund
             }
         };
 
@@ -295,10 +297,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 fe0e780eafef658dda6c7b4dfab83781624fd76c702ccee7cccebecb8c77f189
-            .nTime    = 1698139248,
-            .nTxCount = 3222151,
-            .dTxRate  = 0.02976566447700859,
+            // Data from RPC: getchaintxstats 40500 8f2c0be64feb3d84572ec928d8cc55416eb9cd9b811b92fa34602e3543698a0f
+            .nTime    = 1715973760,
+            .nTxCount = 3752992,
+            .dTxRate  = 0.0297410476168098,
         };
 
         // A vector of p2sh addresses

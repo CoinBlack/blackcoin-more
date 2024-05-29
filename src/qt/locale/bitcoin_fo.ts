@@ -1333,6 +1333,10 @@
         <translation type="unfinished">Lurtingin eftir inngangandi sambondum miseydnaðist (lurtingin gav villuna %s)</translation>
     </message>
     <message>
+        <source>Listening for incoming connections failed (listen returned error %s)</source>
+        <translation type="unfinished">Lurtingin eftir inngangandi sambondum miseydnaðist (lurtingin gav villuna %s)</translation>
+    </message>
+    <message>
         <source>No addresses available</source>
         <translation type="unfinished">Ongar adressur tøkar</translation>
     </message>

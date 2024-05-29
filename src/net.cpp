@@ -1423,7 +1423,7 @@ CNetMessage V2Transport::GetReceivedMessage(std::chrono::microseconds time, bool
     Assume(m_recv_state == RecvState::APP_READY);
     Span<const uint8_t> contents{m_recv_decode_buffer};
     auto msg_type = GetMessageType(contents);
-    CNetMessage msg{DataStream{}};
+    CNetMessage msg{CDataStream{}};
     // Note that BIP324Cipher::EXPANSION also includes the length descriptor size.
     msg.m_raw_message_size = m_recv_decode_buffer.size() + BIP324Cipher::EXPANSION;
     if (msg_type) {

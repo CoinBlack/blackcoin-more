@@ -6,7 +6,6 @@
 
 #include <streams.h>
 #include <util/fs.h>
-#include <version.h> // for PROTOCOL_VERSION
 
 #include <cstddef>
 #include <cstdint>
@@ -15,7 +14,7 @@
 static void FindByte(benchmark::Bench& bench)
 {
     // Setup
-    AutoFile file{fsbridge::fopen("streams_tmp", "w+b")};
+    CAutoFile file{fsbridge::fopen("streams_tmp", "w+b"), 0};
     const size_t file_size = 200;
     uint8_t data[file_size] = {0};
     data[file_size-1] = 1;

@@ -460,9 +460,8 @@ BOOST_AUTO_TEST_CASE(bnb_sffo_restriction)
             rand,
             /*change_output_size=*/ 31,  // unused value, p2wpkh output size (wallet default change type)
             /*change_spend_size=*/ 68,   // unused value, p2wpkh input size (high-r signature)
-            /*min_change_target=*/ 0,    // dummy, set later
             /*effective_feerate=*/ CFeeRate(3000),
-            /*long_term_feerate=*/ CFeeRate(1000),
+            /*discard_feerate=*/ CFeeRate(1000),
             /*tx_noinputs_size=*/ 0,
             /*avoid_partial=*/ false,
     };
@@ -1108,9 +1107,7 @@ BOOST_AUTO_TEST_CASE(coin_grinder_tests)
             rand,
             /*change_output_size=*/34,
             /*change_spend_size=*/68,
-            /*min_change_target=*/CENT,
             /*effective_feerate=*/CFeeRate(5000),
-            /*long_term_feerate=*/CFeeRate(2000),
             /*discard_feerate=*/CFeeRate(1000),
             /*tx_noinputs_size=*/10 + 34, // static header size + output size
             /*avoid_partial=*/false,

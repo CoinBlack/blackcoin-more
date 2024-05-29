@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(SimpleRoundTripTest)
     {
         CBlockHeaderAndShortTxIDs shortIDs{block};
 
-        DataStream stream{};
+        CDataStream stream(SER_NETWORK);
         stream << shortIDs;
 
         CBlockHeaderAndShortTxIDs shortIDs2;
@@ -121,7 +121,7 @@ public:
     std::vector<unsigned char> vchBlockSig;
 
     explicit TestHeaderAndShortIDs(const CBlockHeaderAndShortTxIDs& orig) {
-        DataStream stream{};
+        CDataStream stream(SER_NETWORK);
         stream << orig;
         stream >> *this;
     }
@@ -129,7 +129,7 @@ public:
         TestHeaderAndShortIDs(CBlockHeaderAndShortTxIDs{block}) {}
 
     uint64_t GetShortID(const uint256& txhash) const {
-        DataStream stream{};
+        CDataStream stream(SER_NETWORK);
         stream << *this;
         CBlockHeaderAndShortTxIDs base;
         stream >> base;
@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(NonCoinbasePreforwardRTTest)
         shortIDs.shorttxids[0] = shortIDs.GetShortID(block.vtx[0]->GetHash());
         shortIDs.shorttxids[1] = shortIDs.GetShortID(block.vtx[2]->GetHash());
 
-        DataStream stream{};
+        CDataStream stream(SER_NETWORK);
         stream << shortIDs;
 
         CBlockHeaderAndShortTxIDs shortIDs2;
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(SufficientPreforwardRTTest)
         shortIDs.shorttxids.resize(1);
         shortIDs.shorttxids[0] = shortIDs.GetShortID(block.vtx[1]->GetHash());
 
-        DataStream stream{};
+        CDataStream stream(SER_NETWORK);
         stream << shortIDs;
 
         CBlockHeaderAndShortTxIDs shortIDs2;
@@ -288,7 +288,7 @@ BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)
     {
         CBlockHeaderAndShortTxIDs shortIDs{block};
 
-        DataStream stream{};
+        CDataStream stream(SER_NETWORK);
         stream << shortIDs;
 
         CBlockHeaderAndShortTxIDs shortIDs2;

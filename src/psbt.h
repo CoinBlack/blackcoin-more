@@ -316,7 +316,7 @@ struct PSBTInput
                 const auto& [leaf_hashes, origin] = leaf_origin;
                 SerializeToVector(s, PSBT_IN_TAP_BIP32_DERIVATION, xonly);
                 std::vector<unsigned char> value;
-                VectorWriter s_value{s.GetType(), s.GetVersion(), value, 0};
+                VectorWriter s_value{s.GetType(), value, 0};
                 s_value << leaf_hashes;
                 SerializeKeyOrigin(s_value, origin);
                 s << value;
@@ -771,7 +771,7 @@ struct PSBTOutput
             const auto& [leaf_hashes, origin] = leaf;
             SerializeToVector(s, PSBT_OUT_TAP_BIP32_DERIVATION, xonly);
             std::vector<unsigned char> value;
-            VectorWriter s_value{s.GetType(), s.GetVersion(), value, 0};
+            VectorWriter s_value{s.GetType(), value, 0};
             s_value << leaf_hashes;
             SerializeKeyOrigin(s_value, origin);
             s << value;

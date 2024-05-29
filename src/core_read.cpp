@@ -221,7 +221,7 @@ bool DecodeHexBlk(CBlock& block, const std::string& strHexBlk)
         return false;
 
     std::vector<unsigned char> blockData(ParseHex(strHexBlk));
-    DataStream ssBlock(blockData);
+    CDataStream ssBlock(blockData, SER_NETWORK);
     try {
         ssBlock >> TX_WITH_WITNESS(block);
     }

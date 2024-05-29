@@ -1083,6 +1083,10 @@ Om den här plånboken innehåller lösbara</translation>
         <translation type="unfinished">Migrering av plånboken ' %1 ' genomförd.</translation>
     </message>
     <message>
+        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Watchonly-skript har migrerats till en ny plånbok med namnet '%1'.</translation>
+    </message>
+    <message>
         <source>Migration failed</source>
         <translation type="unfinished">Migrering misslyckades</translation>
     </message>

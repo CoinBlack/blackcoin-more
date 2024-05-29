@@ -58,10 +58,10 @@ BOOST_AUTO_TEST_CASE(IsStandard_test)
     t.nVersion = 1;
     CheckIsStandard(t);
 
-    // Disallowed nVersion
     t.nVersion = 2;
-    CheckIsNotStandard(t, "version");
+    CheckIsStandard(t);
 
+    // Disallowed nVersion
     t.nVersion = 3;
     CheckIsNotStandard(t, "version");
 
@@ -70,11 +70,11 @@ BOOST_AUTO_TEST_CASE(IsStandard_test)
     t.nTime = 0;
     CheckIsStandard(t);
 
-    // Disallowed nVersion, empty nTime
     t.nVersion = 2;
     t.nTime = 0;
-    CheckIsNotStandard(t, "version");
+    CheckIsStandard(t);
 
+    // Disallowed nVersion, empty nTime
     t.nVersion = 3;
     t.nTime = 0;
     CheckIsNotStandard(t, "version");

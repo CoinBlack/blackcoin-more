@@ -1350,6 +1350,10 @@ The migration process will create a backup of the wallet before migrating. This 
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
         <translation type="unfinished">此目录中至少会保存 %1 GB 的数据，并且大小还会随着时间增长。</translation>
     </message>
+    <message>
+        <source>Approximately %1 GB of data will be stored in this directory.</source>
+        <translation type="unfinished">此目錄中將儲存約%1 GB 的資料。</translation>
+    </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
@@ -1376,6 +1380,10 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <source>Welcome</source>
         <translation type="unfinished">欢迎</translation>
+    </message>
+    <message>
+        <source>Welcome to %1.</source>
+        <translation type="unfinished">歡迎來到  %1。</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -1409,6 +1417,10 @@ The migration process will create a backup of the wallet before migrating. This 
 <context>
     <name>HelpMessageDialog</name>
     <message>
+        <source>version</source>
+        <translation type="unfinished">版本</translation>
+    </message>
+    <message>
         <source>About %1</source>
         <translation type="unfinished">关于 %1</translation>
     </message>
@@ -1423,12 +1435,24 @@ The migration process will create a backup of the wallet before migrating. This 
         <source>%1 is shutting down…</source>
         <translation type="unfinished">%1正在关闭...</translation>
     </message>
-    </context>
+    <message>
+        <source>Do not shut down the computer until this window disappears.</source>
+        <translation type="unfinished">在該視窗消失之前，請勿關閉電腦。</translation>
+    </message>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
         <source>Form</source>
         <translation type="unfinished">窗体</translation>
+    </message>
+    <message>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <translation type="unfinished">最近的交易可能還看不到，因此錢包餘額可能不正確。在錢包軟體完成跟 bitcoin 網路的同步後，這裡的資訊就會正確。詳情請見下面。</translation>
+    </message>
+    <message>
+        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation type="unfinished">嘗試花費受尚未顯示的交易影響的比特幣將不會被網路接受。</translation>
     </message>
     <message>
         <source>Unknown…</source>

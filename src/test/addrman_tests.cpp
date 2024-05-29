@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(addrman_select_by_network)
 
     // add ipv4 address to the new table
     CNetAddr source = ResolveIP("252.2.2.2");
-    CService addr1 = ResolveService("250.1.1.1", 8333);
+    CService addr1 = ResolveService("250.1.1.1", 15714);
     BOOST_CHECK(addrman->Add({CAddress(addr1, NODE_NONE)}, source));
 
     BOOST_CHECK(addrman->Select(/*new_only=*/true, NET_IPV4).first == addr1);
@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(addrman_select_special)
     BOOST_CHECK(addrman->Good(i2p_addr));
 
     // add ipv4 address to the new table
-    CService addr1 = ResolveService("250.1.1.3", 8333);
+    CService addr1 = ResolveService("250.1.1.3", 15714);
     BOOST_CHECK(addrman->Add({CAddress(addr1, NODE_NONE)}, source));
 
     // since the only ipv4 address is on the new table, ensure that the new

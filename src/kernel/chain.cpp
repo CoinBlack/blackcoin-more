@@ -21,7 +21,7 @@ interfaces::BlockInfo MakeBlockInfo(const CBlockIndex* index, const CBlock* data
         LOCK(::cs_main);
         info.file_number = index->nFile;
         info.data_pos = index->nDataPos;
-        info.is_pos = data->IsProofOfStake();
+        info.is_pos = index->IsProofOfStake();
     }
     info.data = data;
     return info;

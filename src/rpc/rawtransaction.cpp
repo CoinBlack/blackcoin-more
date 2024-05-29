@@ -1485,7 +1485,7 @@ static RPCHelpMan combinepsbt()
         throw JSONRPCTransactionError(error);
     }
 
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << merged_psbt;
     return EncodeBase64(ssTx);
 },
@@ -1530,7 +1530,7 @@ static RPCHelpMan finalizepsbt()
     bool complete = FinalizeAndExtractPSBT(psbtx, mtx);
 
     UniValue result(UniValue::VOBJ);
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     std::string result_str;
 
     if (complete && extract) {
@@ -1577,7 +1577,7 @@ static RPCHelpMan createpsbt()
     }
 
     // Serialize the PSBT
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << psbtx;
 
     return EncodeBase64(ssTx);
@@ -1644,7 +1644,7 @@ static RPCHelpMan converttopsbt()
     }
 
     // Serialize the PSBT
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << psbtx;
 
     return EncodeBase64(ssTx);
@@ -1691,7 +1691,7 @@ static RPCHelpMan utxoupdatepsbt()
         /*sighash_type=*/SIGHASH_ALL,
         /*finalize=*/false);
 
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << psbtx;
     return EncodeBase64(ssTx);
 },
@@ -1792,7 +1792,7 @@ static RPCHelpMan joinpsbts()
     }
     shuffled_psbt.unknown.insert(merged_psbt.unknown.begin(), merged_psbt.unknown.end());
 
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << shuffled_psbt;
     return EncodeBase64(ssTx);
 },
@@ -1972,7 +1972,7 @@ RPCHelpMan descriptorprocesspsbt()
         complete &= PSBTInputSigned(input);
     }
 
-    DataStream ssTx{};
+    CDataStream ssTx(SER_NETWORK);
     ssTx << psbtx;
 
     UniValue result(UniValue::VOBJ);
