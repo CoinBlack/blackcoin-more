@@ -1226,9 +1226,9 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
             return state.DoS(0, false, REJECT_INVALID, "too many dust vouts");
     }
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = (int64_t)tx.nTime;
-    if (!nTimeTx && tx.nVersion >= CTransaction::MAX_STANDARD_VERSION)
+    if (!nTimeTx && tx.nVersion >= 2)
         nTimeTx = GetAdjustedTime();
 
     if (!CheckTransaction(tx, state))
@@ -1241,14 +1241,6 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
     // Coinstake is also only valid in a block, not as a loose transaction
     if (tx.IsCoinStake())
         return state.DoS(100, false, REJECT_INVALID, "coinstake");
-
-    // Don't relay version 2 transactions until CSV is active, and we can be
-    // sure that such transactions will be mined (unless we're on
-    // -testnet/-regtest).
-    const CChainParams& chainparams = Params();
-    if (fRequireStandard && tx.nVersion >= CTransaction::MAX_STANDARD_VERSION && !chainparams.GetConsensus().IsProtocolV3_1(nTimeTx)) {
-        return state.DoS(0, false, REJECT_NONSTANDARD, "premature-version2-tx");
-    }
 
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)
     string reason;
@@ -1348,7 +1340,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         CAmount nFees = nValueIn-nValueOut;
 
         // Blackcoin: Minimum fee check
-        if (chainparams.GetConsensus().IsProtocolV3_1(nTimeTx) && nFees < GetMinFee(tx, nTimeTx))
+        if (Params().GetConsensus().IsProtocolV3_1(nTimeTx) && nFees < GetMinFee(tx, nTimeTx))
             return state.Invalid(false, REJECT_INSUFFICIENTFEE, "fee is below minimum");
 
         // nModifiedFees includes any fee deltas from PrioritiseTransaction
@@ -2007,9 +1999,9 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
     if (!inputs.HaveInputs(tx))
         return state.Invalid(false, 0, "", "Inputs unavailable");
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as TxTime
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = tx.nTime;
-    if (!nTimeTx && tx.nVersion >= CTransaction::MAX_STANDARD_VERSION)
+    if (!nTimeTx && tx.nVersion >= 2)
         nTimeTx = GetAdjustedTime();
 
     CAmount nValueIn = 0;
@@ -5179,7 +5171,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             return false;
         }
 
-        if (pfrom->nVersion < (chainparams.GetConsensus().IsProtocolV3_1(GetAdjustedTime()) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION))
+        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
         {
             // disconnect from peers older than this proto version
             LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
