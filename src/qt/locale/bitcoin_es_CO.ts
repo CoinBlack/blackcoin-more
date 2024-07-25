@@ -65,7 +65,7 @@
         <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Estas son tus direcciones de Bitcoin para recibir pagos. Usa el botón "Crear nueva dirección de recepción" en la pestaña "Recibir" para crear nuevas direcciones.
-Solo es posible firmar con direcciones de tipo legacy.</translation>
+Solo es posible firmar con direcciones de tipo "legacy".</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -225,7 +225,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character. If this is successful, please set a new passphrase to avoid this issue in the future.</source>
-        <translation type="unfinished">La frase de contraseña ingresada para el descifrado de la billetera es incorrecta. Contiene un carácter nulo (es decir, un byte cero). Si la frase de contraseña se configuró con una versión de este software anterior a la 25.0, vuelve a intentarlo solo con los caracteres hasta el primer carácter nulo, pero sin incluirlo . Si esto tiene éxito, establece una nueva frase de contraseña para evitar este problema en el futuro.</translation>
+        <translation type="unfinished">La frase de contraseña ingresada para el descifrado de la billetera es incorrecta. Contiene un carácter nulo (es decir, un byte cero). Si la frase de contraseña se configuró con una versión de este software anterior a la 25.0, vuelve a intentarlo solo con los caracteres hasta el primer carácter nulo, pero sin incluirlo . Si esto es correcto, establece una nueva frase de contraseña para evitar este problema en el futuro.</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
@@ -259,7 +259,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     <name>BitcoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
-        <translation type="unfinished">El archivo de configuración %1 puede estar corrupto o no ser válido.</translation>
+        <translation type="unfinished">El archivo de configuración %1 puede estar dañado o no ser válido.</translation>
     </message>
     <message>
         <source>Runaway exception</source>
@@ -422,7 +422,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Show information about %1</source>
-        <translation type="unfinished">Mostrar Información sobre %1</translation>
+        <translation type="unfinished">Mostrar información sobre %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -430,7 +430,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Show information about Qt</source>
-        <translation type="unfinished">Mostrar Información sobre Qt</translation>
+        <translation type="unfinished">Mostrar información sobre Qt</translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
@@ -478,6 +478,10 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
         <translation type="unfinished">&amp;Recibir</translation>
     </message>
     <message>
+        <source>&amp;Options…</source>
+        <translation type="unfinished">&amp;Opciones…</translation>
+    </message>
+    <message>
         <source>&amp;Encrypt Wallet…</source>
         <translation type="unfinished">&amp;Encriptar billetera…</translation>
     </message>
@@ -515,7 +519,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
-        <translation type="unfinished">&amp;Cargar PSBT desde archivo...</translation>
+        <translation type="unfinished">&amp;Cargar TBPF desde archivo...</translation>
     </message>
     <message>
         <source>Open &amp;URI…</source>
@@ -603,7 +607,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation type="unfinished">&amp;Opciones de línea de comando</translation>
+        <translation type="unfinished">&amp;Opciones de línea de comandos</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -646,7 +650,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
-        <translation type="unfinished">Cargar PSBT desde el &amp;portapapeles...</translation>
+        <translation type="unfinished">Cargar TBPF desde el &amp;portapapeles...</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
@@ -666,7 +670,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses</source>
-        <translation type="unfinished">&amp;Direcciones de destino</translation>
+        <translation type="unfinished">&amp;Direcciones de recepción</translation>
     </message>
     <message>
         <source>Open a bitcoin: URI</source>
@@ -804,7 +808,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">No se puede crear una nueva billetera, el software se compiló sin soporte de sqlite (requerido para billeteras descriptivas)</translation>
+        <translation type="unfinished">No se puede crear una billetera nueva, ya que el software se compiló sin compatibilidad con sqlite (requerida para billeteras basadas en descriptores)</translation>
     </message>
     <message>
         <source>Warning: %1</source>
@@ -1076,10 +1080,10 @@ If this wallet contains any solvable but not watched scripts, a different and ne
 
 The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the "Restore Wallet" functionality.</source>
         <translation type="unfinished">La migración de la billetera la convertirá en una o más billeteras basadas en descriptores. Será necesario realizar una nueva copia de seguridad de la billetera.
-Si esta billetera contiene scripts solo de lectura, se creará una nueva billetera que los contenga.
-Si esta billetera contiene scripts solucionables pero no de lectura, se creará una nueva billetera diferente que los contenga.
+Si esta billetera contiene scripts solo de observación, se creará una nueva billetera que los contenga.
+Si esta billetera contiene scripts solucionables pero no de observación, se creará una nueva billetera diferente que los contenga.
 
-El proceso de migración creará una copia de seguridad de la billetera antes de proceder. Este archivo de copia de seguridad se llamará &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak y se encontrará en el directorio de esta billetera. En caso de que la migración falle, se puede restaurar la copia de seguridad con la funcionalidad "Restore Wallet" (Restaurar billetera).</translation>
+El proceso de migración creará una copia de seguridad de la billetera antes de proceder. Este archivo de copia de seguridad se llamará &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak y se encontrará en el directorio de esta billetera. En caso de que la migración falle, se puede restaurar la copia de seguridad con la funcionalidad "Restaurar billetera".</translation>
     </message>
     <message>
         <source>Migrate Wallet</source>
@@ -1095,11 +1099,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Los scripts solo de lectura se migraron a una nueva billetera llamada "%1".</translation>
+        <translation type="unfinished">Los scripts solo de observación se migraron a una nueva billetera llamada "%1".</translation>
     </message>
     <message>
         <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Los scripts solucionables pero no de lectura se migraron a una nueva billetera llamada "%1".</translation>
+        <translation type="unfinished">Los scripts solucionables pero no de observación se migraron a una nueva billetera llamada "%1".</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1222,7 +1226,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation type="unfinished">Desactivar las claves privadas para esta billetera. Las billeteras con claves privadas desactivadas no tendrán claves privadas y no podrán tener ninguna semilla HD ni claves privadas importadas. Esto es ideal para billeteras de solo lectura.</translation>
+        <translation type="unfinished">Desactivar las claves privadas para esta billetera. Las billeteras con claves privadas desactivadas no tendrán claves privadas y no podrán tener ninguna semilla HD ni claves privadas importadas. Esto es ideal para billeteras solo de observación.</translation>
     </message>
     <message>
         <source>Disable Private Keys</source>
@@ -1251,7 +1255,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
         <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
-        <translation type="unfinished">Compilado sin soporte de firma externa (requerido para la firma externa)</translation>
+        <translation type="unfinished">Compilado sin compatibilidad con firma externa (requerida para la firma externa)</translation>
     </message>
 </context>
 <context>
@@ -1440,7 +1444,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Command-line options</source>
-        <translation type="unfinished">Opciones de línea de comando</translation>
+        <translation type="unfinished">Opciones de línea de comandos</translation>
     </message>
 </context>
 <context>
@@ -1451,7 +1455,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">No apagues el equipo hasta que desaparezca esta ventana.</translation>
+        <translation type="unfinished">No apagues la computadora hasta que desaparezca esta ventana.</translation>
     </message>
 </context>
 <context>
@@ -1660,12 +1664,12 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Enable &amp;PSBT controls</source>
         <extracomment>An options window setting to enable PSBT controls.</extracomment>
-        <translation type="unfinished">Activar controles de &amp;PSBT</translation>
+        <translation type="unfinished">Activar controles de &amp;TBPF</translation>
     </message>
     <message>
         <source>Whether to show PSBT controls.</source>
         <extracomment>Tooltip text for options window setting that enables PSBT controls.</extracomment>
-        <translation type="unfinished">Si se muestran los controles de PSBT.</translation>
+        <translation type="unfinished">Si se muestran los controles de TBPF.</translation>
     </message>
     <message>
         <source>External Signer (e.g. hardware wallet)</source>
@@ -1806,7 +1810,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
         <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
-        <translation type="unfinished">Compilado sin soporte de firma externa (requerido para la firma externa)</translation>
+        <translation type="unfinished">Compilado sin compatibilidad con firma externa (requerida para la firma externa)</translation>
     </message>
     <message>
         <source>default</source>
@@ -1886,7 +1890,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Watch-only:</source>
-        <translation type="unfinished">Solo lectura:</translation>
+        <translation type="unfinished">Solo de observación:</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -1922,7 +1926,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Your current balance in watch-only addresses</source>
-        <translation type="unfinished">Tu saldo actual en direcciones de solo lectura</translation>
+        <translation type="unfinished">Tu saldo actual en direcciones solo de observación</translation>
     </message>
     <message>
         <source>Spendable:</source>
@@ -1934,26 +1938,26 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
-        <translation type="unfinished">Transacciones sin confirmar hacia direcciones de solo lectura</translation>
+        <translation type="unfinished">Transacciones sin confirmar hacia direcciones solo de observación</translation>
     </message>
     <message>
         <source>Mined balance in watch-only addresses that has not yet matured</source>
-        <translation type="unfinished">Saldo minado en direcciones de solo lectura que aún no ha madurado</translation>
+        <translation type="unfinished">Saldo minado en direcciones solo de observación que aún no ha madurado</translation>
     </message>
     <message>
         <source>Current total balance in watch-only addresses</source>
-        <translation type="unfinished">Saldo total actual en direcciones de solo lectura</translation>
+        <translation type="unfinished">Saldo total actual en direcciones solo de observación</translation>
     </message>
     <message>
         <source>Privacy mode activated for the Overview tab. To unmask the values, uncheck Settings-&gt;Mask values.</source>
-        <translation type="unfinished">Modo de privacidad activado para la pestaña de vista general. Para mostrar los valores, anula la selección de Configuración-&gt;Ocultar valores.</translation>
+        <translation type="unfinished">Modo de privacidad activado para la pestaña de vista general. Para mostrar los valores, anula la selección de "Configuración-&gt;Ocultar valores".</translation>
     </message>
 </context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
         <source>PSBT Operations</source>
-        <translation type="unfinished">Operaciones PSBT</translation>
+        <translation type="unfinished">Operaciones TBPF</translation>
     </message>
     <message>
         <source>Sign Tx</source>
@@ -2013,7 +2017,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>PSBT copied to clipboard.</source>
-        <translation type="unfinished">PSBT copiada al portapapeles.</translation>
+        <translation type="unfinished">TBPF copiada al portapapeles.</translation>
     </message>
     <message>
         <source>Save Transaction Data</source>
@@ -2022,11 +2026,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Partially Signed Transaction (Binary)</source>
         <extracomment>Expanded name of the binary PSBT file format. See: BIP 174.</extracomment>
-        <translation type="unfinished">Transacción firmada parcialmente (binaria) </translation>
+        <translation type="unfinished">Transacción parcialmente firmada (binario)</translation>
     </message>
     <message>
         <source>PSBT saved to disk.</source>
-        <translation type="unfinished">PSBT guardada en en el disco.</translation>
+        <translation type="unfinished">TBPF guardada en el disco.</translation>
     </message>
     <message>
         <source> * Sends %1 to %2</source>
@@ -2093,7 +2097,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation type="unfinished">No se puede iniciar Bitcoin: controlador de clic para pagar</translation>
+        <translation type="unfinished">No se puede iniciar el controlador "bitcoin: click-to-pay"</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -2218,7 +2222,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Client version</source>
-        <translation type="unfinished">Versión del Cliente</translation>
+        <translation type="unfinished">Versión del cliente</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -2314,11 +2318,11 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>The BIP324 session ID string in hex, if any.</source>
-        <translation type="unfinished">Cadena de identificación de la sesión BIP324 en formato hexadecimal, si existe.</translation>
+        <translation type="unfinished">Cadena de identificador de la sesión BIP324 en formato hexadecimal, si existe.</translation>
     </message>
     <message>
         <source>Session ID</source>
-        <translation type="unfinished">Identificación de la sesión</translation>
+        <translation type="unfinished">Identificador de sesión</translation>
     </message>
     <message>
         <source>Version</source>
@@ -2334,7 +2338,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Starting Block</source>
-        <translation type="unfinished">Bloque de inicio</translation>
+        <translation type="unfinished">Bloque inicial</translation>
     </message>
     <message>
         <source>Synced Headers</source>
@@ -2364,17 +2368,17 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     <message>
         <source>Address Relay</source>
         <extracomment>Text title for the Address Relay field in the peer details area, which displays whether we relay addresses to this peer (Yes/No).</extracomment>
-        <translation type="unfinished">Retransmisión de dirección</translation>
+        <translation type="unfinished">Retransmisión de direcciones</translation>
     </message>
     <message>
         <source>The total number of addresses received from this peer that were processed (excludes addresses that were dropped due to rate-limiting).</source>
         <extracomment>Tooltip text for the Addresses Processed field in the peer details area, which displays the total number of addresses received from this peer that were processed (excludes addresses that were dropped due to rate-limiting).</extracomment>
-        <translation type="unfinished">El número total de direcciones recibidas desde este par que se procesaron (excluye las direcciones omitidas debido a la limitación de volumen).</translation>
+        <translation type="unfinished">El número total de direcciones recibidas desde este par que se procesaron (excluye las direcciones desestimadas debido a la limitación de volumen).</translation>
     </message>
     <message>
         <source>The total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</source>
         <extracomment>Tooltip text for the Addresses Rate-Limited field in the peer details area, which displays the total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</extracomment>
-        <translation type="unfinished">El número total de direcciones recibidas desde este par que se omitieron (no se procesaron) debido a la limitación de volumen.</translation>
+        <translation type="unfinished">El número total de direcciones recibidas desde este par que se desestimaron (no se procesaron) debido a la limitación de volumen.</translation>
     </message>
     <message>
         <source>Addresses Processed</source>
@@ -2384,7 +2388,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     <message>
         <source>Addresses Rate-Limited</source>
         <extracomment>Text title for the Addresses Rate-Limited field in the peer details area, which displays the total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</extracomment>
-        <translation type="unfinished">Direcciones omitidas por limitación de volumen</translation>
+        <translation type="unfinished">Direcciones desestimadas por limitación de volumen</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -2432,7 +2436,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>High bandwidth BIP152 compact block relay: %1</source>
-        <translation type="unfinished">Retransmisión de bloque compacto BIP152 en modo de banda ancha: %1</translation>
+        <translation type="unfinished">Retransmisión de bloques compactos BIP152 en banda ancha: %1</translation>
     </message>
     <message>
         <source>High Bandwidth</source>
@@ -2509,7 +2513,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>Clear console</source>
-        <translation type="unfinished">Limpiar consola</translation>
+        <translation type="unfinished">Borrar consola</translation>
     </message>
     <message>
         <source>In:</source>
@@ -2552,7 +2556,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     <message>
         <source>detecting: peer could be v1 or v2</source>
         <extracomment>Explanatory text for "detecting" transport type.</extracomment>
-        <translation type="unfinished">detectando: el par puede ser v1 o v2</translation>
+        <translation type="unfinished">Detectando: el par puede ser v1 o v2</translation>
     </message>
     <message>
         <source>v1: unencrypted, plaintext transport protocol</source>
@@ -2608,7 +2612,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>&amp;Unban</source>
-        <translation type="unfinished">&amp;Desbloquear</translation>
+        <translation type="unfinished">&amp;Levantar prohibición</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
@@ -2637,7 +2641,7 @@ Utiliza %3 y %4 para aumentar o disminuir el tamaño de la fuente.
 Escribe %5 para ver los comandos disponibles.
 Para obtener más información sobre cómo usar esta consola, escribe %6.
 
-%7 ADVERTENCIA: Los estafadores han estado diciéndoles a los usuarios que escriban comandos aquí para robarles el contenido de sus billeteras. No uses esta consola sin entender completamente las ramificaciones de un comando.%8</translation>
+%7 ADVERTENCIA: Los estafadores suelen decirles a los usuarios que escriban comandos aquí para robarles el contenido de sus billeteras. No uses esta consola sin entender completamente las ramificaciones de un comando.%8</translation>
     </message>
     <message>
         <source>Executing…</source>
@@ -2658,7 +2662,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">Para</translation>
+        <translation type="unfinished">A</translation>
     </message>
     <message>
         <source>From</source>
@@ -2666,7 +2670,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>Ban for</source>
-        <translation type="unfinished">Prohibir para</translation>
+        <translation type="unfinished">Prohibir por</translation>
     </message>
     <message>
         <source>Never</source>
@@ -2709,7 +2713,7 @@ Para obtener más información sobre cómo usar esta consola, escribe %6.
     </message>
     <message>
         <source>An optional label to associate with the new receiving address (used by you to identify an invoice).  It is also attached to the payment request.</source>
-        <translation type="unfinished">Una etiqueta opcional para asociar con la nueva dirección de recepción (utilizada por ti para identificar una factura). También se adjunta a la solicitud de pago.</translation>
+        <translation type="unfinished">Una etiqueta opcional para asociar con la nueva dirección de recepción (puedes usarla para identificar una factura). También se adjunta a la solicitud de pago.</translation>
     </message>
     <message>
         <source>An optional message that is attached to the payment request and may be displayed to the sender.</source>
@@ -2990,7 +2994,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
-        <translation type="unfinished">Si la comisión es demasiado baja, es posible que la transacción nunca se confirme (leer la información sobre herramientas).</translation>
+        <translation type="unfinished">Si la comisión es demasiado baja, es posible que la transacción nunca se confirme (leer la información en pantalla).</translation>
     </message>
     <message>
         <source>(Smart fee not initialized yet. This usually takes a few blocks…)</source>
@@ -3002,11 +3006,11 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Enable Replace-By-Fee</source>
-        <translation type="unfinished">Activar "Reemplazar-por-comisión"</translation>
+        <translation type="unfinished">Activar "Remplazar por comisión"</translation>
     </message>
     <message>
         <source>With Replace-By-Fee (BIP-125) you can increase a transaction's fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
-        <translation type="unfinished">Con la función "Reemplazar-por-comisión" (BIP-125), puedes aumentar la comisión de una transacción después de enviarla. Sin esta, es posible que se recomiende una comisión más alta para compensar el mayor riesgo de retraso de la transacción.</translation>
+        <translation type="unfinished">Con la función "Remplazar por comisión" (BIP-125), puedes aumentar la comisión de una transacción después de enviarla. Sin esta, es posible que se recomiende una comisión más alta para compensar el mayor riesgo de retraso de la transacción.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -3072,7 +3076,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <translation type="unfinished">Crea una transacción de Bitcoin parcialmente firmada (PSBT) para usarla, por ejemplo, con una billetera %1 sin conexión o una billetera de hardware compatible con PSBT.</translation>
+        <translation type="unfinished">Crea una transacción de Bitcoin parcialmente firmada (TBPF) para usarla, por ejemplo, con una billetera %1 sin conexión o una billetera de hardware compatible con TBPF.</translation>
     </message>
     <message>
         <source> from wallet '%1'</source>
@@ -3080,7 +3084,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>%1 to '%2'</source>
-        <translation type="unfinished">%1 a '%2'</translation>
+        <translation type="unfinished">%1 a "%2"</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -3111,12 +3115,12 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <message>
         <source>Partially Signed Transaction (Binary)</source>
         <extracomment>Expanded name of the binary PSBT file format. See: BIP 174.</extracomment>
-        <translation type="unfinished">Transacción firmada parcialmente (binaria) </translation>
+        <translation type="unfinished">Transacción parcialmente firmada (binario) </translation>
     </message>
     <message>
         <source>PSBT saved</source>
         <extracomment>Popup message when a PSBT has been saved to a file</extracomment>
-        <translation type="unfinished">PSBT guardada</translation>
+        <translation type="unfinished">TBPF guardada</translation>
     </message>
     <message>
         <source>External balance:</source>
@@ -3128,7 +3132,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>You can increase the fee later (signals Replace-By-Fee, BIP-125).</source>
-        <translation type="unfinished">Puedes aumentar la comisión después (indica "Reemplazar-por-comisión", BIP-125).</translation>
+        <translation type="unfinished">Puedes aumentar la comisión después (indica "Remplazar por comisión", BIP-125).</translation>
     </message>
     <message>
         <source>Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
@@ -3143,7 +3147,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <message>
         <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Bitcoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
-        <translation type="unfinished">Revisa la transacción. Puedes crear y enviar esta transacción de Bitcoin parcialmente firmada (PSBT), que además puedes guardar o copiar y, luego, firmar; por ejemplo, una billetera %1 sin conexión o una billetera de hardware compatible con PSBT.</translation>
+        <translation type="unfinished">Revisa la transacción. Puedes crear y enviar esta transacción de Bitcoin parcialmente firmada (TBPF), que además puedes guardar o copiar y, luego, firmar; por ejemplo, una billetera %1 sin conexión o una billetera de hardware compatible con TBPF.</translation>
     </message>
     <message>
         <source>Please, review your transaction.</source>
@@ -3156,7 +3160,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Not signalling Replace-By-Fee, BIP-125.</source>
-        <translation type="unfinished">No indica "Reemplazar-por-comisión", BIP-125.</translation>
+        <translation type="unfinished">No indica "Remplazar por comisión", BIP-125.</translation>
     </message>
     <message>
         <source>Total Amount</source>
@@ -3170,19 +3174,19 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>The PSBT has been copied to the clipboard. You can also save it.</source>
-        <translation type="unfinished">Se copió la PSBT al portapapeles. También puedes guardarla.</translation>
+        <translation type="unfinished">Se copió la TBPF al portapapeles. También puedes guardarla.</translation>
     </message>
     <message>
         <source>PSBT saved to disk</source>
-        <translation type="unfinished">PSBT guardada en el disco</translation>
+        <translation type="unfinished">TBPF guardada en el disco</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
-        <translation type="unfinished">Confirmar el envió de monedas</translation>
+        <translation type="unfinished">Confirmar el envío de monedas</translation>
     </message>
     <message>
         <source>Watch-only balance:</source>
-        <translation type="unfinished">Saldo de solo lectura:</translation>
+        <translation type="unfinished">Saldo solo de observación:</translation>
     </message>
     <message>
         <source>The recipient address is not valid. Please recheck.</source>
@@ -3314,11 +3318,11 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>Signatures - Sign / Verify a Message</source>
-        <translation type="unfinished">Firmas - Firmar / verificar un mensaje</translation>
+        <translation type="unfinished">Firmas: firmar o verificar un mensaje</translation>
     </message>
     <message>
         <source>&amp;Sign Message</source>
-        <translation type="unfinished">&amp;Firmar Mensaje</translation>
+        <translation type="unfinished">&amp;Firmar mensaje</translation>
     </message>
     <message>
         <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
@@ -3522,7 +3526,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">Para</translation>
+        <translation type="unfinished">A</translation>
     </message>
     <message>
         <source>own address</source>
@@ -3530,7 +3534,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>watch-only</source>
-        <translation type="unfinished">Solo lectura</translation>
+        <translation type="unfinished">Solo de observación</translation>
     </message>
     <message>
         <source>label</source>
@@ -3703,7 +3707,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>watch-only</source>
-        <translation type="unfinished">Solo lectura</translation>
+        <translation type="unfinished">Solo de observación</translation>
     </message>
     <message>
         <source>(n/a)</source>
@@ -3727,7 +3731,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation type="unfinished">Si una dirección de solo lectura está involucrada en esta transacción o no.</translation>
+        <translation type="unfinished">Si una dirección solo de observación está involucrada en esta transacción o no.</translation>
     </message>
     <message>
         <source>User-defined intent/purpose of the transaction.</source>
@@ -3852,7 +3856,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Watch-only</source>
-        <translation type="unfinished">Solo lectura</translation>
+        <translation type="unfinished">Solo de observación</translation>
     </message>
     <message>
         <source>Date</source>
@@ -3884,7 +3888,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Exporting Successful</source>
-        <translation type="unfinished">Exportación exitosa</translation>
+        <translation type="unfinished">Exportación correcta</translation>
     </message>
     <message>
         <source>The transaction history was successfully saved to %1.</source>
@@ -3915,7 +3919,7 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
     <message>
         <source>Unable to decode PSBT from clipboard (invalid base64)</source>
-        <translation type="unfinished">No se puede decodificar la PSBT desde el portapapeles (Base64 inválida)</translation>
+        <translation type="unfinished">No se puede decodificar la TBPF desde el portapapeles (Base64 inválida)</translation>
     </message>
     <message>
         <source>Load Transaction Data</source>
@@ -3923,15 +3927,15 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
     <message>
         <source>Partially Signed Transaction (*.psbt)</source>
-        <translation type="unfinished">Transacción firmada parcialmente (*.psbt)</translation>
+        <translation type="unfinished">Transacción parcialmente firmada (*.psbt)</translation>
     </message>
     <message>
         <source>PSBT file must be smaller than 100 MiB</source>
-        <translation type="unfinished">El archivo PSBT debe ser más pequeño de 100 MiB</translation>
+        <translation type="unfinished">El archivo de la TBPF debe ser más pequeño de 100 MiB</translation>
     </message>
     <message>
         <source>Unable to decode PSBT</source>
-        <translation type="unfinished">No se puede decodificar PSBT</translation>
+        <translation type="unfinished">No se puede decodificar TBPF</translation>
     </message>
 </context>
 <context>
@@ -3979,7 +3983,7 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
     <message>
         <source>PSBT copied</source>
-        <translation type="unfinished">PSBT copiada</translation>
+        <translation type="unfinished">TBPF copiada</translation>
     </message>
     <message>
         <source>Copied to clipboard</source>
@@ -4099,7 +4103,7 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
     <message>
         <source>Error: Dumpfile version is not supported. This version of bitcoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
-        <translation type="unfinished">Error: La versión del archivo volcado no es compatible. Esta versión de la billetera de Bitcoin solo admite archivos de volcado de la versión 1. Se obtuvo un archivo de volcado con la versión %s</translation>
+        <translation type="unfinished">Error: La versión del archivo de volcado no es compatible. Esta versión de la billetera de Bitcoin solo admite archivos de volcado de la versión 1. Se obtuvo un archivo de volcado con la versión %s</translation>
     </message>
     <message>
         <source>Error: Legacy wallets only support the "legacy", "p2sh-segwit", and "bech32" address types</source>
@@ -4251,7 +4255,7 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
     <message>
         <source>Cannot resolve -%s address: '%s'</source>
-        <translation type="unfinished">No se puede resolver la dirección de -%s: '%s'</translation>
+        <translation type="unfinished">No se puede resolver la dirección de -%s: "%s"</translation>
     </message>
     <message>
         <source>Cannot set -forcednsseed to true when setting -dnsseed to false.</source>
@@ -4347,14 +4351,14 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
     </message>
     <message>
         <source>Unconfirmed UTXOs are available, but spending them creates a chain of transactions that will be rejected by the mempool</source>
-        <translation type="unfinished">Las UTXO sin confirmar están disponibles, pero si se gastan, se crea una cadena de transacciones que rechazará el pool de memoria.</translation>
+        <translation type="unfinished">Las UTXO sin confirmar están disponibles, pero si se gastan, se crea una cadena de transacciones que rechazará la mempool.</translation>
     </message>
     <message>
         <source>Unexpected legacy entry in descriptor wallet found. Loading wallet %s
 
 The wallet might have been tampered with or created with malicious intent.
 </source>
-        <translation type="unfinished">Se encontró una entrada heredada inesperada en la billetera basada en descriptores. Cargando billetera%s
+        <translation type="unfinished">Se encontró una entrada inesperada tipo "legacy" en la billetera basada en descriptores. Cargando billetera%s
 
 Es posible que la billetera haya sido manipulada o creada con malas intenciones.
 </translation>
@@ -4390,6 +4394,10 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     <message>
         <source>Config setting for %s only applied on %s network when in [%s] section.</source>
         <translation type="unfinished">La configuración para %s solo se aplica en la red %s cuando se encuentra en la sección [%s].</translation>
+    </message>
+    <message>
+        <source>Copyright (C) %i-%i</source>
+        <translation type="unfinished">Derechos de autor (C) %i-%i</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -4453,7 +4461,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Error opening block database</source>
-        <translation type="unfinished">Error al abrir base de datos de bloques</translation>
+        <translation type="unfinished">Error al abrir la base de datos de bloques</translation>
     </message>
     <message>
         <source>Error reading configuration file: %s</source>
@@ -4473,11 +4481,11 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Error: Could not add watchonly tx to watchonly wallet</source>
-        <translation type="unfinished">Error: No se pudo agregar la transacción solo de lectura a la billetera respectiva</translation>
+        <translation type="unfinished">Error: No se pudo agregar la transacción solo de observación a la billetera respectiva</translation>
     </message>
     <message>
         <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">Error: No se pudieron eliminar las transacciones solo de lectura</translation>
+        <translation type="unfinished">Error: No se pudieron eliminar las transacciones solo de observación</translation>
     </message>
     <message>
         <source>Error: Couldn't create cursor into database</source>
@@ -4493,15 +4501,15 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Error: Failed to create new watchonly wallet</source>
-        <translation type="unfinished">Error: No se pudo crear una billetera solo de lectura</translation>
+        <translation type="unfinished">Error: No se pudo crear una billetera solo de observación</translation>
     </message>
     <message>
         <source>Error: Got key that was not hex: %s</source>
-        <translation type="unfinished">Error: Se recibió una clave que no es hex: %s</translation>
+        <translation type="unfinished">Error: Se recibió una clave que no es hexadecimal (%s)</translation>
     </message>
     <message>
         <source>Error: Got value that was not hex: %s</source>
-        <translation type="unfinished">Error: Se recibió un valor que no es hex: %s</translation>
+        <translation type="unfinished">Error: Se recibió un valor que no es hexadecimal (%s)</translation>
     </message>
     <message>
         <source>Error: Keypool ran out, please call keypoolrefill first</source>
@@ -4517,7 +4525,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">Error: No se pudieron eliminar todas las transacciones solo de lectura</translation>
+        <translation type="unfinished">Error: No se pudieron eliminar todas las transacciones solo de observación</translation>
     </message>
     <message>
         <source>Error: This wallet already uses SQLite</source>
@@ -4545,7 +4553,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Error: Unable to remove watchonly address book data</source>
-        <translation type="unfinished">Error: No se pueden eliminar los datos de la libreta de direcciones solo de lectura</translation>
+        <translation type="unfinished">Error: No se pueden eliminar los datos de la libreta de direcciones solo de observación</translation>
     </message>
     <message>
         <source>Error: Unable to write record to new wallet</source>
@@ -4625,11 +4633,11 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Importe inválido para -%s=&lt;amount&gt;: '%s'</translation>
+        <translation type="unfinished">Importe inválido para -%s=&lt;amount&gt;: "%s"</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
-        <translation type="unfinished">Máscara de red inválida especificada en -whitelist: '%s'</translation>
+        <translation type="unfinished">Máscara de red inválida especificada en -whitelist: "%s"</translation>
     </message>
     <message>
         <source>Invalid port specified in %s: '%s'</source>
@@ -4649,7 +4657,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Loading banlist…</source>
-        <translation type="unfinished">Cargando lista de bloqueos...</translation>
+        <translation type="unfinished">Cargando lista de prohibiciones...</translation>
     </message>
     <message>
         <source>Loading block index…</source>
@@ -4669,7 +4677,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
-        <translation type="unfinished">Se necesita especificar un puerto con -whitebind: '%s'</translation>
+        <translation type="unfinished">Se necesita especificar un puerto con -whitebind: "%s"</translation>
     </message>
     <message>
         <source>No addresses available</source>
@@ -4697,7 +4705,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Pruning blockstore…</source>
-        <translation type="unfinished">Podando almacén de bloques…</translation>
+        <translation type="unfinished">Podando almacenamiento de bloques…</translation>
     </message>
     <message>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
@@ -4801,7 +4809,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">La transacción tiene una cadena demasiado larga del pool de memoria</translation>
+        <translation type="unfinished">La transacción tiene una cadena demasiado larga de la mempool</translation>
     </message>
     <message>
         <source>Transaction must have at least one recipient</source>
@@ -4853,7 +4861,7 @@ No se puede restaurar la copia de seguridad de la billetera.</translation>
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation type="unfinished">No puede iniciar el servidor HTTP. Consulta el registro de depuración para obtener información.</translation>
+        <translation type="unfinished">No se puede iniciar el servidor HTTP. Consulta el registro de depuración para obtener información.</translation>
     </message>
     <message>
         <source>Unable to unload the wallet before migrating</source>
