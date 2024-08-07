@@ -126,7 +126,7 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000042bc911cd05857a5b34"); // block 4939111
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000043c846cfe732c8b6dbc"); // block 5044605
         consensus.defaultAssumeValid = uint256S("0x6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119"); // block 4908715
 
         /**
@@ -187,10 +187,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119
-            .nTime    = 1713938480,
-            .nTxCount = 15170003,
-            .dTxRate  = 0.02990868924889543,
+            // Data from RPC: getchaintxstats 40500 97d26e7793f0d3f3e8b3f52503881b013d4deb8ff468f6cae3f670266c91a46e
+            .nTime    = 1723034304,
+            .nTxCount = 15444062,
+            .dTxRate  = 0.03010594818542921,
         };
 
         // A vector of p2sh addresses
@@ -247,7 +247,7 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000004efbeeda43294ccd83"); // block 1867048
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000054788711eaf8d71d0e"); // block 1971755
         consensus.defaultAssumeValid = uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39"); // block 1415393
 
         pchMessageStart[0] = 0xcd;
@@ -297,10 +297,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 8f2c0be64feb3d84572ec928d8cc55416eb9cd9b811b92fa34602e3543698a0f
-            .nTime    = 1715973760,
-            .nTxCount = 3752992,
-            .dTxRate  = 0.0297410476168098,
+            // Data from RPC: getchaintxstats 40500 84517a2467681cf97ed7cf8926acc45dbd567226f2fb189302979ad49fd56b1f
+            .nTime    = 1723034480,
+            .nTxCount = 3962401,
+            .dTxRate  = 0.02976167726989428,
         };
 
         // A vector of p2sh addresses
