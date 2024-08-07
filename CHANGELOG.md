@@ -1,5 +1,10 @@
 # Changelog
 
+## v26.2.0-beta-1 (2024-XX-XX)
+- Updated to Bitcoin Core 26.2
+- Activated Segwit on regtest
+- New mempool.dat format (backport of Core's PR28207)
+
 ## v26.1.0-beta-1 (2024-05-24)
 - Updated to Bitcoin Core 26.1
 - Create V2 transactions by default
