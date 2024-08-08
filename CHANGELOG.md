@@ -1,6 +1,6 @@
 # Changelog
 
-## v26.2.0-beta-1 (2024-XX-XX)
+## v26.2.0-beta-1 (2024-08-07)
 - Updated to Bitcoin Core 26.2
 - Activated Segwit on regtest
 - New mempool.dat format (backport of Core's PR28207)
