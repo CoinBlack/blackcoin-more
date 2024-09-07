@@ -33,22 +33,22 @@ jobs:
         include:
           - name: linux-32-bit
             host: i686-pc-linux-gnu
-            os: ubuntu-22.04
+            os: ubuntu-20.04
             packages: g++-multilib
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "--enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+            config-opts: "--enable-sse2 --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
             goal: install
 
           - name: linux-64-bit
             host: x86_64-pc-linux-gnu
-            os: ubuntu-22.04
+            os: ubuntu-20.04
             packages: python3
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "--enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+            config-opts: "--enable-sse2 --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
             goal: install
 
           - name: windows-64-bit
@@ -63,7 +63,7 @@ jobs:
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "LDFLAGS=-static-libgcc"
+            config-opts: "--enable-sse2 LDFLAGS=-static-libgcc"
             goal: install
 
           - name: macos-64-bit
@@ -73,13 +73,13 @@ jobs:
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: ""
+            config-opts: "--enable-sse2"
             goal: deploy
             sdk: 12.2-12B45b
 
           - name: linux-arm-32-bit
             host: arm-linux-gnueabihf
-            os: ubuntu-22.04
+            os: ubuntu-20.04
             packages: g++-arm-linux-gnueabihf binutils-arm-linux-gnueabihf
             check-security: false
             check-symbols: false
@@ -89,7 +89,7 @@ jobs:
 
           - name: linux-arm-64-bit
             host: aarch64-linux-gnu
-            os: ubuntu-22.04
+            os: ubuntu-20.04
             packages: g++-aarch64-linux-gnu binutils-aarch64-linux-gnu
             check-security: false
             check-symbols: false
