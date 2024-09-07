@@ -41,7 +41,7 @@ RUN git clone -b $BRANCH https://$HUBLAB.com/$GITNAME/blackcoin-more.git && \
       make install && \
       cd ../.. && \
       cd blackcoin-more/  && ./autogen.sh && \
-      ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --disable-tests --disable-bench --enable-reduce-exports && \
+      ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --enable-upnp-default --disable-man --enable-sse2 --disable-tests --disable-bench --enable-reduce-exports && \
       make -j4 && \
       cd src/ && \
       strip blackmore*) && \
