@@ -1,0 +1,17 @@
+name: Build and Push Docker - 26.x
+on: [push]
+jobs:
+  test:
+    name: Build and Push Docker - 26.x
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+        with:
+          ref: add-jenkins
+      - name: Set environment variables
+        run: echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Login to DockerHub Registry
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Run build script
+        run: contrib/docker/gh-build-26.sh
