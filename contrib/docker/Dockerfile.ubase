@@ -8,10 +8,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
       apt-get update && apt-get install -yqq \
                           wget \
+                          curl \
                           jq \
                           bc \
                           git \
                           make \
+                          cmake \
+                          patch \
+                          bison \
                           file \
                           autoconf \
                           automake \
@@ -25,6 +29,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
                           libevent-dev \
                           libboost-all-dev \
                           libminiupnpc-dev \
+                          libnatpmp-dev \
+                          libsqlite3-dev \
+                          systemtap-sdt-dev \
                           libzmq3-dev \
                           libssl-dev \
                           gperf \
@@ -32,9 +39,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
                           libqrencode-dev \
                           libprotobuf-dev \
                           protobuf-compiler \
-                          libqt5core5a \
-                          libqt5dbus5 \
-                          libqt5gui5 \
+                          qtbase5-dev \
+                          qtwayland5 \
                           qttools5-dev \
                           qttools5-dev-tools 
 #

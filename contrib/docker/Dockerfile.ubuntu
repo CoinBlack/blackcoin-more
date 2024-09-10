@@ -10,12 +10,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 		apt-get update && \
 			apt-get -yqq upgrade && \
 				apt-get  -yqq install \
-						libboost-chrono-dev \
-						libboost-filesystem-dev \
-						libboost-program-options-dev \
-						libboost-system-dev \
-						libboost-test-dev \
-						libboost-thread-dev \
+						libboost-all-dev \
+						systemtap-sdt-dev \
+						libsqlite3-dev \
+						libnatpmp-dev \
 						libzmq3-dev \
 						libminiupnpc-dev \
 						libevent-dev \
@@ -23,9 +21,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 						libprotobuf-dev \
 						protobuf-compiler \
                         libqrencode-dev \
-						libqt5core5a \
-						libqt5dbus5 \
-						libqt5gui5 \
+						qtbase5-dev \
+						qtwayland5 \
 						qttools5-dev \
 						qttools5-dev-tools 
 #
