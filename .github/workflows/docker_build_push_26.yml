@@ -15,4 +15,4 @@ jobs:
       - name: Login to DockerHub Registry
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Run build script
-        run: contrib/docker/gh-build-26.sh
+        run: gh-build-26.sh
