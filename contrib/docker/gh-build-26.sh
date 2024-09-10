@@ -21,7 +21,7 @@ echo ${SYSTYPE}
 echo ${TZ}
 
 # tag names
-base="${DockerHub}/blackcoin-more-26.2.0-base-${SYSTYPE}:${BRANCH}"
+base="${DockerHub}/blackcoin-more-base-${SYSTYPE}:${BRANCH}"
 minimal="${DockerHub}/blackcoin-more-26.2.0-minimal-${SYSTYPE}:${BRANCH}"
 ubuntu="${DockerHub}/blackcoin-more-26.2.0-ubuntu-${SYSTYPE}:${BRANCH}"
 
