@@ -8,7 +8,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.7
         with:
-          ref: add-jenkins
+          repository: BlackcoinDev/docker-blk
+          ref: main
       - name: Set environment variables
         run: echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: Login to DockerHub Registry
