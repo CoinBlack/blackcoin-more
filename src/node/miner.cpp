@@ -138,7 +138,7 @@ void BlockAssembler::resetBlock()
     nFees = 0;
 }
 
-std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, bool* pfPoSCancel, int64_t* pFees)
+std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, bool* pfPoSCancel, int64_t* pFees, CTxDestination destination)
 {
     const auto time_start{SteadyClock::now()};
 
@@ -225,7 +225,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         int64_t nSearchTime = txCoinStake.nTime; // search to current time
 
         if (nSearchTime > nLastCoinStakeSearchTime) {
-            if (wallet::CreateCoinStake(*pwallet, pblock->nBits, 1, txCoinStake, nFees)) {
+            if (wallet::CreateCoinStake(*pwallet, pblock->nBits, 1, txCoinStake, nFees, destination)) {
                 if (txCoinStake.nTime >= pindexPrev->GetMedianTimePast()+1) {
                     // Make the coinbase tx empty in case of proof of stake
                     coinbaseTx.vout[0].SetEmpty();
@@ -651,20 +651,26 @@ void PoSMiner(CWallet *pwallet)
 
     unsigned int nExtraNonce = 0;
 
-    OutputType output_type = pwallet->m_default_change_type ? *pwallet->m_default_change_type : pwallet->m_default_address_type;
-    ReserveDestination reservedest(pwallet, output_type);
     CTxDestination dest;
 
     // Compute timeout for pos as sqrt(numUTXO)
     unsigned int pos_timio;
     {
         LOCK2(pwallet->cs_wallet, cs_main);
-        auto op_dest = reservedest.GetReservedDestination(true);
+        const std::string label = "Staking Legacy Address";
+        pwallet->ForEachAddrBookEntry([&](const CTxDestination& _dest, const std::string& _label, bool _is_change, const std::optional<wallet::AddressPurpose>& _purpose) {
+            if (_is_change) return;
+            if (_label == label)
+                dest = _dest;
+        });
 
-        if (!op_dest)
-            throw std::runtime_error("Error: Keypool ran out, please call keypoolrefill first.");
-
-        dest = *op_dest;
+        if (std::get_if<CNoDestination>(&dest)) {
+            // create mintkey address
+            auto op_dest = pwallet->GetNewDestination(OutputType::LEGACY, label);
+            if (!op_dest)
+                throw std::runtime_error("Error: Keypool ran out, please call keypoolrefill first.");
+            dest = *op_dest;
+        }
 
         std::vector<std::pair<const CWalletTx*, unsigned int> > vCoins;
         CCoinControl coincontrol;
@@ -703,15 +709,15 @@ void PoSMiner(CWallet *pwallet)
             // Create new block
             //
             CBlockIndex* pindexPrev = pwallet->chain().getTip();
-            bool fPoSCancel = false;
-            CScript scriptPubKey = GetScriptForDestination(dest);
+            bool fPoSCancel{false};
+            int64_t pFees{0};
             CBlock *pblock;
             std::unique_ptr<CBlockTemplate> pblocktemplate;
 
             {
                 LOCK2(pwallet->cs_wallet, cs_main);
                 try {
-                    pblocktemplate = BlockAssembler{pwallet->chain().chainman().ActiveChainstate(), &pwallet->chain().mempool()}.CreateNewBlock(scriptPubKey, pwallet, &fPoSCancel);
+                    pblocktemplate = BlockAssembler{pwallet->chain().chainman().ActiveChainstate(), &pwallet->chain().mempool()}.CreateNewBlock(GetScriptForDestination(dest), pwallet, &fPoSCancel, &pFees, dest);
                 }
                 catch (const std::runtime_error &e)
                 {
