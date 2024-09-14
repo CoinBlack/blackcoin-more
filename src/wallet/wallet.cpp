@@ -1075,8 +1075,8 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
         }
     }
 
-    // Mark inactive coinbase transactions and their descendants as abandoned
-    if (wtx.IsCoinBase() && wtx.isInactive()) {
+    // Mark inactive coinbase and coinstake transactions and their descendants as abandoned
+    if ((wtx.IsCoinBase() || wtx.IsCoinStake()) && wtx.isInactive()) {
         std::vector<CWalletTx*> txs{&wtx};
 
         TxStateInactive inactive_state = TxStateInactive{/*abandoned=*/true};
