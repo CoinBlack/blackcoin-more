@@ -2129,9 +2129,10 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
         flags |= SCRIPT_VERIFY_WITNESS;
     }
 
-    // Enforce CHECKLOCKTIMEVERIFY (BIP65)
+    // Enforce CHECKLOCKTIMEVERIFY (BIP65) and BIP147 NULLDUMMY
     if (consensusparams.IsProtocolV3(block_index.GetBlockTime())) {
         flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
+        flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
     // Enforce CHECKSEQUENCEVERIFY (BIP112)
@@ -2142,11 +2143,6 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     // Enforce Taproot (BIP340-BIP342)
     if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
         flags |= SCRIPT_VERIFY_TAPROOT;
-    }
-
-    // Enforce BIP147 NULLDUMMY (activated simultaneously with CLTV)
-    if (consensusparams.IsProtocolV3(block_index.GetBlockTime())) {
-        flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
     return flags;
