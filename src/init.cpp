@@ -1645,6 +1645,13 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     // Init indexes
     for (auto index : node.indexes) if (!index->Init()) return false;
 
+    // ********************************************************* Step 9: load wallet
+    for (const auto& client : node.chain_clients) {
+        if (!client->load()) {
+            return false;
+        }
+    }
+
     // ********************************************************* Step 10: data directory maintenance
 
     LogPrintf("Setting NODE_NETWORK\n");
@@ -1744,12 +1751,6 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
         return false;
     }
 
-    // ********************************************************* Step 9: load wallet
-    for (const auto& client : node.chain_clients) {
-        if (!client->load()) {
-            return false;
-        }
-    }
     // ********************************************************* Step 12: start node
 
     //// debug print
