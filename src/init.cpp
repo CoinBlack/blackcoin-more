@@ -1023,7 +1023,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
     if (args.GetIntArg("-rpcserialversion", DEFAULT_RPC_SERIALIZE_VERSION) > 1)
         return InitError(Untranslated("Unknown rpcserialversion requested."));
 
-    /*
+    /* Blackcoin Todo
     if (args.GetIntArg("-rpcserialversion", DEFAULT_RPC_SERIALIZE_VERSION) == 0 && !IsDeprecatedRPCEnabled("serialversion")) {
         return InitError(Untranslated("-rpcserialversion=0 is deprecated and will be removed in the future. Specify -deprecatedrpc=serialversion to allow anyway."));
     }
@@ -1645,13 +1645,6 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     // Init indexes
     for (auto index : node.indexes) if (!index->Init()) return false;
 
-    // ********************************************************* Step 9: load wallet
-    for (const auto& client : node.chain_clients) {
-        if (!client->load()) {
-            return false;
-        }
-    }
-
     // ********************************************************* Step 10: data directory maintenance
 
     LogPrintf("Setting NODE_NETWORK\n");
@@ -1751,6 +1744,12 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
         return false;
     }
 
+    // ********************************************************* Step 9: load wallet
+    for (const auto& client : node.chain_clients) {
+        if (!client->load()) {
+            return false;
+        }
+    }
     // ********************************************************* Step 12: start node
 
     //// debug print

@@ -766,7 +766,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     {
         const CTransaction* ptxConflicting = m_pool.GetConflictTx(txin.prevout);
         if (ptxConflicting) {
-            // Disable replacement feature for now
+            // Blackcoin: Disable replacement feature for now
             return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "txn-mempool-conflict");
         }
     }
@@ -3694,6 +3694,8 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
     // All potential-corruption validation must be done before we do any
     // transaction validation, as otherwise we may mark the header as invalid
     // because we receive the wrong transactions for it.
+    // Note that witness malleability is checked in ContextualCheckBlock, so no
+    // checks that use witness data may be performed here.
 
     // Size limits
     if (block.vtx.empty() || block.vtx.size() * WITNESS_SCALE_FACTOR > MAX_BLOCK_WEIGHT || ::GetSerializeSize(TX_NO_WITNESS(block)) * WITNESS_SCALE_FACTOR > MAX_BLOCK_WEIGHT)
@@ -3919,7 +3921,7 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "time-too-old", "block's timestamp is too early");
 
     // Check timestamp
-    if (block.Time() > now + std::chrono::seconds{MAX_FUTURE_BLOCK_TIME}) {
+    if (block.Time() > NodeClock::now() + std::chrono::seconds{MAX_FUTURE_BLOCK_TIME}) {
         return state.Invalid(BlockValidationResult::BLOCK_TIME_FUTURE, "time-too-new", "block timestamp too far in the future");
     }
 
