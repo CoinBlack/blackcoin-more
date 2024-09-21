@@ -56,6 +56,9 @@ RPCHelpMan getnewaddress()
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Legacy wallets cannot provide bech32m addresses");
         } else if (parsed.value() == OutputType::P2SH_SEGWIT) {
             throw JSONRPCError(RPC_INVALID_PARAMETER, "P2SH_SEGWIT addresses are not welcome");
+        //Blackcoin todo : remove after taproot activation
+        } else if (parsed.value() == OutputType::BECH32M) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "Taproot addresses (bech32m) are not supported yet");
         }
         output_type = parsed.value();
     }
