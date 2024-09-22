@@ -2076,11 +2076,7 @@ std::optional<std::string> PeerManagerImpl::FetchBlock(NodeId peer_id, const CBl
     // Construct message to request the block
     const uint256& hash{block_index.GetBlockHash()};
 
-    /*
-    // Blackcoin: Do not send witness flag for now
     std::vector<CInv> invs{CInv(MSG_BLOCK | MSG_WITNESS_FLAG, hash)};
-    */
-    std::vector<CInv> invs{CInv(MSG_BLOCK, hash)};
 
     // Send block request message to the peer
     bool success = m_connman.ForNode(peer_id, [this, &invs](CNode* node) {
