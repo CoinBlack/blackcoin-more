@@ -105,9 +105,15 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
     }
     case TxoutType::MULTISIG:
     case TxoutType::NULL_DATA:
-    case TxoutType::NONSTANDARD:
+    case TxoutType::NONSTANDARD: {
+        // Blackcoin - Skip NONSTANDARD if scriptPubKey is empty (used in coinstake)
+        if (whichType == TxoutType::NONSTANDARD && scriptPubKey.empty()) {
+            return true; // Skip processing for empty scriptPubKey
+        }
+
         addressRet = CNoDestination(scriptPubKey);
         return false;
+    }
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
