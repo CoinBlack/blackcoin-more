@@ -1075,32 +1075,40 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
         }
     }
 
-    // Mark inactive coinbase and coinstake transactions and their descendants as abandoned
-    if ((wtx.IsCoinBase() || wtx.IsCoinStake()) && wtx.isInactive()) {
-        std::vector<CWalletTx*> txs{&wtx};
+// Mark inactive coinbase and coinstake transactions and their descendants as abandoned
+if ((wtx.IsCoinBase() || wtx.IsCoinStake()) && wtx.isInactive()) {
+    std::vector<CWalletTx*> txs{&wtx};
 
-        TxStateInactive inactive_state = TxStateInactive{/*abandoned=*/true};
+    TxStateInactive inactive_state = TxStateInactive{/*abandoned=*/true};
 
-        while (!txs.empty()) {
-            CWalletTx* desc_tx = txs.back();
-            txs.pop_back();
-            desc_tx->m_state = inactive_state;
-            // Break caches since we have changed the state
-            desc_tx->MarkDirty();
-            batch.WriteTx(*desc_tx);
-            MarkInputsDirty(desc_tx->tx);
-            for (unsigned int i = 0; i < desc_tx->tx->vout.size(); ++i) {
-                COutPoint outpoint(desc_tx->GetHash(), i);
-                std::pair<TxSpends::const_iterator, TxSpends::const_iterator> range = mapTxSpends.equal_range(outpoint);
-                for (TxSpends::const_iterator it = range.first; it != range.second; ++it) {
-                    const auto wit = mapWallet.find(it->second);
-                    if (wit != mapWallet.end()) {
-                        txs.push_back(&wit->second);
-                    }
+    // Log the start of abandoning inactive coinstakes
+    LogPrint(BCLog::COINSTAKE, "Starting to abandon inactive coinstake transaction: txid=%s\n", wtx.GetHash().ToString());
+
+    while (!txs.empty()) {
+        CWalletTx* desc_tx = txs.back();
+        txs.pop_back();
+        desc_tx->m_state = inactive_state;
+
+        // Break caches since we have changed the state
+        desc_tx->MarkDirty();
+        batch.WriteTx(*desc_tx);
+        MarkInputsDirty(desc_tx->tx);
+
+        for (unsigned int i = 0; i < desc_tx->tx->vout.size(); ++i) {
+            COutPoint outpoint(desc_tx->GetHash(), i);
+            std::pair<TxSpends::const_iterator, TxSpends::const_iterator> range = mapTxSpends.equal_range(outpoint);
+            for (TxSpends::const_iterator it = range.first; it != range.second; ++it) {
+                const auto wit = mapWallet.find(it->second);
+                if (wit != mapWallet.end()) {
+                    txs.push_back(&wit->second);
                 }
             }
         }
     }
+
+    // Log the completion of abandoning the coinstake
+    LogPrint(BCLog::COINSTAKE, "Completed abandoning inactive coinstake transaction: txid=%s\n", wtx.GetHash().ToString());
+}
 
     //// debug print
     WalletLogPrintf("AddToWallet %s  %s%s %s\n", hash.ToString(), (fInsertedNew ? "new" : ""), (fUpdated ? "update" : ""), TxStateString(state));
