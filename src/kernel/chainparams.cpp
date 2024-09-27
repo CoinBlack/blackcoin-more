@@ -267,10 +267,10 @@ public:
         // This is fine at runtime as we'll fall back to using them as an addrfetch if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted by blackcoin.nl
         vSeeds.emplace_back("swap.blackcoin.nl"); // hosted by blackcoin.nl
         vSeeds.emplace_back("dns2.blackcoin.nl");  // hosted by blackcoin.nl
+        vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted by blackcoin.nl
+        vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted by blackcoin.nl
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
