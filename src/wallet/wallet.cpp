@@ -1516,13 +1516,8 @@ void CWallet::blockDisconnected(const interfaces::BlockInfo& block)
         }
     }
 
-    // Blackcoin: Call to abandon orphaned coinstakes after handling disconnections
-    // Log before calling AbandonOrphanedCoinstakes
-    LogPrint(BCLog::COINSTAKE, "Starting to abandon orphaned coinstakes after block disconnection at height %d\n", block.height);
+    // Blackcoin - Call to abandon orphaned coinstakes after handling disconnections
     AbandonOrphanedCoinstakes();
-
-    // Log after the abandonment process
-    LogPrint(BCLog::COINSTAKE, "Completed abandoning orphaned coinstakes after block disconnection at height %d\n", block.height);
 }
 
 void CWallet::updatedBlockTip()
