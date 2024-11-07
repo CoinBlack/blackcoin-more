@@ -100,15 +100,23 @@ bool BaseIndex::Init()
     LOCK(cs_main);
     CChain& index_chain = m_chainstate->m_chain;
 
-    if (locator.IsNull()) {
+if (locator.IsNull()) {
         SetBestBlockIndex(nullptr);
     } else {
         // Setting the best block to the locator's top block. If it is not part of the
         // best chain, we will rewind to the fork point during index sync
         const CBlockIndex* locator_index{m_chainstate->m_blockman.LookupBlockIndex(locator.vHave.at(0))};
         if (!locator_index) {
+// If we couldn't find a block index from the locator, use m_best_header as a fallback
+        const CBlockIndex* best_header = index_chain.Tip();
+        if (best_header) {
+            locator_index = best_header;
+            LogPrintf("%s: Using m_best_header as fallback, block hash: %s at height %d\n", GetName(), locator_index->GetBlockHash().ToString(), locator_index->nHeight);
+        } else {
+
             return InitError(strprintf(Untranslated("%s: best block of the index not found. Please rebuild the index."), GetName()));
         }
+}
         SetBestBlockIndex(locator_index);
     }
 
