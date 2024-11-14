@@ -1,5 +1,12 @@
 # Changelog
 
+## v26.2.0-beta-2 (2024-XX-XX)
+- Activated SegWit on testnet on Sep 23, 2024
+- Changed miner activation window parameters for BIP9 soft fork deployment
+- Abandon coinstake transactions when orphaned (Peercoin commit `f6896a4`)
+- Show P2PK addresses for coinstake transactions in RPC
+- Show the reward value for coinstake transactions in RPC
+
 ## v26.2.0-beta-1 (2024-08-07)
 - Updated to Bitcoin Core 26.2
 - Activated Segwit on regtest
