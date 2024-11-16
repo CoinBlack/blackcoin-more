@@ -3,6 +3,7 @@
 ## v26.2.0-beta-2 (2024-XX-XX)
 - Activated SegWit on testnet on Sep 23, 2024
 - Changed miner activation window parameters for BIP9 soft fork deployment
+- Updated derivation path with the BIP44 coin type for descriptor wallets
 - Abandon coinstake transactions when orphaned (Peercoin commit `f6896a4`)
 - Show P2PK addresses for coinstake transactions in RPC
 - Show the reward value for coinstake transactions in RPC
