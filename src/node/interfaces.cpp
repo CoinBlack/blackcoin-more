@@ -854,6 +854,10 @@ public:
     {
         return GetStakeWeight(wallet);
     }
+    Span<const CRPCCommand> getStakingRPCCommands() override
+    {
+        return wallet::GetStakingRPCCommands();
+    }
 #endif
     
     bool hasAssumedValidChain() override

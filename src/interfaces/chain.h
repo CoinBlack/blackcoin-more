@@ -19,6 +19,10 @@
 #include <string>
 #include <vector>
 
+#if defined(HAVE_CONFIG_H)
+#include <config/bitcoin-config.h>
+#endif
+
 class ArgsManager;
 class CBlock;
 class CBlockUndo;
@@ -383,6 +387,9 @@ public:
 
     //! Get stake weight.
     virtual uint64_t getStakeWeight(const wallet::CWallet& wallet) = 0;
+
+    //! Get staking RPC commands.
+    virtual Span<const CRPCCommand> getStakingRPCCommands() = 0;
 #endif
 };
 

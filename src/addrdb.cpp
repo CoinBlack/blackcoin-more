@@ -60,7 +60,7 @@ bool SerializeFileDB(const std::string& prefix, const fs::path& path, const Data
     // open temp output file
     fs::path pathTmp = gArgs.GetDataDirNet() / fs::u8path(tmpfn);
     FILE *file = fsbridge::fopen(pathTmp, "wb");
-    CAutoFile fileout{file};
+    AutoFile fileout{file};
     if (fileout.IsNull()) {
         fileout.fclose();
         remove(pathTmp);
@@ -118,7 +118,7 @@ template <typename Data>
 void DeserializeFileDB(const fs::path& path, Data&& data)
 {
     FILE* file = fsbridge::fopen(path, "rb");
-    CAutoFile filein{file};
+    AutoFile filein{file};
     if (filein.IsNull()) {
         throw DbNotFoundError{};
     }

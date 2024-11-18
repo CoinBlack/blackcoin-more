@@ -591,7 +591,7 @@ public:
     {
         std::vector<Span<const CRPCCommand>> commands;
         commands.push_back(GetWalletRPCCommands());
-        commands.push_back(GetStakingRPCCommands());
+        commands.push_back(m_context.chain->getStakingRPCCommands());
         for(size_t i = 0; i < commands.size(); i++) {
             for (const CRPCCommand& command : commands[i]) {
                 m_rpc_commands.emplace_back(command.category, command.name, [this, &command](const JSONRPCRequest& request, UniValue& result, bool last_handler) {
