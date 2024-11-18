@@ -1048,13 +1048,23 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
         <translation type="unfinished">Deschide portofel</translation>
     </message>
-    </context>
+    <message>
+        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
+        <extracomment>Descriptive text of the open wallet progress window which indicates to the user which wallet is currently being opened.</extracomment>
+        <translation type="unfinished">Deschidere Portofel&lt;b&gt;%1&lt;/b&gt;</translation>
+    </message>
+</context>
 <context>
     <name>RestoreWalletActivity</name>
     <message>
         <source>Restore Wallet</source>
         <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
         <translation type="unfinished">Restaurare portofel</translation>
+    </message>
+    <message>
+        <source>Restoring Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
+        <extracomment>Descriptive text of the restore wallets progress window which indicates to the user that wallets are currently being restored.</extracomment>
+        <translation type="unfinished">Restabilirea Portofelului&lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Restore wallet failed</source>
@@ -1598,6 +1608,14 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
         <translation type="unfinished">Conectați-vă la rețeaua Bitcoin printr-un proxy SOCKS5 separat pentru serviciile Tor onion.</translation>
     </message>
     <message>
+        <source>embedded "%1"</source>
+        <translation type="unfinished">incorporat "%1"</translation>
+    </message>
+    <message>
+        <source>closest matching "%1"</source>
+        <translation type="unfinished">cel mai potrivit "%1"</translation>
+    </message>
+    <message>
         <source>&amp;Cancel</source>
         <translation type="unfinished">Renunţă</translation>
     </message>
@@ -1758,6 +1776,10 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
     <message>
         <source>Save Transaction Data</source>
         <translation type="unfinished">Salvați datele tranzacției</translation>
+    </message>
+    <message>
+        <source> * Sends %1 to %2</source>
+        <translation type="unfinished">* Trimite %1la%2</translation>
     </message>
     <message>
         <source>own address</source>

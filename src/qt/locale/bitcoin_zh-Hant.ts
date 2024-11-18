@@ -4532,6 +4532,10 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">dbcache不足以用于区块验证</translation>
     </message>
     <message>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">金额不足</translation>
+    </message>
+    <message>
         <source>Invalid -i2psam address or hostname: '%s'</source>
         <translation type="unfinished">无效的 -i2psam 地址或主机名: '%s'</translation>
     </message>

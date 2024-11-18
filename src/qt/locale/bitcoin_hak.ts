@@ -10,10 +10,6 @@
         <translation type="unfinished">新增一個位址</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation type="unfinished">新增 &amp;N</translation>
-    </message>
-    <message>
         <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">把目前选择的地址复制到系统粘贴板中</translation>
     </message>
@@ -4530,6 +4526,10 @@ Unable to restore backup of wallet.</source>
     <message>
         <source>Insufficient dbcache for block verification</source>
         <translation type="unfinished">dbcache不足以用于区块验证</translation>
+    </message>
+    <message>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">金额不足</translation>
     </message>
     <message>
         <source>Invalid -i2psam address or hostname: '%s'</source>

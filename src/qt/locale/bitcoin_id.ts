@@ -3,7 +3,9 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">Klik kanan untuk mengedit alamat atau label</translation>
+        <translation type="unfinished">Klik kanan untuk mengedit alamat atau label
+third_party/catapult/tracing/tracing/metrics/OWNERS
+//@@@@@@@@\\ @@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ _ @@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@/ @@@@@ @@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ _ @@@@@@@@@@@@ @@@@@@@@@@@@@ @@@@@@@@@@@@@ @@@@@@@@@ @@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@ @ @@@@@@@@@@@@@@ /@@@@@@@@@@@@@@@@@@@@@@\ @@@@@@@@@ @@@@@@@ @@@@@@@@@@@@@@ (@@@@ @@@@@@@@@@@@@@@) @@@@@ @@@@@@@@@@@ @@@@@@@@@@@@@@@@ @@@@ @@@@@@@@@@@@ @@@@ / @@@@@@@@@@@@@@@@@ @@@@@@@@@@ ======= \@@@@@@@@@@@@@@ @@@@@@@@@@@/ ======= @@@@@@@@@@ @@@@@@@@@@@@@@@@@\ \ @@@@@@@@@@@@@@@@@@@@@@/ /@@@@@@@@@@@@@@@@@@ @@@@@@ @@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@ \@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@ @@@@@@@@ \@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@ @@@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@ @@@@@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@ @@@@@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@ @@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@ @ @@ @@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ _ @@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@ @@@@@@@@@@@@@@@@@@@@@@@@ \\@@@@@@@@@//</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -77,6 +79,14 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
         <translation type="unfinished">Terjadi sebuah kesalahan saat mencoba menyimpan daftar alamat ke %1. Silakan coba lagi.</translation>
+    </message>
+    <message>
+        <source>Sending addresses - %1</source>
+        <translation type="unfinished">Alamat pengirim - %1</translation>
+    </message>
+    <message>
+        <source>Receiving addresses - %1</source>
+        <translation type="unfinished">Penerima alamat - %1</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -582,6 +592,10 @@ Proses migrasi akan mencadangkan dompet sebelum melakukan pemindahan. Fail cadan
     <message>
         <source>Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
         <translation type="unfinished">Skrip hanya lihat telah diimigrasikan ke dompet baru yang bernama '%1'.</translation>
+    </message>
+    <message>
+        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Skrip yang dapat dipecahkan tetapi tidak ditonton telah dimigrasikan ke wallet baru bernama '%1'.</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1183,6 +1197,10 @@ Proses migrasi akan mencadangkan dompet sebelum melakukan pemindahan. Fail cadan
     <message>
         <source>Received</source>
         <translation type="unfinished">Diterima</translation>
+    </message>
+    <message>
+        <source>The transport layer version: %1</source>
+        <translation type="unfinished">Versi lapisan transportasi: %1</translation>
     </message>
     <message>
         <source>The transport layer version: %1</source>

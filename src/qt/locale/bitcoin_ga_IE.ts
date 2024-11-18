@@ -1315,6 +1315,10 @@ Ní féidir síniú ach le seoltaí 'oidhreachta'.</translation>
         <translation type="unfinished">Úsáid seachfhreastalaí SOCKS5 ar leith chun sroicheadh piaraí trí sheirbhísí Tor oinniún:</translation>
     </message>
     <message>
+        <source>embedded "%1"</source>
+        <translation type="unfinished">leabaithe "%1"</translation>
+    </message>
+    <message>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;Togha</translation>
     </message>

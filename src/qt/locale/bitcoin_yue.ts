@@ -800,7 +800,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform> %n 与比特币网络接。</numerusform>
         </translation>
     </message>
     <message>
@@ -4502,6 +4502,10 @@ Unable to restore backup of wallet.</source>
     <message>
         <source>Insufficient dbcache for block verification</source>
         <translation type="unfinished">dbcache不足以用于区块验证</translation>
+    </message>
+    <message>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">金额不足</translation>
     </message>
     <message>
         <source>Invalid -i2psam address or hostname: '%s'</source>

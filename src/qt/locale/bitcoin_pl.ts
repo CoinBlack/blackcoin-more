@@ -46,6 +46,14 @@
         <translation type="unfinished">&amp;Usuń</translation>
     </message>
     <message>
+        <source>Choose the address to send coins to</source>
+        <translation type="unfinished">Wybierz adres, na który chcesz wysłać monety</translation>
+    </message>
+    <message>
+        <source>Choose the address to receive coins with</source>
+        <translation type="unfinished">Wybierz adres, na który chcesz otrzymywać monety</translation>
+    </message>
+    <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">Wybierz</translation>
     </message>
@@ -1079,6 +1087,14 @@ Proces migracji utworzy kopię zapasową portfela przed migracją. Plik kopii za
     </message>
     <message>
         <source>Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Sprawne, ale nie oglądane skrypty tylko do odczytu zostały przeniesione do nowego portfela '%1'</translation>
+    </message>
+    <message>
+        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Skrypty tylko do odczytu zostały przeniesione do nowego portfela '%1'</translation>
+    </message>
+    <message>
+        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
         <translation type="unfinished">Sprawne, ale nie oglądane skrypty tylko do odczytu zostały przeniesione do nowego portfela '%1'</translation>
     </message>
     <message>
@@ -4316,6 +4332,10 @@ Nie można przywrócić kopii zapasowej portfela</translation>
         <translation type="unfinished">Błąd odczytu kolejnego rekordu z bazy danych portfela</translation>
     </message>
     <message>
+        <source>Error: Could not delete watchonly transactions</source>
+        <translation type="unfinished">Błąd: Nie można usunąć transakcji tylko do odczytu</translation>
+    </message>
+    <message>
         <source>Error: Disk space is low for %s</source>
         <translation type="unfinished">Błąd: zbyt mało miejsca na dysku dla %s</translation>
     </message>
@@ -4346,6 +4366,10 @@ Nie można przywrócić kopii zapasowej portfela</translation>
     <message>
         <source>Error: No %s addresses available.</source>
         <translation type="unfinished">Błąd: %s adres nie dostępny</translation>
+    </message>
+    <message>
+        <source>Error: Not all watchonly txs could be deleted</source>
+        <translation type="unfinished">Błąd: Nie wszystkie txs tylko do odczytu mogą być usunięte</translation>
     </message>
     <message>
         <source>Error: This wallet already uses SQLite</source>

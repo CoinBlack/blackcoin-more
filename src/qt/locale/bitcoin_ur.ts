@@ -3,11 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Create a new address</source>
-        <translation type="unfinished">نیا پتہ تخلیق کریں</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="unfinished">اور نیا</translation>
+        <translation type="unfinished">نیا ایڈریس بنائیں</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>

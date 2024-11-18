@@ -4231,6 +4231,10 @@ Ei voinut palauttaa lompakon varmuuskopiota..</translation>
         <translation type="unfinished">Virhe seuraavan tietueen lukemisessa lompakon tietokannasta</translation>
     </message>
     <message>
+        <source>Error: Could not delete watchonly transactions</source>
+        <translation type="unfinished">Virhe: Ei voinut poistaa watchonly-tapahtumia</translation>
+    </message>
+    <message>
         <source>Error: Couldn't create cursor into database</source>
         <translation type="unfinished">Virhe: Tietokantaan ei voitu luoda kursoria.</translation>
     </message>

@@ -225,7 +225,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character. If this is successful, please set a new passphrase to avoid this issue in the future.</source>
-        <translation type="unfinished">La frase de contraseña ingresada para el descifrado de la billetera es incorrecta. Contiene un carácter nulo (es decir, un byte cero). Si la frase de contraseña se configuró con una versión de este software anterior a la 25.0, vuelve a intentarlo solo con los caracteres hasta el primer carácter nulo, pero sin incluirlo . Si esto tiene éxito, establece una nueva frase de contraseña para evitar este problema en el futuro.</translation>
+        <translation type="unfinished">La frase de contraseña ingresada para el descifrado de la billetera es incorrecta. Contiene un carácter nulo (es decir, un byte cero). Si la frase de contraseña se configuró con una versión de este software anterior a la 25.0, vuelve a intentarlo solo con los caracteres hasta el primer carácter nulo, pero sin incluirlo . Si esto es correcto, establece una nueva frase de contraseña para evitar este problema en el futuro.</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
@@ -259,7 +259,11 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     <name>BitcoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
-        <translation type="unfinished">El archivo de configuración %1 puede estar corrupto o no ser válido.</translation>
+        <translation type="unfinished">El archivo de configuración %1 puede estar dañado o no ser válido.</translation>
+    </message>
+    <message>
+        <source>Runaway exception</source>
+        <translation type="unfinished">Excepción fuera de control</translation>
     </message>
     <message>
         <source>Runaway exception</source>
@@ -2010,7 +2014,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Partially Signed Transaction (Binary)</source>
         <extracomment>Expanded name of the binary PSBT file format. See: BIP 174.</extracomment>
-        <translation type="unfinished">Transacción parcialmente firmada (binario) </translation>
+        <translation type="unfinished">Transacción parcialmente firmada (binario)</translation>
     </message>
     <message>
         <source>PSBT saved to disk.</source>

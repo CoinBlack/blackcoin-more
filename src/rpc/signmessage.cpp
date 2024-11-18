@@ -30,11 +30,11 @@ static RPCHelpMan verifymessage()
             "\nUnlock the wallet for 30 seconds\n"
             + HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
             "\nCreate the signature\n"
-            + HelpExampleCli("signmessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" \"my message\"") +
+            + HelpExampleCli("signmessage", "\"BKDvboD1CzZ5KycP1FRSXRoi7XXhHoQhS1\" \"my message\"") +
             "\nVerify the signature\n"
-            + HelpExampleCli("verifymessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" \"signature\" \"my message\"") +
+            + HelpExampleCli("verifymessage", "\"BKDvboD1CzZ5KycP1FRSXRoi7XXhHoQhS1\" \"signature\" \"my message\"") +
             "\nAs a JSON-RPC call\n"
-            + HelpExampleRpc("verifymessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\", \"signature\", \"my message\"")
+            + HelpExampleRpc("verifymessage", "\"BKDvboD1CzZ5KycP1FRSXRoi7XXhHoQhS1\", \"signature\", \"my message\"")
         },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
         {
@@ -76,7 +76,7 @@ static RPCHelpMan signmessagewithprivkey()
             "\nCreate the signature\n"
             + HelpExampleCli("signmessagewithprivkey", "\"privkey\" \"my message\"") +
             "\nVerify the signature\n"
-            + HelpExampleCli("verifymessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" \"signature\" \"my message\"") +
+            + HelpExampleCli("verifymessage", "\"BKDvboD1CzZ5KycP1FRSXRoi7XXhHoQhS1\" \"signature\" \"my message\"") +
             "\nAs a JSON-RPC call\n"
             + HelpExampleRpc("signmessagewithprivkey", "\"privkey\", \"my message\"")
         },

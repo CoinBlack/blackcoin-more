@@ -2425,6 +2425,10 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Αδειες</translation>
     </message>
     <message>
+        <source>The direction and type of peer connection: %1</source>
+        <translation type="unfinished">Η κατεύθυνση και ο τύπος της ομότιμης σύνδεσης: %1</translation>
+    </message>
+    <message>
         <source>Direction/Type</source>
         <translation type="unfinished">Κατεύθυνση/Τύπος</translation>
     </message>

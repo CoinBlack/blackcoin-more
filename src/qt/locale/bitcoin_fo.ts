@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>Bytes:</source>
-        <translation type="unfinished">Byte:</translation>
+        <translation type="unfinished">Být:</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -864,7 +864,7 @@
     </message>
     <message>
         <source>Bytes:</source>
-        <translation type="unfinished">Byte:</translation>
+        <translation type="unfinished">Být:</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -881,6 +881,10 @@
     <message>
         <source>Custom change address</source>
         <translation type="unfinished">Adressa til vekslipening</translation>
+    </message>
+    <message>
+        <source>per kilobyte</source>
+        <translation type="unfinished">per kilobýt</translation>
     </message>
     <message>
         <source>Hide</source>

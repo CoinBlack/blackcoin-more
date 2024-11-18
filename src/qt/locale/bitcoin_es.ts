@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">Haz clic derecho para editar dirección o etiqueta</translation>
+        <translation type="unfinished">Hacer clic derecho para editar la dirección o etiqueta</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -2075,7 +2075,7 @@ El proceso de migración creará una copia de seguridad del monedero antes de mi
     </message>
     <message>
         <source>Pays transaction fee: </source>
-        <translation type="unfinished">Pagar comisión por transacción:</translation>
+        <translation type="unfinished">Pagar comisión de transacción:</translation>
     </message>
     <message>
         <source>Total Amount</source>
@@ -2351,7 +2351,7 @@ Si recibes este error, debes solicitar al comerciante que te proporcione un URI 
     </message>
     <message>
         <source>The BIP324 session ID string in hex, if any.</source>
-        <translation type="unfinished">Cadena de identificación de la sesión BIP324 en formato hexadecimal, si existe.</translation>
+        <translation type="unfinished">Cadena de identificador de la sesión BIP324 en formato hexadecimal, si existe.</translation>
     </message>
     <message>
         <source>Session ID</source>
@@ -4136,7 +4136,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>%s failed to validate the -assumeutxo snapshot state. This indicates a hardware problem, or a bug in the software, or a bad software modification that allowed an invalid snapshot to be loaded. As a result of this, the node will shut down and stop using any state that was built on the snapshot, resetting the chain height from %d to %d. On the next restart, the node will resume syncing from %d without using any snapshot data. Please report this incident to %s, including how you obtained the snapshot. The invalid snapshot chainstate will be left on disk in case it is helpful in diagnosing the issue that caused this error.</source>
-        <translation type="unfinished">%s no pudo validar el estado de la instantánea -assumeutxo. Esto indica un problema de hardware, un error en el software o una modificación incorrecta del software que permitió que se cargara una instantánea no válida. Por consiguiente, el nodo se apagará y dejará de utilizar cualquier estado basado en la instantánea, restableciendo la altura de la cadena de %d a %d. En el siguiente reinicio, el nodo reanudará la sincronización desde %d sin usar datos de instantánea. Comunique este incidente a %s, indicando cómo obtuvo la instantánea. Se dejó el estado de encadenamiento de la instantánea no válida en el disco por si resulta útil para diagnosticar el problema que causó este error.</translation>
+        <translation type="unfinished">%s no pudo validar el estado de la instantánea -assumeutxo. Esto indica un problema de hardware, un error en el software o una modificación incorrecta del software que permitió que se cargara una instantánea inválida. Por consiguiente, el nodo se apagará y dejará de utilizar cualquier estado basado en la instantánea, restableciendo la altura de la cadena de %d a %d. En el siguiente reinicio, el nodo reanudará la sincronización desde %d sin usar datos de instantánea. Reporta este incidente a %s, indicando cómo obtuviste la instantánea. Se dejó el estado de cadena de la instantánea inválida en el disco por si resulta útil para diagnosticar el problema que causó este error.</translation>
     </message>
     <message>
         <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
@@ -4240,7 +4240,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Rename of '%s' -&gt; '%s' failed. You should resolve this by manually moving or deleting the invalid snapshot directory %s, otherwise you will encounter the same error again on the next startup.</source>
-        <translation type="unfinished">Error de renombrado de «%s» → «%s». Debería resolver esto manualmente moviendo o borrando el directorio %s de la instantánea no válida, en otro caso encontrará el mismo error de nuevo en el arranque siguiente.</translation>
+        <translation type="unfinished">Error al cambiar el nombre de "%s" a "%s". Para resolverlo, mueve o elimina manualmente el directorio %s de la instantánea no válida. De lo contrario, encontrarás el mismo error de nuevo en el siguiente inicio.</translation>
     </message>
     <message>
         <source>SQLiteDatabase: Unknown sqlite wallet schema version %d. Only version %d is supported</source>
@@ -4292,7 +4292,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Unsupported category-specific logging level %1$s=%2$s. Expected %1$s=&lt;category&gt;:&lt;loglevel&gt;. Valid categories: %3$s. Valid loglevels: %4$s.</source>
-        <translation type="unfinished">Nivel de boletín del acceso especificado en categoría no mantenida en %1$s=%2$s. Se esperaba %1$s=&lt;category&gt;:&lt;loglevel&gt;. Categorías válidas: %3$s. Niveles de boletín válidos: %4 $s.</translation>
+        <translation type="unfinished">El nivel de registro de la categoría específica no es compatible: %1$s=%2$s. Se esperaba %1$s=&lt;category&gt;:&lt;loglevel&gt;. Categorías válidas: %3$s. Niveles de registro válidos: %4 $s.</translation>
     </message>
     <message>
         <source>Unsupported chainstate database format found. Please restart with -reindex-chainstate. This will rebuild the chainstate database.</source>
@@ -4308,7 +4308,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
-        <translation type="unfinished">Monedero correctamente cargado. El tipo de billetero heredado está siendo obsoleto y mantenimiento para creación de monederos heredados serán eliminados en el futuro. Los monederos heredados pueden ser migrados a un descriptor de monedero con migratewallet.</translation>
+        <translation type="unfinished">El monedero se cargó correctamente. El tipo de monedero "legacy" se está descontinuando, por lo que la asistencia para crear y abrir estos monederos se eliminará en el futuro. Los monederos tipo "legacy" se pueden migrar a un monedero basado en descriptores con "migratewallet".</translation>
     </message>
     <message>
         <source>Warning: Dumpfile wallet format "%s" does not match command line specified format "%s".</source>
@@ -4360,7 +4360,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>%s is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation type="unfinished">La configuración de %s es demasiado alta. Las comisiones tan grandes se podrían pagar en una sola transacción.</translation>
+        <translation type="unfinished">El valor de %s es demasiado alto. Las comisiones tan grandes se podrían pagar en una sola transacción.</translation>
     </message>
     <message>
         <source>Cannot provide specific connections and have addrman find outgoing connections at the same time.</source>
@@ -4400,7 +4400,7 @@ Ve a "Archivo &gt; Abrir monedero" para cargar uno.
     </message>
     <message>
         <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable %s.</source>
-        <translation type="unfinished">Error al calcular la comisión. La opción «fallbackfee» está desactivada. Espera algunos bloques o activa %s.</translation>
+        <translation type="unfinished">Error al calcular la comisión. La opción fallbackfee está desactivada. Espera algunos bloques o activa %s.</translation>
     </message>
     <message>
         <source>Incompatible options: -dnsseed=1 was explicitly specified, but -onlynet forbids connections to IPv4/IPv6</source>
@@ -4482,7 +4482,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Block verification was interrupted</source>
-        <translation type="unfinished">La verificación del bloque fue interrumpida</translation>
+        <translation type="unfinished">Se interrumpió la verificación de bloques</translation>
     </message>
     <message>
         <source>Config setting for %s only applied on %s network when in [%s] section.</source>
@@ -4506,7 +4506,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Disk space is too low!</source>
-        <translation type="unfinished">¡El espacio en el disco es demasiado pequeño!</translation>
+        <translation type="unfinished">¡El espacio en disco es demasiado pequeño!</translation>
     </message>
     <message>
         <source>Do you want to rebuild the block database now?</source>
@@ -4534,7 +4534,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Error al inicializar el entorno de la base de datos del monedero  %s</translation>
+        <translation type="unfinished">Error al inicializar el entorno de la base de datos del monedero %s</translation>
     </message>
     <message>
         <source>Error loading %s</source>
@@ -4594,7 +4594,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Error: Failed to create new watchonly wallet</source>
-        <translation type="unfinished">Error: No se puede crear un monedero solo de observación</translation>
+        <translation type="unfinished">Error: No se pudo crear un monedero solo de observación</translation>
     </message>
     <message>
         <source>Error: Got key that was not hex: %s</source>
@@ -4614,7 +4614,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Error: No %s addresses available.</source>
-        <translation type="unfinished">Error: No hay direcciones %s disponibles .</translation>
+        <translation type="unfinished">Error: No hay direcciones %s disponibles.</translation>
     </message>
     <message>
         <source>Error: This wallet already uses SQLite</source>
@@ -4710,7 +4710,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Input not found or already spent</source>
-        <translation type="unfinished">Entrada no encontrada o ya gastada</translation>
+        <translation type="unfinished">La entrada no se encontró o ya se gastó</translation>
     </message>
     <message>
         <source>Insufficient dbcache for block verification</source>
@@ -4738,11 +4738,11 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Invalid amount for %s=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation type="unfinished">Importe inválido para %s=&lt;amount&gt;: '%s' (debe ser por lo menos %s)</translation>
+        <translation type="unfinished">Importe inválido para %s=&lt;amount&gt;: "%s" (debe ser por lo menos %s)</translation>
     </message>
     <message>
         <source>Invalid amount for %s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Importe inválido para %s=&lt;amount&gt;: '%s'</translation>
+        <translation type="unfinished">Importe inválido para %s=&lt;amount&gt;: "%s"</translation>
     </message>
     <message>
         <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
@@ -4874,7 +4874,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Specified data directory "%s" does not exist.</source>
-        <translation type="unfinished">El directorio de datos especificado «%s» no existe.</translation>
+        <translation type="unfinished">El directorio de datos especificado "%s" no existe.</translation>
     </message>
     <message>
         <source>Starting network threads…</source>
@@ -4890,7 +4890,7 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>The transaction amount is too small to pay the fee</source>
-        <translation type="unfinished">El importe de la transacción es muy pequeño para pagar la comisión</translation>
+        <translation type="unfinished">El importe de la transacción es demasiado pequeño para pagar la comisión</translation>
     </message>
     <message>
         <source>The wallet will avoid paying less than the minimum relay fee.</source>
@@ -5042,11 +5042,11 @@ No se puede restaurar la copia de seguridad del monedero.</translation>
     </message>
     <message>
         <source>Settings file could not be read</source>
-        <translation type="unfinished">El archivo de configuración no puede leerse</translation>
+        <translation type="unfinished">El archivo de configuración no pudo leerse</translation>
     </message>
     <message>
         <source>Settings file could not be written</source>
-        <translation type="unfinished">El archivo de configuración no puede escribirse</translation>
+        <translation type="unfinished">El archivo de configuración no pudo escribirse</translation>
     </message>
 </context>
 </TS>

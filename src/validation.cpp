@@ -784,7 +784,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     {
         const CTransaction* ptxConflicting = m_pool.GetConflictTx(txin.prevout);
         if (ptxConflicting) {
-            // Disable replacement feature for now
+            // Blackcoin: Disable replacement feature for now
             return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "txn-mempool-conflict");
         }
     }
@@ -2184,14 +2184,15 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     }
 
     // Enforce WITNESS rules whenever P2SH is in effect (and the segwit
-    // deployment is defined).
-    if (flags & SCRIPT_VERIFY_P2SH && DeploymentEnabled(consensusparams, Consensus::DEPLOYMENT_SEGWIT)) {
+    // deployment is active).
+    if (flags & SCRIPT_VERIFY_P2SH && DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_SEGWIT)) {
         flags |= SCRIPT_VERIFY_WITNESS;
     }
 
-    // Enforce CHECKLOCKTIMEVERIFY (BIP65)
+    // Enforce CHECKLOCKTIMEVERIFY (BIP65) and BIP147 NULLDUMMY
     if (consensusparams.IsProtocolV3(block_index.GetBlockTime())) {
         flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
+        flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
     // Enforce CHECKSEQUENCEVERIFY (BIP112)
@@ -2202,11 +2203,6 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     // Enforce Taproot (BIP340-BIP342)
     if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
         flags |= SCRIPT_VERIFY_TAPROOT;
-    }
-
-    // Enforce BIP147 NULLDUMMY (activated simultaneously with CLTV)
-    if (consensusparams.IsProtocolV3(block_index.GetBlockTime())) {
-        flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
     return flags;
@@ -3758,6 +3754,8 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
     // All potential-corruption validation must be done before we do any
     // transaction validation, as otherwise we may mark the header as invalid
     // because we receive the wrong transactions for it.
+    // Note that witness malleability is checked in ContextualCheckBlock, so no
+    // checks that use witness data may be performed here.
 
     // Size limits
     if (block.vtx.empty() || block.vtx.size() * WITNESS_SCALE_FACTOR > MAX_BLOCK_WEIGHT || ::GetSerializeSize(TX_NO_WITNESS(block)) * WITNESS_SCALE_FACTOR > MAX_BLOCK_WEIGHT)

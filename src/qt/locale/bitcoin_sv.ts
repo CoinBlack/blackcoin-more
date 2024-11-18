@@ -26,10 +26,6 @@
         <translation type="unfinished">S&amp;täng</translation>
     </message>
     <message>
-        <source>Delete the currently selected address from the list</source>
-        <translation type="unfinished">Ta bort den valda adressen från listan</translation>
-    </message>
-    <message>
         <source>Enter address or label to search</source>
         <translation type="unfinished">Ange en adress eller etikett att söka efter</translation>
     </message>
@@ -62,11 +58,6 @@
         <translation type="unfinished">Detta är dina Bitcoin-adresser för att skicka betalningar. Kontrollera alltid belopp och mottagaradress innan du skickar bitcoin.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Detta är dina Bitcoinadresser för att ta emot betalningar. Använd knappen 'Skapa ny mottagaradress' i mottagsfliken för att skapa nya adresser. Signering är bara tillgänglig för adresser av typen 'legacy'</translation>
-    </message>
-    <message>
         <source>&amp;Copy Address</source>
         <translation type="unfinished">&amp;Kopiera adress</translation>
     </message>
@@ -92,10 +83,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
         <translation type="unfinished">Ett fel inträffade när adresslistan skulle sparas till %1.
 Försök igen.</translation>
-    </message>
-    <message>
-        <source>Sending addresses - %1</source>
-        <translation type="unfinished">Avsändaradresser - %1</translation>
     </message>
     <message>
         <source>Receiving addresses - %1</source>
@@ -640,14 +627,6 @@ Försök igen.</translation>
         <translation type="unfinished">Av&amp;sändaradresser</translation>
     </message>
     <message>
-        <source>&amp;Receiving addresses</source>
-        <translation type="unfinished">Mottaga&amp;radresser</translation>
-    </message>
-    <message>
-        <source>Open a bitcoin: URI</source>
-        <translation type="unfinished">Öppna en bitcoin:-URI</translation>
-    </message>
-    <message>
         <source>Open Wallet</source>
         <translation type="unfinished">Öppna plånbok</translation>
     </message>
@@ -1085,6 +1064,10 @@ Om den här plånboken innehåller lösbara</translation>
     <message>
         <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
         <translation type="unfinished">Watchonly-skript har migrerats till en ny plånbok med namnet '%1'.</translation>
+    </message>
+    <message>
+        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
+        <translation type="unfinished">Lösbara, men inte övervakade script har migrerats till en ny plånbok med namnet '%1'.</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1597,8 +1580,23 @@ Om den här plånboken innehåller lösbara</translation>
         <translation type="unfinished">Vid avstängning av denna inställning kommer den fullständiga blockkedjan behövas laddas ned igen.</translation>
     </message>
     <message>
+        <source>Maximum database cache size. A larger cache can contribute to faster sync, after which the benefit is less pronounced for most use cases. Lowering the cache size will reduce memory usage. Unused mempool memory is shared for this cache.</source>
+        <extracomment>Tooltip text for Options window setting that sets the size of the database cache. Explains the corresponding effects of increasing/decreasing this value.</extracomment>
+        <translation type="unfinished">Maximal storlek för databasens cacheminne. Större cache kan bidra till snabbare synkronisering, dock blir fördelen mindre uppenbar för de flesta användningsområdena efter den initiala synkroniseringen. En lägre storlek på databasens cacheminne minskar minnesanvändningen. Mempoolens outnyttjade minne delas med denna cache.</translation>
+    </message>
+    <message>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <translation type="unfinished">Sätt antalet trådar för skriptverifiering. Negativa värden motsvarar antalet kärnor som skall lämnas tillgängliga för systemet. </translation>
+    </message>
+    <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
         <translation type="unfinished">(0 = auto, &lt;0 = lämna så många kärnor lediga)</translation>
+    </message>
+    <message>
+        <source>This allows you or a third party tool to communicate with the node through command-line and JSON-RPC commands.</source>
+        <extracomment>Tooltip text for Options window setting that enables the RPC server.</extracomment>
+        <translation type="unfinished">Detta tillåter dig eller ett tredjepartsverktyg att kommunicera med noden genom kommandotolken och JSON-RPC-kommandon. </translation>
     </message>
     <message>
         <source>Enable R&amp;PC server</source>

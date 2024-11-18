@@ -97,7 +97,6 @@ void ReceiveCoinsDialog::setModel(WalletModel *_model)
 
         // Blackcoin: hide SegWit address types before SegWit activation
         if (!(model->wallet().getDefaultAddressType() == OutputType::LEGACY)) {
-            add_address_type(OutputType::P2SH_SEGWIT, tr("Base58 (P2SH-SegWit)"), tr("Generates an address compatible with older wallets."));
             add_address_type(OutputType::BECH32, tr("Bech32 (SegWit)"), tr("Generates a native segwit address (BIP-173). Some old wallets don't support it."));
             if (model->wallet().taprootEnabled()) {
                 add_address_type(OutputType::BECH32M, tr("Bech32m (Taproot)"), tr("Bech32m (BIP-350) is an upgrade to Bech32, wallet support is still limited."));

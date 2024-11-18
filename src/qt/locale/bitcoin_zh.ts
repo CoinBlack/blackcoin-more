@@ -50,10 +50,6 @@
         <translation type="unfinished">选择收款人地址</translation>
     </message>
     <message>
-        <source>Choose the address to receive coins with</source>
-        <translation type="unfinished">选择接收比特币地址</translation>
-    </message>
-    <message>
         <source>C&amp;hoose</source>
         <translation type="unfinished">选择(&amp;H)</translation>
     </message>
@@ -96,10 +92,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Sending addresses - %1</source>
         <translation type="unfinished">付款地址 - %1</translation>
-    </message>
-    <message>
-        <source>Receiving addresses - %1</source>
-        <translation type="unfinished">收款地址 - %1</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -1351,6 +1343,10 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <source>Unknown. Syncing Headers (%1, %2%)…</source>
         <translation type="unfinished">未知。同步區塊標頭(%1, %2%)中...</translation>
+    </message>
+    <message>
+        <source>%1 is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
+        <translation type="unfinished">%1 當前正在同步。它將從peers下載區塊頭和區塊，並對其進行驗證，直到到達區塊鏈的頂為止。</translation>
     </message>
     <message>
         <source>Unknown. Pre-syncing Headers (%1, %2%)…</source>
@@ -4370,6 +4366,10 @@ Unable to restore backup of wallet.</source>
     <message>
         <source>Insufficient dbcache for block verification</source>
         <translation type="unfinished">dbcache不足以用于区块验证</translation>
+    </message>
+    <message>
+        <source>Insufficient funds</source>
+        <translation type="unfinished">金额不足</translation>
     </message>
     <message>
         <source>Invalid amount for %s=&lt;amount&gt;: '%s' (must be at least %s)</source>

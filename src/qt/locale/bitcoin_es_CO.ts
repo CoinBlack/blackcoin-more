@@ -65,7 +65,7 @@
         <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Estas son tus direcciones de Bitcoin para recibir pagos. Usa el botón "Crear nueva dirección de recepción" en la pestaña "Recibir" para crear nuevas direcciones.
-Solo es posible firmar con direcciones de tipo legacy.</translation>
+Solo es posible firmar con direcciones de tipo "legacy".</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -225,7 +225,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character. If this is successful, please set a new passphrase to avoid this issue in the future.</source>
-        <translation type="unfinished">La frase de contraseña ingresada para el descifrado de la billetera es incorrecta. Contiene un carácter nulo (es decir, un byte cero). Si la frase de contraseña se configuró con una versión de este software anterior a la 25.0, vuelve a intentarlo solo con los caracteres hasta el primer carácter nulo, pero sin incluirlo . Si esto tiene éxito, establece una nueva frase de contraseña para evitar este problema en el futuro.</translation>
+        <translation type="unfinished">La frase de contraseña ingresada para el descifrado de la billetera es incorrecta. Contiene un carácter nulo (es decir, un byte cero). Si la frase de contraseña se configuró con una versión de este software anterior a la 25.0, vuelve a intentarlo solo con los caracteres hasta el primer carácter nulo, pero sin incluirlo . Si esto es correcto, establece una nueva frase de contraseña para evitar este problema en el futuro.</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
@@ -259,7 +259,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     <name>BitcoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
-        <translation type="unfinished">El archivo de configuración %1 puede estar corrupto o no ser válido.</translation>
+        <translation type="unfinished">El archivo de configuración %1 puede estar dañado o no ser válido.</translation>
     </message>
     <message>
         <source>Runaway exception</source>
@@ -434,7 +434,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Show information about %1</source>
-        <translation type="unfinished">Mostrar Información sobre %1</translation>
+        <translation type="unfinished">Mostrar información sobre %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -682,7 +682,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses</source>
-        <translation type="unfinished">&amp;Direcciones de destino</translation>
+        <translation type="unfinished">&amp;Direcciones de recepción</translation>
     </message>
     <message>
         <source>Open a bitcoin: URI</source>
@@ -1150,7 +1150,7 @@ The migration process will create a backup of the wallet before migrating. This 
 Si esta billetera contiene scripts solo de lectura, se creará una nueva billetera que los contenga.
 Si esta billetera contiene scripts solucionables pero no de lectura, se creará una nueva billetera diferente que los contenga.
 
-El proceso de migración creará una copia de seguridad de la billetera antes de proceder. Este archivo de copia de seguridad se llamará &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak y se encontrará en el directorio de esta billetera. En caso de que la migración falle, se puede restaurar la copia de seguridad con la funcionalidad "Restore Wallet" (Restaurar billetera).</translation>
+El proceso de migración creará una copia de seguridad de la billetera antes de proceder. Este archivo de copia de seguridad se llamará &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak y se encontrará en el directorio de esta billetera. En caso de que la migración falle, se puede restaurar la copia de seguridad con la funcionalidad "Restaurar billetera".</translation>
     </message>
     <message>
         <source>Migrate Wallet</source>
@@ -1166,11 +1166,11 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     </message>
     <message>
         <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Los scripts solo de lectura se migraron a una nueva billetera llamada "%1".</translation>
+        <translation type="unfinished">Los scripts solo de observación se migraron a una nueva billetera llamada "%1".</translation>
     </message>
     <message>
         <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Los scripts solucionables pero no de lectura se migraron a una nueva billetera llamada "%1".</translation>
+        <translation type="unfinished">Los scripts solucionables pero no de observación se migraron a una nueva billetera llamada "%1".</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -3155,7 +3155,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>%1 to '%2'</source>
-        <translation type="unfinished">%1 a '%2'</translation>
+        <translation type="unfinished">%1 a "%2"</translation>
     </message>
     <message>
         <source>%1 to %2</source>

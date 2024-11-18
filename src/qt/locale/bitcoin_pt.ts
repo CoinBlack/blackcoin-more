@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">Clique com o botão direito para editar o endereço ou etiqueta</translation>
+        <translation type="unfinished">Clique com o botão direito do rato para editar o endereço ou a etiqueta</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -145,7 +145,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
-        <translation type="unfinished">Encriptar carteira</translation>
+        <translation type="unfinished">Encriptar a carteira</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
@@ -153,7 +153,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation type="unfinished">Desbloquear carteira</translation>
+        <translation type="unfinished">Desbloquear a carteira</translation>
     </message>
     <message>
         <source>Change passphrase</source>
@@ -1120,7 +1120,7 @@ O processo de migração criará uma cópia de segurança da carteira antes da m
     </message>
     <message>
         <source>Migration Successful</source>
-        <translation type="unfinished">Êxito na migração</translation>
+        <translation type="unfinished">Migração bem sucedida</translation>
     </message>
 </context>
 <context>
@@ -1722,7 +1722,7 @@ O processo de migração criará uma cópia de segurança da carteira antes da m
     </message>
     <message>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished">Conectar à rede da Bitcoin através dum proxy SOCLS5.</translation>
+        <translation type="unfinished">Conectar à rede da Bitcoin através de um proxy SOCLS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>

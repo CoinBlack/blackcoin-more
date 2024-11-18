@@ -561,8 +561,8 @@ RPCHelpMan listsinceblock()
                                 {RPCResult::Type::STR, "category", "The transaction category.\n"
                                     "\"send\"                  Transactions sent.\n"
                                     "\"receive\"               Non-coinbase and non-coinstake transactions received.\n"
-                                    "\"generate\"              Coinbase or coinstake transactions received with more than 100 confirmations.\n"
-                                    "\"immature\"              Coinbase or coinstake transactions received with 100 or fewer confirmations.\n"
+                                    "\"generate\"              Coinbase or coinstake transactions received with more than 500 confirmations.\n"
+                                    "\"immature\"              Coinbase or coinstake transactions received with 500 or fewer confirmations.\n"
                                     "\"orphan\"                Orphaned coinbase or coinstake transactions received."},
                                 {RPCResult::Type::STR_AMOUNT, "amount", "The amount in " + CURRENCY_UNIT + ". This is negative for the 'send' category, and is positive\n"
                                     "for all other categories"},

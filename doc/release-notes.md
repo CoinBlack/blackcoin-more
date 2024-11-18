@@ -5,7 +5,7 @@ Bitcoin Core version 27.2 is now available from:
 
   <https://bitcoincore.org/bin/bitcoin-core-27.2/>
 
-This release includes various bug fixes and performance
+This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
@@ -69,7 +69,7 @@ Notable changes
 - #30283 upnp: fix build with miniupnpc 2.2.8
 - #30633 Fixes for GCC 15 compatibility
 
-### CI
+### Misc
 
 - #30193 ci: move ASan job to GitHub Actions from Cirrus CI
 - #30299 ci: remove unused bcc variable from workflow
