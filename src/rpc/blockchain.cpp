@@ -222,12 +222,12 @@ UniValue blockToJSON(BlockManager& blockman, const CBlock& block, const CBlockIn
                 const CTxUndo* txundo = (have_undo && i > 0) ? &blockUndo.vtxundo.at(i - 1) : nullptr;
                 UniValue objTx(UniValue::VOBJ);
                 TxToUniv(*tx, /*block_hash=*/uint256(), /*entry=*/objTx, /*include_hex=*/true, txundo, verbosity);
-                txs.push_back(objTx);
+                txs.push_back(std::move(objTx));
             }
             break;
     }
 
-    result.pushKV("tx", txs);
+    result.pushKV("tx", std::move(txs));
 
     result.pushKV("flags", strprintf("%s", blockindex.IsProofOfStake()? "proof-of-stake" : "proof-of-work"));
     result.pushKV("modifier", blockindex.nStakeModifier.GetHex());

@@ -1,6 +1,9 @@
-Bitcoin Core version 27.x is now available from:
+27.2 Release Notes
+=====================
 
-  <https://bitcoincore.org/bin/bitcoin-core-27.x/>
+Bitcoin Core version 27.2 is now available from:
+
+  <https://bitcoincore.org/bin/bitcoin-core-27.2/>
 
 This release includes various bug fixes and performance
 improvements, as well as updated translations.
@@ -37,55 +40,53 @@ unsupported systems.
 Notable changes
 ===============
 
-### Miniscript
+### P2P
 
-- #29853 sign: don't assume we are parsing a sane TapMiniscript
+- #30394 net: fix race condition in self-connect detection
+
+### Init
+
+- #30435 init: change shutdown order of load block thread and scheduler
 
 ### RPC
 
-- #29869 rpc, bugfix: Enforce maximum value for setmocktime
-- #29870 rpc: Reword SighashFromStr error message
+- #30357 Fix cases of calls to FillPSBT errantly returning complete=true
 
-### Index
+### PSBT
 
-- #29776 Fix #29767, set m_synced = true after Commit()
+- #29855 psbt: Check non witness utxo outpoint early
 
 ### Test
 
-- #29892 test: Fix failing univalue float test
-
-### Build
-
-- #29747 depends: fix mingw-w64 Qt DEBUG=1 build
-- #29859 build: Fix false positive CHECK_ATOMIC test
-- #29985 depends: Fix build of Qt for 32-bit platforms with recent glibc
+- #30552 test: fix constructor of msg_tx
 
 ### Doc
 
-- #29934 doc: add LLVM instruction for macOS < 13
+- #30504 doc: use proper doxygen formatting for CTxMemPool::cs
+
+### Build
+
+- #30283 upnp: fix build with miniupnpc 2.2.8
+- #30633 Fixes for GCC 15 compatibility
 
 ### CI
 
-- #29856 ci: Bump s390x to ubuntu:24.04
-
-### Misc
-
-- #29691 Change Luke Dashjr seed to dashjr-list-of-p2p-nodes.us
+- #30193 ci: move ASan job to GitHub Actions from Cirrus CI
+- #30299 ci: remove unused bcc variable from workflow
 
 Credits
 =======
 
 Thanks to everyone who directly contributed to this release:
 
-- Antoine Poinsot
-- dergoegge
-- fanquake
-- Hennadii Stepanov
-- laanwj
-- Luke Dashjr
-- MarcoFalke
-- nanlour
-- Sjors Provoost
+- Ava Chow
+- Cory Fields
+- Martin Zumsande
+- Matt Whitlock
+- Max Edwards
+- Sebastian Falbesoner
+- Vasil Dimov
+- willcl-ark
 
 As well as to everyone that helped with translations on
 [Transifex](https://www.transifex.com/bitcoin/bitcoin/).
