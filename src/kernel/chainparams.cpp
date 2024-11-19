@@ -126,8 +126,8 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000043c846cfe732c8b6dbc"); // block 5044605
-        consensus.defaultAssumeValid = uint256S("0x6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119"); // block 4908715
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000004586098169d7b9cdc63"); // block 5178789
+        consensus.defaultAssumeValid = uint256S("0xc133d21768f6579597cf33611e9d7388b452af1cfebce1c983d84ab38ebcee79"); // block 5178789
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -187,10 +187,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 97d26e7793f0d3f3e8b3f52503881b013d4deb8ff468f6cae3f670266c91a46e
-            .nTime    = 1723034304,
-            .nTxCount = 15444062,
-            .dTxRate  = 0.03010594818542921,
+            // Data from RPC: getchaintxstats 40500 c133d21768f6579597cf33611e9d7388b452af1cfebce1c983d84ab38ebcee79
+            .nTime    = 1732044192,
+            .nTxCount = 15713978,
+            .dTxRate  = 0.03001311850270631,
         };
 
         // A vector of p2sh addresses
@@ -247,8 +247,8 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000054788711eaf8d71d0e"); // block 1971755
-        consensus.defaultAssumeValid = uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39"); // block 1415393
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000005bcd58fc08c1b0ec53"); // block 2103490
+        consensus.defaultAssumeValid = uint256S("0x03fec30e422ef981c1dcf5f19b1892ea7d5a3123277400f5c3d56f8a59e548b6"); // block 2103490
 
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
@@ -298,10 +298,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 84517a2467681cf97ed7cf8926acc45dbd567226f2fb189302979ad49fd56b1f
-            .nTime    = 1723034480,
-            .nTxCount = 3962401,
-            .dTxRate  = 0.02976167726989428,
+            // Data from RPC: getchaintxstats 40500 03fec30e422ef981c1dcf5f19b1892ea7d5a3123277400f5c3d56f8a59e548b6
+            .nTime    = 1732044208,
+            .nTxCount = 4225853,
+            .dTxRate  = 0.02972773825989593,
         };
 
         // A vector of p2sh addresses
