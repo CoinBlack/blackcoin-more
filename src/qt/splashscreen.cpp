@@ -89,7 +89,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     pixPaint.setFont(QFont(font, 33*fontFactor));
     fm = pixPaint.fontMetrics();
     titleTextWidth  = GUIUtil::TextWidth(fm, titleText);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop,titleText);
+    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+2,paddingTop,titleText);
 
     pixPaint.setFont(QFont(font, 15*fontFactor));
 
@@ -100,12 +100,12 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
         pixPaint.setFont(QFont(font, 10*fontFactor));
         titleVersionVSpace -= 5;
     }
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+2,paddingTop+titleVersionVSpace,versionText);
+    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+5,paddingTop+titleVersionVSpace,versionText);
 
     // draw copyright stuff
     {
         pixPaint.setFont(QFont(font, 10*fontFactor));
-        const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight;
+        const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+5;
         const int y = paddingTop+titleCopyrightVSpace;
         pixPaint.drawText(x,y,copyrightTextBitcoin);
         pixPaint.drawText(x,y+10,copyrightTextBlackcoin);
