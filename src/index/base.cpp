@@ -100,7 +100,7 @@ bool BaseIndex::Init()
     LOCK(cs_main);
     CChain& index_chain = m_chainstate->m_chain;
 
-if (locator.IsNull()) {
+    if (locator.IsNull()) {
         SetBestBlockIndex(nullptr);
     } else {
         // Setting the best block to the locator's top block. If it is not part of the
@@ -121,7 +121,6 @@ if (locator.IsNull()) {
                 return InitError(strprintf(Untranslated("%s: best block of the index not found. Please rebuild the index."), GetName()));
             }
         }
-}
         SetBestBlockIndex(locator_index);
     }
 
