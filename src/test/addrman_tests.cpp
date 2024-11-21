@@ -22,6 +22,7 @@
 
 using namespace std::literals;
 using node::NodeContext;
+using util::ToString;
 
 static NetGroupManager EMPTY_NETGROUPMAN{std::vector<bool>()};
 static const bool DETERMINISTIC{true};
@@ -434,7 +435,7 @@ BOOST_AUTO_TEST_CASE(getaddr_unfiltered)
     auto addrman = std::make_unique<AddrMan>(EMPTY_NETGROUPMAN, DETERMINISTIC, GetCheckRatio(m_node));
 
     // Set time on this addr so isTerrible = false
-    CAddress addr1 = CAddress(ResolveService("250.250.2.1", 8333), NODE_NONE);
+    CAddress addr1 = CAddress(ResolveService("250.250.2.1", 15714), NODE_NONE);
     addr1.nTime = Now<NodeSeconds>();
     // Not setting time so this addr should be isTerrible = true
     CAddress addr2 = CAddress(ResolveService("250.251.2.2", 9999), NODE_NONE);
@@ -1097,7 +1098,7 @@ BOOST_AUTO_TEST_CASE(addrman_update_address)
     BOOST_CHECK_EQUAL(vAddr2.at(0).nServices, NODE_NETWORK_LIMITED);
 
     // Updating an existing addr through Add() (used in gossip relay) can add additional services but can't remove existing ones.
-    CAddress addr_v2{CAddress(ResolveService("250.1.1.1", 8333), NODE_P2P_V2)};
+    CAddress addr_v2{CAddress(ResolveService("250.1.1.1", 15714), NODE_P2P_V2)};
     addr_v2.nTime = start_time;
     BOOST_CHECK(!addrman->Add({addr_v2}, source));
     std::vector<CAddress> vAddr3{addrman->GetAddr(/*max_addresses=*/0, /*max_pct=*/0, /*network=*/std::nullopt)};

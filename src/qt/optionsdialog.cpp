@@ -2,9 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
-#endif
+#include <config/bitcoin-config.h> // IWYU pragma: keep
 
 #include <qt/optionsdialog.h>
 #include <qt/forms/ui_optionsdialog.h>
@@ -91,10 +89,12 @@ void setupFontOptions(QComboBox* cb, QLabel* preview)
 }
 
 OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
-    : QDialog(parent, GUIUtil::dialog_flags),
+    : QDialog(parent, GUIUtil::dialog_flags | Qt::WindowMaximizeButtonHint),
       ui(new Ui::OptionsDialog)
 {
     ui->setupUi(this);
+
+    ui->verticalLayout->setStretchFactor(ui->tabWidget, 1);
 
     /* Main elements init */
     ui->databaseCache->setMinimum(nMinDbCache);
@@ -431,7 +431,7 @@ void OptionsDialog::updateProxyValidationState()
     QValidatedLineEdit *otherProxyWidget = (pUiProxyIp == ui->proxyIpTor) ? ui->proxyIp : ui->proxyIpTor;
     if (pUiProxyIp->isValid() && (!ui->proxyPort->isEnabled() || ui->proxyPort->text().toInt() > 0) && (!ui->proxyPortTor->isEnabled() || ui->proxyPortTor->text().toInt() > 0))
     {
-        setOkButtonState(otherProxyWidget->isValid()); //only enable ok button if both proxys are valid
+        setOkButtonState(otherProxyWidget->isValid()); //only enable ok button if both proxies are valid
         clearStatusLabel();
     }
     else
@@ -444,20 +444,24 @@ void OptionsDialog::updateProxyValidationState()
 
 void OptionsDialog::updateDefaultProxyNets()
 {
-    const std::optional<CNetAddr> ui_proxy_netaddr{LookupHost(ui->proxyIp->text().toStdString(), /*fAllowLookup=*/false)};
-    const CService ui_proxy{ui_proxy_netaddr.value_or(CNetAddr{}), ui->proxyPort->text().toUShort()};
+    std::string proxyIpText{ui->proxyIp->text().toStdString()};
+    if (!IsUnixSocketPath(proxyIpText)) {
+        const std::optional<CNetAddr> ui_proxy_netaddr{LookupHost(proxyIpText, /*fAllowLookup=*/false)};
+        const CService ui_proxy{ui_proxy_netaddr.value_or(CNetAddr{}), ui->proxyPort->text().toUShort()};
+        proxyIpText = ui_proxy.ToStringAddrPort();
+    }
 
     Proxy proxy;
     bool has_proxy;
 
     has_proxy = model->node().getProxy(NET_IPV4, proxy);
-    ui->proxyReachIPv4->setChecked(has_proxy && proxy.proxy == ui_proxy);
+    ui->proxyReachIPv4->setChecked(has_proxy && proxy.ToString() == proxyIpText);
 
     has_proxy = model->node().getProxy(NET_IPV6, proxy);
-    ui->proxyReachIPv6->setChecked(has_proxy && proxy.proxy == ui_proxy);
+    ui->proxyReachIPv6->setChecked(has_proxy && proxy.ToString() == proxyIpText);
 
     has_proxy = model->node().getProxy(NET_ONION, proxy);
-    ui->proxyReachTor->setChecked(has_proxy && proxy.proxy == ui_proxy);
+    ui->proxyReachTor->setChecked(has_proxy && proxy.ToString() == proxyIpText);
 }
 
 ProxyAddressValidator::ProxyAddressValidator(QObject *parent) :

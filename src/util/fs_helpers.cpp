@@ -5,9 +5,7 @@
 
 #include <util/fs_helpers.h>
 
-#if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
-#endif
+#include <config/bitcoin-config.h> // IWYU pragma: keep
 
 #include <logging.h>
 #include <sync.h>
@@ -18,6 +16,7 @@
 #include <fstream>
 #include <map>
 #include <memory>
+#include <optional>
 #include <string>
 #include <system_error>
 #include <utility>
@@ -69,7 +68,7 @@ LockResult LockDirectory(const fs::path& directory, const fs::path& lockfile_nam
     }
     auto lock = std::make_unique<fsbridge::FileLock>(pathLockFile);
     if (!lock->TryLock()) {
-        error("Error while attempting to lock directory %s: %s", fs::PathToString(directory), lock->GetReason());
+        LogError("Error while attempting to lock directory %s: %s\n", fs::PathToString(directory), lock->GetReason());
         return LockResult::ErrorLock;
     }
     if (!probe_only) {
@@ -249,20 +248,9 @@ fs::path GetSpecialFolderPath(int nFolder, bool fCreate)
 
 bool RenameOver(fs::path src, fs::path dest)
 {
-#ifdef __MINGW64__
-    // This is a workaround for a bug in libstdc++ which
-    // implements fs::rename with _wrename function.
-    // This bug has been fixed in upstream:
-    //  - GCC 10.3: 8dd1c1085587c9f8a21bb5e588dfe1e8cdbba79e
-    //  - GCC 11.1: 1dfd95f0a0ca1d9e6cbc00e6cbfd1fa20a98f312
-    // For more details see the commits mentioned above.
-    return MoveFileExW(src.wstring().c_str(), dest.wstring().c_str(),
-                       MOVEFILE_REPLACE_EXISTING) != 0;
-#else
     std::error_code error;
     fs::rename(src, dest, error);
     return !error;
-#endif
 }
 
 /**
@@ -281,4 +269,43 @@ bool TryCreateDirectories(const fs::path& p)
 
     // create_directories didn't create the directory, it had to have existed already
     return false;
+}
+
+std::string PermsToSymbolicString(fs::perms p)
+{
+    std::string perm_str(9, '-');
+
+    auto set_perm = [&](size_t pos, fs::perms required_perm, char letter) {
+        if ((p & required_perm) != fs::perms::none) {
+            perm_str[pos] = letter;
+        }
+    };
+
+    set_perm(0, fs::perms::owner_read,   'r');
+    set_perm(1, fs::perms::owner_write,  'w');
+    set_perm(2, fs::perms::owner_exec,   'x');
+    set_perm(3, fs::perms::group_read,   'r');
+    set_perm(4, fs::perms::group_write,  'w');
+    set_perm(5, fs::perms::group_exec,   'x');
+    set_perm(6, fs::perms::others_read,  'r');
+    set_perm(7, fs::perms::others_write, 'w');
+    set_perm(8, fs::perms::others_exec,  'x');
+
+    return perm_str;
+}
+
+std::optional<fs::perms> InterpretPermString(const std::string& s)
+{
+    if (s == "owner") {
+        return fs::perms::owner_read | fs::perms::owner_write;
+    } else if (s == "group") {
+        return fs::perms::owner_read | fs::perms::owner_write |
+               fs::perms::group_read;
+    } else if (s == "all") {
+        return fs::perms::owner_read | fs::perms::owner_write |
+               fs::perms::group_read |
+               fs::perms::others_read;
+    } else {
+        return std::nullopt;
+    }
 }

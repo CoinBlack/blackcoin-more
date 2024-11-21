@@ -134,7 +134,7 @@ public:
 
     UnlockContext requestUnlock();
 
-    bool displayAddress(std::string sAddress) const;
+    void displayAddress(std::string sAddress) const;
 
     static bool isWalletEnabled();
 

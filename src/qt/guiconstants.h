@@ -50,6 +50,7 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 #define QAPP_ORG_DOMAIN "blackcoin.org"
 #define QAPP_APP_NAME_DEFAULT "Blackmore-Qt"
 #define QAPP_APP_NAME_TESTNET "Blackmore-Qt-testnet"
+#define QAPP_APP_NAME_TESTNET4 "Blackmore-Qt-testnet4"
 #define QAPP_APP_NAME_SIGNET "Blackmore-Qt-signet"
 #define QAPP_APP_NAME_REGTEST "Blackmore-Qt-regtest"
 

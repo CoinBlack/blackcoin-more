@@ -19,6 +19,7 @@
 #include <interfaces/node.h>
 #include <key_io.h>
 #include <node/interface_ui.h>
+#include <node/types.h>
 #include <psbt.h>
 #include <util/translation.h>
 #include <wallet/coincontrol.h>
@@ -545,16 +546,17 @@ WalletModel::UnlockContext::~UnlockContext()
     }
 }
 
-bool WalletModel::displayAddress(std::string sAddress) const
+void WalletModel::displayAddress(std::string sAddress) const
 {
     CTxDestination dest = DecodeDestination(sAddress);
-    bool res = false;
     try {
-        res = m_wallet->displayAddress(dest);
+        util::Result<void> result = m_wallet->displayAddress(dest);
+        if (!result) {
+            QMessageBox::warning(nullptr, tr("Signer error"), QString::fromStdString(util::ErrorString(result).translated));
+        }
     } catch (const std::runtime_error& e) {
         QMessageBox::critical(nullptr, tr("Can't display address"), e.what());
     }
-    return res;
 }
 
 bool WalletModel::isWalletEnabled()
@@ -569,8 +571,7 @@ QString WalletModel::getWalletName() const
 
 QString WalletModel::getDisplayName() const
 {
-    const QString name = getWalletName();
-    return name.isEmpty() ? "["+tr("default wallet")+"]" : name;
+    return GUIUtil::WalletDisplayName(getWalletName());
 }
 
 bool WalletModel::isMultiwallet() const

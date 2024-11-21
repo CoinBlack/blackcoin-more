@@ -253,8 +253,10 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     bnTargetPerCoinDay.SetCompact(nBits);
 
     // Transaction index is required to get to block header
-    if (!g_txindex)
-        return error("CreateCoinStake : transaction index unavailable");
+    if (!g_txindex) {
+        LogError("%s: transaction index unavailable", __func__);
+        return false;
+    }
 
     LOCK2(cs_main, wallet.cs_wallet);
     txNew.vin.clear();
@@ -479,8 +481,10 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     if (wallet.IsLegacy()) {
         for (const auto &pcoin : vwtxPrev) {
             SignatureData empty;
-            if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty))
-                return error("CreateCoinStake : failed to sign coinstake");
+            if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty)) {
+                LogError("%s: failed to sign coinstake", __func__);
+                return false;
+            }
         }
     }
     else
@@ -500,8 +504,10 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     // Limit size
     unsigned int nBytes = ::GetSerializeSize(TX_WITH_WITNESS(txNew));
-    if (nBytes >= 1000000/5)
-        return error("CreateCoinStake : exceeded coinstake size limit");
+    if (nBytes >= 1000000/5) {
+        LogError("%s: exceeded coinstake size limit", __func__);
+        return false;
+    }
 
     // Successfully generated coinstake
     return true;

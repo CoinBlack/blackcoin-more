@@ -1,0 +1,10 @@
+prefix=/
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Blackcoin More consensus library
+Description: Library for the Blackcoin consensus protocol.
+Version: 27.2.0
+Libs: -L${libdir} -lbitcoinconsensus
+Cflags: -I${includedir}

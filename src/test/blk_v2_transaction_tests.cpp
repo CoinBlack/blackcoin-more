@@ -54,43 +54,43 @@ BOOST_AUTO_TEST_CASE(IsStandard_test)
 
     CheckIsStandard(t);
 
-    // Allowed nVersion
-    t.nVersion = 1;
+    // Allowed version
+    t.version = 1;
     CheckIsStandard(t);
 
-    t.nVersion = 2;
+    t.version = 2;
     CheckIsStandard(t);
 
-    // Disallowed nVersion
-    t.nVersion = 3;
+    // Disallowed version
+    t.version = 3;
     CheckIsNotStandard(t, "version");
 
-    // Allowed nVersion, empty nTime
-    t.nVersion = 1;
+    // Allowed version, empty nTime
+    t.version = 1;
     t.nTime = 0;
     CheckIsStandard(t);
 
-    t.nVersion = 2;
+    t.version = 2;
     t.nTime = 0;
     CheckIsStandard(t);
 
-    // Disallowed nVersion, empty nTime
-    t.nVersion = 3;
+    // Disallowed version, empty nTime
+    t.version = 3;
     t.nTime = 0;
     CheckIsNotStandard(t, "version");
 
     // Check transaction version after V3_1 fork
-    // Allowed nVersion, after-fork nTime
-    t.nVersion = 1;
+    // Allowed version, after-fork nTime
+    t.version = 1;
     t.nTime = Params().GetConsensus().nProtocolV3_1Time + 1;
     CheckIsStandard(t);
 
-    t.nVersion = 2;
+    t.version = 2;
     t.nTime = Params().GetConsensus().nProtocolV3_1Time + 1;
     CheckIsStandard(t);
 
-    // Disallowed nVersion, after-fork nTime
-    t.nVersion = 3;
+    // Disallowed version, after-fork nTime
+    t.version = 3;
     t.nTime = Params().GetConsensus().nProtocolV3_1Time + 1;
     CheckIsNotStandard(t, "version");
 }

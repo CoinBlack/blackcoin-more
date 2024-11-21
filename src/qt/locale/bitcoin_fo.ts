@@ -1009,10 +1009,6 @@
         <translation type="unfinished">&amp;Undirrita Boð</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished">Tú kann skriva undir boð/sáttmálar við tínum adressum, fyri at prógva at tú kanst móttaka bitcoin sendar til tær. Ver ansin so tú ikki skrivar undir nakað ógreitt ella tilvildarligt, tí fysking-álop kunnu royna at snýta teg til at latað tín samleika til tey. Undirrita einans nágreiniligar útsagnir ið tú tekur undir við.</translation>
-    </message>
-    <message>
         <source>The Bitcoin address to sign the message with</source>
         <translation type="unfinished">Bitcoin adressan at undirskriva boðini við</translation>
     </message>
@@ -1271,10 +1267,6 @@
     <message>
         <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
         <translation type="unfinished">%s umbøn at lurta á portur %u. Hetta portrið er tulkað "óhóskandi" og tí er ósannlíkt at nakar viðskiftari sambindur í tað. Sí lista yvir "óhóskandi" portur og nágreiniligari upplýsingar í doc/p2p-bad-ports.md.</translation>
-    </message>
-    <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation type="unfinished">Vinaliga tryggja at dagfesting og tíð, í teldu tíni, eru røtt! Er klokkan skeiv virkar %s ikki sum ætlað.</translation>
     </message>
     <message>
         <source>%s is set very high!</source>

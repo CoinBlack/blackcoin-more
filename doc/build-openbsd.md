@@ -1,6 +1,6 @@
 # OpenBSD Build Guide
 
-**Updated for OpenBSD [7.4](https://www.openbsd.org/74.html)**
+**Updated for OpenBSD [7.5](https://www.openbsd.org/75.html)**
 
 This guide describes how to build blackmored, command-line utilities, and GUI on OpenBSD.
 
@@ -63,7 +63,23 @@ export BDB_PREFIX="/path/to/bitcoin/depends/x86_64-unknown-openbsd"
 Blackcoin More includes a GUI built with the cross-platform Qt Framework. To compile the GUI, Qt 5 is required.
 
 ```bash
-pkg_add qt5
+pkg_add qtbase qttools
+```
+
+###### libqrencode
+
+The GUI can encode addresses in a QR Code. To build in QR support for the GUI, install `libqrencode`. Skip if not using the GUI or don't want QR code functionality.
+```bash
+pkg_add libqrencode
+```
+---
+
+#### Notifications
+###### ZeroMQ
+
+Bitcoin Core can provide notifications via ZeroMQ. If the package is installed, support will be compiled in.
+```bash
+pkg_add zeromq
 ```
 
 ## Building Blackcoin More

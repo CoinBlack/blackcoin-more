@@ -46,6 +46,7 @@ MAX_PROTOCOL_MESSAGE_LENGTH = 4000000  # Maximum length of incoming protocol mes
 MAX_HEADERS_RESULTS = 2000  # Number of headers sent in one getheaders result
 MAX_INV_SIZE = 50000  # Maximum number of entries in an 'inv' protocol message
 
+NODE_NONE = 0
 NODE_NETWORK = (1 << 0)
 NODE_BLOOM = (1 << 2)
 NODE_WITNESS = (1 << 3)
@@ -559,12 +560,12 @@ class CTxWitness:
 
 
 class CTransaction:
-    __slots__ = ("hash", "nLockTime", "nVersion", "nTime", "sha256", "vin", "vout",
+    __slots__ = ("hash", "nLockTime", "version", "nTime", "sha256", "vin", "vout",
                  "wit")
 
     def __init__(self, tx=None):
         if tx is None:
-            self.nVersion = 2
+            self.version = 2
             self.nTime = int(time.time())
             self.vin = []
             self.vout = []
@@ -573,7 +574,7 @@ class CTransaction:
             self.sha256 = None
             self.hash = None
         else:
-            self.nVersion = tx.nVersion
+            self.version = tx.version
             self.nTime = tx.nTime
             self.vin = copy.deepcopy(tx.vin)
             self.vout = copy.deepcopy(tx.vout)
@@ -583,7 +584,7 @@ class CTransaction:
             self.wit = copy.deepcopy(tx.wit)
 
     def deserialize(self, f):
-        self.nVersion = int.from_bytes(f.read(4), "little", signed=True)
+        self.version = int.from_bytes(f.read(4), "little")
         if self.nVersion < 2:
             self.nTime = int.from_bytes(f.read(4), "little")
         self.vin = deser_vector(f, CTxIn)
@@ -608,7 +609,7 @@ class CTransaction:
 
     def serialize_without_witness(self):
         r = b""
-        r += self.nVersion.to_bytes(4, "little", signed=True)
+        r += self.version.to_bytes(4, "little")
         if self.nVersion < 2:
             r += self.nTime.to_bytes(4, "little")
         r += ser_vector(self.vin)
@@ -622,7 +623,7 @@ class CTransaction:
         if not self.wit.is_null():
             flags |= 1
         r = b""
-        r += self.nVersion.to_bytes(4, "little", signed=True)
+        r += self.version.to_bytes(4, "little")
         if self.nVersion < 2:
             r += self.nTime.to_bytes(4, "little")
         if flags:
@@ -684,8 +685,8 @@ class CTransaction:
         return math.ceil(self.get_weight() / WITNESS_SCALE_FACTOR)
 
     def __repr__(self):
-        return "CTransaction(nVersion=%i nTime=%i vin=%s vout=%s wit=%s nLockTime=%i)" \
-            % (self.nVersion, self.nTime, repr(self.vin), repr(self.vout), repr(self.wit), self.nLockTime)
+        return "CTransaction(version=%i nTime=%i vin=%s vout=%s wit=%s nLockTime=%i)" \
+            % (self.version, self.nTime, repr(self.vin), repr(self.vout), repr(self.wit), self.nLockTime)
 
 
 class CBlockHeader:

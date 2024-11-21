@@ -59,7 +59,7 @@ The `includeconf=<file>` option in the `blackmore.conf` file can be used to incl
 
 Operating System | Data Directory | Example Path
 -- | -- | --
-Windows | `%APPDATA%\Blackmore\` | `C:\Users\username\AppData\Roaming\Blackmore\blackmore.conf`
+Windows | `%LOCALAPPDATA%\Blackmore\` | `C:\Users\username\AppData\Local\Blackmore\blackmore.conf`
 Linux | `$HOME/.blackmore/` | `/home/username/.blackmore/blackmore.conf`
 macOS | `$HOME/Library/Application Support/Blackmore/` | `/Users/username/Library/Application Support/Blackmore/blackmore.conf`
 

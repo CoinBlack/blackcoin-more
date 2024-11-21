@@ -146,6 +146,10 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
         <translation type="unfinished">Wprowadź stare i nowe hasło portfela. </translation>
     </message>
     <message>
+        <source>Continue</source>
+        <translation type="unfinished">Kontynuuj</translation>
+    </message>
+    <message>
         <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
         <translation type="unfinished">Pamiętaj, że zaszyfrowanie portfela nie pomoże w zapobiegnięciu kradzieży twoich bitcoinów jeśli komputer zostanie zainfekowany przez złośliwe oprogramowanie.</translation>
     </message>
@@ -383,7 +387,11 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
             <numerusform>%n lata</numerusform>
         </translation>
     </message>
-    </context>
+    <message>
+        <source>default wallet</source>
+        <translation type="unfinished">domyślny portfel</translation>
+    </message>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -696,10 +704,6 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
     <message>
         <source>Mask the values in the Overview tab</source>
         <translation type="unfinished">Schowaj wartości w zakładce Podsumowanie</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation type="unfinished">domyślny portfel</translation>
     </message>
     <message>
         <source>No wallets available</source>
@@ -1090,14 +1094,6 @@ Proces migracji utworzy kopię zapasową portfela przed migracją. Plik kopii za
         <translation type="unfinished">Sprawne, ale nie oglądane skrypty tylko do odczytu zostały przeniesione do nowego portfela '%1'</translation>
     </message>
     <message>
-        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Skrypty tylko do odczytu zostały przeniesione do nowego portfela '%1'</translation>
-    </message>
-    <message>
-        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Sprawne, ale nie oglądane skrypty tylko do odczytu zostały przeniesione do nowego portfela '%1'</translation>
-    </message>
-    <message>
         <source>Migration failed</source>
         <translation type="unfinished">Przeniesienie nie powiodło się</translation>
     </message>
@@ -1115,10 +1111,6 @@ Proces migracji utworzy kopię zapasową portfela przed migracją. Plik kopii za
     <message>
         <source>Open wallet warning</source>
         <translation type="unfinished">Ostrzeżenie przy otworzeniu potrfela</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation type="unfinished">domyślny portfel</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -2313,10 +2305,6 @@ Jeśli pojawia się ten błąd, poproś sprzedawcę o podanie URI zgodnego z BIP
         <translation type="unfinished">Transfer</translation>
     </message>
     <message>
-        <source>The BIP324 session ID string in hex, if any.</source>
-        <translation type="unfinished">ID sesji BIP324 jest szestnastkowym ciągiem znaków, jeśli istnieje.</translation>
-    </message>
-    <message>
         <source>Session ID</source>
         <translation type="unfinished">ID sesji</translation>
     </message>
@@ -2413,6 +2401,10 @@ Jeśli pojawia się ten błąd, poproś sprzedawcę o podanie URI zgodnego z BIP
     <message>
         <source>Permissions</source>
         <translation type="unfinished">Uprawnienia</translation>
+    </message>
+    <message>
+        <source>The direction and type of peer connection: %1</source>
+        <translation type="unfinished">Kierunek i typ połączenia równorzędnego: %1</translation>
     </message>
     <message>
         <source>Direction/Type</source>
@@ -2611,6 +2603,10 @@ Jeśli pojawia się ten błąd, poproś sprzedawcę o podanie URI zgodnego z BIP
         <translation type="unfinished">Aktywność sieciowa wyłączona</translation>
     </message>
     <message>
+        <source>None</source>
+        <translation type="unfinished">Żaden</translation>
+    </message>
+    <message>
         <source>Executing command without any wallet</source>
         <translation type="unfinished">Wykonuję komendę bez portfela</translation>
     </message>
@@ -2621,6 +2617,23 @@ Jeśli pojawia się ten błąd, poproś sprzedawcę o podanie URI zgodnego z BIP
     <message>
         <source>Executing command using "%1" wallet</source>
         <translation type="unfinished">Wykonuję komendę używając portfela "%1"</translation>
+    </message>
+    <message>
+        <source>Welcome to the %1 RPC console.
+Use up and down arrows to navigate history, and %2 to clear screen.
+Use %3 and %4 to increase or decrease the font size.
+Type %5 for an overview of available commands.
+For more information on using this console, type %6.
+
+%7WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.%8</source>
+        <extracomment>RPC console welcome message. Placeholders %7 and %8 are style tags for the warning content, and they are not space separated from the rest of the text intentionally.</extracomment>
+        <translation type="unfinished">Witaj w %1 konsoli RPC.
+Użyj strzałek do góry oraz w dół, aby nawigować po historii oraz %2 w celu wyczyszczenia ekranu.
+Użyj %3 oraz %4 aby zwiększyć lub zmniejszyć rozmiar czcionki.
+Wpisz %5 w celu wyświetlenia dostępnych komend.
+Aby uzyskać więcej informacji na temat używania tej konsoli wpisz %6.
+
+%7UWAGA: Oszuści są wszędzie i potrafią namawiać użytkowników do wpisywania złych komend w celu wykradania zawartości ich porfeli. Nie używaj tej konsoli jeżeli nie znasz wszystkich konsekwencji danej komendy.%8</translation>
     </message>
     <message>
         <source>Executing…</source>
@@ -3310,10 +3323,6 @@ Uwaga: Ponieważ opłata jest naliczana za każdy bajt, opłata "100 satoshi za 
         <translation type="unfinished">Podpi&amp;sz Wiadomość</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished">Możesz podpisywać wiadomości swoimi adresami aby udowodnić, że jesteś ich właścicielem. Uważaj, aby nie podpisywać niczego co wzbudza Twoje podejrzenia, ponieważ ktoś może stosować phishing próbując nakłonić Cię do ich podpisania. Akceptuj i podpisuj tylko w pełni zrozumiałe komunikaty i wiadomości.</translation>
-    </message>
-    <message>
         <source>The Bitcoin address to sign the message with</source>
         <translation type="unfinished">Adres Bitcoin, za pomocą którego podpisać wiadomość</translation>
     </message>
@@ -3397,10 +3406,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
     <message>
         <source>Please check the address and try again.</source>
         <translation type="unfinished">Proszę sprawdzić adres i spróbować ponownie.</translation>
-    </message>
-    <message>
-        <source>The entered address does not refer to a key.</source>
-        <translation type="unfinished">Wprowadzony adres nie odnosi się do klucza.</translation>
     </message>
     <message>
         <source>Wallet unlock was cancelled.</source>
@@ -3884,8 +3889,7 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
 Go to File &gt; Open Wallet to load a wallet.
 - OR -</source>
         <translation type="unfinished">Portfel nie został wybrany.
-Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
-</translation>
+Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.</translation>
     </message>
     <message>
         <source>Create a new wallet</source>
@@ -3964,11 +3968,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation type="unfinished">Skopiowano PSBT</translation>
     </message>
     <message>
-        <source>Copied to clipboard</source>
-        <comment>Fee-bump PSBT saved</comment>
-        <translation type="unfinished">Skopiowane do schowka</translation>
-    </message>
-    <message>
         <source>Can't sign transaction.</source>
         <translation type="unfinished">Nie można podpisać transakcji.</translation>
     </message>
@@ -3979,10 +3978,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
     <message>
         <source>Can't display address</source>
         <translation type="unfinished">Nie można wyświetlić adresu</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation type="unfinished">domyślny portfel</translation>
     </message>
 </context>
 <context>
@@ -4085,7 +4080,7 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
     </message>
     <message>
         <source>No dump file provided. To use createfromdump, -dumpfile=&lt;filename&gt; must be provided.</source>
-        <translation type="unfinished">Nie dostarczono pliku zrzutu. Aby użyć funkcji createfromdump, należy podać -dumpfile=1.</translation>
+        <translation type="unfinished">Nie dostarczono pliku zrzutu. Aby użyć funkcji createfromdump, należy podać -dumpfile=&lt;filename&gt;.</translation>
     </message>
     <message>
         <source>No dump file provided. To use dump, -dumpfile=&lt;filename&gt; must be provided.</source>
@@ -4093,11 +4088,7 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
     </message>
     <message>
         <source>No wallet file format provided. To use createfromdump, -format=&lt;format&gt; must be provided.</source>
-        <translation type="unfinished">Nie dostarczono pliku zrzutu. Aby użyć funkcji createfromdump, należy podać -dumpfile=1.</translation>
-    </message>
-    <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation type="unfinished">Proszę sprawdzić czy data i czas na Twoim komputerze są poprawne! Jeżeli ustawienia zegara będą złe, %s nie będzie działał prawidłowo.</translation>
+        <translation type="unfinished">Nie dostarczono pliku zrzutu. Aby użyć funkcji createfromdump, należy podać -dumpfile=&lt;format&gt;.</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -4164,6 +4155,14 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation type="unfinished">Nieobsługiwany poziom rejestrowania specyficzny dla kategorii %1$s=%2$s. Oczekiwano %1$s=&lt;category&gt;:&lt;loglevel&gt;. Poprawne kategorie %3$s. Poprawne poziomy logowania: %4 $s.</translation>
     </message>
     <message>
+        <source>Unsupported chainstate database format found. Please restart with -reindex-chainstate. This will rebuild the chainstate database.</source>
+        <translation type="unfinished">Znaleziono nieobsługiwany format bazy danych chainstate. Proszę uruchomić ponownie z opcją -reindex-chainstate. To odbuduje bazę danych chainstate.</translation>
+    </message>
+    <message>
+        <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
+        <translation type="unfinished">Portfel został załadowany pomyślnie. Starszy typ portfela jest przestarzały, a obsługa tworzenia i otwierania starszych portfeli zostanie usunięta w przyszłości. Starsze portfele można migrować do portfela deskryptora za pomocą migratewallet.</translation>
+    </message>
+    <message>
         <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
         <translation type="unfinished">Uwaga: Wykryto klucze prywatne w portfelu [%s] który ma wyłączone klucze prywatne</translation>
     </message>
@@ -4182,10 +4181,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
     <message>
         <source>-maxmempool must be at least %d MB</source>
         <translation type="unfinished">-maxmempool musi być przynajmniej %d MB</translation>
-    </message>
-    <message>
-        <source>A fatal internal error occurred, see debug.log for details</source>
-        <translation type="unfinished">Błąd: Wystąpił fatalny błąd wewnętrzny, sprawdź szczegóły w debug.log</translation>
     </message>
     <message>
         <source>Cannot resolve -%s address: '%s'</source>
@@ -4224,12 +4219,24 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation type="unfinished">Błąd: Podczas migracji utworzono zduplikowane deskryptory. Twój portfel może być uszkodzony.</translation>
     </message>
     <message>
+        <source>Failed to calculate bump fees, because unconfirmed UTXOs depend on enormous cluster of unconfirmed transactions.</source>
+        <translation type="unfinished">Nie udało się obliczyć opłat za uderzenia, ponieważ niepotwierdzone UTXO zależą od ogromnego skupiska niepotwierdzonych transakcji.</translation>
+    </message>
+    <message>
         <source>Failed to rename invalid peers.dat file. Please move or delete it and try again.</source>
         <translation type="unfinished">Zmiana nazwy nieprawidłowego pliku peers.dat nie powiodła się. Przenieś go lub usuń i spróbuj ponownie.</translation>
     </message>
     <message>
         <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable %s.</source>
         <translation type="unfinished">Estymacja opłat nieudana. Domyślna opłata jest wyłączona. Poczekaj kilka bloków lub włącz  -%s.</translation>
+    </message>
+    <message>
+        <source>Outbound connections restricted to CJDNS (-onlynet=cjdns) but -cjdnsreachable is not provided</source>
+        <translation type="unfinished">Połączenia wychodzące ograniczone do CJDNS (-onlynet=cjdns), ale nie podano -cjdnsreachable</translation>
+    </message>
+    <message>
+        <source>Outbound connections restricted to Tor (-onlynet=onion) but the proxy for reaching the Tor network is explicitly forbidden: -onion=0</source>
+        <translation type="unfinished">Połączenia wychodzące ograniczone do sieci Tor (-onlynet=onion), ale proxy do uzyskania dostępu do sieci Tor jest wyraźnie zabronione: -onion=0</translation>
     </message>
     <message>
         <source>
@@ -4332,8 +4339,12 @@ Nie można przywrócić kopii zapasowej portfela</translation>
         <translation type="unfinished">Błąd odczytu kolejnego rekordu z bazy danych portfela</translation>
     </message>
     <message>
-        <source>Error: Could not delete watchonly transactions</source>
-        <translation type="unfinished">Błąd: Nie można usunąć transakcji tylko do odczytu</translation>
+        <source>Error: Cannot extract destination from the generated scriptpubkey</source>
+        <translation type="unfinished">Błąd: Nie można wyodrębnić miejsca docelowego z wygenerowanego scriptpubkey</translation>
+    </message>
+    <message>
+        <source>Error: Couldn't create cursor into database</source>
+        <translation type="unfinished">Błąd: Nie udało się utworzyć kursora w bazie danych</translation>
     </message>
     <message>
         <source>Error: Disk space is low for %s</source>
@@ -4376,6 +4387,10 @@ Nie można przywrócić kopii zapasowej portfela</translation>
         <translation type="unfinished">Błąd: Ten portfel już używa SQLite</translation>
     </message>
     <message>
+        <source>Error: This wallet is already a descriptor wallet</source>
+        <translation type="unfinished">Błąd: Ten portfel jest już portfelem opisowym (descriptor wallet)</translation>
+    </message>
+    <message>
         <source>Error: Unable to begin reading all records in the database</source>
         <translation type="unfinished">Błąd: Nie można odczytać wszystkich rekordów z bazy danych</translation>
     </message>
@@ -4412,6 +4427,10 @@ Nie można przywrócić kopii zapasowej portfela</translation>
         <translation type="unfinished">Nie udało się ponownie przeskanować portfela podczas inicjalizacji.</translation>
     </message>
     <message>
+        <source>Failed to start indexes, shutting down..</source>
+        <translation type="unfinished">Nie udało się uruchomić indeksów, zamykanie...</translation>
+    </message>
+    <message>
         <source>Failed to verify database</source>
         <translation type="unfinished">Nie udało się zweryfikować bazy danych</translation>
     </message>
@@ -4442,6 +4461,10 @@ Nie można przywrócić kopii zapasowej portfela</translation>
     <message>
         <source>Input not found or already spent</source>
         <translation type="unfinished">Wejście nie znalezione lub już wydane</translation>
+    </message>
+    <message>
+        <source>Insufficient dbcache for block verification</source>
+        <translation type="unfinished">Niewystarczająca pamięć podręczna bazy danych (dbcache) do weryfikacji bloków</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -4589,8 +4612,11 @@ Nie można przywrócić kopii zapasowej portfela</translation>
     </message>
     <message>
         <source>Specified blocks directory "%s" does not exist.</source>
-        <translation type="unfinished">Podany folder bloków "%s" nie istnieje.
-</translation>
+        <translation type="unfinished">Podany folder bloków "%s" nie istnieje.</translation>
+    </message>
+    <message>
+        <source>Specified data directory "%s" does not exist.</source>
+        <translation type="unfinished">Określony katalog danych "%s" nie istnieje</translation>
     </message>
     <message>
         <source>Specified data directory "%s" does not exist.</source>
@@ -4655,10 +4681,6 @@ Nie można przywrócić kopii zapasowej portfela</translation>
     <message>
         <source>Transaction too large</source>
         <translation type="unfinished">Transakcja zbyt duża</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory for -maxsigcachesize: '%s' MiB</source>
-        <translation type="unfinished">Nie mogę zalokować pamięci dla -maxsigcachesize: '%s' MiB</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>

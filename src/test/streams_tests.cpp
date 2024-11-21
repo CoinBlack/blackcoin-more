@@ -30,8 +30,7 @@ BOOST_AUTO_TEST_CASE(xor_file)
     }
     {
 #ifdef __MINGW64__
-        // Our usage of mingw-w64 and the msvcrt runtime does not support
-        // the x modifier for the _wfopen().
+        // Temporary workaround for https://github.com/bitcoin/bitcoin/issues/30210
         const char* mode = "wb";
 #else
         const char* mode = "wbx";
@@ -143,8 +142,8 @@ BOOST_AUTO_TEST_CASE(streams_vector_reader)
     BOOST_CHECK_EQUAL(reader.size(), 5U);
     BOOST_CHECK(!reader.empty());
 
-    // Read a single byte as a signed char.
-    signed char b;
+    // Read a single byte as a int8_t.
+    int8_t b;
     reader >> b;
     BOOST_CHECK_EQUAL(b, -1);
     BOOST_CHECK_EQUAL(reader.size(), 4U);
@@ -262,7 +261,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file)
     for (uint8_t j = 0; j < 40; ++j) {
         file << j;
     }
-    std::rewind(file.Get());
+    file.seek(0, SEEK_SET);
 
     // The buffer size (second arg) must be greater than the rewind
     // amount (third arg).
@@ -392,7 +391,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file_skip)
     for (uint8_t j = 0; j < 40; ++j) {
         file << j;
     }
-    std::rewind(file.Get());
+    file.seek(0, SEEK_SET);
 
     // The buffer is 25 bytes, allow rewinding 10 bytes.
     BufferedFile bf{file, 25, 10, SER_NETWORK};
@@ -436,7 +435,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file_skip)
 BOOST_AUTO_TEST_CASE(streams_buffered_file_rand)
 {
     // Make this test deterministic.
-    SeedInsecureRand(SeedRand::ZEROS);
+    SeedRandomForTest(SeedRand::ZEROS);
 
     fs::path streams_test_filename = m_args.GetDataDirBase() / "streams_test_tmp";
     for (int rep = 0; rep < 50; ++rep) {
@@ -445,7 +444,7 @@ BOOST_AUTO_TEST_CASE(streams_buffered_file_rand)
         for (uint8_t i = 0; i < fileSize; ++i) {
             file << i;
         }
-        std::rewind(file.Get());
+        file.seek(0, SEEK_SET);
 
         size_t bufSize = InsecureRandRange(300) + 1;
         size_t rewindSize = InsecureRandRange(bufSize);

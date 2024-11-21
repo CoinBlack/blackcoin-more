@@ -1328,9 +1328,9 @@ public:
     /** Serialize txTo */
     template<typename S>
     void Serialize(S &s) const {
-        // Serialize nVersion
-        ::Serialize(s, txTo.nVersion);
-        if (txTo.nVersion < 2) {
+        // Serialize version
+        ::Serialize(s, txTo.version);
+        if (txTo.version < 2) {
             // Serialize nTime
             ::Serialize(s, txTo.nTime);
         }
@@ -1523,7 +1523,7 @@ bool SignatureHashSchnorr(uint256& hash_out, ScriptExecutionData& execdata, cons
     ss << hash_type;
 
     // Transaction level data
-    ss << tx_to.nVersion;
+    ss << tx_to.version;
     ss << tx_to.nLockTime;
     if (input_type != SIGHASH_ANYONECANPAY) {
         ss << cache.m_prevouts_single_hash;
@@ -1605,8 +1605,8 @@ uint256 SignatureHash(const CScript& scriptCode, const T& txTo, unsigned int nIn
 
         HashWriter ss{};
         // Version
-        ss << txTo.nVersion;
-        if (txTo.nVersion < 2) {
+        ss << txTo.version;
+        if (txTo.version < 2) {
             // nTime
             ss << txTo.nTime;
         }
@@ -1758,7 +1758,7 @@ bool GenericTransactionSignatureChecker<T>::CheckSequence(const CScriptNum& nSeq
 
     // Fail if the transaction's version number is not set high
     // enough to trigger BIP 68 rules.
-    if (static_cast<uint32_t>(txTo->nVersion) < 2)
+    if (txTo->version < 2)
         return false;
 
     // Sequence numbers with their most significant bit set are not
@@ -1958,6 +1958,8 @@ static bool VerifyWitnessProgram(const CScriptWitness& witness, int witversion, 
             }
             return set_success(serror);
         }
+    } else if (!is_p2sh && CScript::IsPayToAnchor(witversion, program)) {
+        return true;
     } else {
         if (flags & SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM) {
             return set_error(serror, SCRIPT_ERR_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM);

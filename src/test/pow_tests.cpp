@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_CASE(CheckProofOfWork_test_negative_target)
     uint256 hash;
     unsigned int nBits;
     nBits = UintToArith256(consensus.powLimit).GetCompact(true);
-    hash.SetHex("0x1");
+    hash = uint256{1};
     BOOST_CHECK(!CheckProofOfWork(hash, nBits, consensus));
 }
 
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(CheckProofOfWork_test_overflow_target)
     const auto consensus = CreateChainParams(*m_node.args, ChainType::MAIN)->GetConsensus();
     uint256 hash;
     unsigned int nBits{~0x00800000U};
-    hash.SetHex("0x1");
+    hash = uint256{1};
     BOOST_CHECK(!CheckProofOfWork(hash, nBits, consensus));
 }
 
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(CheckProofOfWork_test_too_easy_target)
     arith_uint256 nBits_arith = UintToArith256(consensus.powLimit);
     nBits_arith *= 2;
     nBits = nBits_arith.GetCompact();
-    hash.SetHex("0x1");
+    hash = uint256{1};
     BOOST_CHECK(!CheckProofOfWork(hash, nBits, consensus));
 }
 
@@ -186,7 +186,7 @@ void sanity_check_chainparams(const ArgsManager& args, ChainType chain_type)
 
     // check max target * 4*nPowTargetTimespan doesn't overflow -- see pow.cpp:CalculateNextWorkRequired()
     if (!consensus.fPowNoRetargeting) {
-        arith_uint256 targ_max{UintToArith256(uint256S("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"))};
+        arith_uint256 targ_max{UintToArith256(uint256{"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"})};
         targ_max /= consensus.nTargetTimespan*4;
         BOOST_CHECK(UintToArith256(consensus.powLimit) < targ_max);
     }
@@ -205,6 +205,11 @@ BOOST_AUTO_TEST_CASE(ChainParams_REGTEST_sanity)
 BOOST_AUTO_TEST_CASE(ChainParams_TESTNET_sanity)
 {
     sanity_check_chainparams(*m_node.args, ChainType::TESTNET);
+}
+
+BOOST_AUTO_TEST_CASE(ChainParams_TESTNET4_sanity)
+{
+    sanity_check_chainparams(*m_node.args, ChainType::TESTNET4);
 }
 
 BOOST_AUTO_TEST_CASE(ChainParams_SIGNET_sanity)

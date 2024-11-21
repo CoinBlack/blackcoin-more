@@ -13,7 +13,7 @@
 #include <clientversion.h>
 #include <coins.h>
 #include <hash.h>
-#include <timedata.h>
+#include <util/time.h>
 #include <validation.h>
 #include <arith_uint256.h>
 #include <uint256.h>
@@ -76,8 +76,10 @@ bool CheckStakeBlockTimestamp(int64_t nTimeBlock)
 //
 bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, uint32_t blockFromTime, CAmount prevoutValue, const COutPoint& prevout, unsigned int nTimeTx, bool fPrintProofOfStake)
 {
-    if (nTimeTx < blockFromTime)  // Transaction timestamp violation
-        return error("CheckStakeKernelHash() : nTime violation");
+    if (nTimeTx < blockFromTime) { // Transaction timestamp violation
+        LogError("%s: nTime violation", __func__);
+        return false;
+    }
 
     // Base target
     arith_uint256 bnTarget;
@@ -85,8 +87,10 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, uin
 
     // Weighted target
     int64_t nValueIn = prevoutValue;
-    if (nValueIn == 0)
-        return error("CheckStakeKernelHash() : nValueIn = 0");
+    if (nValueIn == 0) {
+        LogError("%s: nValueIn = 0", __func__);
+        return false;
+    }
     arith_uint256 bnWeight = arith_uint256(nValueIn);
     bnTarget *= bnWeight;
 
@@ -125,8 +129,10 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, uin
 // Check kernel hash target and coinstake signature
 bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, BlockValidationState& state, CCoinsViewCache& view, unsigned int nTimeTx)
 {
-    if (!tx.IsCoinStake())
-        return error("CheckProofOfStake() : called on non-coinstake %s", tx.GetHash().ToString());
+    if (!tx.IsCoinStake()) {
+        LogError("%s: called on non-coinstake %s", __func__, tx.GetHash().ToString());
+        return false;
+    }
 
     // Kernel (input 0) must match the stake hash target per coin age (nBits)
     const CTxIn& txin = tx.vin[0];
@@ -174,16 +180,19 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
         }
 
         if (pindexPrev->nHeight + 1 - coinPrev.nHeight < Params().GetConsensus().nCoinbaseMaturity) {
-            return error("CheckKernel(): Coin is not mature");
+            LogError("%s: coin is not mature", __func__);
+            return false;
         }
 
         CBlockIndex* blockFrom = pindexPrev->GetAncestor(coinPrev.nHeight);
         if (!blockFrom) {
-            return error("CheckKernel(): Could not find block");
+            LogError("%s: could not find block", __func__);
+            return false;
         }
 
         if (coinPrev.IsSpent()) {
-            return error("CheckKernel(): Coin is spent");
+            LogError("%s: coin is spent", __func__);
+            return false;
         }
 
         return CheckStakeKernelHash(pindexPrev, nBits, (coinPrev.nTime ? coinPrev.nTime : blockFrom->nTime), coinPrev.out.nValue, prevout, nTime);

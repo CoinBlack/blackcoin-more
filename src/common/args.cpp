@@ -159,6 +159,7 @@ std::list<SectionInfo> ArgsManager::GetUnrecognizedSections() const
         ChainTypeToString(ChainType::REGTEST),
         ChainTypeToString(ChainType::SIGNET),
         ChainTypeToString(ChainType::TESTNET),
+        ChainTypeToString(ChainType::TESTNET4),
         ChainTypeToString(ChainType::MAIN),
     };
 
@@ -682,14 +683,33 @@ std::string HelpMessageOpt(const std::string &option, const std::string &message
            std::string("\n\n");
 }
 
+const std::vector<std::string> TEST_OPTIONS_DOC{
+    "addrman (use deterministic addrman)",
+};
+
+bool HasTestOption(const ArgsManager& args, const std::string& test_option)
+{
+    const auto options = args.GetArgs("-test");
+    return std::any_of(options.begin(), options.end(), [test_option](const auto& option) {
+        return option == test_option;
+    });
+}
+
 fs::path GetDefaultDataDir()
 {
-    // Windows: C:\Users\Username\AppData\Roaming\Blackmore
+    // Windows:
+    //   old: C:\Users\Username\AppData\Roaming\Blackmore
+    //   new: C:\Users\Username\AppData\Local\Blackmore
     // macOS: ~/Library/Application Support/Blackmore
     // Unix-like: ~/.blackmore
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Blackmore";
+    // Check for existence of datadir in old location and keep it there
+    fs::path legacy_path = GetSpecialFolderPath(CSIDL_APPDATA) / "Blackmore";
+    if (fs::exists(legacy_path)) return legacy_path;
+
+    // Otherwise, fresh installs can start in the new, "proper" location
+    return GetSpecialFolderPath(CSIDL_LOCAL_APPDATA) / "Blackmore";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -754,10 +774,11 @@ std::variant<ChainType, std::string> ArgsManager::GetChainArg() const
     const bool fRegTest = get_net("-regtest");
     const bool fSigNet  = get_net("-signet");
     const bool fTestNet = get_net("-testnet");
+    const bool fTestNet4 = get_net("-testnet4");
     const auto chain_arg = GetArg("-chain");
 
-    if ((int)chain_arg.has_value() + (int)fRegTest + (int)fSigNet + (int)fTestNet > 1) {
-        throw std::runtime_error("Invalid combination of -regtest, -signet, -testnet and -chain. Can use at most one.");
+    if ((int)chain_arg.has_value() + (int)fRegTest + (int)fSigNet + (int)fTestNet + (int)fTestNet4 > 1) {
+        throw std::runtime_error("Invalid combination of -regtest, -signet, -testnet, -testnet4 and -chain. Can use at most one.");
     }
     if (chain_arg) {
         if (auto parsed = ChainTypeFromString(*chain_arg)) return *parsed;
@@ -767,6 +788,7 @@ std::variant<ChainType, std::string> ArgsManager::GetChainArg() const
     if (fRegTest) return ChainType::REGTEST;
     if (fSigNet) return ChainType::SIGNET;
     if (fTestNet) return ChainType::TESTNET;
+    if (fTestNet4) return ChainType::TESTNET4;
     return ChainType::MAIN;
 }
 

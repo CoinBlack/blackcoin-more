@@ -69,6 +69,9 @@ using MillisecondsDouble = std::chrono::duration<double, std::chrono::millisecon
  */
 int64_t GetTime();
 
+// Blackcoin
+int64_t GetAdjustedTimeSeconds();
+
 /**
  * DEPRECATED
  * Use SetMockTime with chrono type
@@ -115,8 +118,5 @@ struct timeval MillisToTimeval(int64_t nTimeout);
  * Convert milliseconds to a struct timeval for e.g. select.
  */
 struct timeval MillisToTimeval(std::chrono::milliseconds ms);
-
-/** Sanity check epoch match normal Unix epoch */
-bool ChronoSanityCheck();
 
 #endif // BITCOIN_UTIL_TIME_H

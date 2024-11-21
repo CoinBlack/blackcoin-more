@@ -243,6 +243,10 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
 <context>
     <name>BitcoinApplication</name>
     <message>
+        <source>Settings file %1 might be corrupt or invalid.</source>
+        <translation type="unfinished">Faili ya mipangilio ya asilimia %1 inaweza kuwa mbovu au batili.</translation>
+    </message>
+    <message>
         <source>Runaway exception</source>
         <translation type="unfinished">Ubaguzi wa kukimbia</translation>
     </message>
@@ -321,7 +325,11 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
             <numerusform />
         </translation>
     </message>
-    </context>
+    <message>
+        <source>default wallet</source>
+        <translation type="unfinished">mkoba chaguo-msingi</translation>
+    </message>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -383,7 +391,7 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     </message>
     <message>
         <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation type="unfinished">Proxy imeamilishwa: %1</translation>
+        <translation type="unfinished">Proxy &lt;b&gt;imeamilishwa&lt;/b&gt;: %1</translation>
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
@@ -410,8 +418,17 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
         <translation type="unfinished">&amp;Chaguo...</translation>
     </message>
     <message>
+        <source>&amp;Encrypt Wallet…</source>
+        <translation type="unfinished">&amp;Simba Mkoba...</translation>
+    </message>
+    <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation type="unfinished">Funga funguo za siri zinazomiliki mkoba wako.</translation>
+    </message>
+    <message>
+        <source>&amp;Backup Wallet…</source>
+        <translation type="unfinished">&amp;Hifadhi Mkoba...
+</translation>
     </message>
     <message>
         <source>&amp;Change Passphrase…</source>
@@ -426,8 +443,16 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
         <translation type="unfinished">Saini ujumbe na anwani zako za Bitcoin ili kuthibitisha umiliki wao.</translation>
     </message>
     <message>
+        <source>&amp;Verify message…</source>
+        <translation type="unfinished">&amp;Thibitisha ujumbe...</translation>
+    </message>
+    <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
         <translation type="unfinished">Hakikisha ujumbe umethibitishwa kuwa ulisainiwa na anwani za Bitcoin zilizotajwa</translation>
+    </message>
+    <message>
+        <source>&amp;Load PSBT from file…</source>
+        <translation type="unfinished">&amp;Pakia PSBT kutoka faili...</translation>
     </message>
     <message>
         <source>Open &amp;URI…</source>
@@ -487,7 +512,7 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
-        <translation type="unfinished">Onyesha orodha ya anuani za kutuma na chapa</translation>
+        <translation type="unfinished">Onyesha orodha ya anuani za kutuma zilizotumika na chapa</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
@@ -503,6 +528,14 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
             <numerusform />
             <numerusform />
         </translation>
+    </message>
+    <message>
+        <source>%1 behind</source>
+        <translation type="unfinished">%1 nyuma</translation>
+    </message>
+    <message>
+        <source>Catching up…</source>
+        <translation type="unfinished">Inakamata...</translation>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
@@ -521,12 +554,105 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
         <translation type="unfinished">Habari</translation>
     </message>
     <message>
+        <source>Up to date</source>
+        <translation type="unfinished">Imesasishwa</translation>
+    </message>
+    <message>
+        <source>Load Partially Signed Bitcoin Transaction</source>
+        <translation type="unfinished">Pakia Muamala wa Bitcoin Uliosainiwa Kiasi</translation>
+    </message>
+    <message>
+        <source>Load PSBT from &amp;clipboard…</source>
+        <translation type="unfinished">Pakia PSBT kutoka &amp;clipboard...</translation>
+    </message>
+    <message>
+        <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
+        <translation type="unfinished">Pakia Muamala wa Bitcoin Uliosainiwa Kiasi kutoka kwenye ubao wa kunakili</translation>
+    </message>
+    <message>
+        <source>Node window</source>
+        <translation type="unfinished">Dirisha la nodi</translation>
+    </message>
+    <message>
+        <source>Open node debugging and diagnostic console</source>
+        <translation type="unfinished">Fungua utatuzi wa nodi na koni ya uchunguzi</translation>
+    </message>
+    <message>
+        <source>&amp;Sending addresses</source>
+        <translation type="unfinished">&amp;Anwani za kutuma</translation>
+    </message>
+    <message>
+        <source>&amp;Receiving addresses</source>
+        <translation type="unfinished">&amp;Inapokea anwani</translation>
+    </message>
+    <message>
+        <source>Open a bitcoin: URI</source>
+        <translation type="unfinished">Fungua bitcoin: URI</translation>
+    </message>
+    <message>
         <source>Open Wallet</source>
         <translation type="unfinished">Fungua Pochi</translation>
     </message>
     <message>
+        <source>Open a wallet</source>
+        <translation type="unfinished">Fungua pochi</translation>
+    </message>
+    <message>
         <source>Close wallet</source>
         <translation type="unfinished">Funga pochi</translation>
+    </message>
+    <message>
+        <source>Restore Wallet…</source>
+        <extracomment>Name of the menu item that restores wallet from a backup file.</extracomment>
+        <translation type="unfinished">Rejesha Pochi...</translation>
+    </message>
+    <message>
+        <source>Restore a wallet from a backup file</source>
+        <extracomment>Status tip for Restore Wallet menu item</extracomment>
+        <translation type="unfinished">Rejesha mkoba kutoka kwa faili ya chelezo</translation>
+    </message>
+    <message>
+        <source>Close all wallets</source>
+        <translation type="unfinished">Funga pochi zote</translation>
+    </message>
+    <message>
+        <source>Migrate Wallet</source>
+        <translation type="unfinished">Hamisha Pochi</translation>
+    </message>
+    <message>
+        <source>Migrate a wallet</source>
+        <translation type="unfinished">Hamisha mkoba</translation>
+    </message>
+    <message>
+        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
+        <translation type="unfinished">Onyesha %1 ujumbe wa usaidizi ili kupata orodha na chaguo zinazowezekana za mstari wa amri za Bitcoin</translation>
+    </message>
+    <message>
+        <source>&amp;Mask values</source>
+        <translation type="unfinished">&amp;Funga maadili</translation>
+    </message>
+    <message>
+        <source>Mask the values in the Overview tab</source>
+        <translation type="unfinished">Ficha maadili kwenye kichupo cha Muhtasari</translation>
+    </message>
+    <message>
+        <source>No wallets available</source>
+        <translation type="unfinished">Hakuna pochi zinazopatikana</translation>
+    </message>
+    <message>
+        <source>Wallet Data</source>
+        <extracomment>Name of the wallet data file format.</extracomment>
+        <translation type="unfinished">Data ya Pochi</translation>
+    </message>
+    <message>
+        <source>Load Wallet Backup</source>
+        <extracomment>The title for Restore Wallet File Windows</extracomment>
+        <translation type="unfinished">Pakia Hifadhi Nakala ya Wallet</translation>
+    </message>
+    <message>
+        <source>Restore Wallet</source>
+        <extracomment>Title of pop-up window shown when the user is attempting to restore a wallet.</extracomment>
+        <translation type="unfinished">Rejesha Pochi</translation>
     </message>
     <message>
         <source>Wallet Name</source>
@@ -534,8 +660,28 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
         <translation type="unfinished">Jina la Wallet</translation>
     </message>
     <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished">&amp;Dirisha</translation>
+    </message>
+    <message>
+        <source>Zoom</source>
+        <translation type="unfinished">Kuza</translation>
+    </message>
+    <message>
+        <source>Main Window</source>
+        <translation type="unfinished">Dirisha Kuu</translation>
+    </message>
+    <message>
+        <source>%1 client</source>
+        <translation type="unfinished">%1 mteja</translation>
+    </message>
+    <message>
         <source>&amp;Hide</source>
         <translation type="unfinished">&amp;Ficha</translation>
+    </message>
+    <message>
+        <source>S&amp;how</source>
+        <translation type="unfinished">Jinsi &amp; jinsi</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
@@ -546,13 +692,98 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
         </translation>
     </message>
     <message>
+        <source>Click for more actions.</source>
+        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <translation type="unfinished">Bofya kwa vitendo zaidi.</translation>
+    </message>
+    <message>
+        <source>Show Peers tab</source>
+        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <translation type="unfinished">Onyesha kichupo cha Marika</translation>
+    </message>
+    <message>
+        <source>Disable network activity</source>
+        <extracomment>A context menu item.</extracomment>
+        <translation type="unfinished">Zima shughuli za mtandao</translation>
+    </message>
+    <message>
+        <source>Enable network activity</source>
+        <extracomment>A context menu item. The network activity was disabled previously.</extracomment>
+        <translation type="unfinished">Washa shughuli za mtandao</translation>
+    </message>
+    <message>
+        <source>Pre-syncing Headers (%1%)…</source>
+        <translation type="unfinished">Kusawazisha Vichwa vya awali (%1%)...</translation>
+    </message>
+    <message>
+        <source>Error creating wallet</source>
+        <translation type="unfinished">Hitilafu unapounda pochi</translation>
+    </message>
+    <message>
+        <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
+        <translation type="unfinished">Haiwezi kuunda pochi mpya, programu iliundwa bila usaidizi wa sqlite (inahitajika kwa pochi za maelezo)</translation>
+    </message>
+    <message>
         <source>Error: %1</source>
         <translation type="unfinished">Kosa: %1</translation>
     </message>
     <message>
+        <source>Warning: %1</source>
+        <translation type="unfinished">Onyo: %1</translation>
+    </message>
+    <message>
+        <source>Date: %1
+</source>
+        <translation type="unfinished">Tarehe: %1</translation>
+    </message>
+    <message>
+        <source>Amount: %1
+</source>
+        <translation type="unfinished">Kiasi: %1
+</translation>
+    </message>
+    <message>
+        <source>Wallet: %1
+</source>
+        <translation type="unfinished">Pochi: %1
+</translation>
+    </message>
+    <message>
+        <source>Type: %1
+</source>
+        <translation type="unfinished">Aina: %1</translation>
+    </message>
+    <message>
         <source>Label: %1
 </source>
-        <translation type="unfinished">Chapa: %1</translation>
+        <translation type="unfinished">Chapa: %1
+</translation>
+    </message>
+    <message>
+        <source>Address: %1
+</source>
+        <translation type="unfinished">Anwani: %1
+</translation>
+    </message>
+    <message>
+        <source>Sent transaction</source>
+        <translation type="unfinished">Umetuma muamala</translation>
+    </message>
+    <message>
+        <source>Incoming transaction</source>
+        <translation type="unfinished">Muamala unaoingia</translation>
+    </message>
+    <message>
+        <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
+        <translation type="unfinished">Uzalishaji wa ufunguo wa HD ni &lt;b&gt;kuwezeshwa &lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
+        <translation type="unfinished">Uzalishaji wa ufunguo wa HD ni &lt;b&gt;kutowezeshwa&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
+        <translation type="unfinished">Ufunguo wa kibinafsi &lt;b&gt; umezimwa &lt;/b&gt;</translation>
     </message>
     </context>
 <context>
@@ -587,6 +818,13 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     </message>
     </context>
 <context>
+    <name>MigrateWalletActivity</name>
+    <message>
+        <source>Migrate Wallet</source>
+        <translation type="unfinished">Hamisha Pochi</translation>
+    </message>
+    </context>
+<context>
     <name>OpenWalletActivity</name>
     <message>
         <source>Open Wallet</source>
@@ -596,6 +834,11 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     </context>
 <context>
     <name>RestoreWalletActivity</name>
+    <message>
+        <source>Restore Wallet</source>
+        <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
+        <translation type="unfinished">Rejesha Pochi</translation>
+    </message>
     <message>
         <source>Restore wallet warning</source>
         <extracomment>Title of message box which is displayed when the wallet is restored with some warning.</extracomment>
@@ -611,6 +854,10 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     <message>
         <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
         <translation type="unfinished">Kufunga pochi kwa muda mrefu sana kunaweza kusababisha kusawazisha tena mnyororo mzima ikiwa upogoaji umewezeshwa.</translation>
+    </message>
+    <message>
+        <source>Close all wallets</source>
+        <translation type="unfinished">Funga pochi zote</translation>
     </message>
     </context>
 <context>
@@ -725,6 +972,10 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
 <context>
     <name>OptionsDialog</name>
     <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished">&amp;Dirisha</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation type="unfinished">Onyo</translation>
     </message>
@@ -742,6 +993,13 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     <message>
         <source>Resulting URI too long, try to reduce the text for label / message.</source>
         <translation type="unfinished">URI inayotokea ni ndefu sana. Jaribu kupunguza maandishi ya chapa / ujumbe.</translation>
+    </message>
+    </context>
+<context>
+    <name>RPCConsole</name>
+    <message>
+        <source>Node window</source>
+        <translation type="unfinished">Dirisha la nodi</translation>
     </message>
     </context>
 <context>
@@ -919,6 +1177,11 @@ Kutia sahihi kunawezekana tu kwa anwani za aina ya 'urithi'.</translation>
     <message>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">Toa data katika kichupo cha sasa hadi kwenye faili</translation>
+    </message>
+    <message>
+        <source>Wallet Data</source>
+        <extracomment>Name of the wallet data file format.</extracomment>
+        <translation type="unfinished">Data ya Pochi</translation>
     </message>
     </context>
 <context>

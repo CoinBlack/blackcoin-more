@@ -2,15 +2,14 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
-#endif
+#include <config/bitcoin-config.h> // IWYU pragma: keep
 
 #include <crypto/sha256.h>
 #include <crypto/common.h>
 
-#include <assert.h>
-#include <string.h>
+#include <algorithm>
+#include <cassert>
+#include <cstring>
 
 #if !defined(DISABLE_OPTIMIZED_SHA256)
 #include <compat/cpuid.h>
@@ -20,7 +19,7 @@
 #include <asm/hwcap.h>
 #endif
 
-#if defined(MAC_OSX) && defined(ENABLE_ARM_SHANI)
+#if defined(__APPLE__) && defined(ENABLE_ARM_SHANI)
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #endif
@@ -623,7 +622,7 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
         }
     }
 
-#if defined(ENABLE_X86_SHANI)
+#if defined(ENABLE_SSE41) && defined(ENABLE_X86_SHANI)
     if (have_x86_shani) {
         Transform = sha256_x86_shani::Transform;
         TransformD64 = TransformD64Wrapper<sha256_x86_shani::Transform>;
@@ -670,7 +669,7 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
 #endif
 #endif
 
-#if defined(MAC_OSX)
+#if defined(__APPLE__)
         int val = 0;
         size_t len = sizeof(val);
         if (sysctlbyname("hw.optional.arm.FEAT_SHA256", &val, &len, nullptr, 0) == 0) {

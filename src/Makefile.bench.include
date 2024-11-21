@@ -23,7 +23,9 @@ bench_bench_blackmore_SOURCES = \
   bench/ccoins_caching.cpp \
   bench/chacha20.cpp \
   bench/checkblock.cpp \
+  bench/checkblockindex.cpp \
   bench/checkqueue.cpp \
+  bench/cluster_linearize.cpp \
   bench/crypto_hash.cpp \
   bench/data.cpp \
   bench/data.h \
@@ -34,6 +36,7 @@ bench_bench_blackmore_SOURCES = \
   bench/examples.cpp \
   bench/gcs_filter.cpp \
   bench/hashpadding.cpp \
+  bench/index_blockfilter.cpp \
   bench/load_external.cpp \
   bench/lockedpool.cpp \
   bench/logging.cpp \
@@ -42,14 +45,17 @@ bench_bench_blackmore_SOURCES = \
   bench/merkle_root.cpp \
   bench/nanobench.cpp \
   bench/nanobench.h \
+  bench/parse_hex.cpp \
   bench/peer_eviction.cpp \
   bench/poly1305.cpp \
   bench/pool.cpp \
   bench/prevector.cpp \
+  bench/random.cpp \
   bench/readblock.cpp \
   bench/rollingbloom.cpp \
   bench/rpc_blockchain.cpp \
   bench/rpc_mempool.cpp \
+  bench/sign_transaction.cpp \
   bench/streams_findbyte.cpp \
   bench/strencodings.cpp \
   bench/util_time.cpp \

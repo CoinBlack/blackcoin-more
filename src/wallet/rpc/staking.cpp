@@ -11,13 +11,14 @@
 #include <wallet/wallet.h>
 #include <node/context.h>
 #include <node/miner.h>
+#include <node/warnings.h>
 #include <key_io.h> // For EncodeDestination
 #include <pow.h> // For GetNextTargetRequired
-#include <warnings.h>
 
 #include <univalue.h>
 
 using node::BlockAssembler;
+using node::NodeContext;
 
 namespace wallet {
 
@@ -89,7 +90,9 @@ static RPCHelpMan getstakinginfo()
     obj.pushKV("expectedtime", nExpectedTime);
 
     obj.pushKV("chain", chainman.GetParams().GetChainTypeString());
-    obj.pushKV("warnings", GetWarnings(false).original);
+
+    NodeContext& node = EnsureAnyNodeContext(request.context);
+    obj.pushKV("warnings", node::GetWarningsForRpc(*CHECK_NONFATAL(node.warnings), IsDeprecatedRPCEnabled("warnings")));
     return obj;
 },
     };
@@ -316,7 +319,8 @@ static RPCHelpMan checkkernel()
 
     bool fPoSCancel = false;
     int64_t nFees;
-    std::unique_ptr<node::CBlockTemplate> pblocktemplate(BlockAssembler{active_chainstate, &mempool}.CreateNewBlock(CScript(), nullptr, &fPoSCancel, &nFees));
+    BlockAssembler::Options options;
+    std::unique_ptr<node::CBlockTemplate> pblocktemplate(BlockAssembler{active_chainstate, &mempool, options}.CreateNewBlock(CScript(), nullptr, &fPoSCancel, &nFees));
     if (!pblocktemplate.get())
         throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
 

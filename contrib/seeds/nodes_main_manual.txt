@@ -1,4 +1,0 @@
-
-# manually updated 2023-04 for minimal torv3 bootstrap support
-
-jgsfxfwhm7vdabt5dxl42il7uenvysknyedtzuaiajo7w5bv5jf2jpid.onion:15714

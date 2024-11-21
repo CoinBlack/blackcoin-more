@@ -123,11 +123,11 @@ We can also log custom events to the logger.
 ```
 
 **Note: Please also consider the functional test
-[readme](../test/functional/README.md), which provides an overview of the
+[readme](/test/functional/README.md), which provides an overview of the
 test-framework**. Modules such as
-[key.py](../test/functional/test_framework/key.py),
-[script.py](../test/functional/test_framework/script.py) and
-[messages.py](../test/functional/test_framework/messages.py) are particularly
+[key.py](/test/functional/test_framework/key.py),
+[script.py](/test/functional/test_framework/script.py) and
+[messages.py](/test/functional/test_framework/messages.py) are particularly
 useful in constructing objects which can be passed to the blackmored nodes managed
 by a running `TestShell` object.
 
@@ -169,10 +169,10 @@ can be called after the TestShell is shut down.
 
 | Test parameter key | Default Value | Description |
 |---|---|---|
-| `bind_to_localhost_only` | `True` | Binds blackmored RPC services to `127.0.0.1` if set to `True`.|
-| `cachedir` | `"/path/to/blackcoin-more/test/cache"` | Sets the blackmored datadir directory. |
+| `bind_to_localhost_only` | `True` | Binds blackmored P2P services to `127.0.0.1` if set to `True`.|
+| `cachedir` | `"/path/to/blackmore/test/cache"` | Sets the blackmored datadir directory. |
 | `chain`  | `"regtest"` | Sets the chain-type for the underlying test blackmored processes. |
-| `configfile` | `"/path/to/blackcoin-more/test/config.ini"` | Sets the location of the test framework config file. |
+| `configfile` | `"/path/to/blackmore/test/config.ini"` | Sets the location of the test framework config file. |
 | `coveragedir` | `None` | Records blackmored RPC test coverage into this directory if set. |
 | `loglevel` | `INFO` | Logs events at this level and higher. Can be set to `DEBUG`, `INFO`, `WARNING`, `ERROR` or `CRITICAL`. |
 | `nocleanup` | `False` | Cleans up temporary test directory if set to `True` during `shutdown`. |

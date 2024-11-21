@@ -13,6 +13,8 @@
 #include <cstdint>
 #include <optional>
 
+class ValidationSignals;
+
 /** Default for -maxmempool, maximum megabytes of mempool memory usage */
 static constexpr unsigned int DEFAULT_MAX_MEMPOOL_SIZE_MB{300};
 /** Default for -maxmempool when blocksonly is set */
@@ -52,6 +54,8 @@ struct MemPoolOptions {
     bool require_standard{true};
     bool persist_v1_dat{DEFAULT_PERSIST_V1_DAT};
     MemPoolLimits limits{};
+
+    ValidationSignals* signals{nullptr};
 };
 } // namespace kernel
 
