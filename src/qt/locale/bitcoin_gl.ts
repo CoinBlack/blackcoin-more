@@ -62,10 +62,10 @@
         <translation type="unfinished">Estas son as túas direccións Bitcoin para enviar pagos. Revisa sempre a cantidade e a dirección receptora antes de enviar moedas.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Estes son os teus enderezos de Bitcoin para recibir pagamentos. Emprega o botón 'Crear novo enderezo para recibir pagamentos' na solapa de recibir para crear novos enderezos.
-Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">Estes son os teus enderezos de Bitcoin para recibir pagamentos. Emprega o botón &apos;Crear novo enderezo para recibir pagamentos&apos; na solapa de recibir para crear novos enderezos.
+Firmar é posible unicamente con enderezos de tipo &apos;legacy&apos;.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -279,46 +279,46 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -473,8 +473,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -570,8 +570,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -754,10 +754,6 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">Esta etiqueta tórnase vermella se algún receptor recibe unha cantidade máis pequena que o actual límite de po.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation type="unfinished">Pode variar +/- %1 satoshi(s) por entrada.</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation type="unfinished">(sen etiqueta)</translation>
     </message>
@@ -785,7 +781,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Create wallet warning</source>
         <translation type="unfinished">Creación de carteira con aviso</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -797,14 +793,14 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
         <translation type="unfinished">Abrir Moedeiro</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletController</name>
     <message>
         <source>Close wallet</source>
         <translation type="unfinished">Pechar moedeiro</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletDialog</name>
     <message>
@@ -851,7 +847,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Create</source>
         <translation type="unfinished">Crea</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -887,16 +883,16 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">Modificar dirección para enviar</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">A dirección introducida '%1' non é unha dirección Bitcoin válida.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <translation type="unfinished">A dirección introducida &apos;%1&apos; non é unha dirección Bitcoin válida.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">O enderezo "%1" xa existe como un enderezo de recepción ca etiqueta "%2" polo que non pode ser añadido como un enderezo de envío.</translation>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation type="unfinished">O enderezo &quot;%1&quot; xa existe como un enderezo de recepción ca etiqueta &quot;%2&quot; polo que non pode ser añadido como un enderezo de envío.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">O enderezo introducido "%1" xa existe na axenda de enderezos ca etiqueta "%2".</translation>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation type="unfinished">O enderezo introducido &quot;%1&quot; xa existe na axenda de enderezos ca etiqueta &quot;%2&quot;.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -935,8 +931,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -957,8 +953,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1007,7 +1003,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Last block time</source>
         <translation type="unfinished">Hora do último bloque</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1171,7 +1167,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Recent transactions</source>
         <translation type="unfinished">Transaccións recentes</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -1186,7 +1182,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>own address</source>
         <translation type="unfinished">dirección propia</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PaymentServer</name>
     <message>
@@ -1197,7 +1193,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>URI handling</source>
         <translation type="unfinished">Manexo de URI</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -1207,7 +1203,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">Tipo</translation>
     </message>
     <message>
@@ -1215,7 +1211,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
         <translation type="unfinished">Rede</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QRImageWidget</name>
     <message>
@@ -1238,7 +1234,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Save QR Code</source>
         <translation type="unfinished">Gardar Código QR</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RPCConsole</name>
     <message>
@@ -1318,7 +1314,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>From</source>
         <translation type="unfinished">Dende</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
@@ -1357,7 +1353,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">Non se puido desbloquear o moedeiro.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -1411,7 +1407,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>(no label)</source>
         <translation type="unfinished">(sen etiqueta)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -1529,8 +1525,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1580,7 +1576,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation type="unfinished">Introduce unha etiqueta para esta dirección para engadila á listaxe de direccións empregadas</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
@@ -1644,8 +1640,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">Restaurar todos os campos de verificación de mensaxe</translation>
     </message>
     <message>
-        <source>Click "Sign Message" to generate signature</source>
-        <translation type="unfinished">Click en "Asinar Mensaxe" para xerar sinatura</translation>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
+        <translation type="unfinished">Click en &quot;Asinar Mensaxe&quot; para xerar sinatura</translation>
     </message>
     <message>
         <source>The entered address is invalid.</source>
@@ -1751,8 +1747,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1788,8 +1784,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">Comerciante</translation>
     </message>
     <message>
-        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation type="unfinished">As moedas xeradas deben madurar %1 bloques antes de que poidan ser gastadas. Cando xeraste este bloque, foi propagado á rede para ser engadido á cadeas de bloques. Se falla ao tentar meterse na cadea, o seu estado cambiará a "non aceptado" e non poderá ser gastado. Esto pode ocorrir ocasionalmente se outro nodo xera un bloque en poucos segundos de diferencia co teu.</translation>
+        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <translation type="unfinished">As moedas xeradas deben madurar %1 bloques antes de que poidan ser gastadas. Cando xeraste este bloque, foi propagado á rede para ser engadido á cadeas de bloques. Se falla ao tentar meterse na cadea, o seu estado cambiará a &quot;non aceptado&quot; e non poderá ser gastado. Esto pode ocorrir ocasionalmente se outro nodo xera un bloque en poucos segundos de diferencia co teu.</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -1822,7 +1818,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>This pane shows a detailed description of the transaction</source>
         <translation type="unfinished">Este panel amosa unha descripción detallada da transacción</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -1996,7 +1992,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>Error</source>
         <translation type="unfinished">Erro</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -2038,7 +2034,7 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <source>The wallet data was successfully saved to %1.</source>
         <translation type="unfinished">Os datos do moedeiro foron gardados correctamente en %1.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
@@ -2106,8 +2102,8 @@ Firmar é posible unicamente con enderezos de tipo 'legacy'.</translation>
         <translation type="unfinished">A transacción é demasiado grande</translation>
     </message>
     <message>
-        <source>Unknown network specified in -onlynet: '%s'</source>
-        <translation type="unfinished">Rede descoñecida especificada en -onlynet: '%s'</translation>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
+        <translation type="unfinished">Rede descoñecida especificada en -onlynet: &apos;%s&apos;</translation>
     </message>
-    </context>
+</context>
 </TS>

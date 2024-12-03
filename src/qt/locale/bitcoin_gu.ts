@@ -62,10 +62,10 @@
         <translation type="unfinished">આ તમારા ચુકવણી કરવા માટે ના સરનામાં છે, હંમેશા કિંમત અને મોકલવાના ના સરનામાં ચકાસી લેવા સિક્કા આપતા પહેલા.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">આ તમારુ ચૂકવણું લેવા માટે નું સરનામા છે. નવું સરનામું બનાવા માટે "મેળવવા" માટે ની ટેબ માં "ચૂકવણું લેવા માટે નવું સરનામુ બનાવો" બટન વાપરો.
-ડિજિટલી સહી કરવા માટે 'legacy એટલેકે જુના પ્રકાર નુ' પ્રકાર નું સરનામું હોવું જરૂરી છે.</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">આ તમારુ ચૂકવણું લેવા માટે નું સરનામા છે. નવું સરનામું બનાવા માટે &quot;મેળવવા&quot; માટે ની ટેબ માં &quot;ચૂકવણું લેવા માટે નવું સરનામુ બનાવો&quot; બટન વાપરો.
+ડિજિટલી સહી કરવા માટે &apos;legacy એટલેકે જુના પ્રકાર નુ&apos; પ્રકાર નું સરનામું હોવું જરૂરી છે.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -273,7 +273,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Internal error</source>
         <translation type="unfinished">આંતરિક ભૂલ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QObject</name>
     <message>
@@ -291,7 +291,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ભૂલ: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 હજુ સુરક્ષિત રીતે બહાર નીકળ્યું નથી..</translation>
     </message>
     <message>
@@ -379,25 +379,25 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -768,12 +768,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">વધુ ક્રિયાઓ માટે ક્લિક કરો.</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">પીઅર ટેબ બતાવો</translation>
     </message>
     <message>
@@ -1038,7 +1038,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">વૉલેટ ચેતવણી બનાવો</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">સહી કરનારની યાદી બનાવી શકાતી નથી</translation>
     </message>
     <message>
@@ -1074,12 +1074,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 If this wallet contains any watchonly scripts, a new wallet will be created which contains those watchonly scripts.
 If this wallet contains any solvable but not watched scripts, a different and new wallet will be created which contains those scripts.
 
-The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the "Restore Wallet" functionality.</source>
+The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the &quot;Restore Wallet&quot; functionality.</source>
         <translation type="unfinished">વૉલેટનું સ્થાનાંતરણ આ વૉલેટને એક અથવા વધુ વર્ણનકર્તા વૉલેટમાં રૂપાંતરિત કરશે. નવું વૉલેટ બેકઅપ લેવાની જરૂર પડશે.
 જો આ વૉલેટમાં કોઈ માત્ર વૉચનલી સ્ક્રિપ્ટ્સ હોય, તો એક નવું વૉલેટ બનાવવામાં આવશે જેમાં તે માત્ર વૉચનલી સ્ક્રિપ્ટ્સ હશે.
 જો આ વૉલેટમાં કોઈ ઉકેલી શકાય તેવી પરંતુ જોઈ ન હોય તેવી સ્ક્રિપ્ટો હોય, તો એક અલગ અને નવું વૉલેટ બનાવવામાં આવશે જેમાં તે સ્ક્રિપ્ટો હશે.
 
-સ્થળાંતર પ્રક્રિયા સ્થળાંતર કરતા પહેલા વૉલેટનો બેકઅપ બનાવશે. આ બેકઅપ ફાઇલને &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak નામ આપવામાં આવશે અને આ વૉલેટ માટેની ડિરેક્ટરીમાં મળી શકશે. અયોગ્ય સ્થાનાંતરણની ઘટનામાં, બેકઅપને "રીસ્ટોર વોલેટ" કાર્યક્ષમતા સાથે પુનઃસ્થાપિત કરી શકાય છે.</translation>
+સ્થળાંતર પ્રક્રિયા સ્થળાંતર કરતા પહેલા વૉલેટનો બેકઅપ બનાવશે. આ બેકઅપ ફાઇલને &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak નામ આપવામાં આવશે અને આ વૉલેટ માટેની ડિરેક્ટરીમાં મળી શકશે. અયોગ્ય સ્થાનાંતરણની ઘટનામાં, બેકઅપને &quot;રીસ્ટોર વોલેટ&quot; કાર્યક્ષમતા સાથે પુનઃસ્થાપિત કરી શકાય છે.</translation>
     </message>
     <message>
         <source>Migrate Wallet</source>
@@ -1090,16 +1090,16 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">વૉલેટ સ્થાનાંતરિત કરી રહ્યાં છીએ&lt;b&gt;%1&lt;/b&gt;…</translation>
     </message>
     <message>
-        <source>The wallet '%1' was migrated successfully.</source>
-        <translation type="unfinished">વૉલેટ '%1' સફળતાપૂર્વક સ્થાનાંતરિત થયું.</translation>
+        <source>The wallet &apos;%1&apos; was migrated successfully.</source>
+        <translation type="unfinished">વૉલેટ &apos;%1&apos; સફળતાપૂર્વક સ્થાનાંતરિત થયું.</translation>
     </message>
     <message>
-        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Watchonly સ્ક્રિપ્ટો '%1'નામના નવા વૉલેટમાં સ્થાનાંતરિત કરવામાં આવી છે.</translation>
+        <source> Watchonly scripts have been migrated to a new wallet named &apos;%1&apos;.</source>
+        <translation type="unfinished">Watchonly સ્ક્રિપ્ટો &apos;%1&apos;નામના નવા વૉલેટમાં સ્થાનાંતરિત કરવામાં આવી છે.</translation>
     </message>
     <message>
-        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">ઉકેલી શકાય તેવી પરંતુ જોયેલી સ્ક્રિપ્ટો '%1'નામના નવા વૉલેટમાં સ્થાનાંતરિત કરવામાં આવી છે .</translation>
+        <source> Solvable but not watched scripts have been migrated to a new wallet named &apos;%1&apos;.</source>
+        <translation type="unfinished">ઉકેલી શકાય તેવી પરંતુ જોયેલી સ્ક્રિપ્ટો &apos;%1&apos;નામના નવા વૉલેટમાં સ્થાનાંતરિત કરવામાં આવી છે .</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1250,7 +1250,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">બાહ્ય હસ્તાક્ષર આધાર વિના સંકલિત (બાહ્ય હસ્તાક્ષર માટે જરૂરી)</translation>
     </message>
 </context>
@@ -1289,16 +1289,16 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">મોકલવાનું સરનામું સંપાદિત કરો</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">દાખલ કરેલ સરનામું "%1" માન્ય બીટકોઈન સરનામું નથી.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <translation type="unfinished">દાખલ કરેલ સરનામું &quot;%1&quot; માન્ય બીટકોઈન સરનામું નથી.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">સરનામું "%1" પહેલેથી જ "%2" લેબલ સાથે પ્રાપ્ત સરનામા તરીકે અસ્તિત્વમાં છે અને તેથી તેને મોકલવાના સરનામા તરીકે ઉમેરી શકાતું નથી.</translation>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation type="unfinished">સરનામું &quot;%1&quot; પહેલેથી જ &quot;%2&quot; લેબલ સાથે પ્રાપ્ત સરનામા તરીકે અસ્તિત્વમાં છે અને તેથી તેને મોકલવાના સરનામા તરીકે ઉમેરી શકાતું નથી.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">દાખલ કરેલ સરનામું "%1" પહેલાથી જ "%2" લેબલ સાથે એડ્રેસ બુકમાં છે.</translation>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation type="unfinished">દાખલ કરેલ સરનામું &quot;%1&quot; પહેલાથી જ &quot;%2&quot; લેબલ સાથે એડ્રેસ બુકમાં છે.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1388,8 +1388,8 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">વૉલેટ પણ આ ડિરેક્ટરીમાં સ્ટોર કરવામાં આવશે.</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation type="unfinished">ભૂલ: ઉલ્લેખિત ડેટા ડિરેક્ટરી "%1" બનાવી શકાતી નથી.</translation>
+        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
+        <translation type="unfinished">ભૂલ: ઉલ્લેખિત ડેટા ડિરેક્ટરી &quot;%1&quot; બનાવી શકાતી નથી.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1473,7 +1473,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">ફોર્મ</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
         <translation type="unfinished">તાજેતરના વ્યવહારો હજુ સુધી દેખાતા ન હોઈ શકે અને તેથી તમારા વૉલેટનું બેલેન્સ ખોટું હોઈ શકે છે. એકવાર તમારું વૉલેટ બિટકોઇન નેટવર્ક સાથે સિંક્રનાઇઝ થઈ જાય પછી આ માહિતી સાચી હશે, જેમ કે નીચે વિગતવાર છે.</translation>
     </message>
     <message>
@@ -1808,7 +1808,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">બાહ્ય હસ્તાક્ષર આધાર વિના સંકલિત (બાહ્ય હસ્તાક્ષર માટે જરૂરી)</translation>
     </message>
     <message>
@@ -1830,9 +1830,9 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">ફેરફારોને સક્રિય કરવા માટે ક્લાયન્ટ પુનઃપ્રારંભ જરૂરી છે.</translation>
     </message>
     <message>
-        <source>Current settings will be backed up at "%1".</source>
-        <extracomment>Text explaining to the user that the client's current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location's path.</extracomment>
-        <translation type="unfinished">વર્તમાન સેટિંગ્સનું "%1" પર બેકઅપ લેવામાં આવશે.</translation>
+        <source>Current settings will be backed up at &quot;%1&quot;.</source>
+        <extracomment>Text explaining to the user that the client&apos;s current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location&apos;s path.</extracomment>
+        <translation type="unfinished">વર્તમાન સેટિંગ્સનું &quot;%1&quot; પર બેકઅપ લેવામાં આવશે.</translation>
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
@@ -1877,8 +1877,8 @@ The migration process will create a backup of the wallet before migrating. This 
 <context>
     <name>OptionsModel</name>
     <message>
-        <source>Could not read setting "%1", %2.</source>
-        <translation type="unfinished">સેટિંગ "%1", %2  વાંચી શકાયું નથી.</translation>
+        <source>Could not read setting &quot;%1&quot;, %2.</source>
+        <translation type="unfinished">સેટિંગ &quot;%1&quot;, %2  વાંચી શકાયું નથી.</translation>
     </message>
 </context>
 <context>
@@ -2107,12 +2107,12 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">URI હેન્ડલિંગ</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation type="unfinished">'bitcoin://' એ માન્ય URI નથી. તેના બદલે 'bitcoin:' નો ઉપયોગ કરો.</translation>
+        <source>&apos;bitcoin://&apos; is not a valid URI. Use &apos;bitcoin:&apos; instead.</source>
+        <translation type="unfinished">&apos;bitcoin://&apos; એ માન્ય URI નથી. તેના બદલે &apos;bitcoin:&apos; નો ઉપયોગ કરો.</translation>
     </message>
     <message>
         <source>Cannot process payment request because BIP70 is not supported.
-Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.
+Due to widespread security flaws in BIP70 it&apos;s strongly recommended that any merchant instructions to switch wallets be ignored.
 If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
         <translation type="unfinished">ચુકવણી વિનંતી પર પ્રક્રિયા કરી શકાતી નથી કારણ કે BIP70 સમર્થિત નથી.
 BIP70 માં વ્યાપક સુરક્ષા ખામીઓને લીધે, વોલેટ બદલવા માટેની કોઈપણ વેપારીની સૂચનાઓને અવગણવાની ભારપૂર્વક ભલામણ કરવામાં આવે છે.
@@ -2131,7 +2131,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <extracomment>Title of Peers Table column which contains the peer's User Agent string.</extracomment>
+        <extracomment>Title of Peers Table column which contains the peer&apos;s User Agent string.</extracomment>
         <translation type="unfinished">વપરાશકર્તા એજન્ટ</translation>
     </message>
     <message>
@@ -2171,7 +2171,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">પ્રકાર</translation>
     </message>
     <message>
@@ -2245,16 +2245,16 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <translation type="unfinished">ડેટાડર</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the data directory use the '%1' option.</source>
-        <translation type="unfinished">ડેટા ડિરેક્ટરીનું બિન-ડિફોલ્ટ સ્થાન સ્પષ્ટ કરવા માટે '%1' વિકલ્પનો ઉપયોગ કરો.</translation>
+        <source>To specify a non-default location of the data directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">ડેટા ડિરેક્ટરીનું બિન-ડિફોલ્ટ સ્થાન સ્પષ્ટ કરવા માટે &apos;%1&apos; વિકલ્પનો ઉપયોગ કરો.</translation>
     </message>
     <message>
         <source>Blocksdir</source>
         <translation type="unfinished">બ્લોક્સડર</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
-        <translation type="unfinished">બ્લોક્સ ડિરેક્ટરીનું બિન-મૂળભૂત સ્થાન સ્પષ્ટ કરવા માટે '%1' વિકલ્પનો ઉપયોગ કરો.</translation>
+        <source>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">બ્લોક્સ ડિરેક્ટરીનું બિન-મૂળભૂત સ્થાન સ્પષ્ટ કરવા માટે &apos;%1&apos; વિકલ્પનો ઉપયોગ કરો.</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -2531,7 +2531,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
     </message>
     <message>
         <source>detecting: peer could be v1 or v2</source>
-        <extracomment>Explanatory text for "detecting" transport type.</extracomment>
+        <extracomment>Explanatory text for &quot;detecting&quot; transport type.</extracomment>
         <translation type="unfinished">શોધવું: પીઅર v1 અથવા v2 હોઈ શકે છે</translation>
     </message>
     <message>
@@ -2603,7 +2603,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
     </message>
     <message>
         <source>&amp;Copy IP/Netmask</source>
-        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer's IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
+        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer&apos;s IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
         <translation type="unfinished">&amp;કોપી IP/Netmask</translation>
     </message>
     <message>
@@ -2635,8 +2635,8 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <translation type="unfinished">કંટ્રોલ+P</translation>
     </message>
     <message>
-        <source>Executing command using "%1" wallet</source>
-        <translation type="unfinished">" %1 "વોલેટનો ઉપયોગ કરીને આદેશ ચલાવી રહ્યા છીએ</translation>
+        <source>Executing command using &quot;%1&quot; wallet</source>
+        <translation type="unfinished">&quot; %1 &quot;વોલેટનો ઉપયોગ કરીને આદેશ ચલાવી રહ્યા છીએ</translation>
     </message>
     <message>
         <source>Executing…</source>
@@ -2782,7 +2782,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">વૉલેટ અનલૉક કરી શકાયું નથી.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -2809,7 +2809,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>&amp;Save Image…</source>
         <translation type="unfinished">&amp;છબી સાચવો…</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -2824,7 +2824,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>(no label)</source>
         <translation type="unfinished">લેબલ નથી</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -2903,8 +2903,8 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2922,14 +2922,14 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>Paste address from clipboard</source>
         <translation type="unfinished">ક્લિપબોર્ડમાંથી સરનામું પેસ્ટ કરો</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>Paste address from clipboard</source>
         <translation type="unfinished">ક્લિપબોર્ડમાંથી સરનામું પેસ્ટ કરો</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionDesc</name>
     <message>
@@ -2955,15 +2955,15 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Amount</source>
         <translation type="unfinished">રકમ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -2982,7 +2982,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>(no label)</source>
         <translation type="unfinished">લેબલ નથી</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -3026,7 +3026,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>Exporting Failed</source>
         <translation type="unfinished">નિકાસ ની પ્ર્રાક્રિયા નિષ્ફળ ગયેલ છે</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -3037,7 +3037,7 @@ BIP70 માં વ્યાપક સુરક્ષા ખામીઓને �
         <source>Error</source>
         <translation type="unfinished">ભૂલ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>

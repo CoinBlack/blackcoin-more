@@ -62,10 +62,10 @@
         <translation type="unfinished">Dawn huma l-indirizzi Bitcoin tiegħek biex tibgħat il-ħlasijiet. Dejjem iċċekkja l-ammont u l-indirizz li tirċievi qabel ma tibgħat muniti.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Dawn huma l-indirizzi Bitcoin tiegħek biex tirċievi ħlasijiet. Uża l-buttuna 'Oħloq indirizz riċevitur ġdid' fit-tab tar-riċeviment biex toħloq indirizzi ġodda.
-L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">Dawn huma l-indirizzi Bitcoin tiegħek biex tirċievi ħlasijiet. Uża l-buttuna &apos;Oħloq indirizz riċevitur ġdid&apos; fit-tab tar-riċeviment biex toħloq indirizzi ġodda.
+L-iffirmar huwa possibbli biss b&apos;indirizzi tat-tip &apos;legacy&apos;.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -81,7 +81,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Export Address List</source>
-        <translation type="unfinished">Lista ta' Indirizzi ta' Esportazzjoni</translation>
+        <translation type="unfinished">Lista ta&apos; Indirizzi ta&apos; Esportazzjoni</translation>
     </message>
     <message>
         <source>Comma separated file</source>
@@ -91,7 +91,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
-        <translation type="unfinished">Kien hemm żball meta ppruvaw issalva l-lista tal-indirizzi f'%1. Jekk jogħġbok erġa pprova.</translation>
+        <translation type="unfinished">Kien hemm żball meta ppruvaw issalva l-lista tal-indirizzi f&apos;%1. Jekk jogħġbok erġa pprova.</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -169,7 +169,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation type="unfinished">Daħħal il-passphrase l-ġdida għall-kartiera.&lt;br/&gt;Jekk jogħġbok uża passphrase ta' &lt;b&gt;għaxar karattri jew aktar każwali&lt;/b&gt;, jew &lt;b&gt; tmien kelmiet jew aktar&lt;/b&gt;.</translation>
+        <translation type="unfinished">Daħħal il-passphrase l-ġdida għall-kartiera.&lt;br/&gt;Jekk jogħġbok uża passphrase ta&apos; &lt;b&gt;għaxar karattri jew aktar każwali&lt;/b&gt;, jew &lt;b&gt; tmien kelmiet jew aktar&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Enter the old passphrase and new passphrase for the wallet.</source>
@@ -193,7 +193,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation type="unfinished">IMPORTANTI: Kwalunkwe backups preċedenti li għamilt tal-fajl tal-kartiera tiegħek għandhom jiġu sostitwiti bil-fajl tal-kartiera iġġenerat ġdid u kriptat. Għal raġunijiet ta' sigurtà, backups preċedenti tal-fajl tal-kartiera mhux kriptat se jsiru inutli hekk kif tibda tuża l-kartiera l-ġdida u kriptata.</translation>
+        <translation type="unfinished">IMPORTANTI: Kwalunkwe backups preċedenti li għamilt tal-fajl tal-kartiera tiegħek għandhom jiġu sostitwiti bil-fajl tal-kartiera iġġenerat ġdid u kriptat. Għal raġunijiet ta&apos; sigurtà, backups preċedenti tal-fajl tal-kartiera mhux kriptat se jsiru inutli hekk kif tibda tuża l-kartiera l-ġdida u kriptata.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
@@ -217,11 +217,11 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character. If this is successful, please set a new passphrase to avoid this issue in the future.</source>
-        <translation type="unfinished">Il-passphrase mdaħħla għad-decryption tal-kartiera mhix korretta. Fiha karattru null (jiġifieri - byte żero). Jekk il-passphrase ġiet issettjata b'verżjoni ta' dan is-software qabel 25.0, jekk jogħġbok erġa' pprova bil-karattri biss sa — iżda mhux inkluż — l-ewwel karattru null. Jekk dan jirnexxi, jekk jogħġbok waqqaf passphrase ġdida biex tevita din il-kwistjoni fil-futur.</translation>
+        <translation type="unfinished">Il-passphrase mdaħħla għad-decryption tal-kartiera mhix korretta. Fiha karattru null (jiġifieri - byte żero). Jekk il-passphrase ġiet issettjata b&apos;verżjoni ta&apos; dan is-software qabel 25.0, jekk jogħġbok erġa&apos; pprova bil-karattri biss sa — iżda mhux inkluż — l-ewwel karattru null. Jekk dan jirnexxi, jekk jogħġbok waqqaf passphrase ġdida biex tevita din il-kwistjoni fil-futur.</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation type="unfinished">Il-passphrase tal-kartiera nbidlet b'suċċess.</translation>
+        <translation type="unfinished">Il-passphrase tal-kartiera nbidlet b&apos;suċċess.</translation>
     </message>
     <message>
         <source>Passphrase change failed</source>
@@ -229,7 +229,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>The old passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character.</source>
-        <translation type="unfinished">Il-passphrase l-antika mdaħħla għad-decryption tal-kartiera mhix korretta. Fiha karattru null (jiġifieri - byte żero). Jekk il-passphrase ġiet issettjata b'verżjoni ta' dan is-software qabel 25.0, jekk jogħġbok erġa' pprova bil-karattri biss sa — iżda mhux inkluż — l-ewwel karattru null.</translation>
+        <translation type="unfinished">Il-passphrase l-antika mdaħħla għad-decryption tal-kartiera mhix korretta. Fiha karattru null (jiġifieri - byte żero). Jekk il-passphrase ġiet issettjata b&apos;verżjoni ta&apos; dan is-software qabel 25.0, jekk jogħġbok erġa&apos; pprova bil-karattri biss sa — iżda mhux inkluż — l-ewwel karattru null.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -247,7 +247,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     <name>BitcoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
-        <translation type="unfinished">Il-fajl tas-settings %1jista' jkun korrott jew invalidu.</translation>
+        <translation type="unfinished">Il-fajl tas-settings %1jista&apos; jkun korrott jew invalidu.</translation>
     </message>
     <message>
         <source>Runaway exception</source>
@@ -255,7 +255,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
-        <translation type="unfinished">Sar żball fatali. %1ma tistax tkompli b'mod sigur u se tieqaf.</translation>
+        <translation type="unfinished">Sar żball fatali. %1ma tistax tkompli b&apos;mod sigur u se tieqaf.</translation>
     </message>
     <message>
         <source>Internal error</source>
@@ -263,7 +263,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>An internal error occurred. %1 will attempt to continue safely. This is an unexpected bug which can be reported as described below.</source>
-        <translation type="unfinished">Sar żball intern. %1se jipprova jkompli mingħajr periklu. Dan huwa bug mhux mistenni li jista 'jiġi rrappurtat kif deskritt hawn taħt.</translation>
+        <translation type="unfinished">Sar żball intern. %1se jipprova jkompli mingħajr periklu. Dan huwa bug mhux mistenni li jista &apos;jiġi rrappurtat kif deskritt hawn taħt.</translation>
     </message>
 </context>
 <context>
@@ -276,71 +276,71 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     <message>
         <source>A fatal error occurred. Check that settings file is writable, or try running with -nosettings.</source>
         <extracomment>Explanatory text shown on startup when the settings file could not be written. Prompts user to check that we have the ability to write to the file. Explains that the user has the option of running without a settings file.</extracomment>
-        <translation type="unfinished">Sar żball fatali. Iċċekkja li l-fajl tas-settings jista' jinkiteb, jew ipprova taħdem b'-nosettings.</translation>
+        <translation type="unfinished">Sar żball fatali. Iċċekkja li l-fajl tas-settings jista&apos; jinkiteb, jew ipprova taħdem b&apos;-nosettings.</translation>
     </message>
     <message>
         <source>Error: %1</source>
         <translation type="unfinished">Żball:%1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
-        <translation type="unfinished">%1għadu ma ħariġx b'mod sikur...</translation>
+        <source>%1 didn&apos;t yet exit safely…</source>
+        <translation type="unfinished">%1għadu ma ħariġx b&apos;mod sikur...</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -410,7 +410,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Ibgħat muniti f'indirizz Bitcoin</translation>
+        <translation type="unfinished">Ibgħat muniti f&apos;indirizz Bitcoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -462,7 +462,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Ivverifika l-messaġġi biex tiżgura li ġew iffirmati b'indirizzi Bitcoin speċifikati</translation>
+        <translation type="unfinished">Ivverifika l-messaġġi biex tiżgura li ġew iffirmati b&apos;indirizzi Bitcoin speċifikati</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -502,7 +502,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Indexing blocks on disk…</source>
-        <translation type="unfinished">Indiċjar ta' blokki fuq disk...</translation>
+        <translation type="unfinished">Indiċjar ta&apos; blokki fuq disk...</translation>
     </message>
     <message>
         <source>Processing blocks on disk…</source>
@@ -510,7 +510,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Connecting to peers…</source>
-        <translation type="unfinished">Konnessjoni ma' sħabhom...</translation>
+        <translation type="unfinished">Konnessjoni ma&apos; sħabhom...</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
@@ -522,7 +522,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
-        <translation type="unfinished">Uri l-lista ta' indirizzi u tikketti riċevituri użati</translation>
+        <translation type="unfinished">Uri l-lista ta&apos; indirizzi u tikketti riċevituri użati</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -629,7 +629,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Uri %1l-messaġġ ta 'għajnuna biex tikseb lista b'għażliet possibbli tal-linja tal-kmand Bitcoin</translation>
+        <translation type="unfinished">Uri %1l-messaġġ ta &apos;għajnuna biex tikseb lista b&apos;għażliet possibbli tal-linja tal-kmand Bitcoin</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -699,12 +699,12 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">Ikklikkja għal aktar azzjonijiet.</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">Uri tab Peers</translation>
     </message>
     <message>
@@ -719,7 +719,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>Pre-syncing Headers (%1%)…</source>
-        <translation type="unfinished">Intestaturi ta' qabel is-sinkronizzazzjoni (%1%)...</translation>
+        <translation type="unfinished">Intestaturi ta&apos; qabel is-sinkronizzazzjoni (%1%)...</translation>
     </message>
     <message>
         <source>Error: %1</source>
@@ -779,11 +779,11 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">HD key ġenerazzjoni hija&lt;b&gt;b'diżabilità&lt;/b&gt;</translation>
+        <translation type="unfinished">HD key ġenerazzjoni hija&lt;b&gt;b&apos;diżabilità&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">Ċavetta privata&lt;b&gt;b'diżabilità&lt;/b&gt;</translation>
+        <translation type="unfinished">Ċavetta privata&lt;b&gt;b&apos;diżabilità&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
@@ -835,7 +835,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>(no label)</source>
         <translation type="unfinished">(l-ebda tikketta)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -847,7 +847,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
         <translation type="unfinished">Iftaħ Kartiera</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RestoreWalletActivity</name>
     <message>
@@ -855,7 +855,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
         <translation type="unfinished">Irrestawra Kartiera</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletController</name>
     <message>
@@ -866,58 +866,58 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>Close all wallets</source>
         <translation type="unfinished">Agħlaq il-kartieri kollha</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletDialog</name>
     <message>
         <source>Wallet Name</source>
         <translation type="unfinished">Isem tal-Kartiera</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>Intro</name>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(of %n GB needed)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Error</source>
         <translation type="unfinished">Żball</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OptionsDialog</name>
     <message>
@@ -928,7 +928,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>Error</source>
         <translation type="unfinished">Żball</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -936,14 +936,14 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <extracomment>Title of Peers Table column which contains the IP/Onion/I2P address of the connected peer.</extracomment>
         <translation type="unfinished">Indirizz</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RPCConsole</name>
     <message>
         <source>Node window</source>
         <translation type="unfinished">Tieqa tan-node</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -954,7 +954,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>Wallet:</source>
         <translation type="unfinished">Kartiera:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -965,7 +965,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>(no label)</source>
         <translation type="unfinished">(l-ebda tikketta)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -991,10 +991,10 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1007,13 +1007,13 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -1024,7 +1024,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>(no label)</source>
         <translation type="unfinished">(l-ebda tikketta)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -1044,7 +1044,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>Exporting Failed</source>
         <translation type="unfinished">L-esportazzjoni falliet</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -1055,7 +1055,7 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <source>Error</source>
         <translation type="unfinished">Żball</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -1078,5 +1078,5 @@ L-iffirmar huwa possibbli biss b'indirizzi tat-tip 'legacy'.</translation>
         <extracomment>Name of the wallet data file format.</extracomment>
         <translation type="unfinished">Dejta tal-Kartiera</translation>
     </message>
-    </context>
+</context>
 </TS>

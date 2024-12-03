@@ -199,40 +199,40 @@ Alihkan fail data ke dalam tab semasa</translation>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -350,7 +350,7 @@ Alihkan fail data ke dalam tab semasa</translation>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -386,17 +386,17 @@ Alihkan fail data ke dalam tab semasa</translation>
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CoinControlDialog</name>
     <message>
         <source>(no label)</source>
         <translation type="unfinished">(tiada label)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -409,21 +409,21 @@ Alihkan fail data ke dalam tab semasa</translation>
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
         <translation type="unfinished">Buka Wallet</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletController</name>
     <message>
         <source>Close wallet</source>
         <translation type="unfinished">Tutup Wallet</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletDialog</name>
     <message>
         <source>Wallet</source>
         <translation type="unfinished">dompet</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -434,13 +434,13 @@ Alihkan fail data ke dalam tab semasa</translation>
         <source>&amp;Address</source>
         <translation type="unfinished">Alamat</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>Intro</name>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -459,21 +459,21 @@ Alihkan fail data ke dalam tab semasa</translation>
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Error</source>
         <translation type="unfinished">Ralat</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OptionsDialog</name>
     <message>
         <source>Error</source>
         <translation type="unfinished">Ralat</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -481,7 +481,7 @@ Alihkan fail data ke dalam tab semasa</translation>
         <extracomment>Title of Peers Table column which contains the IP/Onion/I2P address of the connected peer.</extracomment>
         <translation type="unfinished">Alamat</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -492,14 +492,14 @@ Alihkan fail data ke dalam tab semasa</translation>
         <source>Copy &amp;Address</source>
         <translation type="unfinished">&amp;Salin Alamat</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
         <source>(no label)</source>
         <translation type="unfinished">(tiada label)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -509,7 +509,7 @@ Alihkan fail data ke dalam tab semasa</translation>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -522,17 +522,17 @@ Alihkan fail data ke dalam tab semasa</translation>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
         <source>(no label)</source>
         <translation type="unfinished">(tiada label)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -543,14 +543,14 @@ Alihkan fail data ke dalam tab semasa</translation>
         <source>Exporting Failed</source>
         <translation type="unfinished">Mengeksport Gagal</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
         <source>Error</source>
         <translation type="unfinished">Ralat</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -570,12 +570,12 @@ Alihkan fail data ke dalam tab semasa</translation>
         <translation type="unfinished">
 Alihkan fail data ke dalam tab semasa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
         <source>Done loading</source>
         <translation type="unfinished">Baca Selesai</translation>
     </message>
-    </context>
+</context>
 </TS>

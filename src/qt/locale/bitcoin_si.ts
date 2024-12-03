@@ -241,7 +241,7 @@
         <translation type="unfinished">දෝෂය: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 තවමත් ආරක්ෂිතව පිටව ගොස් නැත ...</translation>
     </message>
     <message>
@@ -294,7 +294,7 @@
             <numerusform>%n year(s)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -503,7 +503,7 @@
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">තව ක්‍රියාමාර්ග සඳහා ඔබන්න.</translation>
     </message>
     <message>
@@ -627,7 +627,7 @@
         <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
         <translation type="unfinished">පසුම්බිය සාදන්න</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -639,7 +639,7 @@
         <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
         <translation type="unfinished">පසුම්බිය බලන්න</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RestoreWalletActivity</name>
     <message>
@@ -655,7 +655,7 @@
     <message>
         <source>Restore wallet message</source>
         <extracomment>Title of message box which is displayed when the wallet is successfully restored.</extracomment>
-        <translation type="unfinished">පසුම්බිය ප්‍රතිස්ථාපනය කිරීමේ පණිවිඩය </translation>
+        <translation type="unfinished">පසුම්බිය ප්‍රතිස්ථාපනය කිරීමේ පණිවිඩය&#xa0;</translation>
     </message>
 </context>
 <context>
@@ -668,7 +668,7 @@
         <source>Close all wallets</source>
         <translation type="unfinished">සියළු පසුම්බි වසන්න</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletDialog</name>
     <message>
@@ -695,7 +695,7 @@
         <source>Create</source>
         <translation type="unfinished">සාදන්න</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -718,7 +718,7 @@
         <source>Edit sending address</source>
         <translation type="unfinished">යවන ලිපිනය සංස්කරණය</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>FreespaceChecker</name>
     <message>
@@ -739,22 +739,22 @@
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(of %n GB needed)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -785,7 +785,7 @@
         <source>Use the default data directory</source>
         <translation type="unfinished">පෙරනිමි දත්ත නාමාවලිය භාවිතා කරන්න</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>HelpMessageDialog</name>
     <message>
@@ -796,7 +796,7 @@
         <source>About %1</source>
         <translation type="unfinished">%1 පිළිබඳව</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
@@ -815,7 +815,7 @@
         <source>Hide</source>
         <translation type="unfinished">සඟවන්න</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OptionsDialog</name>
     <message>
@@ -875,8 +875,8 @@
         <translation type="unfinished">අතරු මුහුණතේ &amp;භාෂාව:</translation>
     </message>
     <message>
-        <source>embedded "%1"</source>
-        <translation type="unfinished">එබ්බවූ "%1"</translation>
+        <source>embedded &quot;%1&quot;</source>
+        <translation type="unfinished">එබ්බවූ &quot;%1&quot;</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -898,21 +898,21 @@
         <source>Error</source>
         <translation type="unfinished">දෝෂයකි</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OverviewPage</name>
     <message>
         <source>Form</source>
         <translation type="unfinished">වෙතින්</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
         <source>or</source>
         <translation type="unfinished">හෝ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -927,10 +927,10 @@
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">වර්ගය</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RPCConsole</name>
     <message>
@@ -951,14 +951,14 @@
         <source>From</source>
         <translation type="unfinished">වෙතින්</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
         <source>&amp;Copy address</source>
         <translation type="unfinished">&amp;ලිපිනයෙහි පිටපතක්</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -969,7 +969,7 @@
         <source>Wallet:</source>
         <translation type="unfinished">පසුම්බිය:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -988,7 +988,7 @@
         <source>(no label)</source>
         <translation type="unfinished">(නම්පතක් නැත)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -1024,8 +1024,8 @@
         <translation type="unfinished">බයිට පිටපත් කරන්න</translation>
     </message>
     <message>
-        <source>%1 to '%2'</source>
-        <translation type="unfinished">%1 සිට '%2'</translation>
+        <source>%1 to &apos;%2&apos;</source>
+        <translation type="unfinished">%1 සිට &apos;%2&apos;</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -1057,7 +1057,7 @@
         <source>Signature</source>
         <translation type="unfinished">අත්සන</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TrafficGraphWidget</name>
     <message>
@@ -1118,7 +1118,7 @@
         <source>Amount</source>
         <translation type="unfinished">අගය</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -1145,7 +1145,7 @@
         <source>Type of transaction.</source>
         <translation type="unfinished">ගනුදෙනු වර්ග.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -1228,7 +1228,7 @@
         <source>Error</source>
         <translation type="unfinished">දෝෂයකි</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -1307,12 +1307,12 @@
         <translation type="unfinished">මෙය පර්යේෂණාත්මක මෘදුකාංගයකි.</translation>
     </message>
     <message>
-        <source>Unknown address type '%s'</source>
-        <translation type="unfinished">'%s' නොදන්නා ලිපින වර්ගයකි</translation>
+        <source>Unknown address type &apos;%s&apos;</source>
+        <translation type="unfinished">&apos;%s&apos; නොදන්නා ලිපින වර්ගයකි</translation>
     </message>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">සැකසීම් ගොනුව කියවිය නොහැක</translation>
     </message>
-    </context>
+</context>
 </TS>

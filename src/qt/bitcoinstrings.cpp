@@ -11,8 +11,8 @@
 static const char UNUSED *bitcoin_strings[] = {
 QT_TRANSLATE_NOOP("bitcoin-core", "The %s developers"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"%s corrupt. Try using the wallet tool bitcoin-wallet to salvage or restoring "
-"a backup."),
+"%s corrupt. Try using the wallet tool blackmore-wallet to salvage or "
+"restoring a backup."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "%s failed to validate the -assumeutxo snapshot state. This indicates a "
 "hardware problem, or a bug in the software, or a bad software modification "
@@ -51,11 +51,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Error loading %s: External signer wallet being loaded without external "
 "signer support compiled"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Error loading wallet. Wallet requires blocks to be downloaded, and software "
-"does not currently support loading wallets while blocks are being downloaded "
-"out of order when using assumeutxo snapshots. Wallet should be able to load "
-"successfully after node sync reaches height %s"),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Error reading %s! All keys read correctly, but transaction data or address "
 "metadata may be missing or incorrect."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
@@ -69,7 +64,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Error: Dumpfile identifier record is incorrect. Got \"%s\", expected \"%s\"."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Error: Dumpfile version is not supported. This version of bitcoin-wallet "
+"Error: Dumpfile version is not supported. This version of blackmore-wallet "
 "only supports version 1 dumpfiles. Got dumpfile with version %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Error: Duplicate descriptors created during migration. Your wallet may be "
@@ -89,9 +84,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Failed to rename invalid peers.dat file. Please move or delete it and try "
 "again."),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable "
-"%s."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "File %s already exists. If you are sure this is what you want, move it out "
 "of the way first."),
@@ -121,6 +113,9 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "cjdnsreachable is not provided"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Outbound connections restricted to Tor (-onlynet=onion) but the proxy for "
+"reaching the Tor network is explicitly forbidden: -onion=0"),
+QT_TRANSLATE_NOOP("bitcoin-core", ""
+"Outbound connections restricted to Tor (-onlynet=onion) but the proxy for "
 "reaching the Tor network is not provided: none of -proxy, -onion or -"
 "listenonion is given"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
@@ -134,12 +129,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "about the software."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Prune configured below the minimum of %d MiB.  Please use a higher number."),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Prune mode is incompatible with -reindex-chainstate. Use full -reindex "
-"instead."),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Prune: last wallet synchronisation goes beyond pruned data. You need to -"
-"reindex (download the whole blockchain again in case of pruned node)"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Rename of '%s' -> '%s' failed. You should resolve this by manually moving or "
 "deleting the invalid snapshot directory %s, otherwise you will encounter the "
@@ -167,15 +156,13 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "the software that last loaded this wallet"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "This is a pre-release test build - use at your own risk - do not use for "
-"mining or merchant applications"),
+"staking or merchant applications"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "This is the maximum transaction fee you pay (in addition to the normal fee) "
 "to prioritize partial spend avoidance over regular coin selection."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "This is the transaction fee you may discard if change is smaller than dust "
 "at this level"),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
-"This is the transaction fee you may pay when fee estimates are not available."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Total length of network version string (%i) exceeds maximum length (%i). "
 "Reduce the number or size of uacomments."),
@@ -230,9 +217,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Witness data for blocks after height %d requires validation. Please restart "
 "with -reindex."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"You need to rebuild the database using -reindex to go back to unpruned "
-"mode.  This will redownload the entire blockchain"),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
 "\n"
 "Unable to cleanup failed migration"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
@@ -247,7 +231,9 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Cannot set -forcednsseed to true when setting
 QT_TRANSLATE_NOOP("bitcoin-core", "Cannot set -peerblockfilters without -blockfilterindex."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Cannot write to data directory '%s'; check permissions."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Config setting for %s only applied on %s network when in [%s] section."),
-QT_TRANSLATE_NOOP("bitcoin-core", "Copyright (C) %i-%i"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Copyright (C) 2009-%i The Bitcoin Core Developers"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Copyright (C) 2014-%i The Blackcoin Developers"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Copyright (C) 2018-%i The Blackcoin More Developers"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Corrupted block database detected"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Could not find asmap file %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Could not parse asmap file %s"),
@@ -268,7 +254,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Error reading configuration file: %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error reading from database, shutting down."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error reading next record from wallet database"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error: Cannot extract destination from the generated scriptpubkey"),
-QT_TRANSLATE_NOOP("bitcoin-core", "Error: Could not add watchonly tx to watchonly wallet"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Error: Could not add watchonly tx %s to watchonly wallet"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error: Could not delete watchonly transactions"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error: Couldn't create cursor into database"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error: Disk space is low for %s"),
@@ -323,8 +309,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Not enough file descriptors available."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Not found pre-selected input %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Not solvable pre-selected input %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Prune cannot be configured with a negative value."),
-QT_TRANSLATE_NOOP("bitcoin-core", "Prune mode is incompatible with -txindex."),
-QT_TRANSLATE_NOOP("bitcoin-core", "Pruning blockstore…"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Reducing -maxconnections from %d to %d, because of system limitations."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Replaying blocks…"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Rescanning…"),
@@ -347,7 +331,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", "The specified config file %s does not exist")
 QT_TRANSLATE_NOOP("bitcoin-core", "The transaction amount is too small to pay the fee"),
 QT_TRANSLATE_NOOP("bitcoin-core", "The wallet will avoid paying less than the minimum relay fee."),
 QT_TRANSLATE_NOOP("bitcoin-core", "This is experimental software."),
-QT_TRANSLATE_NOOP("bitcoin-core", "This is the minimum transaction fee you pay on every transaction."),
 QT_TRANSLATE_NOOP("bitcoin-core", "This is the transaction fee you will pay if you send a transaction."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Transaction amount too small"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Transaction amounts must not be negative"),
@@ -377,6 +360,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Unsupported logging category %s=%s."),
 QT_TRANSLATE_NOOP("bitcoin-core", "User Agent comment (%s) contains unsafe characters."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Verifying blocks…"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Verifying wallet(s)…"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Wallet file creation failed: %s"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Wallet needed to be rewritten: restart %s to complete"),
-QT_TRANSLATE_NOOP("bitcoin-core", "acceptstalefeeestimates is not supported on %s chain."),
 };

@@ -62,10 +62,10 @@
         <translation type="unfinished">ទាំងនេះ​គឺជាអាសយដ្ឋាន Bitcoin របស់អ្នកសម្រាប់ធ្វើការផ្ញើការបង់ប្រាក់។ តែងតែពិនិត្យមើលចំនួនប្រាក់ និងអាសយដ្ឋានដែលទទួល មុនពេលផ្ញើប្រាក់។</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">ទាំងនេះគឺជាអាសយដ្ឋាន Bitcoin របស់អ្នកសម្រាប់ការទទួលការទូទាត់។ ប្រើប៊ូតុង 'បង្កើតអាសយដ្ឋានទទួលថ្មី' នៅក្នុងផ្ទាំងទទួល ដើម្បីបង្កើតអាសយដ្ឋានថ្មី។ 
-ការចុះហត្ថលេខាគឺអាចធ្វើទៅបានតែជាមួយអាសយដ្ឋាននៃប្រភេទ 'legacy' ប៉ុណ្ណោះ។</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">ទាំងនេះគឺជាអាសយដ្ឋាន Bitcoin របស់អ្នកសម្រាប់ការទទួលការទូទាត់។ ប្រើប៊ូតុង &apos;បង្កើតអាសយដ្ឋានទទួលថ្មី&apos; នៅក្នុងផ្ទាំងទទួល ដើម្បីបង្កើតអាសយដ្ឋានថ្មី។ 
+ការចុះហត្ថលេខាគឺអាចធ្វើទៅបានតែជាមួយអាសយដ្ឋាននៃប្រភេទ &apos;legacy&apos; ប៉ុណ្ណោះ។</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -291,7 +291,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">កំហុស៖%1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1មិនទាន់ចេញដោយសុវត្ថិភាពទេ…</translation>
     </message>
     <message>
@@ -330,49 +330,49 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform>%n(ច្រើន)វិនាទី</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation type="unfinished">
             <numerusform>%n(ច្រើន)នាទី</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform>%n(ច្រើន)ម៉ោង</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
             <numerusform>%n(ច្រើន)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
             <numerusform>%n(ច្រើន)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
             <numerusform>%n(ច្រើន)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>%1 kB</source>
         <translation type="unfinished"> %1 kB</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -564,7 +564,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
             <numerusform>បានដំណើរការ %n ប្លុកនៃប្រវត្តិប្រត្តិបត្តិការ។</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -690,17 +690,17 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform>%n ការតភ្ជាប់សកម្មទៅបណ្តាញ Bitcoin ។</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">ចុចសម្រាប់សកម្មភាពបន្ថែម។</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">បង្ហាញផ្ទាំង Peers</translation>
     </message>
     <message>
@@ -900,10 +900,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">អាច +/- %1 satoshi(s)ច្រើនក្នុងការបញ្ជូលមួយ។</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation type="unfinished">អាច +/- %1 satoshi(s)ច្រើនក្នុងការបញ្ជូលមួយ។</translation>
-    </message>
-    <message>
         <source>(no label)</source>
         <translation type="unfinished">(គ្មាន​ស្លាក​)</translation>
     </message>
@@ -937,7 +933,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ការព្រមានបង្កើតកាបូប</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">មិនអាចចុះបញ្ជីអ្នកចុះហត្ថលេខាបានទេ។</translation>
     </message>
     <message>
@@ -964,7 +960,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Migrate Wallet</source>
         <translation type="unfinished">កាបូបMigrate</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenWalletActivity</name>
     <message>
@@ -1073,7 +1069,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">ចងក្រងដោយមិនមានការគាំទ្រការចុះហត្ថលេខាខាងក្រៅ (ទាមទារសម្រាប់ការចុះហត្ថលេខាខាងក្រៅ)</translation>
     </message>
 </context>
@@ -1145,21 +1141,21 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>%n GB of space available</source>
         <translation type="unfinished">
             <numerusform>%nGB នៃកន្លែងទំនេរ</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(of %n GB needed)</source>
         <translation type="unfinished">
             <numerusform>(នៃ%n GB ដែលត្រូវការ)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
             <numerusform>(%n GB ត្រូវការសម្រាប់ខ្សែសង្វាក់ពេញលេញ)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1167,7 +1163,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
             <numerusform>(គ្រប់គ្រាន់ដើម្បីស្ដារការបម្រុងទុក%nថ្ងៃចាស់)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1205,7 +1201,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>version</source>
         <translation type="unfinished">ជំនាន់</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ShutdownWindow</name>
     <message>
@@ -1224,7 +1220,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ទម្រង់</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
         <translation type="unfinished">ប្រត្តិបត្តិការថ្មីៗនេះប្រហែលជាមិនអាចមើលឃើញ ហេតុដូច្នេះសមតុល្យនៅក្នងកាបូបអេឡិចត្រូនិចរបស់អ្នកប្រហែលជាមិនត្រឹមត្រូវ។ ព័ត៌មានត្រឹមត្រូវនៅពេលដែលកាបូបអេឡិចត្រូនិចរបស់អ្នកបានធ្វើសមកាលកម្មជាមួយបណ្តាញប៊ឺតខញ  សូមពិនិត្យព័ត៌មានលំម្អិតខាងក្រោម។</translation>
     </message>
     <message>
@@ -1432,7 +1428,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">ចងក្រងដោយមិនមានការគាំទ្រការចុះហត្ថលេខាខាងក្រៅ (ទាមទារសម្រាប់ការចុះហត្ថលេខាខាងក្រៅ)</translation>
     </message>
     <message>
@@ -1471,7 +1467,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>This change would require a client restart.</source>
         <translation type="unfinished">ការផ្លាស់ប្តូរនេះនឹងត្រូវការចាប់ផ្តើមម៉ាស៊ីនកុំព្យូទ័រឡើងវិញ។​</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OverviewPage</name>
     <message>
@@ -1538,7 +1534,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Unconfirmed transactions to watch-only addresses</source>
         <translation type="unfinished">ប្រឹត្តិបត្តិការមិនទាន់បញ្ចាក់ច្បាស់ ទៅកាន់ អាសយដ្ឋានសម្រាប់តែមើល</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -1651,13 +1647,13 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Cannot process payment request because BIP70 is not supported.
-Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.
+Due to widespread security flaws in BIP70 it&apos;s strongly recommended that any merchant instructions to switch wallets be ignored.
 If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
         <translation type="unfinished">មិនអាចដំណើរការសំណើបង់ប្រាក់បានទេព្រោះ BIP70 មិនត្រូវបានគាំទ្រ។
 ដោយសារបញ្ហាសុវត្ថិភាពរីករាលដាលនៅក្នុង BIP70 វាត្រូវបានណែនាំយ៉ាងខ្លាំងថាការណែនាំរបស់ពាណិជ្ជករណាមួយដើម្បីប្តូរកាបូបមិនត្រូវបានអើពើ។
 ប្រសិនបើអ្នកកំពុងទទួលបានកំហុសនេះ អ្នកគួរតែស្នើសុំពាណិជ្ជករផ្តល់ URI ដែលត្រូវគ្នា BIP21។</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -1687,7 +1683,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">ប្រភេទ</translation>
     </message>
     <message>
@@ -1695,7 +1691,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
         <translation type="unfinished">បណ្តាញ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QRImageWidget</name>
     <message>
@@ -1904,7 +1900,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <source>&amp;Copy IP/Netmask</source>
-        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer's IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
+        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer&apos;s IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
         <translation type="unfinished">ចម្លង IP/Netmask (&amp;C)</translation>
     </message>
     <message>
@@ -1944,7 +1940,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <source>Never</source>
         <translation type="unfinished">មិនដែល</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
@@ -2039,7 +2035,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">មិនអាចបើកសោរ កាបូបអេឡិចត្រូនិចបាន។</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -2090,7 +2086,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <source>Payment information</source>
         <translation type="unfinished">ព័ត៏មានទូរទាត់ប្រាក់</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -2197,12 +2193,12 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">ជ្រើសរើស…</translation>
     </message>
     <message>
-        <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
+        <source>Specify a custom fee per kB (1,000 bytes) of the transaction&apos;s virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satoshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 satoshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 satoshis per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 satoshis.</source>
         <translation type="unfinished">បញ្ជាក់ថ្លៃផ្ទាល់ខ្លួនក្នុងមួយkB (1,000 byte) នៃទំហំនិម្មិតរបស់ប្រតិបត្តិការ។
 
-ចំណាំ៖ ដោយសារតម្លៃត្រូវបានគណនាលើមូលដ្ឋានក្នុងមួយបៃ អត្រាថ្លៃសេវា "100 satoshis ក្នុងមួយ kvB" សម្រាប់ទំហំប្រតិបត្តិការ 500  byteនិម្មិត (ពាក់កណ្តាលនៃ 1 kvB) ទីបំផុតនឹងផ្តល់ថ្លៃសេវាត្រឹមតែ 50 satoshis ប៉ុណ្ណោះ។</translation>
+ចំណាំ៖ ដោយសារតម្លៃត្រូវបានគណនាលើមូលដ្ឋានក្នុងមួយបៃ អត្រាថ្លៃសេវា &quot;100 satoshis ក្នុងមួយ kvB&quot; សម្រាប់ទំហំប្រតិបត្តិការ 500  byteនិម្មិត (ពាក់កណ្តាលនៃ 1 kvB) ទីបំផុតនឹងផ្តល់ថ្លៃសេវាត្រឹមតែ 50 satoshis ប៉ុណ្ណោះ។</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2250,7 +2246,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>Sign on device</source>
-        <extracomment>"device" usually means a hardware wallet.</extracomment>
+        <extracomment>&quot;device&quot; usually means a hardware wallet.</extracomment>
         <translation type="unfinished">ចុះហត្ថលេខាលើឧបករណ៍</translation>
     </message>
     <message>
@@ -2259,12 +2255,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>Set external signer script path in Options -&gt; Wallet</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">កំណត់ទីតាំងscript អ្នកចុះហត្ថលេខាខាងក្រៅនៅក្នុងជម្រើស -&gt; កាបូប</translation>
     </message>
     <message>
-        <source>To review recipient list click "Show Details…"</source>
-        <translation type="unfinished">ដើម្បីពិនិត្យមើលបញ្ជីអ្នកទទួលសូមចុច "បង្ហាញព័ត៌មានលម្អិត..."</translation>
+        <source>To review recipient list click &quot;Show Details…&quot;</source>
+        <translation type="unfinished">ដើម្បីពិនិត្យមើលបញ្ជីអ្នកទទួលសូមចុច &quot;បង្ហាញព័ត៌មានលម្អិត...&quot;</translation>
     </message>
     <message>
         <source>Sign failed</source>
@@ -2272,12 +2268,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>External signer not found</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">រកមិនឃើញអ្នកចុះហត្ថលេខាខាងក្រៅទេ។</translation>
     </message>
     <message>
         <source>External signer failure</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">ការបរាជ័យអ្នកចុះហត្ថលេខាខាងក្រៅ</translation>
     </message>
     <message>
@@ -2361,7 +2357,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
             <numerusform>ប៉ាន់ស្មានដើម្បីចាប់ផ្តើមការបញ្ជាក់នៅក្នុង%n(ច្រើន)ប្លុក។</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2411,14 +2407,14 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation type="unfinished">បញ្ចូលស្លាក​សញ្ញាមួយ សម្រាប់អាសយដ្ឋាននេះ ដើម្បីបញ្ចូលវាទៅក្នងបញ្ចីរអាសយដ្ឋានដែលបានប្រើប្រាស់</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendConfirmationDialog</name>
     <message>
         <source>Send</source>
         <translation type="unfinished">បញ្ចូន</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
@@ -2494,7 +2490,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">កែសម្រួលឡើងវិញគ្រប់សារផ្ទៀងផ្ទាត់ទាំងអស់</translation>
     </message>
     <message>
-        <source>Click "Sign Message" to generate signature</source>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
         <translation type="unfinished">ចុច ៉ហត្ថលេខា​ លើសារ​ ​ ៉​ដើម្បីបង្កើតហត្ថលេខា</translation>
     </message>
     <message>
@@ -2603,8 +2599,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2873,7 +2869,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <source>Partially Signed Transaction (*.psbt)</source>
         <translation type="unfinished">ប្រត្តិបត្តិការ ដែលបានចុះហត្ថលេខាដោយផ្នែក (*.psbt)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -2898,14 +2894,14 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">ការព្រមាន៖ វាអាចបង់ថ្លៃបន្ថែមដោយកាត់បន្ថយលទ្ធផលនៃការផ្លាស់ប្តូរ ឬបន្ថែមធាតុចូល នៅពេលចាំបាច់។ វាអាចបន្ថែមលទ្ធផលនៃការផ្លាស់ប្តូរថ្មី ប្រសិនបើវាមិនទាន់មាន។ ការផ្លាស់ប្តូរទាំងនេះអាចនឹងលេចធ្លាយភាពឯកជន។</translation>
     </message>
     <message>
-        <source>Can't sign transaction.</source>
+        <source>Can&apos;t sign transaction.</source>
         <translation type="unfinished">មិនអាចចុះហត្ថលេខាលើប្រត្តិបត្តិការ។</translation>
     </message>
     <message>
         <source>Could not commit transaction</source>
         <translation type="unfinished">មិនបានធ្វើប្រត្តិបត្តិការ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletView</name>
     <message>
@@ -2961,11 +2957,11 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">%s ត្រូវបានកំណត់យ៉ាងខ្ពស់</translation>
     </message>
     <message>
-        <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation type="unfinished">មិនអាចសរសេរទៅកាន់ កន្លែងផ្ទុកទិន្នន័យ​ '%s'; ពិនិត្យមើលការអនុញ្ញាត។</translation>
+        <source>Cannot write to data directory &apos;%s&apos;; check permissions.</source>
+        <translation type="unfinished">មិនអាចសរសេរទៅកាន់ កន្លែងផ្ទុកទិន្នន័យ​ &apos;%s&apos;; ពិនិត្យមើលការអនុញ្ញាត។</translation>
     </message>
     <message>
-        <source>The inputs size exceeds the maximum weight. Please try sending a smaller amount or manually consolidating your wallet's UTXOs</source>
+        <source>The inputs size exceeds the maximum weight. Please try sending a smaller amount or manually consolidating your wallet&apos;s UTXOs</source>
         <translation type="unfinished">ទំហំបញ្ចូលលើសពីទម្ងន់អតិបរមា។ សូមព្យាយាមផ្ញើចំនួនតូចជាងនេះ ឬបង្រួបបង្រួម UTXO នៃកាបូបរបស់អ្នកដោយដៃ</translation>
     </message>
     <message>
@@ -2993,12 +2989,12 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">មូលនិធិមិនគ្រប់គ្រាន់</translation>
     </message>
     <message>
-        <source>Invalid P2P permission: '%s'</source>
-        <translation type="unfinished">ការអនុញ្ញាត P2P មិនត្រឹមត្រូវៈ​ '%s'</translation>
+        <source>Invalid P2P permission: &apos;%s&apos;</source>
+        <translation type="unfinished">ការអនុញ្ញាត P2P មិនត្រឹមត្រូវៈ​ &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់  -%s=&lt;amount&gt;: '%s'</translation>
+        <source>Invalid amount for -%s=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation type="unfinished">ចំនួនមិនត្រឹមត្រូវសម្រាប់  -%s=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>

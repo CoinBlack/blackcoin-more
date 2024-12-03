@@ -5,18 +5,18 @@
         <source>Create a new address</source>
         <translation type="unfinished">สร้างแอดเดรสใหม่</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">ไฟล์ตั้งค่า%1 อาจเสียหายหรือไม่ถูกต้อง</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QObject</name>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 ยังไม่ออกอย่างปลอดภัย...</translation>
     </message>
     <message>
@@ -188,12 +188,12 @@
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">คลิกเพื่อดูการดำเนินการเพิ่มเติม</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">แสดง Peers แท็ป</translation>
     </message>
     <message>
@@ -206,7 +206,7 @@
         <extracomment>A context menu item. The network activity was disabled previously.</extracomment>
         <translation type="unfinished">เปิดใช้งาน กิจกรรม เครือข่าย</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
@@ -232,7 +232,7 @@
         <source>(%1 locked)</source>
         <translation type="unfinished">(%1 ล็อคแล้ว)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletActivity</name>
     <message>
@@ -240,7 +240,7 @@
         <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
         <translation type="unfinished">สร้าง วอลเล็ต</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>LoadWalletsActivity</name>
     <message>
@@ -367,7 +367,7 @@
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
         <translation type="unfinished">Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -399,16 +399,16 @@
         <translation type="unfinished">แก้ไข แอดเดรส การส่ง</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">แอดเดรส ที่ป้อน "%1" เป็น Bitcoin แอดเดรส ที่ ไม่ ถูกต้อง</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <translation type="unfinished">แอดเดรส ที่ป้อน &quot;%1&quot; เป็น Bitcoin แอดเดรส ที่ ไม่ ถูกต้อง</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address</translation>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation type="unfinished">Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">The entered address "%1" is already in the address book with label "%2"</translation>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation type="unfinished">The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -447,7 +447,7 @@
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -566,7 +566,7 @@
         <source>Estimated time left until synced</source>
         <translation type="unfinished">เวลาโดยประมาณที่เหลือจนกว่าจะซิงค์</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OptionsDialog</name>
     <message>
@@ -610,7 +610,7 @@
         <source>Error</source>
         <translation type="unfinished">ข้อผิดพลาด</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OverviewPage</name>
     <message>
@@ -621,7 +621,7 @@
         <source>Available:</source>
         <translation type="unfinished">พร้อมใช้งาน:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -636,7 +636,7 @@
         <source>Transaction has %1 unsigned inputs.</source>
         <translation type="unfinished">ธุรกรรมมี %1 อินพุตที่ไม่ได้ลงนาม</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -716,21 +716,21 @@
         <extracomment>Explanatory text for an outbound peer connection that relays all network information. This is the default behavior for outbound connections.</extracomment>
         <translation type="unfinished">ขาออก Full Relay: ค่าเริ่มต้น</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">ไม่สามารถปลดล็อกวอลเล็ตได้</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
         <source>Payment information</source>
         <translation type="unfinished">ข้อมูการชำระเงิน</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -739,7 +739,7 @@
     </message>
     <message>
         <source>Sign on device</source>
-        <extracomment>"device" usually means a hardware wallet.</extracomment>
+        <extracomment>&quot;device&quot; usually means a hardware wallet.</extracomment>
         <translation type="unfinished">ลงชื่อบนอุปกรณ์</translation>
     </message>
     <message>
@@ -757,14 +757,14 @@
         <source>Confirm custom change address</source>
         <translation type="unfinished">ยืนยันการเปลี่ยนแปลงแอดเดรสที่กำหนดเอง</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>Please check the signature and try again.</source>
         <translation type="unfinished">โปรดตรวจสอบลายเซ็นต์และลองใหม่อีกครั้ง</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionDesc</name>
     <message>
@@ -778,14 +778,14 @@
             <numerusform>matures in %n more block(s)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
         <source>Exporting Successful</source>
         <translation type="unfinished">ส่งออกสำเร็จ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -823,9 +823,6 @@
         <extracomment>Name of the wallet data file format.</extracomment>
         <translation type="unfinished">ข้อมูล วอลเล็ต</translation>
     </message>
-    </context>
-<context>
-    <name>bitcoin-core</name>
     <message>
         <source>%s is set very high!</source>
         <translation type="unfinished">%s ตั้งไว้สูงมาก</translation>
@@ -842,5 +839,5 @@
         <source>Error: Unable to read all records in the database</source>
         <translation type="unfinished">ข้อผิดพลาด: ไม่สามารถอ่านข้อมูลทั้งหมดในฐานข้อมูลได้</translation>
     </message>
-    </context>
+</context>
 </TS>

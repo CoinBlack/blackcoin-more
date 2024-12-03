@@ -62,10 +62,10 @@
         <translation type="unfinished">Улар тўловларни жўнатиш учун сизнинг Bitcoin манзилларингиз. Доимо тангаларни жўнатишдан олдин сумма ва қабул қилувчи манзилни текшириб кўринг. </translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Улар тўловларни қабул қилиш учун сизнинг Bitcoin манзилларингиз. Янги манзилларни яратиш учун қабул қилиш варағидаги "Янги қабул қилиш манзилини яратиш" устига босинг. 
-Фақат 'legacy' туридаги манзиллар билан ҳисобга кириш мумкин.</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">Улар тўловларни қабул қилиш учун сизнинг Bitcoin манзилларингиз. Янги манзилларни яратиш учун қабул қилиш варағидаги &quot;Янги қабул қилиш манзилини яратиш&quot; устига босинг. 
+Фақат &apos;legacy&apos; туридаги манзиллар билан ҳисобга кириш мумкин.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -169,15 +169,15 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation type="unfinished">Hamyon uchun yangi maxfiy so'zni kiriting. &lt;br/&gt;Iltimos, &lt;b&gt;10 va undan ortiq istalgan&lt;/b&gt; yoki &lt;b&gt;8 va undan ortiq so'zlardan&lt;/b&gt; iborat maxfiy so'zdan foydalaning.</translation>
+        <translation type="unfinished">Hamyon uchun yangi maxfiy so&apos;zni kiriting. &lt;br/&gt;Iltimos, &lt;b&gt;10 va undan ortiq istalgan&lt;/b&gt; yoki &lt;b&gt;8 va undan ortiq so&apos;zlardan&lt;/b&gt; iborat maxfiy so&apos;zdan foydalaning.</translation>
     </message>
     <message>
         <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation type="unfinished">Hamyonning oldingi va yangi maxfiy so'zlarini kiriting</translation>
+        <translation type="unfinished">Hamyonning oldingi va yangi maxfiy so&apos;zlarini kiriting</translation>
     </message>
     <message>
         <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Shuni yodda tutingki, hamyonni shifrlash kompyuterdagi virus yoki zararli dasturlar sizning bitcoinlaringizni o'g'irlashidan to'liq himoyalay olmaydi.</translation>
+        <translation type="unfinished">Shuni yodda tutingki, hamyonni shifrlash kompyuterdagi virus yoki zararli dasturlar sizning bitcoinlaringizni o&apos;g&apos;irlashidan to&apos;liq himoyalay olmaydi.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -235,7 +235,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>BitcoinApplication</name>
     <message>
         <source>Runaway exception</source>
-        <translation type="unfinished">qo'shimcha istisno</translation>
+        <translation type="unfinished">qo&apos;shimcha istisno</translation>
     </message>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
@@ -255,7 +255,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Do you want to reset settings to default values, or to abort without making changes?</source>
         <extracomment>Explanatory text shown on startup when the settings file cannot be read. Prompts user to make a choice between resetting or aborting.</extracomment>
-        <translation type="unfinished">Sozlamalarni asliga qaytarishni xohlaysizmi yoki o'zgartirishlar saqlanmasinmi?</translation>
+        <translation type="unfinished">Sozlamalarni asliga qaytarishni xohlaysizmi yoki o&apos;zgartirishlar saqlanmasinmi?</translation>
     </message>
     <message>
         <source>A fatal error occurred. Check that settings file is writable, or try running with -nosettings.</source>
@@ -267,8 +267,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Xatolik: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
-        <translation type="unfinished">%1 hali tizimni xavfsiz ravishda tark etgani yo'q...</translation>
+        <source>%1 didn&apos;t yet exit safely…</source>
+        <translation type="unfinished">%1 hali tizimni xavfsiz ravishda tark etgani yo&apos;q...</translation>
     </message>
     <message>
         <source>unknown</source>
@@ -315,36 +315,36 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -354,8 +354,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -403,7 +403,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Show information about %1</source>
-        <translation type="unfinished">%1 haqida axborotni ko'rsatish</translation>
+        <translation type="unfinished">%1 haqida axborotni ko&apos;rsatish</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -415,7 +415,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
-        <translation type="unfinished">%1 konfiguratsiya sozlamalarini o'zgartirish</translation>
+        <translation type="unfinished">%1 konfiguratsiya sozlamalarini o&apos;zgartirish</translation>
     </message>
     <message>
         <source>Create a new wallet</source>
@@ -432,7 +432,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Network activity disabled.</source>
         <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">Mobil tarmoq faoliyati o'chirilgan</translation>
+        <translation type="unfinished">Mobil tarmoq faoliyati o&apos;chirilgan</translation>
     </message>
     <message>
         <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
@@ -476,7 +476,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">&amp;Maxfiy so'zni o'zgartirish...</translation>
+        <translation type="unfinished">&amp;Maxfiy so&apos;zni o&apos;zgartirish...</translation>
     </message>
     <message>
         <source>Sign &amp;message…</source>
@@ -570,7 +570,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
             <numerusform>Tranzaksiya tarixining %n blok(lar)i qayta ishlandi.</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -655,11 +655,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Yozilishi mumkin bo'lgan command-line sozlamalar ro'yxatini olish uchun %1 yordam xabarini ko'rsatish</translation>
+        <translation type="unfinished">Yozilishi mumkin bo&apos;lgan command-line sozlamalar ro&apos;yxatini olish uchun %1 yordam xabarini ko&apos;rsatish</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">Umumiy ko'rinish menyusidagi qiymatlarni maskirovka qilish</translation>
+        <translation type="unfinished">Umumiy ko&apos;rinish menyusidagi qiymatlarni maskirovka qilish</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -696,25 +696,25 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>S&amp;how</source>
-        <translation type="unfinished">Ko'&amp;rsatish</translation>
+        <translation type="unfinished">Ko&apos;&amp;rsatish</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>Bitkoin tarmog'iga %n aktiv ulanishlar.</numerusform>
-            <numerusform />
+            <numerusform>Bitkoin tarmog&apos;iga %n aktiv ulanishlar.</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
-        <translation type="unfinished">Ko'proq sozlamalar uchun bosing.</translation>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
+        <translation type="unfinished">Ko&apos;proq sozlamalar uchun bosing.</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
-        <translation type="unfinished">Pirlar oynasini ko'rsatish</translation>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
+        <translation type="unfinished">Pirlar oynasini ko&apos;rsatish</translation>
     </message>
     <message>
         <source>Disable network activity</source>
@@ -788,7 +788,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation type="unfinished">Maxfiy kalit &lt;b&gt;o'chiq&lt;/b&gt;</translation>
+        <translation type="unfinished">Maxfiy kalit &lt;b&gt;o&apos;chiq&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
@@ -807,7 +807,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation type="unfinished">Miqdorlarni ko'rsatish birligi. Boshqa birlik tanlash uchun bosing.</translation>
+        <translation type="unfinished">Miqdorlarni ko&apos;rsatish birligi. Boshqa birlik tanlash uchun bosing.</translation>
     </message>
 </context>
 <context>
@@ -966,10 +966,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Hamyon yaratish ogohlantirishi</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
-        <translation type="unfinished">Signerlarni ro'yxat shakliga keltirib bo'lmaydi</translation>
+        <source>Can&apos;t list signers</source>
+        <translation type="unfinished">Signerlarni ro&apos;yxat shakliga keltirib bo&apos;lmaydi</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>LoadWalletsActivity</name>
     <message>
@@ -987,7 +987,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>OpenWalletActivity</name>
     <message>
         <source>Open wallet failed</source>
-        <translation type="unfinished">Hamyonni ochib bo'lmaydi</translation>
+        <translation type="unfinished">Hamyonni ochib bo&apos;lmaydi</translation>
     </message>
     <message>
         <source>Open wallet warning</source>
@@ -1020,7 +1020,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
-        <translation type="unfinished">Agar 'pruning' funksiyasi o'chirilgan bo'lsa, hamyondan uzoq vaqt foydalanmaslik butun zanjirnni qayta sinxronlashga olib kelishi mumkin.</translation>
+        <translation type="unfinished">Agar &apos;pruning&apos; funksiyasi o&apos;chirilgan bo&apos;lsa, hamyondan uzoq vaqt foydalanmaslik butun zanjirnni qayta sinxronlashga olib kelishi mumkin.</translation>
     </message>
     <message>
         <source>Close all wallets</source>
@@ -1047,7 +1047,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation type="unfinished">Hamyonni shifrlash. Hamyon siz tanlagan maxfiy so'z bilan shifrlanadi</translation>
+        <translation type="unfinished">Hamyonni shifrlash. Hamyon siz tanlagan maxfiy so&apos;z bilan shifrlanadi</translation>
     </message>
     <message>
         <source>Encrypt Wallet</source>
@@ -1055,11 +1055,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation type="unfinished">Qo'shimcha sozlamalar</translation>
+        <translation type="unfinished">Qo&apos;shimcha sozlamalar</translation>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation type="unfinished">Ushbu hamyon uchun maxfiy kalitlarni o'chirish. Maxfiy kalitsiz hamyonlar maxfiy kalitlar yoki import qilingan maxfiy kalitlar, shuningdek, HD seedlarga ega bo'la olmaydi.</translation>
+        <translation type="unfinished">Ushbu hamyon uchun maxfiy kalitlarni o&apos;chirish. Maxfiy kalitsiz hamyonlar maxfiy kalitlar yoki import qilingan maxfiy kalitlar, shuningdek, HD seedlarga ega bo&apos;la olmaydi.</translation>
     </message>
     <message>
         <source>Disable Private Keys</source>
@@ -1067,11 +1067,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation type="unfinished">Bo'sh hamyon yaratish. Bo'sh hamyonlarga keyinchalik maxfiy kalitlar yoki manzillar import qilinishi mumkin, yana HD seedlar ham o'rnatilishi mumkin.</translation>
+        <translation type="unfinished">Bo&apos;sh hamyon yaratish. Bo&apos;sh hamyonlarga keyinchalik maxfiy kalitlar yoki manzillar import qilinishi mumkin, yana HD seedlar ham o&apos;rnatilishi mumkin.</translation>
     </message>
     <message>
         <source>Make Blank Wallet</source>
-        <translation type="unfinished">Bo'sh hamyon yaratish</translation>
+        <translation type="unfinished">Bo&apos;sh hamyon yaratish</translation>
     </message>
     <message>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
@@ -1087,7 +1087,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Tashqi signing yordamisiz tuzilgan (tashqi signing uchun zarur)</translation>
     </message>
 </context>
@@ -1126,16 +1126,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Жунатилувчи манзилни тахрирлаш</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">Киритилган "%1" манзили тўғри Bitcoin манзили эмас.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <translation type="unfinished">Киритилган &quot;%1&quot; манзили тўғри Bitcoin манзили эмас.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">Yuboruvchi(%1manzil) va  qabul qiluvchi(%2manzil) bir xil bo'lishi mumkin emas</translation>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation type="unfinished">Yuboruvchi(%1manzil) va  qabul qiluvchi(%2manzil) bir xil bo&apos;lishi mumkin emas</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">Kiritilgan %1manzil allaqachon %2yorlig'i bilan manzillar kitobida</translation>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation type="unfinished">Kiritilgan %1manzil allaqachon %2yorlig&apos;i bilan manzillar kitobida</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1174,38 +1174,38 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(of %n GB needed)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation type="unfinished">Kamida %1 GB ma'lumot bu yerda saqlanadi va vaqtlar davomida o'sib boradi</translation>
+        <translation type="unfinished">Kamida %1 GB ma&apos;lumot bu yerda saqlanadi va vaqtlar davomida o&apos;sib boradi</translation>
     </message>
     <message>
         <source>Approximately %1 GB of data will be stored in this directory.</source>
-        <translation type="unfinished">Bu katalogda %1  GB ma'lumot saqlanadi</translation>
+        <translation type="unfinished">Bu katalogda %1  GB ma&apos;lumot saqlanadi</translation>
     </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
             <numerusform>(%n kun oldingi zaxira nusxalarini tiklash uchun etarli)</numerusform>
-            <numerusform />
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1217,8 +1217,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Hamyon ham ushbu katalogda saqlanadi.</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation type="unfinished">Хато: кўрсатилган "%1" маълумотлар директориясини яратиб бўлмайди.</translation>
+        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
+        <translation type="unfinished">Хато: кўрсатилган &quot;%1&quot; маълумотлар директориясини яратиб бўлмайди.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1234,7 +1234,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
-        <translation type="unfinished">Birinchi marta dastur ishga tushirilganda, siz %1 o'z ma'lumotlarini qayerda saqlashini tanlashingiz mumkin</translation>
+        <translation type="unfinished">Birinchi marta dastur ishga tushirilganda, siz %1 o&apos;z ma&apos;lumotlarini qayerda saqlashini tanlashingiz mumkin</translation>
     </message>
     <message>
         <source>Limit block chain storage to</source>
@@ -1242,7 +1242,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation type="unfinished">Bu sozlamani qaytarish butun blok zanjirini qayta yuklab olishni talab qiladi. Avval to'liq zanjirni yuklab olish va keyinroq kesish kamroq vaqt oladi. Ba'zi qo'shimcha funksiyalarni cheklaydi.</translation>
+        <translation type="unfinished">Bu sozlamani qaytarish butun blok zanjirini qayta yuklab olishni talab qiladi. Avval to&apos;liq zanjirni yuklab olish va keyinroq kesish kamroq vaqt oladi. Ba&apos;zi qo&apos;shimcha funksiyalarni cheklaydi.</translation>
     </message>
     <message>
         <source> GB</source>
@@ -1250,11 +1250,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation type="unfinished">Ushbu dastlabki sinxronlash juda qiyin va kompyuteringiz bilan ilgari sezilmagan apparat muammolarini yuzaga keltirishi mumkin. Har safar %1 ni ishga tushirganingizda, u yuklab olish jarayonini qayerda to'xtatgan bo'lsa, o'sha yerdan boshlab davom ettiradi.</translation>
+        <translation type="unfinished">Ushbu dastlabki sinxronlash juda qiyin va kompyuteringiz bilan ilgari sezilmagan apparat muammolarini yuzaga keltirishi mumkin. Har safar %1 ni ishga tushirganingizda, u yuklab olish jarayonini qayerda to&apos;xtatgan bo&apos;lsa, o&apos;sha yerdan boshlab davom ettiradi.</translation>
     </message>
     <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation type="unfinished">Agar siz blok zanjirini saqlashni cheklashni tanlagan bo'lsangiz (pruning), eski ma'lumotlar hali ham yuklab olinishi va qayta ishlanishi kerak, ammo diskdan kamroq foydalanish uchun keyin o'chiriladi.</translation>
+        <translation type="unfinished">Agar siz blok zanjirini saqlashni cheklashni tanlagan bo&apos;lsangiz (pruning), eski ma&apos;lumotlar hali ham yuklab olinishi va qayta ishlanishi kerak, ammo diskdan kamroq foydalanish uchun keyin o&apos;chiriladi.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1288,7 +1288,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">Bu oyna paydo bo'lmagunicha kompyuterni o'chirmang.</translation>
+        <translation type="unfinished">Bu oyna paydo bo&apos;lmagunicha kompyuterni o&apos;chirmang.</translation>
     </message>
 </context>
 <context>
@@ -1298,12 +1298,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Шакл</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation type="unfinished">So'nggi tranzaksiyalar hali ko'rinmasligi mumkin, shuning uchun hamyoningiz balansi noto'g'ri ko'rinishi mumkin. Sizning hamyoningiz bitkoin tarmog'i bilan sinxronlashni tugatgandan so'ng, quyida batafsil tavsiflanganidek, bu ma'lumot to'g'rilanadi.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <translation type="unfinished">So&apos;nggi tranzaksiyalar hali ko&apos;rinmasligi mumkin, shuning uchun hamyoningiz balansi noto&apos;g&apos;ri ko&apos;rinishi mumkin. Sizning hamyoningiz bitkoin tarmog&apos;i bilan sinxronlashni tugatgandan so&apos;ng, quyida batafsil tavsiflanganidek, bu ma&apos;lumot to&apos;g&apos;rilanadi.</translation>
     </message>
     <message>
         <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation type="unfinished">Hali ko'rsatilmagan tranzaksiyalarga bitkoinlarni sarflashga urinish tarmoq tomonidan qabul qilinmaydi.</translation>
+        <translation type="unfinished">Hali ko&apos;rsatilmagan tranzaksiyalarga bitkoinlarni sarflashga urinish tarmoq tomonidan qabul qilinmaydi.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1311,7 +1311,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Unknown…</source>
-        <translation type="unfinished">Noma'lum...</translation>
+        <translation type="unfinished">Noma&apos;lum...</translation>
     </message>
     <message>
         <source>calculating…</source>
@@ -1323,11 +1323,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="unfinished">O'sish</translation>
+        <translation type="unfinished">O&apos;sish</translation>
     </message>
     <message>
         <source>Progress increase per hour</source>
-        <translation type="unfinished">Harakatning soatiga o'sishi</translation>
+        <translation type="unfinished">Harakatning soatiga o&apos;sishi</translation>
     </message>
     <message>
         <source>Estimated time left until synced</source>
@@ -1343,9 +1343,9 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Unknown. Syncing Headers (%1, %2%)…</source>
-        <translation type="unfinished">Noma'lum. Sarlavhalarni sinxronlash(%1, %2%)...</translation>
+        <translation type="unfinished">Noma&apos;lum. Sarlavhalarni sinxronlash(%1, %2%)...</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1378,7 +1378,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
-        <translation type="unfinished">Do'kon tranzaksiyalari katta xotira talab qilgani tufayli pruning ni yoqish sezilarli darajada xotirada joy kamayishiga olib keladi. Barcha bloklar hali ham to'liq tasdiqlangan. Bu sozlamani qaytarish butun blok zanjirini qayta yuklab olishni talab qiladi.</translation>
+        <translation type="unfinished">Do&apos;kon tranzaksiyalari katta xotira talab qilgani tufayli pruning ni yoqish sezilarli darajada xotirada joy kamayishiga olib keladi. Barcha bloklar hali ham to&apos;liq tasdiqlangan. Bu sozlamani qaytarish butun blok zanjirini qayta yuklab olishni talab qiladi.</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1394,11 +1394,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Shows if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
-        <translation type="unfinished">Taqdim etilgan standart SOCKS5 proksi-serveridan ushbu tarmoq turi orqali pirlar bilan bog‘lanish uchun foydalanilganini ko'rsatadi.</translation>
+        <translation type="unfinished">Taqdim etilgan standart SOCKS5 proksi-serveridan ushbu tarmoq turi orqali pirlar bilan bog‘lanish uchun foydalanilganini ko&apos;rsatadi.</translation>
     </message>
     <message>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
-        <translation type="unfinished">Oyna yopilganda dasturdan chiqish o'rniga minimallashtirish. Ushbu parametr yoqilganda, dastur faqat menyuda Chiqish ni tanlagandan keyin yopiladi.</translation>
+        <translation type="unfinished">Oyna yopilganda dasturdan chiqish o&apos;rniga minimallashtirish. Ushbu parametr yoqilganda, dastur faqat menyuda Chiqish ni tanlagandan keyin yopiladi.</translation>
     </message>
     <message>
         <source>Open the %1 configuration file from the working directory.</source>
@@ -1414,7 +1414,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Reset Options</source>
-        <translation type="unfinished">Sozlamalarni &amp;qayta o'rnatish</translation>
+        <translation type="unfinished">Sozlamalarni &amp;qayta o&apos;rnatish</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -1431,7 +1431,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Maximum database cache size. A larger cache can contribute to faster sync, after which the benefit is less pronounced for most use cases. Lowering the cache size will reduce memory usage. Unused mempool memory is shared for this cache.</source>
         <extracomment>Tooltip text for Options window setting that sets the size of the database cache. Explains the corresponding effects of increasing/decreasing this value.</extracomment>
-        <translation type="unfinished">Ma'lumotlar bazasi keshining maksimal hajmi. Kattaroq kesh tezroq sinxronlashtirishga hissa qo'shishi mumkin, ya'ni foyda kamroq sezilishi mumkin.</translation>
+        <translation type="unfinished">Ma&apos;lumotlar bazasi keshining maksimal hajmi. Kattaroq kesh tezroq sinxronlashtirishga hissa qo&apos;shishi mumkin, ya&apos;ni foyda kamroq sezilishi mumkin.</translation>
     </message>
     <message>
         <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
@@ -1440,12 +1440,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
-        <translation type="unfinished">(0 = avtomatik, &lt;0 = bu yadrolarni bo'sh qoldirish)</translation>
+        <translation type="unfinished">(0 = avtomatik, &lt;0 = bu yadrolarni bo&apos;sh qoldirish)</translation>
     </message>
     <message>
         <source>This allows you or a third party tool to communicate with the node through command-line and JSON-RPC commands.</source>
         <extracomment>Tooltip text for Options window setting that enables the RPC server.</extracomment>
-        <translation type="unfinished">Bu sizga yoki uchinchi tomon vositasiga command-line va JSON-RPC buyruqlari orqali node bilan bog'lanish imkonini beradi.</translation>
+        <translation type="unfinished">Bu sizga yoki uchinchi tomon vositasiga command-line va JSON-RPC buyruqlari orqali node bilan bog&apos;lanish imkonini beradi.</translation>
     </message>
     <message>
         <source>Enable R&amp;PC server</source>
@@ -1459,12 +1459,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Whether to set subtract fee from amount as default or not.</source>
         <extracomment>Tooltip text for Options window setting that sets subtracting the fee from a sending amount as default.</extracomment>
-        <translation type="unfinished">Chegirma to'lovini standart qilib belgilash kerakmi yoki yo'qmi?</translation>
+        <translation type="unfinished">Chegirma to&apos;lovini standart qilib belgilash kerakmi yoki yo&apos;qmi?</translation>
     </message>
     <message>
         <source>Subtract &amp;fee from amount by default</source>
         <extracomment>An Options window setting to set subtracting the fee from a sending amount as default.</extracomment>
-        <translation type="unfinished">Standart bo'yicha chegirma belgilash</translation>
+        <translation type="unfinished">Standart bo&apos;yicha chegirma belgilash</translation>
     </message>
     <message>
         <source>Expert</source>
@@ -1482,7 +1482,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Whether to show PSBT controls.</source>
         <extracomment>Tooltip text for options window setting that enables PSBT controls.</extracomment>
-        <translation type="unfinished">PSBT boshqaruvlarini ko'rsatish kerakmi?</translation>
+        <translation type="unfinished">PSBT boshqaruvlarini ko&apos;rsatish kerakmi?</translation>
     </message>
     <message>
         <source>External Signer (e.g. hardware wallet)</source>
@@ -1490,7 +1490,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;External signer script path</source>
-        <translation type="unfinished">&amp;Tashqi signer skripti yo'li</translation>
+        <translation type="unfinished">&amp;Tashqi signer skripti yo&apos;li</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1538,7 +1538,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Tashqi signing yordamisiz tuzilgan (tashqi signing uchun zarur)</translation>
     </message>
     <message>
@@ -1642,7 +1642,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Current total balance in watch-only addresses</source>
         <translation type="unfinished">Жорий умумий баланс фақат кўринадиган манзилларда</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -1653,7 +1653,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>or</source>
         <translation type="unfinished">ёки</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PaymentServer</name>
     <message>
@@ -1664,12 +1664,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>URI handling</source>
         <translation type="unfinished">URI осилиб қолмоқда</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <extracomment>Title of Peers Table column which contains the peer's User Agent string.</extracomment>
+        <extracomment>Title of Peers Table column which contains the peer&apos;s User Agent string.</extracomment>
         <translation type="unfinished">Фойдаланувчи вакил</translation>
     </message>
     <message>
@@ -1684,7 +1684,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">Тури</translation>
     </message>
     <message>
@@ -1713,7 +1713,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Save QR Code</source>
         <translation type="unfinished">QR кодни сақлаш</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RPCConsole</name>
     <message>
@@ -1920,7 +1920,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">Ҳамён қулфдан чиқмади.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -1970,7 +1970,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>(no message)</source>
         <translation type="unfinished">(Хабар йўқ)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -2108,8 +2108,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2151,7 +2151,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Message:</source>
         <translation type="unfinished">Хабар</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
@@ -2226,8 +2226,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2281,7 +2281,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>This pane shows a detailed description of the transaction</source>
         <translation type="unfinished">Ушбу ойна операциянинг батафсил таърифини кўрсатади</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -2467,7 +2467,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Error</source>
         <translation type="unfinished">Хатолик</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -2489,7 +2489,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">Жорий ички ойна ичидаги маълумотларни файлга экспорт қилиш</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
@@ -2502,7 +2502,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation type="unfinished">HTTP serverni ishga tushirib bo'lmadi. Tafsilotlar uchun disk raskadrovka jurnaliga qarang.</translation>
+        <translation type="unfinished">HTTP serverni ishga tushirib bo&apos;lmadi. Tafsilotlar uchun disk raskadrovka jurnaliga qarang.</translation>
     </message>
     <message>
         <source>Verifying blocks…</source>
@@ -2518,7 +2518,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Settings file could not be read</source>
-        <translation type="unfinished">Sozlamalar fayli o'qishga yaroqsiz</translation>
+        <translation type="unfinished">Sozlamalar fayli o&apos;qishga yaroqsiz</translation>
     </message>
     <message>
         <source>Settings file could not be written</source>
