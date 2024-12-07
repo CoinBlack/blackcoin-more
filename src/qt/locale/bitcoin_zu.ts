@@ -14,7 +14,7 @@
         <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
         <translation type="unfinished">Ifayela elehlukaniswe ngo khefana.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinApplication</name>
     <message>
@@ -29,7 +29,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1Ingakatholakali ngokuphepha okwamanje.</translation>
     </message>
     <message numerus="yes">
@@ -74,7 +74,7 @@
             <numerusform>%n year(s)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">Chofa ukuveza ezinye izenzo.</translation>
     </message>
     <message>
@@ -130,21 +130,21 @@
         <extracomment>A context menu item.</extracomment>
         <translation type="unfinished">Khubaza umsebenzi we nethiwekhi</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletActivity</name>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">Akukwazi ukwenza uhlu lwabasayini.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletDialog</name>
     <message>
         <source>External signer</source>
         <translation type="unfinished">Umusayini wa ngaphandle</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>Intro</name>
     <message numerus="yes">
@@ -176,7 +176,7 @@
             <numerusform>(sufficient to restore backups %n day(s) old)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -184,7 +184,7 @@
         <extracomment>Title of Peers Table column which contains a unique number used to identify a connection.</extracomment>
         <translation type="unfinished">Untanga</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -198,7 +198,7 @@
             <numerusform>Estimated to begin confirmation within %n block(s).</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionDesc</name>
     <message numerus="yes">
@@ -208,7 +208,7 @@
             <numerusform>matures in %n more block(s)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -216,12 +216,12 @@
         <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
         <translation type="unfinished">Ifayela elehlukaniswe ngo khefana.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
         <source>Error: Missing checksum</source>
         <translation type="unfinished">Iphutha: iChecksum engekho</translation>
     </message>
-    </context>
+</context>
 </TS>

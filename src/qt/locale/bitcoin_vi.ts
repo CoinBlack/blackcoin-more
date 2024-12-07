@@ -62,14 +62,6 @@
         <translation type="unfinished">Sao chép &amp;Nhãn</translation>
     </message>
     <message>
-        <source>&amp;Copy Address</source>
-        <translation type="unfinished">&amp;Sao chép địa chỉ</translation>
-    </message>
-    <message>
-        <source>Copy &amp;Label</source>
-        <translation type="unfinished">Sao chép &amp;Nhãn</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Chỉnh sửa</translation>
     </message>
@@ -77,7 +69,7 @@
         <source>Export Address List</source>
         <translation type="unfinished">Xuất danh sách địa chỉ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>AddressTableModel</name>
     <message>
@@ -251,7 +243,7 @@
         <translation type="unfinished">Lỗi: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 vẫn chưa thoát ra một cách an toàn…</translation>
     </message>
     <message numerus="yes">
@@ -290,7 +282,7 @@
             <numerusform>%nnăm</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -342,10 +334,6 @@
         <translation type="unfinished">Tạo một ví mới</translation>
     </message>
     <message>
-        <source>&amp;Transactions</source>
-        <translation type="unfinished">&amp;Các Giao Dịch</translation>
-    </message>
-    <message>
         <source>Wallet:</source>
         <translation type="unfinished">Ví tiền</translation>
     </message>
@@ -381,79 +369,10 @@
     <message>
         <source>&amp;Encrypt Wallet…</source>
         <translation type="unfinished">&amp;Mã hóa ví…</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation type="unfinished">T&amp;hoát</translation>
-    </message>
-    <message>
-        <source>Quit application</source>
-        <translation type="unfinished">Đóng ứng dụng</translation>
-    </message>
-    <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished">&amp;Khoảng %1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">Hiện thông tin khoảng %1</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation type="unfinished">Về &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation type="unfinished">Hiện thông tin về Qt</translation>
-    </message>
-    <message>
-        <source>Modify configuration options for %1</source>
-        <translation type="unfinished">Sửa đổi tùy chỉnh cấu hình cho %1</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation type="unfinished">Tạo một ví mới</translation>
     </message>
     <message>
         <source>&amp;Minimize</source>
         <translation type="unfinished">&amp;Thu nhỏ</translation>
-    </message>
-    <message>
-        <source>Wallet:</source>
-        <translation type="unfinished">Ví tiền</translation>
-    </message>
-    <message>
-        <source>Network activity disabled.</source>
-        <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">Hoạt động mạng được vô hiệu.</translation>
-    </message>
-    <message>
-        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation type="unfinished">Proxy là &lt;b&gt; cho phép &lt;/b&gt;: %1</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Gửi coin đến một địa chỉ Bitcoin</translation>
-    </message>
-    <message>
-        <source>Backup wallet to another location</source>
-        <translation type="unfinished">Backup ví đến một địa chỉ khác</translation>
-    </message>
-    <message>
-        <source>Change the passphrase used for wallet encryption</source>
-        <translation type="unfinished">Thay đổi cụm mật khẩu cho ví đã mã hóa</translation>
-    </message>
-    <message>
-        <source>&amp;Send</source>
-        <translation type="unfinished">&amp;Gửi</translation>
-    </message>
-    <message>
-        <source>&amp;Receive</source>
-        <translation type="unfinished">&amp;Nhận</translation>
-    </message>
-    <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Mã hóa ví…</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -596,14 +515,6 @@
         <translation type="unfinished">Không có ví nào</translation>
     </message>
     <message>
-        <source>default wallet</source>
-        <translation type="unfinished">ví mặc định</translation>
-    </message>
-    <message>
-        <source>No wallets available</source>
-        <translation type="unfinished">Không có ví nào</translation>
-    </message>
-    <message>
         <source>Load Wallet Backup</source>
         <extracomment>The title for Restore Wallet File Windows</extracomment>
         <translation type="unfinished">Tải bản sao lưu ví</translation>
@@ -634,12 +545,12 @@
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">Nhấp để có thêm hành động.</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">Hiển thị tab ngang hàng</translation>
     </message>
     <message>
@@ -676,7 +587,7 @@
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation type="unfinished">Ví thì &lt;b&gt;được mã hóa &lt;/b&gt; và hiện tại &lt;b&gt;đã khóa&lt;/b&gt;</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
@@ -702,7 +613,7 @@
         <source>(no label)</source>
         <translation type="unfinished">(không có nhãn)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletActivity</name>
     <message>
@@ -769,7 +680,7 @@
         <source>Close all wallets</source>
         <translation type="unfinished">Đóng tất cả ví</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletDialog</name>
     <message>
@@ -782,7 +693,7 @@
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Được biên dịch mà không có hỗ trợ ký bên ngoài (bắt buộc đối với ký bên ngoài)</translation>
     </message>
 </context>
@@ -800,7 +711,7 @@
         <source>Edit sending address</source>
         <translation type="unfinished">Chỉnh sửa địa chỉ gửi</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>Intro</name>
     <message numerus="yes">
@@ -833,8 +744,8 @@
         </translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation type="unfinished">Lỗi: Danh mục data xác định "%1" không thể được tạo.</translation>
+        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
+        <translation type="unfinished">Lỗi: Danh mục data xác định &quot;%1&quot; không thể được tạo.</translation>
     </message>
     <message>
         <source>Welcome</source>
@@ -860,7 +771,7 @@
         <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2 GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
         <translation type="unfinished">Khi bạn nhấn OK, %1 sẽ bắt đầu tải xuống và xử lý toàn bộ chuỗi chính %4 (%2 GB), bắt đầu từ các giao dịch sớm nhất trong %3 khi %4 được khởi chạy ban đầu.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>HelpMessageDialog</name>
     <message>
@@ -878,7 +789,7 @@
         <source>%1 is shutting down…</source>
         <translation type="unfinished">%1 đang tắt…</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
@@ -1014,13 +925,13 @@
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Được biên dịch mà không có hỗ trợ ký bên ngoài (bắt buộc đối với ký bên ngoài)</translation>
     </message>
     <message>
-        <source>Current settings will be backed up at "%1".</source>
-        <extracomment>Text explaining to the user that the client's current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location's path.</extracomment>
-        <translation type="unfinished">Các thiết lập hiện tại sẽ được sao lưu tại"%1".</translation>
+        <source>Current settings will be backed up at &quot;%1&quot;.</source>
+        <extracomment>Text explaining to the user that the client&apos;s current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location&apos;s path.</extracomment>
+        <translation type="unfinished">Các thiết lập hiện tại sẽ được sao lưu tại&quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Continue</source>
@@ -1030,12 +941,12 @@
         <source>Error</source>
         <translation type="unfinished">Lỗi</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OptionsModel</name>
     <message>
-        <source>Could not read setting "%1", %2.</source>
-        <translation type="unfinished">Không thể đọc thiết lập "%1", %2.</translation>
+        <source>Could not read setting &quot;%1&quot;, %2.</source>
+        <translation type="unfinished">Không thể đọc thiết lập &quot;%1&quot;, %2.</translation>
     </message>
 </context>
 <context>
@@ -1060,7 +971,7 @@
         <source>(But no wallet is loaded.)</source>
         <translation type="unfinished">(Nhưng không có ví nào được tải.)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -1073,7 +984,7 @@
         <extracomment>Title of Peers Table column which contains the IP/Onion/I2P address of the connected peer.</extracomment>
         <translation type="unfinished">Địa chỉ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RPCConsole</name>
     <message>
@@ -1124,10 +1035,10 @@
     </message>
     <message>
         <source>&amp;Copy IP/Netmask</source>
-        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer's IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
+        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer&apos;s IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
         <translation type="unfinished">&amp;Sao chép IP/Netmask</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
@@ -1143,21 +1054,21 @@
         <translation type="unfinished">Tạo một địa chỉ tương thích với các ví cũ hơn.</translation>
     </message>
     <message>
-        <source>Generates a native segwit address (BIP-173). Some old wallets don't support it.</source>
+        <source>Generates a native segwit address (BIP-173). Some old wallets don&apos;t support it.</source>
         <translation type="unfinished">Tạo một địa chỉ segwit chuyên biệt (BIP-173). Một số ví cũ sẽ không hỗ trợ.</translation>
     </message>
     <message>
         <source>Bech32m (BIP-350) is an upgrade to Bech32, wallet support is still limited.</source>
         <translation type="unfinished">Bech32m (BIP-350) là bản nâng cấp của Bech32, hỗ trợ ví vẫn còn hạn chế.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
         <source>Wallet:</source>
         <translation type="unfinished">Ví tiền</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -1168,7 +1079,7 @@
         <source>(no label)</source>
         <translation type="unfinished">(không có nhãn)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -1188,7 +1099,7 @@
     <message>
         <source>Unsigned Transaction</source>
         <comment>PSBT copied</comment>
-        <extracomment>Caption of "PSBT has been copied" messagebox</extracomment>
+        <extracomment>Caption of &quot;PSBT has been copied&quot; messagebox</extracomment>
         <translation type="unfinished">Giao dịch chưa được ký</translation>
     </message>
     <message>
@@ -1216,21 +1127,21 @@
         <source>Paste address from clipboard</source>
         <translation type="unfinished">Dán địa chỉ từ khay nhớ tạm</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendConfirmationDialog</name>
     <message>
         <source>Send</source>
         <translation type="unfinished">Gửi</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>Paste address from clipboard</source>
         <translation type="unfinished">Dán địa chỉ từ khay nhớ tạm</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SplashScreen</name>
     <message>
@@ -1256,7 +1167,7 @@
             <numerusform>sẽ trưởng thành sau%n khối nữa </numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -1267,7 +1178,7 @@
         <source>(no label)</source>
         <translation type="unfinished">(không có nhãn)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -1287,14 +1198,14 @@
         <source>Address</source>
         <translation type="unfinished">Địa chỉ</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
         <source>Create a new wallet</source>
         <translation type="unfinished">Tạo một ví mới</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -1317,7 +1228,7 @@
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">Xuất dữ liệu ở thẻ hiện tại ra tập tin.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
@@ -1451,16 +1362,16 @@ Không thể khôi phục bản sao lưu của ví.</translation>
         <translation type="unfinished">Không đủ bộ đệm (dbcache) để xác minh khối</translation>
     </message>
     <message>
-        <source>Invalid amount for %s=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation type="unfinished">Số lượng không hợp lệ cho %s=&lt;amount&gt;: '%s' (tối thiểu phải là %s)</translation>
+        <source>Invalid amount for %s=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</source>
+        <translation type="unfinished">Số lượng không hợp lệ cho %s=&lt;amount&gt;: &apos;%s&apos; (tối thiểu phải là %s)</translation>
     </message>
     <message>
-        <source>Invalid amount for %s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Số lượng không hợp lệ cho %s=&lt;amount&gt;: '%s'</translation>
+        <source>Invalid amount for %s=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation type="unfinished">Số lượng không hợp lệ cho %s=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid port specified in %s: '%s'</source>
-        <translation type="unfinished">Cổng được chỉ định không hợp lệ trong %s: '%s'</translation>
+        <source>Invalid port specified in %s: &apos;%s&apos;</source>
+        <translation type="unfinished">Cổng được chỉ định không hợp lệ trong %s: &apos;%s&apos;</translation>
     </message>
     <message>
         <source>Invalid pre-selected input %s</source>
@@ -1491,28 +1402,28 @@ Không thể khôi phục bản sao lưu của ví.</translation>
         <translation type="unfinished">Đầu vào được chọn trước không giải được %s</translation>
     </message>
     <message>
-        <source>Specified data directory "%s" does not exist.</source>
-        <translation type="unfinished">Đường dẫn dữ liệu được chỉ định "%s" không tồn tại.</translation>
+        <source>Specified data directory &quot;%s&quot; does not exist.</source>
+        <translation type="unfinished">Đường dẫn dữ liệu được chỉ định &quot;%s&quot; không tồn tại.</translation>
     </message>
     <message>
         <source>Transaction change output index out of range</source>
         <translation type="unfinished">Chỉ số đầu ra thay đổi giao dịch nằm ngoài phạm vi</translation>
     </message>
     <message>
-        <source>Transaction needs a change address, but we can't generate it.</source>
+        <source>Transaction needs a change address, but we can&apos;t generate it.</source>
         <translation type="unfinished">Giao dịch cần thay đổi địa chỉ, nhưng chúng tôi không thể tạo địa chỉ đó.</translation>
     </message>
     <message>
-        <source>Unable to allocate memory for -maxsigcachesize: '%s' MiB</source>
-        <translation type="unfinished">Không có khả năng để phân bổ bộ nhớ cho -maxsigcachesize: '%s' MiB</translation>
+        <source>Unable to allocate memory for -maxsigcachesize: &apos;%s&apos; MiB</source>
+        <translation type="unfinished">Không có khả năng để phân bổ bộ nhớ cho -maxsigcachesize: &apos;%s&apos; MiB</translation>
     </message>
     <message>
         <source>Unable to find UTXO for external input</source>
         <translation type="unfinished">Không thể tìm UTXO cho đầu vào từ bên ngoài</translation>
     </message>
     <message>
-        <source>Unable to parse -maxuploadtarget: '%s'</source>
-        <translation type="unfinished">Không thể parse -maxuploadtarget '%s</translation>
+        <source>Unable to parse -maxuploadtarget: &apos;%s&apos;</source>
+        <translation type="unfinished">Không thể parse -maxuploadtarget &apos;%s</translation>
     </message>
     <message>
         <source>Unable to unload the wallet before migrating</source>

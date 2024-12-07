@@ -62,10 +62,10 @@
         <translation type="unfinished">भुगतान भेजने के लिए ये आपके बिटकॉइन पते हैं। कॉइन्स भेजने से पहले हमेशा राशि और प्राप्त करने वाले पते की जांच करें।</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">भुगतान प्राप्त करने के लिए ये आपके बिटकॉइन पते हैं। नए पते बनाने के लिए रिसिव टैब में 'नया प्राप्तकर्ता पता बनाएं' बटन का उपयोग करें।
-हस्ताक्षर केवल 'लेगसी' प्रकार के पते के साथ ही संभव है।</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">भुगतान प्राप्त करने के लिए ये आपके बिटकॉइन पते हैं। नए पते बनाने के लिए रिसिव टैब में &apos;नया प्राप्तकर्ता पता बनाएं&apos; बटन का उपयोग करें।
+हस्ताक्षर केवल &apos;लेगसी&apos; प्रकार के पते के साथ ही संभव है।</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -279,7 +279,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">त्रुटि: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 अभी तक सुरक्षित रूप से बाहर नहीं निकला...</translation>
     </message>
     <message>
@@ -332,7 +332,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
             <numerusform>%n year(s)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -423,7 +423,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>&amp;Options…</source>
         <translation type="unfinished">&amp;विकल्प
- </translation>
+&#xa0;</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
@@ -658,7 +658,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>(no label)</source>
         <translation type="unfinished">(कोई लेबल नहीं)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CreateWalletActivity</name>
     <message>
@@ -666,10 +666,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">वॉलेट बनाना विफल</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">हस्ताक्षरकर्ताओं को सूचीबद्ध नहीं कर सका</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>LoadWalletsActivity</name>
     <message>
@@ -724,7 +724,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <message>
         <source>Choose data directory</source>
         <translation type="unfinished">डेटा निर्देशिका चुनें
- </translation>
+&#xa0;</translation>
     </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
@@ -734,7 +734,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
             <numerusform>(sufficient to restore backups %n day(s) old)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -749,7 +749,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Full path to a %1 compatible script (e.g. C:\Downloads\hwi.exe or /Users/you/Downloads/hwi.py). Beware: malware can steal your coins!</source>
         <translation type="unfinished">%1 संगत स्क्रिप्ट का पूर्ण पथ (उदा. C:\Downloads\hwi.exe या /Users/you/Downloads/hwi.py). सावधान: मैलवेयर आपके सिक्के चुरा सकता है!</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -773,12 +773,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>or</source>
         <translation type="unfinished">और</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <extracomment>Title of Peers Table column which contains the peer's User Agent string.</extracomment>
+        <extracomment>Title of Peers Table column which contains the peer&apos;s User Agent string.</extracomment>
         <translation type="unfinished">उपभोक्ता अभिकर्ता</translation>
     </message>
     <message>
@@ -798,7 +798,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">प्रकार</translation>
     </message>
     <message>
@@ -806,27 +806,27 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
         <translation type="unfinished">नेटवर्क</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QRImageWidget</name>
     <message>
         <source>&amp;Save Image…</source>
         <translation type="unfinished">&amp;सेव इमेज…</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>To specify a non-default location of the data directory use the '%1' option.</source>
-        <translation type="unfinished">डेटा निर्देशिका का गैर-डिफ़ॉल्ट स्थान निर्दिष्ट करने के लिए '%1' विकल्प का उपयोग करें।</translation>
+        <source>To specify a non-default location of the data directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">डेटा निर्देशिका का गैर-डिफ़ॉल्ट स्थान निर्दिष्ट करने के लिए &apos;%1&apos; विकल्प का उपयोग करें।</translation>
     </message>
     <message>
         <source>Blocksdir</source>
         <translation type="unfinished">ब्लॉकडिर</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
-        <translation type="unfinished">ब्लॉक निर्देशिका का गैर-डिफ़ॉल्ट स्थान निर्दिष्ट करने के लिए '%1' विकल्प का उपयोग करें।</translation>
+        <source>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">ब्लॉक निर्देशिका का गैर-डिफ़ॉल्ट स्थान निर्दिष्ट करने के लिए &apos;%1&apos; विकल्प का उपयोग करें।</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1142,7 +1142,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>&amp;Copy IP/Netmask</source>
-        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer's IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
+        <extracomment>Context menu action to copy the IP/Netmask of a banned peer. IP/Netmask is the combination of a peer&apos;s IP address and its Netmask. For IP address, see: https://en.wikipedia.org/wiki/IP_address.</extracomment>
         <translation type="unfinished">&amp;कॉपी आईपी/नेटमास्क</translation>
     </message>
     <message>
@@ -1158,8 +1158,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">बिना किसी वॉलेट के कमांड निष्पादित करना</translation>
     </message>
     <message>
-        <source>Executing command using "%1" wallet</source>
-        <translation type="unfinished">"%1" वॉलेट का प्रयोग कर कमांड निष्पादित करना</translation>
+        <source>Executing command using &quot;%1&quot; wallet</source>
+        <translation type="unfinished">&quot;%1&quot; वॉलेट का प्रयोग कर कमांड निष्पादित करना</translation>
     </message>
     <message>
         <source>Welcome to the %1 RPC console.
@@ -1492,12 +1492,12 @@ For more information on using this console, type %6.
         <translation type="unfinished">लेनदेन शुल्क सेटिंग छुपाएं</translation>
     </message>
     <message>
-        <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
+        <source>Specify a custom fee per kB (1,000 bytes) of the transaction&apos;s virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satoshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 satoshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 satoshis per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 satoshis.</source>
         <translation type="unfinished">लेन-देन के आभासी आकार के प्रति kB (1,000 बाइट्स) के लिए एक कस्टम शुल्क निर्दिष्ट करें।
 
-नोट: चूंकि शुल्क की गणना प्रति-बाइट के आधार पर की जाती है, इसलिए 500 वर्चुअल बाइट्स (1 केवीबी का आधा) के लेन-देन के आकार के लिए "100 सतोशी प्रति केवीबी" की शुल्क दर अंततः केवल 50 सतोशी का शुल्क देगी।</translation>
+नोट: चूंकि शुल्क की गणना प्रति-बाइट के आधार पर की जाती है, इसलिए 500 वर्चुअल बाइट्स (1 केवीबी का आधा) के लेन-देन के आकार के लिए &quot;100 सतोशी प्रति केवीबी&quot; की शुल्क दर अंततः केवल 50 सतोशी का शुल्क देगी।</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
@@ -1520,7 +1520,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">प्रतिस्थापन-दर-शुल्क सक्षम करें</translation>
     </message>
     <message>
-        <source>With Replace-By-Fee (BIP-125) you can increase a transaction's fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
+        <source>With Replace-By-Fee (BIP-125) you can increase a transaction&apos;s fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
         <translation type="unfinished">प्रतिस्थापन-दर-शुल्क (बीआईपी-125) के साथ आप लेनदेन के शुल्क को भेजने के बाद बढ़ा सकते हैं। इसके बिना, बढ़े हुए लेन-देन में देरी के जोखिम की भरपाई के लिए एक उच्च शुल्क की सिफारिश की जा सकती है।</translation>
     </message>
     <message>
@@ -1569,7 +1569,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>Sign on device</source>
-        <extracomment>"device" usually means a hardware wallet.</extracomment>
+        <extracomment>&quot;device&quot; usually means a hardware wallet.</extracomment>
         <translation type="unfinished">डिवाइस पर साइन करें</translation>
     </message>
     <message>
@@ -1578,7 +1578,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>Set external signer script path in Options -&gt; Wallet</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">विकल्प में बाहरी हस्ताक्षरकर्ता स्क्रिप्ट पथ सेट करें -&gt; वॉलेट </translation>
     </message>
     <message>
@@ -1590,20 +1590,20 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">उदाहरण के लिए उपयोग के लिए आंशिक रूप से हस्ताक्षरित बिटकॉइन लेनदेन (PSBT) बनाता है। एक ऑफ़लाइन% 1 %1  वॉलेट, या एक PSBT-संगत हार्डवेयर वॉलेट।</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation type="unfinished">वॉलिट से '%1'</translation>
+        <source> from wallet &apos;%1&apos;</source>
+        <translation type="unfinished">वॉलिट से &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>%1 to '%2'</source>
-        <translation type="unfinished">%1टु '%2'</translation>
+        <source>%1 to &apos;%2&apos;</source>
+        <translation type="unfinished">%1टु &apos;%2&apos;</translation>
     </message>
     <message>
         <source>%1 to %2</source>
         <translation type="unfinished">%1 टु %2</translation>
     </message>
     <message>
-        <source>To review recipient list click "Show Details…"</source>
-        <translation type="unfinished">प्राप्तकर्ता सूची की समीक्षा करने के लिए "शो डिटैइल्स ..." पर क्लिक करें।</translation>
+        <source>To review recipient list click &quot;Show Details…&quot;</source>
+        <translation type="unfinished">प्राप्तकर्ता सूची की समीक्षा करने के लिए &quot;शो डिटैइल्स ...&quot; पर क्लिक करें।</translation>
     </message>
     <message>
         <source>Sign failed</source>
@@ -1611,12 +1611,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>External signer not found</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">बाहरी हस्ताक्षरकर्ता नहीं मिला</translation>
     </message>
     <message>
         <source>External signer failure</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">बाहरी हस्ताक्षरकर्ता विफलता</translation>
     </message>
     <message>
@@ -1632,7 +1632,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>PSBT saved</source>
         <extracomment>Popup message when a PSBT has been saved to a file</extracomment>
         <translation type="unfinished">पीएसबीटी सहेजा गया
- </translation>
+&#xa0;</translation>
     </message>
     <message>
         <source>External balance:</source>
@@ -1681,9 +1681,9 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>Unsigned Transaction</source>
         <comment>PSBT copied</comment>
-        <extracomment>Caption of "PSBT has been copied" messagebox</extracomment>
+        <extracomment>Caption of &quot;PSBT has been copied&quot; messagebox</extracomment>
         <translation type="unfinished">अहस्ताक्षरित लेनदेन
- </translation>
+&#xa0;</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -1894,7 +1894,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">&amp;संदेश सत्यापित करें</translation>
     </message>
     <message>
-        <source>Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
+        <source>Enter the receiver&apos;s address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
         <translation type="unfinished">संदेश को सत्यापित करने के लिए नीचे प्राप्तकर्ता का पता, संदेश (सुनिश्चित करें कि आप लाइन ब्रेक, रिक्त स्थान, टैब आदि की प्रतिलिपि बनाते हैं) और हस्ताक्षर दर्ज करें। सावधान रहें कि हस्ताक्षरित संदेश में जो लिखा है, उससे अधिक हस्ताक्षर में न पढ़ें, ताकि बीच-बीच में किसी व्यक्ति द्वारा छल किए जाने से बचा जा सके। ध्यान दें कि यह केवल यह साबित करता है कि हस्ताक्षर करने वाला पक्ष पते के साथ प्राप्त करता है, यह किसी भी लेनदेन की प्रेषकता साबित नहीं कर सकता है!</translation>
     </message>
     <message>
@@ -1922,8 +1922,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">सभी सत्यापित संदेश फ़ील्ड रीसेट करें</translation>
     </message>
     <message>
-        <source>Click "Sign Message" to generate signature</source>
-        <translation type="unfinished">हस्ताक्षर उत्पन्न करने के लिए "साईन मेसेज" पर क्लिक करें</translation>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
+        <translation type="unfinished">हस्ताक्षर उत्पन्न करने के लिए &quot;साईन मेसेज&quot; पर क्लिक करें</translation>
     </message>
     <message>
         <source>The entered address is invalid.</source>
@@ -1940,7 +1940,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>Wallet unlock was cancelled.</source>
         <translation type="unfinished">वॉलेट अनलॉक रद्द कर दिया गया था।
- </translation>
+&#xa0;</translation>
     </message>
     <message>
         <source>No error</source>
@@ -2002,7 +2002,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     <message>
         <source>conflicted with a transaction with %1 confirmations</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>
-        <translation type="unfinished"> %1 पुष्टिकरण के साथ लेन-देन के साथ विरोधाभासी</translation>
+        <translation type="unfinished"> %1&#xa0;पुष्टिकरण के साथ लेन-देन के साथ विरोधाभासी</translation>
     </message>
     <message>
         <source>abandoned</source>
@@ -2127,8 +2127,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">सौदागर</translation>
     </message>
     <message>
-        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation type="unfinished"> %1 सृजित सिक्कों को खर्च करने से पहले ब्लॉक में परिपक्व होना चाहिए। जब आपने इस ब्लॉक को जनरेट किया था, तो इसे नेटवर्क में प्रसारित किया गया था ताकि इसे ब्लॉक चेन में जोड़ा जा सके। यदि यह श्रृंखला में शामिल होने में विफल रहता है, तो इसकी स्थिति "स्वीकृत नहीं" में बदल जाएगी और यह खर्च करने योग्य नहीं होगी। यह कभी-कभी हो सकता है यदि कोई अन्य नोड आपके कुछ सेकंड के भीतर एक ब्लॉक उत्पन्न करता है।</translation>
+        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <translation type="unfinished"> %1 सृजित सिक्कों को खर्च करने से पहले ब्लॉक में परिपक्व होना चाहिए। जब आपने इस ब्लॉक को जनरेट किया था, तो इसे नेटवर्क में प्रसारित किया गया था ताकि इसे ब्लॉक चेन में जोड़ा जा सके। यदि यह श्रृंखला में शामिल होने में विफल रहता है, तो इसकी स्थिति &quot;स्वीकृत नहीं&quot; में बदल जाएगी और यह खर्च करने योग्य नहीं होगी। यह कभी-कभी हो सकता है यदि कोई अन्य नोड आपके कुछ सेकंड के भीतर एक ब्लॉक उत्पन्न करता है।</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -2348,14 +2348,14 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>Exporting Failed</source>
         <translation type="unfinished">निर्यात विफल हो गया है</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
         <source>Create a new wallet</source>
         <translation type="unfinished">एक नया वॉलेट बनाएं |</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -2367,7 +2367,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <comment>Fee-bump PSBT saved</comment>
         <translation type="unfinished">क्लिपबोर्ड में कापी किया गया</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletView</name>
     <message>
@@ -2378,7 +2378,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">मौजूदा टैब में डेटा को फ़ाइल में निर्यात करें</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
@@ -2390,7 +2390,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">बटुआ लोड करने में त्रुटि. वॉलेट को डाउनलोड करने के लिए ब्लॉक की आवश्यकता होती है, और सॉफ्टवेयर वर्तमान में लोडिंग वॉलेट का समर्थन नहीं करता है, जबकि ब्लॉक्स को ऑर्डर से बाहर डाउनलोड किया जा रहा है, जब ग्रहणुत्सो स्नैपशॉट का उपयोग किया जाता है। नोड सिंक के %s ऊंचाई तक पहुंचने के बाद वॉलेट को सफलतापूर्वक लोड करने में सक्षम होना चाहिए</translation>
     </message>
     <message>
-        <source>Error: Unable to produce descriptors for this legacy wallet. Make sure to provide the wallet's passphrase if it is encrypted.</source>
+        <source>Error: Unable to produce descriptors for this legacy wallet. Make sure to provide the wallet&apos;s passphrase if it is encrypted.</source>
         <translation type="unfinished">त्रुटि: इस लीगेसी वॉलेट के लिए वर्णनकर्ता बनाने में असमर्थ। यदि बटुए का पासफ़्रेज़ एन्क्रिप्ट किया गया है, तो उसे प्रदान करना सुनिश्चित करें।</translation>
     </message>
     <message>
@@ -2402,7 +2402,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">आउटबाउंड कनेक्शन i2p(-onlynet=i2p) तक सीमित हैं लेकिन -i2psam प्रदान नहीं किया गया है</translation>
     </message>
     <message>
-        <source>The inputs size exceeds the maximum weight. Please try sending a smaller amount or manually consolidating your wallet's UTXOs</source>
+        <source>The inputs size exceeds the maximum weight. Please try sending a smaller amount or manually consolidating your wallet&apos;s UTXOs</source>
         <translation type="unfinished">इनपुट आकार अधिकतम वजन से अधिक है। कृपया एक छोटी राशि भेजने या मैन्युअल रूप से अपने वॉलेट के UTXO को समेकित करने का प्रयास करें</translation>
     </message>
     <message>
@@ -2427,8 +2427,8 @@ The wallet might have been tampered with or created with malicious intent.
         <translation type="unfinished">ब्लॉक सत्यापन के लिए अपर्याप्त dbcache</translation>
     </message>
     <message>
-        <source>Invalid port specified in %s: '%s'</source>
-        <translation type="unfinished">में निर्दिष्ट अमान्य पोर्ट %s:'%s'</translation>
+        <source>Invalid port specified in %s: &apos;%s&apos;</source>
+        <translation type="unfinished">में निर्दिष्ट अमान्य पोर्ट %s:&apos;%s&apos;</translation>
     </message>
     <message>
         <source>Invalid pre-selected input %s</source>

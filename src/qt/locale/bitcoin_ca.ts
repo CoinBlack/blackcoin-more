@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copia l'adreça seleccionada al porta-retalls del sistema</translation>
+        <translation type="unfinished">Copia l&apos;adreça seleccionada al porta-retalls del sistema</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation type="unfinished">Elimina l'adreça seleccionada actualment de la llista</translation>
+        <translation type="unfinished">Elimina l&apos;adreça seleccionada actualment de la llista</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation type="unfinished">Trieu l'adreça on enviar les monedes</translation>
+        <translation type="unfinished">Trieu l&apos;adreça on enviar les monedes</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation type="unfinished">Trieu l'adreça on rebre les monedes</translation>
+        <translation type="unfinished">Trieu l&apos;adreça on rebre les monedes</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -59,21 +59,21 @@
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Aquestes són les vostres adreces de Bitcoin per a enviar els pagaments. Sempre reviseu l'import i l'adreça del destinatari abans de transferir monedes.</translation>
+        <translation type="unfinished">Aquestes són les vostres adreces de Bitcoin per a enviar els pagaments. Sempre reviseu l&apos;import i l&apos;adreça del destinatari abans de transferir monedes.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Aquestes son les teves adreces de Bitcoin per a rebre pagaments. Utilitza el botó "Crear nova adreça de recepció" de la pestanya de recepció per a crear una nova adreça.
-Només és possible firmar amb adreces del tipus "legacy".</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">Aquestes son les teves adreces de Bitcoin per a rebre pagaments. Utilitza el botó &quot;Crear nova adreça de recepció&quot; de la pestanya de recepció per a crear una nova adreça.
+Només és possible firmar amb adreces del tipus &quot;legacy&quot;.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
-        <translation type="unfinished">&amp;Copia l'adreça</translation>
+        <translation type="unfinished">&amp;Copia l&apos;adreça</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
-        <translation type="unfinished">Copia l'&amp;etiqueta</translation>
+        <translation type="unfinished">Copia l&apos;&amp;etiqueta</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -81,7 +81,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Export Address List</source>
-        <translation type="unfinished">Exporta la llista d'adreces</translation>
+        <translation type="unfinished">Exporta la llista d&apos;adreces</translation>
     </message>
     <message>
         <source>Comma separated file</source>
@@ -91,11 +91,11 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
-        <translation type="unfinished">S'ha produït un error en desar la llista d'adreces a %1. Torneu-ho a provar.</translation>
+        <translation type="unfinished">S&apos;ha produït un error en desar la llista d&apos;adreces a %1. Torneu-ho a provar.</translation>
     </message>
     <message>
         <source>Sending addresses - %1</source>
-        <translation type="unfinished">Adreces d'enviament - %1</translation>
+        <translation type="unfinished">Adreces d&apos;enviament - %1</translation>
     </message>
     <message>
         <source>Receiving addresses - %1</source>
@@ -103,7 +103,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
-        <translation type="unfinished">L'exportació ha fallat</translation>
+        <translation type="unfinished">L&apos;exportació ha fallat</translation>
     </message>
 </context>
 <context>
@@ -197,7 +197,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Your wallet is now encrypted. </source>
-        <translation type="unfinished">S'ha xifrat la cartera.</translation>
+        <translation type="unfinished">S&apos;ha xifrat la cartera.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -225,7 +225,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character. If this is successful, please set a new passphrase to avoid this issue in the future.</source>
-        <translation type="unfinished">La contrasenya introduïda per a desxifrar la cartera és incorrecta. Conté un caràcter nul (és a dir, un byte zero). Si la contrasenya es va establir amb una versió d'aquest programari anterior a la 25.0, si us plau, torneu-ho a provar només amb els caràcters fins a — però sense incloure — el primer caràcter nul. En cas d'èxit, si us plau, establiu una nova contrasenya per evitar aquest problema en el futur.</translation>
+        <translation type="unfinished">La contrasenya introduïda per a desxifrar la cartera és incorrecta. Conté un caràcter nul (és a dir, un byte zero). Si la contrasenya es va establir amb una versió d&apos;aquest programari anterior a la 25.0, si us plau, torneu-ho a provar només amb els caràcters fins a — però sense incloure — el primer caràcter nul. En cas d&apos;èxit, si us plau, establiu una nova contrasenya per evitar aquest problema en el futur.</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
@@ -237,7 +237,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>The old passphrase entered for the wallet decryption is incorrect. It contains a null character (ie - a zero byte). If the passphrase was set with a version of this software prior to 25.0, please try again with only the characters up to — but not including — the first null character.</source>
-        <translation type="unfinished">La contrasenya antiga introduïda per a desxifrar la cartera és incorrecta. Conté un caràcter nul (és a dir, un byte zero). Si la contrasenya es va establir amb una versió d'aquest programari anterior a la 25.0, si us plau, intenta-ho de nou només amb els caràcters fins a — però sense incloure — el primer caràcter nul.</translation>
+        <translation type="unfinished">La contrasenya antiga introduïda per a desxifrar la cartera és incorrecta. Conté un caràcter nul (és a dir, un byte zero). Si la contrasenya es va establir amb una versió d&apos;aquest programari anterior a la 25.0, si us plau, intenta-ho de nou només amb els caràcters fins a — però sense incloure — el primer caràcter nul.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -267,13 +267,13 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
-        <translation type="unfinished">S'ha produït un error fatal. %1 ja no pot continuar amb seguretat i sortirà.</translation>
+        <translation type="unfinished">S&apos;ha produït un error fatal. %1 ja no pot continuar amb seguretat i sortirà.</translation>
     </message>
     <message>
         <source>Internal error</source>
         <translation type="unfinished">Error intern</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QObject</name>
     <message>
@@ -284,14 +284,14 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     <message>
         <source>A fatal error occurred. Check that settings file is writable, or try running with -nosettings.</source>
         <extracomment>Explanatory text shown on startup when the settings file could not be written. Prompts user to check that we have the ability to write to the file. Explains that the user has the option of running without a settings file.</extracomment>
-        <translation type="unfinished">S'ha produit un error fatal. Revisa que l'arxiu de preferències sigui d'escriptura, o torna-ho a intentar amb -nosettings</translation>
+        <translation type="unfinished">S&apos;ha produit un error fatal. Revisa que l&apos;arxiu de preferències sigui d&apos;escriptura, o torna-ho a intentar amb -nosettings</translation>
     </message>
     <message>
         <source>Error: %1</source>
         <translation type="unfinished">Avís: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 no ha sortit de manera segura...</translation>
     </message>
     <message>
@@ -396,7 +396,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
             <numerusform>%n anys</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -413,7 +413,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation type="unfinished">Explora l'historial de transaccions</translation>
+        <translation type="unfinished">Explora l&apos;historial de transaccions</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -421,7 +421,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Quit application</source>
-        <translation type="unfinished">Surt de l'aplicació</translation>
+        <translation type="unfinished">Surt de l&apos;aplicació</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
@@ -458,7 +458,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     <message>
         <source>Network activity disabled.</source>
         <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">S'ha inhabilitat l'activitat de la xarxa.</translation>
+        <translation type="unfinished">S&apos;ha inhabilitat l&apos;activitat de la xarxa.</translation>
     </message>
     <message>
         <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
@@ -474,7 +474,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation type="unfinished">Canvia la contrasenya d'encriptació de la cartera</translation>
+        <translation type="unfinished">Canvia la contrasenya d&apos;encriptació de la cartera</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -526,7 +526,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Open &amp;URI…</source>
-        <translation type="unfinished">Obre l'&amp;URL...</translation>
+        <translation type="unfinished">Obre l&apos;&amp;URL...</translation>
     </message>
     <message>
         <source>Close Wallet…</source>
@@ -554,7 +554,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Tabs toolbar</source>
-        <translation type="unfinished">Barra d'eines de les pestanyes</translation>
+        <translation type="unfinished">Barra d&apos;eines de les pestanyes</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)…</source>
@@ -562,15 +562,15 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Synchronizing with network…</source>
-        <translation type="unfinished">S'està sincronitzant amb la xarxa...</translation>
+        <translation type="unfinished">S&apos;està sincronitzant amb la xarxa...</translation>
     </message>
     <message>
         <source>Indexing blocks on disk…</source>
-        <translation type="unfinished">S'estan indexant els blocs al disc...</translation>
+        <translation type="unfinished">S&apos;estan indexant els blocs al disc...</translation>
     </message>
     <message>
         <source>Processing blocks on disk…</source>
-        <translation type="unfinished">S'estan processant els blocs al disc...</translation>
+        <translation type="unfinished">S&apos;estan processant els blocs al disc...</translation>
     </message>
     <message>
         <source>Connecting to peers…</source>
@@ -582,21 +582,21 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
-        <translation type="unfinished">Mostra la llista d'adreces d'enviament i etiquetes utilitzades</translation>
+        <translation type="unfinished">Mostra la llista d&apos;adreces d&apos;enviament i etiquetes utilitzades</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
-        <translation type="unfinished">Mostra la llista d'adreces de recepció i etiquetes utilitzades</translation>
+        <translation type="unfinished">Mostra la llista d&apos;adreces de recepció i etiquetes utilitzades</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation type="unfinished">Opcions de la &amp;línia d'ordres</translation>
+        <translation type="unfinished">Opcions de la &amp;línia d&apos;ordres</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform>Processat(s) %n bloc(s) de l'historial de transaccions.</numerusform>
-            <numerusform>Processat(s) %n bloc(s) de l'historial de transaccions.</numerusform>
+            <numerusform>Processat(s) %n bloc(s) de l&apos;historial de transaccions.</numerusform>
+            <numerusform>Processat(s) %n bloc(s) de l&apos;historial de transaccions.</numerusform>
         </translation>
     </message>
     <message>
@@ -605,7 +605,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Catching up…</source>
-        <translation type="unfinished">S'està posant al dia ...</translation>
+        <translation type="unfinished">S&apos;està posant al dia ...</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
@@ -613,7 +613,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation type="unfinished">Les transaccions a partir d'això no seran visibles.</translation>
+        <translation type="unfinished">Les transaccions a partir d&apos;això no seran visibles.</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -649,7 +649,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>&amp;Sending addresses</source>
-        <translation type="unfinished">Adreces d'&amp;enviament</translation>
+        <translation type="unfinished">Adreces d&apos;&amp;enviament</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses</source>
@@ -679,7 +679,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     <message>
         <source>Restore a wallet from a backup file</source>
         <extracomment>Status tip for Restore Wallet menu item</extracomment>
-        <translation type="unfinished">Reestablir una cartera des d'un fitxer de còpia de seguretat</translation>
+        <translation type="unfinished">Reestablir una cartera des d&apos;un fitxer de còpia de seguretat</translation>
     </message>
     <message>
         <source>Close all wallets</source>
@@ -695,7 +695,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Mostra el missatge d'ajuda del %1 per obtenir una llista amb les possibles opcions de línia d'ordres de Bitcoin</translation>
+        <translation type="unfinished">Mostra el missatge d&apos;ajuda del %1 per obtenir una llista amb les possibles opcions de línia d&apos;ordres de Bitcoin</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -721,7 +721,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     <message>
         <source>Load Wallet Backup</source>
         <extracomment>The title for Restore Wallet File Windows</extracomment>
-        <translation type="unfinished">Carregar còpia de seguretat d'una cartera</translation>
+        <translation type="unfinished">Carregar còpia de seguretat d&apos;una cartera</translation>
     </message>
     <message>
         <source>Restore Wallet</source>
@@ -767,23 +767,23 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">Fes clic per a més accions.</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
-        <translation type="unfinished">Mostrar pestanyes d'iguals</translation>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
+        <translation type="unfinished">Mostrar pestanyes d&apos;iguals</translation>
     </message>
     <message>
         <source>Disable network activity</source>
         <extracomment>A context menu item.</extracomment>
-        <translation type="unfinished">Inhabilita l'activitat de la xarxa.</translation>
+        <translation type="unfinished">Inhabilita l&apos;activitat de la xarxa.</translation>
     </message>
     <message>
         <source>Enable network activity</source>
         <extracomment>A context menu item. The network activity was disabled previously.</extracomment>
-        <translation type="unfinished">Habilita l'activitat de la xarxa</translation>
+        <translation type="unfinished">Habilita l&apos;activitat de la xarxa</translation>
     </message>
     <message>
         <source>Pre-syncing Headers (%1%)…</source>
@@ -795,7 +795,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">No s'ha pogut crear una nova cartera, el programari s'ha compilat sense suport per a SQLite (necessari per a les carteres de descriptors)</translation>
+        <translation type="unfinished">No s&apos;ha pogut crear una nova cartera, el programari s&apos;ha compilat sense suport per a SQLite (necessari per a les carteres de descriptors)</translation>
     </message>
     <message>
         <source>Error: %1</source>
@@ -925,11 +925,11 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Received with label</source>
-        <translation type="unfinished">Rebut amb l'etiqueta</translation>
+        <translation type="unfinished">Rebut amb l&apos;etiqueta</translation>
     </message>
     <message>
         <source>Received with address</source>
-        <translation type="unfinished">Rebut amb l'adreça</translation>
+        <translation type="unfinished">Rebut amb l&apos;adreça</translation>
     </message>
     <message>
         <source>Date</source>
@@ -945,15 +945,15 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation type="unfinished">Copia l'import</translation>
+        <translation type="unfinished">Copia l&apos;import</translation>
     </message>
     <message>
         <source>&amp;Copy address</source>
-        <translation type="unfinished">&amp;Copia l'adreça</translation>
+        <translation type="unfinished">&amp;Copia l&apos;adreça</translation>
     </message>
     <message>
         <source>Copy &amp;label</source>
-        <translation type="unfinished">Copia l'&amp;etiqueta</translation>
+        <translation type="unfinished">Copia l&apos;&amp;etiqueta</translation>
     </message>
     <message>
         <source>Copy &amp;amount</source>
@@ -1033,7 +1033,7 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
         <translation type="unfinished">Avís en la creació de la cartera</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">No es poden enumerar signants</translation>
     </message>
     <message>
@@ -1069,12 +1069,12 @@ Només és possible firmar amb adreces del tipus "legacy".</translation>
 If this wallet contains any watchonly scripts, a new wallet will be created which contains those watchonly scripts.
 If this wallet contains any solvable but not watched scripts, a different and new wallet will be created which contains those scripts.
 
-The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the "Restore Wallet" functionality.</source>
+The migration process will create a backup of the wallet before migrating. This backup file will be named &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak and can be found in the directory for this wallet. In the event of an incorrect migration, the backup can be restored with the &quot;Restore Wallet&quot; functionality.</source>
         <translation type="unfinished">Migrar la cartera convertirà aquesta cartera en una o més carteres de descriptors. Caldrà fer una nova còpia de seguretat de la cartera.
 Si aquesta cartera conté algun script només per a visualització, es crearà una nova cartera que contingui aquests scripts només per a visualització.
 Si aquesta cartera conté algun script resoluble però no visualitzat, es crearà una cartera diferent i nova que contingui aquests scripts.
 
-El procés de migració crearà una còpia de seguretat de la cartera abans de migrar-la. Aquest fitxer de còpia de seguretat tindrà el nom &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak i es podrà trobar al directori d'aquesta cartera. En cas d'una migració incorrecta, es podrà restaurar la còpia de seguretat mitjançant la funcionalitat "Restaurar cartera".</translation>
+El procés de migració crearà una còpia de seguretat de la cartera abans de migrar-la. Aquest fitxer de còpia de seguretat tindrà el nom &lt;wallet name&gt;-&lt;timestamp&gt;.legacy.bak i es podrà trobar al directori d&apos;aquesta cartera. En cas d&apos;una migració incorrecta, es podrà restaurar la còpia de seguretat mitjançant la funcionalitat &quot;Restaurar cartera&quot;.</translation>
     </message>
     <message>
         <source>Migrate Wallet</source>
@@ -1085,16 +1085,16 @@ El procés de migració crearà una còpia de seguretat de la cartera abans de m
         <translation type="unfinished">Migrant cartera &lt;b&gt;%1&lt;/b&gt;...</translation>
     </message>
     <message>
-        <source>The wallet '%1' was migrated successfully.</source>
-        <translation type="unfinished">La cartera '%1' s'ha migrat amb èxit.</translation>
+        <source>The wallet &apos;%1&apos; was migrated successfully.</source>
+        <translation type="unfinished">La cartera &apos;%1&apos; s&apos;ha migrat amb èxit.</translation>
     </message>
     <message>
-        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Els scripts de només visualització s'han migrat a una nova cartera anomenada '%1'.</translation>
+        <source> Watchonly scripts have been migrated to a new wallet named &apos;%1&apos;.</source>
+        <translation type="unfinished">Els scripts de només visualització s&apos;han migrat a una nova cartera anomenada &apos;%1&apos;.</translation>
     </message>
     <message>
-        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Els scripts resolubles però no vigilats s'han migrat a una nova cartera anomenada '%1'.</translation>
+        <source> Solvable but not watched scripts have been migrated to a new wallet named &apos;%1&apos;.</source>
+        <translation type="unfinished">Els scripts resolubles però no vigilats s&apos;han migrat a una nova cartera anomenada &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1109,11 +1109,11 @@ El procés de migració crearà una còpia de seguretat de la cartera abans de m
     <name>OpenWalletActivity</name>
     <message>
         <source>Open wallet failed</source>
-        <translation type="unfinished">Ha fallat l'obertura de la cartera</translation>
+        <translation type="unfinished">Ha fallat l&apos;obertura de la cartera</translation>
     </message>
     <message>
         <source>Open wallet warning</source>
-        <translation type="unfinished">Avís en l'obertura de la cartera</translation>
+        <translation type="unfinished">Avís en l&apos;obertura de la cartera</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -1246,7 +1246,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Compilat sense suport de signatura externa (necessari per a la signatura externa)</translation>
     </message>
 </context>
@@ -1254,7 +1254,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
-        <translation type="unfinished">Edita l'adreça</translation>
+        <translation type="unfinished">Edita l&apos;adreça</translation>
     </message>
     <message>
         <source>&amp;Label</source>
@@ -1262,11 +1262,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>The label associated with this address list entry</source>
-        <translation type="unfinished">L'etiqueta associada amb aquesta entrada de llista d'adreces</translation>
+        <translation type="unfinished">L&apos;etiqueta associada amb aquesta entrada de llista d&apos;adreces</translation>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation type="unfinished">L'adreça associada amb aquesta entrada de llista d'adreces. Només es pot modificar per a les adreces d'enviament.</translation>
+        <translation type="unfinished">L&apos;adreça associada amb aquesta entrada de llista d&apos;adreces. Només es pot modificar per a les adreces d&apos;enviament.</translation>
     </message>
     <message>
         <source>&amp;Address</source>
@@ -1274,35 +1274,35 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>New sending address</source>
-        <translation type="unfinished">Nova adreça d'enviament</translation>
+        <translation type="unfinished">Nova adreça d&apos;enviament</translation>
     </message>
     <message>
         <source>Edit receiving address</source>
-        <translation type="unfinished">Edita l'adreça de recepció</translation>
+        <translation type="unfinished">Edita l&apos;adreça de recepció</translation>
     </message>
     <message>
         <source>Edit sending address</source>
-        <translation type="unfinished">Edita l'adreça d'enviament</translation>
+        <translation type="unfinished">Edita l&apos;adreça d&apos;enviament</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">L'adreça introduïda «%1» no és una adreça de Bitcoin vàlida.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <translation type="unfinished">L&apos;adreça introduïda «%1» no és una adreça de Bitcoin vàlida.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">L'adreça "%1" ja existeix com una adreça per a rebre amb l'etiqueta "%2" i per tant no pot ésser afegida com adreça per a enviar.</translation>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation type="unfinished">L&apos;adreça &quot;%1&quot; ja existeix com una adreça per a rebre amb l&apos;etiqueta &quot;%2&quot; i per tant no pot ésser afegida com adreça per a enviar.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">L'adreça introduïda "%1" ja existeix al directori d'adreces amb l'etiqueta "%2".</translation>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation type="unfinished">L&apos;adreça introduïda &quot;%1&quot; ja existeix al directori d&apos;adreces amb l&apos;etiqueta &quot;%2&quot;.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
-        <translation type="unfinished">No s'ha pogut desblocar la cartera.</translation>
+        <translation type="unfinished">No s&apos;ha pogut desblocar la cartera.</translation>
     </message>
     <message>
         <source>New key generation failed.</source>
-        <translation type="unfinished">Ha fallat la generació d'una clau nova.</translation>
+        <translation type="unfinished">Ha fallat la generació d&apos;una clau nova.</translation>
     </message>
 </context>
 <context>
@@ -1333,8 +1333,8 @@ Això és ideal per a carteres de mode només lectura.</translation>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform>%n GB d'espai lliure disponible</numerusform>
-            <numerusform>%n GB d'espai lliure disponibles</numerusform>
+            <numerusform>%n GB d&apos;espai lliure disponible</numerusform>
+            <numerusform>%n GB d&apos;espai lliure disponibles</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1357,7 +1357,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation type="unfinished">Almenys %1 GB de dades s'emmagatzemaran en aquest directori, i creixerà amb el temps.</translation>
+        <translation type="unfinished">Almenys %1 GB de dades s&apos;emmagatzemaran en aquest directori, i creixerà amb el temps.</translation>
     </message>
     <message>
         <source>Approximately %1 GB of data will be stored in this directory.</source>
@@ -1380,7 +1380,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
         <translation type="unfinished">La cartera també serà emmagatzemat en aquest directori.</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
+        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
         <translation type="unfinished">Error: el directori de dades «%1» especificat no pot ser creat.</translation>
     </message>
     <message>
@@ -1393,7 +1393,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
-        <translation type="unfinished">Com és la primera vegada que s'executa el programa, podeu triar on %1 emmagatzemaran les dades.</translation>
+        <translation type="unfinished">Com és la primera vegada que s&apos;executa el programa, podeu triar on %1 emmagatzemaran les dades.</translation>
     </message>
     <message>
         <source>Limit block chain storage to</source>
@@ -1405,15 +1405,15 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation type="unfinished">Aquesta sincronització inicial és molt exigent i pot exposar problemes de maquinari amb l'equip que anteriorment havien passat desapercebuts. Cada vegada que executeu %1, continuarà descarregant des del punt on es va deixar.</translation>
+        <translation type="unfinished">Aquesta sincronització inicial és molt exigent i pot exposar problemes de maquinari amb l&apos;equip que anteriorment havien passat desapercebuts. Cada vegada que executeu %1, continuarà descarregant des del punt on es va deixar.</translation>
     </message>
     <message>
         <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2 GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
-        <translation type="unfinished">Quan feu clic a D'acord, %1 començarà a descarregar i processar la cadena de blocs %4 completa (%2 GB) començant per les primeres transaccions de %3, any de llençament inicial de %4.</translation>
+        <translation type="unfinished">Quan feu clic a D&apos;acord, %1 començarà a descarregar i processar la cadena de blocs %4 completa (%2 GB) començant per les primeres transaccions de %3, any de llençament inicial de %4.</translation>
     </message>
     <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation type="unfinished">Si heu decidit limitar l'emmagatzematge de la cadena de blocs (podar), les dades històriques encara s'hauran de baixar i processar, però se suprimiran més endavant per a mantenir baix l'ús del disc.</translation>
+        <translation type="unfinished">Si heu decidit limitar l&apos;emmagatzematge de la cadena de blocs (podar), les dades històriques encara s&apos;hauran de baixar i processar, però se suprimiran més endavant per a mantenir baix l&apos;ús del disc.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1436,18 +1436,18 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Command-line options</source>
-        <translation type="unfinished">Opcions de línia d'ordres</translation>
+        <translation type="unfinished">Opcions de línia d&apos;ordres</translation>
     </message>
 </context>
 <context>
     <name>ShutdownWindow</name>
     <message>
         <source>%1 is shutting down…</source>
-        <translation type="unfinished">%1 s'està tancant ...</translation>
+        <translation type="unfinished">%1 s&apos;està tancant ...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
-        <translation type="unfinished">No apagueu l'ordinador fins que no desaparegui aquesta finestra.</translation>
+        <translation type="unfinished">No apagueu l&apos;ordinador fins que no desaparegui aquesta finestra.</translation>
     </message>
 </context>
 <context>
@@ -1457,12 +1457,12 @@ Això és ideal per a carteres de mode només lectura.</translation>
         <translation type="unfinished">Formulari</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
         <translation type="unfinished">És possible que les transaccions recents encara no siguin visibles i, per tant, el saldo de la vostra cartera podria ser incorrecte. Aquesta informació serà correcta una vegada que la cartera hagi finalitzat la sincronització amb la xarxa bitcoin, tal com es detalla més avall.</translation>
     </message>
     <message>
         <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation type="unfinished">Els intents de gastar bitcoins que es veuen afectats per les transaccions que encara no s'hagin mostrat no seran acceptats per la xarxa.</translation>
+        <translation type="unfinished">Els intents de gastar bitcoins que es veuen afectats per les transaccions que encara no s&apos;hagin mostrat no seran acceptats per la xarxa.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1474,7 +1474,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>calculating…</source>
-        <translation type="unfinished">s'està calculant...</translation>
+        <translation type="unfinished">s&apos;està calculant...</translation>
     </message>
     <message>
         <source>Last block time</source>
@@ -1498,7 +1498,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>%1 is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
-        <translation type="unfinished">%1 sincronitzant ara mateix. Es descarregaran capçaleres i blocs d'altres iguals i es validaran fins a obtenir la punta de la cadena de blocs. </translation>
+        <translation type="unfinished">%1 sincronitzant ara mateix. Es descarregaran capçaleres i blocs d&apos;altres iguals i es validaran fins a obtenir la punta de la cadena de blocs. </translation>
     </message>
     <message>
         <source>Unknown. Syncing Headers (%1, %2%)…</source>
@@ -1518,7 +1518,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     <message>
         <source>Paste address from clipboard</source>
         <extracomment>Tooltip text for button that allows you to paste an address that is in your clipboard.</extracomment>
-        <translation type="unfinished">Enganxa l'adreça del porta-retalls</translation>
+        <translation type="unfinished">Enganxa l&apos;adreça del porta-retalls</translation>
     </message>
 </context>
 <context>
@@ -1533,11 +1533,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Automatically start %1 after logging in to the system.</source>
-        <translation type="unfinished">Inicieu %1 automàticament després d'entrar en el sistema.</translation>
+        <translation type="unfinished">Inicieu %1 automàticament després d&apos;entrar en el sistema.</translation>
     </message>
     <message>
         <source>&amp;Start %1 on system login</source>
-        <translation type="unfinished">&amp;Inicia %1 en l'entrada al sistema</translation>
+        <translation type="unfinished">&amp;Inicia %1 en l&apos;entrada al sistema</translation>
     </message>
     <message>
         <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
@@ -1549,7 +1549,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Number of script &amp;verification threads</source>
-        <translation type="unfinished">Nombre de fils de &amp;verificació d'scripts</translation>
+        <translation type="unfinished">Nombre de fils de &amp;verificació d&apos;scripts</translation>
     </message>
     <message>
         <source>Full path to a %1 compatible script (e.g. C:\Downloads\hwi.exe or /Users/you/Downloads/hwi.py). Beware: malware can steal your coins!</source>
@@ -1561,11 +1561,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Shows if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
-        <translation type="unfinished">Mostra si el proxy SOCKS5 predeterminat subministrat s'utilitza per a arribar a altres iguals a través d'aquest tipus de xarxa.</translation>
+        <translation type="unfinished">Mostra si el proxy SOCKS5 predeterminat subministrat s&apos;utilitza per a arribar a altres iguals a través d&apos;aquest tipus de xarxa.</translation>
     </message>
     <message>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
-        <translation type="unfinished">Minimitza en comptes de sortir de l'aplicació quan la finestra es tanca. Quan s'habilita aquesta opció l'aplicació es tancarà només quan se selecciona Surt del menú. </translation>
+        <translation type="unfinished">Minimitza en comptes de sortir de l&apos;aplicació quan la finestra es tanca. Quan s&apos;habilita aquesta opció l&apos;aplicació es tancarà només quan se selecciona Surt del menú. </translation>
     </message>
     <message>
         <source>Options set in this dialog are overridden by the command line:</source>
@@ -1618,7 +1618,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation type="unfinished">Si inhabiliteu la despesa d'un canvi sense confirmar, el canvi d'una transacció no pot ser utilitzat fins que la transacció no tingui com a mínim una confirmació. Això també afecta com es calcula el vostre balanç.</translation>
+        <translation type="unfinished">Si inhabiliteu la despesa d&apos;un canvi sense confirmar, el canvi d&apos;una transacció no pot ser utilitzat fins que la transacció no tingui com a mínim una confirmació. Això també afecta com es calcula el vostre balanç.</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
@@ -1635,11 +1635,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>&amp;External signer script path</source>
-        <translation type="unfinished">&amp;Camí de l'script del signatari extern</translation>
+        <translation type="unfinished">&amp;Camí de l&apos;script del signatari extern</translation>
     </message>
     <message>
         <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Obre el port del client de Bitcoin al router de forma automàtica. Això només funciona quan el router implementa UPnP i l'opció està activada.</translation>
+        <translation type="unfinished">Obre el port del client de Bitcoin al router de forma automàtica. Això només funciona quan el router implementa UPnP i l&apos;opció està activada.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1663,11 +1663,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished">Connecta a la xarxa Bitcoin a través d'un proxy SOCKS5.</translation>
+        <translation type="unfinished">Connecta a la xarxa Bitcoin a través d&apos;un proxy SOCKS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
-        <translation type="unfinished">&amp;Connecta a través d'un proxy SOCKS5 (proxy per defecte):</translation>
+        <translation type="unfinished">&amp;Connecta a través d&apos;un proxy SOCKS5 (proxy per defecte):</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1699,7 +1699,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minimitza a la barra d'aplicacions en comptes de la barra de tasques</translation>
+        <translation type="unfinished">&amp;Minimitza a la barra d&apos;aplicacions en comptes de la barra de tasques</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -1711,11 +1711,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>User Interface &amp;language:</source>
-        <translation type="unfinished">&amp;Llengua de la interfície d'usuari:</translation>
+        <translation type="unfinished">&amp;Llengua de la interfície d&apos;usuari:</translation>
     </message>
     <message>
         <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation type="unfinished">Aquí es pot definir la llengua de la interfície d'usuari. Aquest paràmetre tindrà efecte en reiniciar el %1.</translation>
+        <translation type="unfinished">Aquí es pot definir la llengua de la interfície d&apos;usuari. Aquest paràmetre tindrà efecte en reiniciar el %1.</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
@@ -1723,11 +1723,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation type="unfinished">Selecciona la unitat de subdivisió per defecte per a mostrar en la interfície quan s'envien monedes.</translation>
+        <translation type="unfinished">Selecciona la unitat de subdivisió per defecte per a mostrar en la interfície quan s&apos;envien monedes.</translation>
     </message>
     <message>
         <source>Third-party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation type="unfinished">URL de terceres parts (p. ex. explorador de blocs) que apareix en la pestanya de transaccions com elements del menú contextual. %s en l'URL es reemplaçat pel resum de la transacció. Diferents URL estan separades per una barra vertical |.</translation>
+        <translation type="unfinished">URL de terceres parts (p. ex. explorador de blocs) que apareix en la pestanya de transaccions com elements del menú contextual. %s en l&apos;URL es reemplaçat pel resum de la transacció. Diferents URL estan separades per una barra vertical |.</translation>
     </message>
     <message>
         <source>&amp;Third-party transaction URLs</source>
@@ -1743,23 +1743,23 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</source>
-        <translation type="unfinished">Utilitzeu el servidor intermediari SOCKS&amp;5 per a arribar als iguals mitjançant els serveis d'onion de Tor:</translation>
+        <translation type="unfinished">Utilitzeu el servidor intermediari SOCKS&amp;5 per a arribar als iguals mitjançant els serveis d&apos;onion de Tor:</translation>
     </message>
     <message>
         <source>Monospaced font in the Overview tab:</source>
         <translation type="unfinished">Tipus de lletra monoespai a la pestanya Visió general:</translation>
     </message>
     <message>
-        <source>embedded "%1"</source>
-        <translation type="unfinished">incrustat "%1"</translation>
+        <source>embedded &quot;%1&quot;</source>
+        <translation type="unfinished">incrustat &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>closest matching "%1"</source>
-        <translation type="unfinished">coincidència més propera "%1"</translation>
+        <source>closest matching &quot;%1&quot;</source>
+        <translation type="unfinished">coincidència més propera &quot;%1&quot;</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;D'acord</translation>
+        <translation type="unfinished">&amp;D&apos;acord</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -1767,7 +1767,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Compilat sense suport de signatura externa (necessari per a la signatura externa)</translation>
     </message>
     <message>
@@ -1791,7 +1791,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
         <extracomment>Text asking the user to confirm if they would like to proceed with a client shutdown.</extracomment>
-        <translation type="unfinished">S'aturarà el client. Voleu procedir?</translation>
+        <translation type="unfinished">S&apos;aturarà el client. Voleu procedir?</translation>
     </message>
     <message>
         <source>Configuration options</source>
@@ -1801,7 +1801,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     <message>
         <source>The configuration file is used to specify advanced user options which override GUI settings. Additionally, any command-line options will override this configuration file.</source>
         <extracomment>Explanatory text about the priority order of instructions considered by client. The order from high to low being: command-line, configuration file, GUI settings.</extracomment>
-        <translation type="unfinished">El fitxer de configuració s'utilitza per a especificar les opcions d'usuari avançades que substitueixen la configuració de la interfície gràfica d'usuari. A més, qualsevol opció de la línia d'ordres substituirà aquest fitxer de configuració.</translation>
+        <translation type="unfinished">El fitxer de configuració s&apos;utilitza per a especificar les opcions d&apos;usuari avançades que substitueixen la configuració de la interfície gràfica d&apos;usuari. A més, qualsevol opció de la línia d&apos;ordres substituirà aquest fitxer de configuració.</translation>
     </message>
     <message>
         <source>Continue</source>
@@ -1813,7 +1813,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>The configuration file could not be opened.</source>
-        <translation type="unfinished">No s'ha pogut obrir el fitxer de configuració.</translation>
+        <translation type="unfinished">No s&apos;ha pogut obrir el fitxer de configuració.</translation>
     </message>
     <message>
         <source>This change would require a client restart.</source>
@@ -1821,7 +1821,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
-        <translation type="unfinished">L'adreça proxy introduïda és invalida.</translation>
+        <translation type="unfinished">L&apos;adreça proxy introduïda és invalida.</translation>
     </message>
 </context>
 <context>
@@ -1832,7 +1832,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">La informació mostrada pot no estar al dia. El vostra cartera se sincronitza automàticament amb la xarxa Bitcoin un cop s'ha establert connexió, però aquest proces encara no ha finalitzat.</translation>
+        <translation type="unfinished">La informació mostrada pot no estar al dia. El vostra cartera se sincronitza automàticament amb la xarxa Bitcoin un cop s&apos;ha establert connexió, però aquest proces encara no ha finalitzat.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1892,7 +1892,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Privacy mode activated for the Overview tab. To unmask the values, uncheck Settings-&gt;Mask values.</source>
-        <translation type="unfinished">El mode de privadesa està activat a la pestanya d'Overview. Per desenmascarar els valors, desmarqueu Configuració-&gt; Valors de màscara.</translation>
+        <translation type="unfinished">El mode de privadesa està activat a la pestanya d&apos;Overview. Per desenmascarar els valors, desmarqueu Configuració-&gt; Valors de màscara.</translation>
     </message>
 </context>
 <context>
@@ -1931,7 +1931,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Could not sign any more inputs.</source>
-        <translation type="unfinished">No s'han pogut firmar més entrades.</translation>
+        <translation type="unfinished">No s&apos;han pogut firmar més entrades.</translation>
     </message>
     <message>
         <source>Signed %1 inputs, but more signatures are still required.</source>
@@ -1939,7 +1939,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Signed transaction successfully. Transaction is ready to broadcast.</source>
-        <translation type="unfinished">La transacció s'ha firmat correctament. La transacció està a punt per a emetre's.</translation>
+        <translation type="unfinished">La transacció s&apos;ha firmat correctament. La transacció està a punt per a emetre&apos;s.</translation>
     </message>
     <message>
         <source>Unknown error processing transaction.</source>
@@ -1947,7 +1947,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Transaction broadcast failed: %1</source>
-        <translation type="unfinished">L'emissió de la transacció ha fallat: %1</translation>
+        <translation type="unfinished">L&apos;emissió de la transacció ha fallat: %1</translation>
     </message>
     <message>
         <source>PSBT copied to clipboard.</source>
@@ -1996,7 +1996,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Transaction is missing some information about inputs.</source>
-        <translation type="unfinished">La transacció manca d'informació en algunes entrades.</translation>
+        <translation type="unfinished">La transacció manca d&apos;informació en algunes entrades.</translation>
     </message>
     <message>
         <source>Transaction still needs signature(s).</source>
@@ -2016,11 +2016,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>Transaction is fully signed and ready for broadcast.</source>
-        <translation type="unfinished">La transacció està completament firmada i a punt per a emetre's.</translation>
+        <translation type="unfinished">La transacció està completament firmada i a punt per a emetre&apos;s.</translation>
     </message>
     <message>
         <source>Transaction status is unknown.</source>
-        <translation type="unfinished">L'estat de la transacció és desconegut.</translation>
+        <translation type="unfinished">L&apos;estat de la transacció és desconegut.</translation>
     </message>
 </context>
 <context>
@@ -2035,23 +2035,23 @@ Això és ideal per a carteres de mode només lectura.</translation>
     </message>
     <message>
         <source>URI handling</source>
-        <translation type="unfinished">Gestió d'URI</translation>
+        <translation type="unfinished">Gestió d&apos;URI</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation type="unfinished">'bitcoin://' no és una URI vàlida. Usi 'bitcoin:' en lloc seu.</translation>
+        <source>&apos;bitcoin://&apos; is not a valid URI. Use &apos;bitcoin:&apos; instead.</source>
+        <translation type="unfinished">&apos;bitcoin://&apos; no és una URI vàlida. Usi &apos;bitcoin:&apos; en lloc seu.</translation>
     </message>
     <message>
         <source>Cannot process payment request because BIP70 is not supported.
-Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.
+Due to widespread security flaws in BIP70 it&apos;s strongly recommended that any merchant instructions to switch wallets be ignored.
 If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
-        <translation type="unfinished">No es pot processar la sol·licitud de pagament perquè no s'admet BIP70.
-A causa dels defectes generalitzats de seguretat del BIP70, es recomana que s'ignorin totes les instruccions del comerciant per a canviar carteres.
+        <translation type="unfinished">No es pot processar la sol·licitud de pagament perquè no s&apos;admet BIP70.
+A causa dels defectes generalitzats de seguretat del BIP70, es recomana que s&apos;ignorin totes les instruccions del comerciant per a canviar carteres.
 Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un URI compatible amb BIP21.</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation type="unfinished">L'URI no pot ser analitzat! Això pot ser a causa d'una adreça de Bitcoin no vàlida o per paràmetres URI amb mal format.</translation>
+        <translation type="unfinished">L&apos;URI no pot ser analitzat! Això pot ser a causa d&apos;una adreça de Bitcoin no vàlida o per paràmetres URI amb mal format.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -2062,8 +2062,8 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <extracomment>Title of Peers Table column which contains the peer's User Agent string.</extracomment>
-        <translation type="unfinished">Agent d'usuari</translation>
+        <extracomment>Title of Peers Table column which contains the peer&apos;s User Agent string.</extracomment>
+        <translation type="unfinished">Agent d&apos;usuari</translation>
     </message>
     <message>
         <source>Peer</source>
@@ -2097,7 +2097,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">Tipus</translation>
     </message>
     <message>
@@ -2120,7 +2120,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     <name>QRImageWidget</name>
     <message>
         <source>&amp;Save Image…</source>
-        <translation type="unfinished">&amp;Desa l'imatge...</translation>
+        <translation type="unfinished">&amp;Desa l&apos;imatge...</translation>
     </message>
     <message>
         <source>&amp;Copy Image</source>
@@ -2132,7 +2132,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>Error encoding URI into QR Code.</source>
-        <translation type="unfinished">Error en codificar l'URI en un codi QR.</translation>
+        <translation type="unfinished">Error en codificar l&apos;URI en un codi QR.</translation>
     </message>
     <message>
         <source>QR code support not available.</source>
@@ -2159,20 +2159,20 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
         <translation type="unfinished">&amp;Informació</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the data directory use the '%1' option.</source>
-        <translation type="unfinished">Per tal d'especificar una ubicació que no és per defecte del directori de dades utilitza la '%1' opció.</translation>
+        <source>To specify a non-default location of the data directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">Per tal d&apos;especificar una ubicació que no és per defecte del directori de dades utilitza la &apos;%1&apos; opció.</translation>
     </message>
     <message>
         <source>Blocksdir</source>
         <translation type="unfinished">Directori de blocs</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
-        <translation type="unfinished">Per tal d'especificar una ubicació que no és per defecte del directori de blocs utilitza la '%1' opció.</translation>
+        <source>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">Per tal d&apos;especificar una ubicació que no és per defecte del directori de blocs utilitza la &apos;%1&apos; opció.</translation>
     </message>
     <message>
         <source>Startup time</source>
-        <translation type="unfinished">&amp;Temps d'inici</translation>
+        <translation type="unfinished">&amp;Temps d&apos;inici</translation>
     </message>
     <message>
         <source>Network</source>
@@ -2240,7 +2240,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>Starting Block</source>
-        <translation type="unfinished">Bloc d'inici</translation>
+        <translation type="unfinished">Bloc d&apos;inici</translation>
     </message>
     <message>
         <source>Synced Headers</source>
@@ -2264,7 +2264,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>User Agent</source>
-        <translation type="unfinished">Agent d'usuari</translation>
+        <translation type="unfinished">Agent d&apos;usuari</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -2308,7 +2308,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>High bandwidth BIP152 compact block relay: %1</source>
-        <translation type="unfinished">Trànsit de bloc compacte BIP152 d'ample de banda elevat: %1</translation>
+        <translation type="unfinished">Trànsit de bloc compacte BIP152 d&apos;ample de banda elevat: %1</translation>
     </message>
     <message>
         <source>High Bandwidth</source>
@@ -2329,7 +2329,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     <message>
         <source>Elapsed time since a novel transaction accepted into our mempool was received from this peer.</source>
         <extracomment>Tooltip text for the Last Transaction field in the peer details area.</extracomment>
-        <translation type="unfinished">El temps transcorregut des que es va rebre d'aquesta transacció una nova transacció acceptada al nostre igual.</translation>
+        <translation type="unfinished">El temps transcorregut des que es va rebre d&apos;aquesta transacció una nova transacció acceptada al nostre igual.</translation>
     </message>
     <message>
         <source>Last Send</source>
@@ -2345,7 +2345,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>The duration of a currently outstanding ping.</source>
-        <translation type="unfinished">La duració d'un ping més destacat actualment.</translation>
+        <translation type="unfinished">La duració d&apos;un ping més destacat actualment.</translation>
     </message>
     <message>
         <source>Ping Wait</source>
@@ -2415,15 +2415,15 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     <message>
         <source>Outbound Address Fetch: short-lived, for soliciting addresses</source>
         <extracomment>Explanatory text for a short-lived outbound peer connection that is used to request addresses from a peer.</extracomment>
-        <translation type="unfinished">Obtenció d'adreces de sortida: de curta durada, per a sol·licitar adreces</translation>
+        <translation type="unfinished">Obtenció d&apos;adreces de sortida: de curta durada, per a sol·licitar adreces</translation>
     </message>
     <message>
         <source>we selected the peer for high bandwidth relay</source>
-        <translation type="unfinished">hem seleccionat l'igual per a un gran trànsit d'amplada de banda</translation>
+        <translation type="unfinished">hem seleccionat l&apos;igual per a un gran trànsit d&apos;amplada de banda</translation>
     </message>
     <message>
         <source>the peer selected us for high bandwidth relay</source>
-        <translation type="unfinished">l'igual que hem seleccionat per al trànsit de gran amplada de banda</translation>
+        <translation type="unfinished">l&apos;igual que hem seleccionat per al trànsit de gran amplada de banda</translation>
     </message>
     <message>
         <source>no high bandwidth relay selected</source>
@@ -2432,7 +2432,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     <message>
         <source>&amp;Copy address</source>
         <extracomment>Context menu action to copy the address of a peer.</extracomment>
-        <translation type="unfinished">&amp;Copia l'adreça</translation>
+        <translation type="unfinished">&amp;Copia l&apos;adreça</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>
@@ -2464,11 +2464,11 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
     </message>
     <message>
         <source>Executing command without any wallet</source>
-        <translation type="unfinished">S'està executant l'ordre sense cap cartera</translation>
+        <translation type="unfinished">S&apos;està executant l&apos;ordre sense cap cartera</translation>
     </message>
     <message>
-        <source>Executing command using "%1" wallet</source>
-        <translation type="unfinished">S'està executant comanda usant la cartera "%1"</translation>
+        <source>Executing command using &quot;%1&quot; wallet</source>
+        <translation type="unfinished">S&apos;està executant comanda usant la cartera &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Welcome to the %1 RPC console.
@@ -2480,12 +2480,12 @@ For more information on using this console, type %6.
 %7WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.%8</source>
         <extracomment>RPC console welcome message. Placeholders %7 and %8 are style tags for the warning content, and they are not space separated from the rest of the text intentionally.</extracomment>
         <translation type="unfinished">Benvingut a la consola RPC %1.
-Utilitzeu les fletxes amunt i avall per a navegar per l'historial i %2 per a esborrar la pantalla.
+Utilitzeu les fletxes amunt i avall per a navegar per l&apos;historial i %2 per a esborrar la pantalla.
 Utilitzeu %3 i %4 per augmentar o reduir la mida de la lletra.
 Escriviu %5 per a obtenir una visió general de les ordres disponibles.
 Per a obtenir més informació sobre com utilitzar aquesta consola, escriviu %6.
 ADVERTIMENT %7: Els estafadors han estat actius, dient als usuaris que escriguin ordres aquí, robant el contingut de la seva cartera.
-No utilitzeu aquesta consola sense entendre completament les ramificacions d'una ordre. %8</translation>
+No utilitzeu aquesta consola sense entendre completament les ramificacions d&apos;una ordre. %8</translation>
     </message>
     <message>
         <source>Executing…</source>
@@ -2541,11 +2541,11 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation type="unfinished">Un missatge opcional que s'adjuntarà a la sol·licitud de pagament, que es mostrarà quan s'obri la sol·licitud. Nota: El missatge no s'enviarà amb el pagament per la xarxa Bitcoin.</translation>
+        <translation type="unfinished">Un missatge opcional que s&apos;adjuntarà a la sol·licitud de pagament, que es mostrarà quan s&apos;obri la sol·licitud. Nota: El missatge no s&apos;enviarà amb el pagament per la xarxa Bitcoin.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
-        <translation type="unfinished">Una etiqueta opcional que s'associarà amb la nova adreça receptora.</translation>
+        <translation type="unfinished">Una etiqueta opcional que s&apos;associarà amb la nova adreça receptora.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -2597,15 +2597,15 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>Copy &amp;URI</source>
-        <translation type="unfinished">Copia l'&amp;URI</translation>
+        <translation type="unfinished">Copia l&apos;&amp;URI</translation>
     </message>
     <message>
         <source>&amp;Copy address</source>
-        <translation type="unfinished">&amp;Copia l'adreça</translation>
+        <translation type="unfinished">&amp;Copia l&apos;adreça</translation>
     </message>
     <message>
         <source>Copy &amp;label</source>
-        <translation type="unfinished">Copia l'&amp;etiqueta</translation>
+        <translation type="unfinished">Copia l&apos;&amp;etiqueta</translation>
     </message>
     <message>
         <source>Copy &amp;message</source>
@@ -2617,11 +2617,11 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>Could not unlock wallet.</source>
-        <translation type="unfinished">No s'ha pogut desblocar la cartera.</translation>
+        <translation type="unfinished">No s&apos;ha pogut desblocar la cartera.</translation>
     </message>
     <message>
         <source>Could not generate new %1 address</source>
-        <translation type="unfinished">No s'ha pogut generar una nova %1 direcció</translation>
+        <translation type="unfinished">No s&apos;ha pogut generar una nova %1 direcció</translation>
     </message>
 </context>
 <context>
@@ -2652,11 +2652,11 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>Copy &amp;URI</source>
-        <translation type="unfinished">Copia l'&amp;URI</translation>
+        <translation type="unfinished">Copia l&apos;&amp;URI</translation>
     </message>
     <message>
         <source>Copy &amp;Address</source>
-        <translation type="unfinished">Copia l'&amp;adreça</translation>
+        <translation type="unfinished">Copia l&apos;&amp;adreça</translation>
     </message>
     <message>
         <source>&amp;Verify</source>
@@ -2669,7 +2669,7 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>&amp;Save Image…</source>
-        <translation type="unfinished">&amp;Desa l'imatge...</translation>
+        <translation type="unfinished">&amp;Desa l&apos;imatge...</translation>
     </message>
     <message>
         <source>Payment information</source>
@@ -2704,7 +2704,7 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>(no amount requested)</source>
-        <translation type="unfinished">(no s'ha sol·licitat import)</translation>
+        <translation type="unfinished">(no s&apos;ha sol·licitat import)</translation>
     </message>
     <message>
         <source>Requested</source>
@@ -2751,11 +2751,11 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation type="unfinished">Si s'activa això, però l'adreça de canvi està buida o bé no és vàlida, el canvi s'enviarà a una adreça generada de nou.</translation>
+        <translation type="unfinished">Si s&apos;activa això, però l&apos;adreça de canvi està buida o bé no és vàlida, el canvi s&apos;enviarà a una adreça generada de nou.</translation>
     </message>
     <message>
         <source>Custom change address</source>
-        <translation type="unfinished">Personalitza l'adreça de canvi</translation>
+        <translation type="unfinished">Personalitza l&apos;adreça de canvi</translation>
     </message>
     <message>
         <source>Transaction Fee:</source>
@@ -2763,11 +2763,11 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
     </message>
     <message>
         <source>Using the fallbackfee can result in sending a transaction that will take several hours or days (or never) to confirm. Consider choosing your fee manually or wait until you have validated the complete chain.</source>
-        <translation type="unfinished">L'ús de la tarifa de pagament pot provocar l'enviament d'una transacció que trigarà diverses hores o dies (o mai) a confirmar. Penseu a triar la possibilitat d'escollir la tarifa manualment o espereu fins que hagueu validat la cadena completa.</translation>
+        <translation type="unfinished">L&apos;ús de la tarifa de pagament pot provocar l&apos;enviament d&apos;una transacció que trigarà diverses hores o dies (o mai) a confirmar. Penseu a triar la possibilitat d&apos;escollir la tarifa manualment o espereu fins que hagueu validat la cadena completa.</translation>
     </message>
     <message>
         <source>Warning: Fee estimation is currently not possible.</source>
-        <translation type="unfinished">Advertència: l'estimació de tarifes no és possible actualment.</translation>
+        <translation type="unfinished">Advertència: l&apos;estimació de tarifes no és possible actualment.</translation>
     </message>
     <message>
         <source>Hide</source>
@@ -2806,11 +2806,11 @@ No utilitzeu aquesta consola sense entendre completament les ramificacions d'una
         <translation type="unfinished">Amagueu la configuració de les tarifes de transacció</translation>
     </message>
     <message>
-        <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
+        <source>Specify a custom fee per kB (1,000 bytes) of the transaction&apos;s virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satoshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 satoshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 satoshis per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 satoshis.</source>
         <translation type="unfinished">Especifiqueu una tarifa personalitzada per kB (1.000 bytes) de la mida virtual de la transacció.
-Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per kvB" per a una mida de transacció de 500 bytes virtuals (la meitat d'1 kvB) donaria finalment una tarifa de només 50 satoshis.</translation>
+Nota: atès que la tarifa es calcula per byte, una tarifa de &quot;100 satoshis per kvB&quot; per a una mida de transacció de 500 bytes virtuals (la meitat d&apos;1 kvB) donaria finalment una tarifa de només 50 satoshis.</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
@@ -2822,7 +2822,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>(Smart fee not initialized yet. This usually takes a few blocks…)</source>
-        <translation type="unfinished">(La tarifa intel·ligent encara no s'ha inicialitzat. Normalment triga uns quants blocs...)</translation>
+        <translation type="unfinished">(La tarifa intel·ligent encara no s&apos;ha inicialitzat. Normalment triga uns quants blocs...)</translation>
     </message>
     <message>
         <source>Confirmation time target:</source>
@@ -2833,8 +2833,8 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <translation type="unfinished">Habilita Replace-By-Fee: substitució per tarifa</translation>
     </message>
     <message>
-        <source>With Replace-By-Fee (BIP-125) you can increase a transaction's fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
-        <translation type="unfinished">Amb la substitució per tarifa o Replace-By-Fee (BIP-125) pot incrementar la tarifa de la transacció després d'enviar-la. Sense això, seria recomenable una tarifa més alta per a compensar el risc d'increment del retard de la transacció.</translation>
+        <source>With Replace-By-Fee (BIP-125) you can increase a transaction&apos;s fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
+        <translation type="unfinished">Amb la substitució per tarifa o Replace-By-Fee (BIP-125) pot incrementar la tarifa de la transacció després d&apos;enviar-la. Sense això, seria recomenable una tarifa més alta per a compensar el risc d&apos;increment del retard de la transacció.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -2846,7 +2846,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Confirm the send action</source>
-        <translation type="unfinished">Confirma l'acció d'enviament</translation>
+        <translation type="unfinished">Confirma l&apos;acció d&apos;enviament</translation>
     </message>
     <message>
         <source>S&amp;end</source>
@@ -2858,7 +2858,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Copy amount</source>
-        <translation type="unfinished">Copia l'import</translation>
+        <translation type="unfinished">Copia l&apos;import</translation>
     </message>
     <message>
         <source>Copy fee</source>
@@ -2882,8 +2882,8 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Sign on device</source>
-        <extracomment>"device" usually means a hardware wallet.</extracomment>
-        <translation type="unfinished">Identifica't al dispositiu</translation>
+        <extracomment>&quot;device&quot; usually means a hardware wallet.</extracomment>
+        <translation type="unfinished">Identifica&apos;t al dispositiu</translation>
     </message>
     <message>
         <source>Connect your hardware wallet first.</source>
@@ -2891,8 +2891,8 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Set external signer script path in Options -&gt; Wallet</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
-        <translation type="unfinished">Definiu el camí de l'script del signant extern a Opcions -&gt; Cartera</translation>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
+        <translation type="unfinished">Definiu el camí de l&apos;script del signant extern a Opcions -&gt; Cartera</translation>
     </message>
     <message>
         <source>Cr&amp;eate Unsigned</source>
@@ -2903,19 +2903,19 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <translation type="unfinished">Crea una transacció bitcoin parcialment signada (PSBT) per a utilitzar, per exemple,  amb una cartera %1 fora de línia o amb una cartera compatible amb PSBT.</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation type="unfinished">de la cartera "%1"</translation>
+        <source> from wallet &apos;%1&apos;</source>
+        <translation type="unfinished">de la cartera &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 to '%2'</source>
-        <translation type="unfinished">%1 a '%2'</translation>
+        <source>%1 to &apos;%2&apos;</source>
+        <translation type="unfinished">%1 a &apos;%2&apos;</translation>
     </message>
     <message>
         <source>%1 to %2</source>
         <translation type="unfinished">%1 a %2</translation>
     </message>
     <message>
-        <source>To review recipient list click "Show Details…"</source>
+        <source>To review recipient list click &quot;Show Details…&quot;</source>
         <translation type="unfinished">Per a revisar la llista de destinataris, feu clic a «Mostra els detalls...»</translation>
     </message>
     <message>
@@ -2924,12 +2924,12 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>External signer not found</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
-        <translation type="unfinished">No s'ha trobat el signant extern</translation>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
+        <translation type="unfinished">No s&apos;ha trobat el signant extern</translation>
     </message>
     <message>
         <source>External signer failure</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Error del signant extern</translation>
     </message>
     <message>
@@ -2988,12 +2988,12 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     <message>
         <source>Unsigned Transaction</source>
         <comment>PSBT copied</comment>
-        <extracomment>Caption of "PSBT has been copied" messagebox</extracomment>
+        <extracomment>Caption of &quot;PSBT has been copied&quot; messagebox</extracomment>
         <translation type="unfinished">Transacció no signada</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
-        <translation type="unfinished">Confirma l'enviament de monedes</translation>
+        <translation type="unfinished">Confirma l&apos;enviament de monedes</translation>
     </message>
     <message>
         <source>Watch-only balance:</source>
@@ -3001,23 +3001,23 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>The recipient address is not valid. Please recheck.</source>
-        <translation type="unfinished">L'adreça del destinatari no és vàlida. Torneu-la a comprovar.</translation>
+        <translation type="unfinished">L&apos;adreça del destinatari no és vàlida. Torneu-la a comprovar.</translation>
     </message>
     <message>
         <source>The amount to pay must be larger than 0.</source>
-        <translation type="unfinished">L'import a pagar ha de ser major que 0.</translation>
+        <translation type="unfinished">L&apos;import a pagar ha de ser major que 0.</translation>
     </message>
     <message>
         <source>The amount exceeds your balance.</source>
-        <translation type="unfinished">L'import supera el vostre balanç.</translation>
+        <translation type="unfinished">L&apos;import supera el vostre balanç.</translation>
     </message>
     <message>
         <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation type="unfinished">El total excedeix el vostre balanç quan s'afegeix la tarifa a la transacció %1.</translation>
+        <translation type="unfinished">El total excedeix el vostre balanç quan s&apos;afegeix la tarifa a la transacció %1.</translation>
     </message>
     <message>
         <source>Duplicate address found: addresses should only be used once each.</source>
-        <translation type="unfinished">S'ha trobat una adreça duplicada: les adreces només s'haurien d'utilitzar una vegada cada una.</translation>
+        <translation type="unfinished">S&apos;ha trobat una adreça duplicada: les adreces només s&apos;haurien d&apos;utilitzar una vegada cada una.</translation>
     </message>
     <message>
         <source>Transaction creation failed!</source>
@@ -3030,8 +3030,8 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3044,11 +3044,11 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Confirm custom change address</source>
-        <translation type="unfinished">Confirma l'adreça de canvi personalitzada</translation>
+        <translation type="unfinished">Confirma l&apos;adreça de canvi personalitzada</translation>
     </message>
     <message>
         <source>The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?</source>
-        <translation type="unfinished">L'adreça que heu seleccionat per al canvi no és part d'aquesta cartera. Tots els fons de la vostra cartera es poden enviar a aquesta adreça. N'esteu segur?</translation>
+        <translation type="unfinished">L&apos;adreça que heu seleccionat per al canvi no és part d&apos;aquesta cartera. Tots els fons de la vostra cartera es poden enviar a aquesta adreça. N&apos;esteu segur?</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -3075,7 +3075,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>The Bitcoin address to send the payment to</source>
-        <translation type="unfinished">L'adreça Bitcoin on enviar el pagament</translation>
+        <translation type="unfinished">L&apos;adreça Bitcoin on enviar el pagament</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -3083,7 +3083,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation type="unfinished">Enganxa l'adreça del porta-retalls</translation>
+        <translation type="unfinished">Enganxa l&apos;adreça del porta-retalls</translation>
     </message>
     <message>
         <source>Remove this entry</source>
@@ -3095,11 +3095,11 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation type="unfinished">La tarifa es deduirà de l'import que s'enviarà. El destinatari rebrà menys bitcoins que les que introduïu al camp d'import. Si se seleccionen múltiples destinataris, la tarifa es dividirà per igual.</translation>
+        <translation type="unfinished">La tarifa es deduirà de l&apos;import que s&apos;enviarà. El destinatari rebrà menys bitcoins que les que introduïu al camp d&apos;import. Si se seleccionen múltiples destinataris, la tarifa es dividirà per igual.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
-        <translation type="unfinished">S&amp;ubstreu la tarifa de l'import</translation>
+        <translation type="unfinished">S&amp;ubstreu la tarifa de l&apos;import</translation>
     </message>
     <message>
         <source>Use available balance</source>
@@ -3111,11 +3111,11 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
-        <translation type="unfinished">Introduïu una etiqueta per a aquesta adreça per afegir-la a la llista d'adreces utilitzades</translation>
+        <translation type="unfinished">Introduïu una etiqueta per a aquesta adreça per afegir-la a la llista d&apos;adreces utilitzades</translation>
     </message>
     <message>
         <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation type="unfinished">Un missatge que s'ha adjuntat al bitcoin: URI que s'emmagatzemarà amb la transacció per a la vostra referència. Nota: el missatge no s'enviarà a través de la xarxa Bitcoin.</translation>
+        <translation type="unfinished">Un missatge que s&apos;ha adjuntat al bitcoin: URI que s&apos;emmagatzemarà amb la transacció per a la vostra referència. Nota: el missatge no s&apos;enviarà a través de la xarxa Bitcoin.</translation>
     </message>
 </context>
 <context>
@@ -3141,11 +3141,11 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished">Podeu signar missatges/acords amb les vostres adreces per a provar que rebeu les bitcoins que s'hi envien. Aneu amb compte no signar res que sigui vague o aleatori, perquè en alguns atacs de suplantació es pot provar que hi signeu la vostra identitat. Només signeu aquelles declaracions completament detallades en què hi esteu d'acord. </translation>
+        <translation type="unfinished">Podeu signar missatges/acords amb les vostres adreces per a provar que rebeu les bitcoins que s&apos;hi envien. Aneu amb compte no signar res que sigui vague o aleatori, perquè en alguns atacs de suplantació es pot provar que hi signeu la vostra identitat. Només signeu aquelles declaracions completament detallades en què hi esteu d&apos;acord. </translation>
     </message>
     <message>
         <source>The Bitcoin address to sign the message with</source>
-        <translation type="unfinished">L'adreça Bitcoin amb què signar el missatge</translation>
+        <translation type="unfinished">L&apos;adreça Bitcoin amb què signar el missatge</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3157,7 +3157,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation type="unfinished">Enganxa l'adreça del porta-retalls</translation>
+        <translation type="unfinished">Enganxa l&apos;adreça del porta-retalls</translation>
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
@@ -3173,7 +3173,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation type="unfinished">Signa el missatge per a provar que ets propietari d'aquesta adreça Bitcoin</translation>
+        <translation type="unfinished">Signa el missatge per a provar que ets propietari d&apos;aquesta adreça Bitcoin</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3192,12 +3192,12 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <translation type="unfinished">&amp;Verifica el missatge</translation>
     </message>
     <message>
-        <source>Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
-        <translation type="unfinished">Introduïu l'adreça del receptor, el missatge (assegureu-vos de copiar els salts de línia, espais, tabuladors, etc. exactament) i signatura de sota per a verificar el missatge. Tingueu cura de no llegir més en la signatura del que està al missatge signat, per a evitar ser enganyat per un atac d'home-en-el-mig. Tingueu en compte que això només demostra que la part que signa rep amb l'adreça, i no es pot provar l'enviament de qualsevol transacció!</translation>
+        <source>Enter the receiver&apos;s address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
+        <translation type="unfinished">Introduïu l&apos;adreça del receptor, el missatge (assegureu-vos de copiar els salts de línia, espais, tabuladors, etc. exactament) i signatura de sota per a verificar el missatge. Tingueu cura de no llegir més en la signatura del que està al missatge signat, per a evitar ser enganyat per un atac d&apos;home-en-el-mig. Tingueu en compte que això només demostra que la part que signa rep amb l&apos;adreça, i no es pot provar l&apos;enviament de qualsevol transacció!</translation>
     </message>
     <message>
         <source>The Bitcoin address the message was signed with</source>
-        <translation type="unfinished">L'adreça Bitcoin amb què va ser signat el missatge</translation>
+        <translation type="unfinished">L&apos;adreça Bitcoin amb què va ser signat el missatge</translation>
     </message>
     <message>
         <source>The signed message to verify</source>
@@ -3220,24 +3220,24 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <translation type="unfinished">Neteja tots els camps de verificació de missatge</translation>
     </message>
     <message>
-        <source>Click "Sign Message" to generate signature</source>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
         <translation type="unfinished">Feu clic a «Signa el missatge» per a generar una signatura</translation>
     </message>
     <message>
         <source>The entered address is invalid.</source>
-        <translation type="unfinished">L'adreça introduïda no és vàlida.</translation>
+        <translation type="unfinished">L&apos;adreça introduïda no és vàlida.</translation>
     </message>
     <message>
         <source>Please check the address and try again.</source>
-        <translation type="unfinished">Comproveu l'adreça i torneu-ho a provar.</translation>
+        <translation type="unfinished">Comproveu l&apos;adreça i torneu-ho a provar.</translation>
     </message>
     <message>
         <source>The entered address does not refer to a key.</source>
-        <translation type="unfinished">L'adreça introduïda no referencia a cap clau.</translation>
+        <translation type="unfinished">L&apos;adreça introduïda no referencia a cap clau.</translation>
     </message>
     <message>
         <source>Wallet unlock was cancelled.</source>
-        <translation type="unfinished">S'ha cancel·lat el desblocatge de la cartera.</translation>
+        <translation type="unfinished">S&apos;ha cancel·lat el desblocatge de la cartera.</translation>
     </message>
     <message>
         <source>No error</source>
@@ -3257,7 +3257,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>The signature could not be decoded.</source>
-        <translation type="unfinished">La signatura no s'ha pogut descodificar.</translation>
+        <translation type="unfinished">La signatura no s&apos;ha pogut descodificar.</translation>
     </message>
     <message>
         <source>Please check the signature and try again.</source>
@@ -3282,7 +3282,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <source>(press q to shutdown and continue later)</source>
         <translation type="unfinished">(premeu q per apagar i continuar més tard)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionDesc</name>
     <message>
@@ -3408,15 +3408,15 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source> (Certificate was not verified)</source>
-        <translation type="unfinished">(El certificat no s'ha verificat)</translation>
+        <translation type="unfinished">(El certificat no s&apos;ha verificat)</translation>
     </message>
     <message>
         <source>Merchant</source>
         <translation type="unfinished">Mercader</translation>
     </message>
     <message>
-        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation type="unfinished">Les monedes generades han de madurar %1 blocs abans de poder ser gastades. Quan genereu aquest bloc, es farà saber a la xarxa per tal d'afegir-lo a la cadena de blocs. Si no pot fer-se lloc a la cadena, el seu estat canviarà a «no acceptat» i no es podrà gastar. Això pot passar ocasionalment si un altre node genera un bloc en un marge de segons respecte al vostre.</translation>
+        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <translation type="unfinished">Les monedes generades han de madurar %1 blocs abans de poder ser gastades. Quan genereu aquest bloc, es farà saber a la xarxa per tal d&apos;afegir-lo a la cadena de blocs. Si no pot fer-se lloc a la cadena, el seu estat canviarà a «no acceptat» i no es podrà gastar. Això pot passar ocasionalment si un altre node genera un bloc en un marge de segons respecte al vostre.</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -3538,7 +3538,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>User-defined intent/purpose of the transaction.</source>
-        <translation type="unfinished">Intenció/propòsit de la transacció definida per l'usuari.</translation>
+        <translation type="unfinished">Intenció/propòsit de la transacció definida per l&apos;usuari.</translation>
     </message>
     <message>
         <source>Amount removed from or added to balance.</source>
@@ -3589,7 +3589,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Enter address, transaction id, or label to search</source>
-        <translation type="unfinished">Introduïu una adreça, la id de la transacció o l'etiqueta per a cercar</translation>
+        <translation type="unfinished">Introduïu una adreça, la id de la transacció o l&apos;etiqueta per a cercar</translation>
     </message>
     <message>
         <source>Min amount</source>
@@ -3601,11 +3601,11 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>&amp;Copy address</source>
-        <translation type="unfinished">&amp;Copia l'adreça</translation>
+        <translation type="unfinished">&amp;Copia l&apos;adreça</translation>
     </message>
     <message>
         <source>Copy &amp;label</source>
-        <translation type="unfinished">Copia l'&amp;etiqueta</translation>
+        <translation type="unfinished">Copia l&apos;&amp;etiqueta</translation>
     </message>
     <message>
         <source>Copy &amp;amount</source>
@@ -3633,15 +3633,15 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>A&amp;bandon transaction</source>
-        <translation type="unfinished">Transacció d'a&amp;bandonar</translation>
+        <translation type="unfinished">Transacció d&apos;a&amp;bandonar</translation>
     </message>
     <message>
         <source>&amp;Edit address label</source>
-        <translation type="unfinished">&amp;Edita l'etiqueta de l'adreça</translation>
+        <translation type="unfinished">&amp;Edita l&apos;etiqueta de l&apos;adreça</translation>
     </message>
     <message>
         <source>Export Transaction History</source>
-        <translation type="unfinished">Exporta l'historial de transacció</translation>
+        <translation type="unfinished">Exporta l&apos;historial de transacció</translation>
     </message>
     <message>
         <source>Comma separated file</source>
@@ -3674,11 +3674,11 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>Exporting Failed</source>
-        <translation type="unfinished">L'exportació ha fallat</translation>
+        <translation type="unfinished">L&apos;exportació ha fallat</translation>
     </message>
     <message>
         <source>There was an error trying to save the transaction history to %1.</source>
-        <translation type="unfinished">S'ha produït un error en provar de desar l'historial de transacció a %1.</translation>
+        <translation type="unfinished">S&apos;ha produït un error en provar de desar l&apos;historial de transacció a %1.</translation>
     </message>
     <message>
         <source>Exporting Successful</source>
@@ -3686,7 +3686,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
     </message>
     <message>
         <source>The transaction history was successfully saved to %1.</source>
-        <translation type="unfinished">L'historial de transaccions s'ha desat correctament a %1.</translation>
+        <translation type="unfinished">L&apos;historial de transaccions s&apos;ha desat correctament a %1.</translation>
     </message>
     <message>
         <source>Range:</source>
@@ -3703,7 +3703,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <source>No wallet has been loaded.
 Go to File &gt; Open Wallet to load a wallet.
 - OR -</source>
-        <translation type="unfinished">No s'ha carregat cap cartera. 
+        <translation type="unfinished">No s&apos;ha carregat cap cartera. 
 Ves a Arxiu &gt; Obrir Cartera per a carregar cartera. 
 - O -</translation>
     </message>
@@ -3725,7 +3725,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>PSBT file must be smaller than 100 MiB</source>
-        <translation type="unfinished">L'arxiu PSBT ha de ser més petit que 100MiB</translation>
+        <translation type="unfinished">L&apos;arxiu PSBT ha de ser més petit que 100MiB</translation>
     </message>
     <message>
         <source>Unable to decode PSBT</source>
@@ -3744,7 +3744,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Increasing transaction fee failed</source>
-        <translation type="unfinished">S'ha produït un error en augmentar la tarifa de transacció</translation>
+        <translation type="unfinished">S&apos;ha produït un error en augmentar la tarifa de transacció</translation>
     </message>
     <message>
         <source>Do you want to increase the fee?</source>
@@ -3765,14 +3765,14 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Warning: This may pay the additional fee by reducing change outputs or adding inputs, when necessary. It may add a new change output if one does not already exist. These changes may potentially leak privacy.</source>
-        <translation type="unfinished">Avís: això pot pagar la tarifa addicional en reduir les sortides de canvi o afegint entrades, quan sigui necessari. Pot afegir una nova sortida de canvi si encara no n'hi ha. Aquests canvis poden filtrar la privadesa.</translation>
+        <translation type="unfinished">Avís: això pot pagar la tarifa addicional en reduir les sortides de canvi o afegint entrades, quan sigui necessari. Pot afegir una nova sortida de canvi si encara no n&apos;hi ha. Aquests canvis poden filtrar la privadesa.</translation>
     </message>
     <message>
         <source>Confirm fee bump</source>
         <translation type="unfinished">Confirmeu el recàrrec de tarifes</translation>
     </message>
     <message>
-        <source>Can't draft transaction.</source>
+        <source>Can&apos;t draft transaction.</source>
         <translation type="unfinished">No es pot redactar la transacció.</translation>
     </message>
     <message>
@@ -3785,16 +3785,16 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
         <translation type="unfinished">Copiat al portaretalls</translation>
     </message>
     <message>
-        <source>Can't sign transaction.</source>
+        <source>Can&apos;t sign transaction.</source>
         <translation type="unfinished">No es pot signar la transacció.</translation>
     </message>
     <message>
         <source>Could not commit transaction</source>
-        <translation type="unfinished">No s'ha pogut confirmar la transacció</translation>
+        <translation type="unfinished">No s&apos;ha pogut confirmar la transacció</translation>
     </message>
     <message>
-        <source>Can't display address</source>
-        <translation type="unfinished">No es pot mostrar l'adreça</translation>
+        <source>Can&apos;t display address</source>
+        <translation type="unfinished">No es pot mostrar l&apos;adreça</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -3826,15 +3826,15 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>There was an error trying to save the wallet data to %1.</source>
-        <translation type="unfinished">S'ha produït un error en provar de desar les dades de la cartera a %1.</translation>
+        <translation type="unfinished">S&apos;ha produït un error en provar de desar les dades de la cartera a %1.</translation>
     </message>
     <message>
         <source>Backup Successful</source>
-        <translation type="unfinished">La còpia de seguretat s'ha realitzat correctament</translation>
+        <translation type="unfinished">La còpia de seguretat s&apos;ha realitzat correctament</translation>
     </message>
     <message>
         <source>The wallet data was successfully saved to %1.</source>
-        <translation type="unfinished">S'han desat correctament %1 les dades de la cartera a .</translation>
+        <translation type="unfinished">S&apos;han desat correctament %1 les dades de la cartera a .</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -3857,31 +3857,31 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
-        <translation type="unfinished">No es pot obtenir un bloqueig al directori de dades %s. %s probablement ja s'estigui executant.</translation>
+        <translation type="unfinished">No es pot obtenir un bloqueig al directori de dades %s. %s probablement ja s&apos;estigui executant.</translation>
     </message>
     <message>
         <source>Cannot upgrade a non HD split wallet from version %i to version %i without upgrading to support pre-split keypool. Please use version %i or no version specified.</source>
-        <translation type="unfinished">No es pot actualitzar una cartera dividida no HD de la versió %i a la versió %i sense actualitzar-la per a admetre l'agrupació de claus dividida prèviament. Utilitzeu la versió %i o cap versió especificada.</translation>
+        <translation type="unfinished">No es pot actualitzar una cartera dividida no HD de la versió %i a la versió %i sense actualitzar-la per a admetre l&apos;agrupació de claus dividida prèviament. Utilitzeu la versió %i o cap versió especificada.</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
-        <translation type="unfinished">Distribuït sota la llicència del programari MIT, consulteu el fitxer d'acompanyament %s o %s</translation>
+        <translation type="unfinished">Distribuït sota la llicència del programari MIT, consulteu el fitxer d&apos;acompanyament %s o %s</translation>
     </message>
     <message>
-        <source>Error: Dumpfile format record is incorrect. Got "%s", expected "format".</source>
-        <translation type="unfinished">Error: el registre del format del fitxer de bolcat és incorrecte. S'ha obtingut «%s», s'esperava «format».</translation>
+        <source>Error: Dumpfile format record is incorrect. Got &quot;%s&quot;, expected &quot;format&quot;.</source>
+        <translation type="unfinished">Error: el registre del format del fitxer de bolcat és incorrecte. S&apos;ha obtingut «%s», s&apos;esperava «format».</translation>
     </message>
     <message>
-        <source>Error: Dumpfile identifier record is incorrect. Got "%s", expected "%s".</source>
-        <translation type="unfinished">Error: el registre de l'identificador del fitxer de bolcat és incorrecte. S'ha obtingut «%s», s'esperava «%s».</translation>
+        <source>Error: Dumpfile identifier record is incorrect. Got &quot;%s&quot;, expected &quot;%s&quot;.</source>
+        <translation type="unfinished">Error: el registre de l&apos;identificador del fitxer de bolcat és incorrecte. S&apos;ha obtingut «%s», s&apos;esperava «%s».</translation>
     </message>
     <message>
         <source>Error: Dumpfile version is not supported. This version of bitcoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
-        <translation type="unfinished">Error: la versió del fitxer de bolcat no és compatible. Aquesta versió de bitcoin-wallet només admet fitxers de bolcat de la versió 1. S'ha obtingut un fitxer de bolcat amb la versió %s</translation>
+        <translation type="unfinished">Error: la versió del fitxer de bolcat no és compatible. Aquesta versió de bitcoin-wallet només admet fitxers de bolcat de la versió 1. S&apos;ha obtingut un fitxer de bolcat amb la versió %s</translation>
     </message>
     <message>
-        <source>Error: Legacy wallets only support the "legacy", "p2sh-segwit", and "bech32" address types</source>
-        <translation type="unfinished">Error: les carteres heretades només admeten els tipus d'adreces «legacy», «p2sh-segwit» i «bech32»</translation>
+        <source>Error: Legacy wallets only support the &quot;legacy&quot;, &quot;p2sh-segwit&quot;, and &quot;bech32&quot; address types</source>
+        <translation type="unfinished">Error: les carteres heretades només admeten els tipus d&apos;adreces «legacy», «p2sh-segwit» i «bech32»</translation>
     </message>
     <message>
         <source>File %s already exists. If you are sure this is what you want, move it out of the way first.</source>
@@ -3889,23 +3889,23 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>More than one onion bind address is provided. Using %s for the automatically created Tor onion service.</source>
-        <translation type="unfinished"> Es proporciona més d'una adreça de vinculació. Utilitzant %s pel servei Tor onion automàticament creat.</translation>
+        <translation type="unfinished"> Es proporciona més d&apos;una adreça de vinculació. Utilitzant %s pel servei Tor onion automàticament creat.</translation>
     </message>
     <message>
         <source>No dump file provided. To use createfromdump, -dumpfile=&lt;filename&gt; must be provided.</source>
-        <translation type="unfinished">No s'ha proporcionat cap fitxer de bolcat. Per a utilitzar createfromdump, s'ha de proporcionar&lt;filename&gt;.</translation>
+        <translation type="unfinished">No s&apos;ha proporcionat cap fitxer de bolcat. Per a utilitzar createfromdump, s&apos;ha de proporcionar&lt;filename&gt;.</translation>
     </message>
     <message>
         <source>No dump file provided. To use dump, -dumpfile=&lt;filename&gt; must be provided.</source>
-        <translation type="unfinished">No s'ha proporcionat cap fitxer de bolcat. Per a bolcar, cal proporcionar&lt;filename&gt;.</translation>
+        <translation type="unfinished">No s&apos;ha proporcionat cap fitxer de bolcat. Per a bolcar, cal proporcionar&lt;filename&gt;.</translation>
     </message>
     <message>
         <source>No wallet file format provided. To use createfromdump, -format=&lt;format&gt; must be provided.</source>
-        <translation type="unfinished">No s'ha proporcionat cap format de fitxer de cartera. Per a utilitzar createfromdump, s'ha de proporcionar&lt;format&gt;.</translation>
+        <translation type="unfinished">No s&apos;ha proporcionat cap format de fitxer de cartera. Per a utilitzar createfromdump, s&apos;ha de proporcionar&lt;format&gt;.</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
-        <translation type="unfinished">Comproveu que la data i hora de l'ordinador són correctes. Si el rellotge és incorrecte, %s no funcionarà correctament.</translation>
+        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong, %s will not work properly.</source>
+        <translation type="unfinished">Comproveu que la data i hora de l&apos;ordinador són correctes. Si el rellotge és incorrecte, %s no funcionarà correctament.</translation>
     </message>
     <message>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
@@ -3924,12 +3924,12 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
         <translation type="unfinished">SQLiteDatabase: esquema de cartera sqlite de versió %d desconegut. Només és compatible la versió %d</translation>
     </message>
     <message>
-        <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
-        <translation type="unfinished">La base de dades de blocs conté un bloc que sembla ser del futur. Això pot ser degut a que la data i l'hora del vostre ordinador s'estableix incorrectament. Només reconstruïu la base de dades de blocs si esteu segur que la data i l'hora del vostre ordinador són correctes</translation>
+        <source>The block database contains a block which appears to be from the future. This may be due to your computer&apos;s date and time being set incorrectly. Only rebuild the block database if you are sure that your computer&apos;s date and time are correct</source>
+        <translation type="unfinished">La base de dades de blocs conté un bloc que sembla ser del futur. Això pot ser degut a que la data i l&apos;hora del vostre ordinador s&apos;estableix incorrectament. Només reconstruïu la base de dades de blocs si esteu segur que la data i l&apos;hora del vostre ordinador són correctes</translation>
     </message>
     <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
-        <translation type="unfinished">L'import de la transacció és massa petit per a enviar-la després que se'n dedueixi la tarifa</translation>
+        <translation type="unfinished">L&apos;import de la transacció és massa petit per a enviar-la després que se&apos;n dedueixi la tarifa</translation>
     </message>
     <message>
         <source>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</source>
@@ -3941,7 +3941,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>This is the maximum transaction fee you pay (in addition to the normal fee) to prioritize partial spend avoidance over regular coin selection.</source>
-        <translation type="unfinished">Aquesta és la comissió màxima de transacció que pagueu (a més de la tarifa normal) per prioritzar l'evitació parcial de la despesa per sobre de la selecció regular de monedes.</translation>
+        <translation type="unfinished">Aquesta és la comissió màxima de transacció que pagueu (a més de la tarifa normal) per prioritzar l&apos;evitació parcial de la despesa per sobre de la selecció regular de monedes.</translation>
     </message>
     <message>
         <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
@@ -3960,12 +3960,12 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
         <translation type="unfinished">No es poden reproduir els blocs. Haureu de reconstruir la base de dades mitjançant -reindex- chainstate.</translation>
     </message>
     <message>
-        <source>Unknown wallet file format "%s" provided. Please provide one of "bdb" or "sqlite".</source>
-        <translation type="unfinished">S'ha proporcionat un format de fitxer de cartera desconegut «%s». Proporcioneu un de «bdb» o «sqlite».</translation>
+        <source>Unknown wallet file format &quot;%s&quot; provided. Please provide one of &quot;bdb&quot; or &quot;sqlite&quot;.</source>
+        <translation type="unfinished">S&apos;ha proporcionat un format de fitxer de cartera desconegut «%s». Proporcioneu un de «bdb» o «sqlite».</translation>
     </message>
     <message>
-        <source>Warning: Dumpfile wallet format "%s" does not match command line specified format "%s".</source>
-        <translation type="unfinished">Avís: el format de cartera del fitxer de bolcat «%s» no coincideix amb el format «%s» especificat a la línia d'ordres.</translation>
+        <source>Warning: Dumpfile wallet format &quot;%s&quot; does not match command line specified format &quot;%s&quot;.</source>
+        <translation type="unfinished">Avís: el format de cartera del fitxer de bolcat «%s» no coincideix amb el format «%s» especificat a la línia d&apos;ordres.</translation>
     </message>
     <message>
         <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
@@ -3973,11 +3973,11 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation type="unfinished">Avís: sembla que no estem plenament d'acord amb els nostres iguals! Podria caler que actualitzar l'aplicació, o potser que ho facin altres nodes.</translation>
+        <translation type="unfinished">Avís: sembla que no estem plenament d&apos;acord amb els nostres iguals! Podria caler que actualitzar l&apos;aplicació, o potser que ho facin altres nodes.</translation>
     </message>
     <message>
         <source>Witness data for blocks after height %d requires validation. Please restart with -reindex.</source>
-        <translation type="unfinished">Les dades de testimoni dels blocs després de l'altura %d requereixen validació. Reinicieu amb -reindex.</translation>
+        <translation type="unfinished">Les dades de testimoni dels blocs després de l&apos;altura %d requereixen validació. Reinicieu amb -reindex.</translation>
     </message>
     <message>
         <source>You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain</source>
@@ -3993,19 +3993,19 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>A fatal internal error occurred, see debug.log for details</source>
-        <translation type="unfinished">S'ha produït un error intern fatal. Consulteu debug.log per a més detalls</translation>
+        <translation type="unfinished">S&apos;ha produït un error intern fatal. Consulteu debug.log per a més detalls</translation>
     </message>
     <message>
-        <source>Cannot resolve -%s address: '%s'</source>
-        <translation type="unfinished">No es pot resoldre -%s adreça: '%s'</translation>
+        <source>Cannot resolve -%s address: &apos;%s&apos;</source>
+        <translation type="unfinished">No es pot resoldre -%s adreça: &apos;%s&apos;</translation>
     </message>
     <message>
         <source>Cannot set -peerblockfilters without -blockfilterindex.</source>
         <translation type="unfinished">No es poden configurar -peerblockfilters sense -blockfilterindex.</translation>
     </message>
     <message>
-        <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation type="unfinished">No es pot escriure en el directori de dades "%s". Reviseu-ne els permisos.</translation>
+        <source>Cannot write to data directory &apos;%s&apos;; check permissions.</source>
+        <translation type="unfinished">No es pot escriure en el directori de dades &quot;%s&quot;. Reviseu-ne els permisos.</translation>
     </message>
     <message>
         <source>%s is set very high! Fees this large could be paid on a single transaction.</source>
@@ -4014,15 +4014,15 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Error reading %s! All keys read correctly, but transaction data or address metadata may be missing or incorrect.</source>
-        <translation type="unfinished">S'ha produït un error en llegir %s. Totes les claus es llegeixen correctament, però les dades de la transacció o les entra des de la llibreta d'adreces podrien faltar o ser incorrectes.</translation>
+        <translation type="unfinished">S&apos;ha produït un error en llegir %s. Totes les claus es llegeixen correctament, però les dades de la transacció o les entra des de la llibreta d&apos;adreces podrien faltar o ser incorrectes.</translation>
     </message>
     <message>
         <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable %s.</source>
-        <translation type="unfinished">L'estimació de la quota ha fallat. Fallbackfee està desactivat. Espereu uns quants blocs o activeu %s.</translation>
+        <translation type="unfinished">L&apos;estimació de la quota ha fallat. Fallbackfee està desactivat. Espereu uns quants blocs o activeu %s.</translation>
     </message>
     <message>
-        <source>Invalid amount for %s=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation type="unfinished">Import no vàlid per a %s=&lt;amount&gt;: '%s' (cal que sigui com a mínim la comissió de minrelay de %s per evitar que les comissions s'encallin)</translation>
+        <source>Invalid amount for %s=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
+        <translation type="unfinished">Import no vàlid per a %s=&lt;amount&gt;: &apos;%s&apos; (cal que sigui com a mínim la comissió de minrelay de %s per evitar que les comissions s&apos;encallin)</translation>
     </message>
     <message>
         <source>Config setting for %s only applied on %s network when in [%s] section.</source>
@@ -4030,19 +4030,19 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Corrupted block database detected</source>
-        <translation type="unfinished">S'ha detectat una base de dades de blocs corrupta</translation>
+        <translation type="unfinished">S&apos;ha detectat una base de dades de blocs corrupta</translation>
     </message>
     <message>
         <source>Could not find asmap file %s</source>
-        <translation type="unfinished">No s'ha pogut trobar el fitxer asmap %s</translation>
+        <translation type="unfinished">No s&apos;ha pogut trobar el fitxer asmap %s</translation>
     </message>
     <message>
         <source>Could not parse asmap file %s</source>
-        <translation type="unfinished">No s'ha pogut analitzar el fitxer asmap %s</translation>
+        <translation type="unfinished">No s&apos;ha pogut analitzar el fitxer asmap %s</translation>
     </message>
     <message>
         <source>Disk space is too low!</source>
-        <translation type="unfinished">L'espai de disc és insuficient!</translation>
+        <translation type="unfinished">L&apos;espai de disc és insuficient!</translation>
     </message>
     <message>
         <source>Do you want to rebuild the block database now?</source>
@@ -4066,7 +4066,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Error inicialitzant l'entorn de la base de dades de la cartera %s!</translation>
+        <translation type="unfinished">Error inicialitzant l&apos;entorn de la base de dades de la cartera %s!</translation>
     </message>
     <message>
         <source>Error loading %s</source>
@@ -4078,11 +4078,11 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Error loading %s: Wallet corrupted</source>
-        <translation type="unfinished">S'ha produït un error en carregar %s: la cartera és corrupta</translation>
+        <translation type="unfinished">S&apos;ha produït un error en carregar %s: la cartera és corrupta</translation>
     </message>
     <message>
         <source>Error loading %s: Wallet requires newer version of %s</source>
-        <translation type="unfinished">S'ha produït un error en carregar %s: la cartera requereix una versió més nova de %s</translation>
+        <translation type="unfinished">S&apos;ha produït un error en carregar %s: la cartera requereix una versió més nova de %s</translation>
     </message>
     <message>
         <source>Error loading block database</source>
@@ -4094,7 +4094,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Error reading configuration file: %s</source>
-        <translation type="unfinished">S'ha produït un error en llegir el fitxer de configuració: %s</translation>
+        <translation type="unfinished">S&apos;ha produït un error en llegir el fitxer de configuració: %s</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>
@@ -4102,28 +4102,28 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Error reading next record from wallet database</source>
-        <translation type="unfinished">S'ha produït un error en llegir el següent registre de la base de dades de la cartera</translation>
+        <translation type="unfinished">S&apos;ha produït un error en llegir el següent registre de la base de dades de la cartera</translation>
     </message>
     <message>
-        <source>Error: Couldn't create cursor into database</source>
-        <translation type="unfinished">Error: No s'ha pogut crear el cursor a la base de dades</translation>
+        <source>Error: Couldn&apos;t create cursor into database</source>
+        <translation type="unfinished">Error: No s&apos;ha pogut crear el cursor a la base de dades</translation>
     </message>
     <message>
         <source>Error: Disk space is low for %s</source>
-        <translation type="unfinished">Error: l'espai del disc és insuficient per a %s</translation>
+        <translation type="unfinished">Error: l&apos;espai del disc és insuficient per a %s</translation>
     </message>
     <message>
         <source>Error: Dumpfile checksum does not match. Computed %s, expected %s</source>
-        <translation type="unfinished">Error: la suma de comprovació del fitxer bolcat no coincideix. S'ha calculat %s, s'esperava 
+        <translation type="unfinished">Error: la suma de comprovació del fitxer bolcat no coincideix. S&apos;ha calculat %s, s&apos;esperava 
 %s</translation>
     </message>
     <message>
         <source>Error: Got key that was not hex: %s</source>
-        <translation type="unfinished">Error: S'ha obtingut una clau que no era hexadecimal: %s</translation>
+        <translation type="unfinished">Error: S&apos;ha obtingut una clau que no era hexadecimal: %s</translation>
     </message>
     <message>
         <source>Error: Got value that was not hex: %s</source>
-        <translation type="unfinished">Error: S'ha obtingut un valor que no era hexadecimal: %s</translation>
+        <translation type="unfinished">Error: S&apos;ha obtingut un valor que no era hexadecimal: %s</translation>
     </message>
     <message>
         <source>Error: Keypool ran out, please call keypoolrefill first</source>
@@ -4151,7 +4151,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Failed to rescan the wallet during initialization</source>
-        <translation type="unfinished">No s'ha pogut escanejar novament la cartera durant la inicialització</translation>
+        <translation type="unfinished">No s&apos;ha pogut escanejar novament la cartera durant la inicialització</translation>
     </message>
     <message>
         <source>Failed to verify database</source>
@@ -4171,70 +4171,70 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
-        <translation type="unfinished">No s'ha trobat el bloc de gènesi o és incorrecte. El directori de dades de la xarxa és incorrecte?</translation>
+        <translation type="unfinished">No s&apos;ha trobat el bloc de gènesi o és incorrecte. El directori de dades de la xarxa és incorrecte?</translation>
     </message>
     <message>
         <source>Initialization sanity check failed. %s is shutting down.</source>
-        <translation type="unfinished">S'ha produït un error en la verificació de sanejament d'inicialització. S'està tancant %s.</translation>
+        <translation type="unfinished">S&apos;ha produït un error en la verificació de sanejament d&apos;inicialització. S&apos;està tancant %s.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
         <translation type="unfinished">Balanç insuficient</translation>
     </message>
     <message>
-        <source>Invalid -i2psam address or hostname: '%s'</source>
-        <translation type="unfinished">Adreça o nom d'amfitrió -i2psam no vàlids: «%s»</translation>
+        <source>Invalid -i2psam address or hostname: &apos;%s&apos;</source>
+        <translation type="unfinished">Adreça o nom d&apos;amfitrió -i2psam no vàlids: «%s»</translation>
     </message>
     <message>
-        <source>Invalid -onion address or hostname: '%s'</source>
-        <translation type="unfinished">Adreça o nom de l'ordinador -onion no vàlida: '%s'</translation>
+        <source>Invalid -onion address or hostname: &apos;%s&apos;</source>
+        <translation type="unfinished">Adreça o nom de l&apos;ordinador -onion no vàlida: &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid -proxy address or hostname: '%s'</source>
-        <translation type="unfinished">Adreça o nom de l'ordinador -proxy no vàlida: '%s'</translation>
+        <source>Invalid -proxy address or hostname: &apos;%s&apos;</source>
+        <translation type="unfinished">Adreça o nom de l&apos;ordinador -proxy no vàlida: &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid P2P permission: '%s'</source>
-        <translation type="unfinished">Permís P2P no vàlid: '%s'</translation>
+        <source>Invalid P2P permission: &apos;%s&apos;</source>
+        <translation type="unfinished">Permís P2P no vàlid: &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid amount for %s=&lt;amount&gt;: '%s' (must be at least %s)</source>
+        <source>Invalid amount for %s=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</source>
         <translation type="unfinished">Import no vàlid per a %s=&lt;amount&gt;: «%s» (ha de ser com a mínim %s)</translation>
     </message>
     <message>
-        <source>Invalid amount for %s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Import invàlid per a %s=&lt;amount&gt;: '%s'</translation>
+        <source>Invalid amount for %s=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation type="unfinished">Import invàlid per a %s=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
-        <translation type="unfinished">Import invàlid per a -%s=&lt;amount&gt;: '%s'</translation>
+        <source>Invalid amount for -%s=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation type="unfinished">Import invàlid per a -%s=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Invalid netmask specified in -whitelist: '%s'</source>
-        <translation type="unfinished">S'ha especificat una màscara de xarxa no vàlida a -whitelist: «%s»</translation>
+        <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
+        <translation type="unfinished">S&apos;ha especificat una màscara de xarxa no vàlida a -whitelist: «%s»</translation>
     </message>
     <message>
         <source>Listening for incoming connections failed (listen returned error %s)</source>
-        <translation type="unfinished">ha fallat escoltar les connexions entrants (l'escoltament ha retornat l'error %s)</translation>
+        <translation type="unfinished">ha fallat escoltar les connexions entrants (l&apos;escoltament ha retornat l&apos;error %s)</translation>
     </message>
     <message>
         <source>Loading P2P addresses…</source>
-        <translation type="unfinished">S'estan carregant les adreces P2P...</translation>
+        <translation type="unfinished">S&apos;estan carregant les adreces P2P...</translation>
     </message>
     <message>
         <source>Loading banlist…</source>
-        <translation type="unfinished">S'està carregant la llista de bans...</translation>
+        <translation type="unfinished">S&apos;està carregant la llista de bans...</translation>
     </message>
     <message>
         <source>Loading block index…</source>
-        <translation type="unfinished">S'està carregant l'índex de blocs...</translation>
+        <translation type="unfinished">S&apos;està carregant l&apos;índex de blocs...</translation>
     </message>
     <message>
         <source>Loading wallet…</source>
         <translation type="unfinished">Carregant cartera...</translation>
     </message>
     <message>
-        <source>Need to specify a port with -whitebind: '%s'</source>
+        <source>Need to specify a port with -whitebind: &apos;%s&apos;</source>
         <translation type="unfinished">Cal especificar un port amb -whitebind: «%s»</translation>
     </message>
     <message>
@@ -4263,15 +4263,15 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Rescanning…</source>
-        <translation type="unfinished">S'està tornant a escanejar…</translation>
+        <translation type="unfinished">S&apos;està tornant a escanejar…</translation>
     </message>
     <message>
         <source>SQLiteDatabase: Failed to execute statement to verify database: %s</source>
-        <translation type="unfinished">SQLiteDatabase: No s'ha pogut executar la sentència per a verificar la base de dades: %s</translation>
+        <translation type="unfinished">SQLiteDatabase: No s&apos;ha pogut executar la sentència per a verificar la base de dades: %s</translation>
     </message>
     <message>
         <source>SQLiteDatabase: Failed to prepare statement to verify database: %s</source>
-        <translation type="unfinished">SQLiteDatabase: No s'ha pogut preparar la sentència per a verificar la base de dades: %s</translation>
+        <translation type="unfinished">SQLiteDatabase: No s&apos;ha pogut preparar la sentència per a verificar la base de dades: %s</translation>
     </message>
     <message>
         <source>SQLiteDatabase: Failed to read database verification error: %s</source>
@@ -4279,7 +4279,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>SQLiteDatabase: Unexpected application id. Expected %u, got %u</source>
-        <translation type="unfinished">SQLiteDatabase: Identificador d’aplicació inesperat. S'esperava %u, s'ha obtingut  %u</translation>
+        <translation type="unfinished">SQLiteDatabase: Identificador d’aplicació inesperat. S&apos;esperava %u, s&apos;ha obtingut  %u</translation>
     </message>
     <message>
         <source>Section [%s] is not recognized.</source>
@@ -4290,28 +4290,28 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
         <translation type="unfinished">Ha fallat la signatura de la transacció</translation>
     </message>
     <message>
-        <source>Specified -walletdir "%s" does not exist</source>
-        <translation type="unfinished">-Walletdir especificat "%s" no existeix</translation>
+        <source>Specified -walletdir &quot;%s&quot; does not exist</source>
+        <translation type="unfinished">-Walletdir especificat &quot;%s&quot; no existeix</translation>
     </message>
     <message>
-        <source>Specified -walletdir "%s" is a relative path</source>
-        <translation type="unfinished">-Walletdir especificat "%s" és una ruta relativa</translation>
+        <source>Specified -walletdir &quot;%s&quot; is a relative path</source>
+        <translation type="unfinished">-Walletdir especificat &quot;%s&quot; és una ruta relativa</translation>
     </message>
     <message>
-        <source>Specified -walletdir "%s" is not a directory</source>
-        <translation type="unfinished">-Walletdir especificat "%s" no és un directori</translation>
+        <source>Specified -walletdir &quot;%s&quot; is not a directory</source>
+        <translation type="unfinished">-Walletdir especificat &quot;%s&quot; no és un directori</translation>
     </message>
     <message>
-        <source>Specified blocks directory "%s" does not exist.</source>
-        <translation type="unfinished">El directori de blocs especificat "%s" no existeix.</translation>
+        <source>Specified blocks directory &quot;%s&quot; does not exist.</source>
+        <translation type="unfinished">El directori de blocs especificat &quot;%s&quot; no existeix.</translation>
     </message>
     <message>
-        <source>Specified data directory "%s" does not exist.</source>
+        <source>Specified data directory &quot;%s&quot; does not exist.</source>
         <translation type="unfinished">El directori de dades especificat «%s» no existeix.</translation>
     </message>
     <message>
         <source>Starting network threads…</source>
-        <translation type="unfinished">S'estan iniciant fils de xarxa...</translation>
+        <translation type="unfinished">S&apos;estan iniciant fils de xarxa...</translation>
     </message>
     <message>
         <source>The source code is available from %s.</source>
@@ -4323,7 +4323,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>The transaction amount is too small to pay the fee</source>
-        <translation type="unfinished">L'import de la transacció és massa petit per a pagar-ne una tarifa</translation>
+        <translation type="unfinished">L&apos;import de la transacció és massa petit per a pagar-ne una tarifa</translation>
     </message>
     <message>
         <source>The wallet will avoid paying less than the minimum relay fee.</source>
@@ -4351,7 +4351,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Transaction has too long of a mempool chain</source>
-        <translation type="unfinished">La transacció té massa temps d'una cadena de mempool</translation>
+        <translation type="unfinished">La transacció té massa temps d&apos;una cadena de mempool</translation>
     </message>
     <message>
         <source>Transaction must have at least one recipient</source>
@@ -4363,23 +4363,23 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
-        <translation type="unfinished">No s'ha pogut vincular a %s en aquest ordinador (la vinculació ha retornat l'error %s)</translation>
+        <translation type="unfinished">No s&apos;ha pogut vincular a %s en aquest ordinador (la vinculació ha retornat l&apos;error %s)</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>
-        <translation type="unfinished">No es pot enllaçar a %s en aquest ordinador. %s probablement ja s'estigui executant.</translation>
+        <translation type="unfinished">No es pot enllaçar a %s en aquest ordinador. %s probablement ja s&apos;estigui executant.</translation>
     </message>
     <message>
-        <source>Unable to create the PID file '%s': %s</source>
-        <translation type="unfinished">No es pot crear el fitxer PID '%s': %s</translation>
+        <source>Unable to create the PID file &apos;%s&apos;: %s</source>
+        <translation type="unfinished">No es pot crear el fitxer PID &apos;%s&apos;: %s</translation>
     </message>
     <message>
         <source>Unable to generate initial keys</source>
-        <translation type="unfinished">No s'han pogut generar les claus inicials</translation>
+        <translation type="unfinished">No s&apos;han pogut generar les claus inicials</translation>
     </message>
     <message>
         <source>Unable to generate keys</source>
-        <translation type="unfinished">No s'han pogut generar les claus</translation>
+        <translation type="unfinished">No s&apos;han pogut generar les claus</translation>
     </message>
     <message>
         <source>Unable to open %s for writing</source>
@@ -4387,27 +4387,27 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
-        <translation type="unfinished">No s'ha pogut iniciar el servidor HTTP. Vegeu debug.log per a més detalls.</translation>
+        <translation type="unfinished">No s&apos;ha pogut iniciar el servidor HTTP. Vegeu debug.log per a més detalls.</translation>
     </message>
     <message>
         <source>Unknown -blockfilterindex value %s.</source>
         <translation type="unfinished">Valor %s -blockfilterindex desconegut</translation>
     </message>
     <message>
-        <source>Unknown address type '%s'</source>
-        <translation type="unfinished">Tipus d'adreça desconegut '%s'</translation>
+        <source>Unknown address type &apos;%s&apos;</source>
+        <translation type="unfinished">Tipus d&apos;adreça desconegut &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Unknown change type '%s'</source>
-        <translation type="unfinished">Tipus de canvi desconegut '%s'</translation>
+        <source>Unknown change type &apos;%s&apos;</source>
+        <translation type="unfinished">Tipus de canvi desconegut &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Unknown network specified in -onlynet: '%s'</source>
-        <translation type="unfinished">Xarxa desconeguda especificada a -onlynet: '%s'</translation>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
+        <translation type="unfinished">Xarxa desconeguda especificada a -onlynet: &apos;%s&apos;</translation>
     </message>
     <message>
         <source>Unknown new rules activated (versionbit %i)</source>
-        <translation type="unfinished">S'han activat regles noves desconegudes (bit de versió %i)</translation>
+        <translation type="unfinished">S&apos;han activat regles noves desconegudes (bit de versió %i)</translation>
     </message>
     <message>
         <source>Unsupported logging category %s=%s.</source>
@@ -4415,11 +4415,11 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
     </message>
     <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
-        <translation type="unfinished">El comentari de l'agent d'usuari (%s) conté caràcters insegurs.</translation>
+        <translation type="unfinished">El comentari de l&apos;agent d&apos;usuari (%s) conté caràcters insegurs.</translation>
     </message>
     <message>
         <source>Verifying blocks…</source>
-        <translation type="unfinished">S'estan verificant els blocs...</translation>
+        <translation type="unfinished">S&apos;estan verificant els blocs...</translation>
     </message>
     <message>
         <source>Verifying wallet(s)…</source>

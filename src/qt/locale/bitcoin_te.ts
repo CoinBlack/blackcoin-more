@@ -62,10 +62,10 @@
         <translation type="unfinished">ఇవి మీరు పంపే చెల్లింపుల బిట్‌కాయిన్ చిరునామాలు. నాణేలు పంపే ముందు ప్రతిసారి అందుకునే చిరునామా మరియు చెల్లింపు మొత్తం సరిచూసుకోండి.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">చెల్లింపులను స్వీకరించడానికి ఇవి మీ బిట్‌కాయిన్ చిరునామాలు. కొత్త చిరునామాలను సృష్టించడానికి స్వీకరించే ట్యాబ్‌లోని 'కొత్త స్వీకరించే చిరునామాను సృష్టించు' బటన్‌ను ఉపయోగించండి. 
-'లెగసీ' రకం చిరునామాలతో మాత్రమే సంతకం చేయడం సాధ్యమవుతుంది.</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">చెల్లింపులను స్వీకరించడానికి ఇవి మీ బిట్‌కాయిన్ చిరునామాలు. కొత్త చిరునామాలను సృష్టించడానికి స్వీకరించే ట్యాబ్‌లోని &apos;కొత్త స్వీకరించే చిరునామాను సృష్టించు&apos; బటన్‌ను ఉపయోగించండి. 
+&apos;లెగసీ&apos; రకం చిరునామాలతో మాత్రమే సంతకం చేయడం సాధ్యమవుతుంది.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -161,7 +161,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation type="unfinished">మీరు ఖచ్చితంగా మీ జోలెని సంకేతపరచాలని కోరుకుంటున్నారా?</translation>
+        <translation type="unfinished">మీరు ఖచ్చితంగా మీ జోలెని సంకేతపరచాలని&#xa0;కోరుకుంటున్నారా?</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -271,7 +271,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">లోపం: %1</translation>
     </message>
     <message>
-        <source>%1 didn't yet exit safely…</source>
+        <source>%1 didn&apos;t yet exit safely…</source>
         <translation type="unfinished">%1 ఇంకా సురక్షితంగా బయటకు రాలేదు...</translation>
     </message>
     <message>
@@ -379,7 +379,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
             <numerusform>%n సంవత్సరం(లు)</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -404,7 +404,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Quit application</source>
-        <translation type="unfinished">అప్లికేషన్ నిష్క్రమణ </translation>
+        <translation type="unfinished">అప్లికేషన్ నిష్క్రమణ&#xa0;</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
@@ -746,12 +746,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Click for more actions.</source>
-        <extracomment>A substring of the tooltip. "More actions" are available via the context menu.</extracomment>
+        <extracomment>A substring of the tooltip. &quot;More actions&quot; are available via the context menu.</extracomment>
         <translation type="unfinished">మరిన్ని చర్యల కోసం క్లిక్ చేయండి.</translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">పీర్స్ ట్యాబ్‌ని చూపించు</translation>
     </message>
     <message>
@@ -1008,7 +1008,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">వాలెట్ హెచ్చరికను సృష్టించండి</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">సంతకం చేసేవారిని జాబితా చేయలేరు</translation>
     </message>
     <message>
@@ -1149,7 +1149,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">బాహ్య సంతకం మద్దతు లేకుండా సంకలనం చేయబడింది (బాహ్య సంతకం కోసం అవసరం)</translation>
     </message>
 </context>
@@ -1184,16 +1184,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">పంపే చిరునామాను సవరించండి</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">నమోదు చేసిన చిరునామా "%1" చెల్లుబాటు అయ్యే బిట్‌కాయిన్ చిరునామా కాదు.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <translation type="unfinished">నమోదు చేసిన చిరునామా &quot;%1&quot; చెల్లుబాటు అయ్యే బిట్‌కాయిన్ చిరునామా కాదు.</translation>
     </message>
     <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation type="unfinished">చిరునామా "%1" ఇప్పటికే "%2" లేబుల్‌తో స్వీకరించే చిరునామాగా ఉంది మరియు పంపే చిరునామాగా జోడించబడదు.</translation>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation type="unfinished">చిరునామా &quot;%1&quot; ఇప్పటికే &quot;%2&quot; లేబుల్‌తో స్వీకరించే చిరునామాగా ఉంది మరియు పంపే చిరునామాగా జోడించబడదు.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation type="unfinished">నమోదు చేసిన చిరునామా "%1" ఇప్పటికే చిరునామా పుస్తకంలో "%2" లేబుల్‌తో ఉంది.</translation>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation type="unfinished">నమోదు చేసిన చిరునామా &quot;%1&quot; ఇప్పటికే చిరునామా పుస్తకంలో &quot;%2&quot; లేబుల్‌తో ఉంది.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1279,8 +1279,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">వాలెట్ కూడా ఈ డైరెక్టరీలో నిల్వ చేయబడుతుంది.</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation type="unfinished">లోపం: పేర్కొన్న డేటా డైరెక్టరీ "%1" సృష్టించబడదు.</translation>
+        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
+        <translation type="unfinished">లోపం: పేర్కొన్న డేటా డైరెక్టరీ &quot;%1&quot; సృష్టించబడదు.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1412,11 +1412,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Automatically start %1 after logging in to the system.</source>
-        <translation type="unfinished">సిస్టమ్‌కు లాగిన్ అయిన తర్వాత స్వయంచాలకంగా "%1" ని ప్రారంభించండి.</translation>
+        <translation type="unfinished">సిస్టమ్‌కు లాగిన్ అయిన తర్వాత స్వయంచాలకంగా &quot;%1&quot; ని ప్రారంభించండి.</translation>
     </message>
     <message>
         <source>&amp;Start %1 on system login</source>
-        <translation type="unfinished">సిస్టమ్ లాగిన్‌లో "%1" ని &amp;ప్రారంభించండి</translation>
+        <translation type="unfinished">సిస్టమ్ లాగిన్‌లో &quot;%1&quot; ని &amp;ప్రారంభించండి</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1621,12 +1621,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ఓవర్‌వ్యూ ట్యాబ్‌లో మోనోస్పేస్డ్ ఫాంట్:</translation>
     </message>
     <message>
-        <source>embedded "%1"</source>
-        <translation type="unfinished">పొందుపరిచారు "%1"</translation>
+        <source>embedded &quot;%1&quot;</source>
+        <translation type="unfinished">పొందుపరిచారు &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>closest matching "%1"</source>
-        <translation type="unfinished">సన్నిహిత సరిపోలిక "%1"</translation>
+        <source>closest matching &quot;%1&quot;</source>
+        <translation type="unfinished">సన్నిహిత సరిపోలిక &quot;%1&quot;</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -1638,7 +1638,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Compiled without external signing support (required for external signing)</source>
-        <extracomment>"External signing" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">బాహ్య సంతకం మద్దతు లేకుండా సంకలనం చేయబడింది (బాహ్య సంతకం కోసం అవసరం)</translation>
     </message>
     <message>
@@ -1660,9 +1660,9 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">మార్పులను సక్రియం చేయడానికి క్లయింట్ పునఃప్రారంభించాల్సిన అవసరం ఉంది.</translation>
     </message>
     <message>
-        <source>Current settings will be backed up at "%1".</source>
-        <extracomment>Text explaining to the user that the client's current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location's path.</extracomment>
-        <translation type="unfinished">ప్రస్తుత సెట్టింగ్‌లు "%1" వద్ద బ్యాకప్ చేయబడతాయి.</translation>
+        <source>Current settings will be backed up at &quot;%1&quot;.</source>
+        <extracomment>Text explaining to the user that the client&apos;s current settings will be backed up at a specific location. %1 is a stand-in argument for the backup location&apos;s path.</extracomment>
+        <translation type="unfinished">ప్రస్తుత సెట్టింగ్‌లు &quot;%1&quot; వద్ద బ్యాకప్ చేయబడతాయి.</translation>
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
@@ -1707,8 +1707,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 <context>
     <name>OptionsModel</name>
     <message>
-        <source>Could not read setting "%1", %2.</source>
-        <translation type="unfinished">సెట్టింగ్ "%1", %2 చదవడం సాధ్యపడలేదు, .</translation>
+        <source>Could not read setting &quot;%1&quot;, %2.</source>
+        <translation type="unfinished">సెట్టింగ్ &quot;%1&quot;, %2 చదవడం సాధ్యపడలేదు, .</translation>
     </message>
 </context>
 <context>
@@ -1933,8 +1933,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">URI నిర్వహణ</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation type="unfinished">'bitcoin://' చెల్లుబాటు అయ్యే URI కాదు. బదులుగా 'bitcoin:' ఉపయోగించండి.</translation>
+        <source>&apos;bitcoin://&apos; is not a valid URI. Use &apos;bitcoin:&apos; instead.</source>
+        <translation type="unfinished">&apos;bitcoin://&apos; చెల్లుబాటు అయ్యే URI కాదు. బదులుగా &apos;bitcoin:&apos; ఉపయోగించండి.</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
@@ -1949,7 +1949,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <extracomment>Title of Peers Table column which contains the peer's User Agent string.</extracomment>
+        <extracomment>Title of Peers Table column which contains the peer&apos;s User Agent string.</extracomment>
         <translation type="unfinished">వినియోగదారు ఏజెంట్</translation>
     </message>
     <message>
@@ -1989,7 +1989,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">రకము</translation>
     </message>
     <message>
@@ -2063,16 +2063,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">సమాచార డైరెక్టరీ</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the data directory use the '%1' option.</source>
-        <translation type="unfinished">డేటా డైరెక్టరీ యొక్క నాన్-డిఫాల్ట్ స్థానాన్ని పేర్కొనడానికి '%1' ఎంపికను ఉపయోగించండి.</translation>
+        <source>To specify a non-default location of the data directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">డేటా డైరెక్టరీ యొక్క నాన్-డిఫాల్ట్ స్థానాన్ని పేర్కొనడానికి &apos;%1&apos; ఎంపికను ఉపయోగించండి.</translation>
     </message>
     <message>
         <source>Blocksdir</source>
         <translation type="unfinished">బ్లాక్స్ డైరెక్టరీ</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
-        <translation type="unfinished">బ్లాక్స్ డైరెక్టరీ యొక్క నాన్-డిఫాల్ట్ స్థానాన్ని పేర్కొనడానికి '%1' ఎంపికను ఉపయోగించండి.</translation>
+        <source>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</source>
+        <translation type="unfinished">బ్లాక్స్ డైరెక్టరీ యొక్క నాన్-డిఫాల్ట్ స్థానాన్ని పేర్కొనడానికి &apos;%1&apos; ఎంపికను ఉపయోగించండి.</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -2159,7 +2159,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>From</source>
         <translation type="unfinished">నుండి</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
@@ -2231,13 +2231,13 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>Copy &amp;Address</source>
-        <translation type="unfinished">కాపీ &amp;చిరునామా </translation>
+        <translation type="unfinished">కాపీ &amp;చిరునామా&#xa0;</translation>
     </message>
     <message>
         <source>&amp;Save Image…</source>
         <translation type="unfinished">&amp;చిత్రాన్ని సేవ్ చేయి...</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -2256,7 +2256,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>(no label)</source>
         <translation type="unfinished">( ఉల్లాకు లేదు )</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -2320,12 +2320,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">%1 (%2 బ్లాక్‌లు)</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation type="unfinished">వాలెట్ నుండి '%1'</translation>
+        <source> from wallet &apos;%1&apos;</source>
+        <translation type="unfinished">వాలెట్ నుండి &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>%1 to '%2'</source>
-        <translation type="unfinished">%1 కు '%2'</translation>
+        <source>%1 to &apos;%2&apos;</source>
+        <translation type="unfinished">%1 కు &apos;%2&apos;</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2370,7 +2370,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Message:</source>
         <translation type="unfinished">సందేశం:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
@@ -2385,7 +2385,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Signature</source>
         <translation type="unfinished">సంతకం</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SplashScreen</name>
     <message>
@@ -2434,7 +2434,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Amount</source>
         <translation type="unfinished">మొత్తం</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -2453,7 +2453,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>(no label)</source>
         <translation type="unfinished">( ఉల్లాకు లేదు )</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -2501,7 +2501,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Exporting Failed</source>
         <translation type="unfinished">ఎగుమతి విఫలమయ్యింది</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -2512,7 +2512,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Error</source>
         <translation type="unfinished">లోపం</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -2571,8 +2571,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">విభాగం [%s] గుర్తించబడలేదు.</translation>
     </message>
     <message>
-        <source>Specified blocks directory "%s" does not exist.</source>
-        <translation type="unfinished">పేర్కొన్న బ్లాక్‌ల డైరెక్టరీ "%s" ఉనికిలో లేదు.</translation>
+        <source>Specified blocks directory &quot;%s&quot; does not exist.</source>
+        <translation type="unfinished">పేర్కొన్న బ్లాక్‌ల డైరెక్టరీ &quot;%s&quot; ఉనికిలో లేదు.</translation>
     </message>
     <message>
         <source>Starting network threads…</source>
@@ -2627,7 +2627,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">లావాదేవీకి కనీసం ఒక గ్రహీత ఉండాలి</translation>
     </message>
     <message>
-        <source>Transaction needs a change address, but we can't generate it.</source>
+        <source>Transaction needs a change address, but we can&apos;t generate it.</source>
         <translation type="unfinished">లావాదేవీకి చిరునామా మార్పు అవసరం, కానీ మేము దానిని రూపొందించలేము.</translation>
     </message>
     <message>
@@ -2635,8 +2635,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">లావాదేవీ చాలా పెద్దది</translation>
     </message>
     <message>
-        <source>Unable to allocate memory for -maxsigcachesize: '%s' MiB</source>
-        <translation type="unfinished">-maxsigcacheize కోసం మెమరీని కేటాయించడం సాధ్యం కాలేదు: '%s' MiB</translation>
+        <source>Unable to allocate memory for -maxsigcachesize: &apos;%s&apos; MiB</source>
+        <translation type="unfinished">-maxsigcacheize కోసం మెమరీని కేటాయించడం సాధ్యం కాలేదు: &apos;%s&apos; MiB</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
@@ -2647,8 +2647,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">బైండ్ చేయడం సాధ్యపడలేదు %s ఈ కంప్యూటర్‌లో. %s బహుశా ఇప్పటికే అమలులో ఉంది.</translation>
     </message>
     <message>
-        <source>Unable to create the PID file '%s': %s</source>
-        <translation type="unfinished">PID ఫైల్‌ని సృష్టించడం సాధ్యం కాలేదు '%s': %s</translation>
+        <source>Unable to create the PID file &apos;%s&apos;: %s</source>
+        <translation type="unfinished">PID ఫైల్‌ని సృష్టించడం సాధ్యం కాలేదు &apos;%s&apos;: %s</translation>
     </message>
     <message>
         <source>Unable to find UTXO for external input</source>
@@ -2667,8 +2667,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">వ్రాయుటకు %s తెరవుట కుదరలేదు</translation>
     </message>
     <message>
-        <source>Unable to parse -maxuploadtarget: '%s'</source>
-        <translation type="unfinished">-maxuploadtarget అన్వయించడం సాధ్యం కాలేదు: '%s'</translation>
+        <source>Unable to parse -maxuploadtarget: &apos;%s&apos;</source>
+        <translation type="unfinished">-maxuploadtarget అన్వయించడం సాధ్యం కాలేదు: &apos;%s&apos;</translation>
     </message>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
@@ -2683,16 +2683,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">తెలియని -blockfilterindex విలువ %s.</translation>
     </message>
     <message>
-        <source>Unknown address type '%s'</source>
-        <translation type="unfinished">తెలియని చిరునామా రకం '%s'</translation>
+        <source>Unknown address type &apos;%s&apos;</source>
+        <translation type="unfinished">తెలియని చిరునామా రకం &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Unknown change type '%s'</source>
-        <translation type="unfinished">తెలియని మార్పు రకం '%s'</translation>
+        <source>Unknown change type &apos;%s&apos;</source>
+        <translation type="unfinished">తెలియని మార్పు రకం &apos;%s&apos;</translation>
     </message>
     <message>
-        <source>Unknown network specified in -onlynet: '%s'</source>
-        <translation type="unfinished">తెలియని నెట్‌వర్క్ -onlynetలో పేర్కొనబడింది: '%s'</translation>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
+        <translation type="unfinished">తెలియని నెట్‌వర్క్ -onlynetలో పేర్కొనబడింది: &apos;%s&apos;</translation>
     </message>
     <message>
         <source>Unknown new rules activated (versionbit %i)</source>

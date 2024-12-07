@@ -62,10 +62,10 @@
         <translation type="unfinished">Hauek dira zuk dirua jaso dezaketen Bitcoin helbideak. Egiaztatu beti diru-kopurua eta dirua jasoko duen helbidea zuzen egon daitezen, txanponak bidali baino lehen.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
-Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Hauek dira ordainketak jasotzeko zure Bitcoin helbideak. Jaso taulako 'Jasotzeko helbide berri bat sortu' botoia erabili helbide berri bat sortzeko.
-Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
+        <source>These are your Bitcoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
+        <translation type="unfinished">Hauek dira ordainketak jasotzeko zure Bitcoin helbideak. Jaso taulako &apos;Jasotzeko helbide berri bat sortu&apos; botoia erabili helbide berri bat sortzeko.
+Sinatzea &apos;legacy&apos; motako helbideekin soilik da posible</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -245,7 +245,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Internal error</source>
         <translation type="unfinished">Barne errorea</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QObject</name>
     <message>
@@ -271,46 +271,46 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message numerus="yes">
         <source>%n second(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -501,8 +501,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -622,13 +622,13 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
         <source>Show Peers tab</source>
-        <extracomment>A context menu item. The "Peers tab" is an element of the "Node window".</extracomment>
+        <extracomment>A context menu item. The &quot;Peers tab&quot; is an element of the &quot;Node window&quot;.</extracomment>
         <translation type="unfinished">Erakutxi kideen fitxa</translation>
     </message>
     <message>
@@ -832,10 +832,10 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Diru-zorroa sortzearen buruzko oharra</translation>
     </message>
     <message>
-        <source>Can't list signers</source>
+        <source>Can&apos;t list signers</source>
         <translation type="unfinished">Ezin dira sinatzaileak zerrendatu</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>LoadWalletsActivity</name>
     <message>
@@ -927,7 +927,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Create</source>
         <translation type="unfinished">Sortu</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -987,30 +987,30 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message numerus="yes">
         <source>%n GB of space available</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(of %n GB needed)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1059,7 +1059,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>%1 is shutting down…</source>
         <translation type="unfinished">%1Itzaltzen ari da...</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
@@ -1094,7 +1094,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Hide</source>
         <translation type="unfinished">Izkutatu</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1232,7 +1232,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>This change would require a client restart.</source>
         <translation type="unfinished">Aldaketa honek clienta berriro piztea eskatzen du</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OverviewPage</name>
     <message>
@@ -1275,7 +1275,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Recent transactions</source>
         <translation type="unfinished">Transakzio berriak</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -1325,12 +1325,12 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Payment request error</source>
         <translation type="unfinished">Ordainketa eskaera akatsa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <extracomment>Title of Peers Table column which contains the peer's User Agent string.</extracomment>
+        <extracomment>Title of Peers Table column which contains the peer&apos;s User Agent string.</extracomment>
         <translation type="unfinished">Erabiltzaile agentea</translation>
     </message>
     <message>
@@ -1355,7 +1355,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">Mota</translation>
     </message>
     <message>
@@ -1363,7 +1363,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <extracomment>Title of Peers Table column which states the network the peer connected through.</extracomment>
         <translation type="unfinished">Sarea</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QRImageWidget</name>
     <message>
@@ -1554,7 +1554,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished">Ezin da diruzorroa desblokeatu.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -1597,7 +1597,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Payment information</source>
         <translation type="unfinished">Ordainketaren informazioa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -1729,7 +1729,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
     <message>
         <source>Sign on device</source>
-        <extracomment>"device" usually means a hardware wallet.</extracomment>
+        <extracomment>&quot;device&quot; usually means a hardware wallet.</extracomment>
         <translation type="unfinished">Sinatu gailuan</translation>
     </message>
     <message>
@@ -1742,12 +1742,12 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
     <message>
         <source>External signer not found</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Kanpo sinatzailea ez da aurkitu</translation>
     </message>
     <message>
         <source>External signer failure</source>
-        <extracomment>"External signer" means using devices such as hardware wallets.</extracomment>
+        <extracomment>&quot;External signer&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished">Kanpo sinatzailearen hutsegitea</translation>
     </message>
     <message>
@@ -1782,8 +1782,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1817,7 +1817,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Message:</source>
         <translation type="unfinished">Mezua:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
@@ -1937,8 +1937,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1984,7 +1984,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>This pane shows a detailed description of the transaction</source>
         <translation type="unfinished">Panel honek transakzien deskribapen xehea azaltzen du</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
@@ -2127,7 +2127,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Exporting Failed</source>
         <translation type="unfinished">Esportazioak huts egin du</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -2138,7 +2138,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Error</source>
         <translation type="unfinished">Akatsa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
@@ -2172,7 +2172,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Export the data in the current tab to a file</source>
         <translation type="unfinished">Uneko fitxategian datuak esportatu</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>bitcoin-core</name>
     <message>
@@ -2243,5 +2243,5 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <source>Verifying wallet(s)…</source>
         <translation type="unfinished">Diruzorroak egiaztatzen...</translation>
     </message>
-    </context>
+</context>
 </TS>

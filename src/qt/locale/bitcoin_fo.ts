@@ -34,7 +34,7 @@
         <extracomment>An error message. %1 is a stand-in argument for the name of the file we attempted to save to.</extracomment>
         <translation type="unfinished">Villa við goyming av adressuskrá til %1. Vinaliga royn aftur.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>AddressTableModel</name>
     <message>
@@ -60,7 +60,7 @@
         <source>Internal error</source>
         <translation type="unfinished">Innanhýsis villa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>QObject</name>
     <message>
@@ -144,7 +144,7 @@
             <numerusform>%n ár</numerusform>
         </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>BitcoinGUI</name>
     <message>
@@ -207,8 +207,8 @@
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -277,7 +277,7 @@
         <translation type="unfinished">Adressa: %1
 </translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CoinControlDialog</name>
     <message>
@@ -355,7 +355,7 @@
         <source>Advanced Options</source>
         <translation type="unfinished">Víðkaðar stillingar</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -374,14 +374,14 @@
         <source>&amp;Address</source>
         <translation type="unfinished">&amp;Adressa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>FreespaceChecker</name>
     <message>
         <source>name</source>
         <translation type="unfinished">navn</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>Intro</name>
     <message numerus="yes">
@@ -401,8 +401,8 @@
     <message numerus="yes">
         <source>(%n GB needed for full chain)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -413,8 +413,8 @@
         <source>(sufficient to restore backups %n day(s) old)</source>
         <extracomment>Explanatory text on the capability of the current prune target.</extracomment>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -437,21 +437,21 @@
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
         <translation type="unfinished">Hendan innleiðandi stevjavningin er sera krevjandi, og kann avdúka trupulleikar, við tólbúnaðinum í teldu tíni, ið tú annars ikki hevur varnast. %1 heldur á fram at takað niður, hvørja ferð %1 verður koyrt.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>HelpMessageDialog</name>
     <message>
         <source>About %1</source>
         <translation type="unfinished">Um %1</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ShutdownWindow</name>
     <message>
         <source>%1 is shutting down…</source>
         <translation type="unfinished">%1 letur aftur...</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
@@ -470,7 +470,7 @@
         <source>Hide</source>
         <translation type="unfinished">Loka</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OptionsDialog</name>
     <message>
@@ -561,7 +561,7 @@
         <source>This change would require a client restart.</source>
         <translation type="unfinished">Broytingin krevur endurbyrjan av viðskiftaranum.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>OverviewPage</name>
     <message>
@@ -572,7 +572,7 @@
         <source>Pending:</source>
         <translation type="unfinished">Óváttað:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
@@ -595,7 +595,7 @@
         <source>or</source>
         <translation type="unfinished">ella</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>PeerTableModel</name>
     <message>
@@ -615,7 +615,7 @@
     </message>
     <message>
         <source>Type</source>
-        <extracomment>Title of Peers Table column which describes the type of peer connection. The "type" describes why the connection exists.</extracomment>
+        <extracomment>Title of Peers Table column which describes the type of peer connection. The &quot;type&quot; describes why the connection exists.</extracomment>
         <translation type="unfinished">Slag</translation>
     </message>
     <message>
@@ -786,7 +786,7 @@
         <source>From</source>
         <translation type="unfinished">Frá</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
@@ -813,7 +813,7 @@
         <source>Copy &amp;amount</source>
         <translation type="unfinished">Avrita &amp;upphædd</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
@@ -840,7 +840,7 @@
         <source>&amp;Save Image…</source>
         <translation type="unfinished">&amp;Goym mynd...</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -859,7 +859,7 @@
         <source>(no message)</source>
         <translation type="unfinished">(eingi boð)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
@@ -928,12 +928,12 @@
     </message>
     <message>
         <source>Sign on device</source>
-        <extracomment>"device" usually means a hardware wallet.</extracomment>
+        <extracomment>&quot;device&quot; usually means a hardware wallet.</extracomment>
         <translation type="unfinished">Undirrita á eind</translation>
     </message>
     <message>
-        <source>%1 to '%2'</source>
-        <translation type="unfinished">%1 til '%2'</translation>
+        <source>%1 to &apos;%2&apos;</source>
+        <translation type="unfinished">%1 til &apos;%2&apos;</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -958,8 +958,8 @@
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1001,7 +1001,7 @@
         <source>Message:</source>
         <translation type="unfinished">Boð:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
@@ -1061,8 +1061,8 @@
         <translation type="unfinished">Undirritað boð at vátta</translation>
     </message>
     <message>
-        <source>Click "Sign Message" to generate signature</source>
-        <translation type="unfinished">Trýst á "Undirrita boð" fyri at gera eina undirskrift</translation>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
+        <translation type="unfinished">Trýst á &quot;Undirrita boð&quot; fyri at gera eina undirskrift</translation>
     </message>
     <message>
         <source>No error</source>
@@ -1088,7 +1088,7 @@
         <source>The signature did not match the message digest.</source>
         <translation type="unfinished">Undirskriftin samsvaraði ikki við innihaldi í boðnum.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionDesc</name>
     <message>
@@ -1114,8 +1114,8 @@
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
         <translation type="unfinished">
-            <numerusform />
-            <numerusform />
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1168,7 +1168,7 @@
         <source>(no label)</source>
         <translation type="unfinished">(einki spjaldur)</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
@@ -1251,14 +1251,14 @@
         <source>Error</source>
         <translation type="unfinished">Villa</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
         <source>Increase:</source>
         <translation type="unfinished">Øking:</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletView</name>
     <message>
@@ -1273,11 +1273,11 @@
         <translation type="unfinished">%smennararnir</translation>
     </message>
     <message>
-        <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
-        <translation type="unfinished">%s umbøn at lurta á portur %u. Hetta portrið er tulkað "óhóskandi" og tí er ósannlíkt at nakar viðskiftari sambindur í tað. Sí lista yvir "óhóskandi" portur og nágreiniligari upplýsingar í doc/p2p-bad-ports.md.</translation>
+        <source>%s request to listen on port %u. This port is considered &quot;bad&quot; and thus it is unlikely that any peer will connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
+        <translation type="unfinished">%s umbøn at lurta á portur %u. Hetta portrið er tulkað &quot;óhóskandi&quot; og tí er ósannlíkt at nakar viðskiftari sambindur í tað. Sí lista yvir &quot;óhóskandi&quot; portur og nágreiniligari upplýsingar í doc/p2p-bad-ports.md.</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
+        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong, %s will not work properly.</source>
         <translation type="unfinished">Vinaliga tryggja at dagfesting og tíð, í teldu tíni, eru røtt! Er klokkan skeiv virkar %s ikki sum ætlað.</translation>
     </message>
     <message>
