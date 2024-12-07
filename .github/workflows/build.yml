@@ -119,11 +119,11 @@ jobs:
         run: ${{ matrix.postinstall }}
 
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.2
 
       - name: SDK cache
         if: ${{ matrix.sdk }}
-        uses: actions/cache@v4.0.2
+        uses: actions/cache@v4.2.0
         env:
           cache-name: sdk
         with:
@@ -139,7 +139,7 @@ jobs:
           tar -C depends/SDKs -xzvf depends/sdk-sources/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz
 
       - name: Dependency cache
-        uses: actions/cache@v4.0.2
+        uses: actions/cache@v4.2.0
         env:
           cache-name: depends
         with:
@@ -164,7 +164,7 @@ jobs:
         run: make -C src check-symbols
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: blackcoin-more-develop-${{ github.sha }}-${{ matrix.name }}
           path: |
