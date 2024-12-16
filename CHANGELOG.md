@@ -1,5 +1,8 @@
 # Changelog
 
+## v26.2.0 (2024-XX-XX)
+- Begin signalling for SegWit activation on mainnet on June 20, 2025
+
 ## v26.2.0-beta-2 (2024-11-20)
 - Activated SegWit on testnet on Sep 23, 2024
 - Changed miner activation window parameters for BIP9 soft fork deployment
