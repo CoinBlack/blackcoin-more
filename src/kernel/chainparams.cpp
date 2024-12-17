@@ -126,8 +126,8 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000004586098169d7b9cdc63"); // block 5178789
-        consensus.defaultAssumeValid = uint256S("0xc133d21768f6579597cf33611e9d7388b452af1cfebce1c983d84ab38ebcee79"); // block 5178789
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000461191ade0b134e4e08"); // block 5214838
+        consensus.defaultAssumeValid = uint256S("0x19c385f36869c5b57e17b186414e0dc5d7fa71f24ec3084d03b7736b45e5a3e4"); // block 5214838
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -153,8 +153,8 @@ public:
         // release ASAP to avoid it where possible.
         vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted by blackcoin.nl
         vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("swap.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("dns2.blackcoin.nl");  // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum2.blackcoin.nl"); // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum3.blackcoin.nl");  // hosted by blackcoin.nl
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
@@ -187,10 +187,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 c133d21768f6579597cf33611e9d7388b452af1cfebce1c983d84ab38ebcee79
-            .nTime    = 1732044192,
-            .nTxCount = 15713978,
-            .dTxRate  = 0.03001311850270631,
+            // Data from RPC: getchaintxstats 40500 19c385f36869c5b57e17b186414e0dc5d7fa71f24ec3084d03b7736b45e5a3e4
+            .nTime    = 1734468656,
+            .nTxCount = 15786440,
+            .dTxRate  = 0.02988878182907771,
         };
 
         // A vector of p2sh addresses
@@ -247,8 +247,8 @@ public:
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000005bcd58fc08c1b0ec53"); // block 2103490
-        consensus.defaultAssumeValid = uint256S("0x03fec30e422ef981c1dcf5f19b1892ea7d5a3123277400f5c3d56f8a59e548b6"); // block 2103490
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000005e076ec35dd78945ce"); // block 2139564
+        consensus.defaultAssumeValid = uint256S("0xade1c1bd7d6b75cd95b5ec841ffaff24f79ab71c084a3fe8374c2680c72f6b4e"); // block 2139564
 
         pchMessageStart[0] = 0xcd;
         pchMessageStart[1] = 0xf2;
@@ -267,8 +267,8 @@ public:
         // This is fine at runtime as we'll fall back to using them as an addrfetch if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("swap.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("dns2.blackcoin.nl");  // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum2.blackcoin.nl"); // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum3.blackcoin.nl");  // hosted by blackcoin.nl
         vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted by blackcoin.nl
         vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted by blackcoin.nl
 
@@ -290,6 +290,7 @@ public:
                 {  90235, uint256S("0x567898e79184dc2f7dc3a661f794f28566e4b856d70180914f7371b1b3cc82d8")}, // initial checkpoint
                 {1320664, uint256S("0x64fa6a5414c6797629d34ef150c46486a5e1d49d2bceb87d6da14a501f838afd")}, // hardfork
                 {1415393, uint256S("0x5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39")}, // start devfund
+                {2070000, uint256S("0xf8e2c3919353487f73cd957f29654dc00a3b0c99a9fbf38a3514cdead626f0ec")}, // segwit activated
             }
         };
 
@@ -298,10 +299,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 03fec30e422ef981c1dcf5f19b1892ea7d5a3123277400f5c3d56f8a59e548b6
-            .nTime    = 1732044208,
-            .nTxCount = 4225853,
-            .dTxRate  = 0.02972773825989593,
+            // Data from RPC: getchaintxstats 40500 ade1c1bd7d6b75cd95b5ec841ffaff24f79ab71c084a3fe8374c2680c72f6b4e
+            .nTime    = 1734469040,
+            .nTxCount = 4298002,
+            .dTxRate  = 0.02974604428985235,
         };
 
         // A vector of p2sh addresses
