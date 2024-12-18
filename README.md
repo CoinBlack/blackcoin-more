@@ -1,6 +1,6 @@
 Blackcoin More
 =====================================
-[![build](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml/badge.svg?branch=26.x)](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml)
+[![build](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml)
 
 https://blackcoinmore.org
 
@@ -86,8 +86,8 @@ The develop branch is considered an unstable branch, as it is constantly updated
 The master branch gets latest updates from the stable branch.
 However, it may contain experimental features and should be used with caution.
 
-### 13.2
-The release branch for Blackcoin More 13.2.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
-
 ### 26.x
-The release branch for Blackcoin More 26.x. Contains functional but highly experimental code.
+The release branch for Blackcoin More 26.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
+
+### 28.x
+The release branch for Blackcoin More 28.x. Contains functional but highly experimental code.
