@@ -1,12 +1,12 @@
-name: Build and Push Docker - 26.x
+name: Build and Push Docker - master
 on: [push]
 jobs:
   test:
-    name: Build and Push Docker - 26.x
+    name: Build and Push Docker - master
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4
         with:
           repository: BlackcoinDev/docker-blk
           ref: main
