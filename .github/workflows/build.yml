@@ -43,7 +43,7 @@ jobs:
 
           - name: linux-64-bit
             host: x86_64-pc-linux-gnu
-            os: ubuntu-20.04
+            os: ubuntu-22.04
             packages: python3
             check-security: false
             check-symbols: false
@@ -79,7 +79,7 @@ jobs:
 
           - name: linux-arm-32-bit
             host: arm-linux-gnueabihf
-            os: ubuntu-20.04
+            os: ubuntu-22.04
             packages: g++-arm-linux-gnueabihf binutils-arm-linux-gnueabihf
             check-security: false
             check-symbols: false
@@ -89,7 +89,7 @@ jobs:
 
           - name: linux-arm-64-bit
             host: aarch64-linux-gnu
-            os: ubuntu-20.04
+            os: ubuntu-22.04
             packages: g++-aarch64-linux-gnu binutils-aarch64-linux-gnu
             check-security: false
             check-symbols: false
