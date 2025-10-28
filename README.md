@@ -2,6 +2,8 @@ Blackcoin More
 =====================================
 [![build](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/CoinBlack/blackcoin-more)
+
 https://blackcoinmore.org
 
 What is Blackcoin?
