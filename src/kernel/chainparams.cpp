@@ -164,8 +164,8 @@ public:
         // release ASAP to avoid it where possible.
         vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted by blackcoin.nl
         vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("swap.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("dns2.blackcoin.nl");  // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum1.blackcoin.nl"); // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum2.blackcoin.nl");  // hosted by blackcoin.nl
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
@@ -282,8 +282,8 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("swap.blackcoin.nl"); // hosted by blackcoin.nl
-        vSeeds.emplace_back("dns2.blackcoin.nl");  // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum1.blackcoin.nl"); // hosted by blackcoin.nl
+        vSeeds.emplace_back("electrum2.blackcoin.nl");  // hosted by blackcoin.nl
         vSeeds.emplace_back("dnsseed.blackcoin.nl"); // hosted by blackcoin.nl
         vSeeds.emplace_back("dnsseed2.blackcoin.nl"); // hosted by blackcoin.nl
 
