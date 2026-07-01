@@ -13,7 +13,7 @@
 
 namespace wallet {
 
-static int64_t GetStakeCombineThreshold() { return 500 * COIN; }
+static int64_t GetStakeCombineThreshold() { return 250 * COIN; }
 static int64_t GetStakeSplitThreshold() { return 2 * GetStakeCombineThreshold(); }
 
 void StakeCoins(CWallet& wallet, bool fStake) {
