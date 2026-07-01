@@ -119,15 +119,19 @@ void CCoinsViewCache::EmplaceCoinInternalDANGER(COutPoint&& outpoint, Coin&& coi
     }
 }
 
-void AddCoins(CCoinsViewCache& cache, const CTransaction &tx, int nHeight, bool check_for_overwrite) {
+void AddCoins(CCoinsViewCache& cache, const CTransaction &tx, int nHeight, bool check_for_overwrite, int nBlockTime) {
     bool fCoinbase = tx.IsCoinBase();
     bool fCoinstake = tx.IsCoinStake();
     const Txid& txid = tx.GetHash();
+    // For v2 transactions, nTime is not serialized on the wire.
+    // Always use block header time to ensure deterministic Coin nTime
+    // regardless of whether tx came from memory or disk.
+    int nTimeCoin = tx.version >= 2 ? nBlockTime : (int)tx.nTime;
     for (size_t i = 0; i < tx.vout.size(); ++i) {
         bool overwrite = check_for_overwrite ? cache.HaveCoin(COutPoint(txid, i)) : fCoinbase;
         // Coinbase transactions can always be overwritten, in order to correctly
         // deal with the pre-BIP30 occurrences of duplicate coinbase transactions.
-        cache.AddCoin(COutPoint(txid, i), Coin(tx.vout[i], nHeight, fCoinbase, fCoinstake, tx.nTime), overwrite);
+        cache.AddCoin(COutPoint(txid, i), Coin(tx.vout[i], nHeight, fCoinbase, fCoinstake, nTimeCoin), overwrite);
     }
 }
 

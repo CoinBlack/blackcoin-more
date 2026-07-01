@@ -149,7 +149,11 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
 
             for (uint32_t j = 0; j < tx->vout.size(); ++j) {
                 const CTxOut& out{tx->vout[j]};
-                Coin coin{out, block.height, tx->IsCoinBase(), tx->IsCoinStake(), (int)tx->nTime};
+                // For v2 transactions, nTime is not serialized on the wire.
+                // Always use block header time to ensure deterministic Coin nTime
+                // regardless of whether tx came from memory or disk.
+                int nTimeOut = tx->version >= 2 ? (int)block.data->nTime : (int)tx->nTime;
+                Coin coin{out, block.height, tx->IsCoinBase(), tx->IsCoinStake(), nTimeOut};
                 COutPoint outpoint{tx->GetHash(), j};
 
                 // Skip unspendable coins
@@ -179,6 +183,14 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
                 for (size_t j = 0; j < tx_undo.vprevout.size(); ++j) {
                     Coin coin{tx_undo.vprevout[j]};
                     COutPoint outpoint{tx->vin[j].prevout.hash, tx->vin[j].prevout.n};
+
+                    // For old undo data written before the AddCoins fix,
+                    // v2 transaction outputs may have nTime = 0. Reconstruct it
+                    // from the coin's creation block.
+                    if (coin.nTime == 0 && coin.nHeight > 0) {
+                        const CBlockIndex* pindexPrev = pindex->GetAncestor(coin.nHeight);
+                        if (pindexPrev) coin.nTime = pindexPrev->nTime;
+                    }
 
                     RemoveCoinHash(m_muhash, outpoint, coin);
 
@@ -431,7 +443,11 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
         for (uint32_t j = 0; j < tx->vout.size(); ++j) {
             const CTxOut& out{tx->vout[j]};
             COutPoint outpoint{tx->GetHash(), j};
-            Coin coin{out, pindex->nHeight, tx->IsCoinBase(), tx->IsCoinStake(), (int)tx->nTime};
+            // For v2 transactions, nTime is not serialized on the wire.
+            // Always use block header time to ensure deterministic Coin nTime
+            // regardless of whether tx came from memory or disk.
+            int nTimeOut = tx->version >= 2 ? (int)block.nTime : (int)tx->nTime;
+            Coin coin{out, pindex->nHeight, tx->IsCoinBase(), tx->IsCoinStake(), nTimeOut};
 
             // Skip unspendable coins
             if (coin.out.scriptPubKey.IsUnspendable()) {
@@ -460,6 +476,14 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
             for (size_t j = 0; j < tx_undo.vprevout.size(); ++j) {
                 Coin coin{tx_undo.vprevout[j]};
                 COutPoint outpoint{tx->vin[j].prevout.hash, tx->vin[j].prevout.n};
+
+                // For old undo data written before the AddCoins fix,
+                // v2 transaction outputs may have nTime = 0. Reconstruct it
+                // from the coin's creation block.
+                if (coin.nTime == 0 && coin.nHeight > 0) {
+                    const CBlockIndex* pindexPrev = pindex->GetAncestor(coin.nHeight);
+                    if (pindexPrev) coin.nTime = pindexPrev->nTime;
+                }
 
                 ApplyCoinHash(m_muhash, outpoint, coin);
 

@@ -28,11 +28,20 @@ private:
     uint64_t m_transaction_output_count{0};
     uint64_t m_bogo_size{0};
     CAmount m_total_amount{0};
+    // Blackcoin: tracks the total of (PoW coinbase subsidy + PoS stake reward)
+    // across all blocks. The name "subsidy" is inherited from upstream where it
+    // refers to the PoW coinbase only. On Blackcoin's hybrid chain it covers
+    // both. Not renamed for forward-port compatibility.
     CAmount m_total_subsidy{0};
     CAmount m_total_unspendable_amount{0};
     CAmount m_total_prevout_spent_amount{0};
     CAmount m_total_new_outputs_ex_coinbase_amount{0};
     CAmount m_total_coinbase_amount{0};
+    // Blackcoin: BIP30-unspendable tracking is intentionally not present.
+    // The consensus rule is still enforced (see validation.cpp), but no
+    // Blackcoin block is BIP30-vulnerable, so the accounting channel is
+    // always zero. Do not re-add when forward-porting from upstream unless
+    // Blackcoin's chain history changes to include a BIP30 collision.
     CAmount m_total_unspendables_genesis_block{0};
     CAmount m_total_unspendables_scripts{0};
     CAmount m_total_unspendables_unclaimed_rewards{0};
