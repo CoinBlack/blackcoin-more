@@ -176,8 +176,10 @@ public:
             throw std::runtime_error("Not a BDB file");
         }
 
-        // Only version 9 is supported
-        if (version != 9) {
+        // Only versions 9 and 10 are supported
+        // BDB 4.8 writes version 9, BDB 5.x/6.x+ writes version 10
+        // The page structure is identical between these versions
+        if (version != 9 && version != 10) {
             throw std::runtime_error("Unsupported BDB data file version number");
         }
 
