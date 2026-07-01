@@ -845,7 +845,8 @@ namespace { // Variables internal to initialization process only
 int nMaxConnections;
 int nUserMaxConnections;
 int nFD;
-ServiceFlags nLocalServices = ServiceFlags(NODE_NETWORK_LIMITED | NODE_WITNESS);
+// Blackcoin: No pruning - always have full chain, never set NETWORK_LIMITED
+ServiceFlags nLocalServices = ServiceFlags(NODE_NETWORK | NODE_WITNESS);
 int64_t peer_connect_timeout;
 std::set<BlockFilterType> g_enabled_filter_types;
 
@@ -1700,13 +1701,9 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
 
     // ********************************************************* Step 10: data directory maintenance
 
-    // Prior to setting NODE_NETWORK, check if we can provide historical blocks.
-    if (!WITH_LOCK(chainman.GetMutex(), return chainman.BackgroundSyncInProgress())) {
-        LogPrintf("Setting NODE_NETWORK\n");
-        nLocalServices = ServiceFlags(nLocalServices | NODE_NETWORK);
-    } else {
-        LogPrintf("Running node in NODE_NETWORK_LIMITED mode until snapshot background sync completes\n");
-    }
+    // Blackcoin: Always set NODE_NETWORK - no pruning, no snapshot sync
+    LogPrintf("Setting NODE_NETWORK\n");
+    nLocalServices = ServiceFlags(nLocalServices | NODE_NETWORK);
 
     // ********************************************************* Step 11: import blocks
 
