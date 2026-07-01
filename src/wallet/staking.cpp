@@ -98,9 +98,10 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 
     vCoins.clear();
     CAmount nTotal = 0;
-    // Either the WALLET_FLAG_AVOID_REUSE flag is not set (in which case we always allow), or we default to avoiding, and only in the case where
-    // a coin control object is provided, and has the avoid address reuse flag set to false, do we allow already used addresses
-    bool allow_used_addresses = !wallet.IsWalletFlagSet(WALLET_FLAG_AVOID_REUSE);
+    // Staking always allows used addresses, because staking inherently spends from and
+    // sends rewards back to the same address. The avoid_reuse privacy feature from Bitcoin
+    // is not applicable to staking.
+    bool allow_used_addresses = true;
     const int min_depth = std::max(DEFAULT_MIN_DEPTH, Params().GetConsensus().nCoinbaseMaturity);
     const int max_depth = DEFAULT_MAX_DEPTH;
     const bool only_safe = true;
