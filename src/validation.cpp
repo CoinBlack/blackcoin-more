@@ -4275,7 +4275,6 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
 static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& state, const ChainstateManager& chainman, const CBlockIndex* pindexPrev)
 {
     const int nHeight = pindexPrev == nullptr ? 0 : pindexPrev->nHeight + 1;
-    const Consensus::Params& consensusParams = chainman.GetConsensus();
 
     // Enforce BIP113 (Median Time Past).
     bool enforce_locktime_median_time_past{false};

@@ -482,7 +482,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         for (const auto &pcoin : vwtxPrev) {
             SignatureData empty;
             if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty)) {
-                LogError("%s: failed to sign coinstake", __func__);
+                LogError("%s: failed to sign coinstake\n", __func__);
                 return false;
             }
         }
@@ -505,7 +505,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     // Limit size
     unsigned int nBytes = ::GetSerializeSize(TX_WITH_WITNESS(txNew));
     if (nBytes >= 1000000/5) {
-        LogError("%s: exceeded coinstake size limit", __func__);
+        LogError("%s: exceeded coinstake size limit\n", __func__);
         return false;
     }
 

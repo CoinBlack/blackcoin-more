@@ -569,7 +569,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager& chainman)
     // Process this block the same as if we had received it from another node
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
     if (!chainman.ProcessNewBlock(shared_pblock, true, true, nullptr)) {
-        LogError("%s: block not accepted", __func__);
+        LogError("%s: block not accepted\n", __func__);
         return false;
     }
 
@@ -735,6 +735,7 @@ void PoSMiner(CWallet *pwallet)
                 {
                     if (!SleepStaker(pwallet, pos_timio))
                         return;
+
                     continue;
                 }
                 pwallet->WalletLogPrintf("Error in PoSMiner: Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
