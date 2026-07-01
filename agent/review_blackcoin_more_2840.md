@@ -845,6 +845,45 @@ The BIP94 code currently exists but is disabled on mainnet and testnet (`enforce
 
 **Reference**: `agent/validations.md` §3, `agent/staking.md` §10
 
+### 12.7 Header sync PRESYNC phase — effectively a no-op for Blackcoin
+
+**Status:** Acknowledged. Not planned for modification — the overhead is accepted as-is.
+
+Bitcoin Core's headers-first sync protocol (inherited by Blackcoin) uses a two-phase header synchronization:
+
+1. **PRESYNC** — lightweight validation: stores 1-bit hash commitments per 50 headers, checks difficulty transitions, accumulates chain work
+2. **REDOWNLOAD** — re-downloads full headers, verifies the hash commitments match, then promotes to `AcceptBlockHeader` for full validation
+
+The PRESYNC phase's primary security mechanism is `PermittedDifficultyTransition` (`pow.cpp:101`), which prevents an adversary from claiming arbitrary difficulty jumps between consecutive headers. In Bitcoin, this check constrains the claimed work to realistic bounds — an attacker cannot compress infinite work into a short chain because difficulty can't jump more than 4x per block.
+
+**For Blackcoin, `PermittedDifficultyTransition` is stubbed out:**
+
+```cpp
+// pow.cpp:101
+bool PermittedDifficultyTransition(const Consensus::Params& params, int64_t height, uint32_t old_nbits, uint32_t new_nbits)
+{
+    // Blackcoin: skip this check as we are using different difficulty adjustment algo
+    return true;
+}
+```
+
+**Why it must be disabled:** Blackcoin has **separate PoW and PoS difficulty tracks**. `GetNextTargetRequired` calls `GetLastBlockIndex(pindexLast, fProofOfStake)`, which walks backward to the last block of the same type. Since PoW and PoS blocks alternate on the same chain, consecutive headers routinely have dramatically different `nBits` values — a PoS block may have 1/100th the target of the preceding PoW block. A Bitcoin-style "difficulty can't change by more than 4x" check would reject every valid PoW→PoS transition.
+
+**What PRESYNC still does for Blackcoin (marginal value):**
+
+| Function | Value for Blackcoin |
+|---|---|
+| `PermittedDifficultyTransition` | **None** — always returns `true` |
+| Hash commitments (1 bit per 50 headers) | **Marginal** — prevents the *same* peer from switching chains between PRESYNC and REDOWNLOAD. Does not protect against a fully malicious peer who lies consistently in both phases. |
+| Work accumulation (`GetBlockProof`) | **Needed** — gates the `min_pow_checked` threshold in `AcceptBlockHeader`. But `GetBlockProof` uses `nBits` directly, so an adversary can inflate claimed work by setting tiny targets. |
+| Chain length bounding (`max_commitments`) | **Useful** — soft cap at ~53k headers per peer, limiting memory consumption. |
+
+**Practical impact:** On mainnet IBD from scratch, the PRESYNC + REDOWNLOAD pipeline takes approximately **30 minutes** before block download can begin. During this time, the node is serially processing 2000-header batches (~400ms per round-trip), storing hash commitments, and accumulating work — all without any Blackcoin-specific validation. The actual header validation (PoW for PoW blocks via `CheckProofOfWork`, difficulty via `GetNextTargetRequired`, PoS kernel via `CheckProofOfStake`) happens downstream in `AcceptBlockHeader` and `ConnectBlock`, regardless of whether PRESYNC ran.
+
+**Why we leave it as-is:** Removing PRESYNC would require replacing the anti-DoS work threshold mechanism and the hash commitment scheme with an alternative. The 30-minute overhead is a one-time cost during IBD and does not affect steady-state operation. The security model is unchanged — PRESYNC doesn't add Blackcoin-specific validation, and its removal wouldn't remove any protection that matters for Blackcoin's threat model. The complexity of modifying the inherited headersync protocol outweighs the benefit of saving 30 minutes during initial sync.
+
+**Reference**: `agent/validations.md` §2, §3 (header validation flow), `src/pow.cpp:101-105`, `src/headerssync.cpp:178-214` (PRESYNC), `src/headerssync.cpp:216-278` (REDOWNLOAD), `src/net_processing.cpp:3003-3083` (`IsContinuationOfLowWorkHeadersSync`)
+
 ---
 
 ## 13. Implementation Plan: P2WPKH / P2TR Signature Verification Soft-Fork
