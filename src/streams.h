@@ -288,7 +288,7 @@ public:
 class CDataStream : public DataStream
 {
 private:
-    int nType;
+    int nType{SER_NETWORK};
 
 public:
     explicit CDataStream() {}

@@ -497,7 +497,7 @@ static LoadResult LoadRecords(CWallet* pwallet, DatabaseBatch& batch, const std:
 {
     LoadResult result;
     DataStream ssKey;
-    CDataStream ssValue(SER_DISK);
+    DataStream ssValue{};
 
     Assume(!prefix.empty());
     std::unique_ptr<DatabaseCursor> cursor = batch.GetNewPrefixCursor(prefix);
@@ -546,7 +546,7 @@ static DBErrors LoadLegacyWalletRecords(CWallet* pwallet, DatabaseBatch& batch, 
     if (pwallet->IsWalletFlagSet(WALLET_FLAG_DESCRIPTORS)) {
         for (const auto& type : DBKeys::LEGACY_TYPES) {
             DataStream key;
-            CDataStream value(SER_DISK);
+            DataStream value{};
 
             DataStream prefix;
             prefix << type;
