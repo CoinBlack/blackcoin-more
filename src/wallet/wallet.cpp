@@ -2517,14 +2517,14 @@ bool CWallet::SetAddressBook(const CTxDestination& address, const std::string& s
     return SetAddressBookWithDB(batch, address, strName, purpose);
 }
 
-bool CWallet::DelAddressBook(const CTxDestination& address)
+bool CWallet::DelAddressBook(const CTxDestination& address, bool force)
 {
     return RunWithinTxn(GetDatabase(), /*process_desc=*/"address book entry removal", [&](WalletBatch& batch){
-        return DelAddressBookWithDB(batch, address);
+        return DelAddressBookWithDB(batch, address, force);
     });
 }
 
-bool CWallet::DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& address)
+bool CWallet::DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& address, bool force)
 {
     const std::string& dest = EncodeDestination(address);
     {
@@ -2532,6 +2532,11 @@ bool CWallet::DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& add
         // If we want to delete receiving addresses, we should avoid calling EraseAddressData because it will delete the previously_spent value. Could instead just erase the label so it becomes a change address, and keep the data.
         // NOTE: This isn't a problem for sending addresses because they don't have any data that needs to be kept.
         // When adding new address data, it should be considered here whether to retain or delete it.
+        auto it = m_address_book.find(address);
+        if (!force && it != m_address_book.end() && it->second.purpose && *it->second.purpose == AddressPurpose::SIGNKEY) {
+            WalletLogPrintf("%s called with SIGNKEY address, refused to delete to protect staking key.\n", __func__);
+            return false;
+        } // blackcoin: signkey
         if (IsMine(address)) {
             WalletLogPrintf("%s called with IsMine address, NOT SUPPORTED. Please report this bug! %s\n", __func__, PACKAGE_BUGREPORT);
             return false;

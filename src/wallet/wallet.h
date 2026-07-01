@@ -277,6 +277,7 @@ inline std::string PurposeToString(AddressPurpose p)
     case AddressPurpose::RECEIVE: return "receive";
     case AddressPurpose::SEND: return "send";
     case AddressPurpose::REFUND: return "refund";
+    case AddressPurpose::SIGNKEY: return "signkey"; // blackcoin: signkey
     } // no default case so the compiler will warn when a new enum as added
     assert(false);
 }
@@ -286,6 +287,7 @@ inline std::optional<AddressPurpose> PurposeFromString(std::string_view s)
     if (s == "receive") return AddressPurpose::RECEIVE;
     else if (s == "send") return AddressPurpose::SEND;
     else if (s == "refund") return AddressPurpose::REFUND;
+    else if (s == "signkey") return AddressPurpose::SIGNKEY; // blackcoin: signkey
     return {};
 }
 
@@ -803,8 +805,8 @@ public:
 
     bool SetAddressBook(const CTxDestination& address, const std::string& strName, const std::optional<AddressPurpose>& purpose);
 
-    bool DelAddressBook(const CTxDestination& address);
-    bool DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& address);
+    bool DelAddressBook(const CTxDestination& address, bool force = false);
+    bool DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& address, bool force = false);
 
     bool IsAddressPreviouslySpent(const CTxDestination& dest) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     bool SetAddressPreviouslySpent(WalletBatch& batch, const CTxDestination& dest, bool used) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);

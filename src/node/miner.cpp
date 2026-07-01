@@ -642,20 +642,29 @@ void PoSMiner(CWallet *pwallet)
     unsigned int pos_timio;
     {
         LOCK2(pwallet->cs_wallet, cs_main);
-        const std::string label = "Staking Legacy Address";
+        const std::string label = "SignKey";
+        bool found = false;
         pwallet->ForEachAddrBookEntry([&](const CTxDestination& _dest, const std::string& _label, bool _is_change, const std::optional<wallet::AddressPurpose>& _purpose) {
-            if (_is_change) return;
-            if (_label == label)
+            if (found || _is_change) return;
+            if (_label == label && _purpose && *_purpose == wallet::AddressPurpose::SIGNKEY) {
                 dest = _dest;
+                found = true;
+            }
         });
 
+        if (!std::get_if<CNoDestination>(&dest) && !std::holds_alternative<PKHash>(dest)) {
+            pwallet->DelAddressBook(dest, /*force=*/true);
+            dest = CNoDestination();
+        }
+
         if (std::get_if<CNoDestination>(&dest)) {
-            // create mintkey address
+            // create signkey address
             auto op_dest = pwallet->GetNewDestination(OutputType::LEGACY, label);
             if (!op_dest)
                 throw std::runtime_error("Error: Keypool ran out, please call keypoolrefill first.");
             dest = *op_dest;
-        }
+            pwallet->SetAddressBook(dest, label, wallet::AddressPurpose::SIGNKEY);
+        } // blackcoin: signkey
 
         std::vector<std::pair<const CWalletTx*, unsigned int> > vCoins;
         CCoinControl coincontrol;

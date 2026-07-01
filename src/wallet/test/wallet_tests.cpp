@@ -1009,5 +1009,27 @@ BOOST_FIXTURE_TEST_CASE(wallet_sync_tx_invalid_state_test, TestingSetup)
                           HasReason("DB error adding transaction to wallet, write failed"));
 }
 
+BOOST_AUTO_TEST_CASE(address_purpose_signkey_roundtrip)
+{
+    // SIGNKEY is a Blackcoin-specific address purpose for staking signkeys.
+    // Verify it round-trips through PurposeToString/PurposeFromString.
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::SIGNKEY), "signkey");
+    auto parsed = PurposeFromString("signkey");
+    BOOST_CHECK(parsed.has_value());
+    BOOST_CHECK(*parsed == AddressPurpose::SIGNKEY);
+
+    // Verify all existing purposes still round-trip.
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::RECEIVE), "receive");
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::SEND), "send");
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::REFUND), "refund");
+    BOOST_CHECK(*PurposeFromString("receive") == AddressPurpose::RECEIVE);
+    BOOST_CHECK(*PurposeFromString("send") == AddressPurpose::SEND);
+    BOOST_CHECK(*PurposeFromString("refund") == AddressPurpose::REFUND);
+
+    // Unknown string returns empty optional.
+    BOOST_CHECK(!PurposeFromString("unknown").has_value());
+    BOOST_CHECK(!PurposeFromString("").has_value());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 } // namespace wallet

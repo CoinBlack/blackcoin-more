@@ -146,6 +146,11 @@ RPCHelpMan setlabel()
 
     const std::string label{LabelFromValue(request.params[1])};
 
+    const CAddressBookData* old_entry = pwallet->FindAddressBookEntry(dest);
+    if (old_entry && old_entry->purpose && *old_entry->purpose == AddressPurpose::SIGNKEY) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Cannot change label of a signing key address used for staking");
+    } // blackcoin: signkey
+
     if (pwallet->IsMine(dest)) {
         pwallet->SetAddressBook(dest, label, AddressPurpose::RECEIVE);
     } else {
