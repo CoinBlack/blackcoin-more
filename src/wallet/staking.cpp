@@ -311,14 +311,14 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
             if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake, wallet.chain().getCoinsTip()))
             {
                 // Found a kernel
-                LogPrint(BCLog::COINSTAKE, "CreateCoinStake : kernel found\n");
+                LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: kernel found\n", wallet.GetName());
                 std::vector<valtype> vSolutions;
                 scriptPubKeyKernel = pcoin.first->tx->vout[pcoin.second].scriptPubKey;
                 TxoutType whichType = Solver(scriptPubKeyKernel, vSolutions);
 
                 if (whichType != TxoutType::PUBKEY && whichType != TxoutType::PUBKEYHASH && whichType != TxoutType::WITNESS_V0_KEYHASH && whichType != TxoutType::WITNESS_V1_TAPROOT)
                 {
-                    LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%s\n", GetTxnOutputType(whichType));
+                    LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: no support for kernel type=%s\n", wallet.GetName(), GetTxnOutputType(whichType));
                     break;  // only support pay to public key and pay to address and pay to witness keyhash
                 }
                 if (whichType == TxoutType::PUBKEYHASH) // pay to address
@@ -388,7 +388,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
                 }
     
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
-                LogPrint(BCLog::COINSTAKE, "CreateCoinStake : added kernel type=%d\n", (int)whichType);
+                LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: added kernel type=%d\n", wallet.GetName(), (int)whichType);
                 fKernelFound = true;
                 break;
             }

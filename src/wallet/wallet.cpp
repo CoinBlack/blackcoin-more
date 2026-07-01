@@ -2044,9 +2044,9 @@ void CWallet::AbandonOrphanedCoinstakes()
         CWalletTx& wtx = item.second;
         assert(wtx.GetHash() == wtxid);
         if (GetTxDepthInMainChain(wtx) == 0 && !wtx.isAbandoned() && wtx.IsCoinStake()) {
-            LogPrint(BCLog::COINSTAKE, "Abandoning coinstake wtx %s\n", wtx.GetHash().ToString());
+            LogPrint(BCLog::COINSTAKE, "[%s] Abandoning coinstake wtx %s\n", GetName(), wtx.GetHash().ToString());
             if (!AbandonTransaction(wtxid)) {
-                LogPrint(BCLog::COINSTAKE, "Failed to abandon coinstake tx %s\n", wtx.GetHash().ToString());
+                LogPrint(BCLog::COINSTAKE, "[%s] Failed to abandon coinstake tx %s\n", GetName(), wtx.GetHash().ToString());
             }
         }
     }
