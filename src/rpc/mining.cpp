@@ -588,9 +588,9 @@ static RPCHelpMan getblocktemplate()
 {
     NodeContext& node = EnsureAnyNodeContext(request.context);
     ChainstateManager& chainman = EnsureChainman(node);
+    LOCK(cs_main);
     const CChain& active_chain = chainman.ActiveChain();
     Mining& miner = EnsureMining(node);
-    LOCK(cs_main);
     uint256 tip{CHECK_NONFATAL(miner.getTipHash()).value()};
 
     std::string strMode = "template";
@@ -1035,7 +1035,7 @@ static RPCHelpMan submitheader()
     }
 
     BlockValidationState state;
-    chainman.ProcessNewBlockHeaders({h}, /*min_pow_checked=*/true, state, false);
+    chainman.ProcessNewBlockHeaders({h}, /*min_pow_checked=*/true, state);
     if (state.IsValid()) return UniValue::VNULL;
     if (state.IsError()) {
         throw JSONRPCError(RPC_VERIFY_ERROR, state.ToString());

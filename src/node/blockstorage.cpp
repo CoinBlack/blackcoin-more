@@ -862,7 +862,7 @@ bool BlockManager::ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos) cons
 
     // Blackcoin: check the header for a proof-of-work block
     if (block.GetHash() != GetConsensus().hashGenesisBlock && block.IsProofOfWork()) {
-        if (!CheckProofOfWork(block.GetHash(), block.nBits, GetConsensus())) {
+        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, GetConsensus())) {
             LogError("%s: Errors in block header at %s\n", __func__, pos.ToString());
             return false;
         }
