@@ -38,12 +38,14 @@
 
 #include <atomic>
 #include <cassert>
+#include <condition_variable>
 #include <cstddef>
 #include <cstdint>
 #include <functional>
 #include <limits>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <set>
 #include <string>

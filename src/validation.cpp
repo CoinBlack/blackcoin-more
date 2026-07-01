@@ -64,7 +64,6 @@
 #include <util/trace.h>
 #include <util/translation.h>
 #include <validationinterface.h>
-#include <wallet/wallet.h>
 
 #include <algorithm>
 #include <cassert>

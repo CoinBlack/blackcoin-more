@@ -35,6 +35,7 @@
 #include <util/hasher.h>
 #include <util/result.h>
 #include <util/translation.h>
+#include <versionbits.h>
 #include <wallet/wallet.h>
 
 #include <atomic>

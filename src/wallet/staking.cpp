@@ -5,7 +5,7 @@
 // Staking start/stop algos by Qtum
 // Copyright (c) 2016-2023 The Qtum developers
 
-#include <index/txindex.h>
+#include <common/args.h>
 #include <wallet/coincontrol.h>
 #include <wallet/receive.h>
 #include <wallet/staking.h>

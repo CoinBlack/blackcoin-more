@@ -116,6 +116,7 @@ endif
 # bitcoin core #
 BITCOIN_CORE_H = \
   addresstype.h \
+  uint256.h \
   addrdb.h \
   addrman.h \
   addrman_impl.h \
@@ -344,7 +345,6 @@ BITCOIN_CORE_H = \
   util/vector.h \
   validation.h \
   validationinterface.h \
-  version.h \
   versionbits.h \
   wallet/bdb.h \
   wallet/coincontrol.h \
