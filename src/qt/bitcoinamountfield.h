@@ -14,6 +14,7 @@ class AmountSpinBox;
 
 QT_BEGIN_NAMESPACE
 class QValueComboBox;
+class QLabel;
 QT_END_NAMESPACE
 
 /** Widget for entering bitcoin amounts.
@@ -75,7 +76,8 @@ protected:
 
 private:
     AmountSpinBox* amount{nullptr};
-    QValueComboBox *unit;
+    // QValueComboBox *unit; // blackcoin: single-unit BLK, use label instead
+    QLabel *unit{nullptr};
 
 private Q_SLOTS:
     void unitChanged(int idx);

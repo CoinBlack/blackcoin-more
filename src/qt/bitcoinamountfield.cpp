@@ -7,12 +7,13 @@
 #include <qt/bitcoinunits.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
-#include <qt/qvaluecombobox.h>
+// #include <qt/qvaluecombobox.h> // blackcoin: single-unit BLK, use label instead
 
 #include <QApplication>
 #include <QAbstractSpinBox>
 #include <QHBoxLayout>
 #include <QKeyEvent>
+#include <QLabel>
 #include <QLineEdit>
 #include <QVariant>
 
@@ -227,8 +228,10 @@ BitcoinAmountField::BitcoinAmountField(QWidget* parent)
 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(amount);
-    unit = new QValueComboBox(this);
-    unit->setModel(new BitcoinUnits(this));
+    // unit = new QValueComboBox(this); // blackcoin: single-unit BLK, use label instead
+    // unit->setModel(new BitcoinUnits(this));
+    // layout->addWidget(unit);
+    unit = new QLabel(QString("BLK"), this);
     layout->addWidget(unit);
     layout->addStretch(1);
     layout->setContentsMargins(0,0,0,0);
@@ -240,22 +243,23 @@ BitcoinAmountField::BitcoinAmountField(QWidget* parent)
 
     // If one if the widgets changes, the combined content changes as well
     connect(amount, &AmountSpinBox::valueChanged, this, &BitcoinAmountField::valueChanged);
-    connect(unit, qOverload<int>(&QComboBox::currentIndexChanged), this, &BitcoinAmountField::unitChanged);
+    // connect(unit, qOverload<int>(&QComboBox::currentIndexChanged), this, &BitcoinAmountField::unitChanged); // blackcoin: single-unit BLK
 
     // Set default based on configuration
-    unitChanged(unit->currentIndex());
+    // unitChanged(unit->currentIndex()); // blackcoin: single-unit BLK, set unit directly
+    amount->setDisplayUnit(BitcoinUnit::BTC);
 }
 
 void BitcoinAmountField::clear()
 {
     amount->clear();
-    unit->setCurrentIndex(0);
+    // unit->setCurrentIndex(0); // blackcoin: single-unit BLK, no-op
 }
 
 void BitcoinAmountField::setEnabled(bool fEnabled)
 {
     amount->setEnabled(fEnabled);
-    unit->setEnabled(fEnabled);
+    // unit->setEnabled(fEnabled); // blackcoin: single-unit BLK, label always enabled
 }
 
 bool BitcoinAmountField::validate()
@@ -287,8 +291,9 @@ bool BitcoinAmountField::eventFilter(QObject *object, QEvent *event)
 QWidget *BitcoinAmountField::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, amount);
-    QWidget::setTabOrder(amount, unit);
-    return unit;
+    // QWidget::setTabOrder(amount, unit); // blackcoin: single-unit BLK, label not in tab chain
+    // return unit;
+    return amount;
 }
 
 CAmount BitcoinAmountField::value(bool *valid_out) const
@@ -323,18 +328,20 @@ void BitcoinAmountField::setReadOnly(bool fReadOnly)
 
 void BitcoinAmountField::unitChanged(int idx)
 {
+    // blackcoin: single-unit BLK, dropdown removed. Logic kept for reference.
     // Use description tooltip for current unit for the combobox
-    unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
+    // unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
     // Determine new unit ID
-    QVariant new_unit = unit->currentData(BitcoinUnits::UnitRole);
-    assert(new_unit.isValid());
-    amount->setDisplayUnit(new_unit.value<BitcoinUnit>());
+    // QVariant new_unit = unit->currentData(BitcoinUnits::UnitRole);
+    // assert(new_unit.isValid());
+    // amount->setDisplayUnit(new_unit.value<BitcoinUnit>());
 }
 
 void BitcoinAmountField::setDisplayUnit(BitcoinUnit new_unit)
 {
-    unit->setValue(QVariant::fromValue(new_unit));
+    // unit->setValue(QVariant::fromValue(new_unit)); // blackcoin: single-unit BLK
+    amount->setDisplayUnit(BitcoinUnit::BTC);
 }
 
 void BitcoinAmountField::setSingleStep(const CAmount& step)
