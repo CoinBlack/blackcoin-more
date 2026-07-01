@@ -854,12 +854,6 @@ public:
             notifications.transactionAddedToMempool(entry.GetSharedTx());
         }
     }
-    bool isTaprootActive() const override
-    {
-        LOCK(::cs_main);
-        const CBlockIndex* tip = Assert(m_node.chainman)->ActiveChain().Tip();
-        return DeploymentActiveAfter(tip, *m_node.chainman, Consensus::DEPLOYMENT_TAPROOT);
-    }
     CBlockIndex* getTip() const override
     {
         LOCK(::cs_main);
@@ -904,8 +898,8 @@ public:
 
     NodeContext* context() override { return &m_node; }
     ArgsManager& args() { return *Assert(m_node.args); }
-    ChainstateManager& chainman() { return *Assert(m_node.chainman); }
-    const CTxMemPool& mempool() { return *Assert(m_node.mempool); }
+    ChainstateManager& chainman() override { return *Assert(m_node.chainman); }
+    const CTxMemPool& mempool() override { return *Assert(m_node.mempool); }
     ValidationSignals& validation_signals() { return *Assert(m_node.validation_signals); }
     NodeContext& m_node;
 };

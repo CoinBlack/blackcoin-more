@@ -14,10 +14,6 @@ const struct VBDeploymentInfo VersionBitsDeploymentInfo[Consensus::MAX_VERSION_B
         /*.gbt_force =*/ true,
     },
     {
-        /*.name =*/ "segwit",
-        /*.gbt_force =*/ true,
-    },
-    {
         /*.name =*/ "taproot",
         /*.gbt_force =*/ true,
     },
@@ -29,17 +25,17 @@ std::string DeploymentName(Consensus::BuriedDeployment dep)
     switch (dep) {
     case Consensus::DEPLOYMENT_CSV:
         return "csv";
+    case Consensus::DEPLOYMENT_SEGWIT:
+        return "segwit";
     } // no default case, so the compiler can warn about missing cases
     return "";
 }
 
 std::optional<Consensus::BuriedDeployment> GetBuriedDeployment(const std::string_view name)
 {
-    /*
     if (name == "segwit") {
         return Consensus::BuriedDeployment::DEPLOYMENT_SEGWIT;
     }
-    */
     if (name == "csv") {
         return Consensus::BuriedDeployment::DEPLOYMENT_CSV;
     }

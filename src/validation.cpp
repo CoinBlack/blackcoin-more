@@ -814,9 +814,8 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     if (tx.IsCoinStake())
         return state.Invalid(TxValidationResult::TX_CONSENSUS, "coinstake");
 
-    // Reject transactions with witness before segregated witness activates (override with -prematurewitness)
     bool witnessEnabled = DeploymentActiveAfter(m_active_chainstate.m_chain.Tip(), m_active_chainstate.m_chainman, Consensus::DEPLOYMENT_SEGWIT);
-    if (!gArgs.GetBoolArg("-prematurewitness", false) && tx.HasWitness() && !witnessEnabled) {
+    if (tx.HasWitness() && !witnessEnabled) {
         return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "no-witness-yet");
     }
 
@@ -3893,7 +3892,7 @@ static bool CheckBlockSignature(const CBlock& block)
     return false;
 }
 
-static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, Chainstate& chainstate, bool fCheckPOW = true, bool fOldClient = false)
+static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, Chainstate& chainstate, bool fCheckPOW = true)
 {
     // Check block version
     if (block.nVersion < 7 && consensusParams.IsProtocolV2(block.GetBlockTime()))
@@ -3901,10 +3900,7 @@ static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& st
 
     // Check proof of work hash
     if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams)) {
-        if (fOldClient)
-            return false;
-        else
-            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
+        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
     }
 
     // Check timestamp
@@ -4329,7 +4325,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     return true;
 }
 
-bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, CBlockIndex** ppindex, bool min_pow_checked, bool fOldClient)
+bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, CBlockIndex** ppindex, bool min_pow_checked)
 {
     AssertLockHeld(cs_main);
 
@@ -4363,17 +4359,10 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
                 return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "older-than-checkpoint");
         }
 
-        // peercoin: Don't reject in case of old clients. Change our assumption instead.
-        // ppcTODO: Maybe add restrictions until when this is allowed? We don't want new clients to pretend to be old clients and try to abuse this.
-        // Blackcoin ToDo: remove fOldClient after the nodes got updated
-        if (!CheckBlockHeader(block, state, GetConsensus(), chainstate, !fProofOfStake, fOldClient))
+        if (!CheckBlockHeader(block, state, GetConsensus(), chainstate, !fProofOfStake))
         {
-            if (fOldClient)
-                fSetAsProofOfStake = !fProofOfStake; // our guess was wrong - correct it
-            else {
-                LogPrint(BCLog::VALIDATION, "%s: Consensus::CheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
-                return false;
-            }
+            LogPrint(BCLog::VALIDATION, "%s: Consensus::CheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
+            return false;
         }
 
         // Get prev block index
@@ -4462,7 +4451,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
 }
 
 // Exposed wrapper for AcceptBlockHeader
-bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, bool min_pow_checked, BlockValidationState& state, bool old_client, const CBlockIndex** ppindex,  const CBlockIndex** pindexFirst)
+bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, bool min_pow_checked, BlockValidationState& state, const CBlockIndex** ppindex,  const CBlockIndex** pindexFirst)
 {
     AssertLockNotHeld(cs_main);
     {
@@ -4473,7 +4462,7 @@ bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& 
             const CBlockHeader& header = headers[i];
 
             CBlockIndex *pindex = nullptr; // Use a temp pindex instead of ppindex to avoid a const_cast
-            bool accepted{AcceptBlockHeader(header, state, &pindex, min_pow_checked, old_client)};
+            bool accepted{AcceptBlockHeader(header, state, &pindex, min_pow_checked)};
             CheckBlockIndex();
 
             if (!accepted) {
