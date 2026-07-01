@@ -4654,7 +4654,7 @@ bool ChainstateManager::ProcessNewBlock(const std::shared_ptr<const CBlock>& blo
         // not very expensive, the anti-DoS benefits of caching failure (of a definitely-invalid block) are not substantial.
         // Blackcoin: also check for the signature encoding
         if (!CheckCanonicalBlockSignature(block)) {
-            LogError("%s: AcceptBlock FAILED (%s)", __func__, "bad block signature encoding");
+            LogError("%s: AcceptBlock FAILED (%s)\n", __func__, "bad block signature encoding");
             return false;
         }
         bool ret = CheckBlock(*block, state, GetConsensus(), ActiveChainstate());
