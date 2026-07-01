@@ -1848,7 +1848,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     const uint16_t default_bind_port =
         static_cast<uint16_t>(args.GetIntArg("-port", Params().GetDefaultPort()));
 
-    const uint16_t default_bind_port_onion = default_bind_port + 1;
+    const uint16_t default_bind_port_onion = default_bind_port + 3;
 
     const auto BadPortWarning = [](const char* prefix, uint16_t port) {
         return strprintf(_("%s request to listen on port %u. This port is considered \"bad\" and "
