@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Ce sont vos adresses Bitcoin pour envoyer des paiements. Vérifiez toujours le montant et l’adresse de réception avant d’envoyer des pièces.</translation>
+        <translation type="unfinished">Ce sont vos adresses Bitcoin pour envoyer des paiements. Vérifiez toujours le montant et l’adresse du destinataire avant d’envoyer des pièces.</translation>
     </message>
     <message>
         <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
@@ -73,7 +73,7 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
     </message>
     <message>
         <source>Copy &amp;Label</source>
-        <translation type="unfinished">Copier &amp;l’étiquette</translation>
+        <translation type="unfinished">Copier l’é&amp;tiquette</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -86,7 +86,7 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
     <message>
         <source>Comma separated file</source>
         <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
-        <translation type="unfinished">Fichier avec séparateur virgule</translation>
+        <translation type="unfinished">Fichier séparé par des virgules</translation>
     </message>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
@@ -100,14 +100,6 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
     <message>
         <source>Receiving addresses - %1</source>
         <translation type="unfinished">Adresses de réception – %1</translation>
-    </message>
-    <message>
-        <source>Sending addresses - %1</source>
-        <translation type="unfinished">Adresses d’envois - %1</translation>
-    </message>
-    <message>
-        <source>Receiving addresses - %1</source>
-        <translation type="unfinished">Adresses de réceptions - %1</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -172,8 +164,8 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
         <translation type="unfinished">Confirmer le chiffrement du porte-monnaie</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Avertissement : Si vous chiffrez votre porte-monnaie et perdez votre phrase de passe, vous allez &lt;b&gt;PERDRE TOUS VOS BITCOINS&lt;/b&gt; !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Avertissement : Si vous chiffrez votre porte-monnaie et perdez votre phrase de passe, vous &lt;b&gt;PERDREZ TOUS VOS BLACKCOINS&lt;/b&gt; !</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -851,14 +843,6 @@ Il n’est possible de signer qu’avec les adresses de type « legacy ».</tr
     <message>
         <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
         <translation type="unfinished">Impossible de créer un nouveau porte-monnaie. Le logiciel a été compilé sans prise en charge de sqlite (nécessaire pour les porte-monnaie de descripteurs) </translation>
-    </message>
-    <message>
-        <source>Error creating wallet</source>
-        <translation type="unfinished">Erreur lors de la création du portefeuille</translation>
-    </message>
-    <message>
-        <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">Impossible de créer un nouveau portefeuilles, le logiciel a été compilé sans support pour sqlite (nécessaire pour le portefeuille décris) </translation>
     </message>
     <message>
         <source>Error: %1</source>
@@ -2092,10 +2076,6 @@ Le processus de migration créera une sauvegarde du porte-monnaie avant migratio
     <message>
         <source>Sends %1 to %2</source>
         <translation type="unfinished"> Envoie %1 à %2</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation type="unfinished">votre adresse</translation>
     </message>
     <message>
         <source>own address</source>
@@ -3884,7 +3864,7 @@ Note : Les frais étant calculés par octet, un taux de frais de « 100 satoshi
     <message>
         <source>Comma separated file</source>
         <extracomment>Expanded name of the CSV file format. See: https://en.wikipedia.org/wiki/Comma-separated_values.</extracomment>
-        <translation type="unfinished">Fichier avec séparateur virgule</translation>
+        <translation type="unfinished">Fichier séparé par des virgules</translation>
     </message>
     <message>
         <source>Confirmed</source>
@@ -4247,10 +4227,6 @@ Accédez à Fichier &gt; Ouvrir un porte-monnaie pour en charger un.
     <message>
         <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
         <translation type="unfinished">Le porte-monnaie a été créé. Le type de porte-monnaie ancien devient obsolète et la prise en charge de la création et de l’ouverture des porte-monnaie anciens sera supprimée à l’avenir. Les anciens porte-monnaie peuvent être migrés vers un porte-monnaie de descripteurs avec migratewallet.</translation>
-    </message>
-    <message>
-        <source>Wallet loaded successfully. The legacy wallet type is being deprecated and support for creating and opening legacy wallets will be removed in the future. Legacy wallets can be migrated to a descriptor wallet with migratewallet.</source>
-        <translation type="unfinished">Portefeuille chargé avec succès. Le type de portefeuille existant est obsolète et la prise en charge de la création et de l'ouverture de portefeuilles existants sera supprimée à l'avenir. Les anciens portefeuilles peuvent être migrés vers un portefeuille descripteur avec migratewallet.</translation>
     </message>
     <message>
         <source>Warning: Dumpfile wallet format "%s" does not match command line specified format "%s".</source>

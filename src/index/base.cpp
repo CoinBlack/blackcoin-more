@@ -447,7 +447,7 @@ IndexSummary BaseIndex::GetSummary() const
 void BaseIndex::SetBestBlockIndex(const CBlockIndex* block)
 {
     /*
-    // Blackcoin
+    // Blackcoin: pruning is not allowed
     assert(!m_chainstate->m_blockman.IsPruneMode() || AllowPrune());
 
     if (AllowPrune() && block) {
@@ -458,6 +458,10 @@ void BaseIndex::SetBestBlockIndex(const CBlockIndex* block)
     */
 
     // Intentionally set m_best_block_index as the last step in this function,
+    // after updating prune locks above, and after making any other references
+    // to *this, so the BlockUntilSyncedToCurrentChain function (which checks
+    // m_best_block_index as an optimization) can be used to wait for the last
+    // BlockConnected notification and safely assume that prune locks are
     // updated and that the index object is safe to delete.
     m_best_block_index = block;
 }

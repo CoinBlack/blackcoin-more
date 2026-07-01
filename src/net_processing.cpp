@@ -6,6 +6,8 @@
 // Header spam protection by Qtum
 // Copyright (c) 2016-2019 The Qtum developers
 
+// blackcoin: consensusParams.nPowTargetSpacing, used in Bitcoin Core, is replaced by consensusParams.nTargetSpacing
+
 #include <net_processing.h>
 
 #include <addrman.h>
@@ -13,7 +15,7 @@
 #include <blockencodings.h>
 #include <blockfilter.h>
 #include <chainparams.h>
-#include <common/args.h> // for GetBoolArg
+#include <common/args.h> // blackcoin: port of Header spam protection by Qtum
 #include <consensus/amount.h>
 #include <consensus/validation.h>
 #include <deploymentstatus.h>
@@ -494,6 +496,7 @@ struct CNodeState {
     CNodeState(bool is_inbound) : m_is_inbound(is_inbound) {}
 };
 
+// blackcoin: port of Header spam protection by Qtum
 class CNodeHeaders
 {
 public:
@@ -924,6 +927,7 @@ private:
 
     /** Map maintaining per-node state. */
     std::map<NodeId, CNodeState> m_node_states GUARDED_BY(cs_main);
+    // blackcoin: port of Header spam protection by Qtum
     std::map<CService, CNodeHeaders> m_service_headers GUARDED_BY(cs_main);
 
     /** Get a pointer to a const CNodeState, used when not mutating the CNodeState object. */
@@ -1387,6 +1391,7 @@ static bool CanServeWitnesses(const Peer& peer)
     return peer.m_their_services & NODE_WITNESS;
 }
 
+// blackcoin: port of Header spam protection by Qtum
 CNodeHeaders& PeerManagerImpl::ServiceHeaders(const CService& address) EXCLUSIVE_LOCKS_REQUIRED(cs_main) {
     unsigned short port =
             gArgs.GetBoolArg("-headerspamfilterignoreport", DEFAULT_HEADER_SPAM_FILTER_IGNORE_PORT) ? 0 : address.GetPort();
@@ -1394,6 +1399,7 @@ CNodeHeaders& PeerManagerImpl::ServiceHeaders(const CService& address) EXCLUSIVE
     return m_service_headers[addr];
 }
 
+// blackcoin: port of Header spam protection by Qtum
 void PeerManagerImpl::CleanAddressHeaders(const CAddress& addr) EXCLUSIVE_LOCKS_REQUIRED(cs_main) {
     CSubNet subNet(addr);
     for (std::map<CService, CNodeHeaders>::iterator it=m_service_headers.begin(); it!=m_service_headers.end();){
@@ -1493,7 +1499,7 @@ bool PeerManagerImpl::BlockRequested(NodeId nodeid, const CBlockIndex& block, st
 
     // Make sure it's not being fetched already from same peer.
     RemoveBlockRequest(hash, nodeid);
-
+    // blackcoin: port of Header spam protection by Qtum
     std::list<QueuedBlock>::iterator it = state->vBlocksInFlight.insert(state->vBlocksInFlight.end(),
             {&block, std::unique_ptr<PartiallyDownloadedBlock>(pit ? new PartiallyDownloadedBlock(&m_mempool, &m_chainman) : nullptr)});
     if (state->vBlocksInFlight.size() == 1) {
@@ -1824,6 +1830,7 @@ bool PeerManagerImpl::ProcessNetBlockHeaders(CNode& pfrom, const std::vector<CBl
     return ret;
 }
 
+// blackcoin: port of Header spam protection by Qtum
 bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool force_processing, bool min_pow_checked, bool* new_block, CNode& pfrom)
 {
     PeerRef peer = GetPeerRef(pfrom.GetId());
@@ -2199,6 +2206,7 @@ void PeerManagerImpl::MaybePunishNodeForBlock(NodeId nodeid, const BlockValidati
             }
             break;
         }
+    // blackcoin: port of Header spam protection by Qtum
     case BlockValidationResult::BLOCK_INVALID_HEADER:
     case BlockValidationResult::BLOCK_CHECKPOINT:
     case BlockValidationResult::BLOCK_INVALID_PREV:
@@ -2280,7 +2288,6 @@ std::optional<std::string> PeerManagerImpl::FetchBlock(NodeId peer_id, const CBl
 
     // Construct message to request the block
     const uint256& hash{block_index.GetBlockHash()};
-
     std::vector<CInv> invs{CInv(MSG_BLOCK | MSG_WITNESS_FLAG, hash)};
 
     // Send block request message to the peer
@@ -2739,7 +2746,7 @@ void PeerManagerImpl::ProcessGetBlockData(CNode& pfrom, Peer& peer, const CInv& 
     if (a_recent_block && a_recent_block->GetHash() == pindex->GetBlockHash()) {
         pblock = a_recent_block;
     /*
-    // Blackcoin: do not read raw blocks from disk as the disk format is actually different
+    // Blackcoin: disk format omits nFlags (under SER_GETHASH) while wire includes it (under SER_POSMARKER), so raw bytes differ
     } else if (inv.IsMsgWitnessBlk()) {
         // Fast-path: in this case it is possible to serve the block directly from disk,
         // as the network format matches the format on disk
@@ -3837,6 +3844,7 @@ void PeerManagerImpl::ProcessGetCFCheckPt(CNode& node, Peer& peer, DataStream& v
 void PeerManagerImpl::ProcessBlock(CNode& node, const std::shared_ptr<const CBlock>& block, bool force_processing, bool min_pow_checked)
 {
     bool new_block{false};
+    // blackcoin: port of Header spam protection by Qtum
     ProcessNetBlock(block, force_processing, min_pow_checked, &new_block, node);
     if (new_block) {
         node.m_last_block_time = GetTime<std::chrono::seconds>();
@@ -5062,6 +5070,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                 std::list<QueuedBlock>::iterator* queuedBlockIt = nullptr;
                 if (!BlockRequested(pfrom.GetId(), *pindex, &queuedBlockIt)) {
                     if (!(*queuedBlockIt)->partialBlock)
+			// blackcoin: port of Header spam protection by Qtum
                         (*queuedBlockIt)->partialBlock.reset(new PartiallyDownloadedBlock(&m_mempool, &m_chainman));
                     else {
                         // The block was already in flight using compact blocks from the same peer
@@ -5121,6 +5130,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                 // download from.
                 // Optimistically try to reconstruct anyway since we might be
                 // able to without any round trips.
+		// blackcoin: port of Header spam protection by Qtum
                 PartiallyDownloadedBlock tempBlock(&m_mempool, &m_chainman);
                 ReadStatus status = tempBlock.InitData(cmpctblock, vExtraTxnForCompact);
                 if (status != READ_STATUS_OK) {
@@ -5226,6 +5236,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         for (unsigned int n = 0; n < nCount; n++) {
             vRecv >> headers[n];
             ReadCompactSize(vRecv); // ignore tx count; assume it is 0.
+	    //blackcoin: PoS has extra fields in blocks
             ReadCompactSize(vRecv); // ignore block sig; assume it is 0.
         }
 
@@ -5592,6 +5603,7 @@ bool PeerManagerImpl::MaybeDiscourageAndDisconnect(CNode& pnode, Peer& peer)
     LogPrint(BCLog::NET, "Disconnecting and discouraging peer %d!\n", peer.m_id);
     if (m_banman) m_banman->Discourage(pnode.addr);
     m_connman.DisconnectNode(pnode.addr);
+    // blackcoin: port of Header spam protection by Qtum
     LOCK(cs_main);
     // Remove all data from the header spam filter when the address is banned
     CleanAddressHeaders(pnode.addr);
@@ -6000,6 +6012,7 @@ void PeerManagerImpl::MaybeSendSendHeaders(CNode& node, Peer& peer)
     }
 }
 
+// blackcoin: use fixed fee calculation
 void PeerManagerImpl::MaybeSendFeefilter(CNode& pto, Peer& peer, std::chrono::microseconds current_time)
 {
     if (m_opts.ignore_incoming_txs) return;

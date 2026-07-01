@@ -92,7 +92,7 @@ private:
     bool Rewind(const CBlockIndex* current_tip, const CBlockIndex* new_tip);
 
     /*
-    // Blackcoin
+    // Blackcoin: pruning is not allowed
     virtual bool AllowPrune() const = 0;
     */
 

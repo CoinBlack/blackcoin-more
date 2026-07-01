@@ -47,7 +47,7 @@ static const bool DEFAULT_PRINT_MODIFIED_FEE = false;
 //! -staking default
 static const bool DEFAULT_STAKE = true;
 //! -stakecache default
-static const bool DEFAULT_STAKE_CACHE = false;
+static const bool DEFAULT_STAKE_CACHE = false; // blackcoin: stakecache
 //! -staketimio default, proof-of-stake timeout in ms
 static const unsigned int DEFAULT_STAKETIMIO = 500;
 

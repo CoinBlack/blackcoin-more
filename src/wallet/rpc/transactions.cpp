@@ -433,6 +433,7 @@ static std::vector<RPCResult> TransactionDescriptionString()
            }},
            };
 }
+
 RPCHelpMan listtransactions()
 {
     return RPCHelpMan{"listtransactions",

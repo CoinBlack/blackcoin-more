@@ -3,9 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished">Klik kanan untuk mengedit alamat atau label
-third_party/catapult/tracing/tracing/metrics/OWNERS
-//@@@@@@@@\\ @@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ _ @@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@/ @@@@@ @@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ _ @@@@@@@@@@@@ @@@@@@@@@@@@@ @@@@@@@@@@@@@ @@@@@@@@@ @@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@ @ @@@@@@@@@@@@@@ /@@@@@@@@@@@@@@@@@@@@@@\ @@@@@@@@@ @@@@@@@ @@@@@@@@@@@@@@ (@@@@ @@@@@@@@@@@@@@@) @@@@@ @@@@@@@@@@@ @@@@@@@@@@@@@@@@ @@@@ @@@@@@@@@@@@ @@@@ / @@@@@@@@@@@@@@@@@ @@@@@@@@@@ ======= \@@@@@@@@@@@@@@ @@@@@@@@@@@/ ======= @@@@@@@@@@ @@@@@@@@@@@@@@@@@\ \ @@@@@@@@@@@@@@@@@@@@@@/ /@@@@@@@@@@@@@@@@@@ @@@@@@ @@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@ \@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@ @@@@@@@@ \@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@ @@@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@ @@@@@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@ @@@@@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@ @@@@@@ @ @ @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@ @ @@ @@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ _ @@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@ @@@@@@@@@@@@@@@@@@@@@@@@ \\@@@@@@@@@//</translation>
+        <translation type="unfinished">Klik kanan untuk mengedit alamat atau label</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -147,7 +145,7 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
         <translation type="unfinished">Konfirmasi pengenkripsian dompet</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">Peringatan: Jika Anda mengenkripsi dompet Anda dan lupa kata sandi Anda, Anda akan &lt;b&gt;KEHILANGAN SEMUA BITCOIN ANDA&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -629,21 +627,6 @@ Tanda tangan hanya bisa digunakan dengan tipe alamat 'warisan'</translation>
     <message>
         <source>(%1 locked)</source>
         <translation type="unfinished">(%1 terkunci)</translation>
-    </message>
-    </context>
-<context>
-    <name>CoinControlDialog</name>
-    <message>
-        <source>Copy change</source>
-        <translation type="unfinished">Salin Perubahan</translation>
-    </message>
-    <message>
-        <source>(%1 locked)</source>
-        <translation type="unfinished">(%1 terkunci)</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation type="unfinished">(tidak ada label)</translation>
     </message>
     </context>
 <context>
@@ -1304,10 +1287,6 @@ Proses migrasi akan mencadangkan dompet sebelum melakukan pemindahan. Fail cadan
     <message>
         <source>Received</source>
         <translation type="unfinished">Diterima</translation>
-    </message>
-    <message>
-        <source>The transport layer version: %1</source>
-        <translation type="unfinished">Versi lapisan transportasi: %1</translation>
     </message>
     <message>
         <source>The transport layer version: %1</source>

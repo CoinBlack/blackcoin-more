@@ -274,24 +274,8 @@
         <translation type="unfinished">&amp; تشفير المحفظة</translation>
     </message>
     <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp; تشفير المحفظة</translation>
-    </message>
-    <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation type="unfinished">تشفير المفتاح الخاص بمحفظتك</translation>
-    </message>
-    <message>
-        <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp; محفظة احتياطية</translation>
-    </message>
-    <message>
-        <source>&amp;Change Passphrase…</source>
-        <translation type="unfinished">وتغيير العبارات...</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">علامة ورسالة...</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
@@ -314,32 +298,8 @@
         <translation type="unfinished">&amp; تحقق من الرسالة</translation>
     </message>
     <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp; تحقق من الرسالة</translation>
-    </message>
-    <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
         <translation type="unfinished">تحقق من الرسائل للتأكد من أنَها وُقعت برسائل Bitcoin محدَدة</translation>
-    </message>
-    <message>
-        <source>&amp;Load PSBT from file…</source>
-        <translation type="unfinished">وتحميل PSBT من ملف...</translation>
-    </message>
-    <message>
-        <source>Open &amp;URI…</source>
-        <translation type="unfinished">فتح ورابط...</translation>
-    </message>
-    <message>
-        <source>Close Wallet…</source>
-        <translation type="unfinished">اغلاق المحفظة</translation>
-    </message>
-    <message>
-        <source>Create Wallet…</source>
-        <translation type="unfinished">انشاء المحفظة</translation>
-    </message>
-    <message>
-        <source>Close All Wallets…</source>
-        <translation type="unfinished">اغلاق جميع المحافظ</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -394,22 +354,6 @@
         <translation type="unfinished">‫الاتصال بالأقران…‬</translation>
     </message>
     <message>
-        <source>Synchronizing with network…</source>
-        <translation type="unfinished">مزامنة مع الشبكة ...</translation>
-    </message>
-    <message>
-        <source>Indexing blocks on disk…</source>
-        <translation type="unfinished">كتل الفهرسة على القرص ...</translation>
-    </message>
-    <message>
-        <source>Processing blocks on disk…</source>
-        <translation type="unfinished">كتل المعالجة على القرص ...</translation>
-    </message>
-    <message>
-        <source>Connecting to peers…</source>
-        <translation type="unfinished">الاتصال بالأقران ...</translation>
-    </message>
-    <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
         <translation type="unfinished">‫أطلب مدفوعات (أنشئ رموز استجابة (QR Codes) وعناوين بتكوين)‬</translation>
     </message>
@@ -443,10 +387,6 @@
     <message>
         <source>Catching up…</source>
         <translation type="unfinished">‫يجري التدارك…‬</translation>
-    </message>
-    <message>
-        <source>Catching up…</source>
-        <translation type="unfinished">يمسك…</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
@@ -770,34 +710,6 @@
         <translation type="unfinished">لا يمكن سرد الموقعين</translation>
     </message>
     </context>
-<context>
-    <name>RestoreWalletActivity</name>
-    <message>
-        <source>Restore Wallet</source>
-        <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
-        <translation type="unfinished">استعادة المحفظة</translation>
-    </message>
-    <message>
-        <source>Restoring Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
-        <extracomment>Descriptive text of the restore wallets progress window which indicates to the user that wallets are currently being restored.</extracomment>
-        <translation type="unfinished">استعادة المحفظة &lt;b&gt;%1&lt;/b&gt;...</translation>
-    </message>
-    <message>
-        <source>Restore wallet failed</source>
-        <extracomment>Title of message box which is displayed when the wallet could not be restored.</extracomment>
-        <translation type="unfinished">‫تعذر استعادة المحفظة‬</translation>
-    </message>
-    <message>
-        <source>Restore wallet warning</source>
-        <extracomment>Title of message box which is displayed when the wallet is restored with some warning.</extracomment>
-        <translation type="unfinished">‫تحذير استعادة المحفظة‬</translation>
-    </message>
-    <message>
-        <source>Restore wallet message</source>
-        <extracomment>Title of message box which is displayed when the wallet is successfully restored.</extracomment>
-        <translation type="unfinished">‫رسالة استعادة محفظة‬</translation>
-    </message>
-</context>
 <context>
     <name>WalletController</name>
     <message>
@@ -1304,10 +1216,6 @@
     <message>
         <source>PSBT saved to disk.</source>
         <translation type="unfinished">‫تم حفظ المعاملة الموقعة جزئيا على وحدة التخزين.‬</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation type="unfinished">عنوانه</translation>
     </message>
     <message>
         <source>own address</source>

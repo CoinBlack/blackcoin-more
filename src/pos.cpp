@@ -205,7 +205,7 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t nTime, co
         }
     }
     return false;
-}
+} // blackcoin: stakecache
 
 void CacheKernel(std::map<COutPoint, CStakeCache>& cache, const COutPoint& prevout, CBlockIndex* pindexPrev, CCoinsViewCache& view)
 {
@@ -230,4 +230,4 @@ void CacheKernel(std::map<COutPoint, CStakeCache>& cache, const COutPoint& prevo
 
     CStakeCache c((coinPrev.nTime ? coinPrev.nTime : blockFrom->nTime), coinPrev.out.nValue);
     cache.insert({prevout, c});
-}
+} // blackcoin: stakecache

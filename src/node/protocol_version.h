@@ -38,4 +38,4 @@ static const int INVALID_CB_NO_BAN_VERSION = 70015;
 //! "wtxidrelay" command for wtxid-based relay starts with this version
 static const int WTXID_RELAY_VERSION = 70016;
 
-#endif // BITCOIN_VERSION_H
+#endif // BITCOIN_NODE_PROTOCOL_VERSION_H

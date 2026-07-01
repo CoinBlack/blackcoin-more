@@ -20,12 +20,10 @@
 #include <vector>
 
 using node::TransactionError;
-using util::Join;
 
 namespace common {
 /*
-// Blackcoin
-
+// Blackcoin: no fee estimates and RBF
 std::string StringForFeeReason(FeeReason reason)
 {
     static const std::map<FeeReason, std::string> fee_reason_strings = {

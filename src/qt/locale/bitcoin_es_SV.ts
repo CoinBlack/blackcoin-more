@@ -164,8 +164,8 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
         <translation type="unfinished">Confirmar el encriptado de la billetera</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Advertencia: Si encriptas la billetera y pierdes tu frase de contraseña, ¡&lt;b&gt;PERDERÁS TODOS TUS BITCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Advertencia: Si encriptas la billetera y pierdes tu frase de contraseña, ¡&lt;b&gt;PERDERÁS TODOS TUS BLACKCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -502,10 +502,6 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
         <translation type="unfinished">&amp;Recibir</translation>
     </message>
     <message>
-        <source>&amp;Options…</source>
-        <translation type="unfinished">&amp;Opciones…</translation>
-    </message>
-    <message>
         <source>&amp;Encrypt Wallet…</source>
         <translation type="unfinished">&amp;Encriptar billetera…</translation>
     </message>
@@ -520,10 +516,6 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     <message>
         <source>&amp;Change Passphrase…</source>
         <translation type="unfinished">&amp;Cambiar contraseña...</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">Firmar &amp;mensaje...</translation>
     </message>
     <message>
         <source>Sign &amp;message…</source>
@@ -603,10 +595,6 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
             <numerusform>%n bloque procesado del historial de transacciones.</numerusform>
             <numerusform>%n bloques procesados del historial de transacciones.</numerusform>
         </translation>
-    </message>
-    <message>
-        <source>%1 behind</source>
-        <translation type="unfinished">%1 atrás</translation>
     </message>
     <message>
         <source>Catching up…</source>
@@ -894,11 +882,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished">Importe</translation>
-    </message>
-    <message>
-        <source>Received with label</source>
-        <translation type="unfinished">Recibido con etiqueta</translation>
+        <translation type="unfinished">Monto</translation>
     </message>
     <message>
         <source>Received with label</source>
@@ -906,15 +890,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Received with address</source>
-        <translation type="unfinished">Recibido con dirección</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="unfinished">Fecha</translation>
-    </message>
-    <message>
-        <source>Confirmations</source>
-        <translation type="unfinished">Confirmaciones</translation>
+        <translation type="unfinished">Recibido con etiqueta</translation>
     </message>
     <message>
         <source>Date</source>
@@ -930,7 +906,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation type="unfinished">Copiar importe</translation>
+        <translation type="unfinished">Copiar cantidad</translation>
     </message>
     <message>
         <source>&amp;Copy address</source>
@@ -950,7 +926,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>L&amp;ock unspent</source>
-        <translation type="unfinished">&amp;Bloquear importe no gastado</translation>
+        <translation type="unfinished">B&amp;loquear no gastado</translation>
     </message>
     <message>
         <source>&amp;Unlock unspent</source>
@@ -962,19 +938,11 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Copy fee</source>
-        <translation type="unfinished">Copiar comisión</translation>
+        <translation type="unfinished">Tarifa de copia</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation type="unfinished">Copiar después de la comisión</translation>
-    </message>
-    <message>
-        <source>Copy bytes</source>
-        <translation type="unfinished">Copiar bytes</translation>
-    </message>
-    <message>
-        <source>Copy change</source>
-        <translation type="unfinished">Copiar cambio</translation>
+        <translation type="unfinished">Copiar después de la tarifa</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -990,7 +958,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation type="unfinished">Puede variar +/- %1 satoshi(s) por entrada.</translation>
+        <translation type="unfinished">Puede variar en +/- %1 satoshi(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -998,7 +966,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>change from %1 (%2)</source>
-        <translation type="unfinished">cambio desde %1 (%2)</translation>
+        <translation type="unfinished">Cambio desde %1 (%2)</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -1023,7 +991,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Create wallet warning</source>
-        <translation type="unfinished">Advertencia al crear la billetera</translation>
+        <translation type="unfinished">Advertencia de crear billetera</translation>
     </message>
     <message>
         <source>Can't list signers</source>
@@ -1998,7 +1966,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Partially Signed Transaction (Binary)</source>
         <extracomment>Expanded name of the binary PSBT file format. See: BIP 174.</extracomment>
-        <translation type="unfinished">Transacción parcialmente firmada (binario)</translation>
+        <translation type="unfinished">Transacción parcialmente firmada (binario) </translation>
     </message>
     <message>
         <source>PSBT saved to disk.</source>
@@ -3030,19 +2998,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation type="unfinished">Copiar después de la comisión</translation>
-    </message>
-    <message>
-        <source>Copy bytes</source>
-        <translation type="unfinished">Copiar bytes</translation>
-    </message>
-    <message>
-        <source>Copy change</source>
-        <translation type="unfinished">Copiar cambio</translation>
-    </message>
-    <message>
-        <source>%1 (%2 blocks)</source>
-        <translation type="unfinished">%1 (%2 bloques)</translation>
+        <translation type="unfinished">Copiar después de la tarifa</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -3517,10 +3473,6 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">Generado</translation>
     </message>
     <message>
-        <source>Generated</source>
-        <translation type="unfinished">Generado</translation>
-    </message>
-    <message>
         <source>From</source>
         <translation type="unfinished">De</translation>
     </message>
@@ -3629,7 +3581,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished">Importe</translation>
+        <translation type="unfinished">Monto</translation>
     </message>
     <message>
         <source>true</source>

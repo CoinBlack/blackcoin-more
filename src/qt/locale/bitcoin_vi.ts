@@ -132,7 +132,7 @@
         <translation type="unfinished">Xác nhận mã hóa ví</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">Cảnh báo: Nếu bạn mã hóa ví và mất cụm mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ CÁC BITCOIN&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -312,79 +312,6 @@
     <message>
         <source>Browse transaction history</source>
         <translation type="unfinished">Trình duyệt lịch sử giao dịch</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation type="unfinished">T&amp;hoát</translation>
-    </message>
-    <message>
-        <source>Quit application</source>
-        <translation type="unfinished">Đóng ứng dụng</translation>
-    </message>
-    <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished">&amp;Khoảng %1</translation>
-    </message>
-    <message>
-        <source>Show information about %1</source>
-        <translation type="unfinished">Hiện thông tin khoảng %1</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation type="unfinished">Về &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show information about Qt</source>
-        <translation type="unfinished">Hiện thông tin về Qt</translation>
-    </message>
-    <message>
-        <source>Modify configuration options for %1</source>
-        <translation type="unfinished">Sửa đổi tùy chỉnh cấu hình cho %1</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation type="unfinished">Tạo một ví mới</translation>
-    </message>
-    <message>
-        <source>&amp;Transactions</source>
-        <translation type="unfinished">&amp;Các Giao Dịch</translation>
-    </message>
-    <message>
-        <source>Wallet:</source>
-        <translation type="unfinished">Ví tiền</translation>
-    </message>
-    <message>
-        <source>Network activity disabled.</source>
-        <extracomment>A substring of the tooltip.</extracomment>
-        <translation type="unfinished">Hoạt động mạng được vô hiệu.</translation>
-    </message>
-    <message>
-        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation type="unfinished">Proxy là &lt;b&gt; cho phép &lt;/b&gt;: %1</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Gửi coin đến một địa chỉ Bitcoin</translation>
-    </message>
-    <message>
-        <source>Backup wallet to another location</source>
-        <translation type="unfinished">Backup ví đến một địa chỉ khác</translation>
-    </message>
-    <message>
-        <source>Change the passphrase used for wallet encryption</source>
-        <translation type="unfinished">Thay đổi cụm mật khẩu cho ví đã mã hóa</translation>
-    </message>
-    <message>
-        <source>&amp;Send</source>
-        <translation type="unfinished">&amp;Gửi</translation>
-    </message>
-    <message>
-        <source>&amp;Receive</source>
-        <translation type="unfinished">&amp;Nhận</translation>
-    </message>
-    <message>
-        <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Mã hóa ví…</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -616,14 +543,6 @@
         <translation type="unfinished">Không có ví nào</translation>
     </message>
     <message>
-        <source>default wallet</source>
-        <translation type="unfinished">ví mặc định</translation>
-    </message>
-    <message>
-        <source>No wallets available</source>
-        <translation type="unfinished">Không có ví nào</translation>
-    </message>
-    <message>
         <source>Load Wallet Backup</source>
         <extracomment>The title for Restore Wallet File Windows</extracomment>
         <translation type="unfinished">Tải bản sao lưu ví</translation>
@@ -758,13 +677,9 @@
 <context>
     <name>RestoreWalletActivity</name>
     <message>
-        <source>default wallet</source>
-        <translation type="unfinished">ví mặc định</translation>
-    </message>
-    <message>
-        <source>Open Wallet</source>
-        <extracomment>Title of window indicating the progress of opening of a wallet.</extracomment>
-        <translation type="unfinished">Mớ ví</translation>
+        <source>Restore Wallet</source>
+        <extracomment>Title of progress window which is displayed when wallets are being restored.</extracomment>
+        <translation type="unfinished">Khôi phục ví</translation>
     </message>
     <message>
         <source>Restoring Wallet &lt;b&gt;%1&lt;/b&gt;…</source>

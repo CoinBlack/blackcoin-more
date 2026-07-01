@@ -164,7 +164,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Potvrdite šifrovanje novčanika</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">Upozorenje: Ako šifrujete svoj novčanik, i potom izgubite svoju pristupnu frazu &lt;b&gt;IZGUBIĆETE SVE SVOJE BITKOINE&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -1875,10 +1875,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">sopstvena adresa</translation>
     </message>
     <message>
-        <source>own address</source>
-        <translation type="unfinished">sopstvena adresa</translation>
-    </message>
-    <message>
         <source>Unable to calculate transaction fee or total transaction amount.</source>
         <translation type="unfinished">Није могуће израчунати накнаду за трансакцију или укупан износ трансакције.</translation>
     </message>
@@ -3199,11 +3195,6 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <source>conflicted with a transaction with %1 confirmations</source>
         <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an unconfirmed transaction that conflicts with a confirmed transaction.</extracomment>
         <translation type="unfinished">постоји неусаглашеност са трансакцијом са %1 потврда</translation>
-    </message>
-    <message>
-        <source>abandoned</source>
-        <extracomment>Text explaining the current status of a transaction, shown in the status field of the details window for this transaction. This status represents an abandoned transaction.</extracomment>
-        <translation type="unfinished">напуштено</translation>
     </message>
     <message>
         <source>abandoned</source>

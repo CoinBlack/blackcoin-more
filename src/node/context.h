@@ -27,7 +27,6 @@ class ChainstateManager;
 class ECC_Context;
 class NetGroupManager;
 class PeerManager;
-
 namespace interfaces {
 class Chain;
 class ChainClient;

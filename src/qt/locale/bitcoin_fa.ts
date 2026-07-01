@@ -29,10 +29,6 @@
         <source>Delete the currently selected address from the list</source>
         <translation type="unfinished">آدرس انتخاب شده را از لیست پاک کنید</translation>
     </message>
-    <message>
-        <source>Receiving addresses - %1</source>
-        <translation type="unfinished">آدرس‌های گیرنده - %1</translation>
-    </message>
     </context>
 <context>
     <name>AskPassphraseDialog</name>
@@ -521,14 +517,6 @@
     <message>
         <source>Pre-syncing Headers (%1%)…</source>
         <translation type="unfinished">پیش‌همگام‌سازی سرصفحه‌ها (%1%)…</translation>
-    </message>
-    <message>
-        <source>Error creating wallet</source>
-        <translation type="unfinished">خطا در ایجاد کیف پول</translation>
-    </message>
-    <message>
-        <source>Cannot create new wallet, the software was compiled without sqlite support (required for descriptor wallets)</source>
-        <translation type="unfinished">نمی‌توان کیف پول جدیدی ایجاد کرد، نرم‌افزار بدون پشتیبانی sqlite کامپایل شده است (برای کیف پول‌های توصیف‌گر این ویژگی لازم است)</translation>
     </message>
     <message>
         <source>Error: %1</source>

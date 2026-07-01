@@ -689,7 +689,7 @@ util::Result<SelectionResult> ChooseSelectionResult(interfaces::Chain& chain, co
         results.push_back(*knapsack_result);
     } else append_error(std::move(knapsack_result));
 
-    // Blackcoin
+    // Blackcoin: uses fix fee per kb. no need to run CoinGrinder which is designed to minimize the fee for high feerates.
     /*
     if (coin_selection_params.m_effective_feerate > CFeeRate{3 * coin_selection_params.m_long_term_feerate}) { // Minimize input set for feerates of at least 3×LTFRE (default: 30 ṩ/vB+)
         if (auto cg_result{CoinGrinder(groups.positive_group, nTargetValue, coin_selection_params.m_min_change_target, max_selection_weight)}) {

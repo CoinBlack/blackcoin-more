@@ -164,8 +164,8 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
         <translation type="unfinished">Confirmar el encriptado de la billetera</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Advertencia: Si encriptas la billetera y pierdes tu frase de contraseña, ¡&lt;b&gt;PERDERÁS TODOS TUS BITCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Advertencia: Si encriptas la billetera y pierdes tu frase de contraseña, ¡&lt;b&gt;PERDERÁS TODOS TUS BLACKCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -502,20 +502,12 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
         <translation type="unfinished">&amp;Recibir</translation>
     </message>
     <message>
-        <source>&amp;Options…</source>
-        <translation type="unfinished">&amp;Opciones…</translation>
-    </message>
-    <message>
         <source>&amp;Encrypt Wallet…</source>
         <translation type="unfinished">&amp;Encriptar billetera…</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation type="unfinished">Encriptar las claves privadas que pertenecen a la billetera</translation>
-    </message>
-    <message>
-        <source>&amp;Backup Wallet…</source>
-        <translation type="unfinished">&amp;Realizar copia de seguridad de la billetera...</translation>
+        <translation type="unfinished">Encriptar las llaves privadas que pertenecen a tu billetera</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet…</source>
@@ -530,16 +522,8 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
         <translation type="unfinished">Firmar &amp;mensaje...</translation>
     </message>
     <message>
-        <source>Sign &amp;message…</source>
-        <translation type="unfinished">Firmar &amp;mensaje...</translation>
-    </message>
-    <message>
         <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Firmar mensajes con tus direcciones de Bitcoin para demostrar que te pertenecen</translation>
-    </message>
-    <message>
-        <source>&amp;Verify message…</source>
-        <translation type="unfinished">&amp;Verificar mensaje...</translation>
+        <translation type="unfinished">Firma mensajes con tus direcciones Bitcoin para probar que eres dueño de ellas</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
@@ -547,7 +531,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Verificar mensajes para asegurarte de que estén firmados con direcciones de Bitcoin concretas</translation>
+        <translation type="unfinished">Verificar mensajes para asegurar que estaban firmados con direcciones Bitcoin especificas</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -579,7 +563,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Ayuda</translation>
+        <translation type="unfinished">A&amp;yuda</translation>
     </message>
     <message>
         <source>Tabs toolbar</source>
@@ -607,30 +591,30 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Solicitar pagos (genera códigos QR y URI de tipo "bitcoin:")</translation>
+        <translation type="unfinished">Solicitar pagos (genera codigo QR y URL's de Bitcoin)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
-        <translation type="unfinished">Mostrar la lista de etiquetas y direcciones de envío usadas</translation>
+        <translation type="unfinished">Mostrar la lista de direcciones de envío y etiquetas</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
-        <translation type="unfinished">Mostrar la lista de etiquetas y direcciones de recepción usadas</translation>
+        <translation type="unfinished">Muestra la lista de direcciones de recepción y etiquetas</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation type="unfinished">&amp;Opciones de línea de comandos</translation>
+        <translation type="unfinished">Opciones de línea de comandos</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
-            <numerusform>Se procesó %n bloque del historial de transacciones.</numerusform>
-            <numerusform>Se procesaron %n bloques del historial de transacciones.</numerusform>
+            <numerusform>%n bloque procesado del historial de transacciones.</numerusform>
+            <numerusform>%n bloques procesados del historial de transacciones.</numerusform>
         </translation>
     </message>
     <message>
         <source>%1 behind</source>
-        <translation type="unfinished">%1 atrás</translation>
+        <translation type="unfinished">%1 detrás</translation>
     </message>
     <message>
         <source>Catching up…</source>
@@ -638,11 +622,11 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
-        <translation type="unfinished">El último bloque recibido se generó hace %1.</translation>
+        <translation type="unfinished">El último bloque recibido fue generado hace %1 hora(s).</translation>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation type="unfinished">Las transacciones posteriores aún no están visibles.</translation>
+        <translation type="unfinished">Transacciones después de esta no serán visibles todavía.</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -654,7 +638,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Up to date</source>
-        <translation type="unfinished">Actualizado</translation>
+        <translation type="unfinished">Al día</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction</source>
@@ -902,7 +886,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>After Fee:</source>
-        <translation type="unfinished">Después de la comisión:</translation>
+        <translation type="unfinished">Después de tasas:</translation>
     </message>
     <message>
         <source>Change:</source>
@@ -910,19 +894,19 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>(un)select all</source>
-        <translation type="unfinished">(des)marcar todos</translation>
+        <translation type="unfinished">(de)seleccionar todo</translation>
     </message>
     <message>
         <source>Tree mode</source>
-        <translation type="unfinished">Modo árbol</translation>
+        <translation type="unfinished">Modo de árbol</translation>
     </message>
     <message>
         <source>List mode</source>
-        <translation type="unfinished">Modo lista</translation>
+        <translation type="unfinished">Modo de lista</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished">Importe</translation>
+        <translation type="unfinished">Monto</translation>
     </message>
     <message>
         <source>Received with label</source>
@@ -942,11 +926,11 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Confirmed</source>
-        <translation type="unfinished">Confirmada</translation>
+        <translation type="unfinished">Confirmado</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation type="unfinished">Copiar importe</translation>
+        <translation type="unfinished">Copiar cantidad</translation>
     </message>
     <message>
         <source>&amp;Copy address</source>
@@ -982,7 +966,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation type="unfinished">Copiar después de la comisión</translation>
+        <translation type="unfinished">Copiar después de aplicar donación</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -998,7 +982,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation type="unfinished">Puede variar +/- %1 satoshi(s) por entrada.</translation>
+        <translation type="unfinished">Puede variar en +/- %1 satoshi(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1006,7 +990,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>change from %1 (%2)</source>
-        <translation type="unfinished">cambio desde %1 (%2)</translation>
+        <translation type="unfinished">Enviar desde %1 (%2)</translation>
     </message>
     <message>
         <source>(change)</source>
@@ -1031,7 +1015,7 @@ Solo es posible firmar con direcciones de tipo legacy.</translation>
     </message>
     <message>
         <source>Create wallet warning</source>
-        <translation type="unfinished">Advertencia al crear la billetera</translation>
+        <translation type="unfinished">Advertencia de crear billetera</translation>
     </message>
     <message>
         <source>Can't list signers</source>
@@ -2006,7 +1990,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Partially Signed Transaction (Binary)</source>
         <extracomment>Expanded name of the binary PSBT file format. See: BIP 174.</extracomment>
-        <translation type="unfinished">Transacción parcialmente firmada (binario)</translation>
+        <translation type="unfinished">Transacción parcialmente firmada (binario) </translation>
     </message>
     <message>
         <source>PSBT saved to disk.</source>
@@ -2015,10 +1999,6 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
     <message>
         <source>Sends %1 to %2</source>
         <translation type="unfinished">Envía %1 a %2</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation type="unfinished">dirección propia</translation>
     </message>
     <message>
         <source>own address</source>
@@ -3034,7 +3014,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Copy amount</source>
-        <translation type="unfinished">Copiar importe</translation>
+        <translation type="unfinished">Copiar cantidad</translation>
     </message>
     <message>
         <source>Copy fee</source>
@@ -3042,7 +3022,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation type="unfinished">Copiar después de la comisión</translation>
+        <translation type="unfinished">Copiar después de aplicar donación</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -3625,7 +3605,7 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished">Importe</translation>
+        <translation type="unfinished">Monto</translation>
     </message>
     <message>
         <source>true</source>
