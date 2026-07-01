@@ -275,6 +275,19 @@ static RPCHelpMan checkkernel()
     int64_t nTime = GetAdjustedTimeSeconds();
     nTime &= ~Params().GetConsensus().nStakeTimestampMask;
 
+    bool fStakeCache = gArgs.GetBoolArg("-stakecache", node::DEFAULT_STAKE_CACHE);
+    if (fStakeCache) {
+        for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+            const UniValue& o = inputs[idx].get_obj();
+            const UniValue& txid_v = o.find_value("txid");
+            if (!txid_v.isStr()) continue;
+            const UniValue& vout_v = o.find_value("vout");
+            if (!vout_v.isNum()) continue;
+            COutPoint cInput(Txid::FromUint256(uint256S(txid_v.get_str())), vout_v.getInt<int>());
+            CacheKernel(pwallet->stakeCache, cInput, pindexPrev, active_chainstate.CoinsTip());
+        }
+    } // blackcoin: stakecache
+
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& o = inputs[idx].get_obj();
 
@@ -293,11 +306,12 @@ static RPCHelpMan checkkernel()
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout must be positive");
 
         COutPoint cInput(Txid::FromUint256(uint256S(txid)), nOutput);
-        if (CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip()))
+        if (fStakeCache ? CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip(), pwallet->stakeCache)
+                        : CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip()))
         {
             kernel = cInput;
             break;
-        }
+        } // blackcoin: stakecache
     }
 
     UniValue result(UniValue::VOBJ);

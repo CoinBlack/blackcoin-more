@@ -47,6 +47,7 @@ void StopStake(CWallet& wallet) {
     else {
         wallet.m_stop_staking_thread = true;
         wallet.m_enabled_staking = false;
+        wallet.cv_new_block.notify_one();
         StakeCoins(wallet, false);
         wallet.threadStakeMinerGroup = 0;
         wallet.m_stop_staking_thread = false;
@@ -55,6 +56,7 @@ void StopStake(CWallet& wallet) {
 
 uint64_t GetStakeWeight(const CWallet& wallet)
 {
+    LOCK(wallet.cs_wallet);
     // Choose coins to use
     const auto bal = GetBalance(wallet);
     CAmount nBalance = bal.m_mine_trusted;
@@ -204,6 +206,7 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 // Select some coins without random shuffle or best subset approximation
 bool SelectCoinsForStaking(const CWallet& wallet, CAmount& nTargetValue, std::set<std::pair<const CWalletTx *, unsigned int> > &setCoinsRet, CAmount& nValueRet)
 {
+    AssertLockHeld(wallet.cs_wallet);
     std::vector<std::pair<const CWalletTx*, unsigned int> > vCoins;
     CCoinControl coincontrol;
     AvailableCoinsForStaking(wallet, vCoins, &coincontrol);
