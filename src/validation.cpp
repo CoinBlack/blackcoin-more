@@ -4233,10 +4233,10 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
         }
     }
 
-    // Qtum
+    // Qtum: rolling checkpoinsts
     // Check that the block satisfies synchronized checkpoint
     if (!blockman.CheckSyncCheckpoint(nHeight, chain.Tip()))
-        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-fork-prior-to-synch-checkpoint", strprintf("%s: forked chain older than synchronized checkpoint (height %d)", __func__, nHeight));
+        return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "bad-fork-prior-to-synch-checkpoint", strprintf("%s: forked chain older than synchronized checkpoint (height %d)", __func__, nHeight));
 
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
@@ -4957,7 +4957,7 @@ bool Chainstate::RollforwardBlock(const CBlockIndex* pindex, CCoinsViewCache& in
             }
         }
         // Pass check = true as every addition may be an overwrite.
-        AddCoins(inputs, *tx, pindex->nHeight, true);
+        AddCoins(inputs, *tx, pindex->nHeight, true, pindex->nTime);
     }
     return true;
 }
