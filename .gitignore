@@ -184,3 +184,13 @@ db62/
 
 # VSCode
 .vscode/*
+
+# project-specific
+.bear/
+*.tmp
+compile_commands.json
+AGENTS.md
+agents/
+.omo/
+*.code-workspace
+.sisyphus/
