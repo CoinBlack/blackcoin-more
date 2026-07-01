@@ -42,49 +42,6 @@ std::vector<CRecipient> CreateRecipients(const std::vector<std::pair<CTxDestinat
     return recipients;
 }
 
-UniValue SendMoneyToScript(CWallet& wallet, const CScript scriptPubKey, CAmount nValue, const CCoinControl &coin_control, mapValue_t map_value)
-{
-    EnsureWalletIsUnlocked(wallet);
-
-    // This function is only used by sendtoaddress and sendmany.
-    // This should always try to sign, if we don't have private keys, don't try to do anything here.
-    if (wallet.IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS)) {
-        throw JSONRPCError(RPC_WALLET_ERROR, "Error: Private keys are disabled for this wallet");
-    }
-
-    const auto bal = GetBalance(wallet);
-    CAmount curBalance = bal.m_mine_trusted;
-
-    // Check amount
-    if (nValue <= 0)
-        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
-
-    if (nValue > curBalance)
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
-
-    if (wallet.m_wallet_unlock_staking_only)
-        throw JSONRPCError(RPC_WALLET_ERROR, "Error: Wallet unlocked for staking only, unable to create transaction");
-
-    std::vector<CRecipient> recipients;
-    CTxDestination dest;
-    ExtractDestination(scriptPubKey, dest);
-    CRecipient recipient = {dest, nValue, false};
-    recipients.push_back(recipient);
-
-    // Shuffle recipient list
-    std::shuffle(recipients.begin(), recipients.end(), FastRandomContext());
-
-    // Send
-    constexpr int RANDOM_CHANGE_POSITION = -1;
-    auto res = CreateTransaction(wallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
-    if (!res) {
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
-    }
-    const CTransactionRef& tx = res->tx;
-    wallet.CommitTransaction(tx, std::move(map_value), {} /* orderForm */);
-    return tx->GetHash().GetHex();
-}
-
 std::set<int> InterpretSubtractFeeFromOutputInstructions(const UniValue& sffo_instructions, const std::vector<std::string>& destinations)
 {
     std::set<int> sffo_set;
@@ -222,13 +179,13 @@ RPCHelpMan burn()
         HELP_REQUIRING_PASSPHRASE,
             {
                 {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The amount in " + CURRENCY_UNIT + " to burn. eg 0.1"},
-                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string."},
+                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string (must be even-length)."},
             },
             RPCResult{
                 RPCResult::Type::STR_HEX, "txid", "The transaction id."
             },
             RPCExamples{
-                HelpExampleCli("burn", "0.1 \"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\"")
+                HelpExampleCli("burn", "0.1 \"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48da\"")
             },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -256,12 +213,25 @@ RPCHelpMan burn()
 
     CAmount nAmount = AmountFromValue(request.params[0]);
 
+    // Check amount
+    if (nAmount <= 0)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
+
     EnsureWalletIsUnlocked(*pwallet);
 
+    const auto bal = GetBalance(*pwallet);
+    if (nAmount > bal.m_mine_trusted)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
+
     CCoinControl coin_control;
+    coin_control.m_change_type = pwallet->m_default_address_type;
     mapValue_t mapValue;
 
-    return SendMoneyToScript(*pwallet, scriptPubKey, nAmount, coin_control, std::move(mapValue));
+    CTxDestination dest;
+    ExtractDestination(scriptPubKey, dest);
+    std::vector<CRecipient> recipients = {{dest, nAmount, false}};
+
+    return SendMoney(*pwallet, coin_control, recipients, std::move(mapValue), false);
 },
     };
 }
@@ -274,14 +244,14 @@ RPCHelpMan burnwallet()
             "This will make all coins unspendable, making OP_RETURN transaction.\n" +
         HELP_REQUIRING_PASSPHRASE,
             {
-                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string."},
+                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string (must be even-length)."},
                 {"force", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "Force burn."},
             },
             RPCResult{
                 RPCResult::Type::STR_HEX, "txid", "The transaction id."
             },
             RPCExamples{
-                HelpExampleCli("burnwallet", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\" true")
+                HelpExampleCli("burnwallet", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48da\" true")
             },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -308,6 +278,7 @@ RPCHelpMan burnwallet()
     EnsureWalletIsUnlocked(*pwallet);
 
     CCoinControl coin_control;
+    coin_control.m_change_type = pwallet->m_default_address_type;
     mapValue_t mapValue;
 
     const auto bal = GetBalance(*pwallet);
@@ -334,8 +305,7 @@ RPCHelpMan burnwallet()
     std::shuffle(recipients.begin(), recipients.end(), FastRandomContext());
 
     // Send
-    constexpr int RANDOM_CHANGE_POSITION = -1;
-    auto res = CreateTransaction(*pwallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
+    auto res = CreateTransaction(*pwallet, recipients, std::nullopt, coin_control, true);
     if (!res) {
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
     }
@@ -462,8 +432,7 @@ RPCHelpMan optimizeutxoset()
     }
 
     // Send
-    constexpr int RANDOM_CHANGE_POSITION = -1;
-    auto res = CreateTransaction(*pwallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
+    auto res = CreateTransaction(*pwallet, recipients, std::nullopt, coin_control, true);
     if (!res) {
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
     }
