@@ -321,11 +321,11 @@ RPCHelpMan burnwallet()
 RPCHelpMan optimizeutxoset()
 {
     return RPCHelpMan{"optimizeutxoset",
-                "\nOptimize the UTXO set in order to maximize the PoS yield. This is only valid for continuous minting. The accumulated coinage will be reset!" +
+                "\nOptimize the wallet's UTXOs into uniform outputs of the given amount. Consolidates and/or splits coins into the specified value for better staking performance. Note that the new UTXOs need to reach maturity before they can stake again (500 confirmations on mainnet, 10 on testnet)." +
         HELP_REQUIRING_PASSPHRASE,
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The blackcoin address to recieve all the new UTXOs. If not provided, new UTOXs will be assigned to the address of the input UTXOs."},
-                    {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The " + CURRENCY_UNIT + " amount to set the value of new UTXOs, i.e. make new UTXOs with value of 1000. If amount is not provided, hardcoded value will be used."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The blackcoin address to assign all the new UTXOs to."},
+                    {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The " + CURRENCY_UNIT + " value for each new UTXO, e.g. use 1000 to create outputs worth 1000 " + CURRENCY_UNIT + " each."},
                     {"transmit", RPCArg::Type::BOOL, RPCArg::Default{false}, "If true, transmit transaction after generating it."},
                     {"fromAddress", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "The blackcoin address to split coins from. If not provided, all available coins will be used."},
                 },
@@ -333,18 +333,18 @@ RPCHelpMan optimizeutxoset()
                     RPCResult{"if transmit is not set or set to false",
                         RPCResult::Type::OBJ, "", "",
                         {
-                            {RPCResult::Type::STR_HEX, "tx", /*optional=*/true, "The transaction hex."}
+                            {RPCResult::Type::STR_HEX, "tx", /*optional=*/true, "The raw transaction in hex."}
                         },
                     },
                     RPCResult{"if transmit is set to true",
                         RPCResult::Type::OBJ, "", "",
                         {
-                            {RPCResult::Type::STR_HEX, "txid", /*optional=*/true, "The transaction id."}
+                            {RPCResult::Type::STR_HEX, "txid", /*optional=*/true, "The transaction id of the broadcast transaction."}
                         },
                     },
                 },
                 RPCExamples{
-                    "\nTrigger UTXO optimization and assign all the new UTXOs to some blackcoin address with user defined UTXO value\n"
+                    "\nCreate an optimized UTXO set with 1000 " + CURRENCY_UNIT + " outputs without transmitting (use transmit=true to broadcast)\n"
                     + HelpExampleCli("optimizeutxoset", EXAMPLE_ADDRESS[0] + " 1000")
                },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
@@ -395,8 +395,12 @@ RPCHelpMan optimizeutxoset()
         }
         coin_control.m_allow_other_inputs = false;
     } else {
-        const auto bal = GetBalance(*pwallet);
-        availableCoins = bal.m_mine_trusted;
+        std::vector<COutput> vAvailableCoins = AvailableCoins(*pwallet, &coin_control).All();
+        for (const COutput& out : vAvailableCoins) {
+            coin_control.Select(out.outpoint);
+            availableCoins += out.txout.nValue;
+        }
+        coin_control.m_allow_other_inputs = false;
     }
 
     if (availableCoins == 0)
@@ -415,14 +419,13 @@ RPCHelpMan optimizeutxoset()
     }
 
     // Calculate transaction input size
-    const CWallet& wallet{*pwallet};
-    TxSize tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), &wallet, &coin_control);
+    TxSize tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), pwallet.get(), &coin_control);
     int nBytes = tx_sizes.vsize;
 
     // calculate size of output
     CTxOut txout(amount, script_pub_key);
     txTmp.vout.push_back(txout);
-    tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), &wallet, &coin_control);
+    tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), pwallet.get(), &coin_control);
     int nBytesPerOut = tx_sizes.vsize - nBytes;
 
     CAmount fee = GetMinFee(nBytes + (unsigned int)(remaining / amount) * nBytesPerOut, GetAdjustedTimeSeconds());
