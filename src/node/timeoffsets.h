@@ -23,8 +23,10 @@ public:
 private:
     //! Maximum number of timeoffsets stored.
     static constexpr size_t MAX_SIZE{50};
-    //! Minimum difference between system and network time for a warning to be raised.
-    static constexpr std::chrono::minutes WARN_THRESHOLD{10};
+    //! Minimum difference between system and network time (in seconds) for a warning to be raised.
+    // blackcoin: FutureDrift consensus rule rejects blocks/txs with timestamps deviating more than
+    // 16 seconds from median network time, so the warning threshold matches this exactly.
+    static constexpr std::chrono::seconds WARN_THRESHOLD{16};
 
     mutable Mutex m_mutex;
     /** The observed time differences between our local clock and those of our outbound peers. A
