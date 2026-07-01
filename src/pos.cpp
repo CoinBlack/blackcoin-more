@@ -18,7 +18,8 @@
 #include <arith_uint256.h>
 #include <uint256.h>
 #include <primitives/transaction.h>
-#include <script/sign.h>
+#include <script/interpreter.h>
+
 #include <consensus/consensus.h>
 #include <stdio.h>
 
@@ -154,8 +155,27 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
     }
 
     // Verify signature
-    if (!VerifySignature(coinPrev, txin.prevout.hash, tx, 0, SCRIPT_VERIFY_NONE))
-        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-verify-signature-failed", strprintf("CheckProofOfStake(): VerifySignature failed on coinstake %s", tx.GetHash().ToString()));
+    {
+        std::vector<CTxOut> spent_outputs;
+        spent_outputs.reserve(tx.vin.size());
+        for (const auto& in : tx.vin) {
+            Coin coin;
+            if (!view.GetCoin(in.prevout, coin)) {
+                return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-prevout-not-exist",
+                    strprintf("CheckProofOfStake(): Spent output %s not found", in.prevout.ToString()));
+            }
+            spent_outputs.emplace_back(coin.out);
+        }
+
+        PrecomputedTransactionData txdata;
+        txdata.Init(tx, std::move(spent_outputs));
+        TransactionSignatureChecker checker(&tx, 0, coinPrev.out.nValue, txdata, MissingDataBehavior::ASSERT_FAIL);
+
+        if (!VerifyScript(txin.scriptSig, coinPrev.out.scriptPubKey, &txin.scriptWitness,
+            SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_TAPROOT, checker)) {
+            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-verify-signature-failed", strprintf("CheckProofOfStake(): VerifyScript failed on coinstake %s", tx.GetHash().ToString()));
+        }
+    }
 
     if (!CheckStakeKernelHash(pindexPrev, nBits, (coinPrev.nTime ? coinPrev.nTime : blockFrom->nTime), coinPrev.out.nValue, txin.prevout, nTimeTx, LogInstance().WillLogCategory(BCLog::COINSTAKE)))
         return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "stake-check-kernel-failed", strprintf("CheckProofOfStake(): INFO: check kernel failed on coinstake %s", tx.GetHash().ToString())); // may occur during initial download or if behind on block chain sync
