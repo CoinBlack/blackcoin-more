@@ -17,7 +17,8 @@ BOOST_AUTO_TEST_CASE(MoneyRangeTest)
     BOOST_CHECK_EQUAL(MoneyRange(CAmount(0)), true);
     BOOST_CHECK_EQUAL(MoneyRange(CAmount(1)), true);
     BOOST_CHECK_EQUAL(MoneyRange(MAX_MONEY), true);
-    BOOST_CHECK_EQUAL(MoneyRange(MAX_MONEY + CAmount(1)), false);
+    // Use uint64_t to avoid signed overflow warning when MAX_MONEY is at type limit
+    BOOST_CHECK_EQUAL(MoneyRange(static_cast<CAmount>(static_cast<uint64_t>(MAX_MONEY) + 1)), false);
 }
 
 BOOST_AUTO_TEST_CASE(GetFeeTest)
