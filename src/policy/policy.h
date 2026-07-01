@@ -55,6 +55,8 @@ static constexpr unsigned int MAX_STANDARD_SCRIPTSIG_SIZE{1650};
 static constexpr unsigned int DUST_RELAY_TX_FEE{100000};
 /** Default for -minrelaytxfee, minimum relay fee for transactions */
 static constexpr unsigned int DEFAULT_MIN_RELAY_TX_FEE{100000};
+/** Default for -incrementalrelayfee, minimum feerate increase for mempool limiting or replacement **/
+static constexpr unsigned int DEFAULT_INCREMENTAL_RELAY_FEE{100000};
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
 static constexpr unsigned int DEFAULT_ANCESTOR_LIMIT{25};
 /** Default for -limitancestorsize, maximum kilobytes of tx + all in-mempool ancestors */
