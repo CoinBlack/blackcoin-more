@@ -36,46 +36,20 @@ FUZZ_TARGET(wallet_fees, .init = initialize_setup)
         wallet.SetLastBlockProcessed(chainstate->m_chain.Height(), chainstate->m_chain.Tip()->GetBlockHash());
     }
 
-    // Blackcoin
-    // if (fuzzed_data_provider.ConsumeBool()) {
-        // wallet.m_fallback_fee = CFeeRate{ConsumeMoney(fuzzed_data_provider, /*max=*/COIN)};
-    // }
-
     if (fuzzed_data_provider.ConsumeBool()) {
         wallet.m_discard_rate = CFeeRate{ConsumeMoney(fuzzed_data_provider, /*max=*/COIN)};
     }
     (void)GetDiscardRate(wallet);
 
-    const auto tx_bytes{fuzzed_data_provider.ConsumeIntegral<unsigned int>()};
-
     if (fuzzed_data_provider.ConsumeBool()) {
         wallet.m_pay_tx_fee = CFeeRate{ConsumeMoney(fuzzed_data_provider, /*max=*/COIN)};
-        // Blackcoin
-        // wallet.m_min_fee = CFeeRate{ConsumeMoney(fuzzed_data_provider, /*max=*/COIN)};
     }
-
-    // Blackcoin
-    // (void)GetRequiredFee(wallet, tx_bytes);
     (void)GetRequiredFeeRate(wallet);
 
     CCoinControl coin_control;
     if (fuzzed_data_provider.ConsumeBool()) {
         coin_control.m_feerate = CFeeRate{ConsumeMoney(fuzzed_data_provider, /*max=*/COIN)};
     }
-    // Blackcoin
-    /*
-    if (fuzzed_data_provider.ConsumeBool()) {
-        coin_control.m_confirm_target = fuzzed_data_provider.ConsumeIntegralInRange<unsigned int>(0, 999'000);
-    }
-    if (fuzzed_data_provider.ConsumeBool()) {
-        coin_control.m_fee_mode = fuzzed_data_provider.ConsumeBool() ? FeeEstimateMode::CONSERVATIVE : FeeEstimateMode::ECONOMICAL;
-    }
-
-    FeeCalculation fee_calculation;
-    FeeCalculation* maybe_fee_calculation{fuzzed_data_provider.ConsumeBool() ? nullptr : &fee_calculation};
-    (void)GetMinimumFeeRate(wallet, coin_control, maybe_fee_calculation);
-    (void)GetMinimumFee(wallet, tx_bytes, coin_control, maybe_fee_calculation);
-    */
 }
 } // namespace
 } // namespace wallet
