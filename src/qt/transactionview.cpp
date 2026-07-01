@@ -471,6 +471,9 @@ void TransactionView::editLabel()
             // Determine type of address, launch appropriate editor dialog type
             QString type = modelIdx.data(AddressTableModel::TypeRole).toString();
 
+            if(type.isEmpty())
+                return;
+
             auto dlg = new EditAddressDialog(
                 type == AddressTableModel::Receive
                 ? EditAddressDialog::EditReceivingAddress
