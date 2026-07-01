@@ -92,8 +92,11 @@ static RPCHelpMan getstakinginfo()
 
     obj.pushKV("chain", chainman.GetParams().GetChainTypeString());
 
-    NodeContext& node = EnsureAnyNodeContext(request.context);
-    obj.pushKV("warnings", node::GetWarningsForRpc(*CHECK_NONFATAL(node.warnings), IsDeprecatedRPCEnabled("warnings")));
+    if (NodeContext* const node_context = pwallet->chain().context()) {
+        obj.pushKV("warnings", node::GetWarningsForRpc(*CHECK_NONFATAL(node_context->warnings), IsDeprecatedRPCEnabled("warnings")));
+    } else {
+        obj.pushKV("warnings", IsDeprecatedRPCEnabled("warnings") ? UniValue{UniValue::VSTR} : UniValue{UniValue::VARR});
+    }
     return obj;
 },
     };

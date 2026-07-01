@@ -103,6 +103,7 @@ double GetPoSKernelPS(ChainstateManager& chainman)
     double dStakeKernelsTriedAvg = 0;
     int nStakesHandled = 0, nStakesTime = 0;
 
+    LOCK(cs_main);
     CBlockIndex* pindex = chainman.m_best_header;
     CBlockIndex* pindexPrevStake = nullptr;
 
@@ -191,6 +192,8 @@ UniValue blockheaderToJSON(const CBlockIndex& tip, const CBlockIndex& blockindex
     result.pushKV("difficulty", GetDifficulty(blockindex));
     result.pushKV("chainwork", blockindex.nChainWork.GetHex());
     result.pushKV("nTx", blockindex.nTx);
+    result.pushKV("flags", strprintf("%s", blockindex.IsProofOfStake()? "proof-of-stake" : "proof-of-work")); // blackcoin: include flags
+    result.pushKV("modifier", blockindex.nStakeModifier.GetHex()); // blackcoin: include modifier
 
     if (blockindex.pprev)
         result.pushKV("previousblockhash", blockindex.pprev->GetBlockHash().GetHex());
@@ -233,8 +236,6 @@ UniValue blockToJSON(BlockManager& blockman, const CBlock& block, const CBlockIn
 
     result.pushKV("tx", std::move(txs));
 
-    result.pushKV("flags", strprintf("%s", blockindex.IsProofOfStake()? "proof-of-stake" : "proof-of-work"));
-    result.pushKV("modifier", blockindex.nStakeModifier.GetHex());
     if (block.IsProofOfStake())
         result.pushKV("signature", HexStr(block.vchBlockSig));
 
@@ -794,7 +795,13 @@ static RPCHelpMan getblock()
     const std::vector<uint8_t> block_data{GetRawBlockChecked(chainman.m_blockman, *pblockindex)};
 
     if (verbosity <= 0) {
-        return HexStr(block_data);
+        CBlock block;
+        if (!chainman.m_blockman.ReadBlockFromDisk(block, *pblockindex)) {
+            throw JSONRPCError(RPC_MISC_ERROR, "Can't read block from disk");
+        }
+        CDataStream ssBlock(SER_NETWORK);
+        ssBlock << TX_WITH_WITNESS(block);
+        return HexStr(ssBlock);
     }
 
     CDataStream block_stream{block_data, SER_NETWORK};

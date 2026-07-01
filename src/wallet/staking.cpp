@@ -501,7 +501,12 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         // Script verification errors
         std::map<int, bilingual_str> input_errors;
         int nTime = txNew.nTime;
-        wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
+        if (!wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors)) {
+            for (const auto& [idx, err] : input_errors) {
+                LogError("%s: failed to sign coinstake input %d: %s\n", __func__, idx, err.original);
+            }
+            return false;
+        }
         txNew.nTime = nTime;
     }
 

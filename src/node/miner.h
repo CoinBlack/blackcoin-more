@@ -173,7 +173,9 @@ private:
     Chainstate& m_chainstate;
 
 #ifdef ENABLE_WALLET
-    CWallet *pwallet = 0;
+    // blackcoin: pwallet removed — each staking iteration may use a different wallet,
+    // so it's passed as a parameter to CreateNewBlock() instead.
+    // CWallet *pwallet = 0;
 #endif
 
 public:
