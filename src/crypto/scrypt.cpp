@@ -43,6 +43,7 @@
 #endif
 #endif
 #ifndef __FreeBSD__
+static inline uint32_t be32dec(const void *pp) __attribute__((unused));
 static inline uint32_t be32dec(const void *pp)
 {
 	const uint8_t *p = (uint8_t const *)pp;
