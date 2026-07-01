@@ -20,11 +20,19 @@ from collections import namedtuple
 
 settings = {}
 
+# BCM: CBlockHeader is 84 bytes (80 bytes + 4 bytes nFlags for PoS marker).
+# The block hash is computed from only the first 80 bytes (nVersion..nNonce),
+# excluding nFlags. We read the full 84-byte header but hash only the first 80.
+BLOCK_HEADER_SIZE = 84
+BLOCK_HEADER_HASH_SIZE = 80
+
 def calc_hash_str(blk_hdr):
-    blk_hdr_hash = hashlib.sha256(hashlib.sha256(blk_hdr).digest()).digest()
+    # Hash only the first 80 bytes (nVersion through nNonce), excluding nFlags
+    blk_hdr_hash = hashlib.sha256(hashlib.sha256(blk_hdr[:BLOCK_HEADER_HASH_SIZE]).digest()).digest()
     return blk_hdr_hash[::-1].hex()
 
 def get_blk_dt(blk_hdr):
+    # nTime is at offset 68 (bytes 68-71) in the 80-byte hashable header portion
     members = struct.unpack("<I", blk_hdr[68:68+4])
     nTime = members[0]
     dt = datetime.datetime.fromtimestamp(nTime)
@@ -224,8 +232,8 @@ class BlockDataCopier:
                 continue
             inLenLE = inhdr[4:]
             su = struct.unpack("<I", inLenLE)
-            inLen = su[0] - 80 # length without header
-            blk_hdr = self.read_xored(self.inF, 80)
+            inLen = su[0] - BLOCK_HEADER_SIZE # length without header
+            blk_hdr = self.read_xored(self.inF, BLOCK_HEADER_SIZE)
             inExtent = BlockExtent(self.inFn, self.inF.tell(), inhdr, blk_hdr, inLen)
 
             self.hash_str = calc_hash_str(blk_hdr)
@@ -287,9 +295,9 @@ if __name__ == '__main__':
     settings['rev_hash_bytes'] = settings['rev_hash_bytes'].lower()
 
     if 'netmagic' not in settings:
-        settings['netmagic'] = 'f9beb4d9'
+        settings['netmagic'] = '70352206'
     if 'genesis' not in settings:
-        settings['genesis'] = '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f'
+        settings['genesis'] = '000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563'
     if 'input' not in settings:
         settings['input'] = 'input'
     if 'hashlist' not in settings:

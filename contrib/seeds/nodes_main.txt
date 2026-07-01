@@ -13,18 +13,14 @@
 
 
 # IPv6 nodes
-[2a02:c206:2210:3221::1]:15714
-[2a02:c206:2210:3222::1]:15714
 [2a02:c206:2210:3223::1]:15714
 [2a02:c207:2056:6532::1]:15714
 [2a02:c207:2056:6533::1]:15714
 [2a02:c207:2056:6534::1]:15714
-[2a10:3781:525:1::1]:15714
 [2a10:3781:525:1::210]:15714
 [2a10:3781:525::1]:15714
 
 
 # Onion nodes
 jgsfxfwhm7vdabt5dxl42il7uenvysknyedtzuaiajo7w5bv5jf2jpid.onion:15714
-hqnztorcojz5gsomamrxgqvoriitu4dfeze46hclmwd5zht4eic6jfid.onion:15714
 5evnjurdgzorvoty6qnrgqnmb7xot237b4rafgnt3t2vth2hy2bju7id.onion:15714
