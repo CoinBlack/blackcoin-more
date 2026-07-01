@@ -1603,6 +1603,20 @@ void CWallet::blockDisconnected(const interfaces::BlockInfo& block)
 void CWallet::updatedBlockTip()
 {
     m_best_block_time = GetTime();
+
+    if (chain().isInitialBlockDownload()) {
+        return;
+    }
+
+    // blackcoin: safety bump logic moved to miner.cpp
+    {
+        std::lock_guard<std::mutex> lock(cv_block_mutex);
+        m_new_block_arrived.store(true);
+    }
+    cv_new_block.notify_one();
+    LogPrint(BCLog::COINSTAKE, "[%s] WakeOnBlock: staker notified to wake, mtp=%d\n",
+             GetName(),
+             chain().getTip() ? chain().getTip()->GetMedianTimePast() : 0);
 }
 
 void CWallet::BlockUntilSyncedToCurrentChain() const {
