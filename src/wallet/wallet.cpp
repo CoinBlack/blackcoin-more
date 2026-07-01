@@ -1095,6 +1095,14 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
         wtx.nOrderPos = IncOrderPosNext(&batch);
         wtx.m_it_wtxOrdered = wtxOrdered.insert(std::make_pair(wtx.nOrderPos, &wtx));
         wtx.nTimeSmart = ComputeTimeSmart(wtx, rescanning_old_block);
+
+        // Recover nTime for v2 coinstakes loaded from disk or competing threads
+        if (wtx.tx->IsCoinStake() && wtx.tx->nTime == 0 && wtx.tx->version == 2) {
+            CMutableTransaction mtx(*wtx.tx);
+            mtx.nTime = wtx.nTimeSmart ? wtx.nTimeSmart : wtx.nTimeReceived;
+            wtx.tx = MakeTransactionRef(std::move(mtx));
+        }
+
         AddToSpends(wtx, &batch);
 
         // Update birth time when tx time is older than it.
@@ -1106,6 +1114,12 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
         if (state.index() != wtx.m_state.index()) {
             wtx.m_state = state;
             fUpdated = true;
+            // Blackcoin: Recompute nTimeSmart for coinstakes when transitioning to Confirmed state.
+            // The initial insertion may have been an orphaned/invalid stake with wrong timestamps.
+            if (wtx.IsCoinStake() && wtx.state<TxStateConfirmed>()) {
+                wtx.nTimeSmart = ComputeTimeSmart(wtx, /*rescanning_old_block=*/false);
+                fUpdated = true;
+            }
         } else {
             assert(TxStateSerializedIndex(wtx.m_state) == TxStateSerializedIndex(state));
             assert(TxStateSerializedBlockHash(wtx.m_state) == TxStateSerializedBlockHash(state));
@@ -1204,6 +1218,15 @@ bool CWallet::LoadToWallet(const uint256& hash, const UpdateWalletTxFn& fill_wtx
     // don't bother to update txn.
     if (HaveChain()) {
       wtx.updateState(chain());
+    }
+
+    // Recover nTime for v2 coinstakes loaded from disk (which don't serialize nTime)
+    if (wtx.tx->IsCoinStake() && wtx.tx->nTime == 0 && wtx.tx->version == 2) {
+        if (int64_t tx_time = wtx.GetTxTime(); tx_time > 0) {
+            CMutableTransaction mtx(*wtx.tx);
+            mtx.nTime = tx_time;
+            wtx.tx = MakeTransactionRef(std::move(mtx));
+        }
     }
     if (/* insertion took place */ ins.second) {
         wtx.m_it_wtxOrdered = wtxOrdered.insert(std::make_pair(wtx.nOrderPos, &wtx));
