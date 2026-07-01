@@ -891,9 +891,16 @@ The fix goes beyond Peercoin's approach. Peercoin passes real witness data and t
 
 The fix must be tested on regtest and testnet **without BIP-9 deployment** first, before implementing BIP-9-style activation for mainnet. This phased approach allows confidence-building through real-world validation before any consensus change goes live on mainnet.
 
+**The code change is the same for all three phases** — the `pos.cpp:157` fix from §3.9. The only difference is **how and when it's activated**:
+
+- **Phase 1/2**: The fix is applied unconditionally. No BIP-9 gate. All nodes running the binary enforce strict verification immediately.
+- **Phase 3**: The fix is gated by BIP-9 signaling. Nodes only enforce strict verification after BIP-9 activation completes. During the signaling period, the fix is compiled in but not enforced.
+
+This means the initial implementation (Phase 1/2) is simpler — no BIP-9 infrastructure needed. Phase 3 adds the BIP-9 gate later.
+
 #### Phase 1: Regtest Testing (no BIP-9, immediate activation on regtest)
 
-Regtest is a controlled environment — the fix can be activated immediately without BIP-9 coordination.
+Regtest is a controlled environment — the fix can be activated immediately without BIP-9 coordination. The code change from §3.9 is applied directly to `pos.cpp`. No BIP-9 gate, no versionbits logic. The fix is always active on regtest.
 
 1. **Compile and run** the node with the fix applied to `pos.cpp`
 2. **Verify regtest node syncs** from genesis with the new strict verification
@@ -907,7 +914,7 @@ Regtest is a controlled environment — the fix can be activated immediately wit
 
 #### Phase 2: Testnet Testing (no BIP-9, immediate activation on testnet)
 
-Testnet is a public network with real-world conditions. Activate the fix immediately on testnet (testnet is already a development network).
+Testnet is a public development network. Apply the same code change from §3.9 directly to `pos.cpp` for the testnet binary. No BIP-9 gate — the fix is always active on testnet. This is safe because testnet is a development network where breaking the chain is acceptable and expected.
 
 1. **Build and release** a testnet binary with the fix
 2. **Deploy to testnet nodes** — the on-chain audit confirms all 61,196 existing P2WPKH testnet coinstakes have valid witnesses, so historical sync should succeed
@@ -918,7 +925,25 @@ Testnet is a public network with real-world conditions. Activate the fix immedia
 
 #### Phase 3: Mainnet Deployment (BIP-9 activation)
 
-Only after Phase 1 and Phase 2 succeed without issues:
+Only after Phase 1 and Phase 2 succeed without issues. In this phase, the same code change is applied to `pos.cpp`, but **gated by a BIP-9 versionbits flag**. During the signaling period, the fix is compiled in but not enforced — the code checks the BIP-9 activation state and falls back to the old `VerifySignature` call if not yet activated.
+
+```cpp
+// Phase 3: BIP-9 gated version
+if (IsBIP9StrictPOSVerificationActive(pindexPrev)) {
+    // New strict verification (§3.9)
+    PrecomputedTransactionData txdata(tx);
+    TransactionSignatureChecker checker(&tx, 0, coinPrev.out.nValue, txdata, MissingDataBehavior::ASSERT_FAIL);
+    if (!VerifyScript(txin.scriptSig, coinPrev.out.scriptPubKey, &txin.scriptWitness,
+        SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_TAPROOT, checker)) {
+        return state.Invalid(...);
+    }
+} else {
+    // Old behavior during signaling period
+    if (!VerifySignature(coinPrev, txin.prevout.hash, tx, 0, SCRIPT_VERIFY_NONE)) {
+        return state.Invalid(...);
+    }
+}
+```
 
 1. **Implement BIP-9 versionbits deployment** for `CheckProofOfStake` strict verification
 2. **Signal period**: Standard BIP-9 signaling (e.g., 2016-block periods, 1916-block threshold, 4032-block timeout)
