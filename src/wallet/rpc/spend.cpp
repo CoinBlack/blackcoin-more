@@ -472,7 +472,6 @@ RPCHelpMan sendtoaddress()
                                          "The recipient will receive less blackcoins than you enter in the amount field."},
                     {"avoid_reuse", RPCArg::Type::BOOL, RPCArg::Default{true}, "(only available if avoid_reuse wallet flag is set) Avoid spending from dirty addresses; addresses are considered\n"
                                          "dirty if they have previously been used in a transaction. If true, this also activates avoidpartialspends, grouping outputs by their addresses."},
-                    {"fee_rate", RPCArg::Type::AMOUNT, RPCArg::DefaultHint{"not set, fall back to wallet fee estimation"}, "Specify a fee rate in " + CURRENCY_ATOM + "/vB."},
                     {"verbose", RPCArg::Type::BOOL, RPCArg::Default{false}, "If true, return extra information about the transaction."},
                 },
                 {
@@ -494,9 +493,8 @@ RPCHelpMan sendtoaddress()
                     + HelpExampleCli("sendtoaddress", "\"" + EXAMPLE_ADDRESS[0] + "\" 0.1 \"donation\" \"sean's outpost\" false true") +
                     "\nSend 0.2 BLK using named arguments\n"
                     + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.2") +
-                    "\nSend 0.5 BLK with a fee rate of 25 " + CURRENCY_ATOM + "/vB using named arguments\n"
-                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 fee_rate=25")
-                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 fee_rate=25 subtractfeefromamount=false avoid_reuse=true comment=\"2 pizzas\" comment_to=\"jeremy\" verbose=true")
+                    "\nSend 0.5 BLK using named arguments\n"
+                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 subtractfeefromamount=false avoid_reuse=true comment=\"2 pizzas\" comment_to=\"jeremy\" verbose=true")
                 },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -518,7 +516,7 @@ RPCHelpMan sendtoaddress()
 
     CCoinControl coin_control;
 
-    coin_control.m_avoid_address_reuse = GetAvoidReuseFlag(*pwallet, request.params[8]);
+    coin_control.m_avoid_address_reuse = GetAvoidReuseFlag(*pwallet, request.params[5]);
     // We also enable partial spend avoidance if reuse avoidance is set.
     coin_control.m_avoid_partial_spends |= coin_control.m_avoid_address_reuse;
 
@@ -531,7 +529,7 @@ RPCHelpMan sendtoaddress()
             ParseOutputs(address_amounts),
             InterpretSubtractFeeFromOutputInstructions(request.params[4], address_amounts.getKeys())
     );
-    const bool verbose{request.params[10].isNull() ? false : request.params[10].get_bool()};
+    const bool verbose{request.params[6].isNull() ? false : request.params[6].get_bool()};
 
     return SendMoney(*pwallet, coin_control, recipients, mapValue, verbose);
 },
