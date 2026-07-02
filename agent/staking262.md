@@ -262,3 +262,15 @@ main → StakeCoins(true) → std::thread(ThreadStakeMiner, pwallet)
 ### PoSMiner pauses, thread stays alive
 
 When wallet locked / no peers / IBD / not synced: thread stays alive (blocked in `SleepStaker`). PoSMiner loops in `SleepStaker(5000/10000)` chunks. Thread exits only when `m_stop_staking_thread=true`.
+
+---
+
+## 17. Known Bugs
+
+### Bug #2 — PoSMiner keypool exit leaves `m_enabled_staking=true`
+
+**File:** `miner.cpp:830`
+
+When the keypool is exhausted, `PoSMiner` does a plain `return`. But `m_enabled_staking` stays `true` and the `ThreadStakeMiner` retry loop only catches exceptions — a bare `return` exits the thread permanently. The wallet UI shows staking as enabled but no thread is running.
+
+**To fix:** either set `m_enabled_staking=false` before returning, or convert the `return` to a `throw` so the retry loop catches it.

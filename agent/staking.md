@@ -214,6 +214,8 @@ None of these are on the staking hot path.
 10. **BIP94 is NOT active** on Blackcoin mainnet or testnet — `consensus.enforce_BIP94 = false` for both (`chainparams.cpp:116, 351`). Only regtest has it enabled (`chainparams.cpp:559`). BIP94 is a timewarp-attack mitigation that constrains the first block of each difficulty period. The code exists but is disabled everywhere except regtest. `MAX_TIMEWARP = 600` (10 minutes) is defined in `consensus.h:31` but unused on production networks.
 11. **`optimizeutxoset` RPC** (`spend.cpp:351`) creates uniform UTXO outputs for staking. It selects all available coins (optionally filtered by `fromAddress`), calculates a fee, and creates as many outputs of the specified `amount` as possible via `CreateTransaction`. Change goes to the same address (`coin_control.destChange = dest`). Example: `optimizeutxoset <bech32-address> 250` creates N × 250 BLK P2WPKH outputs (if the address is P2WPKH) plus a change output. All outputs go to the same address, making them interchangeable for staking kernel selection. The output type is determined by the address format passed (Bech32 → P2WPKH, Bech32m → P2TR, legacy → P2PKH).
 
+**Bug:** The loop does not check `MAX_STANDARD_TX_WEIGHT` (400K). For large amounts with many inputs, `CreateTransaction` can produce a tx exceeding the weight limit, causing "Transaction too large" errors. **Fix:** calculate `maxOutsPerTx` from the weight limit and loop calling `CreateTransaction` in batches with `transmit=true`, chaining change outputs between iterations.
+
 ## 11. Staker Timing (PoSMiner Loop)
 
 ### 11.1 Design
