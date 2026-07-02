@@ -208,6 +208,7 @@ Checks `CheckProofOfStake`, then submits via `chainman.ProcessNewBlock`.
 | Difficulty adjustment | Per-block EMA (same formula) | Per-block EMA (same formula) |
 | BIP94 | Not active | Not active (regtest only) |
 | Input combining guard | `GetHash() != prevout.hash` (buggy) | `COutPoint(...) != prevout` (fixed June 29) |
+| Compact block prefill | 1 prefilled (coinbase only) | 2 prefilled for PoS (marker + coinstake), July 2 |
 
 **Difficulty adjustment note:** Both v26.x and v28-CORE use the same per-block exponential moving average (EMA) formula in `CalculateNextTargetRequired` (`pow.cpp:54`). The difficulty is recalculated at every block boundary, not at 15-block interval boundaries. `nTargetTimespan = 16 * 60` (16 minutes) defines the smoothing window for the EMA, not a fixed adjustment interval. The formula: `bnNew *= ((nInterval-1)*nTargetSpacing + nActualSpacing*2) / ((nInterval+1)*nTargetSpacing)` where `nInterval = 15` and `nActualSpacing` is the time between the last two PoS blocks.
 
