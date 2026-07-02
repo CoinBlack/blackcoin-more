@@ -19,15 +19,27 @@
 
 CBlockHeaderAndShortTxIDs::CBlockHeaderAndShortTxIDs(const CBlock& block, const uint64_t nonce) :
         nonce(nonce),
-        shorttxids(block.vtx.size() - 1), prefilledtxn(1), header(block), vchBlockSig(block.vchBlockSig) {
+        header(block), vchBlockSig(block.vchBlockSig) {
     FillShortTxIDSelector();
     //TODO: Use our mempool prior to block acceptance to predictively fill more than just the coinbase
-    prefilledtxn[0] = {0, block.vtx[0]};
-    header.nFlags = block.nFlags;
-    for (size_t i = 1; i < block.vtx.size(); i++) {
-        const CTransaction& tx = *block.vtx[i];
-        shorttxids[i - 1] = GetShortID(tx.GetWitnessHash());
+    if (block.IsProofOfStake()) {
+        // Prefill both the marker (vtx[0]) and the coinstake (vtx[1]).
+        // The coinstake is never in any peer's mempool, so short IDs would always
+        // miss, requiring an extra getblocktxn round-trip. Prefilling it avoids
+        // this, matching how Bitcoin Core always prefills the coinbase for PoW.
+        prefilledtxn = {{0, block.vtx[0]}, {0, block.vtx[1]}};
+        shorttxids.resize(block.vtx.size() - 2);
+        for (size_t i = 2; i < block.vtx.size(); i++) {
+            shorttxids[i - 2] = GetShortID(block.vtx[i]->GetWitnessHash());
+        }
+    } else {
+        prefilledtxn = {{0, block.vtx[0]}};
+        shorttxids.resize(block.vtx.size() - 1);
+        for (size_t i = 1; i < block.vtx.size(); i++) {
+            shorttxids[i - 1] = GetShortID(block.vtx[i]->GetWitnessHash());
+        }
     }
+    header.nFlags = block.nFlags;
 }
 
 void CBlockHeaderAndShortTxIDs::FillShortTxIDSelector() const {
