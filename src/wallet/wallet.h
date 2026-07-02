@@ -460,6 +460,8 @@ public:
     // Per-wallet staking timer for multi-wallet independence
     int64_t m_last_coin_stake_search_time{0};
 
+    std::atomic<bool> m_staker_active{false};
+
     WalletDatabase& GetDatabase() const override
     {
         assert(static_cast<bool>(m_database));

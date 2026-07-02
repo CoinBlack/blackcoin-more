@@ -687,9 +687,26 @@ bool SignBlock(CBlock& block, const CWallet& keystore)
 }
 
 // peercoin
+
+/** RAII guard that clears a wallet's m_staker_active flag when destroyed.
+ *  Used so that every exit path from PoSMiner reports the staker as inactive. */
+class StakerActiveGuard
+{
+public:
+    explicit StakerActiveGuard(wallet::CWallet* wallet) : m_wallet(wallet) {}
+    ~StakerActiveGuard() { m_wallet->m_staker_active.store(false); }
+    StakerActiveGuard(const StakerActiveGuard&) = delete;
+    StakerActiveGuard& operator=(const StakerActiveGuard&) = delete;
+private:
+    wallet::CWallet* const m_wallet;
+};
+
 void PoSMiner(CWallet *pwallet)
 {
     pwallet->WalletLogPrintf("PoSMiner started for proof-of-stake\n");
+
+    // Any exit from this function means the staker is no longer actively searching.
+    StakerActiveGuard stakerActiveGuard(pwallet);
 
     unsigned int nExtraNonce = 0;
 
@@ -733,6 +750,8 @@ void PoSMiner(CWallet *pwallet)
     try {
         while (true)
         {
+            // Clear the active flag while waiting for the wallet to become ready to stake.
+            pwallet->m_staker_active.store(false);
             while (pwallet->IsLocked() || !pwallet->m_enabled_staking || !pwallet->chain().chainman().m_blockman.m_blockfiles_indexed || pwallet->chain().chainman().m_blockman.m_importing || pwallet->IsScanning()) {
                 pwallet->m_last_coin_stake_search_interval = 0;
                 if (!SleepStaker(pwallet, 5000))
@@ -742,6 +761,7 @@ void PoSMiner(CWallet *pwallet)
             // Busy-wait for the network to come online so we don't waste time mining
             // on an obsolete chain. In regtest mode we expect to fly solo.
             if (!Params().MineBlocksOnDemand()) {
+                pwallet->m_staker_active.store(false);
                 while (pwallet->chain().getNodeCount(ConnectionDirection::Both) == 0 || pwallet->chain().isInitialBlockDownload()) {
                     pwallet->m_last_coin_stake_search_interval = 0;
                     if (!SleepStaker(pwallet, 10000))
@@ -749,12 +769,18 @@ void PoSMiner(CWallet *pwallet)
                 }
             }
 
+            pwallet->m_staker_active.store(false);
             while (GuessVerificationProgress(Params().TxData(), pwallet->chain().getTip()) < 0.996) {
                 pwallet->m_last_coin_stake_search_interval = 0;
                 pwallet->WalletLogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().getTip()));
                 if (!SleepStaker(pwallet, 10000))
                     return;
             }
+
+            // From here the staker is enabled, connected, synced, and actively
+            // cycling through PoS windows. Keep the flag true across the normal
+            // boundary sleeps so the UI/RPC do not flicker on brief wakes.
+            pwallet->m_staker_active.store(true);
 
             //
             // Create new block
@@ -795,7 +821,7 @@ void PoSMiner(CWallet *pwallet)
                 }
                 pwallet->WalletLogPrintf("Error in PoSMiner: Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
                 if (!SleepStaker(pwallet, 10000))
-                   return;
+                    return;
 
                 return;
             }

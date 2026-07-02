@@ -1588,7 +1588,7 @@ void BitcoinGUI::updateStakingIcon()
     WalletModel * const walletModel = walletView->getWalletModel();
 
     uint64_t nWeight = walletModel->getStakeWeight();
-    if (walletModel->wallet().getLastCoinStakeSearchInterval() &&
+    if (walletModel->wallet().getStakerActive() &&
             walletModel->wallet().getEnabledStaking() && nWeight)
     {
         uint64_t nNetworkWeight = 1.1429 * walletModel->node().getPoSKernelPS();

@@ -53,12 +53,14 @@ static RPCHelpMan getstakinginfo()
 
     uint64_t nWeight = 0;
     uint64_t lastCoinStakeSearchInterval = 0;
+    bool stakerActive = false;
 
     if (pwallet)
     {
         LOCK(pwallet->cs_wallet);
         nWeight = pwallet->GetStakeWeight();
         lastCoinStakeSearchInterval = pwallet->m_enabled_staking ? pwallet->m_last_coin_stake_search_interval : 0;
+        stakerActive = pwallet->m_enabled_staking && pwallet->m_staker_active.load();
     }
 
     const CTxMemPool& mempool = pwallet->chain().mempool();
@@ -69,7 +71,7 @@ static RPCHelpMan getstakinginfo()
     UniValue obj(UniValue::VOBJ);
 
     uint64_t nNetworkWeight = 1.1429 * GetPoSKernelPS(chainman);
-    bool staking = lastCoinStakeSearchInterval && nWeight;
+    bool staking = stakerActive && nWeight;
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
     int64_t nTargetSpacing = consensusParams.nTargetSpacing;

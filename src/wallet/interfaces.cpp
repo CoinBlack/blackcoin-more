@@ -524,6 +524,10 @@ public:
     {
         return m_wallet->m_last_coin_stake_search_interval;
     }
+    bool getStakerActive() override
+    {
+        return m_wallet->m_staker_active.load();
+    }
     bool getWalletUnlockStakingOnly() override
     {
         return m_wallet->m_wallet_unlock_staking_only;

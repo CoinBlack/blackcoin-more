@@ -1003,3 +1003,42 @@ if (IsBIP9StrictPOSVerificationActive(pindexPrev)) {
 1. `make check` — all unit tests pass
 2. Functional tests — staker successfully generates blocks under new rules
 3. `src/test/pos_tests.cpp` — PoS-specific tests with all four kernel types
+
+---
+
+## 13. Staking Status Flicker Fix — Staged and Reviewed
+
+### 13.1 Problem
+
+After the wake-on-block staker refactor (§1.4), `getstakinginfo` and the Qt staking icon briefly reported `"staking": false` after every new block.
+
+Root cause: the staker used `m_last_coin_stake_search_interval > 0` as a proxy for "actively staking". The new `SleepStaker()` wakes immediately on `cv_new_block`, but between waking and starting the next search, `m_last_coin_stake_search_interval` is reset to `0`. That transient state was visible to both RPC and GUI callers.
+
+`m_last_coin_stake_search_interval` is also a plain `int64_t` read from another thread without synchronization — a data race.
+
+### 13.2 Fix
+
+Introduce a dedicated `std::atomic<bool> m_staker_active` flag on `CWallet` and manage it from `PoSMiner()`:
+
+- A new `StakerActiveGuard` RAII helper clears the flag on every exit path from `PoSMiner()` (returns, exceptions).
+- The flag is cleared at the top of each loop iteration while waiting for wallet readiness (locked, disabled, importing, scanning).
+- The flag is set `true` only while the staker is genuinely searching for a proof-of-stake kernel, and stays `true` across brief condition-variable wakes.
+
+Expose the flag through the wallet interface and consume it in:
+- `src/wallet/rpc/staking.cpp` — `getstakinginfo` now reports `staking = stakerActive && nWeight`
+- `src/qt/bitcoingui.cpp` — `updateStakingIcon()` uses `getStakerActive()` instead of `getLastCoinStakeSearchInterval()`
+
+### 13.3 Files Changed
+
+| File | Change |
+|------|--------|
+| `src/wallet/wallet.h` | Add `std::atomic<bool> m_staker_active` |
+| `src/node/miner.cpp` | Add `StakerActiveGuard`; manage flag in `PoSMiner()` |
+| `src/interfaces/wallet.h` | Add `virtual bool getStakerActive()` |
+| `src/wallet/interfaces.cpp` | Implement `getStakerActive()` |
+| `src/wallet/rpc/staking.cpp` | Use `stakerActive` for `staking` field |
+| `src/qt/bitcoingui.cpp` | Use `getStakerActive()` for staking icon |
+
+### 13.4 Review Outcome
+
+Independent review found **no bugs**. One minor observation was incorporated: removed a defensive null-check in `StakerActiveGuard::~StakerActiveGuard()` because the wallet pointer is guaranteed non-null and must outlive the staker thread.
