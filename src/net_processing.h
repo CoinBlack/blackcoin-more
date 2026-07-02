@@ -38,8 +38,9 @@ static const unsigned int MAX_CMPCTBLOCKS_INFLIGHT_PER_BLOCK = 3;
 // blackcoin: port of Header spam protection by Qtum
 /** Default for -headerspamfilter, use header spam filter */
 static const bool DEFAULT_HEADER_SPAM_FILTER = true;
-/** Default for -headerspamfiltermaxsize, maximum size of the list of indexes in the header spam filter */
-static const unsigned int DEFAULT_HEADER_SPAM_FILTER_MAX_SIZE = 500;
+/** Default for -headerspamfiltermaxsize, maximum size of the list of indexes in the header spam filter.
+ *  Set to 2000 to match Qtum's default and reduce false-positive discouragements on busy PoS networks. */
+static const unsigned int DEFAULT_HEADER_SPAM_FILTER_MAX_SIZE = 2000;
 /** Default for -headerspamfiltermaxavg, maximum average size of an index occurrence in the header spam filter */
 static const unsigned int DEFAULT_HEADER_SPAM_FILTER_MAX_AVG = 10;
 /** Default for -headerspamfilterignoreport, ignore the port in the ip address when looking for header spam,

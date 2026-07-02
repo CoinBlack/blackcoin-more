@@ -528,7 +528,7 @@ public:
         return false;
     }
 
-    bool updateState(BlockValidationState& state, bool ret)
+    bool updateState(NodeId peerId, BlockValidationState& state, bool ret)
     {
         // No headers
         size_t size = points.size();
@@ -545,15 +545,17 @@ public:
         // Compute the average value per height
         double nAvgValue = (double)nHeaders / size;
 
-        // Ban the node if try to spam
+        // Flag the peer for discouragement/disconnection if it is spamming headers.
+        // The actual disconnect happens later via MaybeDiscourageAndDisconnect.
         bool banNode = (nAvgValue >= 1.5 * maxAvg && size >= maxAvg) ||
                        (nAvgValue >= maxAvg && nHeaders >= maxSize) ||
                        (nHeaders >= maxSize * 4.1);
         if(banNode)
         {
-            // Clear the points and ban the node
             points.clear();
-            return state.Invalid(BlockValidationResult::BLOCK_HEADER_SPAM, "header-spam", "ban node for sending spam");
+            return state.Invalid(BlockValidationResult::BLOCK_HEADER_SPAM, "header-spam",
+                strprintf("peer %d discouraged/disconnected for header spam (avg=%.2f/%u, headers=%u, max=%u, size=%u)",
+                          peerId, nAvgValue, maxAvg, nHeaders, maxSize, size));
         }
 
         return ret;
@@ -1825,10 +1827,10 @@ bool PeerManagerImpl::ProcessNetBlockHeaders(CNode& pfrom, const std::vector<CBl
         if (!m_chainman.IsInitialBlockDownload() || (gArgs.GetBoolArg("-headerspamfilterduringibd", DEFAULT_HEADER_SPAM_FILTER_DURING_IBD) && m_chainman.IsInitialBlockDownload()))
         {
             LOCK(cs_main);
-            CNodeHeaders& headers = ServiceHeaders(pfrom.GetAddrLocal());
+            CNodeHeaders& headers = ServiceHeaders(pfrom.addr);
             const CBlockIndex *pindexLast = ppindex == nullptr ? nullptr : *ppindex;
             headers.addHeaders(pindexFirst, pindexLast);
-            return headers.updateState(state, ret);
+            return headers.updateState(pfrom.GetId(), state, ret);
         }       
     }
     return ret;
