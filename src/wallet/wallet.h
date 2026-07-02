@@ -459,6 +459,7 @@ public:
 
     // Per-wallet staking timer for multi-wallet independence
     int64_t m_last_coin_stake_search_time{0};
+    uint256 m_last_coin_stake_search_tip{};
 
     std::atomic<bool> m_staker_active{false};
 

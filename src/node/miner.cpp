@@ -228,11 +228,15 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         if (nSearchTime <= pindexPrev->GetMedianTimePast()) {
             pwallet->m_last_coin_stake_search_interval = nSearchTime - pwallet->m_last_coin_stake_search_time;
             pwallet->m_last_coin_stake_search_time = nSearchTime;
+            pwallet->m_last_coin_stake_search_tip = pindexPrev->GetBlockHash();
             *pfPoSCancel = true;
             return nullptr;
         }
 
-        if (nSearchTime > pwallet->m_last_coin_stake_search_time) {
+        uint256 currentTipHash = pindexPrev->GetBlockHash();
+        if (nSearchTime > pwallet->m_last_coin_stake_search_time ||
+            (nSearchTime == pwallet->m_last_coin_stake_search_time &&
+             currentTipHash != pwallet->m_last_coin_stake_search_tip)) {
             if (nSearchTime - pindexPrev->GetMedianTimePast() < 2) {
                 LogPrint(BCLog::COINSTAKE, "[%s] WARNING: Close MTP collision detected (search: %d, MTP: %d, diff: %d)\n",
                          pwallet->GetName(), nSearchTime, pindexPrev->GetMedianTimePast(),
@@ -255,6 +259,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
             }
             pwallet->m_last_coin_stake_search_interval = nSearchTime - pwallet->m_last_coin_stake_search_time;
             pwallet->m_last_coin_stake_search_time = nSearchTime;
+            pwallet->m_last_coin_stake_search_tip = currentTipHash;
             LogPrint(BCLog::COINSTAKE, "[%s] Wallet timer updated: interval=%d, last_search_time=%d (%s)\n",
                      pwallet->GetName(), pwallet->m_last_coin_stake_search_interval, pwallet->m_last_coin_stake_search_time,
                      FormatISO8601DateTime(pwallet->m_last_coin_stake_search_time));
