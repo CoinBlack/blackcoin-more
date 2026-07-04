@@ -825,6 +825,7 @@ void PoSMiner(CWallet *pwallet)
                     continue;
                 }
                 pwallet->WalletLogPrintf("Error in PoSMiner: Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
+                pwallet->m_enabled_staking = false;
                 if (!SleepStaker(pwallet, 10000))
                     return;
 
