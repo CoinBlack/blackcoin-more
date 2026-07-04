@@ -87,7 +87,9 @@ bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_
         if (!max_datacarrier_bytes || scriptPubKey.size() > *max_datacarrier_bytes) {
             return false;
         }
-    } else if (!witnessEnabled && (whichType == TxoutType::WITNESS_V0_SCRIPTHASH || whichType == TxoutType::WITNESS_V0_KEYHASH || whichType == TxoutType::WITNESS_V1_TAPROOT || whichType == TxoutType::WITNESS_UNKNOWN)) {
+    } else if (!witnessEnabled && (whichType == TxoutType::WITNESS_V0_SCRIPTHASH || whichType == TxoutType::WITNESS_V0_KEYHASH || whichType == TxoutType::WITNESS_V1_TAPROOT)) {
+        return false;
+    } else if (whichType == TxoutType::WITNESS_UNKNOWN) {
         return false;
     }
     return true;

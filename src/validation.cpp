@@ -2442,6 +2442,18 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
         flags |= SCRIPT_VERIFY_TAPROOT;
     }
 
+    // Reject spending outputs with unknown witness versions (v > 1) at consensus
+    // level. Without this flag the interpreter returns true for an unknown witness
+    // version (forward-softfork compatibility), making those outputs anyone-can-spend.
+    // Gate on DEPLOYMENT_TAPROOT (not segwit) because the DISCOURAGE flag would
+    // also reject v1 spends — v1 is an unknown upgrade before Taproot activates,
+    // so forward-compatibility would be broken during the BIP-9 window.
+    // Creation of v>1 outputs is blocked earlier in ContextualCheckBlock (gated
+    // on segwit with a v > 1 check that does not affect v1).
+    if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
+        flags |= SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM;
+    }
+
     return flags;
 }
 
@@ -4324,6 +4336,31 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     // failed).
     if (GetBlockWeight(block) > MAX_BLOCK_WEIGHT) {
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
+    }
+
+    // Reject transactions creating outputs with unknown witness versions (v > 1).
+    // Unknown witness versions > 1 are treated as future softfork versions by the
+    // interpreter, which returns true for any witness stack — making those outputs
+    // anyone-can-spend on a node that does not set the DISCOURAGE flag (see
+    // interpreter.cpp VerifyWitnessProgram else-branch). This is a consensus rule:
+    // blocks containing such outputs are rejected.
+    // Known witness versions: 0 (P2WPKH/P2WSH), 1 (Taproot). We check v > 1 (not
+    // v > 0), so v1/Taproot outputs always pass through regardless of gate choice.
+    // Gate on DEPLOYMENT_TAPROOT for symmetry with the DISCOURAGE flag in
+    // GetBlockScriptFlags. On testnet Taproot is already active; on mainnet it
+    // will activate via BIP-9 after its July 12 start time.
+    const bool taproot_active = DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT);
+    if (taproot_active) {
+        for (const auto& tx : block.vtx) {
+            for (const auto& txout : tx->vout) {
+                int witness_version = 0;
+                std::vector<unsigned char> witness_program;
+                if (txout.scriptPubKey.IsWitnessProgram(witness_version, witness_program) && witness_version > 1) {
+                    return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-unknown-witness-version",
+                        strprintf("%s : block contains output with unknown witness version %d", __func__, witness_version));
+                }
+            }
+        }
     }
 
     return true;

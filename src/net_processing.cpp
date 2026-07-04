@@ -4776,6 +4776,20 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         const uint256& hash = peer->m_wtxid_relay ? wtxid : txid;
         AddKnownTx(*peer, hash);
 
+        // Detect and log transactions that create outputs with unknown witness
+        // versions (v > 1). These are characteristic of parasite forks that
+        // exploit Bitcoin Core's forward-softfork compatibility to create
+        // anyone-can-spend outputs on chains that do not understand the version.
+        for (const auto& txout : tx.vout) {
+            int witness_version = 0;
+            std::vector<unsigned char> witness_program;
+            if (txout.scriptPubKey.IsWitnessProgram(witness_version, witness_program) && witness_version > 1) {
+                LogPrint(BCLog::NET, "unknown-witness-version: peer=%d txid=%s creates output with witness version %d (possible parasite-fork migration output)\n",
+                         pfrom.GetId(), txid.ToString(), witness_version);
+                break;
+            }
+        }
+
         LOCK2(cs_main, m_tx_download_mutex);
 
         m_txrequest.ReceivedResponse(pfrom.GetId(), txid);
