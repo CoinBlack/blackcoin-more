@@ -1,6 +1,6 @@
 Blackcoin More
 =====================================
-[![build](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml/badge.svg?branch=26.x)](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml)
+[![build](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml/badge.svg?branch=28.x)](https://github.com/CoinBlack/blackcoin-more/actions/workflows/build.yml)
 
 https://blackcoinmore.org
 
@@ -69,13 +69,10 @@ Translations
 ------------
 
 Changes to translations as well as new translations can be submitted to
-[Blackcoin More's Transifex page](https://app.transifex.com/BlackcoinQT/BlackcoinMore/).
+[Blackcoin More's Transifex page](https://www.transifex.com/BlackcoinQT/BlackcoinMore/).
 
-Translations are periodically pulled from Transifex and merged into the git repository. See the
+Translations might be periodically pulled from Transifex and merged into the git repository. See the
 [translation process](doc/translation_process.md) for details on how this works.
-
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
 
 Branches
 -------
@@ -89,8 +86,8 @@ The develop branch is considered an unstable branch, as it is constantly updated
 The master branch gets latest updates from the stable branch.
 However, it may contain experimental features and should be used with caution.
 
-### 13.2
-The release branch for Blackcoin More 13.2.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
-
 ### 26.x
-The release branch for Blackcoin More 26.x. Contains functional but highly experimental code.
+The release branch for Blackcoin More 26.x. It is intended to contain stable and functional code that has been thoroughly tested and reviewed.
+
+### 28.x
+The release branch for Blackcoin More 28.x. the release which will be become the next stable release. 
