@@ -28,6 +28,7 @@ jobs:
       - name: Run build script for AMD64
         env:
           PLATFORM: linux/amd64
+          DOCKER_HUB_USER: ${{ secrets.DOCKER_USERNAME }}
         run: ./gh-build-28.sh
 
   # 2. Native ARM64 Builder Job
@@ -56,6 +57,7 @@ jobs:
       - name: Run build script for ARM64
         env:
           PLATFORM: linux/arm64
+          DOCKER_HUB_USER: ${{ secrets.DOCKER_USERNAME }}
         run: ./gh-build-28.sh
 
   # 3. Manifest Assembly Job
@@ -78,19 +80,16 @@ jobs:
           DOCKER_HUB_USER="${{ secrets.DOCKER_USERNAME }}"
           
           # A. Base Image Manifest
-          docker manifest create ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH} \
+          docker buildx imagetools create -t ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH} \
             ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}-amd64 \
             ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}-arm64
-          docker manifest push ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}
 
           # B. Debian Image Manifest
-          docker manifest create ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH} \
+          docker buildx imagetools create -t ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH} \
             ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}-amd64 \
             ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}-arm64
-          docker manifest push ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}
 
           # C. Minimal Image Manifest
-          docker manifest create ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH} \
+          docker buildx imagetools create -t ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH} \
             ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}-amd64 \
             ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}-arm64
-          docker manifest push ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}
