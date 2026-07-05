@@ -1,6 +1,10 @@
 name: Build and Push Docker - 28.x
 on: [push]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   # 1. Native AMD64 Builder Job
   build-amd64:
@@ -14,21 +18,24 @@ jobs:
           ref: main
 
       - name: Set environment variables
-        run: echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        run: |
+          echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "GHCR_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4.2.0
 
-      - name: Login to DockerHub Registry
+      - name: Login to GitHub Container Registry (GHCR)
         uses: docker/login-action@v4.4.0
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run build script for AMD64
         env:
           PLATFORM: linux/amd64
-          DOCKER_HUB_USER: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_HUB_USER: ghcr.io/${{ env.GHCR_OWNER }}
         run: ./gh-build-28.sh
 
   # 2. Native ARM64 Builder Job
@@ -43,21 +50,24 @@ jobs:
           ref: main
 
       - name: Set environment variables
-        run: echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        run: |
+          echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "GHCR_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4.2.0
 
-      - name: Login to DockerHub Registry
+      - name: Login to GitHub Container Registry (GHCR)
         uses: docker/login-action@v4.4.0
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run build script for ARM64
         env:
           PLATFORM: linux/arm64
-          DOCKER_HUB_USER: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_HUB_USER: ghcr.io/${{ env.GHCR_OWNER }}
         run: ./gh-build-28.sh
 
   # 3. Manifest Assembly Job
@@ -66,6 +76,13 @@ jobs:
     needs: [build-amd64, build-arm64]
     runs-on: ubuntu-22.04
     steps:
+      - name: Login to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v4.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Login to DockerHub Registry
         uses: docker/login-action@v4.4.0
         with:
@@ -73,23 +90,26 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Extract branch name
-        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        run: |
+          echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "GHCR_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Assemble and Publish Manifests
         run: |
           DOCKER_HUB_USER="${{ secrets.DOCKER_USERNAME }}"
+          GHCR_USER="ghcr.io/${{ env.GHCR_OWNER }}"
           
           # A. Base Image Manifest
           docker buildx imagetools create -t ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH} \
-            ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}-amd64 \
-            ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}-arm64
+            ${GHCR_USER}/blackcoin-more-28.4.0-base:${BRANCH}-amd64 \
+            ${GHCR_USER}/blackcoin-more-28.4.0-base:${BRANCH}-arm64
 
           # B. Debian Image Manifest
           docker buildx imagetools create -t ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH} \
-            ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}-amd64 \
-            ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}-arm64
+            ${GHCR_USER}/blackcoin-more-debian-v28x:${BRANCH}-amd64 \
+            ${GHCR_USER}/blackcoin-more-debian-v28x:${BRANCH}-arm64
 
           # C. Minimal Image Manifest
           docker buildx imagetools create -t ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH} \
-            ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}-amd64 \
-            ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}-arm64
+            ${GHCR_USER}/blackcoin-more-minimal-v28x:${BRANCH}-amd64 \
+            ${GHCR_USER}/blackcoin-more-minimal-v28x:${BRANCH}-arm64
