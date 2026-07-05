@@ -12,7 +12,7 @@
 // and IPv6 uses /128 for normal addresses. Default is false to preserve
 // historical behavior. This variable is file-local; it's exposed via the
 // static NetGroupManager getters/setters declared in netgroup.h.
-static bool g_relax_network_mask = true; // blackcoin: using true for testing, but this should be false in production builds
+static bool g_relax_network_mask = false;
 
 uint256 NetGroupManager::GetAsmapChecksum() const
 {
