@@ -1,25 +1,21 @@
 name: Build and Push Docker - 28.x
 on: [push]
+
 jobs:
-  test:
-    name: Build and Push Docker - 28.x
-    runs-on: ubuntu-22.04
+  # 1. Native AMD64 Builder Job
+  build-amd64:
+    name: Build AMD64 Images (Native)
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
         with:
           repository: BlackcoinDev/docker-blk
           ref: main
+
       - name: Set environment variables
         run: echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      - name: Show GITHUB_ENV content
-        run: cat $GITHUB_ENV
 
-      # 1. Set up QEMU for multi-arch emulation (ARM64, etc.)
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4.2.0
-
-      # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4.2.0
 
@@ -29,6 +25,72 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Run build script
+      - name: Run build script for AMD64
+        env:
+          PLATFORM: linux/amd64
         run: ./gh-build-28.sh
 
+  # 2. Native ARM64 Builder Job
+  build-arm64:
+    name: Build ARM64 Images (Native)
+    runs-on: ubuntu-24.04-arm64
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          repository: BlackcoinDev/docker-blk
+          ref: main
+
+      - name: Set environment variables
+        run: echo "GIT_CURRENT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4.2.0
+
+      - name: Login to DockerHub Registry
+        uses: docker/login-action@v4.4.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Run build script for ARM64
+        env:
+          PLATFORM: linux/arm64
+        run: ./gh-build-28.sh
+
+  # 3. Manifest Assembly Job
+  assemble-manifests:
+    name: Create & Push Multi-Arch Manifests
+    needs: [build-amd64, build-arm64]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub Registry
+        uses: docker/login-action@v4.4.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract branch name
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Assemble and Publish Manifests
+        run: |
+          DOCKER_HUB_USER="${{ secrets.DOCKER_USERNAME }}"
+          
+          # A. Base Image Manifest
+          docker manifest create ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH} \
+            ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}-amd64 \
+            ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}-arm64
+          docker manifest push ${DOCKER_HUB_USER}/blackcoin-more-28.4.0-base:${BRANCH}
+
+          # B. Debian Image Manifest
+          docker manifest create ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH} \
+            ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}-amd64 \
+            ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}-arm64
+          docker manifest push ${DOCKER_HUB_USER}/blackcoin-more-debian-v28x:${BRANCH}
+
+          # C. Minimal Image Manifest
+          docker manifest create ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH} \
+            ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}-amd64 \
+            ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}-arm64
+          docker manifest push ${DOCKER_HUB_USER}/blackcoin-more-minimal-v28x:${BRANCH}
