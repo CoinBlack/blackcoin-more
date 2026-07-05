@@ -129,8 +129,8 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
 
-        consensus.nMinimumChainWork = uint256{"00000000000000000000000000000000000000000000050178435c1198388add"}; // block 5805000
-        consensus.defaultAssumeValid = uint256{"d46da886008c871fa10f6a793b9c62df949a915cecf01e34b3d6467e59e37459"}; // block 5805000
+        consensus.nMinimumChainWork = uint256{"000000000000000000000000000000000000000000000517e2d8a11f8c35a13e"}; // block 5930110
+        consensus.defaultAssumeValid = uint256{"544cc4c650dc758ce20626101533f0476f3f987add3aae0d68e791e01bad013f"}; // block 5930110
 
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
@@ -191,6 +191,7 @@ public:
                 {4232630, uint256{"ae0c2a9bd13746e2887ca57bf1046b3c787a5ed1068fd1633a3575f08ee291fc"}}, // Devfund
                 {4908715, uint256{"6f8e37e21aa2fba3f8e2d6825cb825ca290e9367ed08b8c30943bc16efcba119"}}, // hardfork
                 {5805000, uint256{"d46da886008c871fa10f6a793b9c62df949a915cecf01e34b3d6467e59e37459"}}, // SegWit activated
+                {5930110, uint256{"544cc4c650dc758ce20626101533f0476f3f987add3aae0d68e791e01bad013f"}}, // OP_RETURN staking                
             }
         };
 
@@ -246,8 +247,8 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
 
-        consensus.nMinimumChainWork = uint256{"00000000000000000000000000000000000000000000005e076ec35dd78945ce"}; // block 2139564
-        consensus.defaultAssumeValid = uint256{"ade1c1bd7d6b75cd95b5ec841ffaff24f79ab71c084a3fe8374c2680c72f6b4e"}; // block 2139564
+        consensus.nMinimumChainWork = uint256{"00000000000000000000000000000000000000000000008da52e1d2219de5a78"}; // block 2865000
+        consensus.defaultAssumeValid = uint256{"db325f728786683ce330b11ba7bc0a9627fb94ba5a460ec76a09b54720f17486"}; // block 2865000
 
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 1407053625;
@@ -297,6 +298,7 @@ public:
                 {1320664, uint256{"64fa6a5414c6797629d34ef150c46486a5e1d49d2bceb87d6da14a501f838afd"}}, // hardfork
                 {1415393, uint256{"5d5c42500cc6057533e249ba9eeb9b5e998aff30468c904bc267ec9bccbc8b39"}}, // start devfund
                 {2070000, uint256{"f8e2c3919353487f73cd957f29654dc00a3b0c99a9fbf38a3514cdead626f0ec"}}, // segwit activated
+                {2865000, uint256{"db325f728786683ce330b11ba7bc0a9627fb94ba5a460ec76a09b54720f17486"}}, // taproot activated
             }
         };
 
