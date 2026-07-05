@@ -2445,11 +2445,10 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     // Reject spending outputs with unknown witness versions (v > 1) at consensus
     // level. Without this flag the interpreter returns true for an unknown witness
     // version (forward-softfork compatibility), making those outputs anyone-can-spend.
-    // Gate on DEPLOYMENT_TAPROOT (not segwit) because the DISCOURAGE flag would
-    // also reject v1 spends — v1 is an unknown upgrade before Taproot activates,
-    // so forward-compatibility would be broken during the BIP-9 window.
-    // Creation of v>1 outputs is blocked earlier in ContextualCheckBlock (gated
-    // on segwit with a v > 1 check that does not affect v1).
+    // Gate on DEPLOYMENT_TAPROOT because the DISCOURAGE flag would also reject v1
+    // spends — v1 is an unknown upgrade before Taproot activates, so forward-
+    // compatibility would be broken during the BIP-9 window.
+    // Creation of v>1 outputs is blocked at the same gate in ContextualCheckBlock.
     if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
         flags |= SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM;
     }
@@ -4347,8 +4346,9 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     // Known witness versions: 0 (P2WPKH/P2WSH), 1 (Taproot). We check v > 1 (not
     // v > 0), so v1/Taproot outputs always pass through regardless of gate choice.
     // Gate on DEPLOYMENT_TAPROOT for symmetry with the DISCOURAGE flag in
-    // GetBlockScriptFlags. On testnet Taproot is already active; on mainnet it
-    // will activate via BIP-9 after its July 12 start time.
+    // GetBlockScriptFlags. On testnet Taproot activated at 2,865,000 (after
+    // existing QQ v16 outputs at ~2,864,xxx); on mainnet it will activate via
+    // BIP-9 after July 12, before any v16 outputs are expected.
     const bool taproot_active = DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT);
     if (taproot_active) {
         for (const auto& tx : block.vtx) {

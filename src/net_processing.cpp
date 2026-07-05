@@ -4777,9 +4777,9 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         AddKnownTx(*peer, hash);
 
         // Detect and log transactions that create outputs with unknown witness
-        // versions (v > 1). These are characteristic of parasite forks that
-        // exploit Bitcoin Core's forward-softfork compatibility to create
-        // anyone-can-spend outputs on chains that do not understand the version.
+        // versions (v > 1). These are characteristic of forks that exploit
+        // Bitcoin Core's forward-softfork compatibility to create anyone-can-spend
+        // outputs on chains that do not understand the version.
         for (const auto& txout : tx.vout) {
             int witness_version = 0;
             std::vector<unsigned char> witness_program;
