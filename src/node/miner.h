@@ -47,7 +47,7 @@ static const bool DEFAULT_PRINT_MODIFIED_FEE = false;
 //! -staking default
 static const bool DEFAULT_STAKE = true;
 //! -stakecache default
-static const bool DEFAULT_STAKE_CACHE = false;
+static const bool DEFAULT_STAKE_CACHE = false; // blackcoin: stakecache
 //! -staketimio default, proof-of-stake timeout in ms
 static const unsigned int DEFAULT_STAKETIMIO = 500;
 
@@ -116,7 +116,9 @@ struct CompareTxIterByAncestorCount {
 };
 
 
-struct CTxMemPoolModifiedEntry_Indices final : boost::multi_index::indexed_by<
+using indexed_modified_transaction_set = boost::multi_index_container<
+    CTxMemPoolModifiedEntry,
+    boost::multi_index::indexed_by<
     boost::multi_index::ordered_unique<
         modifiedentry_iter,
         CompareCTxMemPoolIter
@@ -129,12 +131,7 @@ struct CTxMemPoolModifiedEntry_Indices final : boost::multi_index::indexed_by<
         CompareTxMemPoolEntryByAncestorFee
     >
 >
-{};
-
-typedef boost::multi_index_container<
-    CTxMemPoolModifiedEntry,
-    CTxMemPoolModifiedEntry_Indices
-> indexed_modified_transaction_set;
+>;
 
 typedef indexed_modified_transaction_set::nth_index<0>::type::iterator modtxiter;
 typedef indexed_modified_transaction_set::index<ancestor_score>::type::iterator modtxscoreiter;
@@ -160,8 +157,7 @@ private:
     // The constructed block template
     std::unique_ptr<CBlockTemplate> pblocktemplate;
 
-    bool fIncludeWitness;
-
+    // Information on the current status of the block
     uint64_t nBlockWeight;
     uint64_t nBlockTx;
     uint64_t nBlockSigOpsCost;
@@ -177,7 +173,9 @@ private:
     Chainstate& m_chainstate;
 
 #ifdef ENABLE_WALLET
-    CWallet *pwallet = 0;
+    // blackcoin: pwallet removed — each staking iteration may use a different wallet,
+    // so it's passed as a parameter to CreateNewBlock() instead.
+    // CWallet *pwallet = 0;
 #endif
 
 public:

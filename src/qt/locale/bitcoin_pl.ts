@@ -126,7 +126,7 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
         <translation type="unfinished">Potwierdź szyfrowanie portfela </translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">hasłoOstrzeżenie: Jeśli zaszyfrujesz swój portfel i zgubisz hasło - &lt;b&gt;STRACISZ WSZYSTKIE SWOJE BITCONY&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -4379,10 +4379,6 @@ Nie można przywrócić kopii zapasowej portfela</translation>
         <translation type="unfinished">Błąd: %s adres nie dostępny</translation>
     </message>
     <message>
-        <source>Error: Not all watchonly txs could be deleted</source>
-        <translation type="unfinished">Błąd: Nie wszystkie txs tylko do odczytu mogą być usunięte</translation>
-    </message>
-    <message>
         <source>Error: This wallet already uses SQLite</source>
         <translation type="unfinished">Błąd: Ten portfel już używa SQLite</translation>
     </message>
@@ -4613,10 +4609,6 @@ Nie można przywrócić kopii zapasowej portfela</translation>
     <message>
         <source>Specified blocks directory "%s" does not exist.</source>
         <translation type="unfinished">Podany folder bloków "%s" nie istnieje.</translation>
-    </message>
-    <message>
-        <source>Specified data directory "%s" does not exist.</source>
-        <translation type="unfinished">Określony katalog danych "%s" nie istnieje</translation>
     </message>
     <message>
         <source>Specified data directory "%s" does not exist.</source>

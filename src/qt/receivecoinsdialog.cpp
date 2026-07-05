@@ -94,13 +94,9 @@ void ReceiveCoinsDialog::setModel(WalletModel *_model)
             if (model->wallet().getDefaultAddressType() == type) ui->addressType->setCurrentIndex(index);
         };
         add_address_type(OutputType::LEGACY, tr("Base58 (Legacy)"), tr("Not recommended due to higher fees and less protection against typos."));
-
-        // Blackcoin: hide SegWit address types before SegWit activation
-        if (!(model->wallet().getDefaultAddressType() == OutputType::LEGACY)) {
-            add_address_type(OutputType::BECH32, tr("Bech32 (SegWit)"), tr("Generates a native segwit address (BIP-173). Some old wallets don't support it."));
-            if (model->wallet().taprootEnabled()) {
-                add_address_type(OutputType::BECH32M, tr("Bech32m (Taproot)"), tr("Bech32m (BIP-350) is an upgrade to Bech32, wallet support is still limited."));
-            }
+        add_address_type(OutputType::BECH32, tr("Bech32 (SegWit)"), tr("Generates a native segwit address (BIP-173). Some old wallets don't support it."));
+        if (model->wallet().taprootEnabled()) {
+            add_address_type(OutputType::BECH32M, tr("Bech32m (Taproot)"), tr("Bech32m (BIP-350) is an upgrade to Bech32, wallet support is still limited."));
         }
 
         // Set the button to be enabled or disabled based on whether the wallet can give out new addresses.

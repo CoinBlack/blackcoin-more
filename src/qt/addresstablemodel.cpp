@@ -60,6 +60,7 @@ constexpr AddressTableEntry::Type translateTransactionType(wallet::AddressPurpos
     case wallet::AddressPurpose::SEND: return AddressTableEntry::Sending;
     case wallet::AddressPurpose::RECEIVE: return AddressTableEntry::Receiving;
     case wallet::AddressPurpose::REFUND: return AddressTableEntry::Hidden;
+    case wallet::AddressPurpose::SIGNKEY: return AddressTableEntry::Hidden; // blackcoin: signkey
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
@@ -238,6 +239,9 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
     if(!index.isValid())
         return false;
     AddressTableEntry *rec = static_cast<AddressTableEntry*>(index.internalPointer());
+// blackcoin: signkey
+    if(rec->type == AddressTableEntry::Hidden)
+        return false;
     wallet::AddressPurpose purpose = rec->type == AddressTableEntry::Sending ? wallet::AddressPurpose::SEND : wallet::AddressPurpose::RECEIVE;
     editStatus = OK;
 

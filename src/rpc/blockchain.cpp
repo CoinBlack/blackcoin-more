@@ -103,6 +103,7 @@ double GetPoSKernelPS(ChainstateManager& chainman)
     double dStakeKernelsTriedAvg = 0;
     int nStakesHandled = 0, nStakesTime = 0;
 
+    LOCK(cs_main);
     CBlockIndex* pindex = chainman.m_best_header;
     CBlockIndex* pindexPrevStake = nullptr;
 
@@ -191,6 +192,8 @@ UniValue blockheaderToJSON(const CBlockIndex& tip, const CBlockIndex& blockindex
     result.pushKV("difficulty", GetDifficulty(blockindex));
     result.pushKV("chainwork", blockindex.nChainWork.GetHex());
     result.pushKV("nTx", blockindex.nTx);
+    result.pushKV("flags", strprintf("%s", blockindex.IsProofOfStake()? "proof-of-stake" : "proof-of-work")); // blackcoin: include flags
+    result.pushKV("modifier", blockindex.nStakeModifier.GetHex()); // blackcoin: include modifier
 
     if (blockindex.pprev)
         result.pushKV("previousblockhash", blockindex.pprev->GetBlockHash().GetHex());
@@ -233,8 +236,6 @@ UniValue blockToJSON(BlockManager& blockman, const CBlock& block, const CBlockIn
 
     result.pushKV("tx", std::move(txs));
 
-    result.pushKV("flags", strprintf("%s", blockindex.IsProofOfStake()? "proof-of-stake" : "proof-of-work"));
-    result.pushKV("modifier", blockindex.nStakeModifier.GetHex());
     if (block.IsProofOfStake())
         result.pushKV("signature", HexStr(block.vchBlockSig));
 
@@ -688,7 +689,7 @@ const RPCResult getblock_vin{
                     {RPCResult::Type::STR, "asm", "Disassembly of the output script"},
                     {RPCResult::Type::STR, "desc", "Inferred descriptor for the output"},
                     {RPCResult::Type::STR_HEX, "hex", "The raw output script bytes, hex-encoded"},
-                    {RPCResult::Type::STR, "address", /*optional=*/true, "The Bitcoin address (only if a well-defined address exists)"},
+                    {RPCResult::Type::STR, "address", /*optional=*/true, "The Blackcoin address (only if a well-defined address exists)"},
                     {RPCResult::Type::STR, "type", "The type (one of: " + GetAllOutputTypes() + ")"},
                 }},
             }},
@@ -794,7 +795,13 @@ static RPCHelpMan getblock()
     const std::vector<uint8_t> block_data{GetRawBlockChecked(chainman.m_blockman, *pblockindex)};
 
     if (verbosity <= 0) {
-        return HexStr(block_data);
+        CBlock block;
+        if (!chainman.m_blockman.ReadBlockFromDisk(block, *pblockindex)) {
+            throw JSONRPCError(RPC_MISC_ERROR, "Can't read block from disk");
+        }
+        CDataStream ssBlock(SER_NETWORK);
+        ssBlock << TX_WITH_WITNESS(block);
+        return HexStr(ssBlock);
     }
 
     CDataStream block_stream{block_data, SER_NETWORK};
@@ -2283,7 +2290,7 @@ static RPCHelpMan scanblocks()
 {
     return RPCHelpMan{"scanblocks",
         "\nReturn relevant blockhashes for given descriptors (requires blockfilterindex).\n"
-        "This call may take several minutes. Make sure to use no RPC timeout (bitcoin-cli -rpcclienttimeout=0)",
+        "This call may take several minutes. Make sure to use no RPC timeout (blackmore-cli -rpcclienttimeout=0)",
         {
             scan_action_arg_desc,
             scan_objects_arg_desc,

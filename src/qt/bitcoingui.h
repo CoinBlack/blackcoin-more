@@ -122,7 +122,7 @@ private:
     ClientModel* clientModel = nullptr;
     WalletFrame* walletFrame = nullptr;
 
-    UnitDisplayStatusBarControl* unitDisplayControl = nullptr;
+    // UnitDisplayStatusBarControl* unitDisplayControl = nullptr;
     GUIUtil::ThemedLabel* labelWalletEncryptionIcon = nullptr;
     GUIUtil::ThemedLabel* labelWalletHDStatusIcon = nullptr;
     GUIUtil::ClickableLabel* labelProxyIcon = nullptr;
@@ -258,7 +258,7 @@ public Q_SLOTS:
 
 private:
     /** Set the encryption status as shown in the UI.
-       @param[in] status            current encryption status
+       @param[in] walletModel      wallet containing encryption status
        @see WalletModel::EncryptionStatus
     */
     void setEncryptionStatus(WalletModel *walletModel);

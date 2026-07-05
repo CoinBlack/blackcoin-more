@@ -10,6 +10,7 @@
 #include <wallet/coincontrol.h>
 #include <wallet/wallet.h>
 
+
 namespace wallet {
 CAmount GetMinimumFee(const CWallet& wallet, unsigned int nTxBytes, const CCoinControl& coin_control, int64_t current_time)
 {

@@ -62,6 +62,7 @@ enum class AddressPurpose {
     RECEIVE,
     SEND,
     REFUND, //!< Never set in current code may be present in older wallet databases
+    SIGNKEY, //!< Used by PoS staker to hold a private key for signing blocks // blackcoin: signkey
 };
 } // namespace wallet
 

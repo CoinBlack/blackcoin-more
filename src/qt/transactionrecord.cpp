@@ -107,6 +107,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
             isminetype mine = wtx.txout_is_mine[i];
             if(mine)
             {
+                if (wtx.is_coinstake && txout.nValue == 0)
+                    continue;
+
                 //
                 // Credit
                 //
@@ -114,7 +117,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const interface
                 TransactionRecord sub(hash, nTime);
                 if (wtx.is_coinstake) // Combine into single output for coinstake
                 {
-                    sub.idx = 1; // vout index
+                    sub.idx = i;
                     sub.credit = nNet;
                 }
                 else
@@ -180,7 +183,7 @@ void TransactionRecord::updateStatus(const interfaces::WalletTxStatus& wtx, cons
     status.sortKey = strprintf("%010d-%01d-%010u-%03d-%d",
         wtx.block_height,
         (wtx.is_coinbase || wtx.is_coinstake) ? 1 : 0,
-        wtx.time_received,
+        wtx.is_coinstake ? static_cast<unsigned int>(time) : wtx.time_received,
         idx,
         typesort);
     status.countsForBalance = wtx.is_trusted && !(wtx.blocks_to_maturity > 0);

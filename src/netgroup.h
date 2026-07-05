@@ -42,6 +42,17 @@ public:
     uint32_t GetMappedAS(const CNetAddr& address) const;
 
     /**
+     * blackcoin: Dev testing option. When enabled, IPv4 uses /32 and IPv6 uses /128
+     * for normal addresses (overrides default /16 and /32 respectively).
+     * Default is disabled to preserve existing behavior.
+     *
+     * This option is intended for development/testing only and should not
+     * be enabled in production environments.
+     */
+    static void SetRelaxNetWorkMask(bool enable);
+    static bool RelaxNetWorkMask();
+
+    /**
      *  Analyze and log current health of ASMap based buckets.
      */
     void ASMapHealthCheck(const std::vector<CNetAddr>& clearnet_addrs) const;

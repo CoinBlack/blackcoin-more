@@ -164,7 +164,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ウォレットの暗号化の確認</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">警告: ウォレットの暗号化後にパスフレーズを忘れてしまった場合、&lt;b&gt;あなたの Bitcoin はすべて失われます&lt;/b&gt;！</translation>
     </message>
     <message>
@@ -435,7 +435,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     <message>
         <source>%1 kB</source>
-        <translation type="unfinished">%1kB</translation>
+        <translation type="unfinished">%1 KB</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -2328,7 +2328,7 @@ BIP70には広範なセキュリティー上の問題があるので、ウォレ
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished">送信済</translation>
+        <translation type="unfinished">送信</translation>
     </message>
     <message>
         <source>&amp;Peers</source>
@@ -3580,7 +3580,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished">送金元</translation>
+        <translation type="unfinished">内向き</translation>
     </message>
     <message>
         <source>unknown</source>
@@ -4080,7 +4080,7 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <source>Wallet Data</source>
         <extracomment>Name of the wallet data file format.</extracomment>
-        <translation type="unfinished">ウォレットのデータ</translation>
+        <translation type="unfinished">ウォレットデータ</translation>
     </message>
     <message>
         <source>Backup Failed</source>

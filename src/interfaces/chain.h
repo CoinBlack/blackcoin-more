@@ -19,9 +19,7 @@
 #include <string>
 #include <vector>
 
-#if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
-#endif
+#include <config/bitcoin-config.h> // IWYU pragma: keep
 
 class ArgsManager;
 class CBlock;
@@ -376,9 +374,6 @@ public:
     //! to be prepared to handle this by ignoring notifications about unknown
     //! removed transactions and already added new transactions.
     virtual void requestMempoolTransactions(Notifications& notifications) = 0;
-
-    //! Check if Taproot has activated
-    virtual bool isTaprootActive() const = 0;
 
     //! Return true if an assumed-valid chain is in use.
     virtual bool hasAssumedValidChain() = 0;

@@ -61,11 +61,13 @@ static bool IsWarningRaised(const std::vector<std::chrono::seconds>& check_offse
 
 BOOST_AUTO_TEST_CASE(timeoffsets_warning)
 {
+    // blackcoin: threshold is 16 seconds (FutureDrift consensus limit)
     BOOST_CHECK(IsWarningRaised({{-60min, -40min, -30min, 0min, 10min}}));
     BOOST_CHECK(IsWarningRaised({5, 11min}));
 
     BOOST_CHECK(!IsWarningRaised({4, 60min}));
-    BOOST_CHECK(!IsWarningRaised({100, 3min}));
+    // blackcoin: median must stay within 16s to avoid warning
+    BOOST_CHECK(!IsWarningRaised({100, 10s}));
 }
 
 

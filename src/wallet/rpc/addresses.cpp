@@ -58,9 +58,6 @@ RPCHelpMan getnewaddress()
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Legacy wallets cannot provide bech32m addresses");
         } else if (parsed.value() == OutputType::P2SH_SEGWIT) {
             throw JSONRPCError(RPC_INVALID_PARAMETER, "P2SH_SEGWIT addresses are not welcome");
-        //Blackcoin todo : remove after taproot activation
-        } else if (parsed.value() == OutputType::BECH32M) {
-            throw JSONRPCError(RPC_INVALID_PARAMETER, "Taproot addresses (bech32m) are not supported yet");
         }
         output_type = parsed.value();
     }
@@ -148,6 +145,11 @@ RPCHelpMan setlabel()
     }
 
     const std::string label{LabelFromValue(request.params[1])};
+
+    const CAddressBookData* old_entry = pwallet->FindAddressBookEntry(dest);
+    if (old_entry && old_entry->purpose && *old_entry->purpose == AddressPurpose::SIGNKEY) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Cannot change label of a signing key address used for staking");
+    } // blackcoin: signkey
 
     if (pwallet->IsMine(dest)) {
         pwallet->SetAddressBook(dest, label, AddressPurpose::RECEIVE);
@@ -680,7 +682,7 @@ RPCHelpMan getaddressesbylabel()
                     {
                         {RPCResult::Type::OBJ, "address", "json object with information about address",
                         {
-                            {RPCResult::Type::STR, "purpose", "Purpose of address (\"send\" for sending address, \"receive\" for receiving address)"},
+                            {RPCResult::Type::STR, "purpose", "Purpose of address ((\"send\" for sending address, \"receive\" for receiving address, or \"signkey\" sign address for segwit staking)"}, // blackcoin: signkey
                         }},
                     }
                 },
@@ -733,7 +735,7 @@ RPCHelpMan listlabels()
     return RPCHelpMan{"listlabels",
                 "\nReturns the list of all labels, or labels that are assigned to addresses with a specific purpose.\n",
                 {
-                    {"purpose", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "Address purpose to list labels for ('send','receive'). An empty string is the same as not providing this argument."},
+                    {"purpose", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "Address purpose to list labels for ('send','receive','signkey'). An empty string is the same as not providing this argument."}, // blackcoin: signkey
                 },
                 RPCResult{
                     RPCResult::Type::ARR, "", "",
@@ -764,7 +766,7 @@ RPCHelpMan listlabels()
         if (!purpose_str.empty()) {
             purpose = PurposeFromString(purpose_str);
             if (!purpose) {
-                throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid 'purpose' argument, must be a known purpose string, typically 'send', or 'receive'.");
+                throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid 'purpose' argument, must be a known purpose string, typically 'send', 'receive', or 'signkey'.");
             }
         }
     }

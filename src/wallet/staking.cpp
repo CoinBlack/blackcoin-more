@@ -5,7 +5,7 @@
 // Staking start/stop algos by Qtum
 // Copyright (c) 2016-2023 The Qtum developers
 
-#include <index/txindex.h>
+#include <common/args.h>
 #include <wallet/coincontrol.h>
 #include <wallet/receive.h>
 #include <wallet/staking.h>
@@ -13,7 +13,7 @@
 
 namespace wallet {
 
-static int64_t GetStakeCombineThreshold() { return 500 * COIN; }
+static int64_t GetStakeCombineThreshold() { return 250 * COIN; }
 static int64_t GetStakeSplitThreshold() { return 2 * GetStakeCombineThreshold(); }
 
 void StakeCoins(CWallet& wallet, bool fStake) {
@@ -47,6 +47,7 @@ void StopStake(CWallet& wallet) {
     else {
         wallet.m_stop_staking_thread = true;
         wallet.m_enabled_staking = false;
+        wallet.cv_new_block.notify_one();
         StakeCoins(wallet, false);
         wallet.threadStakeMinerGroup = 0;
         wallet.m_stop_staking_thread = false;
@@ -55,6 +56,7 @@ void StopStake(CWallet& wallet) {
 
 uint64_t GetStakeWeight(const CWallet& wallet)
 {
+    LOCK(wallet.cs_wallet);
     // Choose coins to use
     const auto bal = GetBalance(wallet);
     CAmount nBalance = bal.m_mine_trusted;
@@ -96,9 +98,10 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 
     vCoins.clear();
     CAmount nTotal = 0;
-    // Either the WALLET_FLAG_AVOID_REUSE flag is not set (in which case we always allow), or we default to avoiding, and only in the case where
-    // a coin control object is provided, and has the avoid address reuse flag set to false, do we allow already used addresses
-    bool allow_used_addresses = !wallet.IsWalletFlagSet(WALLET_FLAG_AVOID_REUSE);
+    // Staking always allows used addresses, because staking inherently spends from and
+    // sends rewards back to the same address. The avoid_reuse privacy feature from Bitcoin
+    // is not applicable to staking.
+    bool allow_used_addresses = true;
     const int min_depth = std::max(DEFAULT_MIN_DEPTH, Params().GetConsensus().nCoinbaseMaturity);
     const int max_depth = DEFAULT_MAX_DEPTH;
     const bool only_safe = true;
@@ -169,16 +172,14 @@ void AvailableCoinsForStaking(const CWallet& wallet,
             // a P2SH (legacy) or one of P2SH-P2WPKH, P2SH-P2WSH (P2SH-Segwit). We can determine
             // this from the redeemScript. If the Output is not spendable, it will be classified
             // as a P2SH (legacy), since we have no way of knowing otherwise without the redeemScript
-            CScript script;
             if (output.scriptPubKey.IsPayToScriptHash() && solvable) {
                 CTxDestination destination;
                 if (!ExtractDestination(output.scriptPubKey, destination))
                     continue;
                 const CScriptID& hash = ToScriptID(std::get<ScriptHash>(destination));
-                if (!provider->GetCScript(hash, script))
+                CScript redeemScript;
+                if (!provider->GetCScript(hash, redeemScript))
                     continue;
-            } else {
-                script = output.scriptPubKey;
             }
 
             if (spendable)
@@ -204,6 +205,7 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 // Select some coins without random shuffle or best subset approximation
 bool SelectCoinsForStaking(const CWallet& wallet, CAmount& nTargetValue, std::set<std::pair<const CWalletTx *, unsigned int> > &setCoinsRet, CAmount& nValueRet)
 {
+    AssertLockHeld(wallet.cs_wallet);
     std::vector<std::pair<const CWalletTx*, unsigned int> > vCoins;
     CCoinControl coincontrol;
     AvailableCoinsForStaking(wallet, vCoins, &coincontrol);
@@ -252,20 +254,12 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     arith_uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
 
-    // Transaction index is required to get to block header
-    if (!g_txindex) {
-        LogError("%s: transaction index unavailable", __func__);
-        return false;
-    }
-
     LOCK2(cs_main, wallet.cs_wallet);
     txNew.vin.clear();
     txNew.vout.clear();
 
     // Mark coin stake transaction
-    CScript scriptEmpty;
-    scriptEmpty.clear();
-    txNew.vout.push_back(CTxOut(0, scriptEmpty));
+    txNew.vout.push_back(CTxOut(0, CScript()));
 
     // Choose coins to use
     const auto bal = GetBalance(wallet);
@@ -278,118 +272,117 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
 
     std::set<std::pair<const CWalletTx*, unsigned int> > setCoins;
     std::vector<CTransactionRef> vwtxPrev;
-    CAmount nValueIn = 0;
     CAmount nAllowedBalance = nBalance - wallet.m_reserve_balance;
 
     // Select coins with suitable depth
-    if (!SelectCoinsForStaking(wallet, nAllowedBalance, setCoins, nValueIn))
+    CAmount nValueInUnused = 0;
+    if (!SelectCoinsForStaking(wallet, nAllowedBalance, setCoins, nValueInUnused))
         return false;
 
     if (setCoins.empty())
         return false;
 
+    if (wallet.stakeCache.size() > setCoins.size() + 100) {
+        wallet.stakeCache.clear();
+    }
+    if (gArgs.GetBoolArg("-stakecache", node::DEFAULT_STAKE_CACHE)) {
+        for (const auto& pcoin : setCoins) {
+            COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
+            CacheKernel(wallet.stakeCache, prevoutStake, pindexPrev, wallet.chain().getCoinsTip());
+        }
+    } // blackcoin: stakecache
+
     CAmount nCredit = 0;
     bool fKernelFound = false;
-    CScript scriptPubKeyKernel, scriptPubKeyOut;
-    bool bMinterKey = false;
+    CScript scriptPubKeyKernel, scriptPubKeyOut, scriptCarrier;
+    CPubKey minterPubKey;
+    TxoutType whichType = TxoutType::NONSTANDARD;
+
+    if (!wallet.stakeCache.empty()) {
+        LogPrint(BCLog::COINSTAKE, "[%s] CheckKernel: cache active, size=%zu\n", wallet.GetName(), wallet.stakeCache.size());
+    } // blackcoin: stakecache
 
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
-        uint256 blockHash;
-        CTransactionRef tx;
-        if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
-            LogPrintf("couldnt retrieve tx %s\n", *pcoin.first->GetHash().ToString().c_str());
-            continue;
-        }
-
+        // blackcoin: Optimization
+        // We use the cached transaction data in CWalletTx instead of hitting disk with g_txindex->FindTx
+        // This reduces block creation time from ~100s to <100ms
         static int nMaxStakeSearchInterval = 60;
         for (unsigned int n=0; n<std::min(nSearchInterval,(int64_t)nMaxStakeSearchInterval) && !fKernelFound; n++)
         {
             // Search backward in time from the given txNew timestamp
             // Search nSearchInterval seconds back up to nMaxStakeSearchInterval
             COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
-            if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake, wallet.chain().getCoinsTip()))
+            if (CheckKernel(pindexPrev, nBits, txNew.nTime - n, prevoutStake,
+                            wallet.chain().getCoinsTip(), wallet.stakeCache))
             {
                 // Found a kernel
-                LogPrint(BCLog::COINSTAKE, "CreateCoinStake : kernel found\n");
+                LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: kernel found\n", wallet.GetName());
                 std::vector<valtype> vSolutions;
                 scriptPubKeyKernel = pcoin.first->tx->vout[pcoin.second].scriptPubKey;
-                TxoutType whichType = Solver(scriptPubKeyKernel, vSolutions);
+                whichType = Solver(scriptPubKeyKernel, vSolutions);
 
                 if (whichType != TxoutType::PUBKEY && whichType != TxoutType::PUBKEYHASH && whichType != TxoutType::WITNESS_V0_KEYHASH && whichType != TxoutType::WITNESS_V1_TAPROOT)
                 {
-                    LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%s\n", GetTxnOutputType(whichType));
+                    LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: no support for kernel type=%s\n", wallet.GetName(), GetTxnOutputType(whichType));
                     break;  // only support pay to public key and pay to address and pay to witness keyhash
                 }
-                if (whichType == TxoutType::PUBKEYHASH) // pay to address
+
+                // Look up the SignKey pubkey for the OP_RETURN carrier
                 {
-                    // convert to pay to public key type
-                    CKey key;
-                    if (wallet.IsLegacy()) {
-                        auto scriptPubKeyMan = wallet.GetLegacyScriptPubKeyMan();
-                        if (!scriptPubKeyMan) {
-                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get scriptpubkeyman for kernel type=%s\n", GetTxnOutputType(whichType));
-                            break;  // unable to find corresponding public key
-                        }
-                        if (!scriptPubKeyMan->GetKey(CKeyID(uint160(vSolutions[0])), key))
-                        {
-                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for kernel type=%s\n", GetTxnOutputType(whichType));
-                            break;  // unable to find corresponding public key
-                        }
-                        scriptPubKeyOut << ToByteVector(key.GetPubKey()) << OP_CHECKSIG;
-                    }
-                    else {
-                        std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(scriptPubKeyKernel);
-                        if (!provider) {
-                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get signing provider for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
-                            break;
-                        }
-                        CKeyID ckey = CKeyID(uint160(vSolutions[0]));
-                        CPubKey pkey;
-                        if (!provider.get()->GetPubKey(ckey, pkey)) {
-                            LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
-                            break;
-                        }
-                        scriptPubKeyOut << ToByteVector(pkey) << OP_CHECKSIG;
-                    }
-                }
-                else if (whichType == TxoutType::PUBKEY)
-                    scriptPubKeyOut = scriptPubKeyKernel;
-                else if (whichType == TxoutType::WITNESS_V0_KEYHASH || whichType == TxoutType::WITNESS_V1_TAPROOT) // pay to witness keyhash
-                {
-                    std::vector<valtype> vSolutionsTmp;
                     CScript scriptPubKeyTmp = GetScriptForDestination(destination);
-                    Solver(scriptPubKeyTmp, vSolutionsTmp);
+                    std::vector<valtype> vSolutionsTmp;
+                    TxoutType whichTypeTmp = Solver(scriptPubKeyTmp, vSolutionsTmp);
+                    if (whichTypeTmp != TxoutType::PUBKEYHASH || vSolutionsTmp.empty()) {
+                        LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: SignKey destination is not P2PKH (type=%s)\n", wallet.GetName(), GetTxnOutputType(whichTypeTmp));
+                        break;
+                    }
                     std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(scriptPubKeyTmp);
                     if (!provider) {
-                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get signing provider for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
+                        LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: failed to get signing provider for minter key\n", wallet.GetName());
                         break;
                     }
                     CKeyID ckey = CKeyID(uint160(vSolutionsTmp[0]));
-                    CPubKey pkey;
-                    if (!provider.get()->GetPubKey(ckey, pkey)) {
-                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to get key for output %s\n", pcoin.first->tx->vout[pcoin.second].ToString());
+                    if (!provider.get()->GetPubKey(ckey, minterPubKey)) {
+                        LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: failed to get minter pubkey\n", wallet.GetName());
                         break;
                     }
-                    scriptPubKeyOut << ToByteVector(pkey) << OP_CHECKSIG;
-                    bMinterKey = true;
+                }
+                scriptCarrier = CScript() << OP_RETURN << ToByteVector(minterPubKey);
+
+                // Automatically upgrade legacy P2PK kernels to P2PKH rewards
+                if (whichType == TxoutType::PUBKEY) {
+                    scriptPubKeyOut = GetScriptForDestination(PKHash(CPubKey(vSolutions[0])));
+                } else {
+                    scriptPubKeyOut = scriptPubKeyKernel;
                 }
 
                 txNew.nTime -= n;
                 txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
                 nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
-                vwtxPrev.push_back(tx);
+                vwtxPrev.push_back(pcoin.first->tx);
 
-                if (bMinterKey) {
-                    // extra output for minter key
-                    txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
-                    // redefine scriptPubKeyOut to send output to input address
-                    scriptPubKeyOut = scriptPubKeyKernel;
-                }
-    
+                // Append timestamp to OP_RETURN carrier
+                uint32_t nTime = txNew.nTime;
+                unsigned char timeBytes[4] = {
+                    static_cast<unsigned char>(nTime & 0xff),
+                    static_cast<unsigned char>((nTime >> 8) & 0xff),
+                    static_cast<unsigned char>((nTime >> 16) & 0xff),
+                    static_cast<unsigned char>((nTime >> 24) & 0xff)
+                };
+                scriptCarrier << std::vector<unsigned char>(timeBytes, timeBytes + 4);
+
+                // OP_RETURN carrier in vout[1], reward in vout[2]
+                txNew.vout.push_back(CTxOut(0, scriptCarrier));
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
-                LogPrint(BCLog::COINSTAKE, "CreateCoinStake : added kernel type=%d\n", (int)whichType);
+                LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: added kernel type=%d\n", wallet.GetName(), (int)whichType);
                 fKernelFound = true;
+
+                if (txNew.nTime < pindexPrev->GetMedianTimePast() + 1) {
+                    LogPrint(BCLog::COINSTAKE, "[%s] CreateCoinStake: kernel timestamp %d <= MTP %d, aborting\n",
+                             wallet.GetName(), txNew.nTime, pindexPrev->GetMedianTimePast());
+                    return false;
+                }
                 break;
             }
         }
@@ -401,19 +394,24 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     if (nCredit == 0 || nCredit > nAllowedBalance)
         return false;
 
+    // Build the legacy P2PK script from the carrier pubkey so old P2PK reward
+    // UTXOs can still be swept into coinstakes via input combining. Old P2PK
+    // rewards minted before the OP_RETURN carrier change have a different
+    // scriptPubKey than the current kernel (which may be P2PKH/P2WPKH/P2TR),
+    // so matching scriptPubKeyKernel alone would miss them.
+    // P2PK sweep applies only to PUBKEYHASH kernels (the type that historically
+    // produced P2PK rewards).
+    CScript scriptPubKeyP2PK = CScript() << ToByteVector(minterPubKey) << OP_CHECKSIG;
+    bool combineP2PK = (whichType == TxoutType::PUBKEYHASH);
+
     for (const std::pair<const CWalletTx*, unsigned int> &pcoin : setCoins)
     {
-        uint256 blockHash;
-        CTransactionRef tx;
-        if (!g_txindex->FindTx(pcoin.first->GetHash(), blockHash, tx)) {
-            LogPrintf("couldnt retrieve tx %s\n", *pcoin.first->GetHash().ToString().c_str());
-            continue;
-        }
-
-        // Attempt to add more inputs
-        // Only add coins of the same key/address as kernel
-        if (txNew.vout.size() == 2 && ((pcoin.first->tx->vout[pcoin.second].scriptPubKey == scriptPubKeyKernel || pcoin.first->tx->vout[pcoin.second].scriptPubKey == txNew.vout[1].scriptPubKey))
-            && pcoin.first->GetHash() != txNew.vin[0].prevout.hash)
+        // Attempt to add more inputs. Only add coins whose script matches the
+        // current kernel script (same-type combining), or for P2PKH kernels
+        // additionally match legacy P2PK rewards derived from the same SignKey.
+        if (txNew.vout.size() == 3 && (pcoin.first->tx->vout[pcoin.second].scriptPubKey == scriptPubKeyKernel
+            || (combineP2PK && pcoin.first->tx->vout[pcoin.second].scriptPubKey == scriptPubKeyP2PK))
+            && COutPoint(pcoin.first->GetHash(), pcoin.second) != txNew.vin[0].prevout)
         {
             // Stop adding more inputs if already too many inputs
             if (txNew.vin.size() >= 10)
@@ -427,10 +425,17 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
             // Do not add additional significant input
             if (pcoin.first->tx->vout[pcoin.second].nValue >= GetStakeCombineThreshold())
                 continue;
+            // Do not add input with timestamp later than coinstake (bad-txns-time-earlier-than-input)
+            // Use nTimeSmart (block time for confirmed txs) not tx->nTime, which is 0 for v2
+            // transactions since nTime is not serialized for version >= 2 (see transaction.h:233-236).
+            // The consensus check in tx_verify.cpp:191 uses coin.nTime, which for v2 txs equals
+            // the block header time (coins.cpp:129), matching nTimeSmart for confirmed coinstakes.
+            if (pcoin.first->nTimeSmart > txNew.nTime)
+                continue;
 
             txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
             nCredit += pcoin.first->tx->vout[pcoin.second].nValue;
-            vwtxPrev.push_back(tx);
+            vwtxPrev.push_back(pcoin.first->tx);
         }
     }
 
@@ -462,17 +467,18 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         txNew.vout.push_back(CTxOut(0, Params().GetDevRewardScript()));
 
     // Set output amount
-    if (txNew.vout.size() == (isDevFundEnabled ? 4u : 3u) + bMinterKey) {
-        txNew.vout[1 + bMinterKey].nValue = (nCredit / 2 / CENT) * CENT;
-        txNew.vout[2 + bMinterKey].nValue = nCredit - txNew.vout[1 + bMinterKey].nValue;
+    // Reward is always at vout[2] (vout[0]=marker, vout[1]=OP_RETURN carrier)
+    if (txNew.vout.size() == (isDevFundEnabled ? 5u : 4u)) {
+        txNew.vout[2].nValue = (nCredit / 2 / CENT) * CENT;
+        txNew.vout[3].nValue = nCredit - txNew.vout[2].nValue;
         if (isDevFundEnabled)
-            txNew.vout[3 + bMinterKey].nValue = nDevCredit;
+            txNew.vout[4].nValue = nDevCredit;
     }
     else
     {
-        txNew.vout[1 + bMinterKey].nValue = nCredit;
+        txNew.vout[2].nValue = nCredit;
         if (isDevFundEnabled)
-            txNew.vout[2 + bMinterKey].nValue = nDevCredit;
+            txNew.vout[3].nValue = nDevCredit;
     }
 
     // Sign
@@ -482,7 +488,7 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         for (const auto &pcoin : vwtxPrev) {
             SignatureData empty;
             if (!SignSignature(*wallet.GetLegacyScriptPubKeyMan(), *pcoin, txNew, nIn++, SIGHASH_ALL, empty)) {
-                LogError("%s: failed to sign coinstake", __func__);
+                LogError("%s: failed to sign coinstake\n", __func__);
                 return false;
             }
         }
@@ -498,14 +504,19 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
         // Script verification errors
         std::map<int, bilingual_str> input_errors;
         int nTime = txNew.nTime;
-        wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors);
+        if (!wallet.SignTransaction(txNew, coins, SIGHASH_ALL, input_errors)) {
+            for (const auto& [idx, err] : input_errors) {
+                LogError("%s: failed to sign coinstake input %d: %s\n", __func__, idx, err.original);
+            }
+            return false;
+        }
         txNew.nTime = nTime;
     }
 
     // Limit size
     unsigned int nBytes = ::GetSerializeSize(TX_WITH_WITNESS(txNew));
     if (nBytes >= 1000000/5) {
-        LogError("%s: exceeded coinstake size limit", __func__);
+        LogError("%s: exceeded coinstake size limit\n", __func__);
         return false;
     }
 

@@ -27,6 +27,9 @@ void TimeOffsets::Add(std::chrono::seconds offset)
         m_offsets.pop_front();
     }
     m_offsets.push_back(offset);
+    // blackcoin: offset is the deviation between our clock and outbound peer's clock.
+    // A large offset means our node's time is far from network time and risks rejection
+    // by FutureDrift (16 second window), so we collect samples to detect drift early.
     LogDebug(BCLog::NET, "Added time offset %+ds, total samples %d\n",
              Ticks<std::chrono::seconds>(offset), m_offsets.size());
 }
@@ -45,7 +48,8 @@ std::chrono::seconds TimeOffsets::Median() const
 
 bool TimeOffsets::WarnIfOutOfSync() const
 {
-    // when median == std::numeric_limits<int64_t>::min(), calling std::chrono::abs is UB
+    // blackcoin: warn when median offset exceeds 16s — matches FutureDrift consensus limit.
+    // Guard: std::chrono::abs(int64_t::min()) is UB, so clamp to min+1 first.
     auto median{std::max(Median(), std::chrono::seconds(std::numeric_limits<int64_t>::min() + 1))};
     if (std::chrono::abs(median) <= WARN_THRESHOLD) {
         m_warnings.Unset(node::Warning::CLOCK_OUT_OF_SYNC);
@@ -53,13 +57,13 @@ bool TimeOffsets::WarnIfOutOfSync() const
     }
 
     bilingual_str msg{strprintf(_(
-        "Your computer's date and time appear to be more than %d minutes out of sync with the network, "
+        "Your computer's date and time appear to be more than %d seconds out of sync with the network, "
         "this may lead to consensus failure. After you've confirmed your computer's clock, this message "
         "should no longer appear when you restart your node. Without a restart, it should stop showing "
         "automatically after you've connected to a sufficient number of new outbound peers, which may "
         "take some time. You can inspect the `timeoffset` field of the `getpeerinfo` and `getnetworkinfo` "
         "RPC methods to get more info."
-    ), Ticks<std::chrono::minutes>(WARN_THRESHOLD))};
+    ), Ticks<std::chrono::seconds>(WARN_THRESHOLD))};
     LogWarning("%s\n", msg.original);
     m_warnings.Set(node::Warning::CLOCK_OUT_OF_SYNC, msg);
     return true;

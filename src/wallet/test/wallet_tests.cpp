@@ -185,7 +185,7 @@ BOOST_FIXTURE_TEST_CASE(importmulti_rescan, TestChain100Setup)
     CBlockIndex* oldTip = WITH_LOCK(Assert(m_node.chainman)->GetMutex(), return m_node.chainman->ActiveChain().Tip());
     WITH_LOCK(::cs_main, m_node.chainman->m_blockman.GetBlockFileInfo(oldTip->GetBlockPos().nFile)->nSize = MAX_BLOCKFILE_SIZE);
     CreateAndProcessBlock({}, GetScriptForRawPubKey(coinbaseKey.GetPubKey()));
-    CBlockIndex* newTip = m_node.chainman->ActiveChain().Tip();
+    CBlockIndex* newTip = WITH_LOCK(Assert(m_node.chainman)->GetMutex(), return m_node.chainman->ActiveChain().Tip());
 
     // Blackcoin
     /*
@@ -1007,6 +1007,28 @@ BOOST_FIXTURE_TEST_CASE(wallet_sync_tx_invalid_state_test, TestingSetup)
     BOOST_CHECK_EXCEPTION(wallet.transactionAddedToMempool(MakeTransactionRef(mtx)),
                           std::runtime_error,
                           HasReason("DB error adding transaction to wallet, write failed"));
+}
+
+BOOST_AUTO_TEST_CASE(address_purpose_signkey_roundtrip)
+{
+    // SIGNKEY is a Blackcoin-specific address purpose for staking signkeys.
+    // Verify it round-trips through PurposeToString/PurposeFromString.
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::SIGNKEY), "signkey");
+    auto parsed = PurposeFromString("signkey");
+    BOOST_CHECK(parsed.has_value());
+    BOOST_CHECK(*parsed == AddressPurpose::SIGNKEY);
+
+    // Verify all existing purposes still round-trip.
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::RECEIVE), "receive");
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::SEND), "send");
+    BOOST_CHECK_EQUAL(PurposeToString(AddressPurpose::REFUND), "refund");
+    BOOST_CHECK(*PurposeFromString("receive") == AddressPurpose::RECEIVE);
+    BOOST_CHECK(*PurposeFromString("send") == AddressPurpose::SEND);
+    BOOST_CHECK(*PurposeFromString("refund") == AddressPurpose::REFUND);
+
+    // Unknown string returns empty optional.
+    BOOST_CHECK(!PurposeFromString("unknown").has_value());
+    BOOST_CHECK(!PurposeFromString("").has_value());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

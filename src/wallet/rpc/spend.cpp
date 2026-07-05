@@ -42,49 +42,6 @@ std::vector<CRecipient> CreateRecipients(const std::vector<std::pair<CTxDestinat
     return recipients;
 }
 
-UniValue SendMoneyToScript(CWallet& wallet, const CScript scriptPubKey, CAmount nValue, const CCoinControl &coin_control, mapValue_t map_value)
-{
-    EnsureWalletIsUnlocked(wallet);
-
-    // This function is only used by sendtoaddress and sendmany.
-    // This should always try to sign, if we don't have private keys, don't try to do anything here.
-    if (wallet.IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS)) {
-        throw JSONRPCError(RPC_WALLET_ERROR, "Error: Private keys are disabled for this wallet");
-    }
-
-    const auto bal = GetBalance(wallet);
-    CAmount curBalance = bal.m_mine_trusted;
-
-    // Check amount
-    if (nValue <= 0)
-        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
-
-    if (nValue > curBalance)
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
-
-    if (wallet.m_wallet_unlock_staking_only)
-        throw JSONRPCError(RPC_WALLET_ERROR, "Error: Wallet unlocked for staking only, unable to create transaction");
-
-    std::vector<CRecipient> recipients;
-    CTxDestination dest;
-    ExtractDestination(scriptPubKey, dest);
-    CRecipient recipient = {dest, nValue, false};
-    recipients.push_back(recipient);
-
-    // Shuffle recipient list
-    std::shuffle(recipients.begin(), recipients.end(), FastRandomContext());
-
-    // Send
-    constexpr int RANDOM_CHANGE_POSITION = -1;
-    auto res = CreateTransaction(wallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
-    if (!res) {
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
-    }
-    const CTransactionRef& tx = res->tx;
-    wallet.CommitTransaction(tx, std::move(map_value), {} /* orderForm */);
-    return tx->GetHash().GetHex();
-}
-
 std::set<int> InterpretSubtractFeeFromOutputInstructions(const UniValue& sffo_instructions, const std::vector<std::string>& destinations)
 {
     std::set<int> sffo_set;
@@ -222,13 +179,13 @@ RPCHelpMan burn()
         HELP_REQUIRING_PASSPHRASE,
             {
                 {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The amount in " + CURRENCY_UNIT + " to burn. eg 0.1"},
-                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string."},
+                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string (must be even-length)."},
             },
             RPCResult{
                 RPCResult::Type::STR_HEX, "txid", "The transaction id."
             },
             RPCExamples{
-                HelpExampleCli("burn", "0.1 \"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\"")
+                HelpExampleCli("burn", "0.1 \"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48da\"")
             },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -256,12 +213,25 @@ RPCHelpMan burn()
 
     CAmount nAmount = AmountFromValue(request.params[0]);
 
+    // Check amount
+    if (nAmount <= 0)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
+
     EnsureWalletIsUnlocked(*pwallet);
 
+    const auto bal = GetBalance(*pwallet);
+    if (nAmount > bal.m_mine_trusted)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
+
     CCoinControl coin_control;
+    coin_control.m_change_type = pwallet->m_default_address_type;
     mapValue_t mapValue;
 
-    return SendMoneyToScript(*pwallet, scriptPubKey, nAmount, coin_control, std::move(mapValue));
+    CTxDestination dest;
+    ExtractDestination(scriptPubKey, dest);
+    std::vector<CRecipient> recipients = {{dest, nAmount, false}};
+
+    return SendMoney(*pwallet, coin_control, recipients, std::move(mapValue), false);
 },
     };
 }
@@ -274,14 +244,14 @@ RPCHelpMan burnwallet()
             "This will make all coins unspendable, making OP_RETURN transaction.\n" +
         HELP_REQUIRING_PASSPHRASE,
             {
-                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string."},
+                {"hex_string", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The hex-encoded string (must be even-length)."},
                 {"force", RPCArg::Type::BOOL, RPCArg::Optional::OMITTED, "Force burn."},
             },
             RPCResult{
                 RPCResult::Type::STR_HEX, "txid", "The transaction id."
             },
             RPCExamples{
-                HelpExampleCli("burnwallet", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\" true")
+                HelpExampleCli("burnwallet", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48da\" true")
             },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -308,6 +278,7 @@ RPCHelpMan burnwallet()
     EnsureWalletIsUnlocked(*pwallet);
 
     CCoinControl coin_control;
+    coin_control.m_change_type = pwallet->m_default_address_type;
     mapValue_t mapValue;
 
     const auto bal = GetBalance(*pwallet);
@@ -334,8 +305,7 @@ RPCHelpMan burnwallet()
     std::shuffle(recipients.begin(), recipients.end(), FastRandomContext());
 
     // Send
-    constexpr int RANDOM_CHANGE_POSITION = -1;
-    auto res = CreateTransaction(*pwallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
+    auto res = CreateTransaction(*pwallet, recipients, std::nullopt, coin_control, true);
     if (!res) {
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
     }
@@ -351,11 +321,11 @@ RPCHelpMan burnwallet()
 RPCHelpMan optimizeutxoset()
 {
     return RPCHelpMan{"optimizeutxoset",
-                "\nOptimize the UTXO set in order to maximize the PoS yield. This is only valid for continuous minting. The accumulated coinage will be reset!" +
+                "\nOptimize the wallet's UTXOs into uniform outputs of the given amount. Consolidates and/or splits coins into the specified value for better staking performance. Note that the new UTXOs need to reach maturity before they can stake again (500 confirmations on mainnet, 10 on testnet)." +
         HELP_REQUIRING_PASSPHRASE,
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The blackcoin address to recieve all the new UTXOs. If not provided, new UTOXs will be assigned to the address of the input UTXOs."},
-                    {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The " + CURRENCY_UNIT + " amount to set the value of new UTXOs, i.e. make new UTXOs with value of 1000. If amount is not provided, hardcoded value will be used."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The blackcoin address to assign all the new UTXOs to."},
+                    {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The " + CURRENCY_UNIT + " value for each new UTXO, e.g. use 1000 to create outputs worth 1000 " + CURRENCY_UNIT + " each."},
                     {"transmit", RPCArg::Type::BOOL, RPCArg::Default{false}, "If true, transmit transaction after generating it."},
                     {"fromAddress", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "The blackcoin address to split coins from. If not provided, all available coins will be used."},
                 },
@@ -363,18 +333,18 @@ RPCHelpMan optimizeutxoset()
                     RPCResult{"if transmit is not set or set to false",
                         RPCResult::Type::OBJ, "", "",
                         {
-                            {RPCResult::Type::STR_HEX, "tx", /*optional=*/true, "The transaction hex."}
+                            {RPCResult::Type::STR_HEX, "tx", /*optional=*/true, "The raw transaction in hex."}
                         },
                     },
                     RPCResult{"if transmit is set to true",
                         RPCResult::Type::OBJ, "", "",
                         {
-                            {RPCResult::Type::STR_HEX, "txid", /*optional=*/true, "The transaction id."}
+                            {RPCResult::Type::STR_HEX, "txid", /*optional=*/true, "The transaction id of the broadcast transaction."}
                         },
                     },
                 },
                 RPCExamples{
-                    "\nTrigger UTXO optimization and assign all the new UTXOs to some blackcoin address with user defined UTXO value\n"
+                    "\nCreate an optimized UTXO set with 1000 " + CURRENCY_UNIT + " outputs without transmitting (use transmit=true to broadcast)\n"
                     + HelpExampleCli("optimizeutxoset", EXAMPLE_ADDRESS[0] + " 1000")
                },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
@@ -425,8 +395,12 @@ RPCHelpMan optimizeutxoset()
         }
         coin_control.m_allow_other_inputs = false;
     } else {
-        const auto bal = GetBalance(*pwallet);
-        availableCoins = bal.m_mine_trusted;
+        std::vector<COutput> vAvailableCoins = AvailableCoins(*pwallet, &coin_control).All();
+        for (const COutput& out : vAvailableCoins) {
+            coin_control.Select(out.outpoint);
+            availableCoins += out.txout.nValue;
+        }
+        coin_control.m_allow_other_inputs = false;
     }
 
     if (availableCoins == 0)
@@ -445,14 +419,13 @@ RPCHelpMan optimizeutxoset()
     }
 
     // Calculate transaction input size
-    const CWallet& wallet{*pwallet};
-    TxSize tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), &wallet, &coin_control);
+    TxSize tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), pwallet.get(), &coin_control);
     int nBytes = tx_sizes.vsize;
 
     // calculate size of output
     CTxOut txout(amount, script_pub_key);
     txTmp.vout.push_back(txout);
-    tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), &wallet, &coin_control);
+    tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), pwallet.get(), &coin_control);
     int nBytesPerOut = tx_sizes.vsize - nBytes;
 
     CAmount fee = GetMinFee(nBytes + (unsigned int)(remaining / amount) * nBytesPerOut, GetAdjustedTimeSeconds());
@@ -462,8 +435,7 @@ RPCHelpMan optimizeutxoset()
     }
 
     // Send
-    constexpr int RANDOM_CHANGE_POSITION = -1;
-    auto res = CreateTransaction(*pwallet, recipients, RANDOM_CHANGE_POSITION, coin_control, true);
+    auto res = CreateTransaction(*pwallet, recipients, std::nullopt, coin_control, true);
     if (!res) {
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, util::ErrorString(res).original);
     }
@@ -500,7 +472,6 @@ RPCHelpMan sendtoaddress()
                                          "The recipient will receive less blackcoins than you enter in the amount field."},
                     {"avoid_reuse", RPCArg::Type::BOOL, RPCArg::Default{true}, "(only available if avoid_reuse wallet flag is set) Avoid spending from dirty addresses; addresses are considered\n"
                                          "dirty if they have previously been used in a transaction. If true, this also activates avoidpartialspends, grouping outputs by their addresses."},
-                    {"fee_rate", RPCArg::Type::AMOUNT, RPCArg::DefaultHint{"not set, fall back to wallet fee estimation"}, "Specify a fee rate in " + CURRENCY_ATOM + "/vB."},
                     {"verbose", RPCArg::Type::BOOL, RPCArg::Default{false}, "If true, return extra information about the transaction."},
                 },
                 {
@@ -522,9 +493,8 @@ RPCHelpMan sendtoaddress()
                     + HelpExampleCli("sendtoaddress", "\"" + EXAMPLE_ADDRESS[0] + "\" 0.1 \"donation\" \"sean's outpost\" false true") +
                     "\nSend 0.2 BLK using named arguments\n"
                     + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.2") +
-                    "\nSend 0.5 BLK with a fee rate of 25 " + CURRENCY_ATOM + "/vB using named arguments\n"
-                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 fee_rate=25")
-                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 fee_rate=25 subtractfeefromamount=false avoid_reuse=true comment=\"2 pizzas\" comment_to=\"jeremy\" verbose=true")
+                    "\nSend 0.5 BLK using named arguments\n"
+                    + HelpExampleCli("-named sendtoaddress", "address=\"" + EXAMPLE_ADDRESS[0] + "\" amount=0.5 subtractfeefromamount=false avoid_reuse=true comment=\"2 pizzas\" comment_to=\"jeremy\" verbose=true")
                 },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -546,7 +516,7 @@ RPCHelpMan sendtoaddress()
 
     CCoinControl coin_control;
 
-    coin_control.m_avoid_address_reuse = GetAvoidReuseFlag(*pwallet, request.params[8]);
+    coin_control.m_avoid_address_reuse = GetAvoidReuseFlag(*pwallet, request.params[5]);
     // We also enable partial spend avoidance if reuse avoidance is set.
     coin_control.m_avoid_partial_spends |= coin_control.m_avoid_address_reuse;
 
@@ -559,7 +529,7 @@ RPCHelpMan sendtoaddress()
             ParseOutputs(address_amounts),
             InterpretSubtractFeeFromOutputInstructions(request.params[4], address_amounts.getKeys())
     );
-    const bool verbose{request.params[10].isNull() ? false : request.params[10].get_bool()};
+    const bool verbose{request.params[6].isNull() ? false : request.params[6].get_bool()};
 
     return SendMoney(*pwallet, coin_control, recipients, mapValue, verbose);
 },
@@ -1261,13 +1231,13 @@ RPCHelpMan send()
                 }
         },
         RPCExamples{""
-        "\nSend 0.1 BTC with a confirmation target of 6 blocks in economical fee estimate mode\n"
+        "\nSend 0.1 BLK with a confirmation target of 6 blocks in economical fee estimate mode\n"
         + HelpExampleCli("send", "'{\"" + EXAMPLE_ADDRESS[0] + "\": 0.1}' 6 economical\n") +
-        "Send 0.2 BTC with a fee rate of 1.1 " + CURRENCY_ATOM + "/vB using positional arguments\n"
+        "Send 0.2 BLK with a fee rate of 1.1 " + CURRENCY_ATOM + "/vB using positional arguments\n"
         + HelpExampleCli("send", "'{\"" + EXAMPLE_ADDRESS[0] + "\": 0.2}' null \"unset\" 1.1\n") +
-        "Send 0.2 BTC with a fee rate of 1 " + CURRENCY_ATOM + "/vB using the options argument\n"
+        "Send 0.2 BLK with a fee rate of 1 " + CURRENCY_ATOM + "/vB using the options argument\n"
         + HelpExampleCli("send", "'{\"" + EXAMPLE_ADDRESS[0] + "\": 0.2}' null \"unset\" null '{\"fee_rate\": 1}'\n") +
-        "Send 0.3 BTC with a fee rate of 25 " + CURRENCY_ATOM + "/vB using named arguments\n"
+        "Send 0.3 BLK with a fee rate of 25 " + CURRENCY_ATOM + "/vB using named arguments\n"
         + HelpExampleCli("-named send", "outputs='{\"" + EXAMPLE_ADDRESS[0] + "\": 0.3}' fee_rate=25\n") +
         "Create a transaction that should confirm the next block, with a specific input, and return result without adding to wallet or broadcasting to the network\n"
         + HelpExampleCli("send", "'{\"" + EXAMPLE_ADDRESS[0] + "\": 0.1}' 1 economical '{\"add_to_wallet\": false, \"inputs\": [{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\", \"vout\":1}]}'")

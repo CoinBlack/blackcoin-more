@@ -8,6 +8,12 @@
 #include <logging.h>
 #include <util/asmap.h>
 
+// blackcoin: Dev testing toggle for relaxed network masks. When enabled, IPv4 uses /32
+// and IPv6 uses /128 for normal addresses. Default is false to preserve
+// historical behavior. This variable is file-local; it's exposed via the
+// static NetGroupManager getters/setters declared in netgroup.h.
+static bool g_relax_network_mask = false;
+
 uint256 NetGroupManager::GetAsmapChecksum() const
 {
     if (!m_asmap.size()) return {};
@@ -15,6 +21,18 @@ uint256 NetGroupManager::GetAsmapChecksum() const
     return (HashWriter{} << m_asmap).GetHash();
 }
 
+// blackcoin: Dev testing toggle for relaxed network masks
+void NetGroupManager::SetRelaxNetWorkMask(bool enable)
+{
+    g_relax_network_mask = enable;
+}
+
+bool NetGroupManager::RelaxNetWorkMask()
+{
+    return g_relax_network_mask;
+}
+
+// blackcoin: Dev testing toggle for relaxed network masks
 std::vector<unsigned char> NetGroupManager::GetGroup(const CNetAddr& address) const
 {
     std::vector<unsigned char> vchRet;
@@ -43,10 +61,20 @@ std::vector<unsigned char> NetGroupManager::GetGroup(const CNetAddr& address) co
     } else if (!address.IsRoutable()) {
         // all other unroutable addresses belong to the same group
     } else if (address.HasLinkedIPv4()) {
-        // IPv4 addresses (and mapped IPv4 addresses) use /16 groups
+        // IPv4 addresses (and mapped IPv4 addresses): default /16 grouping,
+        // or /32 when RelaxNetWorkMask is enabled (dev testing).
         uint32_t ipv4 = address.GetLinkedIPv4();
-        vchRet.push_back((ipv4 >> 24) & 0xFF);
-        vchRet.push_back((ipv4 >> 16) & 0xFF);
+        if (RelaxNetWorkMask()) {
+            // /32: full IPv4 address
+            vchRet.push_back((ipv4 >> 24) & 0xFF);
+            vchRet.push_back((ipv4 >> 16) & 0xFF);
+            vchRet.push_back((ipv4 >> 8) & 0xFF);
+            vchRet.push_back((ipv4 >> 0) & 0xFF);
+        } else {
+            // /16: historical behavior
+            vchRet.push_back((ipv4 >> 24) & 0xFF);
+            vchRet.push_back((ipv4 >> 16) & 0xFF);
+        }
         return vchRet;
     } else if (address.IsTor() || address.IsI2P()) {
         nBits = 4;
@@ -60,8 +88,13 @@ std::vector<unsigned char> NetGroupManager::GetGroup(const CNetAddr& address) co
         // for he.net, use /36 groups
         nBits = 36;
     } else {
-        // for the rest of the IPv6 network, use /32 groups
-        nBits = 32;
+        // for the rest of the IPv6 network, use /32 groups by default,
+        // or /128 when RelaxNetWorkMask is enabled (dev testing).
+        if (RelaxNetWorkMask()) {
+            nBits = 128;
+        } else {
+            nBits = 32;
+        }
     }
 
     // Push our address onto vchRet.

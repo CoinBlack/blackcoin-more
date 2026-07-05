@@ -226,7 +226,7 @@ private:
      * below will be pruned, but callers should avoid assuming any particular buffer size.
      */
     /*
-    // Blackcoin
+    // Blackcoin: pruning is not allowed
     std::unordered_map<std::string, PruneLockInfo> m_prune_locks GUARDED_BY(::cs_main);
     */
 
@@ -388,7 +388,6 @@ public:
 };
 
 void ImportBlocks(ChainstateManager& chainman, std::vector<fs::path> vImportFiles);
-
 } // namespace node
 
 #endif // BITCOIN_NODE_BLOCKSTORAGE_H

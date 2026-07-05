@@ -157,8 +157,8 @@ la entrada solo es posible con las direcciones del tipo ‘legacy’</translatio
         <translation type="unfinished">Confirmar el cifrado de la cartera</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Advertencia: Si cifras tu billetera y pierdes tu frase de contraseña,podrias 1 PERDER TODS TUS BITCOINS 1 !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Advertencia: Si cifras tu billetera y pierdes tu frase de contraseña,podrias 1 PERDER TODS TUS BLACKCOINS 1 !</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>

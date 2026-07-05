@@ -2,6 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <common/args.h>
 #include <rpc/util.h>
 #include <rpc/blockchain.h>
 #include <rpc/server.h>
@@ -52,12 +53,14 @@ static RPCHelpMan getstakinginfo()
 
     uint64_t nWeight = 0;
     uint64_t lastCoinStakeSearchInterval = 0;
+    bool stakerActive = false;
 
     if (pwallet)
     {
         LOCK(pwallet->cs_wallet);
         nWeight = pwallet->GetStakeWeight();
         lastCoinStakeSearchInterval = pwallet->m_enabled_staking ? pwallet->m_last_coin_stake_search_interval : 0;
+        stakerActive = pwallet->m_enabled_staking && pwallet->m_staker_active.load();
     }
 
     const CTxMemPool& mempool = pwallet->chain().mempool();
@@ -68,7 +71,7 @@ static RPCHelpMan getstakinginfo()
     UniValue obj(UniValue::VOBJ);
 
     uint64_t nNetworkWeight = 1.1429 * GetPoSKernelPS(chainman);
-    bool staking = lastCoinStakeSearchInterval && nWeight;
+    bool staking = stakerActive && nWeight;
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
     int64_t nTargetSpacing = consensusParams.nTargetSpacing;
@@ -91,8 +94,11 @@ static RPCHelpMan getstakinginfo()
 
     obj.pushKV("chain", chainman.GetParams().GetChainTypeString());
 
-    NodeContext& node = EnsureAnyNodeContext(request.context);
-    obj.pushKV("warnings", node::GetWarningsForRpc(*CHECK_NONFATAL(node.warnings), IsDeprecatedRPCEnabled("warnings")));
+    if (NodeContext* const node_context = pwallet->chain().context()) {
+        obj.pushKV("warnings", node::GetWarningsForRpc(*CHECK_NONFATAL(node_context->warnings), IsDeprecatedRPCEnabled("warnings")));
+    } else {
+        obj.pushKV("warnings", IsDeprecatedRPCEnabled("warnings") ? UniValue{UniValue::VSTR} : UniValue{UniValue::VARR});
+    }
     return obj;
 },
     };
@@ -274,6 +280,19 @@ static RPCHelpMan checkkernel()
     int64_t nTime = GetAdjustedTimeSeconds();
     nTime &= ~Params().GetConsensus().nStakeTimestampMask;
 
+    bool fStakeCache = gArgs.GetBoolArg("-stakecache", node::DEFAULT_STAKE_CACHE);
+    if (fStakeCache) {
+        for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+            const UniValue& o = inputs[idx].get_obj();
+            const UniValue& txid_v = o.find_value("txid");
+            if (!txid_v.isStr()) continue;
+            const UniValue& vout_v = o.find_value("vout");
+            if (!vout_v.isNum()) continue;
+            COutPoint cInput(Txid::FromUint256(uint256S(txid_v.get_str())), vout_v.getInt<int>());
+            CacheKernel(pwallet->stakeCache, cInput, pindexPrev, active_chainstate.CoinsTip());
+        }
+    } // blackcoin: stakecache
+
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& o = inputs[idx].get_obj();
 
@@ -292,11 +311,12 @@ static RPCHelpMan checkkernel()
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, vout must be positive");
 
         COutPoint cInput(Txid::FromUint256(uint256S(txid)), nOutput);
-        if (CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip()))
+        if (fStakeCache ? CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip(), pwallet->stakeCache)
+                        : CheckKernel(pindexPrev, nBits, nTime, cInput, active_chainstate.CoinsTip()))
         {
             kernel = cInput;
             break;
-        }
+        } // blackcoin: stakecache
     }
 
     UniValue result(UniValue::VOBJ);

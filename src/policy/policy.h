@@ -45,8 +45,8 @@ static constexpr unsigned int MAX_STANDARD_TAPSCRIPT_STACK_ITEM_SIZE{80};
 static constexpr unsigned int MAX_STANDARD_P2WSH_SCRIPT_SIZE{3600};
 /** The maximum size of a standard ScriptSig */
 static constexpr unsigned int MAX_STANDARD_SCRIPTSIG_SIZE{1650};
-/** The maximum size in bytes of witness input stack items */
-static const unsigned int MAX_STANDARD_WITNESS_SIZE{100000};
+/** The maximum size in bytes of witness input stack items - REMOVED TO MATCH BITCOIN CORE */
+// static const unsigned int MAX_STANDARD_WITNESS_SIZE{100000};
 /** Min feerate for defining dust.
  * Changing the dust limit changes which transactions are
  * standard and should be done with care and ideally rarely. It makes sense to
@@ -55,6 +55,8 @@ static const unsigned int MAX_STANDARD_WITNESS_SIZE{100000};
 static constexpr unsigned int DUST_RELAY_TX_FEE{100000};
 /** Default for -minrelaytxfee, minimum relay fee for transactions */
 static constexpr unsigned int DEFAULT_MIN_RELAY_TX_FEE{100000};
+/** Default for -incrementalrelayfee, minimum feerate increase for mempool limiting or replacement **/
+static constexpr unsigned int DEFAULT_INCREMENTAL_RELAY_FEE{100000};
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
 static constexpr unsigned int DEFAULT_ANCESTOR_LIMIT{25};
 /** Default for -limitancestorsize, maximum kilobytes of tx + all in-mempool ancestors */
@@ -91,7 +93,9 @@ static constexpr unsigned int MANDATORY_SCRIPT_VERIFY_FLAGS{SCRIPT_VERIFY_P2SH |
                                                              SCRIPT_VERIFY_DERSIG |
                                                              SCRIPT_VERIFY_LOW_S |
                                                              SCRIPT_VERIFY_NULLDUMMY |
-                                                             SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY};
+                                                             SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY |
+                                                             SCRIPT_VERIFY_CHECKSEQUENCEVERIFY |
+                                                             SCRIPT_VERIFY_WITNESS};
 
 /**
  * Standard script verification flags that standard transactions will comply
@@ -106,8 +110,7 @@ static constexpr unsigned int STANDARD_SCRIPT_VERIFY_FLAGS{MANDATORY_SCRIPT_VERI
                                                              SCRIPT_VERIFY_CLEANSTACK |
                                                              SCRIPT_VERIFY_MINIMALIF |
                                                              SCRIPT_VERIFY_NULLFAIL |
-                                                             SCRIPT_VERIFY_CHECKSEQUENCEVERIFY |
-                                                             SCRIPT_VERIFY_WITNESS |
+                                                             SCRIPT_VERIFY_TAPROOT |
                                                              SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM |
                                                              SCRIPT_VERIFY_WITNESS_PUBKEYTYPE |
                                                              SCRIPT_VERIFY_CONST_SCRIPTCODE |
@@ -131,7 +134,7 @@ bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_
 // Changing the default transaction version requires a two step process: first
 // adapting relay policy by bumping TX_MAX_STANDARD_VERSION, and then later
 // allowing the new transaction version in the wallet/RPC.
-static constexpr decltype(CTransaction::version) TX_MAX_STANDARD_VERSION{3};
+static constexpr decltype(CTransaction::version) TX_MAX_STANDARD_VERSION{2};
 
 /**
 * Check for standard transaction types

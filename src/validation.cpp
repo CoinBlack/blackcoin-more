@@ -15,7 +15,7 @@
 #include <checkqueue.h>
 #include <clientversion.h>
 #include <consensus/amount.h>
-#include <common/args.h> // for GetBoolArg
+#include <common/args.h> // blackcoin: Rolling checkpoint check by Qtum
 #include <consensus/consensus.h>
 #include <consensus/merkle.h>
 #include <consensus/tx_check.h>
@@ -64,7 +64,6 @@
 #include <util/trace.h>
 #include <util/translation.h>
 #include <validationinterface.h>
-#include <wallet/wallet.h>
 
 #include <algorithm>
 #include <cassert>
@@ -107,7 +106,7 @@ const std::vector<std::string> CHECKLEVEL_DOC {
  *  noticeably interfere with the pruning mechanism.
  * */
 /*
-// Blackcoin
+// Blackcoin: no Pruning
 static constexpr int PRUNE_LOCK_BUFFER{10};
 */
 
@@ -637,7 +636,7 @@ private:
     // of checking a given transaction.
     struct Workspace {
         explicit Workspace(const CTransactionRef& ptx) : m_ptx(ptx), m_hash(ptx->GetHash()) {}
-        // Blackcoin
+        // Blackcoin: no RBF
         /** Txids of mempool transactions that this transaction directly conflicts with or may
          * replace via sibling eviction. */
         // std::set<Txid> m_conflicts;
@@ -682,7 +681,7 @@ private:
     bool PreChecks(ATMPArgs& args, Workspace& ws) EXCLUSIVE_LOCKS_REQUIRED(cs_main, m_pool.cs);
 
     /*
-    // Blackcoin
+    // Blackcoin: no RBF
     // Run checks for mempool replace-by-fee, only used in AcceptSingleTransaction.
     bool ReplacementChecks(Workspace& ws) EXCLUSIVE_LOCKS_REQUIRED(cs_main, m_pool.cs);
     */
@@ -798,7 +797,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     TxValidationState& state = ws.m_state;
     std::unique_ptr<CTxMemPoolEntry>& entry = ws.m_entry;
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
+    // Blackcoin: in v2 transactions use GetAdjustedTimeSeconds() as nTimeTx
     int64_t nTimeTx = (int64_t)tx.nTime;
     if (!nTimeTx && tx.version >= 2)
         nTimeTx = GetAdjustedTimeSeconds();
@@ -815,9 +814,8 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     if (tx.IsCoinStake())
         return state.Invalid(TxValidationResult::TX_CONSENSUS, "coinstake");
 
-    // Reject transactions with witness before segregated witness activates (override with -prematurewitness)
     bool witnessEnabled = DeploymentActiveAfter(m_active_chainstate.m_chain.Tip(), m_active_chainstate.m_chainman, Consensus::DEPLOYMENT_SEGWIT);
-    if (!gArgs.GetBoolArg("-prematurewitness", false) && tx.HasWitness() && !witnessEnabled) {
+    if (tx.HasWitness() && !witnessEnabled) {
         return state.Invalid(TxValidationResult::TX_NOT_STANDARD, "no-witness-yet");
     }
 
@@ -843,8 +841,8 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "time-too-new");
     }
 
-    // is it already in the memory pool?
     if (m_pool.exists(GenTxid::Wtxid(tx.GetWitnessHash()))) {
+        // Exact transaction already exists in the mempool.
         return state.Invalid(TxValidationResult::TX_CONFLICT, "txn-already-in-mempool");
     } else if (m_pool.exists(GenTxid::Txid(tx.GetHash()))) {
         // Transaction with the same non-witness data but different witness (same txid, different
@@ -972,7 +970,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     if (!bypass_limits && !args.m_package_feerates && !CheckFeeRate(ws.m_vsize, ws.m_modified_fees, state)) return false;
 
     /*
-    // Blackcoin
+    // Blackcoin: no RBF
     ws.m_iters_conflicting = m_pool.GetIterSet(ws.m_conflicts);
 
     // Note that these modifications are only applicable to single transaction scenarios;
@@ -1058,31 +1056,32 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
     }
 
     /*
-    // Blackcoin
-
+    // Blackcoin: no RBF
     // Even though just checking direct mempool parents for inheritance would be sufficient, we
     // check using the full ancestor set here because it's more convenient to use what we have
     // already calculated.
-    if (const auto err{SingleTRUCChecks(ws.m_ptx, ws.m_ancestors, ws.m_conflicts, ws.m_vsize)}) {
-        // Single transaction contexts only.
-        if (args.m_allow_sibling_eviction && err->second != nullptr) {
-            // We should only be considering where replacement is considered valid as well.
-            Assume(args.m_allow_replacement);
+    if (!args.m_bypass_limits) {
+        if (const auto err{SingleTRUCChecks(ws.m_ptx, ws.m_ancestors, ws.m_conflicts, ws.m_vsize)}) {
+            // Single transaction contexts only.
+            if (args.m_allow_sibling_eviction && err->second != nullptr) {
+                // We should only be considering where replacement is considered valid as well.
+                Assume(args.m_allow_replacement);
 
-            // Potential sibling eviction. Add the sibling to our list of mempool conflicts to be
-            // included in RBF checks.
-            ws.m_conflicts.insert(err->second->GetHash());
-            // Adding the sibling to m_iters_conflicting here means that it doesn't count towards
-            // RBF Carve Out above. This is correct, since removing to-be-replaced transactions from
-            // the descendant count is done separately in SingleTRUCChecks for TRUC transactions.
-            ws.m_iters_conflicting.insert(m_pool.GetIter(err->second->GetHash()).value());
-            ws.m_sibling_eviction = true;
-            // The sibling will be treated as part of the to-be-replaced set in ReplacementChecks.
-            // Note that we are not checking whether it opts in to replaceability via BIP125 or TRUC
-            // (which is normally done in PreChecks). However, the only way a TRUC transaction can
-            // have a non-TRUC and non-BIP125 descendant is due to a reorg.
-        } else {
-            return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "TRUC-violation", err->first);
+                // Potential sibling eviction. Add the sibling to our list of mempool conflicts to be
+                // included in RBF checks.
+                ws.m_conflicts.insert(err->second->GetHash());
+                // Adding the sibling to m_iters_conflicting here means that it doesn't count towards
+                // RBF Carve Out above. This is correct, since removing to-be-replaced transactions from
+                // the descendant count is done separately in SingleTRUCChecks for TRUC transactions.
+                ws.m_iters_conflicting.insert(m_pool.GetIter(err->second->GetHash()).value());
+                ws.m_sibling_eviction = true;
+                // The sibling will be treated as part of the to-be-replaced set in ReplacementChecks.
+                // Note that we are not checking whether it opts in to replaceability via BIP125 or TRUC
+                // (which is normally done in PreChecks). However, the only way a TRUC transaction can
+                // have a non-TRUC and non-BIP125 descendant is due to a reorg.
+            } else {
+                return state.Invalid(TxValidationResult::TX_MEMPOOL_POLICY, "TRUC-violation", err->first);
+            }
         }
     }
 
@@ -1104,7 +1103,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
 }
 
 /*
-// Blackcoin
+// Blackcoin: no RBF
 bool MemPoolAccept::ReplacementChecks(Workspace& ws)
 {
     AssertLockHeld(cs_main);
@@ -1180,8 +1179,7 @@ bool MemPoolAccept::PackageMempoolChecks(const std::vector<CTransactionRef>& txn
     }
 
     /*
-    // Blackcoin
-
+    // Blackcoin: no RBF
     // No conflicts means we're finished. Further checks are all RBF-only.
     if (!m_subpackage.m_rbf) return true;
 
@@ -1324,7 +1322,7 @@ bool MemPoolAccept::Finalize(const ATMPArgs& args, Workspace& ws)
     AssertLockHeld(cs_main);
     AssertLockHeld(m_pool.cs);
     /*
-    // Blackcoin
+    // Blackcoin: no RBF
     const CTransaction& tx = *ws.m_ptx;
     */
     const uint256& hash = ws.m_hash;
@@ -1333,8 +1331,7 @@ bool MemPoolAccept::Finalize(const ATMPArgs& args, Workspace& ws)
     std::unique_ptr<CTxMemPoolEntry>& entry = ws.m_entry;
 
     /*
-    // Blackcoin
-
+    // Blackcoin: no RBF
     if (!m_subpackage.m_all_conflicts.empty()) Assume(args.m_allow_replacement);
     // Remove conflicting transactions from the mempool
     for (CTxMemPool::txiter it : m_subpackage.m_all_conflicts)
@@ -1494,7 +1491,7 @@ MempoolAcceptResult MemPoolAccept::AcceptSingleTransaction(const CTransactionRef
     }
 
     /*
-    // Blackcoin
+    // Blackcoin: no RBF
     if (m_subpackage.m_rbf && !ReplacementChecks(ws)) {
         if (ws.m_state.GetResult() == TxValidationResult::TX_RECONSIDERABLE) {
             // Failed for incentives-based fee reasons. Provide the effective feerate and which tx was included.
@@ -2122,7 +2119,7 @@ void Chainstate::InvalidBlockFound(CBlockIndex* pindex, const BlockValidationSta
     }
 }
 
-void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight)
+void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight, int nBlockTime)
 {
     // mark inputs spent
     if (!tx.IsCoinBase()) {
@@ -2134,7 +2131,7 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txund
         }
     }
     // add outputs
-    AddCoins(inputs, tx, nHeight);
+    AddCoins(inputs, tx, nHeight, /*check*/false, nBlockTime);
 }
 
 bool CScriptCheck::operator()() {
@@ -2220,7 +2217,7 @@ bool CheckInputScripts(const CTransaction& tx, TxValidationState& state,
     for (unsigned int i = 0; i < tx.vin.size(); i++) {
 
         // We very carefully only pass in things to CScriptCheck which
-        // are clearly committed to by tx' hash. This provides
+        // are clearly committed to by tx' witness hash. This provides
         // a sanity check that our caching is not introducing consensus
         // failures through additional data in, eg, the coins being
         // spent being checked as a part of CScriptCheck.
@@ -2401,7 +2398,7 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
 {
     const Consensus::Params& consensusparams = chainman.GetConsensus();
 
-    /*
+    /* Blackcoin: BIP16 always active
     // BIP16 didn't become active until Apr 1 2012 (on mainnet, and
     // retroactively applied to testnet)
     // However, only one historical block violated the P2SH rules (on both
@@ -2411,11 +2408,13 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
     // For simplicity, always leave P2SH+WITNESS+TAPROOT on except for the two
     // violating blocks.
     uint32_t flags{SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_TAPROOT};
+
     */
-    // Blackcoin
+    // Blackcoin: needed for sigs
     // BIP16 and DERSIG (BIP66) is always active
     // Blackcoin also requires DER encoding of pubkeys and low S in sigs
     uint32_t flags{SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_DERSIG | SCRIPT_VERIFY_DERKEY | SCRIPT_VERIFY_LOW_S};
+
     const auto it{consensusparams.script_flag_exceptions.find(*Assert(block_index.phashBlock))};
     if (it != consensusparams.script_flag_exceptions.end()) {
         flags = it->second;
@@ -2443,6 +2442,17 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
         flags |= SCRIPT_VERIFY_TAPROOT;
     }
 
+    // Reject spending outputs with unknown witness versions (v > 1) at consensus
+    // level. Without this flag the interpreter returns true for an unknown witness
+    // version (forward-softfork compatibility), making those outputs anyone-can-spend.
+    // Gate on DEPLOYMENT_TAPROOT because the DISCOURAGE flag would also reject v1
+    // spends — v1 is an unknown upgrade before Taproot activates, so forward-
+    // compatibility would be broken during the BIP-9 window.
+    // Creation of v>1 outputs is blocked at the same gate in ContextualCheckBlock.
+    if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
+        flags |= SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM;
+    }
+
     return flags;
 }
 
@@ -2463,6 +2473,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     const auto time_start{SteadyClock::now()};
     const CChainParams& params{m_chainman.GetParams()};
 
+    // blackcoin: rolling checkpoints by Qtum
     // We recheck the hardened checkpoints here since ContextualCheckBlock(Header) is not called in ConnectBlock.
     if (m_chainman.m_options.checkpoints_enabled && !m_blockman.CheckHardened(pindex->nHeight, block.GetHash(), params.Checkpoints())) {
         return state.Invalid(BlockValidationResult::BLOCK_CHECKPOINT, "bad-fork-hardened-checkpoint", strprintf("%s: expected hardened checkpoint at height %d", __func__, pindex->nHeight));
@@ -2496,7 +2507,12 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     uint256 hashPrevBlock = pindex->pprev == nullptr ? uint256() : pindex->pprev->GetBlockHash();
     assert(hashPrevBlock == view.GetBestBlock());
 
-    // Check proof-of-stake
+    // blackcoin: Check proof-of-stake
+    if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
+        LogPrint(BCLog::COINSTAKE, "ContextualCheckBlock: CheckProofOfStake called, kernel=%s:%d, tx=%s\n",
+            block.vtx[1]->vin[0].prevout.hash.ToString(), block.vtx[1]->vin[0].prevout.n,
+            block.vtx[1]->GetHash().ToString());
+    }
     if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, *block.vtx[1], block.nBits, state, view, block.vtx[1]->nTime ? block.vtx[1]->nTime : block.nTime)) {
         LogPrintf("WARNING: %s: check proof-of-stake failed for block %s\n", __func__, block.GetHash().ToString());
         return false; // do not error here as we expect this during initial block download
@@ -2550,7 +2566,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
              Ticks<SecondsDouble>(m_chainman.time_check),
              Ticks<MillisecondsDouble>(m_chainman.time_check) / m_chainman.num_blocks_total);
 
-    // BIP30 and BIP34 are always active
+    // blackcoin: BIP30 and BIP34 are always active
     for (const auto& tx : block.vtx) {
         for (size_t o = 0; o < tx->vout.size(); o++) {
             if (view.HaveCoin(COutPoint(tx->GetHash(), o))) {
@@ -2583,8 +2599,8 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     // in multiple threads). Preallocate the vector size so a new allocation
     // doesn't invalidate pointers into the vector, and keep txsdata in scope
     // for as long as `control`.
-    CCheckQueueControl<CScriptCheck> control(fScriptChecks && parallel_script_checks ? &m_chainman.GetCheckQueue() : nullptr);
     std::vector<PrecomputedTransactionData> txsdata(block.vtx.size());
+    CCheckQueueControl<CScriptCheck> control(fScriptChecks && parallel_script_checks ? &m_chainman.GetCheckQueue() : nullptr);
 
     std::vector<int> prevheights;
     CAmount nFees = 0;
@@ -2664,7 +2680,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         if (i > 0) {
             blockundo.vtxundo.emplace_back();
         }
-        UpdateCoins(tx, view, i == 0 ? undoDummy : blockundo.vtxundo.back(), pindex->nHeight);
+        UpdateCoins(tx, view, i == 0 ? undoDummy : blockundo.vtxundo.back(), pindex->nHeight, block.nTime);
     }
     const auto time_3{SteadyClock::now()};
     m_chainman.time_connect += time_3 - time_2;
@@ -2702,7 +2718,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
              Ticks<SecondsDouble>(m_chainman.time_verify),
              Ticks<MillisecondsDouble>(m_chainman.time_verify) / m_chainman.num_blocks_total);
 
-    // Set proof-of-stake hash modifier
+    // blackcoin: Set proof-of-stake hash modifier
     pindex->nStakeModifier = ComputeStakeModifier(pindex->pprev, block.IsProofOfStake() ? block.vtx[1]->vin[0].prevout.hash.ToUint256() : block.GetHash());
 
     if (fJustCheck)
@@ -2998,7 +3014,7 @@ bool Chainstate::DisconnectTip(BlockValidationState& state, DisconnectedBlockTra
              Ticks<MillisecondsDouble>(SteadyClock::now() - time_start));
 
     /*
-    // Blackcoin
+    // Blackcoin: no pruning
     {
         // Prune locks that began at or after the tip should be moved backward so they get a chance to reorg
         const int max_height_first{pindexDelete->nHeight - 1};
@@ -3868,9 +3884,8 @@ static bool CheckBlockSignature(const CBlock& block)
         std::vector<unsigned char>& vchPubKey = vSolutions[0];
         return CPubKey(vchPubKey).Verify(block.GetHash(), block.vchBlockSig);
     }
-    else {
-        // Block signing key also can be encoded in the nonspendable output
-        // This allows to not pollute UTXO set with useless outputs e.g. in case of multisig staking
+    else if (whichType == TxoutType::NULL_DATA) {
+        // OP_RETURN carrier: extract pubkey from first push after OP_RETURN
         const CScript& script = txout.scriptPubKey;
         CScript::const_iterator pc = script.begin();
         opcodetype opcode;
@@ -3892,7 +3907,7 @@ static bool CheckBlockSignature(const CBlock& block)
     return false;
 }
 
-static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, Chainstate& chainstate, bool fCheckPOW = true, bool fOldClient = false)
+static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, Chainstate& chainstate, bool fCheckPOW = true)
 {
     // Check block version
     if (block.nVersion < 7 && consensusParams.IsProtocolV2(block.GetBlockTime()))
@@ -3900,10 +3915,7 @@ static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& st
 
     // Check proof of work hash
     if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams)) {
-        if (fOldClient)
-            return false;
-        else
-            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
+        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
     }
 
     // Check timestamp
@@ -4074,11 +4086,11 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
             assert(tx_state.GetResult() == TxValidationResult::TX_CONSENSUS);
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, tx_state.GetRejectReason(),
                                  strprintf("Transaction check failed (tx hash %s) %s", tx->GetHash().ToString(), tx_state.GetDebugMessage()));
-
-            // Check transaction timestamp
-            if (block.GetBlockTime() < (tx->nTime ? (int64_t)tx->nTime : block.GetBlockTime()))
-                return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-tx-time", strprintf("%s : block timestamp earlier than transaction timestamp", __func__));
         }
+
+        // Check transaction timestamp
+        if (tx->nTime && block.GetBlockTime() < (int64_t)tx->nTime)
+            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-tx-time", strprintf("%s : block timestamp earlier than transaction timestamp", __func__));
     }
     unsigned int nSigOps = 0;
     for (const auto& tx : block.vtx)
@@ -4236,10 +4248,10 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
         }
     }
 
-    // Qtum
+    // Qtum: rolling checkpoinsts
     // Check that the block satisfies synchronized checkpoint
     if (!blockman.CheckSyncCheckpoint(nHeight, chain.Tip()))
-        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-fork-prior-to-synch-checkpoint", strprintf("%s: forked chain older than synchronized checkpoint (height %d)", __func__, nHeight));
+        return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "bad-fork-prior-to-synch-checkpoint", strprintf("%s: forked chain older than synchronized checkpoint (height %d)", __func__, nHeight));
 
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
@@ -4274,7 +4286,6 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
 static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& state, const ChainstateManager& chainman, const CBlockIndex* pindexPrev)
 {
     const int nHeight = pindexPrev == nullptr ? 0 : pindexPrev->nHeight + 1;
-    const Consensus::Params& consensusParams = chainman.GetConsensus();
 
     // Enforce BIP113 (Median Time Past).
     bool enforce_locktime_median_time_past{false};
@@ -4295,7 +4306,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     }
 
     // Enforce rule that the coinbase starts with serialized block height
-    // BIP34 is always active
+    // BIP34 is always active - HEIGHTINCB
     {
         CScript expect = CScript() << nHeight;
         if (block.vtx[0]->vin[0].scriptSig.size() < expect.size() ||
@@ -4326,10 +4337,36 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
     }
 
+    // Reject transactions creating outputs with unknown witness versions (v > 1).
+    // Unknown witness versions > 1 are treated as future softfork versions by the
+    // interpreter, which returns true for any witness stack — making those outputs
+    // anyone-can-spend on a node that does not set the DISCOURAGE flag (see
+    // interpreter.cpp VerifyWitnessProgram else-branch). This is a consensus rule:
+    // blocks containing such outputs are rejected.
+    // Known witness versions: 0 (P2WPKH/P2WSH), 1 (Taproot). We check v > 1 (not
+    // v > 0), so v1/Taproot outputs always pass through regardless of gate choice.
+    // Gate on DEPLOYMENT_TAPROOT for symmetry with the DISCOURAGE flag in
+    // GetBlockScriptFlags. On testnet Taproot activated at 2,865,000 (after
+    // existing QQ v16 outputs at ~2,864,xxx); on mainnet it will activate via
+    // BIP-9 after July 12, before any v16 outputs are expected.
+    const bool taproot_active = DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT);
+    if (taproot_active) {
+        for (const auto& tx : block.vtx) {
+            for (const auto& txout : tx->vout) {
+                int witness_version = 0;
+                std::vector<unsigned char> witness_program;
+                if (txout.scriptPubKey.IsWitnessProgram(witness_version, witness_program) && witness_version > 1) {
+                    return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-unknown-witness-version",
+                        strprintf("%s : block contains output with unknown witness version %d", __func__, witness_version));
+                }
+            }
+        }
+    }
+
     return true;
 }
 
-bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, CBlockIndex** ppindex, bool min_pow_checked, bool fOldClient)
+bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, CBlockIndex** ppindex, bool min_pow_checked)
 {
     AssertLockHeld(cs_main);
 
@@ -4352,7 +4389,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
             return true;
         }
 
-        // Qtum
+        // Qtum: rolling checkpoints
         // Check for the checkpoint
         if (chainstate.m_chain.Tip() && block.hashPrevBlock != chainstate.m_chain.Tip()->GetBlockHash())
         {
@@ -4363,17 +4400,10 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
                 return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "older-than-checkpoint");
         }
 
-        // peercoin: Don't reject in case of old clients. Change our assumption instead.
-        // ppcTODO: Maybe add restrictions until when this is allowed? We don't want new clients to pretend to be old clients and try to abuse this.
-        // Blackcoin ToDo: remove fOldClient after the nodes got updated
-        if (!CheckBlockHeader(block, state, GetConsensus(), chainstate, !fProofOfStake, fOldClient))
+        if (!CheckBlockHeader(block, state, GetConsensus(), chainstate, !fProofOfStake))
         {
-            if (fOldClient)
-                fSetAsProofOfStake = !fProofOfStake; // our guess was wrong - correct it
-            else {
-                LogPrint(BCLog::VALIDATION, "%s: Consensus::CheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
-                return false;
-            }
+            LogPrint(BCLog::VALIDATION, "%s: Consensus::CheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
+            return false;
         }
 
         // Get prev block index
@@ -4462,7 +4492,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
 }
 
 // Exposed wrapper for AcceptBlockHeader
-bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, bool min_pow_checked, BlockValidationState& state, bool old_client, const CBlockIndex** ppindex,  const CBlockIndex** pindexFirst)
+bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, bool min_pow_checked, BlockValidationState& state, const CBlockIndex** ppindex,  const CBlockIndex** pindexFirst)
 {
     AssertLockNotHeld(cs_main);
     {
@@ -4473,7 +4503,7 @@ bool ChainstateManager::ProcessNewBlockHeaders(const std::vector<CBlockHeader>& 
             const CBlockHeader& header = headers[i];
 
             CBlockIndex *pindex = nullptr; // Use a temp pindex instead of ppindex to avoid a const_cast
-            bool accepted{AcceptBlockHeader(header, state, &pindex, min_pow_checked, old_client)};
+            bool accepted{AcceptBlockHeader(header, state, &pindex, min_pow_checked)};
             CheckBlockIndex();
 
             if (!accepted) {
@@ -4650,10 +4680,9 @@ bool ChainstateManager::ProcessNewBlock(const std::shared_ptr<const CBlock>& blo
         // malleability that cause CheckBlock() to fail; see e.g. CVE-2012-2459 and
         // https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016697.html.  Because CheckBlock() is
         // not very expensive, the anti-DoS benefits of caching failure (of a definitely-invalid block) are not substantial.
-        // Blackcoin: also check for the signature encoding
+        // blackcoin: also check for the signature encoding
         if (!CheckCanonicalBlockSignature(block)) {
-            LogError("%s: AcceptBlock FAILED (%s)", __func__, "bad block signature encoding");
-            return false;
+            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-signature-encoding", "AcceptBlock(): bad block signature encoding");
         }
         bool ret = CheckBlock(*block, state, GetConsensus(), ActiveChainstate());
         if (ret) {
@@ -4759,7 +4788,7 @@ bool CheckCanonicalBlockSignature(const std::shared_ptr<const CBlock>& pblock)
     return ret;
 }
 
-// Blackcoin
+// Blackcoin: no pruning
 /* This function is called from the RPC code for pruneblockchain */
 /*
 void PruneBlockFilesManual(Chainstate& active_chainstate, int nManualPruneHeight)
@@ -4968,7 +4997,7 @@ bool Chainstate::RollforwardBlock(const CBlockIndex* pindex, CCoinsViewCache& in
             }
         }
         // Pass check = true as every addition may be an overwrite.
-        AddCoins(inputs, *tx, pindex->nHeight, true);
+        AddCoins(inputs, *tx, pindex->nHeight, true, pindex->nTime);
     }
     return true;
 }
@@ -5218,7 +5247,7 @@ void ChainstateManager::LoadExternalBlockFile(
                         blkdat >> TX_WITH_WITNESS(*pblock);
                         nRewind = blkdat.GetPos();
 
-                        // Set nFlags in case of proof of stake block
+                        // blackcoin: Set nFlags in case of proof of stake block
                         if (pblock->IsProofOfStake())
                             pblock->nFlags |= CBlockIndex::BLOCK_PROOF_OF_STAKE;
 

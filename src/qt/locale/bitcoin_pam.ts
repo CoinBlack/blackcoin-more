@@ -42,14 +42,6 @@
         <translation type="unfinished">I&amp;Export</translation>
     </message>
     <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation type="unfinished">Export me ing data king tab a ini anting metung a file</translation>
-    </message>
-    <message>
-        <source>&amp;Export</source>
-        <translation type="unfinished">I&amp;Export</translation>
-    </message>
-    <message>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Ilako</translation>
     </message>
@@ -128,8 +120,8 @@
         <translation type="unfinished">Kumpirman ya ing wallet encryption</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Kapabaluan: Istung in-encrypt me ing kekang wallet at meala ya ing passphrase na, ma-&lt;b&gt;ALA NO NGAN RING KEKANG BITCOINS&lt;/b&gt;</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Kapabaluan: Istung in-encrypt me ing kekang wallet at meala ya ing passphrase na, ma-&lt;b&gt;ALA NO NGAN RING KEKANG BLACKCOINS&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>

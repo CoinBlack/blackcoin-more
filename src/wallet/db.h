@@ -72,7 +72,7 @@ public:
         ssKey.reserve(1000);
         ssKey << key;
 
-        CDataStream ssValue(SER_DISK);
+        DataStream ssValue{};
         if (!ReadKey(std::move(ssKey), ssValue)) return false;
         try {
             ssValue >> value;
@@ -89,7 +89,7 @@ public:
         ssKey.reserve(1000);
         ssKey << key;
 
-        CDataStream ssValue(SER_DISK);
+        DataStream ssValue{};
         ssValue.reserve(10000);
         ssValue << value;
 
@@ -168,6 +168,9 @@ public:
 
     /** Return path to main database file for logs and error messages. */
     virtual std::string Filename() = 0;
+
+    /** Return paths to all database created files */
+    virtual std::vector<fs::path> Files() = 0;
 
     virtual std::string Format() = 0;
 

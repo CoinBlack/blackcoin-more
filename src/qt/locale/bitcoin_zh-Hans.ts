@@ -164,7 +164,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">确认钱包加密</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">警告: 如果把钱包加密后又忘记密码，你就会从此&lt;b&gt;失去其中所有的比特币了&lt;/b&gt;！</translation>
     </message>
     <message>
@@ -1215,14 +1215,6 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">请指定一个名字，如果需要的话还可以启用高级选项</translation>
     </message>
     <message>
-        <source>You are one step away from creating your new wallet!</source>
-        <translation type="unfinished">距离创建您的新钱包只有一步之遥了！</translation>
-    </message>
-    <message>
-        <source>Please provide a name and, if desired, enable any advanced options</source>
-        <translation type="unfinished">请指定一个名字，如果需要的话还可以启用高级选项</translation>
-    </message>
-    <message>
         <source>Wallet Name</source>
         <translation type="unfinished">钱包名称</translation>
     </message>
@@ -2061,10 +2053,6 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <source>Sends %1 to %2</source>
         <translation type="unfinished">将“%1”发送到“%2”</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation type="unfinished">自己的地址</translation>
     </message>
     <message>
         <source>own address</source>

@@ -16,7 +16,7 @@
 
 namespace init {
 namespace {
-const char* EXE_NAME = "bitcoin-gui";
+const char* EXE_NAME = "blackmore-gui";
 
 class BitcoinGuiInit : public interfaces::Init
 {

@@ -117,6 +117,7 @@ template<typename Stream> inline uint64_t ser_readdata64(Stream &s)
     return le64toh_internal(obj);
 }
 
+
 class SizeComputer;
 
 enum
@@ -130,6 +131,9 @@ enum
 
 /**
  * Convert any argument to a reference to X, maintaining constness.
+ *
+ * This can be used in serialization code to invoke a base class's
+ * serialization routines.
  *
  * Example use:
  *   class Base { ... };

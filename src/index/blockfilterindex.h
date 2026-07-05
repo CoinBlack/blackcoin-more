@@ -46,7 +46,7 @@ private:
     uint256 m_last_header{};
 
     /*
-    // Blackcoin
+    // Blackcoin: pruning is not allowed
     bool AllowPrune() const override { return true; }
     */
 

@@ -152,6 +152,7 @@ BITCOIN_TESTS =\
   test/sighash_tests.cpp \
   test/sigopcount_tests.cpp \
   test/skiplist_tests.cpp \
+  test/pos_tests.cpp \
   test/sock_tests.cpp \
   test/span_tests.cpp \
   test/streams_tests.cpp \

@@ -145,7 +145,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
-        <translation type="unfinished">Encriptar a carteira</translation>
+        <translation type="unfinished">Encriptar carteira</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
@@ -164,8 +164,8 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
         <translation type="unfinished">Confirmar encriptação da carteira</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Aviso: se encriptar a sua carteira e perder a sua frase de segurança, &lt;b&gt;PERDERÁ TODAS AS SUAS BITCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Aviso: se encriptar a sua carteira e perder a sua frase de segurança, &lt;b&gt;PERDERÁ TODAS AS SUAS BLACKCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -516,7 +516,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet…</source>
-        <translation type="unfinished">&amp;Encriptar carteira…</translation>
+        <translation type="unfinished">Carteira &amp;encriptada…</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -544,7 +544,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Verificar mensagens para garantir que foram assinadas com endereços Bitcoin especificados</translation>
+        <translation type="unfinished">Verifique mensagens para assegurar que foram assinadas com o endereço Bitcoin especificado</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -580,11 +580,11 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Tabs toolbar</source>
-        <translation type="unfinished">Barra de ferramentas das abas</translation>
+        <translation type="unfinished">Barra de ferramentas dos separadores</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)…</source>
-        <translation type="unfinished">A sincronizar cabeçalhos (%1%)…</translation>
+        <translation type="unfinished">A sincronizar cabeçalhos (%1%)...</translation>
     </message>
     <message>
         <source>Synchronizing with network…</source>
@@ -604,7 +604,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Pedir pagamentos (gera códigos QR e bitcoin: URIs)</translation>
+        <translation type="unfinished">Solicitar pagamentos (gera códigos QR e bitcoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -616,7 +616,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation type="unfinished">Opções da linha de &amp;comandos</translation>
+        <translation type="unfinished">&amp;Opções da linha de &amp;comando</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -627,11 +627,11 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>%1 behind</source>
-        <translation type="unfinished">%1 atrás</translation>
+        <translation type="unfinished">%1 em atraso</translation>
     </message>
     <message>
         <source>Catching up…</source>
-        <translation type="unfinished">A recuperar o atraso…</translation>
+        <translation type="unfinished">Recuperando o atraso...</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
@@ -639,7 +639,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation type="unfinished">As transações posteriores a esta data ainda não serão visíveis.</translation>
+        <translation type="unfinished">As transações depois de isto ainda não serão visíveis.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -663,7 +663,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
-        <translation type="unfinished">Carregar PSBT da área de transferência…</translation>
+        <translation type="unfinished">Carregar PSBT da área de transferência...</translation>
     </message>
     <message>
         <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
@@ -675,23 +675,23 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Open node debugging and diagnostic console</source>
-        <translation type="unfinished">Abrir a consola de diagnóstico e depuração de nó</translation>
+        <translation type="unfinished">Abrir o depurador de nó e o console de diagnóstico</translation>
     </message>
     <message>
         <source>&amp;Sending addresses</source>
-        <translation type="unfinished">&amp;Endereços de envio</translation>
+        <translation type="unfinished">&amp;Endereço de envio</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses</source>
-        <translation type="unfinished">Endereços de &amp;receção</translation>
+        <translation type="unfinished">&amp;Endereços de receção</translation>
     </message>
     <message>
         <source>Open a bitcoin: URI</source>
-        <translation type="unfinished">Abrir um bitcoin: URI</translation>
+        <translation type="unfinished">Abrir um bitcoin URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
-        <translation type="unfinished">Abrir carteira</translation>
+        <translation type="unfinished">Abrir Carteira</translation>
     </message>
     <message>
         <source>Open a wallet</source>
@@ -699,7 +699,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Close wallet</source>
-        <translation type="unfinished">Fechar carteira</translation>
+        <translation type="unfinished">Fechar a carteira</translation>
     </message>
     <message>
         <source>Restore Wallet…</source>
@@ -713,7 +713,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Close all wallets</source>
-        <translation type="unfinished">Fechar todas carteiras</translation>
+        <translation type="unfinished">Fechar todas carteiras.</translation>
     </message>
     <message>
         <source>Migrate Wallet</source>
@@ -725,15 +725,15 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Mostrar a mensagem de ajuda %1 para obter uma lista com as possíveis opções de linha de comandos do Bitcoin</translation>
+        <translation type="unfinished">Mostrar a mensagem de ajuda %1 para obter uma lista com possíveis opções a usar na linha de comandos.</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
-        <translation type="unfinished">&amp;Mascarar valores</translation>
+        <translation type="unfinished">&amp;Valores de Máscara</translation>
     </message>
     <message>
         <source>Mask the values in the Overview tab</source>
-        <translation type="unfinished">Mascarar os valores na aba Resumo</translation>
+        <translation type="unfinished">Mascare os valores na aba de visão geral</translation>
     </message>
     <message>
         <source>No wallets available</source>
@@ -747,7 +747,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     <message>
         <source>Load Wallet Backup</source>
         <extracomment>The title for Restore Wallet File Windows</extracomment>
-        <translation type="unfinished">Carregar cópia de segurança da carteira</translation>
+        <translation type="unfinished">Carregar cópia de segurança de carteira</translation>
     </message>
     <message>
         <source>Restore Wallet</source>
@@ -757,7 +757,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     <message>
         <source>Wallet Name</source>
         <extracomment>Label of the input field where the name of the wallet is entered.</extracomment>
-        <translation type="unfinished">Nome da carteira</translation>
+        <translation type="unfinished">Nome da Carteira</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -777,7 +777,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished">&amp;Ocultar</translation>
+        <translation type="unfinished">Ocultar</translation>
     </message>
     <message>
         <source>S&amp;how</source>
@@ -787,8 +787,8 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
         <source>%n active connection(s) to Bitcoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%n conexão ativa com a rede Bitcoin.</numerusform>
-            <numerusform>%n conexões ativas com a rede Bitcoin.</numerusform>
+            <numerusform>%n conexão ativa na rede Bitcoin.</numerusform>
+            <numerusform>%n conexões ativas na rede Bitcoin.</numerusform>
         </translation>
     </message>
     <message>
@@ -927,7 +927,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>After Fee:</source>
-        <translation type="unfinished">Após a taxa:</translation>
+        <translation type="unfinished">Depois da taxa:</translation>
     </message>
     <message>
         <source>Change:</source>
@@ -935,7 +935,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>(un)select all</source>
-        <translation type="unfinished">(des)selecionar tudo</translation>
+        <translation type="unfinished">(des)selecionar todos</translation>
     </message>
     <message>
         <source>Tree mode</source>
@@ -967,11 +967,11 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Confirmed</source>
-        <translation type="unfinished">Confirmado</translation>
+        <translation type="unfinished">Confirmada</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation type="unfinished">Copiar quantia</translation>
+        <translation type="unfinished">Copiar valor</translation>
     </message>
     <message>
         <source>&amp;Copy address</source>
@@ -987,7 +987,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Copy transaction &amp;ID and output index</source>
-        <translation type="unfinished">Copiar o &amp;ID da transação e o índice de saída</translation>
+        <translation type="unfinished">Copiar &amp;ID da transação e index do output</translation>
     </message>
     <message>
         <source>L&amp;ock unspent</source>
@@ -1007,7 +1007,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation type="unfinished">Copiar após a taxa</translation>
+        <translation type="unfinished">Copiar depois da taxa</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -1023,7 +1023,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation type="unfinished">Pode variar +/- %1 satoshi(s) por entrada.</translation>
+        <translation type="unfinished">Pode variar +/- %1 satoshi(s) por input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1043,7 +1043,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     <message>
         <source>Create Wallet</source>
         <extracomment>Title of window indicating the progress of creation of a new wallet.</extracomment>
-        <translation type="unfinished">Criar carteira</translation>
+        <translation type="unfinished">Criar Carteira</translation>
     </message>
     <message>
         <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;…</source>
@@ -1077,7 +1077,7 @@ A assinatura só é possível com endereços do tipo "legado".</translation>
     <message>
         <source>Loading wallets…</source>
         <extracomment>Descriptive text of the load wallets progress window which indicates to the user that wallets are currently being loaded.</extracomment>
-        <translation type="unfinished">A carregar carteiras…</translation>
+        <translation type="unfinished">A carregar carteiras...</translation>
     </message>
 </context>
 <context>
@@ -1726,7 +1726,7 @@ O processo de migração criará uma cópia de segurança da carteira antes da m
     </message>
     <message>
         <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished">Conectar à rede da Bitcoin através de um proxy SOCLS5.</translation>
+        <translation type="unfinished">Conectar à rede da Bitcoin através dum proxy SOCLS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -3089,7 +3089,7 @@ Nota: como a taxa é calculada por byte, uma taxa de "100 satoshis por kvB" para
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation type="unfinished">Copiar após a taxa</translation>
+        <translation type="unfinished">Copiar depois da taxa</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -4305,11 +4305,7 @@ Vá ao menu Ficheiro &gt; Abrir carteira para carregar uma carteira
     </message>
     <message>
         <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation type="unfinished">Não foi possível escrever na pasta de dados "%s": verifique as permissões.</translation>
-    </message>
-    <message>
-        <source>%s is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation type="unfinished">%s é muito elevado! As taxas tão elevadas como esta poderiam ser pagas numa única transação.</translation>
+        <translation type="unfinished">Não foi possível escrever na pasta de dados '%s': verifique as permissões.</translation>
     </message>
     <message>
         <source>%s is set very high! Fees this large could be paid on a single transaction.</source>

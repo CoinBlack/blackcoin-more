@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QFontDialog>
 #include <QIntValidator>
+#include <QLabel>
 #include <QLocale>
 #include <QMessageBox>
 #include <QSystemTrayIcon>
@@ -178,7 +179,10 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
             ui->lang->addItem(locale.nativeLanguageName() + QString(" (") + langStr + QString(")"), QVariant(langStr));
         }
     }
-    ui->unit->setModel(new BitcoinUnits(this));
+    // ui->unit->setModel(new BitcoinUnits(this)); // blackcoin: single-unit BLK, show label instead
+    ui->unit->hide();
+    QLabel *unitLabel = new QLabel(QString("BLK"), this);
+    ui->horizontalLayout_2_Display->addWidget(unitLabel);
 
     /* Widget-to-option mapper */
     mapper = new QDataWidgetMapper(this);
@@ -315,7 +319,7 @@ void OptionsDialog::setMapper()
 
     /* Display */
     mapper->addMapping(ui->lang, OptionsModel::Language);
-    mapper->addMapping(ui->unit, OptionsModel::DisplayUnit);
+    // mapper->addMapping(ui->unit, OptionsModel::DisplayUnit); // blackcoin: single-unit BLK, label shown instead
     mapper->addMapping(ui->thirdPartyTxUrls, OptionsModel::ThirdPartyTxUrls);
 }
 

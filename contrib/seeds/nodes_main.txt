@@ -1,8 +1,6 @@
 # List of fixed seed nodes for main network
 
 # IPv4 nodes
-185.197.251.199:15714
-109.123.251.87:15714
 84.46.245.181:15714
 167.86.117.103:15714
 167.86.117.143:15714
@@ -10,21 +8,27 @@
 45.137.91.173:15714
 45.138.55.128:15714
 45.138.55.130:15714
+45.138.55.131:15714
+45.138.55.132:15714
+45.138.55.133:15714
 
 
 # IPv6 nodes
-[2a02:c206:2210:3221::1]:15714
-[2a02:c206:2210:3222::1]:15714
 [2a02:c206:2210:3223::1]:15714
 [2a02:c207:2056:6532::1]:15714
 [2a02:c207:2056:6533::1]:15714
 [2a02:c207:2056:6534::1]:15714
-[2a10:3781:525:1::1]:15714
 [2a10:3781:525:1::210]:15714
+[2a10:3781:525:1::205]:15714
+[2a10:3781:525:1::206]:15714
+[2a10:3781:525:1::207]:15714
 [2a10:3781:525::1]:15714
 
 
 # Onion nodes
 jgsfxfwhm7vdabt5dxl42il7uenvysknyedtzuaiajo7w5bv5jf2jpid.onion:15714
-hqnztorcojz5gsomamrxgqvoriitu4dfeze46hclmwd5zht4eic6jfid.onion:15714
+qfwipkv5ihdx5qwftdbzclxohag7ca6mgnqjwetib7y6ozdnjq4u5oqd.onion:15714
 5evnjurdgzorvoty6qnrgqnmb7xot237b4rafgnt3t2vth2hy2bju7id.onion:15714
+uzjdfdorz6lsasobkpjvmpbnlga35rqw75yy4wunsfnk5k2dxcvznsqd.onion:15714
+x3nsxqnk2farhoqtku3kt6f6qnqd6oocv2qercrcejomrw47sh5mkrid.onion:15714
+56qcxgmqkttwqj35i5pc3mhskzl5bctc37h5orj7tlpf6vcgqple25yd.onion:15714

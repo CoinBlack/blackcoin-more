@@ -105,19 +105,7 @@ bool BaseIndex::Init()
         // best chain, we will rewind to the fork point during index sync
         const CBlockIndex* locator_index{m_chainstate->m_blockman.LookupBlockIndex(locator.vHave.at(0))};
         if (!locator_index) {
-            /*
-            // Blackcoin ToDo: that's a temporary workaround for issue https://github.com/CoinBlack/blackcoin-more/issues/22
-            // This addresses blockfilterindex and txindex crash issues but does not help to deal with the coinstatsindex crash
-            // A more robust solution should replace this in the future
-            */
-            // If we couldn't find a block index from the locator, use m_best_header as a fallback
-            const CBlockIndex* best_header = index_chain.Tip();
-            if (best_header) {
-                locator_index = best_header;
-                LogPrintf("%s: Using m_best_header as fallback, block hash: %s at height %d\n", GetName(), locator_index->GetBlockHash().ToString(), locator_index->nHeight);
-            } else {
-                return InitError(strprintf(Untranslated("%s: best block of the index not found. Please rebuild the index."), GetName()));
-            }
+            return InitError(strprintf(Untranslated("%s: best block of the index not found. Please rebuild the index."), GetName()));
         }
         SetBestBlockIndex(locator_index);
     }
@@ -447,7 +435,7 @@ IndexSummary BaseIndex::GetSummary() const
 void BaseIndex::SetBestBlockIndex(const CBlockIndex* block)
 {
     /*
-    // Blackcoin
+    // Blackcoin: pruning is not allowed
     assert(!m_chainstate->m_blockman.IsPruneMode() || AllowPrune());
 
     if (AllowPrune() && block) {
@@ -458,6 +446,10 @@ void BaseIndex::SetBestBlockIndex(const CBlockIndex* block)
     */
 
     // Intentionally set m_best_block_index as the last step in this function,
+    // after updating prune locks above, and after making any other references
+    // to *this, so the BlockUntilSyncedToCurrentChain function (which checks
+    // m_best_block_index as an optimization) can be used to wait for the last
+    // BlockConnected notification and safely assume that prune locks are
     // updated and that the index object is safe to delete.
     m_best_block_index = block;
 }

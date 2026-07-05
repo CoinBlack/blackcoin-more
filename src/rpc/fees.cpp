@@ -29,9 +29,4 @@ using node::NodeContext;
 
 void RegisterFeeRPCCommands(CRPCTable& t)
 {
-    static const CRPCCommand commands[]{
-    };
-    for (const auto& c : commands) {
-        t.appendCommand(c.name, &c);
-    }
 }

@@ -44,7 +44,7 @@ static void WalletTxToJSON(const CWallet& wallet, const CWalletTx& wtx, UniValue
         mempool_conflicts.push_back(mempool_conflict.GetHex());
     entry.pushKV("mempoolconflicts", std::move(mempool_conflicts));
     entry.pushKV("time", wtx.GetTxTime());
-    entry.pushKV("timereceived", int64_t{wtx.nTimeReceived});
+    entry.pushKV("timereceived", wtx.IsCoinStake() ? wtx.GetTxTime() : int64_t{wtx.nTimeReceived});
 
     for (const std::pair<const std::string, std::string>& item : wtx.mapValue)
         entry.pushKV(item.first, item.second);
@@ -323,6 +323,10 @@ static void ListTransactions(const CWallet& wallet, const CWalletTx& wtx, int nM
         // Condense all of the coinstake inputs and outputs into one output and compute its value
         CAmount amount = CachedTxGetCredit(wallet, wtx, filter_ismine) - CachedTxGetDebit(wallet, wtx, filter_ismine);
         COutputEntry output = *listReceived.begin();
+        if (output.amount == 0 && listReceived.size() > 1) {
+            listReceived.pop_front();
+            output = *listReceived.begin();
+        }
         output.amount = amount;
         listReceived.clear();
         listSent.clear();
@@ -433,6 +437,7 @@ static std::vector<RPCResult> TransactionDescriptionString()
            }},
            };
 }
+
 RPCHelpMan listtransactions()
 {
     return RPCHelpMan{"listtransactions",

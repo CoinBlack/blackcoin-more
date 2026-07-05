@@ -20,7 +20,7 @@
 #include <boost/test/unit_test.hpp>
 
 int ApplyTxInUndo(Coin&& undo, CCoinsViewCache& view, const COutPoint& out);
-void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight);
+void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight, int nBlockTime = 0);
 
 namespace
 {
@@ -800,6 +800,38 @@ BOOST_AUTO_TEST_CASE(ccoins_add)
     CheckAddCoin(VALUE2, VALUE3, VALUE3, DIRTY      , DIRTY      , true );
     CheckAddCoin(VALUE2, VALUE3, FAIL  , DIRTY|FRESH, NO_ENTRY   , false);
     CheckAddCoin(VALUE2, VALUE3, VALUE3, DIRTY|FRESH, DIRTY|FRESH, true );
+}
+
+BOOST_AUTO_TEST_CASE(addcoins_v2_ntime_uses_block_time)
+{
+    // v2 transactions do not serialize nTime on the wire, so after
+    // deserialization tx.nTime is 0. AddCoins must use the block header
+    // time (nBlockTime) for v2 txs to ensure deterministic Coin nTime.
+    // v1 txs serialize nTime, so AddCoins uses tx.nTime directly.
+
+    CCoinsViewTest backend;
+    CCoinsViewCache cache(&backend);
+
+    // v2 tx: nTime should come from nBlockTime, not tx.nTime
+    CMutableTransaction tx2;
+    tx2.version = 2;
+    tx2.nTime = 0; // as it would be after wire deserialization
+    tx2.vout.emplace_back(0, CScript());
+    const int nBlockTime = 1700000000;
+    AddCoins(cache, CTransaction(tx2), 100, false, nBlockTime);
+    Coin coin2;
+    BOOST_CHECK(cache.GetCoin(COutPoint(tx2.GetHash(), 0), coin2));
+    BOOST_CHECK_EQUAL(coin2.nTime, nBlockTime);
+
+    // v1 tx: nTime should come from tx.nTime, not nBlockTime
+    CMutableTransaction tx1;
+    tx1.version = 1;
+    tx1.nTime = 1699999999;
+    tx1.vout.emplace_back(0, CScript());
+    AddCoins(cache, CTransaction(tx1), 100, false, nBlockTime);
+    Coin coin1;
+    BOOST_CHECK(cache.GetCoin(COutPoint(tx1.GetHash(), 0), coin1));
+    BOOST_CHECK_EQUAL(coin1.nTime, 1699999999);
 }
 
 void CheckWriteCoins(CAmount parent_value, CAmount child_value, CAmount expected_value, char parent_flags, char child_flags, char expected_flags)

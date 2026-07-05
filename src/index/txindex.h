@@ -23,7 +23,7 @@ private:
     const std::unique_ptr<DB> m_db;
 
     /*
-    // Blackcoin
+    // Blackcoin: pruning is not allowed
     bool AllowPrune() const override { return false; }
     */
 

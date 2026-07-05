@@ -15,7 +15,6 @@
 
 using node::NodeContext;
 using wallet::AttemptSelection;
-using wallet::CHANGE_LOWER;
 using wallet::COutput;
 using wallet::CWallet;
 using wallet::CWalletTx;

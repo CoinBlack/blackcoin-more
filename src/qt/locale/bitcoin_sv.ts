@@ -147,7 +147,7 @@ Försök igen.</translation>
         <translation type="unfinished">Bekräfta kryptering av plånbok</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
         <translation type="unfinished">VARNING: Om du krypterar din plånbok och glömmer din lösenfras, &lt;b&gt;FÖRLORAR DU ALLA DINA BITCOIN&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -639,6 +639,14 @@ Försök igen.</translation>
         <translation type="unfinished">Av&amp;sändaradresser</translation>
     </message>
     <message>
+        <source>&amp;Receiving addresses</source>
+        <translation type="unfinished">Mottaga&amp;radresser</translation>
+    </message>
+    <message>
+        <source>Open a bitcoin: URI</source>
+        <translation type="unfinished">Öppna en bitcoin:-URI</translation>
+    </message>
+    <message>
         <source>Open Wallet</source>
         <translation type="unfinished">Öppna plånbok</translation>
     </message>
@@ -727,10 +735,6 @@ Försök igen.</translation>
     <message>
         <source>&amp;Hide</source>
         <translation type="unfinished">och göm</translation>
-    </message>
-    <message>
-        <source>S&amp;how</source>
-        <translation type="unfinished">V&amp;isa</translation>
     </message>
     <message>
         <source>S&amp;how</source>
@@ -1068,14 +1072,6 @@ Om den här plånboken innehåller lösbara</translation>
     <message>
         <source>The wallet '%1' was migrated successfully.</source>
         <translation type="unfinished">Migrering av plånboken ' %1 ' genomförd.</translation>
-    </message>
-    <message>
-        <source> Watchonly scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Watchonly-skript har migrerats till en ny plånbok med namnet '%1'.</translation>
-    </message>
-    <message>
-        <source> Solvable but not watched scripts have been migrated to a new wallet named '%1'.</source>
-        <translation type="unfinished">Lösbara, men inte övervakade script har migrerats till en ny plånbok med namnet '%1'.</translation>
     </message>
     <message>
         <source>Migration failed</source>
@@ -1932,10 +1928,6 @@ Om den här plånboken innehåller lösbara</translation>
     <message>
         <source>Sends %1 to %2</source>
         <translation type="unfinished">Skickar %1 till %2</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation type="unfinished">egen adress</translation>
     </message>
     <message>
         <source>own address</source>

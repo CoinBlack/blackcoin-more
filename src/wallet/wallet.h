@@ -38,12 +38,14 @@
 
 #include <atomic>
 #include <cassert>
+#include <condition_variable>
 #include <cstddef>
 #include <cstdint>
 #include <functional>
 #include <limits>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <set>
 #include <string>
@@ -147,7 +149,7 @@ static const unsigned int MAX_DONATION_PERCENTAGE = 95;
 class CCoinControl;
 
 //! Default for -addresstype
-constexpr OutputType DEFAULT_ADDRESS_TYPE{OutputType::LEGACY};
+constexpr OutputType DEFAULT_ADDRESS_TYPE{OutputType::BECH32};
 
 static constexpr uint64_t KNOWN_WALLET_FLAGS =
         WALLET_FLAG_AVOID_REUSE
@@ -275,6 +277,7 @@ inline std::string PurposeToString(AddressPurpose p)
     case AddressPurpose::RECEIVE: return "receive";
     case AddressPurpose::SEND: return "send";
     case AddressPurpose::REFUND: return "refund";
+    case AddressPurpose::SIGNKEY: return "signkey"; // blackcoin: signkey
     } // no default case so the compiler will warn when a new enum as added
     assert(false);
 }
@@ -284,6 +287,7 @@ inline std::optional<AddressPurpose> PurposeFromString(std::string_view s)
     if (s == "receive") return AddressPurpose::RECEIVE;
     else if (s == "send") return AddressPurpose::SEND;
     else if (s == "refund") return AddressPurpose::REFUND;
+    else if (s == "signkey") return AddressPurpose::SIGNKEY; // blackcoin: signkey
     return {};
 }
 
@@ -323,8 +327,6 @@ private:
     bool fBroadcastTransactions = false;
     // Local time that the tip block was received. Used to schedule wallet rebroadcasts.
     std::atomic<int64_t> m_best_block_time {0};
-
-    std::map<COutPoint, CStakeCache> stakeCache;
 
     // First created key time. Used to skip blocks prior to this time.
     // 'std::numeric_limits<int64_t>::max()' if wallet is blank.
@@ -444,6 +446,22 @@ public:
      * This lock protects all the fields added by CWallet.
      */
     mutable RecursiveMutex cs_wallet;
+
+    std::map<COutPoint, CStakeCache> stakeCache; // blackcoin: stakecache
+
+    // Wake-on-block: condition variable for instant staker wake-up when new block arrives
+    std::condition_variable cv_new_block;
+    std::mutex cv_block_mutex;
+    std::atomic<bool> m_new_block_arrived{false};
+
+    // Safety bump: pre-calculated sleep time (ms) to next valid 16-second window after new block
+    // blackcoin: safety bump removed
+
+    // Per-wallet staking timer for multi-wallet independence
+    int64_t m_last_coin_stake_search_time{0};
+    uint256 m_last_coin_stake_search_tip{};
+
+    std::atomic<bool> m_staker_active{false};
 
     WalletDatabase& GetDatabase() const override
     {
@@ -801,8 +819,8 @@ public:
 
     bool SetAddressBook(const CTxDestination& address, const std::string& strName, const std::optional<AddressPurpose>& purpose);
 
-    bool DelAddressBook(const CTxDestination& address);
-    bool DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& address);
+    bool DelAddressBook(const CTxDestination& address, bool force = false);
+    bool DelAddressBookWithDB(WalletBatch& batch, const CTxDestination& address, bool force = false);
 
     bool IsAddressPreviouslySpent(const CTxDestination& dest) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     bool SetAddressPreviouslySpent(WalletBatch& batch, const CTxDestination& dest, bool used) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);

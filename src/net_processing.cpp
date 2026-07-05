@@ -6,6 +6,8 @@
 // Header spam protection by Qtum
 // Copyright (c) 2016-2019 The Qtum developers
 
+// blackcoin: consensusParams.nPowTargetSpacing, used in Bitcoin Core, is replaced by consensusParams.nTargetSpacing
+
 #include <net_processing.h>
 
 #include <addrman.h>
@@ -13,7 +15,7 @@
 #include <blockencodings.h>
 #include <blockfilter.h>
 #include <chainparams.h>
-#include <common/args.h> // for GetBoolArg
+#include <common/args.h> // blackcoin: port of Header spam protection by Qtum
 #include <consensus/amount.h>
 #include <consensus/validation.h>
 #include <deploymentstatus.h>
@@ -67,26 +69,25 @@ static constexpr auto HEADERS_RESPONSE_TIME{2min};
 /** Protect at least this many outbound peers from disconnection due to slow/
  * behind headers chain.
  */
-static constexpr int32_t MAX_OUTBOUND_PEERS_TO_PROTECT_FROM_DISCONNECT = 4;
+// blackcoin: 8 at 50% of max outbound of 16 peers
+static constexpr int32_t MAX_OUTBOUND_PEERS_TO_PROTECT_FROM_DISCONNECT = 8;
 /** Timeout for (unprotected) outbound peers to sync to our chainwork */
-static constexpr auto CHAIN_SYNC_TIMEOUT{20min};
+// blackcoin: change to reflect 8 blocks at 64s block time (Bitcoin default is 2 blocks at 10min block time)
+static constexpr auto CHAIN_SYNC_TIMEOUT{512s};
 /** How frequently to check for stale tips */
-static constexpr auto STALE_CHECK_INTERVAL{10min};
+// blackcoin: change to reflect 4 block at 64s block time (Bitcoin default is 1 block at 10min block time)
+static constexpr auto STALE_CHECK_INTERVAL{256s};
 /** How frequently to check for extra outbound peers and disconnect */
 static constexpr auto EXTRA_PEER_CHECK_INTERVAL{45s};
 /** Minimum time an outbound-peer-eviction candidate must be connected for, in order to evict */
 static constexpr auto MINIMUM_CONNECT_TIME{30s};
 /** SHA256("main address relay")[0:8] */
 static constexpr uint64_t RANDOMIZER_ID_ADDRESS_RELAY = 0x3cac0035b5866b90ULL;
-/*
-/// Age after which a stale block will no longer be served if requested as
-/// protection against fingerprinting. Set to one month, denominated in seconds.
-static constexpr int STALE_RELAY_AGE_LIMIT = 30 * 24 * 60 * 60;
-*/
 /// Age after which a stale block will no longer be served if requested as
 /// protection against fingerprinting.
-/// For Blackcoin, set to 10 hours, denominated in seconds.
+/// blackcoin: set to 10 hours, denominated in seconds.
 /// (should be close to nMaxReorganizationDepth * nTargetSpacing)
+/// was STALE_RELAY_AGE_LIMIT = 30 * 24 * 60 * 60
 static constexpr int STALE_RELAY_AGE_LIMIT = 10 * 60 * 60;
 /// Age after which a block is considered historical for purposes of rate
 /// limiting block relay. Set to one week, denominated in seconds.
@@ -494,6 +495,7 @@ struct CNodeState {
     CNodeState(bool is_inbound) : m_is_inbound(is_inbound) {}
 };
 
+// blackcoin: port of Header spam protection by Qtum
 class CNodeHeaders
 {
 public:
@@ -526,7 +528,7 @@ public:
         return false;
     }
 
-    bool updateState(BlockValidationState& state, bool ret)
+    bool updateState(NodeId peerId, BlockValidationState& state, bool ret)
     {
         // No headers
         size_t size = points.size();
@@ -543,15 +545,17 @@ public:
         // Compute the average value per height
         double nAvgValue = (double)nHeaders / size;
 
-        // Ban the node if try to spam
+        // Flag the peer for discouragement/disconnection if it is spamming headers.
+        // The actual disconnect happens later via MaybeDiscourageAndDisconnect.
         bool banNode = (nAvgValue >= 1.5 * maxAvg && size >= maxAvg) ||
                        (nAvgValue >= maxAvg && nHeaders >= maxSize) ||
                        (nHeaders >= maxSize * 4.1);
         if(banNode)
         {
-            // Clear the points and ban the node
             points.clear();
-            return state.Invalid(BlockValidationResult::BLOCK_HEADER_SPAM, "header-spam", "ban node for sending spam");
+            return state.Invalid(BlockValidationResult::BLOCK_HEADER_SPAM, "header-spam",
+                strprintf("peer %d discouraged/disconnected for header spam (avg=%.2f/%u, headers=%u, max=%u, size=%u)",
+                          peerId, nAvgValue, maxAvg, nHeaders, maxSize, size));
         }
 
         return ret;
@@ -861,10 +865,13 @@ private:
     /** Send `feefilter` message. */
     void MaybeSendFeefilter(CNode& node, Peer& peer, std::chrono::microseconds current_time) EXCLUSIVE_LOCKS_REQUIRED(g_msgproc_mutex);
 
+    // blackcoin: port of Header spam protection by Qtum
     /** Process net block. */
-    bool ProcessNetBlockHeaders(CNode& node, const std::vector<CBlockHeader>& block, bool min_pow_checked, BlockValidationState& state, bool old_client, const CBlockIndex** ppindex=nullptr);
-    bool ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool force_processing, bool min_pow_checked, bool* new_block, CNode& node);
+    bool ProcessNetBlockHeaders(CNode& node, const std::vector<CBlockHeader>& block, bool min_pow_checked, BlockValidationState& state, const CBlockIndex** ppindex=nullptr);
+    bool ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool force_processing, bool min_pow_checked, bool* new_block, CNode& node)
+        EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
 
+    // blackcoin: port of Header spam protection by Qtum
     CNodeHeaders& ServiceHeaders(const CService& address) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
     void CleanAddressHeaders(const CAddress& addr) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
@@ -924,6 +931,7 @@ private:
 
     /** Map maintaining per-node state. */
     std::map<NodeId, CNodeState> m_node_states GUARDED_BY(cs_main);
+    // blackcoin: port of Header spam protection by Qtum
     std::map<CService, CNodeHeaders> m_service_headers GUARDED_BY(cs_main);
 
     /** Get a pointer to a const CNodeState, used when not mutating the CNodeState object. */
@@ -1193,11 +1201,12 @@ private:
         LOCKS_EXCLUDED(::cs_main);
 
     /** Process a new block. Perform any post-processing housekeeping */
-    void ProcessBlock(CNode& node, const std::shared_ptr<const CBlock>& block, bool force_processing, bool min_pow_checked);
+    void ProcessBlock(CNode& node, const std::shared_ptr<const CBlock>& block, bool force_processing, bool min_pow_checked)
+        EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
 
     /** Process compact block txns  */
     void ProcessCompactBlockTxns(CNode& pfrom, Peer& peer, const BlockTransactions& block_transactions)
-        EXCLUSIVE_LOCKS_REQUIRED(g_msgproc_mutex, !m_most_recent_block_mutex);
+        EXCLUSIVE_LOCKS_REQUIRED(g_msgproc_mutex, !m_most_recent_block_mutex, !m_peer_mutex);
 
     /**
      * When a peer sends us a valid block, instruct it to announce blocks to us
@@ -1387,6 +1396,7 @@ static bool CanServeWitnesses(const Peer& peer)
     return peer.m_their_services & NODE_WITNESS;
 }
 
+// blackcoin: port of Header spam protection by Qtum
 CNodeHeaders& PeerManagerImpl::ServiceHeaders(const CService& address) EXCLUSIVE_LOCKS_REQUIRED(cs_main) {
     unsigned short port =
             gArgs.GetBoolArg("-headerspamfilterignoreport", DEFAULT_HEADER_SPAM_FILTER_IGNORE_PORT) ? 0 : address.GetPort();
@@ -1394,6 +1404,7 @@ CNodeHeaders& PeerManagerImpl::ServiceHeaders(const CService& address) EXCLUSIVE
     return m_service_headers[addr];
 }
 
+// blackcoin: port of Header spam protection by Qtum
 void PeerManagerImpl::CleanAddressHeaders(const CAddress& addr) EXCLUSIVE_LOCKS_REQUIRED(cs_main) {
     CSubNet subNet(addr);
     for (std::map<CService, CNodeHeaders>::iterator it=m_service_headers.begin(); it!=m_service_headers.end();){
@@ -1493,7 +1504,7 @@ bool PeerManagerImpl::BlockRequested(NodeId nodeid, const CBlockIndex& block, st
 
     // Make sure it's not being fetched already from same peer.
     RemoveBlockRequest(hash, nodeid);
-
+    // blackcoin: port of Header spam protection by Qtum
     std::list<QueuedBlock>::iterator it = state->vBlocksInFlight.insert(state->vBlocksInFlight.end(),
             {&block, std::unique_ptr<PartiallyDownloadedBlock>(pit ? new PartiallyDownloadedBlock(&m_mempool, &m_chainman) : nullptr)});
     if (state->vBlocksInFlight.size() == 1) {
@@ -1806,24 +1817,26 @@ void PeerManagerImpl::PushNodeVersion(CNode& pnode, const Peer& peer)
     }
 }
 
-bool PeerManagerImpl::ProcessNetBlockHeaders(CNode& pfrom, const std::vector<CBlockHeader>& block, bool min_pow_checked, BlockValidationState& state, bool old_client, const CBlockIndex** ppindex)
+// blackcoin: port of Header spam protection by Qtum
+bool PeerManagerImpl::ProcessNetBlockHeaders(CNode& pfrom, const std::vector<CBlockHeader>& block, bool min_pow_checked, BlockValidationState& state, const CBlockIndex** ppindex)
 {
     const CBlockIndex *pindexFirst = nullptr;
-    bool ret = m_chainman.ProcessNewBlockHeaders(block, min_pow_checked, state, old_client, ppindex, &pindexFirst);
+    bool ret = m_chainman.ProcessNewBlockHeaders(block, min_pow_checked, state, ppindex, &pindexFirst);
     if (gArgs.GetBoolArg("-headerspamfilter", DEFAULT_HEADER_SPAM_FILTER))
     {
         if (!m_chainman.IsInitialBlockDownload() || (gArgs.GetBoolArg("-headerspamfilterduringibd", DEFAULT_HEADER_SPAM_FILTER_DURING_IBD) && m_chainman.IsInitialBlockDownload()))
         {
             LOCK(cs_main);
-            CNodeHeaders& headers = ServiceHeaders(pfrom.GetAddrLocal());
+            CNodeHeaders& headers = ServiceHeaders(pfrom.addr);
             const CBlockIndex *pindexLast = ppindex == nullptr ? nullptr : *ppindex;
             headers.addHeaders(pindexFirst, pindexLast);
-            return headers.updateState(state, ret);
+            return headers.updateState(pfrom.GetId(), state, ret);
         }       
     }
     return ret;
 }
 
+// blackcoin: port of Header spam protection by Qtum
 bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock, bool force_processing, bool min_pow_checked, bool* new_block, CNode& pfrom)
 {
     PeerRef peer = GetPeerRef(pfrom.GetId());
@@ -1838,26 +1851,13 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
         }
     }
 
-    // Blackcoin ToDo: revert after nodes upgrade to current version
-    // /*
-    // Set nFlags in case of proof of stake block received from an old node
-    std::shared_ptr<CBlock> pblock_mutable = std::const_pointer_cast<CBlock>(pblock);
-    bool old_client = pfrom.nVersion <= OLD_VERSION;
-
-    if (old_client && pblock_mutable->IsProofOfStake())
-        pblock_mutable->nFlags = CBlockIndex::BLOCK_PROOF_OF_STAKE;
-
-    // Avoid implicit conversions
-    const std::shared_ptr<const CBlock> pblock_const = std::const_pointer_cast<const CBlock>(pblock_mutable);
-    // */
-
     // Process the header before processing the block
     const CBlockIndex *pindex = nullptr;
     BlockValidationState state;
-    if (!ProcessNetBlockHeaders(pfrom, {*pblock_const}, min_pow_checked, state, old_client, &pindex)) {
+    if (!ProcessNetBlockHeaders(pfrom, {*pblock}, min_pow_checked, state, &pindex)) {
         if (state.IsInvalid()) {
             MaybePunishNodeForBlock(pfrom.GetId(), state, false, strprintf("Peer %d sent us invalid header\n", pfrom.GetId()));
-            LogError("%s: invalid header received\n", __func__);
+            LogError("%s: invalid header received, hash=%s, state=%s\n", __func__, pblock->GetHash().ToString(), state.ToString());
             return false;
         }
     }
@@ -1887,7 +1887,7 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
         }
     }
 
-    if (!m_chainman.ProcessNewBlock(pblock_const, force_processing, min_pow_checked, new_block)) {
+    if (!m_chainman.ProcessNewBlock(pblock, force_processing, min_pow_checked, new_block)) {
         LogError("%s: ProcessNewBlock FAILED\n", __func__);
         return false;
     }
@@ -2060,9 +2060,7 @@ ServiceFlags PeerManagerImpl::GetDesirableServiceFlags(ServiceFlags services) co
             return ServiceFlags(NODE_NETWORK_LIMITED | NODE_WITNESS);
         }
     }
-    // Blackcoin: Do not ask for NODE_WITNESS for now
-    // return ServiceFlags(NODE_NETWORK | NODE_WITNESS);
-    return ServiceFlags(NODE_NETWORK);
+    return ServiceFlags(NODE_NETWORK | NODE_WITNESS);
 }
 
 PeerRef PeerManagerImpl::GetPeerRef(NodeId id) const
@@ -2199,6 +2197,7 @@ void PeerManagerImpl::MaybePunishNodeForBlock(NodeId nodeid, const BlockValidati
             }
             break;
         }
+    // blackcoin: port of Header spam protection by Qtum
     case BlockValidationResult::BLOCK_INVALID_HEADER:
     case BlockValidationResult::BLOCK_CHECKPOINT:
     case BlockValidationResult::BLOCK_INVALID_PREV:
@@ -2264,11 +2263,8 @@ std::optional<std::string> PeerManagerImpl::FetchBlock(NodeId peer_id, const CBl
     PeerRef peer = GetPeerRef(peer_id);
     if (peer == nullptr) return "Peer does not exist";
 
-    /*
-    // Blackcoin: Do not ignore pre-segwit peers for now
     // Ignore pre-segwit peers
     if (!CanServeWitnesses(*peer)) return "Pre-SegWit peer";
-    */
 
     LOCK(cs_main);
 
@@ -2280,7 +2276,6 @@ std::optional<std::string> PeerManagerImpl::FetchBlock(NodeId peer_id, const CBl
 
     // Construct message to request the block
     const uint256& hash{block_index.GetBlockHash()};
-
     std::vector<CInv> invs{CInv(MSG_BLOCK | MSG_WITNESS_FLAG, hash)};
 
     // Send block request message to the peer
@@ -2739,7 +2734,7 @@ void PeerManagerImpl::ProcessGetBlockData(CNode& pfrom, Peer& peer, const CInv& 
     if (a_recent_block && a_recent_block->GetHash() == pindex->GetBlockHash()) {
         pblock = a_recent_block;
     /*
-    // Blackcoin: do not read raw blocks from disk as the disk format is actually different
+    // Blackcoin: disk format omits nFlags (under SER_GETHASH) while wire includes it (under SER_POSMARKER), so raw bytes differ
     } else if (inv.IsMsgWitnessBlk()) {
         // Fast-path: in this case it is possible to serve the block directly from disk,
         // as the network format matches the format on disk
@@ -2960,11 +2955,12 @@ arith_uint256 PeerManagerImpl::GetAntiDoSWorkThreshold()
 {
     arith_uint256 near_chaintip_work = 0;
     LOCK(cs_main);
-    if (m_chainman.ActiveChain().Tip() != nullptr) {
-        const CBlockIndex *tip = m_chainman.ActiveChain().Tip();
-        // Use a 144 block buffer, so that we'll accept headers that fork from
+    const CBlockIndex *tip = m_chainman.ActiveChain().Tip();
+    if (tip != nullptr) {
+        // Use an auto selected sync checkpoint
         // near our tip.
-        near_chaintip_work = tip->nChainWork - std::min<arith_uint256>(144*GetBlockProof(*tip), tip->nChainWork);
+        const CBlockIndex* pcheckpoint = m_chainman.m_blockman.AutoSelectSyncCheckpoint(tip);
+        near_chaintip_work = pcheckpoint->nChainWork;
     }
     return std::max(near_chaintip_work, m_chainman.MinimumChainWork());
 }
@@ -3406,7 +3402,8 @@ void PeerManagerImpl::ProcessHeadersMessage(CNode& pfrom, Peer& peer,
 
     // Now process all the headers.
     BlockValidationState state;
-    if (!ProcessNetBlockHeaders(pfrom, headers, /*min_pow_checked=*/true, state, pfrom.nVersion <= OLD_VERSION, &pindexLast)) {
+    // blackcoin: port of Header spam protection by Qtum
+    if (!ProcessNetBlockHeaders(pfrom, headers, /*min_pow_checked=*/true, state, &pindexLast)) {
         if (state.IsInvalid()) {
             MaybePunishNodeForBlock(pfrom.GetId(), state, via_compact_block, "invalid header received");
             return;
@@ -3837,6 +3834,7 @@ void PeerManagerImpl::ProcessGetCFCheckPt(CNode& node, Peer& peer, DataStream& v
 void PeerManagerImpl::ProcessBlock(CNode& node, const std::shared_ptr<const CBlock>& block, bool force_processing, bool min_pow_checked)
 {
     bool new_block{false};
+    // blackcoin: port of Header spam protection by Qtum
     ProcessNetBlock(block, force_processing, min_pow_checked, &new_block, node);
     if (new_block) {
         node.m_last_block_time = GetTime<std::chrono::seconds>();
@@ -3948,11 +3946,8 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
     PeerRef peer = GetPeerRef(pfrom.GetId());
     if (peer == nullptr) return;
 
-    // peercoin: set/unset deserialization mode to read PoS flag in headers
-    if (pfrom.nVersion <= OLD_VERSION)
-        vRecv.SetType(vRecv.GetType() & ~SER_POSMARKER);
-    else
-        vRecv.SetType(vRecv.GetType() | SER_POSMARKER);
+    // peercoin: set deserialization mode to read PoS flag in headers
+    vRecv.SetType(vRecv.GetType() | SER_POSMARKER);
 
     if (msg_type == NetMsgType::VERSION) {
         if (pfrom.nVersion != 0) {
@@ -4781,6 +4776,20 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         const uint256& hash = peer->m_wtxid_relay ? wtxid : txid;
         AddKnownTx(*peer, hash);
 
+        // Detect and log transactions that create outputs with unknown witness
+        // versions (v > 1). These are characteristic of forks that exploit
+        // Bitcoin Core's forward-softfork compatibility to create anyone-can-spend
+        // outputs on chains that do not understand the version.
+        for (const auto& txout : tx.vout) {
+            int witness_version = 0;
+            std::vector<unsigned char> witness_program;
+            if (txout.scriptPubKey.IsWitnessProgram(witness_version, witness_program) && witness_version > 1) {
+                LogPrint(BCLog::NET, "unknown-witness-version: peer=%d txid=%s creates output with witness version %d (possible parasite-fork migration output)\n",
+                         pfrom.GetId(), txid.ToString(), witness_version);
+                break;
+            }
+        }
+
         LOCK2(cs_main, m_tx_download_mutex);
 
         m_txrequest.ReceivedResponse(pfrom.GetId(), txid);
@@ -4982,7 +4991,8 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
 
         const CBlockIndex *pindex = nullptr;
         BlockValidationState state;
-        if (!ProcessNetBlockHeaders(pfrom, {cmpctblock.header}, /*min_pow_checked=*/true, state, pfrom.nVersion <= OLD_VERSION, &pindex)) {
+	// blackcoin: port of Header spam protection by Qtum
+        if (!ProcessNetBlockHeaders(pfrom, {cmpctblock.header}, /*min_pow_checked=*/true, state, &pindex)) {
             if (state.IsInvalid()) {
                 MaybePunishNodeForBlock(pfrom.GetId(), state, /*via_compact_block=*/true, "invalid header via cmpctblock");
                 return;
@@ -5062,6 +5072,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                 std::list<QueuedBlock>::iterator* queuedBlockIt = nullptr;
                 if (!BlockRequested(pfrom.GetId(), *pindex, &queuedBlockIt)) {
                     if (!(*queuedBlockIt)->partialBlock)
+			// blackcoin: port of Header spam protection by Qtum
                         (*queuedBlockIt)->partialBlock.reset(new PartiallyDownloadedBlock(&m_mempool, &m_chainman));
                     else {
                         // The block was already in flight using compact blocks from the same peer
@@ -5121,6 +5132,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                 // download from.
                 // Optimistically try to reconstruct anyway since we might be
                 // able to without any round trips.
+		// blackcoin: port of Header spam protection by Qtum
                 PartiallyDownloadedBlock tempBlock(&m_mempool, &m_chainman);
                 ReadStatus status = tempBlock.InitData(cmpctblock, vExtraTxnForCompact);
                 if (status != READ_STATUS_OK) {
@@ -5226,6 +5238,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         for (unsigned int n = 0; n < nCount; n++) {
             vRecv >> headers[n];
             ReadCompactSize(vRecv); // ignore tx count; assume it is 0.
+	    //blackcoin: PoS has extra fields in blocks
             ReadCompactSize(vRecv); // ignore block sig; assume it is 0.
         }
 
@@ -5592,6 +5605,7 @@ bool PeerManagerImpl::MaybeDiscourageAndDisconnect(CNode& pnode, Peer& peer)
     LogPrint(BCLog::NET, "Disconnecting and discouraging peer %d!\n", peer.m_id);
     if (m_banman) m_banman->Discourage(pnode.addr);
     m_connman.DisconnectNode(pnode.addr);
+    // blackcoin: port of Header spam protection by Qtum
     LOCK(cs_main);
     // Remove all data from the header spam filter when the address is banned
     CleanAddressHeaders(pnode.addr);
@@ -6000,6 +6014,7 @@ void PeerManagerImpl::MaybeSendSendHeaders(CNode& node, Peer& peer)
     }
 }
 
+// blackcoin: use fixed fee calculation
 void PeerManagerImpl::MaybeSendFeefilter(CNode& pto, Peer& peer, std::chrono::microseconds current_time)
 {
     if (m_opts.ignore_incoming_txs) return;
@@ -6025,9 +6040,8 @@ void PeerManagerImpl::MaybeSendFeefilter(CNode& pto, Peer& peer, std::chrono::mi
         }
     }
     if (current_time > peer.m_next_send_feefilter) {
-        CAmount filterToSend = m_fee_filter_rounder.round(currentFilter);
-        // We always have a fee filter of at least the min relay fee
-        filterToSend = std::max(filterToSend, m_mempool.m_opts.min_relay_feerate.GetFeePerK());
+        // Blackcoin: fixed fee = min relay fee, no dynamic estimation needed
+        CAmount filterToSend = m_mempool.m_opts.min_relay_feerate.GetFeePerK();
         if (filterToSend != peer.m_fee_filter_sent) {
             MakeAndPushMessage(pto, NetMsgType::FEEFILTER, filterToSend);
             peer.m_fee_filter_sent = filterToSend;
