@@ -134,9 +134,6 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Outbound connections restricted to i2p (-onlynet=i2p) but -i2psam is not "
 "provided"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
-"Please check that your computer's date and time are correct! If your clock "
-"is wrong, %s will not work properly."),
-QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Please contribute if you find %s useful. Visit %s for further information "
 "about the software."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""

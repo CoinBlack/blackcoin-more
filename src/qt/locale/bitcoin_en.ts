@@ -5,68 +5,57 @@
     <name>AddressBookPage</name>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+37"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+139"/>
         <source>Right-click to edit address or label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+3"/>
         <source>Create a new address</source>
         <translation>Create a new address</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+2"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+2"/>
         <source>Copy the currently selected address to the system clipboard</source>
         <translation>Copy the currently selected address to the system clipboard</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+2"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+67"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+9"/>
         <source>C&amp;lose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-53"/>
-        <location filename="../forms/ui_addressbookpage.h" line="-7"/>
         <source>Delete the currently selected address from the list</source>
         <translation>Delete the currently selected address from the list</translation>
     </message>
     <message>
         <location line="-71"/>
-        <location filename="../forms/ui_addressbookpage.h" line="-13"/>
         <source>Enter address or label to search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+101"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+17"/>
         <source>Export the data in the current tab to a file</source>
         <translation>Export the data in the current tab to a file</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_addressbookpage.h" line="+2"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
     <message>
         <location line="-30"/>
         <location filename="../addressbookpage.cpp" line="+113"/>
-        <location filename="../forms/ui_addressbookpage.h" line="-4"/>
         <source>&amp;Delete</source>
         <translation>&amp;Delete</translation>
     </message>
@@ -166,43 +155,36 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <name>AskPassphraseDialog</name>
     <message>
         <location filename="../forms/askpassphrasedialog.ui" line="+26"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+140"/>
         <source>Passphrase Dialog</source>
         <translation>Passphrase Dialog</translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+1"/>
         <source>Enter passphrase</source>
         <translation>Enter passphrase</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+1"/>
         <source>New passphrase</source>
         <translation>New passphrase</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+1"/>
         <source>Repeat new passphrase</source>
         <translation>Repeat new passphrase</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+1"/>
         <source>Show passphrase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+3"/>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_askpassphrasedialog.h" line="+2"/>
         <source>For staking only</source>
         <translation type="unfinished"></translation>
     </message>
@@ -396,7 +378,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+273"/>
+        <location filename="../bitcoingui.cpp" line="+271"/>
         <source>&amp;Overview</source>
         <translation>&amp;Overview</translation>
     </message>
@@ -1088,97 +1070,81 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <name>CoinControlDialog</name>
     <message>
         <location filename="../forms/coincontroldialog.ui" line="+14"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+285"/>
         <source>Coin Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+37"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>Quantity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>Bytes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>Fee:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+48"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>After Fee:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>Change:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+56"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>(un)select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>Tree mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+1"/>
         <source>List mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+56"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+6"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="-1"/>
         <source>Received with label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="-1"/>
         <source>Received with address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="-1"/>
         <source>Date</source>
         <translation type="unfinished">Date</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="-1"/>
         <source>Confirmations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_coincontroldialog.h" line="+6"/>
         <source>Confirmed</source>
         <translation type="unfinished">Confirmed</translation>
     </message>
@@ -1308,85 +1274,71 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <name>CreateWalletDialog</name>
     <message>
         <location filename="../forms/createwalletdialog.ui" line="+14"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+153"/>
         <source>Create Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+1"/>
         <source>You are one step away from creating your new wallet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+1"/>
         <source>Please provide a name and, if desired, enable any advanced options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+1"/>
         <source>Wallet Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+1"/>
         <source>Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Encrypt Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+1"/>
         <source>Advanced Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Disable Private Keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Make Blank Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>Use an external signing device such as a hardware wallet. Configure the external signer script in wallet preferences first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_createwalletdialog.h" line="+2"/>
         <source>External signer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1406,31 +1358,26 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <name>EditAddressDialog</name>
     <message>
         <location filename="../forms/editaddressdialog.ui" line="+14"/>
-        <location filename="../forms/ui_editaddressdialog.h" line="+89"/>
         <source>Edit Address</source>
         <translation>Edit Address</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../forms/ui_editaddressdialog.h" line="+1"/>
         <source>&amp;Label</source>
         <translation>&amp;Label</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_editaddressdialog.h" line="+2"/>
         <source>The label associated with this address list entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../forms/ui_editaddressdialog.h" line="+4"/>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-10"/>
-        <location filename="../forms/ui_editaddressdialog.h" line="-2"/>
         <source>&amp;Address</source>
         <translation>&amp;Address</translation>
     </message>
@@ -1525,43 +1472,36 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <name>Intro</name>
     <message>
         <location filename="../forms/intro.ui" line="+14"/>
-        <location filename="../forms/ui_intro.h" line="+195"/>
         <source>Welcome</source>
         <translation>Welcome</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../forms/ui_intro.h" line="+1"/>
         <source>Welcome to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../forms/ui_intro.h" line="+1"/>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+167"/>
-        <location filename="../forms/ui_intro.h" line="+5"/>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-10"/>
-        <location filename="../forms/ui_intro.h" line="-1"/>
         <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2 GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-140"/>
-        <location filename="../forms/ui_intro.h" line="-3"/>
         <source>Use the default data directory</source>
         <translation>Use the default data directory</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_intro.h" line="+1"/>
         <source>Use a custom data directory:</source>
         <translation>Use a custom data directory:</translation>
     </message>
@@ -1686,21 +1626,17 @@ The migration process will create a backup of the wallet before migrating. This 
     <name>ModalOverlay</name>
     <message>
         <location filename="../forms/modaloverlay.ui" line="+14"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+254"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
     <message>
         <location line="+201"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+4"/>
         <source>Number of blocks left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+26"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+1"/>
-        <location line="+2"/>
         <location filename="../modaloverlay.cpp" line="+160"/>
         <source>Unknown…</source>
         <translation type="unfinished"></translation>
@@ -1708,56 +1644,46 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="+44"/>
         <location line="+20"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+3"/>
-        <location line="+2"/>
         <source>calculating…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-77"/>
-        <location filename="../forms/ui_modaloverlay.h" line="-6"/>
         <source>Last block time</source>
         <translation type="unfinished">Last block time</translation>
     </message>
     <message>
         <location line="-102"/>
-        <location filename="../forms/ui_modaloverlay.h" line="-4"/>
         <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the blackcoin network, as detailed below.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+1"/>
         <source>Attempting to spend blackcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+109"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+5"/>
         <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+24"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+1"/>
         <source>Progress increase per hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+2"/>
         <source>Estimated time left until synced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+37"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+2"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_modaloverlay.h" line="+2"/>
         <source>Esc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1781,25 +1707,21 @@ The migration process will create a backup of the wallet before migrating. This 
     <name>OpenURIDialog</name>
     <message>
         <location filename="../forms/openuridialog.ui" line="+14"/>
-        <location filename="../forms/ui_openuridialog.h" line="+89"/>
         <source>Open Blackcoin URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../forms/ui_openuridialog.h" line="+1"/>
         <source>URI:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_openuridialog.h" line="+1"/>
         <source>blackcoin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_openuridialog.h" line="+2"/>
         <source>Paste address from clipboard</source>
         <extracomment>Tooltip text for button that allows you to paste an address that is in your clipboard.</extracomment>
         <translation type="unfinished">Paste address from clipboard</translation>
@@ -1834,69 +1756,57 @@ The migration process will create a backup of the wallet before migrating. This 
     <name>OptionsDialog</name>
     <message>
         <location filename="../forms/optionsdialog.ui" line="+14"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+716"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+29"/>
         <source>&amp;Main</source>
         <translation>&amp;Main</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-27"/>
         <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>&amp;Start %1 on system login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>Size of &amp;database cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+5"/>
         <source>Number of script &amp;verification threads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+224"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+37"/>
         <source>Full path to a %1 compatible script (e.g. C:\Downloads\hwi.exe or /Users/you/Downloads/hwi.py). Beware: malware can steal your coins!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>Automatically open the blackcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>Automatically open the Blackcoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+8"/>
         <source>Connect to the Blackcoin network through a SOCKS5 proxy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+37"/>
         <location line="+187"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+5"/>
-        <location line="+28"/>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1904,96 +1814,84 @@ The migration process will create a backup of the wallet before migrating. This 
         <location line="-118"/>
         <location line="+23"/>
         <location line="+23"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-20"/>
-        <location line="+5"/>
-        <location line="+5"/>
         <source>Shows if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+169"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+26"/>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+107"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+19"/>
+        <location line="+56"/>
+        <source>Unit to show amounts in:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+51"/>
         <source>Font in the Overview tab: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Options set in this dialog are overridden by the command line:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+3"/>
         <source>Open the %1 configuration file from the working directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Open Configuration File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Reset all client options to default.</source>
         <translation>Reset all client options to default.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>&amp;Reset Options</source>
         <translation>&amp;Reset Options</translation>
     </message>
     <message>
         <location line="-570"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-40"/>
         <source>&amp;Network</source>
         <translation>&amp;Network</translation>
     </message>
     <message>
         <location line="-299"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-99"/>
         <source>Maximum database cache size. A larger cache can contribute to faster sync, after which the benefit is less pronounced for most use cases. Lowering the cache size will reduce memory usage. Unused mempool memory is shared for this cache.</source>
         <extracomment>Tooltip text for Options window setting that sets the size of the database cache. Explains the corresponding effects of increasing/decreasing this value.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+3"/>
         <source>MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
         <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+22"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+3"/>
         <source>This allows you or a third party tool to communicate with the node through command-line and JSON-RPC commands.</source>
         <extracomment>Tooltip text for Options window setting that enables the RPC server.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Enable R&amp;PC server</source>
         <extracomment>An Options window setting to enable the RPC server.</extracomment>
         <translation type="unfinished"></translation>
@@ -2001,283 +1899,229 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="+9"/>
         <location line="+31"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+1"/>
-        <location line="+2"/>
         <source>Reserve amount that will not be used for staking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+24"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Percentage of stake going as a donation to the development team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>(set preferrable value in %)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+25"/>
         <source>W&amp;allet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-21"/>
         <source>Whether to set subtract fee from amount as default or not.</source>
         <extracomment>Tooltip text for Options window setting that sets subtracting the fee from a sending amount as default.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Subtract &amp;fee from amount by default</source>
         <extracomment>An Options window setting to set subtracting the fee from a sending amount as default.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+1"/>
         <source>Expert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>Enable coin &amp;control features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>&amp;Spend unconfirmed change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+1"/>
         <source>Enable &amp;PSBT controls</source>
         <extracomment>An options window setting to enable PSBT controls.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Whether to show PSBT controls.</source>
         <extracomment>Tooltip text for options window setting that enables PSBT controls.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>External Signer (e.g. hardware wallet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+1"/>
         <source>&amp;External signer script path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+8"/>
         <source>Map port using &amp;UPnP</source>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>Map port using NA&amp;T-PMP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Accept connections from outside.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Allow incomin&amp;g connections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
         <location line="+187"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+1"/>
-        <location line="+28"/>
         <source>Proxy &amp;IP:</source>
         <translation>Proxy &amp;IP:</translation>
     </message>
     <message>
         <location line="-155"/>
         <location line="+187"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-24"/>
-        <location line="+28"/>
         <source>&amp;Port:</source>
         <translation>&amp;Port:</translation>
     </message>
     <message>
         <location line="-162"/>
         <location line="+187"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-26"/>
-        <location line="+28"/>
         <source>Port of the proxy (e.g. 9050)</source>
         <translation>Port of the proxy (e.g. 9050)</translation>
     </message>
     <message>
         <location line="-163"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-26"/>
         <source>Used for reaching peers via:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+5"/>
         <source>IPv4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+5"/>
         <source>IPv6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+5"/>
         <source>Tor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Connect to the Blackcoin network through a separate SOCKS5 proxy for Tor onion services.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+105"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+24"/>
         <source>&amp;Window</source>
         <translation>&amp;Window</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-11"/>
         <source>Show the icon in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>&amp;Show tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>Show only a tray icon after minimizing the window.</source>
         <translation>Show only a tray icon after minimizing the window.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
         <translation>&amp;Minimize to the tray instead of the taskbar</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+4"/>
         <source>M&amp;inimize on close</source>
         <translation>M&amp;inimize on close</translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+18"/>
         <source>&amp;Display</source>
         <translation>&amp;Display</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-16"/>
         <source>User Interface &amp;language:</source>
         <translation>User Interface &amp;language:</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
         <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
-        <source>&amp;Unit to show amounts in:</source>
-        <translation>&amp;Unit to show amounts in:</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+2"/>
+        <location line="+24"/>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
         <translation>Choose the default subdivision unit to show in the interface and when sending coins.</translation>
     </message>
     <message>
         <location line="+11"/>
         <location line="+13"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+3"/>
-        <location line="+4"/>
         <source>Third-party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-10"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-2"/>
         <source>&amp;Third-party transaction URLs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-517"/>
-        <location filename="../forms/ui_optionsdialog.h" line="-94"/>
         <source>Whether to show coin control features or not.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+303"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+60"/>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+424"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+51"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_optionsdialog.h" line="+1"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+152"/>
+        <location filename="../optionsdialog.cpp" line="+153"/>
         <source>Compiled without external signing support (required for external signing)</source>
         <extracomment>&quot;External signing&quot; means using devices such as hardware wallets.</extracomment>
         <translation type="unfinished"></translation>
@@ -2288,7 +2132,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation>default</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+73"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2372,147 +2216,122 @@ The migration process will create a backup of the wallet before migrating. This 
     <name>OverviewPage</name>
     <message>
         <location filename="../forms/overviewpage.ui" line="+14"/>
-        <location filename="../forms/ui_overviewpage.h" line="+388"/>
         <source>Form</source>
         <translation>Form</translation>
     </message>
     <message>
         <location line="+296"/>
-        <location filename="../forms/ui_overviewpage.h" line="+31"/>
         <source>Watch-only:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_overviewpage.h" line="+1"/>
         <source>Available:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_overviewpage.h" line="+2"/>
         <source>Your current spendable balance</source>
         <translation>Your current spendable balance</translation>
     </message>
     <message>
         <location line="+35"/>
-        <location filename="../forms/ui_overviewpage.h" line="+5"/>
         <source>Pending:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-226"/>
-        <location filename="../forms/ui_overviewpage.h" line="-29"/>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
         <translation>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</translation>
     </message>
     <message>
         <location line="+100"/>
-        <location filename="../forms/ui_overviewpage.h" line="+9"/>
         <source>Immature:</source>
         <translation>Immature:</translation>
     </message>
     <message>
         <location line="-29"/>
-        <location filename="../forms/ui_overviewpage.h" line="-2"/>
         <source>Mined balance that has not yet matured</source>
         <translation>Mined balance that has not yet matured</translation>
     </message>
     <message>
         <location line="-150"/>
-        <location filename="../forms/ui_overviewpage.h" line="-16"/>
         <source>Balances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
         <location line="+435"/>
-        <location filename="../forms/ui_overviewpage.h" line="+2"/>
-        <location line="+47"/>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Blackcoin network after a connection is established, but this process has not completed yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-311"/>
-        <location filename="../forms/ui_overviewpage.h" line="-35"/>
         <source>Total:</source>
         <translation>Total:</translation>
     </message>
     <message>
         <location line="+49"/>
-        <location filename="../forms/ui_overviewpage.h" line="+6"/>
         <source>Your current total balance</source>
         <translation>Your current total balance</translation>
     </message>
     <message>
         <location line="+35"/>
-        <location filename="../forms/ui_overviewpage.h" line="+5"/>
         <source>Donations:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_overviewpage.h" line="+2"/>
         <source>Total donations to the Blackcoin team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_overviewpage.h" line="+2"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+52"/>
-        <location filename="../forms/ui_overviewpage.h" line="+7"/>
         <source>Your current balance in watch-only addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_overviewpage.h" line="+3"/>
         <source>Spendable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_overviewpage.h" line="+1"/>
         <source>Stake:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_overviewpage.h" line="+2"/>
         <source>Your current staking balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../forms/ui_overviewpage.h" line="+3"/>
         <source>Your current staking balance in watch-only addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+84"/>
-        <location filename="../forms/ui_overviewpage.h" line="+2"/>
         <source>Recent transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-375"/>
-        <location filename="../forms/ui_overviewpage.h" line="-41"/>
         <source>Unconfirmed transactions to watch-only addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+38"/>
-        <location filename="../forms/ui_overviewpage.h" line="+6"/>
         <source>Mined balance in watch-only addresses that has not yet matured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+110"/>
-        <location filename="../forms/ui_overviewpage.h" line="+11"/>
         <source>Current total balance in watch-only addresses</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2526,37 +2345,31 @@ The migration process will create a backup of the wallet before migrating. This 
     <name>PSBTOperationsDialog</name>
     <message>
         <location filename="../forms/psbtoperationsdialog.ui" line="+14"/>
-        <location filename="../forms/ui_psbtoperationsdialog.h" line="+131"/>
         <source>PSBT Operations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+72"/>
-        <location filename="../forms/ui_psbtoperationsdialog.h" line="+2"/>
         <source>Sign Tx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../forms/ui_psbtoperationsdialog.h" line="+1"/>
         <source>Broadcast Tx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../forms/ui_psbtoperationsdialog.h" line="+1"/>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_psbtoperationsdialog.h" line="+1"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_psbtoperationsdialog.h" line="+1"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3065,7 +2878,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="-378"/>
+        <location filename="../optionsdialog.cpp" line="-381"/>
         <source>Embedded &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3161,328 +2974,241 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <location line="+26"/>
         <location line="+26"/>
         <location line="+26"/>
-        <location filename="../forms/ui_debugwindow.h" line="+1169"/>
-        <location line="+2"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+2"/>
-        <location line="+3"/>
-        <location line="+2"/>
-        <location line="+7"/>
-        <location line="+2"/>
-        <location line="+3"/>
-        <location line="+2"/>
-        <location line="+40"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+5"/>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+5"/>
         <location filename="../rpcconsole.h" line="+145"/>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
     <message>
         <location line="-1759"/>
-        <location filename="../forms/ui_debugwindow.h" line="-167"/>
         <source>Client version</source>
         <translation>Client version</translation>
     </message>
     <message>
         <location line="-22"/>
-        <location filename="../forms/ui_debugwindow.h" line="+40"/>
         <source>&amp;Information</source>
         <translation>&amp;Information</translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../forms/ui_debugwindow.h" line="-41"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+56"/>
-        <location filename="../forms/ui_debugwindow.h" line="+5"/>
         <source>Datadir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>To specify a non-default location of the data directory use the &apos;%1&apos; option.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>Blocksdir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>Startup time</source>
         <translation>Startup time</translation>
     </message>
     <message>
         <location line="+29"/>
         <location line="+1054"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
-        <location line="+77"/>
         <source>Network</source>
         <translation>Network</translation>
     </message>
     <message>
         <location line="-1047"/>
-        <location filename="../forms/ui_debugwindow.h" line="-76"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Number of connections</source>
         <translation>Number of connections</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Local Addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+41"/>
-        <location filename="../forms/ui_debugwindow.h" line="+4"/>
         <source>Block chain</source>
         <translation>Block chain</translation>
     </message>
     <message>
         <location line="+59"/>
-        <location filename="../forms/ui_debugwindow.h" line="+5"/>
         <source>Memory Pool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_debugwindow.h" line="+1"/>
         <source>Current number of transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Memory usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+94"/>
-        <location filename="../forms/ui_debugwindow.h" line="+8"/>
         <source>Wallet: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../forms/ui_debugwindow.h" line="+1"/>
         <source>(none)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+211"/>
-        <location filename="../forms/ui_debugwindow.h" line="+17"/>
         <source>&amp;Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+80"/>
         <location line="+835"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
-        <location line="+74"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-755"/>
         <location line="+732"/>
-        <location filename="../forms/ui_debugwindow.h" line="-73"/>
-        <location line="+71"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-691"/>
-        <location filename="../forms/ui_debugwindow.h" line="+35"/>
         <source>&amp;Peers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+76"/>
-        <location filename="../forms/ui_debugwindow.h" line="-104"/>
         <source>Banned peers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+76"/>
-        <location filename="../forms/ui_debugwindow.h" line="+1"/>
         <location filename="../rpcconsole.cpp" line="+166"/>
         <source>Select a peer to view detailed information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+52"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Hide Peers Detail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../forms/ui_debugwindow.h" line="+4"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+74"/>
-        <location filename="../forms/ui_debugwindow.h" line="+10"/>
         <source>The transport layer version: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Transport</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>The BIP324 session ID string in hex, if any.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Session ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+49"/>
-        <location filename="../forms/ui_debugwindow.h" line="+7"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+72"/>
-        <location filename="../forms/ui_debugwindow.h" line="+7"/>
         <source>Whether we relay transactions to this peer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Transaction Relay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+49"/>
-        <location filename="../forms/ui_debugwindow.h" line="+7"/>
         <source>Starting Block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Synced Headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Synced Blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+75"/>
-        <location filename="../forms/ui_debugwindow.h" line="+12"/>
         <source>Last Transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+210"/>
-        <location filename="../forms/ui_debugwindow.h" line="+22"/>
         <source>The mapped Autonomous System used for diversifying peer selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Mapped AS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>Whether we relay addresses to this peer.</source>
         <extracomment>Tooltip text for the Address Relay field in the peer details area, which displays whether we relay addresses to this peer (Yes/No).</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Address Relay</source>
         <extracomment>Text title for the Address Relay field in the peer details area, which displays whether we relay addresses to this peer (Yes/No).</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>The total number of addresses received from this peer that were processed (excludes addresses that were dropped due to rate-limiting).</source>
         <extracomment>Tooltip text for the Addresses Processed field in the peer details area, which displays the total number of addresses received from this peer that were processed (excludes addresses that were dropped due to rate-limiting).</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../forms/ui_debugwindow.h" line="+5"/>
         <source>The total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</source>
         <extracomment>Tooltip text for the Addresses Rate-Limited field in the peer details area, which displays the total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-23"/>
-        <location filename="../forms/ui_debugwindow.h" line="-3"/>
         <source>Addresses Processed</source>
         <extracomment>Text title for the Addresses Processed field in the peer details area, which displays the total number of addresses received from this peer that were processed (excludes addresses that were dropped due to rate-limiting).</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../forms/ui_debugwindow.h" line="+5"/>
         <source>Addresses Rate-Limited</source>
         <extracomment>Text title for the Addresses Rate-Limited field in the peer details area, which displays the total number of addresses received from this peer that were dropped (not processed) due to rate-limiting.</extracomment>
         <translation type="unfinished"></translation>
@@ -3490,183 +3216,152 @@ If you are receiving this error you should request the merchant provide a BIP21 
     <message>
         <location line="-1726"/>
         <location line="+1213"/>
-        <location filename="../forms/ui_debugwindow.h" line="-164"/>
-        <location line="+95"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-1287"/>
-        <location filename="../forms/ui_debugwindow.h" line="-99"/>
         <source>Node window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+268"/>
-        <location filename="../forms/ui_debugwindow.h" line="+25"/>
         <source>Network addresses that your Blackcoin node is currently using to communicate with other nodes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>Current block height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+130"/>
-        <location filename="../forms/ui_debugwindow.h" line="+11"/>
         <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+78"/>
-        <location filename="../forms/ui_debugwindow.h" line="+8"/>
         <source>Decrease font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../forms/ui_debugwindow.h" line="+4"/>
         <source>Increase font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+621"/>
-        <location filename="../forms/ui_debugwindow.h" line="+24"/>
         <source>Permissions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>The direction and type of peer connection: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Direction/Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+75"/>
-        <location filename="../forms/ui_debugwindow.h" line="+13"/>
         <source>The network protocol this peer is connected through: IPv4, IPv6, Onion, I2P, or CJDNS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+72"/>
-        <location filename="../forms/ui_debugwindow.h" line="+8"/>
         <source>Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+52"/>
-        <location filename="../forms/ui_debugwindow.h" line="+8"/>
         <source>High bandwidth BIP152 compact block relay: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>High Bandwidth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+92"/>
-        <location filename="../forms/ui_debugwindow.h" line="+8"/>
         <source>Connection Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>Elapsed time since a novel block passing initial validity checks was received from this peer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Last Block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>Elapsed time since a novel transaction accepted into our mempool was received from this peer.</source>
         <extracomment>Tooltip text for the Last Transaction field in the peer details area.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../forms/ui_debugwindow.h" line="+4"/>
         <source>Last Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Last Receive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+69"/>
-        <location filename="../forms/ui_debugwindow.h" line="+6"/>
         <source>Ping Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+3"/>
         <source>The duration of a currently outstanding ping.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Ping Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Min Ping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_debugwindow.h" line="+2"/>
         <source>Time Offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-1385"/>
-        <location filename="../forms/ui_debugwindow.h" line="-118"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
     <message>
         <location line="+110"/>
-        <location filename="../forms/ui_debugwindow.h" line="+11"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../forms/ui_debugwindow.h" line="+19"/>
         <source>&amp;Console</source>
         <translation>&amp;Console</translation>
     </message>
     <message>
         <location line="+187"/>
-        <location filename="../forms/ui_debugwindow.h" line="+5"/>
         <source>&amp;Network Traffic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+68"/>
-        <location filename="../forms/ui_debugwindow.h" line="-3"/>
         <source>Totals</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3682,13 +3377,11 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location filename="../forms/debugwindow.ui" line="-291"/>
-        <location filename="../forms/ui_debugwindow.h" line="-25"/>
         <source>Debug log file</source>
         <translation>Debug log file</translation>
     </message>
     <message>
         <location line="+125"/>
-        <location filename="../forms/ui_debugwindow.h" line="+18"/>
         <source>Clear console</source>
         <translation>Clear console</translation>
     </message>
@@ -3940,105 +3633,87 @@ For more information on using this console, type %6.
     <name>ReceiveCoinsDialog</name>
     <message>
         <location filename="../forms/receivecoinsdialog.ui" line="+37"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+277"/>
         <source>&amp;Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+12"/>
         <source>&amp;Label:</source>
         <translation type="unfinished">&amp;Label:</translation>
     </message>
     <message>
         <location line="-30"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="-8"/>
         <source>&amp;Message:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+6"/>
         <source>An optional label to associate with the new receiving address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-7"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="-2"/>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-39"/>
         <location line="+159"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="-10"/>
-        <location line="+25"/>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-143"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="-21"/>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Blackcoin network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+4"/>
         <source>An optional label to associate with the new receiving address (used by you to identify an invoice).  It is also attached to the payment request.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+8"/>
         <source>An optional message that is attached to the payment request and may be displayed to the sender.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>&amp;Create new receiving address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>Clear all fields of the form.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+136"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+5"/>
         <source>Requested payments history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>Show the selected request (does the same as double clicking an entry)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>Remove the selected entries from the list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_receivecoinsdialog.h" line="+2"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4088,7 +3763,17 @@ For more information on using this console, type %6.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+2"/>
+        <source>Bech32m (Taproot)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Bech32m (BIP-350) is an upgrade to Bech32, wallet support is still limited.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+75"/>
         <source>Could not unlock wallet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4102,67 +3787,56 @@ For more information on using this console, type %6.
     <name>ReceiveRequestDialog</name>
     <message>
         <location filename="../forms/receiverequestdialog.ui" line="+14"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+225"/>
         <source>Request payment to …</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+76"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+2"/>
         <source>Address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>Message:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>Wallet:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+28"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>Copy &amp;URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>Copy &amp;Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+1"/>
         <source>&amp;Verify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+2"/>
         <source>Verify this address on e.g. a hardware wallet screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="+2"/>
         <source>&amp;Save Image…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4173,7 +3847,6 @@ For more information on using this console, type %6.
     </message>
     <message>
         <location filename="../forms/receiverequestdialog.ui" line="-234"/>
-        <location filename="../forms/ui_receiverequestdialog.h" line="-12"/>
         <source>Payment information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4253,122 +3926,102 @@ For more information on using this console, type %6.
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+465"/>
         <location filename="../sendcoinsdialog.cpp" line="+648"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
     <message>
         <location line="+76"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Coin Control Features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+2"/>
         <source>automatically selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Insufficient funds!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+83"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Quantity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+35"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Bytes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+48"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+51"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Fee:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+54"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>After Fee:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+1"/>
         <source>Change:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+44"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+2"/>
         <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+2"/>
         <source>Custom change address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+155"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+11"/>
         <source>Send to multiple recipients at once</source>
         <translation>Send to multiple recipients at once</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+2"/>
         <source>Add &amp;Recipient</source>
         <translation>Add &amp;Recipient</translation>
     </message>
     <message>
         <location line="-20"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="-6"/>
         <source>Clear all fields of the form.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-517"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="-19"/>
         <source>Inputs…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+520"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+21"/>
         <source>Clear &amp;All</source>
         <translation>Clear &amp;All</translation>
     </message>
     <message>
         <location line="+55"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+5"/>
         <source>Balance:</source>
         <translation>Balance:</translation>
     </message>
     <message>
         <location line="-84"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="-11"/>
         <source>Confirm the send action</source>
         <translation>Confirm the send action</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../forms/ui_sendcoinsdialog.h" line="+2"/>
         <source>S&amp;end</source>
         <translation>S&amp;end</translation>
     </message>
@@ -4599,99 +4252,82 @@ For more information on using this console, type %6.
     <name>SendCoinsEntry</name>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="+151"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+208"/>
         <source>A&amp;mount:</source>
         <translation>A&amp;mount:</translation>
     </message>
     <message>
         <location line="-116"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="-27"/>
         <source>Pay &amp;To:</source>
         <translation>Pay &amp;To:</translation>
     </message>
     <message>
         <location line="+18"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+2"/>
         <source>The Blackcoin address to send the payment to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+75"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+20"/>
         <source>&amp;Label:</source>
         <translation>&amp;Label:</translation>
     </message>
     <message>
         <location line="-68"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="-17"/>
         <source>Choose previously used address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+4"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+3"/>
         <source>Paste address from clipboard</source>
         <translation>Paste address from clipboard</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+4"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+3"/>
         <source>Remove this entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+60"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+10"/>
         <source>The amount to send in the selected unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+3"/>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less blackcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+6"/>
         <source>A message that was attached to the blackcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Blackcoin network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-26"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="-4"/>
         <source>S&amp;ubtract fee from amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+1"/>
         <source>Use available balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="+1"/>
         <source>Message:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-51"/>
         <location line="+3"/>
-        <location filename="../forms/ui_sendcoinsentry.h" line="-12"/>
-        <location line="+2"/>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4726,157 +4362,127 @@ For more information on using this console, type %6.
     <name>SignVerifyMessageDialog</name>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="+14"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+285"/>
         <source>Signatures - Sign / Verify a Message</source>
         <translation>Signatures - Sign / Verify a Message</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+38"/>
         <source>&amp;Sign Message</source>
         <translation>&amp;Sign Message</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="-37"/>
         <source>You can sign messages/agreements with your legacy (P2PKH) addresses to prove you can receive blackcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+2"/>
         <source>The Blackcoin address to sign the message with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+216"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+3"/>
-        <location line="+38"/>
         <source>Choose previously used address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-206"/>
         <location line="+216"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="-34"/>
-        <location line="+38"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
         <location line="-206"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="-35"/>
         <source>Paste address from clipboard</source>
         <translation>Paste address from clipboard</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+4"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
         <location line="+12"/>
         <location line="+3"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+3"/>
-        <location line="+2"/>
         <source>Enter the message you want to sign here</source>
         <translation>Enter the message you want to sign here</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+1"/>
         <source>Signature</source>
         <translation>Signature</translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+3"/>
         <source>Copy the current signature to the system clipboard</source>
         <translation>Copy the current signature to the system clipboard</translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+4"/>
         <source>Sign the message to prove you own this Blackcoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+106"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+11"/>
         <source>The Blackcoin address the message was signed with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+51"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+18"/>
         <source>Verify the message to ensure it was signed with the specified Blackcoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-154"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="-27"/>
         <source>Sign &amp;Message</source>
         <translation>Sign &amp;Message</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+2"/>
         <source>Reset all sign message fields</source>
         <translation>Reset all sign message fields</translation>
     </message>
     <message>
         <location line="+3"/>
         <location line="+157"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+2"/>
-        <location line="+29"/>
         <source>Clear &amp;All</source>
         <translation>Clear &amp;All</translation>
     </message>
     <message>
         <location line="-98"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+2"/>
         <source>&amp;Verify Message</source>
         <translation>&amp;Verify Message</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="-28"/>
         <source>Enter the receiver&apos;s address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+50"/>
         <location line="+3"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+12"/>
-        <location line="+2"/>
         <source>The signed message to verify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+3"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+2"/>
-        <location line="+2"/>
         <source>The signature given when the message was signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+4"/>
         <source>Verify &amp;Message</source>
         <translation>Verify &amp;Message</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="+2"/>
         <source>Reset all verify message fields</source>
         <translation>Reset all verify message fields</translation>
     </message>
     <message>
         <location line="-210"/>
-        <location filename="../forms/ui_signverifymessagedialog.h" line="-39"/>
         <source>Click &quot;Sign Message&quot; to generate signature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5204,7 +4810,6 @@ For more information on using this console, type %6.
     <name>TransactionDescDialog</name>
     <message>
         <location filename="../forms/transactiondescdialog.ui" line="+20"/>
-        <location filename="../forms/ui_transactiondescdialog.h" line="+60"/>
         <source>This pane shows a detailed description of the transaction</source>
         <translation>This pane shows a detailed description of the transaction</translation>
     </message>
@@ -5787,7 +5392,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+16"/>
         <source>Please contribute if you find %s useful. Visit %s for further information about the software.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5917,7 +5522,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-236"/>
+        <location line="-233"/>
         <source>%s is set very high! Fees this large could be paid on a single transaction.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6025,11 +5630,6 @@ Go to File &gt; Open Wallet to load a wallet.
     <message>
         <location line="+4"/>
         <source>Outbound connections restricted to i2p (-onlynet=i2p) but -i2psam is not provided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong, %s will not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
