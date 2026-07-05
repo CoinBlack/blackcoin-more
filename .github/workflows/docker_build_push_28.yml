@@ -5,7 +5,7 @@ jobs:
   # 1. Native AMD64 Builder Job
   build-amd64:
     name: Build AMD64 Images (Native)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -33,7 +33,7 @@ jobs:
   # 2. Native ARM64 Builder Job
   build-arm64:
     name: Build ARM64 Images (Native)
-    runs-on: ubuntu-24.04-arm64
+    runs-on: ubuntu-22.04-arm
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -62,7 +62,7 @@ jobs:
   assemble-manifests:
     name: Create & Push Multi-Arch Manifests
     needs: [build-amd64, build-arm64]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Login to DockerHub Registry
         uses: docker/login-action@v4.4.0
