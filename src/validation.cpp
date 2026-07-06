@@ -4345,12 +4345,14 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     // blocks containing such outputs are rejected.
     // Known witness versions: 0 (P2WPKH/P2WSH), 1 (Taproot). We check v > 1 (not
     // v > 0), so v1/Taproot outputs always pass through regardless of gate choice.
-    // Gate on DEPLOYMENT_TAPROOT for symmetry with the DISCOURAGE flag in
-    // GetBlockScriptFlags. On testnet Taproot activated at 2,865,000 (after
-    // existing QQ v16 outputs at ~2,864,xxx); on mainnet it will activate via
-    // BIP-9 after July 12, before any v16 outputs are expected.
-    const bool taproot_active = DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT);
-    if (taproot_active) {
+    // Gate on DEPLOYMENT_SEGWIT (buried, height-based) so the rule is active
+    // wherever witness programs exist at all — on mainnet since block 5805000.
+    // Gating on DEPLOYMENT_TAPROOT ACTIVE would leave a ~22-day BIP-9 window
+    // (STARTED→LOCKED_IN→ACTIVE) during which v>1 outputs (e.g. Quantum Quasar
+    // witness-v16 migration outputs) are anyone-can-spend. SegWit is already
+    // active, so this closes the gap with no BIP-9 wait.
+    const bool witness_active = DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_SEGWIT);
+    if (witness_active) {
         for (const auto& tx : block.vtx) {
             for (const auto& txout : tx->vout) {
                 int witness_version = 0;
