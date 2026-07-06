@@ -1,6 +1,31 @@
 # Changelog
 
-## v26.2.0-beta-2 (2024-XX-XX)
+## v28.4.0 (2026-07-06
+- Complete integration of Bitcoin Core 28.4.0
+- Modernized build system with updated dependencies (secp256k1, leveldb, etc.)
+- Header spam protection: Enhanced qtum header spam filter
+- Rolling checkpoints: Enhanced qtum rolling checkpoint validation
+- V2 transaction support: Proper handling of tx.version v2 
+- Time serialization: Uses GetAdjustedTimeSeconds() for v2 txs
+- COutPoint modernization: COutPoint::hash now typed as Txid
+- Script validation: Enhanced P2SH and witness script handling
+- Bury SegWit Deployment: start BIP-9 for Taproot deployment, July 12th
+- SignKey carrier: OP_RETURN output with pubkey and timestamp for kernel identification
+- Input combining: Fixed COutPoint comparison (was comparing only tx hash, now full `COutPoint`)
+- P2PK legacy support: Automatic upgrade of P2PK kernels to P2PKH rewards. Support SegWit v0/v1 staking.
+- Staking thresholds: Reduced `GetStakeCombineThreshold` from 500 to 250 BLK
+- Cache management: Automatic stake cache clearing when size grows too large
+- Burn RPC modernization: Migrated to native `SendMoney` (Bitcoin Core 28.x style)
+- Fee handling: Enhanced fee estimation and relay fee logic
+- OptimizeUTXO: Fixed weight checking to prevent oversized transactions
+- SendMoneyToScript: Replaced with modern Bitcoin Core transaction building
+- and many many more changes, and bugfixes
+
+
+## v26.2.0 (2024-12-18)
+- Begin signalling for SegWit activation on mainnet on June 20, 2025
+
+## v26.2.0-beta-2 (2024-11-20)
 - Activated SegWit on testnet on Sep 23, 2024
 - Changed miner activation window parameters for BIP9 soft fork deployment
 - Updated derivation path with the BIP44 coin type for descriptor wallets
