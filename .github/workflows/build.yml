@@ -28,6 +28,7 @@ jobs:
           - linux-64-bit
           - windows-64-bit
           - macos-64-bit
+          - macos-arm-64-bit
           - linux-arm-32-bit
           - linux-arm-64-bit
         include:
@@ -74,6 +75,17 @@ jobs:
             check-symbols: false
             dep-opts: ""
             config-opts: "--enable-sse2"
+            goal: deploy
+            sdk: 15.0-15A240d
+
+          - name: macos-arm-64-bit
+            host: arm64-apple-darwin
+            os: ubuntu-24.04
+            packages: clang lld llvm g++ zip libz-dev python3-setuptools libtinfo6 xorriso
+            check-security: false
+            check-symbols: false
+            dep-opts: ""
+            config-opts: ""
             goal: deploy
             sdk: 15.0-15A240d
 
