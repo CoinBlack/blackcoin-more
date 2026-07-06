@@ -74,7 +74,7 @@ jobs:
             check-symbols: false
             dep-opts: ""
             config-opts: "--enable-sse2"
-            goal: install-strip deploy
+            goal: deploy
             sdk: 15.0-15A240d
 
           - name: linux-arm-32-bit
