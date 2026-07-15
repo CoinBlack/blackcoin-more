@@ -15,6 +15,7 @@
 #include <test/fuzz/util.h>
 #include <test/util/setup_common.h>
 #include <util/hasher.h>
+#include <util/time.h>
 
 #include <cassert>
 #include <cstdint>
@@ -255,7 +256,7 @@ FUZZ_TARGET(coins_view, .init = initialize_coins_view)
                     // It is not allowed to call CheckTxInputs if CheckTransaction failed
                     return;
                 }
-                if (Consensus::CheckTxInputs(transaction, state, coins_view_cache, fuzzed_data_provider.ConsumeIntegralInRange<int>(0, std::numeric_limits<int>::max()), tx_fee_out)) {
+                if (Consensus::CheckTxInputs(transaction, state, coins_view_cache, fuzzed_data_provider.ConsumeIntegralInRange<int>(0, std::numeric_limits<int>::max()), tx_fee_out, GetAdjustedTimeSeconds())) {
                     assert(MoneyRange(tx_fee_out));
                 }
             },

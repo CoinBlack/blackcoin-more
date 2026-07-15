@@ -907,8 +907,15 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "non-BIP68-final");
     }
 
-    // The mempool holds txs for the next block, so pass height+1 to CheckTxInputs
-    if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees)) {
+    // The mempool holds txs for the next block, so pass height+1 to CheckTxInputs.
+    // For v2 transactions, use the chain tip's time as nBlockTime (deterministic)
+    // rather than GetAdjustedTimeSeconds() (wall clock, non-deterministic). This
+    // ensures that a v2 tx spending a v2 output is not rejected due to local
+    // clock skew: both coin.nTime (set at mining) and nTimeTx (computed here)
+    // will reference the chain's view of time.
+    const CBlockIndex* const pindex = m_active_chainstate.m_chain.Tip();
+    const int64_t nBlockTime = pindex ? pindex->GetBlockTime() : GetAdjustedTimeSeconds();
+    if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees, nBlockTime)) {
         return false; // state filled in by CheckTxInputs
     }
 
@@ -2619,7 +2626,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         {
             CAmount txfee = 0;
             TxValidationState tx_state;
-            if (!Consensus::CheckTxInputs(tx, tx_state, view, pindex->nHeight, txfee)) {
+            if (!Consensus::CheckTxInputs(tx, tx_state, view, pindex->nHeight, txfee, pindex->nTime)) {
                 // Any transaction validation failure in ConnectBlock is a block consensus failure
                 state.Invalid(BlockValidationResult::BLOCK_CONSENSUS,
                             tx_state.GetRejectReason(), tx_state.GetDebugMessage());
