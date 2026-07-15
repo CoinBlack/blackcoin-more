@@ -105,6 +105,18 @@ bool BaseIndex::Init()
         // best chain, we will rewind to the fork point during index sync
         const CBlockIndex* locator_index{m_chainstate->m_blockman.LookupBlockIndex(locator.vHave.at(0))};
         if (!locator_index) {
+            // Blackcoin: workaround for issue https://github.com/CoinBlack/blackcoin-more/issues/22
+            // If the locator tip is not found (e.g. after a reorg or crash that pruned the
+            // block index entry), walk the locator backwards to find an ancestor that still exists.
+            for (const auto& hash : locator.vHave) {
+                locator_index = m_chainstate->m_blockman.LookupBlockIndex(hash);
+                if (locator_index) {
+                    LogPrintf("%s: Block locator tip not found; falling back to ancestor at height %d\n", GetName(), locator_index->nHeight);
+                    break;
+                }
+            }
+        }
+        if (!locator_index) {
             return InitError(strprintf(Untranslated("%s: best block of the index not found. Please rebuild the index."), GetName()));
         }
         SetBestBlockIndex(locator_index);
