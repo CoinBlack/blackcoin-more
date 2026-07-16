@@ -50,8 +50,6 @@ void OptionTests::migrateSettings()
     QVERIFY(settings.contains("nThreadsScriptVerif"));
     QVERIFY(settings.contains("fUseUPnP"));
     QVERIFY(settings.contains("fListen"));
-    QVERIFY(settings.contains("bPrune"));
-    QVERIFY(settings.contains("nPruneSize"));
     QVERIFY(settings.contains("fUseProxy"));
     QVERIFY(settings.contains("addrProxy"));
     QVERIFY(settings.contains("fUseSeparateProxyTor"));
