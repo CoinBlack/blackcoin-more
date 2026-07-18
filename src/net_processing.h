@@ -89,6 +89,8 @@ public:
         //! Whether or not the internal RNG behaves deterministically (this is
         //! a test-only option).
         bool deterministic_rng{false};
+        //! Whether to reject peers advertising reserved experimental service bits (bits 24-31).
+        bool block_unknown_services{false};
     };
 
     static std::unique_ptr<PeerManager> make(CConnman& connman, AddrMan& addrman,

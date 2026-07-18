@@ -195,6 +195,18 @@ static constexpr uint64_t CMPCTBLOCKS_VERSION{2};
 
 // Internal stuff
 namespace {
+
+// Bits 24-31 are reserved in Bitcoin for temporary experiments.
+// Used by -blockunknownservices to filter peers advertising unknown fork bits.
+static constexpr ServiceFlags FORBIDDEN_SERVICE_BITS = ServiceFlags(
+    (1ULL << 24) | (1ULL << 25) | (1ULL << 26) | (1ULL << 27) |
+    (1ULL << 28) | (1ULL << 29) | (1ULL << 30) | (1ULL << 31));
+
+static bool HasForbiddenServiceBits(ServiceFlags services)
+{
+    return (services & FORBIDDEN_SERVICE_BITS) != 0;
+}
+
 /** Blocks that are in flight, and that are in the queue to be downloaded. */
 struct QueuedBlock {
     /** BlockIndex. We must have this since we only request blocks when we've already validated the header. */
@@ -3968,6 +3980,15 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         if (nTime < 0) {
             nTime = 0;
         }
+
+        // Must check before SetServices below to avoid recording forbidden service bits in addrman.
+        if (m_opts.block_unknown_services && !pfrom.HasPermission(NetPermissionFlags::NoBan) && HasForbiddenServiceBits(nServices))
+        {
+            LogPrint(BCLog::NET, "peer=%d advertised forbidden service bits (%08x); disconnecting\n", pfrom.GetId(), nServices);
+            pfrom.fDisconnect = true;
+            return;
+        }
+
         vRecv.ignore(8); // Ignore the addrMe service bits sent by the peer
         vRecv >> CNetAddr::V1(addrMe);
         if (!pfrom.IsInboundConn())
@@ -4398,6 +4419,11 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
             } else {
                 peer->m_addr_token_bucket -= 1.0;
             }
+            if (m_opts.block_unknown_services && HasForbiddenServiceBits(addr.nServices)) {
+                LogPrint(BCLog::NET, "ignoring address %s from peer=%d: contains forbidden service bits (%08x)\n", addr.ToStringAddrPort(), pfrom.GetId(), addr.nServices);
+                continue;
+            }
+
             // We only bother storing full nodes, though this may include
             // things which we would not make an outbound connection to, in
             // part because we may make feeler connections to them.
