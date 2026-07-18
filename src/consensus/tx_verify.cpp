@@ -162,7 +162,7 @@ int64_t GetTransactionSigOpCost(const CTransaction& tx, const CCoinsViewCache& i
     return nSigOps;
 }
 
-bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee, int64_t nBlockTime)
+bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee)
 {
     // are the actual inputs available?
     if (!inputs.HaveInputs(tx)) {
@@ -170,15 +170,10 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
                          strprintf("%s: inputs missing/spent", __func__));
     }
 
-    // Blackcoin: in v2 transactions nTime is not serialized on the wire.
-    // Use the block time (passed by caller) for deterministic validation.
-    // For block validation this is the block header time; for mempool
-    // acceptance this is the current adjusted time. This ensures that a
-    // v2 transaction spending a v2 output in the same block passes the
-    // coin.nTime > nTimeTx check, since both use the same block time.
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
     int64_t nTimeTx = tx.nTime;
     if (!nTimeTx && tx.version >= 2)
-        nTimeTx = nBlockTime;
+        nTimeTx = GetAdjustedTimeSeconds();
 
     CAmount nValueIn = 0;
     for (unsigned int i = 0; i < tx.vin.size(); ++i) {
@@ -193,6 +188,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
         }
 
         // Check transaction timestamp
+        // blackcoin: todo remove or change dead code.
         if (coin.nTime > nTimeTx)
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-time-earlier-than-input");
 

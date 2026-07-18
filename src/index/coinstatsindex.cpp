@@ -36,6 +36,10 @@ struct DBVal {
     CAmount total_prevout_spent_amount;
     CAmount total_new_outputs_ex_coinbase_amount;
     CAmount total_coinbase_amount;
+    // Blackcoin: total cumulative value of coinstake reward outputs.
+    CAmount total_coinstake_amount;
+    // Blackcoin: total cumulative value of coinstake transaction inputs.
+    CAmount total_coinstake_input_amount;
     CAmount total_unspendables_genesis_block;
     CAmount total_unspendables_scripts;
     CAmount total_unspendables_unclaimed_rewards;
@@ -51,6 +55,8 @@ struct DBVal {
         READWRITE(obj.total_prevout_spent_amount);
         READWRITE(obj.total_new_outputs_ex_coinbase_amount);
         READWRITE(obj.total_coinbase_amount);
+        READWRITE(obj.total_coinstake_amount);
+        READWRITE(obj.total_coinstake_input_amount);
         READWRITE(obj.total_unspendables_genesis_block);
         READWRITE(obj.total_unspendables_scripts);
         READWRITE(obj.total_unspendables_unclaimed_rewards);
@@ -114,8 +120,6 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
 {
     CBlockUndo block_undo;
     const CAmount block_subsidy{GetBlockSubsidy(block.height, Params().GetConsensus(), block.is_pos)};
-    m_total_subsidy += block_subsidy;
-
     // Ignore genesis block
     if (block.height > 0) {
         // pindex variable gives indexing code access to node internals. It
@@ -142,6 +146,10 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
             }
         }
 
+        // Save pre-block coinstake amounts to compute per-block deltas
+        const CAmount coinstake_before = m_total_coinstake_amount;
+        const CAmount coinstake_input_before = m_total_coinstake_input_amount;
+
         // Add the new utxos created from the block
         assert(block.data);
         for (size_t i = 0; i < block.data->vtx.size(); ++i) {
@@ -149,11 +157,11 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
 
             for (uint32_t j = 0; j < tx->vout.size(); ++j) {
                 const CTxOut& out{tx->vout[j]};
-                // For v2 transactions, nTime is not serialized on the wire.
-                // Always use block header time to ensure deterministic Coin nTime
-                // regardless of whether tx came from memory or disk.
-                int nTimeOut = tx->version >= 2 ? (int)block.data->nTime : (int)tx->nTime;
-                Coin coin{out, block.height, tx->IsCoinBase(), tx->IsCoinStake(), nTimeOut};
+                // The Coin's nTime field is set from tx->nTime but is not used
+                // by the muhash (TxOutSer only encodes outpoint, height, coinbase,
+                // coinstake, and out) nor by the stats tracking. It's preserved
+                // here for forward compatibility and matches the AddCoins path.
+                Coin coin{out, block.height, tx->IsCoinBase(), tx->IsCoinStake(), (int)tx->nTime};
                 COutPoint outpoint{tx->GetHash(), j};
 
                 // Skip unspendable coins
@@ -167,6 +175,11 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
 
                 if (tx->IsCoinBase()) {
                     m_total_coinbase_amount += coin.out.nValue;
+                } else if (tx->IsCoinStake()) {
+                    // Blackcoin: coinstake outputs are the PoS staking reward
+                    // paid to the staker. Track them separately so the RPC can
+                    // report PoW coinbase and PoS coinstake amounts.
+                    m_total_coinstake_amount += coin.out.nValue;
                 } else {
                     m_total_new_outputs_ex_coinbase_amount += coin.out.nValue;
                 }
@@ -176,7 +189,8 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
                 m_bogo_size += GetBogoSize(coin.out.scriptPubKey);
             }
 
-            // The coinbase tx has no undo data since no former output is spent
+            // The coinbase tx has no undo data since no former output is spent.
+            // The coinstake tx DOES have undo data: the kernel input it spends.
             if (!tx->IsCoinBase()) {
                 const auto& tx_undo{block_undo.vtxundo.at(i - 1)};
 
@@ -184,17 +198,14 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
                     Coin coin{tx_undo.vprevout[j]};
                     COutPoint outpoint{tx->vin[j].prevout.hash, tx->vin[j].prevout.n};
 
-                    // For old undo data written before the AddCoins fix,
-                    // v2 transaction outputs may have nTime = 0. Reconstruct it
-                    // from the coin's creation block.
-                    if (coin.nTime == 0 && coin.nHeight > 0) {
-                        const CBlockIndex* pindexPrev = pindex->GetAncestor(coin.nHeight);
-                        if (pindexPrev) coin.nTime = pindexPrev->nTime;
-                    }
-
                     RemoveCoinHash(m_muhash, outpoint, coin);
 
                     m_total_prevout_spent_amount += coin.out.nValue;
+                    // Blackcoin: track coinstake inputs separately so the RPC
+                    // can report the staking reward (output - input).
+                    if (tx->IsCoinStake()) {
+                        m_total_coinstake_input_amount += coin.out.nValue;
+                    }
 
                     --m_transaction_output_count;
                     m_total_amount -= coin.out.nValue;
@@ -202,19 +213,43 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
                 }
             }
         }
+
+        // Compute the effective subsidy for this block.
+        // Pre-PoSv3 PoS blocks have coin-age-based rewards rather than a
+        // fixed protocol subsidy.  Use the actual staking reward so the
+        // cumulative unclaimed_rewards accounting stays consistent.
+        CAmount effective_subsidy;
+        if (block.is_pos && !Params().GetConsensus().IsProtocolV3(block.data->nTime)) {
+            effective_subsidy = (m_total_coinstake_amount - coinstake_before) -
+                                (m_total_coinstake_input_amount - coinstake_input_before);
+        } else {
+            effective_subsidy = block_subsidy;
+        }
+        m_total_subsidy += effective_subsidy;
+
+        // If spent prevouts + block subsidy are still a higher amount than
+        // new outputs + coinbase + coinstake + current unspendable amount this means
+        // the miner did not claim the full block reward. Unclaimed block
+        // rewards are also unspendable.
+        const CAmount unclaimed_rewards{(m_total_prevout_spent_amount + m_total_subsidy) - (m_total_new_outputs_ex_coinbase_amount + m_total_coinbase_amount + m_total_coinstake_amount + m_total_unspendable_amount)};
+        m_total_unspendable_amount += unclaimed_rewards;
+        m_total_unspendables_unclaimed_rewards += unclaimed_rewards;
     } else {
         // genesis block
-        m_total_unspendable_amount += block_subsidy;
-        m_total_unspendables_genesis_block += block_subsidy;
+        // Blackcoin: The genesis coinbase output value may not equal the
+        // theoretical subsidy (Blackcoin's genesis coinbase is 0). Walk the
+        // actual outputs to track genuinely unspendable amounts rather than
+        // blindly adding the subsidy.
+        assert(block.data);
+        for (const auto& tx : block.data->vtx) {
+            for (const auto& out : tx->vout) {
+                if (out.scriptPubKey.IsUnspendable()) {
+                    m_total_unspendable_amount += out.nValue;
+                    m_total_unspendables_genesis_block += out.nValue;
+                }
+            }
+        }
     }
-
-    // If spent prevouts + block subsidy are still a higher amount than
-    // new outputs + coinbase + current unspendable amount this means
-    // the miner did not claim the full block reward. Unclaimed block
-    // rewards are also unspendable.
-    const CAmount unclaimed_rewards{(m_total_prevout_spent_amount + m_total_subsidy) - (m_total_new_outputs_ex_coinbase_amount + m_total_coinbase_amount + m_total_unspendable_amount)};
-    m_total_unspendable_amount += unclaimed_rewards;
-    m_total_unspendables_unclaimed_rewards += unclaimed_rewards;
 
     std::pair<uint256, DBVal> value;
     value.first = block.hash;
@@ -226,6 +261,8 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
     value.second.total_prevout_spent_amount = m_total_prevout_spent_amount;
     value.second.total_new_outputs_ex_coinbase_amount = m_total_new_outputs_ex_coinbase_amount;
     value.second.total_coinbase_amount = m_total_coinbase_amount;
+    value.second.total_coinstake_amount = m_total_coinstake_amount;
+    value.second.total_coinstake_input_amount = m_total_coinstake_input_amount;
     value.second.total_unspendables_genesis_block = m_total_unspendables_genesis_block;
     value.second.total_unspendables_scripts = m_total_unspendables_scripts;
     value.second.total_unspendables_unclaimed_rewards = m_total_unspendables_unclaimed_rewards;
@@ -344,6 +381,8 @@ std::optional<CCoinsStats> CoinStatsIndex::LookUpStats(const CBlockIndex& block_
     stats.total_prevout_spent_amount = entry.total_prevout_spent_amount;
     stats.total_new_outputs_ex_coinbase_amount = entry.total_new_outputs_ex_coinbase_amount;
     stats.total_coinbase_amount = entry.total_coinbase_amount;
+    stats.total_coinstake_amount = entry.total_coinstake_amount;
+    stats.total_coinstake_input_amount = entry.total_coinstake_input_amount;
     stats.total_unspendables_genesis_block = entry.total_unspendables_genesis_block;
     stats.total_unspendables_scripts = entry.total_unspendables_scripts;
     stats.total_unspendables_unclaimed_rewards = entry.total_unspendables_unclaimed_rewards;
@@ -388,6 +427,8 @@ bool CoinStatsIndex::CustomInit(const std::optional<interfaces::BlockKey>& block
         m_total_prevout_spent_amount = entry.total_prevout_spent_amount;
         m_total_new_outputs_ex_coinbase_amount = entry.total_new_outputs_ex_coinbase_amount;
         m_total_coinbase_amount = entry.total_coinbase_amount;
+        m_total_coinstake_amount = entry.total_coinstake_amount;
+        m_total_coinstake_input_amount = entry.total_coinstake_input_amount;
         m_total_unspendables_genesis_block = entry.total_unspendables_genesis_block;
         m_total_unspendables_scripts = entry.total_unspendables_scripts;
         m_total_unspendables_unclaimed_rewards = entry.total_unspendables_unclaimed_rewards;
@@ -409,9 +450,6 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
 {
     CBlockUndo block_undo;
     std::pair<uint256, DBVal> read_out;
-
-    const CAmount block_subsidy{GetBlockSubsidy(pindex->nHeight, Params().GetConsensus(), block.IsProofOfStake())};
-    m_total_subsidy -= block_subsidy;
 
     // Ignore genesis block
     if (pindex->nHeight > 0) {
@@ -436,6 +474,10 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
         }
     }
 
+    // Save pre-block coinstake amounts to compute per-block deltas
+    const CAmount coinstake_before = m_total_coinstake_amount;
+    const CAmount coinstake_input_before = m_total_coinstake_input_amount;
+
     // Remove the new UTXOs that were created from the block
     for (size_t i = 0; i < block.vtx.size(); ++i) {
         const auto& tx{block.vtx.at(i)};
@@ -443,11 +485,8 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
         for (uint32_t j = 0; j < tx->vout.size(); ++j) {
             const CTxOut& out{tx->vout[j]};
             COutPoint outpoint{tx->GetHash(), j};
-            // For v2 transactions, nTime is not serialized on the wire.
-            // Always use block header time to ensure deterministic Coin nTime
-            // regardless of whether tx came from memory or disk.
-            int nTimeOut = tx->version >= 2 ? (int)block.nTime : (int)tx->nTime;
-            Coin coin{out, pindex->nHeight, tx->IsCoinBase(), tx->IsCoinStake(), nTimeOut};
+            // nTime is not used by the muhash or stats; see CustomAppend comment.
+            Coin coin{out, pindex->nHeight, tx->IsCoinBase(), tx->IsCoinStake(), (int)tx->nTime};
 
             // Skip unspendable coins
             if (coin.out.scriptPubKey.IsUnspendable()) {
@@ -460,6 +499,9 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
 
             if (tx->IsCoinBase()) {
                 m_total_coinbase_amount -= coin.out.nValue;
+            } else if (tx->IsCoinStake()) {
+                // Blackcoin: mirror of CustomAppend for coinstake outputs.
+                m_total_coinstake_amount -= coin.out.nValue;
             } else {
                 m_total_new_outputs_ex_coinbase_amount -= coin.out.nValue;
             }
@@ -469,25 +511,22 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
             m_bogo_size -= GetBogoSize(coin.out.scriptPubKey);
         }
 
-        // The coinbase tx has no undo data since no former output is spent
+        // The coinbase tx has no undo data since no former output is spent.
+        // The coinstake tx DOES have undo data: the kernel input it spends.
         if (!tx->IsCoinBase()) {
             const auto& tx_undo{block_undo.vtxundo.at(i - 1)};
 
             for (size_t j = 0; j < tx_undo.vprevout.size(); ++j) {
                 Coin coin{tx_undo.vprevout[j]};
-                COutPoint outpoint{tx->vin[j].prevout.hash, tx->vin[j].prevout.n};
-
-                // For old undo data written before the AddCoins fix,
-                // v2 transaction outputs may have nTime = 0. Reconstruct it
-                // from the coin's creation block.
-                if (coin.nTime == 0 && coin.nHeight > 0) {
-                    const CBlockIndex* pindexPrev = pindex->GetAncestor(coin.nHeight);
-                    if (pindexPrev) coin.nTime = pindexPrev->nTime;
-                }
+                COutPoint outpoint = COutPoint{tx->vin[j].prevout.hash, tx->vin[j].prevout.n};
 
                 ApplyCoinHash(m_muhash, outpoint, coin);
 
                 m_total_prevout_spent_amount -= coin.out.nValue;
+                // Blackcoin: mirror of CustomAppend coinstake input tracking.
+                if (tx->IsCoinStake()) {
+                    m_total_coinstake_input_amount -= coin.out.nValue;
+                }
 
                 m_transaction_output_count++;
                 m_total_amount += coin.out.nValue;
@@ -496,9 +535,22 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
         }
     }
 
-    const CAmount unclaimed_rewards{(m_total_new_outputs_ex_coinbase_amount + m_total_coinbase_amount + m_total_unspendable_amount) - (m_total_prevout_spent_amount + m_total_subsidy)};
-    m_total_unspendable_amount -= unclaimed_rewards;
-    m_total_unspendables_unclaimed_rewards -= unclaimed_rewards;
+    if (pindex->nHeight > 0) {
+        const CAmount block_coinstake_output = coinstake_before - m_total_coinstake_amount;
+        const CAmount block_coinstake_input = coinstake_input_before - m_total_coinstake_input_amount;
+
+        CAmount effective_subsidy;
+        if (block.IsProofOfStake() && !Params().GetConsensus().IsProtocolV3(block.nTime)) {
+            effective_subsidy = block_coinstake_output - block_coinstake_input;
+        } else {
+            effective_subsidy = GetBlockSubsidy(pindex->nHeight, Params().GetConsensus(), block.IsProofOfStake());
+        }
+        m_total_subsidy -= effective_subsidy;
+
+        const CAmount unclaimed_rewards{(m_total_new_outputs_ex_coinbase_amount + m_total_coinbase_amount + m_total_coinstake_amount + m_total_unspendable_amount) - (m_total_prevout_spent_amount + m_total_subsidy)};
+        m_total_unspendable_amount -= unclaimed_rewards;
+        m_total_unspendables_unclaimed_rewards -= unclaimed_rewards;
+    }
 
     // Check that the rolled back internal values are consistent with the DB read out
     uint256 out;
@@ -513,6 +565,8 @@ bool CoinStatsIndex::ReverseBlock(const CBlock& block, const CBlockIndex* pindex
     Assert(m_total_prevout_spent_amount == read_out.second.total_prevout_spent_amount);
     Assert(m_total_new_outputs_ex_coinbase_amount == read_out.second.total_new_outputs_ex_coinbase_amount);
     Assert(m_total_coinbase_amount == read_out.second.total_coinbase_amount);
+    Assert(m_total_coinstake_amount == read_out.second.total_coinstake_amount);
+    Assert(m_total_coinstake_input_amount == read_out.second.total_coinstake_input_amount);
     Assert(m_total_unspendables_genesis_block == read_out.second.total_unspendables_genesis_block);
     Assert(m_total_unspendables_scripts == read_out.second.total_unspendables_scripts);
     Assert(m_total_unspendables_unclaimed_rewards == read_out.second.total_unspendables_unclaimed_rewards);

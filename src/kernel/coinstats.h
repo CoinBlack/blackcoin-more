@@ -58,6 +58,13 @@ struct CCoinsStats {
     CAmount total_new_outputs_ex_coinbase_amount{0};
     //! Total cumulative amount of coinbase outputs up to and including this block
     CAmount total_coinbase_amount{0};
+    //! Total cumulative amount of coinstake reward outputs up to and including this block.
+    //! Blackcoin: this is the PoS equivalent of total_coinbase_amount. A coinstake
+    //! output is the newly-created stake reward paid by a PoS block to the staker.
+    //! Uses std::optional to signal overflow, same as total_amount.
+    std::optional<CAmount> total_coinstake_amount{std::nullopt};
+    //! Total cumulative value of coinstake transaction inputs up to and including this block.
+    std::optional<CAmount> total_coinstake_input_amount{std::nullopt};
     //! The unspendable coinbase amount from the genesis block
     CAmount total_unspendables_genesis_block{0};
     //! Total cumulative amount of outputs sent to unspendable scripts (OP_RETURN for example) up to and including this block

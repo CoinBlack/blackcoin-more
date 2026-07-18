@@ -42,7 +42,6 @@ uint64_t GetBogoSize(const CScript& script_pub_key)
     return 32 /* txid */ +
            4 /* vout index */ +
            4 /* height + coinbase + coinstake */ +
-           4 /* nTime */ +
            8 /* amount */ +
            2 /* scriptPubKey len */ +
            script_pub_key.size() /* scriptPubKey */;
@@ -52,8 +51,11 @@ template <typename T>
 static void TxOutSer(T& ss, const COutPoint& outpoint, const Coin& coin)
 {
     ss << outpoint;
-    ss << static_cast<uint32_t>((coin.nHeight << 2) + (coin.fCoinBase ? 1u : 0u) + (coin.fCoinStake ? 2u : 0u));
-    ss << VARINT(coin.nTime);
+    // Blackcoin: encode coinbase in bit 0 and coinstake in bit 1, with height
+    // in the upper bits. For Bitcoin-only chains coinstake is always 0, so
+    // coins from PoW-only chains have the same encoding as upstream (coinstake
+    // bit clear, height shifted by 2 with coinbase in the low 2 bits).
+    ss << static_cast<uint32_t>((coin.nHeight << 2) | (coin.fCoinBase ? 1u : 0u) | (coin.fCoinStake ? 2u : 0u));
     ss << coin.out;
 }
 
@@ -108,6 +110,12 @@ static void ApplyStats(CCoinsStats& stats, const uint256& hash, const std::map<u
         stats.nTransactionOutputs++;
         if (stats.total_amount.has_value()) {
             stats.total_amount = CheckedAdd(*stats.total_amount, it->second.out.nValue);
+        }
+        // Blackcoin: track coinstake reward totals for the direct
+        // (non-index) path. Uses the per-coin fCoinStake flag set when
+        // the Coin was created via AddCoins.
+        if (it->second.fCoinStake && stats.total_coinstake_amount.has_value()) {
+            stats.total_coinstake_amount = CheckedAdd(*stats.total_coinstake_amount, it->second.out.nValue);
         }
         stats.nBogoSize += GetBogoSize(it->second.out.scriptPubKey);
     }

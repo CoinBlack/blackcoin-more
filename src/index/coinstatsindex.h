@@ -37,6 +37,14 @@ private:
     CAmount m_total_prevout_spent_amount{0};
     CAmount m_total_new_outputs_ex_coinbase_amount{0};
     CAmount m_total_coinbase_amount{0};
+    //! Blackcoin: total cumulative value of coinstake reward outputs (PoS
+    //! staking rewards). Mirror of m_total_coinbase_amount for PoS chains.
+    CAmount m_total_coinstake_amount{0};
+    //! Blackcoin: total cumulative value of coinstake transaction inputs.
+    //! Tracked separately so the RPC can report the staking reward
+    //! (m_total_coinstake_amount - m_total_coinstake_input_amount) rather than
+    //! the gross coinstake output value.
+    CAmount m_total_coinstake_input_amount{0};
     // Blackcoin: BIP30-unspendable tracking is intentionally not present.
     // The consensus rule is still enforced (see validation.cpp), but no
     // Blackcoin block is BIP30-vulnerable, so the accounting channel is

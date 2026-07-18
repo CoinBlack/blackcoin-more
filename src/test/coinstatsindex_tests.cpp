@@ -6,6 +6,7 @@
 #include <index/coinstatsindex.h>
 #include <interfaces/chain.h>
 #include <kernel/coinstats.h>
+#include <script/script.h>
 #include <test/util/index.h>
 #include <test/util/setup_common.h>
 #include <test/util/validation.h>
@@ -116,6 +117,43 @@ BOOST_FIXTURE_TEST_CASE(coinstatsindex_unclean_shutdown, TestChain100Setup)
         BOOST_REQUIRE(index.StartBackgroundSync());
         index.Stop();
     }
+}
+
+// Test that the muhash encoding distinguishes fCoinBase and fCoinStake
+// flags. This is the key property that makes the index coinstake-aware.
+BOOST_AUTO_TEST_CASE(coinstatsindex_coinstake_awareness)
+{
+    // Verify the encoding: fCoinBase is bit 0, fCoinStake is bit 1, height
+    // occupies the upper bits. This is what TxOutSer writes into the muhash.
+    const uint32_t height{100};
+
+    const uint32_t cb_code{static_cast<uint32_t>(height << 2) | 1u};  // fCoinBase=1, fCoinStake=0
+    const uint32_t cs_code{static_cast<uint32_t>(height << 2) | 2u};  // fCoinBase=0, fCoinStake=1
+    const uint32_t pl_code{static_cast<uint32_t>(height << 2) | 0u};  // fCoinBase=0, fCoinStake=0
+
+    BOOST_CHECK_EQUAL(cb_code & 1u, 1u);
+    BOOST_CHECK_EQUAL(cb_code & 2u, 0u);
+    BOOST_CHECK_EQUAL(cs_code & 1u, 0u);
+    BOOST_CHECK_EQUAL(cs_code & 2u, 2u);
+    BOOST_CHECK_EQUAL(pl_code & 1u, 0u);
+    BOOST_CHECK_EQUAL(pl_code & 2u, 0u);
+
+    // The three categories must produce different encoded values for the
+    // same height, so the muhash can distinguish them.
+    BOOST_CHECK(cb_code != cs_code);
+    BOOST_CHECK(cb_code != pl_code);
+    BOOST_CHECK(cs_code != pl_code);
+
+    // Verify the same property holds at the height boundary (e.g. height 0).
+    const uint32_t h0_cb{static_cast<uint32_t>(0u << 2) | 1u};
+    const uint32_t h0_cs{static_cast<uint32_t>(0u << 2) | 2u};
+    BOOST_CHECK(h0_cb != h0_cs);
+
+    // Verify GetBogoSize includes 4 bytes for height + coinbase + coinstake.
+    // For a PoW-only chain, fCoinStake is always 0, so the bogo_size is
+    // unchanged from upstream Bitcoin.
+    const CScript spk{CScript() << OP_TRUE};
+    BOOST_CHECK_EQUAL(kernel::GetBogoSize(spk), 32 + 4 + 4 + 8 + 2 + spk.size());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

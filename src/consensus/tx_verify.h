@@ -23,16 +23,9 @@ namespace Consensus {
  * Check whether all inputs of this transaction are valid (no double spends and amounts)
  * This does not modify the UTXO set. This does not check scripts and sigs.
  * @param[out] txfee Set to the transaction fee if successful.
- * @param[in] nBlockTime The block time to use for v2 transactions (where nTime is
- *                       not serialized). For block validation, pass the block
- *                       header time; for mempool acceptance, pass the current
- *                       adjusted time. This ensures that a v2 transaction
- *                       spending a v2 output in the same block passes the
- *                       coin.nTime > nTimeTx check, since both use the same
- *                       block time reference.
  * Preconditions: tx.IsCoinBase() is false.
  */
-[[nodiscard]] bool CheckTxInputs(const CTransaction& tx, TxValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee, int64_t nBlockTime);
+[[nodiscard]] bool CheckTxInputs(const CTransaction& tx, TxValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, CAmount& txfee);
 } // namespace Consensus
 
 /** Auxiliary functions for transaction validation (ideally should not be exposed) */

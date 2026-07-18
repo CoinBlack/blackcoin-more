@@ -896,6 +896,7 @@ static RPCHelpMan gettxoutsetinfo()
                         {
                             {RPCResult::Type::STR_AMOUNT, "prevout_spent", "Total amount of all prevouts spent in this block"},
                             {RPCResult::Type::STR_AMOUNT, "coinbase", "Coinbase subsidy amount of this block"},
+                            {RPCResult::Type::STR_AMOUNT, "coinstake", "Coinstake reward amount of this block (coinstake output minus coinstake input)"},
                             {RPCResult::Type::STR_AMOUNT, "new_outputs_ex_coinbase", "Total amount of new outputs created by this block"},
                             {RPCResult::Type::STR_AMOUNT, "unspendable", "Total amount of unspendable outputs created in this block"},
                             {RPCResult::Type::OBJ, "unspendables", "Detailed view of the unspendable categories",
@@ -999,6 +1000,12 @@ static RPCHelpMan gettxoutsetinfo()
             UniValue block_info(UniValue::VOBJ);
             block_info.pushKV("prevout_spent", ValueFromAmount(stats.total_prevout_spent_amount - prev_stats.total_prevout_spent_amount));
             block_info.pushKV("coinbase", ValueFromAmount(stats.total_coinbase_amount - prev_stats.total_coinbase_amount));
+            // Blackcoin: expose the PoS coinstake reward separately.
+            // The reward is defined as coinstake_output - coinstake_input,
+            // analogous to how coinbase represents new value created.
+            block_info.pushKV("coinstake", ValueFromAmount(
+                (stats.total_coinstake_amount.value_or(0) - prev_stats.total_coinstake_amount.value_or(0)) -
+                (stats.total_coinstake_input_amount.value_or(0) - prev_stats.total_coinstake_input_amount.value_or(0))));
             block_info.pushKV("new_outputs_ex_coinbase", ValueFromAmount(stats.total_new_outputs_ex_coinbase_amount - prev_stats.total_new_outputs_ex_coinbase_amount));
             block_info.pushKV("unspendable", ValueFromAmount(stats.total_unspendable_amount - prev_stats.total_unspendable_amount));
 

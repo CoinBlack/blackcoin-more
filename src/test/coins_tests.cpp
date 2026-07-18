@@ -21,8 +21,10 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <consensus/tx_verify.h>
+
 int ApplyTxInUndo(Coin&& undo, CCoinsViewCache& view, const COutPoint& out);
-void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight, int nBlockTime = 0);
+void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight);
 
 namespace
 {
@@ -804,99 +806,6 @@ BOOST_AUTO_TEST_CASE(ccoins_add)
     CheckAddCoin(VALUE2, VALUE3, VALUE3, DIRTY|FRESH, DIRTY|FRESH, true );
 }
 
-BOOST_AUTO_TEST_CASE(addcoins_v2_ntime_uses_block_time)
-{
-    // v2 transactions do not serialize nTime on the wire, so after
-    // deserialization tx.nTime is 0. AddCoins must use the block header
-    // time (nBlockTime) for v2 txs to ensure deterministic Coin nTime.
-    // v1 txs serialize nTime, so AddCoins uses tx.nTime directly.
-
-    CCoinsViewTest backend;
-    CCoinsViewCache cache(&backend);
-
-    // v2 tx: nTime should come from nBlockTime, not tx.nTime
-    CMutableTransaction tx2;
-    tx2.version = 2;
-    tx2.nTime = 0; // as it would be after wire deserialization
-    tx2.vout.emplace_back(0, CScript());
-    const int nBlockTime = 1700000000;
-    AddCoins(cache, CTransaction(tx2), 100, false, nBlockTime);
-    Coin coin2;
-    BOOST_CHECK(cache.GetCoin(COutPoint(tx2.GetHash(), 0), coin2));
-    BOOST_CHECK_EQUAL(coin2.nTime, nBlockTime);
-
-    // v1 tx: nTime should come from tx.nTime, not nBlockTime
-    CMutableTransaction tx1;
-    tx1.version = 1;
-    tx1.nTime = 1699999999;
-    tx1.vout.emplace_back(0, CScript());
-    AddCoins(cache, CTransaction(tx1), 100, false, nBlockTime);
-    Coin coin1;
-    BOOST_CHECK(cache.GetCoin(COutPoint(tx1.GetHash(), 0), coin1));
-    BOOST_CHECK_EQUAL(coin1.nTime, 1699999999);
-}
-
-// Regression test for the "bad-txns-time-earlier-than-input" bug that caused
-// block 5944947 to be rejected on mainnet (July 8, 2026).
-//
-// Scenario: A v2 transaction spends an output from another v2 transaction
-// in the SAME block. Both use the same block time, so the time check
-// coin.nTime > nTimeTx must compare like to like.
-//
-// Before the fix, AddCoins set coin.nTime = nBlockTime for v2 outputs,
-// but CheckTxInputs used GetAdjustedTimeSeconds() (wall clock) for nTimeTx.
-// When the block time was even slightly ahead of the node's wall clock,
-// the check failed and valid blocks were rejected.
-BOOST_AUTO_TEST_CASE(checktxinputs_v2_chained_in_same_block)
-{
-    CCoinsViewTest backend;
-    CCoinsViewCache cache(&backend);
-
-    // Simulate a v2 coinstake/regular tx that creates an output at a known
-    // block time. After AddCoins, coin.nTime will be nBlockTime.
-    CMutableTransaction mtx_parent;
-    mtx_parent.version = 2;
-    mtx_parent.nTime = 0; // as it would be after wire deserialization
-    mtx_parent.vout.emplace_back(100 * COIN, CScript() << OP_TRUE);
-    const int nBlockTime = 1700000000;
-    const int nHeight = 100;
-    AddCoins(cache, CTransaction(mtx_parent), nHeight, false, nBlockTime);
-
-    // Sanity: confirm coin.nTime == nBlockTime (the AddCoins behavior)
-    Coin coin;
-    BOOST_CHECK(cache.GetCoin(COutPoint(mtx_parent.GetHash(), 0), coin));
-    BOOST_CHECK_EQUAL(coin.nTime, nBlockTime);
-
-    // Now create a child v2 transaction that spends the parent's output.
-    CMutableTransaction mtx_child;
-    mtx_child.version = 2;
-    mtx_child.nTime = 0; // as it would be after wire deserialization
-    mtx_child.vin.emplace_back(COutPoint(mtx_parent.GetHash(), 0));
-    mtx_child.vout.emplace_back(100 * COIN, CScript() << OP_TRUE);
-    CTransaction tx_child(mtx_child);
-
-    TxValidationState state;
-    CAmount txfee = 0;
-
-    // Part 1: Demonstrate the bug. If nBlockTime (passed to CheckTxInputs) is
-    // LESS than coin.nTime (set by AddCoins), the check fails. This simulates
-    // the pre-fix behavior where nBlockTime was the wall clock and coin.nTime
-    // was the block header time — and the wall clock was behind the block time.
-    const int64_t nWallClockBehind = nBlockTime - 7; // 7 seconds behind, like the real bug
-    state = TxValidationState{};
-    BOOST_CHECK(!Consensus::CheckTxInputs(
-        tx_child, state, cache, nHeight, txfee, nWallClockBehind));
-    BOOST_CHECK_EQUAL(state.GetRejectReason(), "bad-txns-time-earlier-than-input");
-
-    // Part 2: Demonstrate the fix. When nBlockTime equals coin.nTime (both
-    // reference the block header), the check passes. This is the post-fix
-    // behavior: CheckTxInputs receives the same time reference that AddCoins
-    // used, so chained v2 transactions in the same block validate correctly.
-    state = TxValidationState{};
-    BOOST_CHECK(Consensus::CheckTxInputs(
-        tx_child, state, cache, nHeight, txfee, nBlockTime));
-}
-
 void CheckWriteCoins(CAmount parent_value, CAmount child_value, CAmount expected_value, char parent_flags, char child_flags, char expected_flags)
 {
     SingleEntryCacheTest test(ABSENT, parent_value, parent_flags);
@@ -1207,6 +1116,61 @@ BOOST_AUTO_TEST_CASE(coins_resource_is_used)
     }
 
     PoolResourceTester::CheckAllDataAccountedFor(resource);
+}
+
+BOOST_AUTO_TEST_CASE(addcoins_v2_ntime_is_zero_restored)
+{
+    // v2 transactions do not serialize nTime on the wire. Under the restored
+    // v262 behavior, AddCoins must store coin.nTime = tx.nTime directly,
+    // which is 0 for v2 transactions.
+    CCoinsViewTest backend;
+    CCoinsViewCache cache(&backend);
+
+    CMutableTransaction tx2;
+    tx2.version = 2;
+    tx2.nTime = 0; // as it would be after wire deserialization
+    tx2.vout.emplace_back(0, CScript());
+    AddCoins(cache, CTransaction(tx2), 100, false);
+
+    Coin coin2;
+    BOOST_CHECK(cache.GetCoin(COutPoint(tx2.GetHash(), 0), coin2));
+    BOOST_CHECK_EQUAL(coin2.nTime, 0u);
+}
+
+BOOST_AUTO_TEST_CASE(checktxinputs_v2_chained_in_same_block_restored)
+{
+    // Regression test for the restored v2 chained transaction validation.
+    // Since coin.nTime is 0 for v2 outputs, CheckTxInputs' time-warp/futuristic check
+    // (coin.nTime > nTimeTx) is always false, which naturally allows chained v2 txs
+    // to spend parent inputs inside the same block without being subject to wall-clock
+    // or blocktime mismatches.
+    CCoinsViewTest backend;
+    CCoinsViewCache cache(&backend);
+
+    // Simulate parent v2 tx. After AddCoins, its output coin.nTime will be 0.
+    CMutableTransaction mtx_parent;
+    mtx_parent.version = 2;
+    mtx_parent.nTime = 0;
+    mtx_parent.vout.emplace_back(100 * COIN, CScript() << OP_TRUE);
+    AddCoins(cache, CTransaction(mtx_parent), 100, false);
+
+    Coin coin;
+    BOOST_CHECK(cache.GetCoin(COutPoint(mtx_parent.GetHash(), 0), coin));
+    BOOST_CHECK_EQUAL(coin.nTime, 0u);
+
+    // Create child v2 transaction spending parent's output.
+    CMutableTransaction mtx_child;
+    mtx_child.version = 2;
+    mtx_child.nTime = 0;
+    mtx_child.vin.emplace_back(COutPoint(mtx_parent.GetHash(), 0));
+    mtx_child.vout.emplace_back(100 * COIN, CScript() << OP_TRUE);
+    CTransaction tx_child(mtx_child);
+
+    TxValidationState state;
+    CAmount txfee = 0;
+
+    // CheckTxInputs should succeed under all block heights / times.
+    BOOST_CHECK(Consensus::CheckTxInputs(tx_child, state, cache, 101, txfee));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
