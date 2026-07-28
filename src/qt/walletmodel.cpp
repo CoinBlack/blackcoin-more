@@ -30,6 +30,7 @@
 
 #include <QDebug>
 #include <QMessageBox>
+#include <QPointer>
 #include <QSet>
 #include <QTimer>
 #include <QFile>
@@ -44,14 +45,14 @@ class WalletWorker : public QObject
 {
     Q_OBJECT
 public:
-    WalletModel *walletModel;
+    QPointer<WalletModel> walletModel;
     WalletWorker(WalletModel *_walletModel):
         walletModel(_walletModel){}
 
 private Q_SLOTS:
     void updateModel()
     {
-        if(walletModel && walletModel->node().shutdownRequested())
+        if(!walletModel || walletModel->node().shutdownRequested())
             return;
 
         // Update the model with results of task that take more time to be completed
@@ -87,9 +88,9 @@ WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel
 
 WalletModel::~WalletModel()
 {
-    unsubscribeFromCoreSignals();
-
     join();
+
+    unsubscribeFromCoreSignals();
 }
 
 void WalletModel::startPollBalance()
@@ -631,8 +632,14 @@ void WalletModel::checkStakeWeightChanged()
 void WalletModel::join()
 {
     // Stop timer
-    if (timer)
+    if (timer) {
         timer->stop();
+        timer->disconnect();
+    }
+
+    if (worker) {
+        worker->walletModel = nullptr;
+    }
 
     // Quit thread
     if (t.isRunning()) {
