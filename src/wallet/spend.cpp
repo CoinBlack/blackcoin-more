@@ -1233,7 +1233,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
         }
     }
     // Blackcoin: and if we don't pay enough fees, reduce the change
-    else if (change_pos && fee_needed > current_fee) {
+    else if (!coin_selection_params.m_subtract_fee_outputs && change_pos && fee_needed > current_fee) {
         auto& change = txNew.vout.at(*change_pos);
         change.nValue -= fee_needed - current_fee;
         current_fee = result.GetSelectedValue() - CalculateOutputValue(txNew);
