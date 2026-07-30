@@ -235,11 +235,12 @@ bool CoinStatsIndex::CustomAppend(const interfaces::BlockInfo& block)
         m_total_unspendable_amount += unclaimed_rewards;
         m_total_unspendables_unclaimed_rewards += unclaimed_rewards;
     } else {
-        // genesis block
-        // Blackcoin: The genesis coinbase output value may not equal the
-        // theoretical subsidy (Blackcoin's genesis coinbase is 0). Walk the
-        // actual outputs to track genuinely unspendable amounts rather than
-        // blindly adding the subsidy.
+        // genesis block (height == 0)
+        // Blackcoin: Do NOT add GetBlockSubsidy() to m_total_subsidy here.
+        // It returns 10,000 BLK, but Blackcoin's actual genesis reward is 0 BLK.
+        // Adding it would corrupt the conservation equation for the entire chain.
+        // Instead, we walk the actual outputs (which sum to 0) and track
+        // unspendables directly.
         assert(block.data);
         for (const auto& tx : block.data->vtx) {
             for (const auto& out : tx->vout) {
