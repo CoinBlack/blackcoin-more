@@ -1212,6 +1212,7 @@ bool CWallet::LoadToWallet(const uint256& hash, const UpdateWalletTxFn& fill_wtx
     const auto& ins = mapWallet.emplace(std::piecewise_construct, std::forward_as_tuple(hash), std::forward_as_tuple(nullptr, TxStateInactive{}));
     CWalletTx& wtx = ins.first->second;
     if (!fill_wtx(wtx, ins.second)) {
+        mapWallet.erase(ins.first);
         return false;
     }
     // If wallet doesn't have a chain (e.g when using bitcoin-wallet tool),
@@ -2082,8 +2083,11 @@ void CWallet::AbandonOrphanedCoinstakes()
     for (std::pair<const uint256, CWalletTx>& item : mapWallet) {
         const uint256& wtxid = item.first;
         CWalletTx& wtx = item.second;
-        assert(wtx.GetHash() == wtxid);
-        if (GetTxDepthInMainChain(wtx) == 0 && !wtx.isAbandoned() && wtx.IsCoinStake()) {
+        if (wtx.GetHash() != wtxid) {
+            WalletLogPrintf("Warning: Transaction hash mismatch in mapWallet. Key: %s, Hash: %s. Skipping.\n", wtxid.ToString(), wtx.GetHash().ToString());
+            continue;
+        }
+        if (!wtx.isConfirmed() && GetTxDepthInMainChain(wtx) == 0 && !wtx.isAbandoned() && wtx.IsCoinStake()) {
             LogPrint(BCLog::COINSTAKE, "[%s] Abandoning coinstake wtx %s\n", GetName(), wtx.GetHash().ToString());
             if (!AbandonTransaction(wtxid)) {
                 LogPrint(BCLog::COINSTAKE, "[%s] Failed to abandon coinstake tx %s\n", GetName(), wtx.GetHash().ToString());
@@ -3527,10 +3531,10 @@ int CWallet::GetTxDepthInMainChain(const CWalletTx& wtx) const
 {
     AssertLockHeld(cs_wallet);
     if (auto* conf = wtx.state<TxStateConfirmed>()) {
-        assert(conf->confirmed_block_height >= 0);
+        if (conf->confirmed_block_height < 0) return 0;
         return GetLastBlockHeight() - conf->confirmed_block_height + 1;
     } else if (auto* conf = wtx.state<TxStateBlockConflicted>()) {
-        assert(conf->conflicting_block_height >= 0);
+        if (conf->conflicting_block_height < 0) return 0;
         return -1 * (GetLastBlockHeight() - conf->conflicting_block_height + 1);
     } else {
         return 0;
