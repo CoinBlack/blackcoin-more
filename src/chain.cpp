@@ -109,7 +109,9 @@ const CBlockIndex* CBlockIndex::GetAncestor(int height) const
             pindexWalk = pindexWalk->pskip;
             heightWalk = heightSkip;
         } else {
-            assert(pindexWalk->pprev);
+            if (pindexWalk->pprev == nullptr) {
+                return nullptr;
+            }
             pindexWalk = pindexWalk->pprev;
             heightWalk--;
         }
@@ -170,6 +172,7 @@ int64_t GetBlockProofEquivalentTime(const CBlockIndex& to, const CBlockIndex& fr
 /** Find the last common ancestor two blocks have.
  *  Both pa and pb must be non-nullptr. */
 const CBlockIndex* LastCommonAncestor(const CBlockIndex* pa, const CBlockIndex* pb) {
+    if (!pa || !pb) return nullptr;
     if (pa->nHeight > pb->nHeight) {
         pa = pa->GetAncestor(pb->nHeight);
     } else if (pb->nHeight > pa->nHeight) {
@@ -181,7 +184,6 @@ const CBlockIndex* LastCommonAncestor(const CBlockIndex* pa, const CBlockIndex* 
         pb = pb->pprev;
     }
 
-    // Eventually all chain branches meet at the genesis block.
-    assert(pa == pb);
+    if (pa != pb) return nullptr;
     return pa;
 }

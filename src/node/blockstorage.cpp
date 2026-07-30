@@ -311,6 +311,10 @@ bool BlockManager::LoadBlockIndex(const std::optional<uint256>& snapshot_blockha
             LogError("%s: block index is non-contiguous, index of height %d missing\n", __func__, previous_index->nHeight + 1);
             return false;
         }
+        if (pindex->nHeight > 0 && pindex->pprev == nullptr) {
+            LogPrintf("%s: Warning: block index entry at height %d (hash=%s) has null pprev (unlinked)\n",
+                      __func__, pindex->nHeight, pindex->GetBlockHash().ToString());
+        }
         previous_index = pindex;
         pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) + GetBlockProof(*pindex);
         pindex->nTimeMax = (pindex->pprev ? std::max(pindex->pprev->nTimeMax, pindex->nTime) : pindex->nTime);
