@@ -162,25 +162,14 @@ void AvailableCoinsForStaking(const CWallet& wallet,
 
             std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(output.scriptPubKey);
 
-            bool solvable = provider ? InferDescriptor(output.scriptPubKey, *provider)->IsSolvable() : false;
-            bool spendable = ((mine & ISMINE_SPENDABLE) != ISMINE_NO) || (((mine & ISMINE_WATCH_ONLY) != ISMINE_NO) && (coinControl && coinControl->fAllowWatchOnly && solvable));
+            bool spendable = ((mine & ISMINE_SPENDABLE) != ISMINE_NO);
+            if (!spendable && ((mine & ISMINE_WATCH_ONLY) != ISMINE_NO) && coinControl && coinControl->fAllowWatchOnly) {
+                bool solvable = provider ? InferDescriptor(output.scriptPubKey, *provider)->IsSolvable() : false;
+                spendable = solvable;
+            }
 
             // Filter by spendable outputs only
             if (!spendable && params.only_spendable) continue;
-
-            // If the Output is P2SH and spendable, we want to know if it is
-            // a P2SH (legacy) or one of P2SH-P2WPKH, P2SH-P2WSH (P2SH-Segwit). We can determine
-            // this from the redeemScript. If the Output is not spendable, it will be classified
-            // as a P2SH (legacy), since we have no way of knowing otherwise without the redeemScript
-            if (output.scriptPubKey.IsPayToScriptHash() && solvable) {
-                CTxDestination destination;
-                if (!ExtractDestination(output.scriptPubKey, destination))
-                    continue;
-                const CScriptID& hash = ToScriptID(std::get<ScriptHash>(destination));
-                CScript redeemScript;
-                if (!provider->GetCScript(hash, redeemScript))
-                    continue;
-            }
 
             if (spendable)
                 vCoins.push_back(std::make_pair(&wtx, i));
