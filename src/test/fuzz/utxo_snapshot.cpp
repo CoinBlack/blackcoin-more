@@ -104,7 +104,9 @@ void utxo_snapshot_fuzz(FuzzBufferType buffer)
                 outfile << coinbase->GetHash();
                 WriteCompactSize(outfile, 1); // number of coins for the hash
                 WriteCompactSize(outfile, 0); // index of coin
-                outfile << Coin(coinbase->vout[0], height, /*fCoinBaseIn=*/1, /*fCoinStakeIn=*/0, /*nTime=*/0);
+                // Blackcoin: alternate between PoW coinbase and PoS coinstake to test both serialization paths
+                bool is_stake = (height % 2 == 1);
+                outfile << Coin(coinbase->vout[0], height, /*fCoinBaseIn=*/!is_stake, /*fCoinStakeIn=*/is_stake, /*nTime=*/is_stake ? 1600000000 : 0);
                 height++;
             }
         }
