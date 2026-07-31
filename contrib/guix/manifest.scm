@@ -108,14 +108,14 @@ chain for " target " development."))
 
 (define base-linux-kernel-headers linux-libre-headers-6.1)
 
-(define* (make-bitcoin-cross-toolchain target
-                                       #:key
-                                       (base-gcc-for-libc linux-base-gcc)
-                                       (base-kernel-headers base-linux-kernel-headers)
-                                       (base-libc glibc-2.31)
-                                       (base-gcc linux-base-gcc))
+(define* (make-blackcoin-cross-toolchain target
+                                         #:key
+                                         (base-gcc-for-libc linux-base-gcc)
+                                         (base-kernel-headers base-linux-kernel-headers)
+                                         (base-libc glibc-2.31)
+                                         (base-gcc linux-base-gcc))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
-desirable for building Bitcoin Core release binaries."
+desirable for building Blackcoin More release binaries."
   (make-cross-toolchain target
                         base-gcc-for-libc
                         base-kernel-headers
@@ -555,7 +555,7 @@ inspecting signatures in Mach-O binaries.")
           ((string-contains target "-linux-")
            (list bison
                  (list gcc-toolchain-12 "static")
-                 (make-bitcoin-cross-toolchain target)))
+                 (make-blackcoin-cross-toolchain target)))
           ((string-contains target "darwin")
            (list clang-toolchain-18
                  lld-18
