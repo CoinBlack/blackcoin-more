@@ -1,5 +1,5 @@
 {
-  "name": "bitcoin-core",
+  "name": "blackcoin-more",
   "version-string": "1",
   "dependencies": [
     "berkeleydb",

@@ -1,6 +1,7 @@
 # CI Scripts
 
-This directory contains scripts for each build step in each build stage.
+This directory contains scripts for each build step in each build stage for the
+Blackcoin More CI system.
 
 ## Running a Stage Locally
 

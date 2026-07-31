@@ -20,7 +20,7 @@ concurrency:
 env:
   CI_FAILFAST_TEST_LEAVE_DANGLING: 1  # GHA does not care about dangling processes and setting this variable avoids killing the CI script itself on error
   CIRRUS_CACHE_HOST: http://127.0.0.1:12321/ # When using Cirrus Runners this host can be used by the docker `gha` build cache type.
-  REPO_USE_CIRRUS_RUNNERS: 'bitcoin/bitcoin' # Use cirrus runners and cache for this repo, instead of falling back to the slow GHA runners
+  REPO_USE_CIRRUS_RUNNERS: 'CoinBlack/blackcoin-more' # Use cirrus runners and cache for this repo, instead of falling back to the slow GHA runners
 
 jobs:
   runners:
@@ -97,9 +97,6 @@ jobs:
     # See: https://github.com/actions/runner-images#available-images.
     runs-on: macos-14
 
-    # No need to run on the read-only mirror, unless it is a PR.
-    if: github.repository != 'bitcoin-core/gui' || github.event_name == 'pull_request'
-
     timeout-minutes: 120
 
     env:
@@ -155,9 +152,6 @@ jobs:
     # Use latest image, but hardcode version to avoid silent upgrades (and breaks).
     # See: https://github.com/actions/runner-images#available-images.
     runs-on: windows-2022
-
-    # No need to run on the read-only mirror, unless it is a PR.
-    if: github.repository != 'bitcoin-core/gui' || github.event_name == 'pull_request'
 
     env:
       CCACHE_MAXSIZE: '200M'
@@ -291,7 +285,7 @@ jobs:
         shell: cmd
         run: |
           ccache --zero-stats
-          msbuild build_msvc\bitcoin.sln -property:CLToolPath=C:\ccache;CLToolExe=cl.exe;UseMultiToolTask=true;Configuration=Release -maxCpuCount -verbosity:minimal -noLogo
+          msbuild build_msvc\blackcoin.sln -property:CLToolPath=C:\ccache;CLToolExe=cl.exe;UseMultiToolTask=true;Configuration=Release -maxCpuCount -verbosity:minimal -noLogo
 
       - name: Ccache stats
         run: ccache --show-stats
@@ -305,10 +299,10 @@ jobs:
           key: ${{ github.job }}-ccache-${{ github.run_id }}
 
       - name: Run unit tests
-        run: src\test_bitcoin.exe -l test_suite
+        run: src\test_blackmore.exe -l test_suite
 
       - name: Run benchmarks
-        run: src\bench_bitcoin.exe -sanity-check
+        run: src\bench_blackmore.exe -sanity-check
 
       - name: Run util tests
         run: py -3 test\util\test_runner.py
@@ -464,7 +458,7 @@ jobs:
     if: ${{ vars.SKIP_BRANCH_PUSH != 'true' || github.event_name == 'pull_request' }}
     timeout-minutes: 20
     env:
-      CONTAINER_NAME: "bitcoin-linter"
+      CONTAINER_NAME: "blackmore-linter"
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -485,4 +479,4 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             CIRRUS_PR_FLAG="-e CIRRUS_PR=1"
           fi
-          docker run --rm $CIRRUS_PR_FLAG -v "$(pwd)":/bitcoin "$CONTAINER_NAME"
+          docker run --rm $CIRRUS_PR_FLAG -v "$(pwd)":/blackcoin "$CONTAINER_NAME"

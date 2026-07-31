@@ -12,16 +12,17 @@ SOURCE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src'
 DEFAULT_PLATFORM_TOOLSET = R'v143'
 
 libs = [
-    'libbitcoin_cli',
-    'libbitcoin_common',
-    'libbitcoin_crypto',
-    'libbitcoin_node',
-    'libbitcoin_util',
-    'libbitcoin_wallet_tool',
-    'libbitcoin_wallet',
-    'libbitcoin_zmq',
-    'bench_bitcoin',
-    'libtest_util',
+    # (Makefile.am source variable, msbuild project name)
+    ('libbitcoin_cli', 'libblackmore_cli'),
+    ('libbitcoin_common', 'libblackmore_common'),
+    ('libbitcoin_crypto', 'libblackmore_crypto'),
+    ('libbitcoin_node', 'libblackmore_node'),
+    ('libbitcoin_util', 'libblackmore_util'),
+    ('libbitcoin_wallet_tool', 'libblackmore_wallet_tool'),
+    ('libbitcoin_wallet', 'libblackmore_wallet'),
+    ('libbitcoin_zmq', 'libblackmore_zmq'),
+    ('bench_bitcoin', 'bench_blackmore'),
+    ('libtest_util', 'libtest_util'),
 ]
 
 ignore_list = [
@@ -43,10 +44,10 @@ def parse_makefile(makefile):
                 if not line.endswith('\\'):
                     current_lib = ''
                 continue
-            for lib in libs:
-                _lib = lib.replace('-', '_')
+            for makefile_var, vcxproj_name in libs:
+                _lib = makefile_var.replace('-', '_')
                 if re.search(_lib + '.*_SOURCES \\= \\\\', line):
-                    current_lib = lib
+                    current_lib = vcxproj_name
                     lib_sources[current_lib] = []
                     break
 
@@ -70,9 +71,9 @@ def parse_config_into_btc_config():
     config_dict = dict(item.split(", ") for item in config_info)
     config_dict["PACKAGE_VERSION"] = f"\"{config_dict['CLIENT_VERSION_MAJOR']}.{config_dict['CLIENT_VERSION_MINOR']}.{config_dict['CLIENT_VERSION_BUILD']}\""
     version = config_dict["PACKAGE_VERSION"].strip('"')
-    config_dict["PACKAGE_STRING"] = f"\"Bitcoin Core {version}\""
+    config_dict["PACKAGE_STRING"] = f"\"Blackcoin More {version}\""
 
-    with open(os.path.join(SOURCE_DIR,'../build_msvc/bitcoin_config.h.in'), "r", encoding="utf8") as template_file:
+    with open(os.path.join(SOURCE_DIR,'../build_msvc/blackcoin_config.h.in'), "r", encoding="utf8") as template_file:
         template = template_file.readlines()
 
     for index, line in enumerate(template):
@@ -82,7 +83,7 @@ def parse_config_into_btc_config():
         if header in config_dict:
             template[index] = line.replace("$", f"{config_dict[header]}")
 
-    with open(os.path.join(SOURCE_DIR,'../build_msvc/bitcoin_config.h'), "w", encoding="utf8") as btc_config:
+    with open(os.path.join(SOURCE_DIR,'../build_msvc/blackcoin_config.h'), "w", encoding="utf8") as btc_config:
         btc_config.writelines(template)
 
 def set_properties(vcxproj_filename, placeholder, content):
@@ -91,7 +92,7 @@ def set_properties(vcxproj_filename, placeholder, content):
             vcxproj_file.write(vcxproj_in_file.read().replace(placeholder, content))
 
 def main():
-    parser = argparse.ArgumentParser(description='Bitcoin-core msbuild configuration initialiser.')
+    parser = argparse.ArgumentParser(description='Blackcoin More msbuild configuration initialiser.')
     parser.add_argument('-toolset', nargs='?', default=DEFAULT_PLATFORM_TOOLSET,
         help='Optionally sets the msbuild platform toolset, e.g. v143 for Visual Studio 2022.'
          ' default is %s.'%DEFAULT_PLATFORM_TOOLSET)
@@ -110,7 +111,7 @@ def main():
             content += '    </ClCompile>\n'
         set_properties(vcxproj_filename, '@SOURCE_FILES@\n', content)
     parse_config_into_btc_config()
-    copyfile(os.path.join(SOURCE_DIR,'../build_msvc/bitcoin_config.h'), os.path.join(SOURCE_DIR, 'config/bitcoin-config.h'))
+    copyfile(os.path.join(SOURCE_DIR,'../build_msvc/blackcoin_config.h'), os.path.join(SOURCE_DIR, 'config/bitcoin-config.h'))
 
 if __name__ == '__main__':
     main()
