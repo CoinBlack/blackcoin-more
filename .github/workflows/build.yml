@@ -192,7 +192,7 @@ jobs:
       - name: Build Blackcoin More
         run: |
           ./autogen.sh
-          ./configure --prefix=`pwd`/depends/${{ matrix.host }} ${{ matrix.config-opts }} --enable-reduce-exports || ( cat config.log && false)
+          CONFIG_SITE=$PWD/depends/${{ matrix.host }}/share/config.site ./configure --prefix=`pwd`/depends/${{ matrix.host }} ${{ matrix.config-opts }} --enable-reduce-exports || ( cat config.log && false)
           make -j $MAKEJOBS ${{ matrix.goal }} || ( echo "Build failure. Verbose build follows." && make ${{ matrix.goal }} V=1 ; false )
 
       - name: Check security
