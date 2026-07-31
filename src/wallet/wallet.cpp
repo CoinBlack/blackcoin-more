@@ -1609,15 +1609,17 @@ void CWallet::updatedBlockTip()
         return;
     }
 
-    // blackcoin: safety bump logic moved to miner.cpp
-    {
-        std::lock_guard<std::mutex> lock(cv_block_mutex);
-        m_new_block_arrived.store(true);
+    if (m_enabled_staking) {
+        // blackcoin: safety bump logic moved to miner.cpp
+        {
+            std::lock_guard<std::mutex> lock(cv_block_mutex);
+            m_new_block_arrived.store(true);
+        }
+        cv_new_block.notify_one();
+        LogPrint(BCLog::COINSTAKE, "[%s] WakeOnBlock: staker notified to wake, mtp=%d\n",
+                 GetName(),
+                 chain().getTip() ? chain().getTip()->GetMedianTimePast() : 0);
     }
-    cv_new_block.notify_one();
-    LogPrint(BCLog::COINSTAKE, "[%s] WakeOnBlock: staker notified to wake, mtp=%d\n",
-             GetName(),
-             chain().getTip() ? chain().getTip()->GetMedianTimePast() : 0);
 }
 
 void CWallet::BlockUntilSyncedToCurrentChain() const {
