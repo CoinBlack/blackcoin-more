@@ -41,7 +41,7 @@ jobs:
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "--enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+            config-opts: "LDFLAGS=-static-libstdc++"
             goal: install-strip
 
           - name: linux-64-bit
@@ -51,7 +51,7 @@ jobs:
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "--enable-sse2 --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+            config-opts: "--enable-sse2 LDFLAGS=-static-libstdc++"
             goal: install-strip
 
           - name: windows-64-bit
@@ -72,7 +72,7 @@ jobs:
             check-symbols: false
             dep-opts: ""
             config-opts: "--enable-sse2"
-            goal: deploy
+            goal: install-strip deploy
             sdk: 15.0-15A240d
 
           - name: macos-arm-64-bit
@@ -83,7 +83,7 @@ jobs:
             check-symbols: false
             dep-opts: ""
             config-opts: ""
-            goal: deploy
+            goal: install-strip deploy
             sdk: 15.0-15A240d
 
           - name: linux-arm-32-bit
@@ -93,7 +93,7 @@ jobs:
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "--enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+            config-opts: "LDFLAGS=-static-libstdc++"
             goal: install-strip
 
           - name: linux-arm-64-bit
@@ -103,7 +103,7 @@ jobs:
             check-security: false
             check-symbols: false
             dep-opts: ""
-            config-opts: "--enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+            config-opts: "LDFLAGS=-static-libstdc++"
             goal: install-strip
 
     runs-on: ${{ matrix.os }}
