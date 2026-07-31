@@ -193,7 +193,9 @@ jobs:
         run: |
           ./autogen.sh
           CONFIG_SITE=$PWD/depends/${{ matrix.host }}/share/config.site ./configure --prefix=`pwd`/depends/${{ matrix.host }} ${{ matrix.config-opts }} --enable-reduce-exports || ( cat config.log && false)
-          make -j $MAKEJOBS ${{ matrix.goal }} || ( echo "Build failure. Verbose build follows." && make ${{ matrix.goal }} V=1 ; false )
+          for goal in ${{ matrix.goal }}; do
+            make -j $MAKEJOBS "$goal" || { echo "Build failure. Verbose build follows."; make "$goal" V=1; false; }
+          done
 
       - name: Check security
         if: ${{ matrix.check-security }}
