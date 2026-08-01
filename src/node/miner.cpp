@@ -755,9 +755,11 @@ void PoSMiner(CWallet *pwallet)
     try {
         while (true)
         {
-            // Clear the active flag while waiting for the wallet to become ready to stake.
-            pwallet->m_staker_active.store(false);
+            // Only clear the active flag while actually waiting for the wallet
+            // to become ready to stake; otherwise keep it true across the normal
+            // active cycle so the UI/RPC do not flicker on brief wakes.
             while (pwallet->IsLocked() || !pwallet->m_enabled_staking || !pwallet->chain().chainman().m_blockman.m_blockfiles_indexed || pwallet->chain().chainman().m_blockman.m_importing || pwallet->IsScanning()) {
+                pwallet->m_staker_active.store(false);
                 pwallet->m_last_coin_stake_search_interval = 0;
                 if (!SleepStaker(pwallet, 5000))
                     return;
@@ -766,16 +768,16 @@ void PoSMiner(CWallet *pwallet)
             // Busy-wait for the network to come online so we don't waste time mining
             // on an obsolete chain. In regtest mode we expect to fly solo.
             if (!Params().MineBlocksOnDemand()) {
-                pwallet->m_staker_active.store(false);
                 while (pwallet->chain().getNodeCount(ConnectionDirection::Both) == 0 || pwallet->chain().isInitialBlockDownload()) {
+                    pwallet->m_staker_active.store(false);
                     pwallet->m_last_coin_stake_search_interval = 0;
                     if (!SleepStaker(pwallet, 10000))
                         return;
                 }
             }
 
-            pwallet->m_staker_active.store(false);
             while (GuessVerificationProgress(Params().TxData(), pwallet->chain().getTip()) < 0.996) {
+                pwallet->m_staker_active.store(false);
                 pwallet->m_last_coin_stake_search_interval = 0;
                 pwallet->WalletLogPrintf("Staker thread sleeps while sync at %f\n", GuessVerificationProgress(Params().TxData(), pwallet->chain().getTip()));
                 if (!SleepStaker(pwallet, 10000))
