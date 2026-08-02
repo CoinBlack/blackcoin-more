@@ -1,25 +1,40 @@
-name: build
+name: build and push docker images
 
 on:
-  push:
-    branches:
-      - "**"
-    tags:
-      - "*"
-    paths-ignore:
-      - "**/*.md"
-  pull_request:
-    paths-ignore:
-      - "doc/**"
-      - "contrib/**"
-      - "**/*.md"
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      target_platform:
+        description: "Select platform to build"
+        required: true
+        type: choice
+        default: "all"
+        options:
+          - "all"
+          - "docker-platforms"
+          - "linux-64-bit"
+          - "linux-32-bit"
+          - "windows-64-bit"
+          - "macos-64-bit"
+          - "macos-arm-64-bit"
+          - "linux-arm-32-bit"
+          - "linux-arm-64-bit"
+      publish_docker:
+        description: "Publish Docker Images? (Requires platform: all or docker-platforms)"
+        required: true
+        type: boolean
+        default: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     name: ${{ matrix.name }}
 
     env:
-      MAKEJOBS: 4
       SDK_URL: https://bitcoincore.org/depends-sources/sdks
 
     strategy:
@@ -109,7 +124,29 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Check target platform
+        id: check_platform
+        run: |
+          SHOULD_BUILD="true"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TARGET="${{ inputs.target_platform }}"
+            MATRIX_NAME="${{ matrix.name }}"
+            if [ "$TARGET" != "all" ] && [ "$TARGET" != "$MATRIX_NAME" ]; then
+              if [ "$TARGET" = "docker-platforms" ] && { [ "$MATRIX_NAME" = "linux-64-bit" ] || [ "$MATRIX_NAME" = "linux-arm-64-bit" ]; }; then
+                SHOULD_BUILD="true"
+              else
+                SHOULD_BUILD="false"
+              fi
+            fi
+          fi
+          echo "should_build=$SHOULD_BUILD" >> $GITHUB_OUTPUT
+
+      - name: Set dynamic MAKEJOBS
+        if: steps.check_platform.outputs.should_build == 'true'
+        run: echo "MAKEJOBS=$(nproc)" >> $GITHUB_ENV
+
       - name: Install packages
+        if: steps.check_platform.outputs.should_build == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -118,7 +155,7 @@ jobs:
           sudo apt-get install -y ${{ matrix.packages }}
 
       - name: Set gcc-12 as default (native x86)
-        if: ${{ matrix.host == 'i686-pc-linux-gnu' || matrix.host == 'x86_64-pc-linux-gnu' }}
+        if: steps.check_platform.outputs.should_build == 'true' && (matrix.host == 'i686-pc-linux-gnu' || matrix.host == 'x86_64-pc-linux-gnu')
         run: |
           # register gcc-11 if present (ignore errors)
           if command -v gcc-11 >/dev/null 2>&1; then
@@ -132,7 +169,7 @@ jobs:
           g++ --version
 
       - name: Set arm-linux-gnueabihf-gcc to GCC 12
-        if: ${{ matrix.host == 'arm-linux-gnueabihf' }}
+        if: steps.check_platform.outputs.should_build == 'true' && matrix.host == 'arm-linux-gnueabihf'
         run: |
           # Prefer the GCC 12 cross compiler for this triplet
           if command -v arm-linux-gnueabihf-gcc-11 >/dev/null 2>&1; then
@@ -145,7 +182,7 @@ jobs:
           arm-linux-gnueabihf-gcc --version
 
       - name: Set aarch64-linux-gnu-gcc to GCC 12
-        if: ${{ matrix.host == 'aarch64-linux-gnu' }}
+        if: steps.check_platform.outputs.should_build == 'true' && matrix.host == 'aarch64-linux-gnu'
         run: |
           if command -v aarch64-linux-gnu-gcc-11 >/dev/null 2>&1; then
             sudo update-alternatives --install /usr/bin/aarch64-linux-gnu-gcc aarch64-linux-gnu-gcc /usr/bin/aarch64-linux-gnu-gcc-11 110 || true
@@ -157,11 +194,12 @@ jobs:
           aarch64-linux-gnu-gcc --version
 
       - name: Checkout
-        uses: actions/checkout@v6
+        if: steps.check_platform.outputs.should_build == 'true'
+        uses: actions/checkout@v7.0.1
 
       - name: SDK cache
-        if: ${{ matrix.sdk }}
-        uses: actions/cache@v5
+        if: steps.check_platform.outputs.should_build == 'true' && matrix.sdk
+        uses: actions/cache@v6.1.0
         env:
           cache-name: sdk
         with:
@@ -169,7 +207,7 @@ jobs:
           key: ${{ matrix.name }}-${{ env.cache-name }}
 
       - name: Install SDK
-        if: ${{ matrix.sdk }}
+        if: steps.check_platform.outputs.should_build == 'true' && matrix.sdk
         run: |
           mkdir -p ./depends/sdk-sources
           mkdir -p ./depends/SDKs
@@ -177,7 +215,8 @@ jobs:
           tar -C depends/SDKs -xzvf depends/sdk-sources/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz
 
       - name: Dependency cache
-        uses: actions/cache@v5
+        if: steps.check_platform.outputs.should_build == 'true'
+        uses: actions/cache@v6.1.0
         env:
           cache-name: depends
         with:
@@ -185,11 +224,13 @@ jobs:
           key: ${{ matrix.name }}-${{ env.cache-name }}-${{ hashFiles('depends/packages/*') }}
 
       - name: Build depends
+        if: steps.check_platform.outputs.should_build == 'true'
         # ARM jobs rely on their explicit cross compilers; native jobs use gcc-12 via alternatives
         run: |
           make -j $MAKEJOBS -C depends HOST=${{ matrix.host }} ${{ matrix.dep-opts }}
 
       - name: Build Blackcoin More
+        if: steps.check_platform.outputs.should_build == 'true'
         run: |
           ./autogen.sh
           CONFIG_SITE=$PWD/depends/${{ matrix.host }}/share/config.site ./configure --prefix=`pwd`/depends/${{ matrix.host }} ${{ matrix.config-opts }} --enable-reduce-exports || ( cat config.log && false)
@@ -198,15 +239,16 @@ jobs:
           done
 
       - name: Check security
-        if: ${{ matrix.check-security }}
+        if: steps.check_platform.outputs.should_build == 'true' && matrix.check-security
         run: make -C src check-security
 
       - name: Check symbols
-        if: ${{ matrix.check-symbols }}
+        if: steps.check_platform.outputs.should_build == 'true' && matrix.check-symbols
         run: make -C src check-symbols
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v6
+        if: steps.check_platform.outputs.should_build == 'true'
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: blackmore-${{ github.sha }}-${{ matrix.name }}
           path: |
@@ -216,7 +258,67 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v7
+  docker-publish:
+    name: Build & Push Docker Images
+    needs: build
+    if: |
+      github.event_name != 'pull_request' &&
+      (github.event_name != 'workflow_dispatch' || (inputs.publish_docker == true && (inputs.target_platform == 'all' || inputs.target_platform == 'docker-platforms')))
+    runs-on: ubuntu-22.04
+    env:
+      DOCKER_HUB_DEST: ${{ secrets.DOCKER_HUB_DEST }}
+    steps:
+      - name: Checkout Dockerfiles
+        uses: actions/checkout@v7.0.1
         with:
-          name: blackmore-${{ github.sha }}-${{ matrix.name }}
+          repository: BlackcoinDev/docker-blk
+          ref: main
+
+      - name: Download AMD64 Artifacts
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: blackmore-${{ github.sha }}-linux-64-bit
+          path: bin/amd64
+
+      - name: Download ARM64 Artifacts
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: blackmore-${{ github.sha }}-linux-arm-64-bit
+          path: bin/arm64
+
+      - name: Flatten Artifact Paths
+        run: |
+          find bin/amd64 -type f -name "*blackmore*" -exec cp {} bin/amd64/ \;
+          find bin/arm64 -type f -name "*blackmore*" -exec cp {} bin/arm64/ \;
+          chmod +x bin/amd64/*blackmore*
+          chmod +x bin/arm64/*blackmore*
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4.2.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4.2.0
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v4.6.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push debian multi-arch image
+        uses: docker/build-push-action@v7.3.0
+        with:
+          context: .
+          file: ./Dockerfile.release
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-28.4.0-debian:${{ github.ref_name }}
+
+      - name: Build and push minimal multi-arch image
+        uses: docker/build-push-action@v7.3.0
+        with:
+          context: .
+          file: ./Dockerfile.minimal.release
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-28.4.0-minimal:${{ github.ref_name }}
