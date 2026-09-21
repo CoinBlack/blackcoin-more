@@ -306,7 +306,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push debian multi-arch image
-        uses: docker/build-push-action@v7.3.0
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           file: ./Dockerfile.release
@@ -315,7 +315,7 @@ jobs:
           tags: ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.0-debian:${{ github.ref_name }}
 
       - name: Build and push minimal multi-arch image
-        uses: docker/build-push-action@v7.3.0
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           file: ./Dockerfile.minimal.release
