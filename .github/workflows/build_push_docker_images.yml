@@ -275,13 +275,13 @@ jobs:
           ref: main
 
       - name: Download AMD64 Artifacts
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: blackmore-${{ github.sha }}-linux-64-bit
           path: bin/amd64
 
       - name: Download ARM64 Artifacts
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: blackmore-${{ github.sha }}-linux-arm-64-bit
           path: bin/arm64
