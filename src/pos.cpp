@@ -128,7 +128,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, uin
 }
 
 // Check kernel hash target and coinstake signature
-bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, BlockValidationState& state, CCoinsViewCache& view, unsigned int nTimeTx)
+bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, BlockValidationState& state, CCoinsViewCache& view, unsigned int nTimeTx, const ChainstateManager& chainman)
 {
     if (!tx.IsCoinStake()) {
         LogError("%s: called on non-coinstake %s\n", __func__, tx.GetHash().ToString());
@@ -171,8 +171,19 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
         txdata.Init(tx, std::move(spent_outputs));
         TransactionSignatureChecker checker(&tx, 0, coinPrev.out.nValue, txdata, MissingDataBehavior::ASSERT_FAIL);
 
+        // Only enforce SegWit and Taproot script flags once their respective
+        // deployments are active after pindexPrev, to avoid mixed-version
+        // consensus splits during BIP-9 signaling and pre-activation IBD.
+        uint32_t script_flags{SCRIPT_VERIFY_P2SH};
+        if (DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_SEGWIT)) {
+            script_flags |= SCRIPT_VERIFY_WITNESS;
+        }
+        if (DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
+            script_flags |= SCRIPT_VERIFY_TAPROOT;
+        }
+
         if (!VerifyScript(txin.scriptSig, coinPrev.out.scriptPubKey, &txin.scriptWitness,
-            SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_TAPROOT, checker)) {
+            script_flags, checker)) {
             return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-verify-signature-failed", strprintf("CheckProofOfStake(): VerifyScript failed on coinstake %s", tx.GetHash().ToString()));
         }
     }

@@ -584,7 +584,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager& chainman)
         LogPrint(BCLog::COINSTAKE, "ProcessBlockFound: CheckProofOfStake called, kernel=%s:%d, tx=%s\n",
             pblock->vtx[1]->vin[0].prevout.hash.ToString(), pblock->vtx[1]->vin[0].prevout.n,
             pblock->vtx[1]->GetHash().ToString());
-        if (!CheckProofOfStake(&chainman.BlockIndex()[pblock->hashPrevBlock], *pblock->vtx[1], pblock->nBits, state, chainman.ActiveChainstate().CoinsTip(), pblock->vtx[1]->nTime ? pblock->vtx[1]->nTime : pblock->nTime)) {
+        if (!CheckProofOfStake(&chainman.BlockIndex()[pblock->hashPrevBlock], *pblock->vtx[1], pblock->nBits, state, chainman.ActiveChainstate().CoinsTip(), pblock->vtx[1]->nTime ? pblock->vtx[1]->nTime : pblock->nTime, chainman)) {
             LogError("%s: proof-of-stake checking failed\n", __func__);
             return false;
         }

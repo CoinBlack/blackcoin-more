@@ -2514,7 +2514,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
             block.vtx[1]->vin[0].prevout.hash.ToString(), block.vtx[1]->vin[0].prevout.n,
             block.vtx[1]->GetHash().ToString());
     }
-    if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, *block.vtx[1], block.nBits, state, view, block.vtx[1]->nTime ? block.vtx[1]->nTime : block.nTime)) {
+    if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, *block.vtx[1], block.nBits, state, view, block.vtx[1]->nTime ? block.vtx[1]->nTime : block.nTime, m_chainman)) {
         LogPrintf("WARNING: %s: check proof-of-stake failed for block %s\n", __func__, block.GetHash().ToString());
         return false; // do not error here as we expect this during initial block download
     }
