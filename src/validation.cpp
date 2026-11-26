@@ -3760,13 +3760,15 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
                 return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-not-empty", "coinbase output not empty for proof-of-stake block");
         }
 
-        // Second transaction must be coinstake, the rest must not be
+        // Second transaction must be coinstake
         if (block.vtx.size() < 2 || !block.vtx[1]->IsCoinStake())
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cs-missing", "second tx is not coinstake");
-        for (unsigned int i = 2; i < block.vtx.size(); i++)
-            if (block.vtx[i]->IsCoinStake())
-                return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cs-multiple", "more than one coinstake");
     }
+
+    // No transaction at index >= 2 may be a coinstake (in either PoS or PoW blocks)
+    for (unsigned int i = 2; i < block.vtx.size(); i++)
+        if (block.vtx[i]->IsCoinStake())
+            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cs-multiple", "more than one coinstake");
 
     // Check proof-of-stake block signature
     if (fCheckSig && !CheckBlockSignature(block))
