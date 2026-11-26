@@ -1,6 +1,19 @@
 # Changelog
 
-## v28.4.0 (2026-07-06
+## v28.4.1 (2026-11-27)
+- **Protocol V3.2 activation:** Scheduled for **Monday, November 30, 2026 at 20:00:00 UTC** (`nProtocolV3_2Time = 1796068800`) — mandatory upgrade before activation
+- Fixed transaction fee double-counting bug in `ConnectBlock()` (Protocol V3.2)
+- Added block-level conservation-of-money invariant (`bad-blk-inflation`) ensuring net block emission never exceeds the block subsidy (Protocol V3.2)
+- Gated unknown witness version (`v > 1`) creation and spend rejection (`bad-unknown-witness-version` and `SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM`) on Protocol V3.2
+- Aligned `bad-tx-time` check under Protocol V3.2 across v26.2 and v28.4
+- Used deterministic block timestamp in `Consensus::CheckTxInputs()` for v2+ transactions (Protocol V3.2) and next-block timestamp in mempool `PreChecks()`
+- Rejected coinstake transactions at index `>= 2` in proof-of-work blocks (`CheckBlock()`)
+- Required `fCheckSig` before caching `block.fChecked` in `CheckBlock()`
+- Prevented signed `int64_t` overflow UB in `CAmount` additions across consensus validation (`MAX_MONEY == INT64_MAX`)
+- Gated `SCRIPT_VERIFY_WITNESS` and `SCRIPT_VERIFY_TAPROOT` in `CheckProofOfStake()` on active deployments
+- Aligned `tx.version` signed comparison for `nTime` serialization and `CheckBlockSignature()` `OP_RETURN` handling with v26.2
+
+## v28.4.0 (2026-07-06)
 - Complete integration of Bitcoin Core 28.4.0
 - Modernized build system with updated dependencies (secp256k1, leveldb, etc.)
 - Header spam protection: Enhanced qtum header spam filter
