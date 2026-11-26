@@ -170,9 +170,9 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
                          strprintf("%s: inputs missing/spent", __func__));
     }
 
-    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx
+    // Blackcoin: in v2 transactions use GetAdjustedTime() as nTimeTx (signed check for 26.2 compatibility)
     int64_t nTimeTx = tx.nTime;
-    if (!nTimeTx && tx.version >= 2)
+    if (!nTimeTx && static_cast<int32_t>(tx.version) >= 2)
         nTimeTx = GetAdjustedTimeSeconds();
 
     CAmount nValueIn = 0;

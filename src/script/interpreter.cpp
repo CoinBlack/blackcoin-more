@@ -1330,7 +1330,8 @@ public:
     void Serialize(S &s) const {
         // Serialize version
         ::Serialize(s, txTo.version);
-        if (txTo.version < 2) {
+        // Use signed comparison to match legacy int32_t sighash serialization (26.2 compatibility)
+        if (static_cast<int32_t>(txTo.version) < 2) {
             // Serialize nTime
             ::Serialize(s, txTo.nTime);
         }
@@ -1606,7 +1607,8 @@ uint256 SignatureHash(const CScript& scriptCode, const T& txTo, unsigned int nIn
         HashWriter ss{};
         // Version
         ss << txTo.version;
-        if (txTo.version < 2) {
+        // Use signed comparison to match legacy int32_t sighash serialization (26.2 compatibility)
+        if (static_cast<int32_t>(txTo.version) < 2) {
             // nTime
             ss << txTo.nTime;
         }

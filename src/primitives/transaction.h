@@ -230,7 +230,8 @@ void UnserializeTransaction(TxType& tx, Stream& s, const TransactionSerParams& p
     const bool fAllowWitness = params.allow_witness;
 
     s >> tx.version;
-    if (tx.version < 2)
+    // Use signed comparison to preserve legacy int32_t wire format for high-bit versions (26.2 compatibility)
+    if (static_cast<int32_t>(tx.version) < 2)
         s >> tx.nTime;
     else
         tx.nTime = 0;
@@ -274,7 +275,8 @@ void SerializeTransaction(const TxType& tx, Stream& s, const TransactionSerParam
     const bool fAllowWitness = params.allow_witness;
 
     s << tx.version;
-    if (tx.version < 2)
+    // Use signed comparison to preserve legacy int32_t wire format for high-bit versions (26.2 compatibility)
+    if (static_cast<int32_t>(tx.version) < 2)
         s << tx.nTime;
     unsigned char flags = 0;
     // Consistency check
