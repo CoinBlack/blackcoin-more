@@ -2660,7 +2660,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         {
             if (tx.IsCoinStake())
                 nActualStakeReward = tx.GetValueOut()-view.GetValueIn(tx);
-            else
+            else if (!params.GetConsensus().IsProtocolV3_2(block.GetBlockTime()))
                 nFees += view.GetValueIn(tx)-tx.GetValueOut();
 
             std::vector<CScriptCheck> vChecks;
