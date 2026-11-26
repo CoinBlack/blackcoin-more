@@ -4090,8 +4090,8 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
                                  strprintf("Transaction check failed (tx hash %s) %s", tx->GetHash().ToString(), tx_state.GetDebugMessage()));
         }
 
-        // Check transaction timestamp
-        if (tx->nTime && block.GetBlockTime() < (int64_t)tx->nTime)
+        // Check transaction timestamp (gated on Protocol V3.2 so 26.2 and 28.4 stay aligned before activation)
+        if (consensusParams.IsProtocolV3_2(block.GetBlockTime()) && tx->nTime && block.GetBlockTime() < (int64_t)tx->nTime)
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-tx-time", strprintf("%s : block timestamp earlier than transaction timestamp", __func__));
     }
     unsigned int nSigOps = 0;
