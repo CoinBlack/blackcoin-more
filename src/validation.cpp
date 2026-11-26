@@ -2445,14 +2445,13 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
         flags |= SCRIPT_VERIFY_TAPROOT;
     }
 
-    // Reject spending outputs with unknown witness versions (v > 1) at consensus
-    // level. Without this flag the interpreter returns true for an unknown witness
-    // version (forward-softfork compatibility), making those outputs anyone-can-spend.
-    // Gate on DEPLOYMENT_TAPROOT because the DISCOURAGE flag would also reject v1
-    // spends — v1 is an unknown upgrade before Taproot activates, so forward-
-    // compatibility would be broken during the BIP-9 window.
-    // Creation of v>1 outputs is blocked at the same gate in ContextualCheckBlock.
-    if (DeploymentActiveAt(block_index, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
+    // Protocol V3.2: reject spending outputs with upgradable/unknown witness
+    // versions (v > 1, and v1 before Taproot activates). Without this flag the
+    // interpreter treats unknown witness versions as anyone-can-spend. Once
+    // SCRIPT_VERIFY_TAPROOT is active (testnet, regtest, or mainnet after BIP-9
+    // activation), v1 is handled before this flag is checked in interpreter.cpp.
+    // Creation of v > 1 outputs is blocked at the same gate in ContextualCheckBlock.
+    if (consensusparams.IsProtocolV3_2(block_index.GetBlockTime())) {
         flags |= SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM;
     }
 
@@ -4344,17 +4343,12 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
     }
 
-    // Reject blocks creating outputs with unknown witness versions (v > 1).
-    // Those outputs are anyone-can-spend unless DISCOURAGE is set (see
-    // interpreter.cpp VerifyWitnessProgram else-branch). Known versions: 0, 1.
-    // Mainnet/signet/regtest/testnet4: gate on SegWit (active, no BIP-9 wait).
-    // Legacy testnet: gate on Taproot ACTIVE — it has existing v16 outputs at
-    // ~2,864,xxx created before Taproot at 2,865,000 that must stay valid.
-    const ChainType chain_type = chainman.GetParams().GetChainType();
-    const bool block_unknown_witness = (chain_type == ChainType::TESTNET)
-        ? DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT)
-        : DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_SEGWIT);
-    if (block_unknown_witness) {
+    // Protocol V3.2: reject blocks creating outputs with unknown witness versions (v > 1).
+    // Known witness versions are 0 (SegWit) and 1 (Taproot). Gating on Protocol V3.2
+    // keeps historical testnet blocks (e.g. v16 outputs around height ~2,864,xxx) valid
+    // while blocking unknown witness outputs on all networks after activation without
+    // waiting for BIP-9 Taproot activation.
+    if (chainman.GetConsensus().IsProtocolV3_2(block.GetBlockTime())) {
         for (const auto& tx : block.vtx) {
             for (const auto& txout : tx->vout) {
                 int witness_version = 0;
