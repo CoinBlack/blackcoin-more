@@ -556,7 +556,7 @@ static bool ProcessBlockFound(const CBlock* pblock, ChainstateManager& chainman)
     {
         LOCK(cs_main);
         BlockValidationState state;
-        if (!CheckProofOfStake(&chainman.BlockIndex()[pblock->hashPrevBlock], *pblock->vtx[1], pblock->nBits, state, chainman.ActiveChainstate().CoinsTip(), pblock->vtx[1]->nTime ? pblock->vtx[1]->nTime : pblock->nTime))
+        if (!CheckProofOfStake(&chainman.BlockIndex()[pblock->hashPrevBlock], *pblock->vtx[1], pblock->nBits, state, chainman.ActiveChainstate().CoinsTip(), pblock->vtx[1]->nTime ? pblock->vtx[1]->nTime : pblock->nTime, chainman))
             return error("ProcessBlockFound(): proof-of-stake checking failed");
         
         if (pblock->hashPrevBlock != chainman.ActiveChain().Tip()->GetBlockHash())

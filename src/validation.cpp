@@ -2147,6 +2147,16 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex& block_index, const Ch
         flags |= SCRIPT_VERIFY_TAPROOT;
     }
 
+    // Protocol V3.2: reject spending outputs with upgradable/unknown witness
+    // versions (v > 1, and v1 before Taproot activates). Without this flag the
+    // interpreter treats unknown witness versions as anyone-can-spend. Once
+    // SCRIPT_VERIFY_TAPROOT is active (testnet, regtest, or mainnet after BIP-9
+    // activation), v1 is handled before this flag is checked in interpreter.cpp.
+    // Creation of v > 1 outputs is blocked at the same gate in ContextualCheckBlock.
+    if (consensusparams.IsProtocolV3_2(block_index.GetBlockTime())) {
+        flags |= SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM;
+    }
+
     return flags;
 }
 
@@ -2209,7 +2219,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     assert(hashPrevBlock == view.GetBestBlock());
 
     // Check proof-of-stake
-    if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, *block.vtx[1], block.nBits, state, view, block.vtx[1]->nTime ? block.vtx[1]->nTime : block.nTime)) {
+    if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime()) && !CheckProofOfStake(pindex->pprev, *block.vtx[1], block.nBits, state, view, block.vtx[1]->nTime ? block.vtx[1]->nTime : block.nTime, m_chainman)) {
         LogPrintf("WARNING: %s: check proof-of-stake failed for block %s\n", __func__, block.GetHash().ToString());
         return false; // do not error here as we expect this during initial block download
     }
@@ -3993,6 +4003,24 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     // failed).
     if (GetBlockWeight(block) > MAX_BLOCK_WEIGHT) {
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
+    }
+
+    // Protocol V3.2: reject blocks creating outputs with unknown witness versions (v > 1).
+    // Known witness versions are 0 (SegWit) and 1 (Taproot). Gating on Protocol V3.2
+    // keeps historical testnet blocks (e.g. v16 outputs around height ~2,864,xxx) valid
+    // while blocking unknown witness outputs on all networks after activation without
+    // waiting for BIP-9 Taproot activation.
+    if (consensusParams.IsProtocolV3_2(block.GetBlockTime())) {
+        for (const auto& tx : block.vtx) {
+            for (const auto& txout : tx->vout) {
+                int witness_version = 0;
+                std::vector<unsigned char> witness_program;
+                if (txout.scriptPubKey.IsWitnessProgram(witness_version, witness_program) && witness_version > 1) {
+                    return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-unknown-witness-version",
+                        strprintf("%s : block contains output with unknown witness version %d", __func__, witness_version));
+                }
+            }
+        }
     }
 
     return true;

@@ -18,6 +18,7 @@
 #include <arith_uint256.h>
 #include <uint256.h>
 #include <primitives/transaction.h>
+#include <script/interpreter.h>
 #include <script/sign.h>
 #include <consensus/consensus.h>
 #include <stdio.h>
@@ -123,7 +124,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, uin
 }
 
 // Check kernel hash target and coinstake signature
-bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, BlockValidationState& state, CCoinsViewCache& view, unsigned int nTimeTx)
+bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned int nBits, BlockValidationState& state, CCoinsViewCache& view, unsigned int nTimeTx, const ChainstateManager& chainman)
 {
     if (!tx.IsCoinStake())
         return error("CheckProofOfStake() : called on non-coinstake %s", tx.GetHash().ToString());
@@ -147,9 +148,38 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-prevout-not-loaded", strprintf("CheckProofOfStake() : Block at height %i for prevout can not be loaded", coinPrev.nHeight));
     }
 
-    // Verify signature
-    if (!VerifySignature(coinPrev, txin.prevout.hash, tx, 0, SCRIPT_VERIFY_NONE))
-        return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-verify-signature-failed", strprintf("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString()));
+    // Verify signature (with deployment-gated SegWit/Taproot flags)
+    {
+        std::vector<CTxOut> spent_outputs;
+        spent_outputs.reserve(tx.vin.size());
+        for (const auto& in : tx.vin) {
+            Coin coin;
+            if (!view.GetCoin(in.prevout, coin)) {
+                return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-prevout-not-exist",
+                    strprintf("CheckProofOfStake() : Spent output %s not found", in.prevout.ToString()));
+            }
+            spent_outputs.emplace_back(coin.out);
+        }
+
+        PrecomputedTransactionData txdata;
+        txdata.Init(tx, std::move(spent_outputs));
+        TransactionSignatureChecker checker(&tx, 0, coinPrev.out.nValue, txdata, MissingDataBehavior::ASSERT_FAIL);
+
+        // Only enforce SegWit and Taproot script flags once their respective
+        // deployments are active after pindexPrev, to avoid mixed-version
+        // consensus splits during BIP-9 signaling and pre-activation IBD.
+        uint32_t script_flags{SCRIPT_VERIFY_P2SH};
+        if (DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_SEGWIT)) {
+            script_flags |= SCRIPT_VERIFY_WITNESS;
+        }
+        if (DeploymentActiveAfter(pindexPrev, chainman, Consensus::DEPLOYMENT_TAPROOT)) {
+            script_flags |= SCRIPT_VERIFY_TAPROOT;
+        }
+
+        if (!VerifyScript(txin.scriptSig, coinPrev.out.scriptPubKey, &txin.scriptWitness, script_flags, checker)) {
+            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "stake-verify-signature-failed", strprintf("CheckProofOfStake() : VerifyScript failed on coinstake %s", tx.GetHash().ToString()));
+        }
+    }
 
     if (!CheckStakeKernelHash(pindexPrev, nBits, (coinPrev.nTime ? coinPrev.nTime : blockFrom->nTime), coinPrev.out.nValue, txin.prevout, nTimeTx, LogInstance().WillLogCategory(BCLog::COINSTAKE)))
         return state.Invalid(BlockValidationResult::BLOCK_HEADER_SYNC, "stake-check-kernel-failed", strprintf("CheckProofOfStake() : INFO: check kernel failed on coinstake %s", tx.GetHash().ToString())); // may occur during initial download or if behind on block chain sync
