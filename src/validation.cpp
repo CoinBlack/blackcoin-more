@@ -2662,10 +2662,16 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
 
         if (!tx.IsCoinBase())
         {
-            if (tx.IsCoinStake())
+            if (tx.IsCoinStake()) {
                 nActualStakeReward = tx.GetValueOut()-view.GetValueIn(tx);
-            else if (!params.GetConsensus().IsProtocolV3_2(block.GetBlockTime()))
-                nFees += view.GetValueIn(tx)-tx.GetValueOut();
+            } else if (!params.GetConsensus().IsProtocolV3_2(block.GetBlockTime())) {
+                const CAmount extra_fee = view.GetValueIn(tx) - tx.GetValueOut();
+                if (!MoneyRange(extra_fee) || extra_fee > MAX_MONEY - nFees) {
+                    LogPrintf("ERROR: %s: accumulated fee in the block out of range.\n", __func__);
+                    return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-txns-accumulated-fee-outofrange");
+                }
+                nFees += extra_fee;
+            }
 
             std::vector<CScriptCheck> vChecks;
             bool fCacheResults = fJustCheck; /* Don't cache results if we're actually connecting blocks (still consult the cache, though) */
@@ -2696,7 +2702,12 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
              Ticks<MillisecondsDouble>(m_chainman.time_connect) / m_chainman.num_blocks_total);
 
     if (block.IsProofOfWork()) {
-        CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), false);
+        const CAmount subsidy = GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), false);
+        // Check before adding to avoid signed integer overflow UB (MAX_MONEY == INT64_MAX)
+        if (nFees > MAX_MONEY - subsidy) {
+            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-txns-accumulated-fee-outofrange");
+        }
+        const CAmount blockReward = nFees + subsidy;
         if (block.vtx[0]->GetValueOut() > blockReward) {
             LogPrintf("ERROR: ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)\n", block.vtx[0]->GetValueOut(), blockReward);
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-amount");
@@ -2704,7 +2715,12 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     }
 
     if (block.IsProofOfStake() && params.GetConsensus().IsProtocolV3(block.GetBlockTime())) {
-        CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), true);
+        const CAmount subsidy = GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), true);
+        // Check before adding to avoid signed integer overflow UB (MAX_MONEY == INT64_MAX)
+        if (nFees > MAX_MONEY - subsidy) {
+            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-txns-accumulated-fee-outofrange");
+        }
+        const CAmount blockReward = nFees + subsidy;
         if (nActualStakeReward > blockReward) {
             LogPrintf("ERROR: ConnectBlock(): coinstake pays too much (actual=%d vs limit=%d)\n", nActualStakeReward, blockReward);
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cs-amount");
