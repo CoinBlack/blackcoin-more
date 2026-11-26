@@ -907,9 +907,11 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "non-BIP68-final");
     }
 
-    // The mempool holds txs for the next block, so pass height+1 and deterministic tip time to CheckTxInputs.
+    // The mempool holds txs for the next block (whose timestamp must be > tip->GetBlockTime()
+    // and is normally >= now), so avoid rejecting v2 txs spending unconfirmed v1 parents.
     const CBlockIndex* const tip = m_active_chainstate.m_chain.Tip();
-    const int64_t nMempoolBlockTime = tip ? tip->GetBlockTime() : GetAdjustedTimeSeconds();
+    const int64_t nMempoolBlockTime = tip ? std::max<int64_t>(tip->GetBlockTime() + 1, GetAdjustedTimeSeconds())
+                                          : GetAdjustedTimeSeconds();
     if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees, nMempoolBlockTime)) {
         return false; // state filled in by CheckTxInputs
     }
