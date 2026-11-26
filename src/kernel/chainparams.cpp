@@ -121,8 +121,8 @@ public:
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
 
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000517e2d8a11f8c35a13e"); // block 5930110
-        consensus.defaultAssumeValid = uint256S("0x544cc4c650dc758ce20626101533f0476f3f987add3aae0d68e791e01bad013f"); // block 5930110
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000053e76941638097bf6ab"); // block 6119546
+        consensus.defaultAssumeValid = uint256S("0x312d3921b8527d96c1f8f7b241e17bde843f01dc5012c71ff97a60d9a51ba945"); // block 6119546
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -184,10 +184,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 40500 d46da886008c871fa10f6a793b9c62df949a915cecf01e34b3d6467e59e37459
-            .nTime    = 1774121904,
-            .nTxCount = 16969196,
-            .dTxRate  = 0.02987128832475943,
+            // Data from RPC: getchaintxstats 40500 312d3921b8527d96c1f8f7b241e17bde843f01dc5012c71ff97a60d9a51ba945
+            .nTime    = 1795267072,
+            .nTxCount = 19762591,
+            .dTxRate  = 0.4089388552623847,
         };
 
         // A vector of p2sh addresses
