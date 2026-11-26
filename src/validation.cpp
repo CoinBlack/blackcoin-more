@@ -907,8 +907,10 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         return state.Invalid(TxValidationResult::TX_PREMATURE_SPEND, "non-BIP68-final");
     }
 
-    // The mempool holds txs for the next block, so pass height+1 to CheckTxInputs.
-    if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees)) {
+    // The mempool holds txs for the next block, so pass height+1 and deterministic tip time to CheckTxInputs.
+    const CBlockIndex* const tip = m_active_chainstate.m_chain.Tip();
+    const int64_t nMempoolBlockTime = tip ? tip->GetBlockTime() : GetAdjustedTimeSeconds();
+    if (!Consensus::CheckTxInputs(tx, state, m_view, m_active_chainstate.m_chain.Height() + 1, ws.m_base_fees, nMempoolBlockTime)) {
         return false; // state filled in by CheckTxInputs
     }
 
@@ -2619,7 +2621,9 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         {
             CAmount txfee = 0;
             TxValidationState tx_state;
-            if (!Consensus::CheckTxInputs(tx, tx_state, view, pindex->nHeight, txfee)) {
+            // Use deterministic block time for v2+ inputs starting at Protocol V3.2
+            const int64_t nBlockTime = params.GetConsensus().IsProtocolV3_2(block.GetBlockTime()) ? pindex->GetBlockTime() : 0;
+            if (!Consensus::CheckTxInputs(tx, tx_state, view, pindex->nHeight, txfee, nBlockTime)) {
                 // Any transaction validation failure in ConnectBlock is a block consensus failure
                 state.Invalid(BlockValidationResult::BLOCK_CONSENSUS,
                             tx_state.GetRejectReason(), tx_state.GetDebugMessage());
