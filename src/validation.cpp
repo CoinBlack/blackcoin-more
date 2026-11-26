@@ -3907,8 +3907,9 @@ static bool CheckBlockSignature(const CBlock& block)
         std::vector<unsigned char>& vchPubKey = vSolutions[0];
         return CPubKey(vchPubKey).Verify(block.GetHash(), block.vchBlockSig);
     }
-    else if (whichType == TxoutType::NULL_DATA) {
+    else {
         // OP_RETURN carrier: extract pubkey from first push after OP_RETURN
+        // (kept as `else` rather than `NULL_DATA` to match 26.2 consensus exactly)
         const CScript& script = txout.scriptPubKey;
         CScript::const_iterator pc = script.begin();
         opcodetype opcode;
