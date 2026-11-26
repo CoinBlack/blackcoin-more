@@ -3768,7 +3768,8 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
     if (nSigOps * WITNESS_SCALE_FACTOR > MAX_BLOCK_SIGOPS_COST)
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-blk-sigops", "out-of-bounds SigOpCount");
 
-    if (fCheckPOW && fCheckMerkleRoot)
+    // Only cache fChecked when block signature was also verified (prevents submitblock from bypassing CheckBlockSignature)
+    if (fCheckPOW && fCheckMerkleRoot && fCheckSig)
         block.fChecked = true;
 
     return true;
