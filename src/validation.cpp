@@ -2609,6 +2609,8 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     std::vector<int> prevheights;
     CAmount nFees = 0;
     CAmount nActualStakeReward = 0;
+    arith_uint256 total_block_in{0};
+    arith_uint256 total_block_out{0};
     int nInputs = 0;
     int64_t nSigOpsCost = 0;
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
@@ -2689,6 +2691,12 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
             control.Add(std::move(vChecks));
         }
 
+        // Track block-wide inputs and outputs before UpdateCoins spends inputs (used for V3.2 inflation invariant)
+        total_block_out += arith_uint256(static_cast<uint64_t>(tx.GetValueOut()));
+        if (!tx.IsCoinBase()) {
+            total_block_in += arith_uint256(static_cast<uint64_t>(view.GetValueIn(tx)));
+        }
+
         CTxUndo undoDummy;
         if (i > 0) {
             blockundo.vtxundo.emplace_back();
@@ -2726,6 +2734,16 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
         if (nActualStakeReward > blockReward) {
             LogPrintf("ERROR: ConnectBlock(): coinstake pays too much (actual=%d vs limit=%d)\n", nActualStakeReward, blockReward);
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cs-amount");
+        }
+    }
+
+    // Protocol V3.2: block-level conservation-of-money invariant (independent of nFees / IsCoinStake).
+    // Net new coins created across the entire block can never exceed the block subsidy.
+    if (params.GetConsensus().IsProtocolV3_2(block.GetBlockTime())) {
+        const CAmount subsidy = GetBlockSubsidy(pindex->nHeight, params.GetConsensus(), block.IsProofOfStake());
+        if (total_block_out > total_block_in + arith_uint256(static_cast<uint64_t>(subsidy))) {
+            LogPrintf("ERROR: ConnectBlock(): block net emission exceeds subsidy\n");
+            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-blk-inflation");
         }
     }
 
