@@ -195,11 +195,11 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
         if (coin.nTime > nTimeTx)
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-time-earlier-than-input");
 
-        // Check for negative or overflow input values
-        nValueIn += coin.out.nValue;
-        if (!MoneyRange(coin.out.nValue) || !MoneyRange(nValueIn)) {
+        // Check for negative or overflow input values before adding to avoid signed overflow UB (MAX_MONEY == INT64_MAX)
+        if (!MoneyRange(coin.out.nValue) || coin.out.nValue > MAX_MONEY - nValueIn) {
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-inputvalues-outofrange");
         }
+        nValueIn += coin.out.nValue;
     }
 
     if (!tx.IsCoinStake())

@@ -94,7 +94,8 @@ CAmount CTransaction::GetValueOut() const
 {
     CAmount nValueOut = 0;
     for (const auto& tx_out : vout) {
-        if (!MoneyRange(tx_out.nValue) || !MoneyRange(nValueOut + tx_out.nValue))
+        // Check before adding to avoid signed integer overflow UB (MAX_MONEY == INT64_MAX)
+        if (!MoneyRange(tx_out.nValue) || tx_out.nValue > MAX_MONEY - nValueOut)
             throw std::runtime_error(std::string(__func__) + ": value out of range");
         nValueOut += tx_out.nValue;
     }

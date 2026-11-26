@@ -2318,11 +2318,12 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
                             tx_state.GetRejectReason(), tx_state.GetDebugMessage());
                 return error("%s: Consensus::CheckTxInputs: %s, %s", __func__, tx.GetHash().ToString(), state.ToString());
             }
-            nFees += txfee;
-            if (!MoneyRange(nFees)) {
+            // Check before adding to avoid signed integer overflow UB (MAX_MONEY == INT64_MAX)
+            if (!MoneyRange(txfee) || txfee > MAX_MONEY - nFees) {
                 LogPrintf("ERROR: %s: accumulated fee in the block out of range.\n", __func__);
                 return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-txns-accumulated-fee-outofrange");
             }
+            nFees += txfee;
 
             // Check that transaction is BIP68 final
             // BIP68 lock checks (as opposed to nLockTime checks) must
