@@ -53,7 +53,8 @@ namespace node {
 
 int64_t MsUntilNextWindow(const Consensus::Params& consensus, int64_t mtp)
 {
-    int64_t now = GetAdjustedTimeSeconds();
+    const int64_t now_ms = TicksSinceEpoch<std::chrono::milliseconds>(NodeClock::now());
+    const int64_t now = now_ms / 1000;
     int64_t nextBoundary = (now & ~consensus.nStakeTimestampMask)
                          + (consensus.nStakeTimestampMask + 1);
 
@@ -61,7 +62,9 @@ int64_t MsUntilNextWindow(const Consensus::Params& consensus, int64_t mtp)
     while (nextBoundary <= mtp)
         nextBoundary += (consensus.nStakeTimestampMask + 1);
 
-    return std::max<int64_t>(0, (nextBoundary - now) * 1000);
+    // Wake 50ms into the next 16s window so GetAdjustedTimeSeconds() has ticked
+    // past nextBoundary without drifting up to 999ms late on every cycle.
+    return std::max<int64_t>(50, nextBoundary * 1000 - now_ms + 50);
 }
 
 int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev)
@@ -226,7 +229,9 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         // Skip staking attempts if search time has not advanced past the current MTP.
         // This avoids wasting CPU on CreateCoinStake and prevents log warning spam.
         if (nSearchTime <= pindexPrev->GetMedianTimePast()) {
-            pwallet->m_last_coin_stake_search_interval = nSearchTime - pwallet->m_last_coin_stake_search_time;
+            if (nSearchTime > pwallet->m_last_coin_stake_search_time) {
+                pwallet->m_last_coin_stake_search_interval = nSearchTime - pwallet->m_last_coin_stake_search_time;
+            }
             pwallet->m_last_coin_stake_search_time = nSearchTime;
             pwallet->m_last_coin_stake_search_tip = pindexPrev->GetBlockHash();
             *pfPoSCancel = true;
@@ -257,7 +262,9 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
                               pwallet->m_last_coin_stake_search_interval);
                 }
             }
-            pwallet->m_last_coin_stake_search_interval = nSearchTime - pwallet->m_last_coin_stake_search_time;
+            if (nSearchTime > pwallet->m_last_coin_stake_search_time) {
+                pwallet->m_last_coin_stake_search_interval = nSearchTime - pwallet->m_last_coin_stake_search_time;
+            }
             pwallet->m_last_coin_stake_search_time = nSearchTime;
             pwallet->m_last_coin_stake_search_tip = currentTipHash;
             LogPrint(BCLog::COINSTAKE, "[%s] Wallet timer updated: interval=%d, last_search_time=%d (%s)\n",
@@ -819,7 +826,7 @@ void PoSMiner(CWallet *pwallet)
             {
                 if (fPoSCancel == true)
                 {
-                    int64_t sleepTime = std::max(MsUntilNextWindow(Params().GetConsensus(), pindexPrev->GetMedianTimePast()), static_cast<int64_t>(pos_timio));
+                    int64_t sleepTime = MsUntilNextWindow(Params().GetConsensus(), pindexPrev->GetMedianTimePast());
 
                     if (!SleepStaker(pwallet, sleepTime))
                         return;

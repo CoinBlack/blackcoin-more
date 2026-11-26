@@ -13,7 +13,7 @@
 - Gated `SCRIPT_VERIFY_WITNESS` and `SCRIPT_VERIFY_TAPROOT` in `CheckProofOfStake()` on active deployments
 - Aligned `tx.version` signed comparison for `nTime` serialization and `CheckBlockSignature()` `OP_RETURN` handling with v26.2
 
-## v28.4.0 (2026-07-06)
+## v28.4.0 (2026-09-21)
 - Complete integration of Bitcoin Core 28.4.0
 - Modernized build system with updated dependencies (secp256k1, leveldb, etc.)
 - Header spam protection: Enhanced qtum header spam filter
