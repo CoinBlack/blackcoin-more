@@ -363,15 +363,16 @@ static RPCHelpMan checkkernel()
 
     // Prepare reserve destination (must yield a 20-byte key hash for CKeyID / GetPubKey;
     // Bech32m Taproot returns a 32-byte x-only pubkey and P2SH-SegWit returns a script hash).
-    auto op_dest = pwallet->GetNewChangeDestination(OutputType::LEGACY);
-    if (!op_dest) {
-        op_dest = pwallet->GetNewChangeDestination(OutputType::BECH32);
-    }
-    if (!op_dest) {
+    CTxDestination dest;
+    if (auto op_dest = pwallet->GetNewChangeDestination(OutputType::LEGACY)) {
+        dest = *op_dest;
+    } else if (auto op_dest_bech32 = pwallet->GetNewChangeDestination(OutputType::BECH32)) {
+        dest = *op_dest_bech32;
+    } else {
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: Keypool ran out, please call keypoolrefill first");
     }
     std::vector<valtype> vSolutionsTmp;
-    CScript scriptPubKeyTmp = GetScriptForDestination(*op_dest);
+    CScript scriptPubKeyTmp = GetScriptForDestination(dest);
     const TxoutType whichType = Solver(scriptPubKeyTmp, vSolutionsTmp);
     if ((whichType != TxoutType::PUBKEYHASH && whichType != TxoutType::WITNESS_V0_KEYHASH) ||
         vSolutionsTmp.empty() || vSolutionsTmp[0].size() != 20) {
