@@ -256,7 +256,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
                     pblock->vtx.insert(pblock->vtx.begin() + 1, MakeTransactionRef(CTransaction(txCoinStake)));
                     *pfPoSCancel = false;
 
-                    pwallet->WalletLogPrintf("COINSTAKE CREATED: found kernel at timestamp %d, hash %s, search time %dms\n",
+                    pwallet->WalletLogPrintf("COINSTAKE CREATED: found kernel at timestamp %d, hash %s, search interval %ds\n",
                               txCoinStake.nTime,
                               txCoinStake.GetHash().GetHex().c_str(),
                               pwallet->m_last_coin_stake_search_interval);

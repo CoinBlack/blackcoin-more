@@ -101,7 +101,8 @@ double GetPoSKernelPS(ChainstateManager& chainman)
 {
     int nPoSInterval = 72;
     double dStakeKernelsTriedAvg = 0;
-    int nStakesHandled = 0, nStakesTime = 0;
+    int nStakesHandled = 0;
+    int64_t nStakesTime = 0;
 
     LOCK(cs_main);
     CBlockIndex* pindex = chainman.m_best_header;
@@ -114,7 +115,7 @@ double GetPoSKernelPS(ChainstateManager& chainman)
             if (pindexPrevStake)
             {
                 dStakeKernelsTriedAvg += GetDifficulty(*pindexPrevStake) * 4294967296.0;
-                nStakesTime += pindexPrevStake->nTime - pindex->nTime;
+                nStakesTime += static_cast<int64_t>(pindexPrevStake->nTime) - static_cast<int64_t>(pindex->nTime);
                 nStakesHandled++;
             }
             pindexPrevStake = pindex;
@@ -125,7 +126,7 @@ double GetPoSKernelPS(ChainstateManager& chainman)
 
     double result = 0;
 
-    if (nStakesTime)
+    if (nStakesTime > 0)
         result = dStakeKernelsTriedAvg / nStakesTime;
 
     result *= Params().GetConsensus().nStakeTimestampMask + 1;
