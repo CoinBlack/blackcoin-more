@@ -1,7 +1,7 @@
 # Changelog
 
 ## v26.2.1 (2026-11-27)
-- **Protocol V3.2 activation:** Scheduled for **Monday, November 30, 2026 at 20:00:00 UTC** (`nProtocolV3_2Time = 1796068800`) — mandatory upgrade before activation
+- **Protocol V3.2 activation:** Scheduled for **Monday, November 30, 2026 at 13:00:00 UTC** (`nProtocolV3_2Time = 1796043600`) — mandatory upgrade before activation
 - Fixed transaction fee double-counting bug in `ConnectBlock()` (Protocol V3.2)
 - Added block-level conservation-of-money invariant (`bad-blk-inflation`) ensuring net block emission never exceeds the block subsidy (Protocol V3.2)
 - Blocked creation and spending of unknown witness versions (`v > 1`) under Protocol V3.2 (`bad-unknown-witness-version` and `SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM`), and rejected `WITNESS_UNKNOWN` in mempool standardness
@@ -11,6 +11,7 @@
 - Required `fCheckSig` before caching `block.fChecked` in `CheckBlock()`
 - Prevented signed `int64_t` overflow UB in `CAmount` additions across consensus validation (`MAX_MONEY == INT64_MAX`)
 - Backported deployment-gated `CheckProofOfStake()` script verification (`P2SH` + SegWit/Taproot when active)
+- Hardened PoS relay and reorg handling: gated `NewPoWValidBlock()` on PoW blocks, evicted immature coinstake spends in `MaybeUpdateMempoolForReorg()`, and fixed the PoS coinstake check in `ProcessNetBlock()`
 - Buried SegWit deployment (`SegwitHeight`), added BIP-9 Taproot deployment parameters, and updated checkpoints, DNS seeds, `defaultAssumeValid`, `nMinimumChainWork`, and `chainTxData`
 
 ## v26.2.0 (2024-12-18)
