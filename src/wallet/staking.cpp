@@ -21,6 +21,10 @@ void StakeCoins(CWallet& wallet, bool fStake) {
 }
 
 void StartStake(CWallet& wallet) {
+    LOCK(wallet.m_stake_thread_mutex);
+    if (wallet.m_enabled_staking && wallet.threadStakeMinerGroup) {
+        return;
+    }
     if (wallet.IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS)) {
         wallet.WalletLogPrintf("Wallet can't contain any private keys - staking disabled\n");
         wallet.m_enabled_staking = false;
@@ -40,6 +44,7 @@ void StartStake(CWallet& wallet) {
 }
 
 void StopStake(CWallet& wallet) {
+    LOCK(wallet.m_stake_thread_mutex);
     if (!wallet.threadStakeMinerGroup) {
         if (wallet.m_enabled_staking)
             wallet.m_enabled_staking = false;

@@ -1081,6 +1081,7 @@ public:
     bool IsStakeClosing();
 
     /* Staking thread group */
+    Mutex m_stake_thread_mutex;
     std::unique_ptr<std::vector<std::thread>> threadStakeMinerGroup;
 
     //! Whether the (external) signer performs R-value signature grinding

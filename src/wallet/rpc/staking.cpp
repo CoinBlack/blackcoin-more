@@ -138,9 +138,9 @@ static RPCHelpMan staking()
                 error = "The wallet can't contain any private keys";
             } else if (pwallet->IsWalletFlagSet(WALLET_FLAG_BLANK_WALLET)) {
                 error = "The wallet is blank";
-            }
-            if (!pwallet->m_enabled_staking)
+            } else if (!pwallet->m_enabled_staking) {
                 StartStake(*pwallet);
+            }
         }
         else {
             StopStake(*pwallet);
