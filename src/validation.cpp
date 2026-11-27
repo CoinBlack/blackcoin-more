@@ -4720,10 +4720,13 @@ bool ChainstateManager::ProcessNewBlock(const std::shared_ptr<const CBlock>& blo
         // https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-February/016697.html.  Because CheckBlock() is
         // not very expensive, the anti-DoS benefits of caching failure (of a definitely-invalid block) are not substantial.
         // blackcoin: also check for the signature encoding
-        if (!CheckCanonicalBlockSignature(block)) {
-            return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-signature-encoding", "AcceptBlock(): bad block signature encoding");
+        bool ret = CheckCanonicalBlockSignature(block);
+        if (!ret) {
+            state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "bad-signature-encoding", "AcceptBlock(): bad block signature encoding");
         }
-        bool ret = CheckBlock(*block, state, GetConsensus(), ActiveChainstate());
+        if (ret) {
+            ret = CheckBlock(*block, state, GetConsensus(), ActiveChainstate());
+        }
         if (ret) {
             // Store to disk
             ret = AcceptBlock(block, state, &pindex, force_processing, nullptr, new_block, min_pow_checked);
