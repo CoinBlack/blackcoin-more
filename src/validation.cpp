@@ -4661,8 +4661,10 @@ bool ChainstateManager::AcceptBlock(const std::shared_ptr<const CBlock>& pblock,
     }
 
     // Header is valid/has work, merkle tree and segwit merkle tree are good...RELAY NOW
-    // (but if it does not build on our best tip, let the SendMessages loop relay it)
-    if (!IsInitialBlockDownload() && ActiveTip() == pindex->pprev && m_options.signals) {
+    // (but if it does not build on our best tip, let the SendMessages loop relay it).
+    // Blackcoin: only fast-announce PoW blocks here; PoS blocks are not kernel-verified
+    // until CheckProofOfStake() in ConnectBlock() and are relayed via UpdatedBlockTip().
+    if (block.IsProofOfWork() && !IsInitialBlockDownload() && ActiveTip() == pindex->pprev && m_options.signals) {
         m_options.signals->NewPoWValidBlock(pindex, pblock);
     }
 
