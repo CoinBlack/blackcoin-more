@@ -312,7 +312,9 @@ jobs:
           file: ./Dockerfile.release
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.0-debian:${{ github.ref_name }}
+          tags: |
+            ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.1-debian:${{ github.ref_name }}
+            ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.1-debian:latest
 
       - name: Build and push minimal multi-arch image
         uses: docker/build-push-action@v7.4.0
@@ -321,4 +323,6 @@ jobs:
           file: ./Dockerfile.minimal.release
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.0-minimal:${{ github.ref_name }}
+          tags: |
+            ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.1-minimal:${{ github.ref_name }}
+            ${{ env.DOCKER_HUB_DEST }}/blackcoin-more-26.2.1-minimal:latest
