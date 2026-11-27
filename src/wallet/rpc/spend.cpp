@@ -372,6 +372,9 @@ RPCHelpMan optimizeutxoset()
 
     coin_control.destChange = dest;
     CAmount amount = AmountFromValue(request.params[1]);
+    if (amount <= 0) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount: must be greater than 0");
+    }
 
     std::vector<CRecipient> recipients;
     const bool transmit{request.params[2].isNull() ? false : request.params[2].get_bool()};
@@ -427,6 +430,11 @@ RPCHelpMan optimizeutxoset()
     txTmp.vout.push_back(txout);
     tx_sizes = CalculateMaximumSignedTxSize(CTransaction(txTmp), pwallet.get(), &coin_control);
     int nBytesPerOut = tx_sizes.vsize - nBytes;
+
+    const int64_t max_vsize = MAX_STANDARD_TX_WEIGHT / WITNESS_SCALE_FACTOR;
+    if (nBytesPerOut <= 0 || nBytes >= max_vsize || (remaining / amount) > (max_vsize - nBytes) / nBytesPerOut) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Amount is too small: resulting transaction would exceed max standard size");
+    }
 
     CAmount fee = GetMinFee(nBytes + (unsigned int)(remaining / amount) * nBytesPerOut, GetAdjustedTimeSeconds());
     while (remaining > amount + fee) {
