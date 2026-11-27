@@ -136,7 +136,7 @@ public:
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
         consensus.nProtocolV3_1Time = 1713938400;
-        consensus.nProtocolV3_2Time = 1795680000; // Thursday, November 26, 2026 08:00:00 UTC
+        consensus.nProtocolV3_2Time = 1796043600; // Monday, November 30, 2026 13:00:00 UTC
         consensus.nLastPOWBlock = 10000;
         consensus.nStakeTimestampMask = 0xf; // 15
         consensus.nCoinbaseMaturity = 500;
@@ -255,7 +255,7 @@ public:
         consensus.nProtocolV2Time = 1407053625;
         consensus.nProtocolV3Time = 1444028400;
         consensus.nProtocolV3_1Time = 1667779200;
-        consensus.nProtocolV3_2Time = 1795680000; // Thursday, November 26, 2026 08:00:00 UTC
+        consensus.nProtocolV3_2Time = 1796043600; // Monday, November 30, 2026 13:00:00 UTC
         consensus.nLastPOWBlock = 0x7fffffff;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;
@@ -501,7 +501,7 @@ public:
         consensus.nProtocolV2Time = 1707168542;
         consensus.nProtocolV3Time = 1707168543;
         consensus.nProtocolV3_1Time = 1707168544;
-        consensus.nProtocolV3_2Time = 1795680000; // Thursday, November 26, 2026 08:00:00 UTC
+        consensus.nProtocolV3_2Time = 1796043600; // Monday, November 30, 2026 13:00:00 UTC
         consensus.nLastPOWBlock = 0x7fffffff;
         consensus.nStakeTimestampMask = 0xf;
         consensus.nCoinbaseMaturity = 10;

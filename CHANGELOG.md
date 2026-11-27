@@ -1,7 +1,7 @@
 # Changelog
 
 ## v28.4.1 (2026-11-27)
-- **Protocol V3.2 activation:** Scheduled for **Monday, November 30, 2026 at 20:00:00 UTC** (`nProtocolV3_2Time = 1796068800`) — mandatory upgrade before activation
+- **Protocol V3.2 activation:** Scheduled for **Monday, November 30, 2026 at 13:00:00 UTC** (`nProtocolV3_2Time = 1796043600`) — mandatory upgrade before activation
 - Fixed transaction fee double-counting bug in `ConnectBlock()` (Protocol V3.2)
 - Added block-level conservation-of-money invariant (`bad-blk-inflation`) ensuring net block emission never exceeds the block subsidy (Protocol V3.2)
 - Gated unknown witness version (`v > 1`) creation and spend rejection (`bad-unknown-witness-version` and `SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM`) on Protocol V3.2
@@ -13,6 +13,7 @@
 - Gated `SCRIPT_VERIFY_WITNESS` and `SCRIPT_VERIFY_TAPROOT` in `CheckProofOfStake()` on active deployments
 - Aligned `tx.version` signed comparison for `nTime` serialization and `CheckBlockSignature()` `OP_RETURN` handling with v26.2
 - Fixed staker 16s window phase drift (`MsUntilNextWindow()` millisecond alignment) and `search-interval` resetting to `0` on mid-slot wakeups
+- Hardened staking, P2P, RPC, and Qt stability: standardized `cs_wallet -> cs_main` lock order, gated `NewPoWValidBlock()` on PoW blocks, prevented `ThreadStakeMiner` spin loop on keypool failure, guarded `StartStake`/`StopStake` with a mutex, fixed `PoSMiner`/`CreateCoinStake` tip race, stopped `BLOCK_HEADER_SYNC` instant-banning peers, evicted immature coinstake spends on reorg, hardened `checkkernel`/`burnwallet`/`optimizeutxoset`/`submitblock` RPCs, and fixed Qt `WalletModel`/`WalletWorker` data races and memory leak
 - Updated mainnet `defaultAssumeValid`, `nMinimumChainWork`, and `chainTxData` to block `6119546`
 
 ## v28.4.0 (2026-09-21)
