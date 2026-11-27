@@ -114,7 +114,7 @@ jobs:
           - name: linux-arm-64-bit
             host: aarch64-linux-gnu
             os: ubuntu-22.04
-            packages: "gcc-12 g++-12 gcc-12 g++-12 gcc-12-aarch64-linux-gnu g++-12-aarch64-linux-gnu binutils-aarch64-linux-gnu"
+            packages: "gcc-12 g++-12 gcc-12-aarch64-linux-gnu g++-12-aarch64-linux-gnu binutils-aarch64-linux-gnu"
             check-security: false
             check-symbols: false
             dep-opts: ""
@@ -211,8 +211,11 @@ jobs:
         run: |
           mkdir -p ./depends/sdk-sources
           mkdir -p ./depends/SDKs
-          curl --location --fail $SDK_URL/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz -o depends/sdk-sources/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz
-          tar -C depends/SDKs -xzvf depends/sdk-sources/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz
+          SDK_TAR="depends/sdk-sources/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz"
+          if [ ! -f "$SDK_TAR" ]; then
+            curl --location --fail "$SDK_URL/Xcode-${{ matrix.sdk }}-extracted-SDK-with-libcxx-headers.tar.gz" -o "$SDK_TAR"
+          fi
+          tar -C depends/SDKs -xzvf "$SDK_TAR"
 
       - name: Dependency cache
         if: steps.check_platform.outputs.should_build == 'true'
@@ -288,8 +291,8 @@ jobs:
 
       - name: Flatten Artifact Paths
         run: |
-          find bin/amd64 -type f -name "*blackmore*" -exec cp {} bin/amd64/ \;
-          find bin/arm64 -type f -name "*blackmore*" -exec cp {} bin/arm64/ \;
+          find bin/amd64 -mindepth 2 -type f -name "*blackmore*" -exec cp {} bin/amd64/ \;
+          find bin/arm64 -mindepth 2 -type f -name "*blackmore*" -exec cp {} bin/arm64/ \;
           chmod +x bin/amd64/*blackmore*
           chmod +x bin/arm64/*blackmore*
 
