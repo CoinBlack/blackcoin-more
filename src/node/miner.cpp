@@ -746,8 +746,11 @@ void PoSMiner(CWallet *pwallet)
         if (std::get_if<CNoDestination>(&dest)) {
             // create signkey address
             auto op_dest = pwallet->GetNewDestination(OutputType::LEGACY, label);
-            if (!op_dest)
-                throw std::runtime_error("Error: Keypool ran out, please call keypoolrefill first.");
+            if (!op_dest) {
+                pwallet->WalletLogPrintf("Error in PoSMiner: Keypool ran out (could not create SignKey), please call keypoolrefill before restarting staking\n");
+                pwallet->m_enabled_staking = false;
+                return;
+            }
             dest = *op_dest;
             pwallet->SetAddressBook(dest, label, wallet::AddressPurpose::SIGNKEY);
         } // blackcoin: signkey
@@ -887,6 +890,9 @@ void static ThreadStakeMiner(CWallet *pwallet)
         } catch (...) {
             PrintExceptionContinue(nullptr, "ThreadStakeMiner()");
         }
+        // Back off and respect StopStake()/shutdown if PoSMiner exits via exception
+        if (!SleepStaker(pwallet, 5000))
+            break;
     }
     pwallet->WalletLogPrintf("ThreadStakeMiner stopped\n");
 }
