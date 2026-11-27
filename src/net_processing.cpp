@@ -2218,12 +2218,12 @@ void PeerManagerImpl::MaybePunishNodeForBlock(NodeId nodeid, const BlockValidati
         return;
     // Conflicting (but not necessarily invalid) data or different policy:
     case BlockValidationResult::BLOCK_MISSING_PREV:
-    case BlockValidationResult::BLOCK_HEADER_SYNC:
         if (peer) Misbehaving(*peer, message);
         return;
     case BlockValidationResult::BLOCK_RECENT_CONSENSUS_CHANGE:
     case BlockValidationResult::BLOCK_TIME_FUTURE:
     case BlockValidationResult::BLOCK_HEADER_REJECT:
+    case BlockValidationResult::BLOCK_HEADER_SYNC:
         break;
     }
     if (message != "") {
