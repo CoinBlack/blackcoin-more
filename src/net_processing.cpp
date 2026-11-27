@@ -1855,8 +1855,8 @@ bool PeerManagerImpl::ProcessNetBlock(const std::shared_ptr<const CBlock> pblock
     {
         LOCK(cs_main);
 
-        // Check that the coinstake transaction exist in the received block
-        if (pblock->IsProofOfStake() && !(pblock->vtx.size() > 1 && pblock->vtx[1]->IsCoinStake())) {
+        // Check that the coinstake transaction exists when the header claims PoS
+        if ((pblock->nFlags & CBlockIndex::BLOCK_PROOF_OF_STAKE) && !pblock->IsProofOfStake()) {
             if (peer) Misbehaving(*peer, "Coinstake transaction does not exist");
             LogError("%s: coinstake transaction does not exist\n", __func__);
             return false;
