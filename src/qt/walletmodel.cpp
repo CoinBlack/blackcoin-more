@@ -46,13 +46,14 @@ class WalletWorker : public QObject
     Q_OBJECT
 public:
     QPointer<WalletModel> walletModel;
+    std::atomic<bool> stopping{false};
     WalletWorker(WalletModel *_walletModel):
         walletModel(_walletModel){}
 
 private Q_SLOTS:
     void updateModel()
     {
-        if(!walletModel || walletModel->node().shutdownRequested())
+        if(stopping.load() || !walletModel || walletModel->node().shutdownRequested())
             return;
 
         // Update the model with results of task that take more time to be completed
@@ -609,7 +610,7 @@ CAmount WalletModel::getAvailableBalance(const CCoinControl* control)
 
 uint64_t WalletModel::getStakeWeight()
 {
-    return nWeight;
+    return nWeight.load();
 }
 
 bool WalletModel::getWalletUnlockStakingOnly()
@@ -624,7 +625,9 @@ void WalletModel::setWalletUnlockStakingOnly(bool unlock)
 
 void WalletModel::checkStakeWeightChanged()
 {
-    if (updateStakeWeight && m_wallet->tryGetStakeWeight(nWeight)) {
+    uint64_t weight{0};
+    if (updateStakeWeight && m_wallet->tryGetStakeWeight(weight)) {
+        nWeight.store(weight);
         updateStakeWeight = false;
     }
 }
@@ -638,7 +641,7 @@ void WalletModel::join()
     }
 
     if (worker) {
-        worker->walletModel = nullptr;
+        worker->stopping.store(true);
     }
 
     // Quit thread
@@ -647,5 +650,10 @@ void WalletModel::join()
             worker->disconnect(this);
         t.quit();
         t.wait();
+    }
+
+    if (worker) {
+        delete worker;
+        worker = nullptr;
     }
 }

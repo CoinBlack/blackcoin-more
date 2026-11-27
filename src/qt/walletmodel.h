@@ -195,7 +195,7 @@ private:
     uint256 m_cached_last_update_tip{};
 
     int pollNum = 0;
-    uint64_t nWeight;
+    std::atomic<uint64_t> nWeight;
     std::atomic<bool> updateStakeWeight;
 
     QThread t;
