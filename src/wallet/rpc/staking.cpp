@@ -361,15 +361,22 @@ static RPCHelpMan checkkernel()
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: This wallet has no available keys");
     }
 
-    // Prepare reserve destination
-    OutputType output_type = pwallet->m_default_change_type ? *pwallet->m_default_change_type : pwallet->m_default_address_type;
-    auto op_dest = pwallet->GetNewChangeDestination(output_type);
+    // Prepare reserve destination (must yield a 20-byte key hash for CKeyID / GetPubKey;
+    // Bech32m Taproot returns a 32-byte x-only pubkey and P2SH-SegWit returns a script hash).
+    auto op_dest = pwallet->GetNewChangeDestination(OutputType::LEGACY);
+    if (!op_dest) {
+        op_dest = pwallet->GetNewChangeDestination(OutputType::BECH32);
+    }
     if (!op_dest) {
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: Keypool ran out, please call keypoolrefill first");
     }
     std::vector<valtype> vSolutionsTmp;
     CScript scriptPubKeyTmp = GetScriptForDestination(*op_dest);
-    Solver(scriptPubKeyTmp, vSolutionsTmp);
+    const TxoutType whichType = Solver(scriptPubKeyTmp, vSolutionsTmp);
+    if ((whichType != TxoutType::PUBKEYHASH && whichType != TxoutType::WITNESS_V0_KEYHASH) ||
+        vSolutionsTmp.empty() || vSolutionsTmp[0].size() != 20) {
+        throw JSONRPCError(RPC_WALLET_ERROR, "Error: failed to derive signing key");
+    }
     std::unique_ptr<SigningProvider> provider = pwallet->GetSolvingProvider(scriptPubKeyTmp);
     if (!provider) {
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: failed to get signing provider");
