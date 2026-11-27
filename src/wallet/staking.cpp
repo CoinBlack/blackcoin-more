@@ -160,10 +160,9 @@ void AvailableCoinsForStaking(const CWallet& wallet,
                 continue;
             }
 
-            std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(output.scriptPubKey);
-
             bool spendable = ((mine & ISMINE_SPENDABLE) != ISMINE_NO);
             if (!spendable && ((mine & ISMINE_WATCH_ONLY) != ISMINE_NO) && coinControl && coinControl->fAllowWatchOnly) {
+                std::unique_ptr<SigningProvider> provider = wallet.GetSolvingProvider(output.scriptPubKey);
                 bool solvable = provider ? InferDescriptor(output.scriptPubKey, *provider)->IsSolvable() : false;
                 spendable = solvable;
             }
