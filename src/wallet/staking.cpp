@@ -243,7 +243,8 @@ bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterva
     arith_uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
 
-    LOCK2(cs_main, wallet.cs_wallet);
+    // Acquire cs_wallet before cs_main to match Bitcoin Core / PoSMiner lock order
+    LOCK2(wallet.cs_wallet, cs_main);
     txNew.vin.clear();
     txNew.vout.clear();
 

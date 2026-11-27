@@ -12,6 +12,8 @@
 - Prevented signed `int64_t` overflow UB in `CAmount` additions across consensus validation (`MAX_MONEY == INT64_MAX`)
 - Gated `SCRIPT_VERIFY_WITNESS` and `SCRIPT_VERIFY_TAPROOT` in `CheckProofOfStake()` on active deployments
 - Aligned `tx.version` signed comparison for `nTime` serialization and `CheckBlockSignature()` `OP_RETURN` handling with v26.2
+- Fixed staker 16s window phase drift (`MsUntilNextWindow()` millisecond alignment) and `search-interval` resetting to `0` on mid-slot wakeups
+- Updated mainnet `defaultAssumeValid`, `nMinimumChainWork`, and `chainTxData` to block `6119546`
 
 ## v28.4.0 (2026-09-21)
 - Complete integration of Bitcoin Core 28.4.0

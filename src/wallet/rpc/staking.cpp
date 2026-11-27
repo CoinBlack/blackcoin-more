@@ -257,7 +257,9 @@ static RPCHelpMan checkkernel()
 
     const CTxMemPool& mempool = pwallet->chain().mempool();
     ChainstateManager& chainman = pwallet->chain().chainman();
-    LOCK(cs_main);
+    // Acquire cs_wallet before cs_main to match Bitcoin Core / PoSMiner lock order
+    // and guard pwallet->stakeCache access throughout checkkernel.
+    LOCK2(pwallet->cs_wallet, cs_main);
     const CChain& active_chain = chainman.ActiveChain();
     Chainstate& active_chainstate = chainman.ActiveChainstate();
 
