@@ -259,6 +259,10 @@ RPCHelpMan burnwallet()
     std::shared_ptr<CWallet> const pwallet = GetWalletForJSONRPCRequest(request);
     if (!pwallet) return NullUniValue;
 
+    pwallet->BlockUntilSyncedToCurrentChain();
+
+    LOCK(pwallet->cs_wallet);
+
     if (request.params.size() > 0) {
         std::vector<unsigned char> data;
         if (request.params[0].get_str().size() > 0){
@@ -283,6 +287,8 @@ RPCHelpMan burnwallet()
 
     const auto bal = GetBalance(*pwallet);
     CAmount nAmount = bal.m_mine_trusted;
+    if (nAmount <= 0)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
 
     if (!fForce) {
         if (scriptPubKey.size() <= 32)
