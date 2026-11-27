@@ -238,12 +238,12 @@ typedef std::vector<unsigned char> valtype;
 bool CreateCoinStake(CWallet& wallet, unsigned int nBits, int64_t nSearchInterval, CMutableTransaction& txNew, CAmount& nFees, CTxDestination destination)
 {
     bool fAllowWatchOnly = wallet.IsWalletFlagSet(WALLET_FLAG_DISABLE_PRIVATE_KEYS);
-    CBlockIndex* pindexPrev = wallet.chain().getTip();
     arith_uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
 
     // Acquire cs_wallet before cs_main to match Bitcoin Core / PoSMiner lock order
     LOCK2(wallet.cs_wallet, cs_main);
+    CBlockIndex* pindexPrev = wallet.chain().getTip();
     txNew.vin.clear();
     txNew.vout.clear();
 

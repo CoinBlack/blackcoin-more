@@ -802,7 +802,7 @@ void PoSMiner(CWallet *pwallet)
             //
             // Create new block
             //
-            CBlockIndex* pindexPrev = pwallet->chain().getTip();
+            CBlockIndex* pindexPrev{nullptr};
             bool fPoSCancel{false};
             int64_t pFees{0};
             CBlock *pblock;
@@ -810,6 +810,9 @@ void PoSMiner(CWallet *pwallet)
 
             {
                 LOCK2(pwallet->cs_wallet, cs_main);
+
+                // Read tip under cs_main so pindexPrev matches the tip CreateNewBlock() builds on
+                pindexPrev = pwallet->chain().getTip();
 
                 // Clear stale wake-up flag under lock
                 pwallet->m_new_block_arrived.store(false);
